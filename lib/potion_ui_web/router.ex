@@ -1,6 +1,8 @@
 defmodule PotionUiWeb.Router do
   use PotionUiWeb, :router
 
+  import PhoenixStorybook.Router
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -14,10 +16,13 @@ defmodule PotionUiWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", PotionUiWeb do
-    pipe_through :browser
+  scope "/" do
+    storybook_assets()
+  end
 
-    get "/", PageController, :home
+  scope "/", PotionUiWeb do
+    pipe_through(:browser)
+    live_storybook("/", backend_module: PotionUiWeb.Storybook)
   end
 
   # Other scopes may use custom stacks.

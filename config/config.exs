@@ -12,7 +12,7 @@ config :esbuild,
   version: "0.17.11",
   potion_ui: [
     args:
-      ~w(js/app.js --bundle --target=es2022 --outdir=../priv/static/assets/js --external:/fonts/* --external:/images/*),
+      ~w(js/app.js js/storybook.js --bundle --target=es2022 --outdir=../priv/static/assets/js --external:/fonts/* --external:/images/*),
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
@@ -59,6 +59,13 @@ config :tailwind,
 
     # Import environment specific config. This must remain at the bottom
     # of this file so it overrides the configuration defined above.
+    cd: Path.expand("..", __DIR__)
+  ],
+  storybook: [
+    args: ~w(
+      --input=assets/css/storybook.css
+      --output=priv/static/assets/storybook.css
+    ),
     cd: Path.expand("..", __DIR__)
   ]
 

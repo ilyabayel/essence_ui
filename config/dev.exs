@@ -56,7 +56,8 @@ config :potion_ui, PotionUiWeb.Endpoint,
   secret_key_base: "Q+Uio4LUvL1oF7eb2n1/hCCoLoy/xNIgQGX/JTPkW9TeErTT9ZWFWVfVSOMtmdQr",
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:potion_ui, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:potion_ui, ~w(--watch)]}
+    tailwind: {Tailwind, :install_and_run, [:potion_ui, ~w(--watch)]},
+    storybook_tailwind: {Tailwind, :install_and_run, [:storybook, ~w(--watch)]}
   ]
 
 # Watch static and templates for browser reloading.
@@ -68,7 +69,8 @@ config :potion_ui, PotionUiWeb.Endpoint,
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/potion_ui_web/(?:controllers|live|components|router)/?.*\.(ex|heex)$"
+      ~r"lib/potion_ui_web/(?:controllers|live|components|router)/?.*\.(ex|heex)$",
+      ~r"storybook/.*(exs)$"
     ]
   ]
 
