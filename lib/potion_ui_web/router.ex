@@ -1,5 +1,5 @@
-defmodule PotionUiWeb.Router do
-  use PotionUiWeb, :router
+defmodule PotionUIWeb.Router do
+  use PotionUIWeb, :router
 
   import PhoenixStorybook.Router
 
@@ -7,7 +7,7 @@ defmodule PotionUiWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, html: {PotionUiWeb.Layouts, :root}
+    plug :put_root_layout, html: {PotionUIWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -20,13 +20,13 @@ defmodule PotionUiWeb.Router do
     storybook_assets()
   end
 
-  scope "/", PotionUiWeb do
+  scope "/", PotionUIWeb do
     pipe_through(:browser)
-    live_storybook("/", backend_module: PotionUiWeb.Storybook)
+    live_storybook("/", backend_module: PotionUIWeb.Storybook)
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", PotionUiWeb do
+  # scope "/api", PotionUIWeb do
   #   pipe_through :api
   # end
 
@@ -42,7 +42,7 @@ defmodule PotionUiWeb.Router do
     scope "/dev" do
       pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: PotionUiWeb.Telemetry
+      live_dashboard "/dashboard", metrics: PotionUIWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end

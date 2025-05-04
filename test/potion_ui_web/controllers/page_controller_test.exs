@@ -1,5 +1,5 @@
-defmodule PotionUiWeb.PageControllerTest do
-  use PotionUiWeb.ConnCase
+defmodule PotionUIWeb.PageControllerTest do
+  use PotionUIWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")

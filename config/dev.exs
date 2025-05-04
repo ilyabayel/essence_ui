@@ -33,7 +33,7 @@ config :phoenix_live_view,
 # to bundle .js and .css sources.
 #
 # Run `mix help phx.gen.cert` for more information.
-config :potion_ui, PotionUiWeb.Endpoint,
+config :potion_ui, PotionUIWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   #
 
@@ -63,7 +63,7 @@ config :potion_ui, PotionUiWeb.Endpoint,
 # Watch static and templates for browser reloading.
 # different ports.
 
-config :potion_ui, PotionUiWeb.Endpoint,
+config :potion_ui, PotionUIWeb.Endpoint,
   live_reload: [
     web_console_logger: true,
     patterns: [

@@ -1,12 +1,12 @@
-defmodule PotionUiWeb do
+defmodule PotionUIWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, components, channels, and so on.
 
   This can be used in your application as:
 
-      use PotionUiWeb, :controller
-      use PotionUiWeb, :html
+      use PotionUIWeb, :controller
+      use PotionUIWeb, :html
 
   The definitions below will be executed for every controller,
   component, etc, so keep them short and clean, focused
@@ -40,7 +40,7 @@ defmodule PotionUiWeb do
   def controller do
     quote do
       use Phoenix.Controller, formats: [:html, :json]
-      use Gettext, backend: PotionUiWeb.Gettext
+      use Gettext, backend: PotionUIWeb.Gettext
 
       import Plug.Conn
 
@@ -80,14 +80,14 @@ defmodule PotionUiWeb do
   defp html_helpers do
     quote do
       # Translation
-      use Gettext, backend: PotionUiWeb.Gettext
+      use Gettext, backend: PotionUIWeb.Gettext
 
       # HTML escaping functionality
       import Phoenix.HTML
 
       # Common modules used in templates
       alias Phoenix.LiveView.JS
-      alias PotionUiWeb.Layouts
+      alias PotionUIWeb.Layouts
 
       # Routes generation with the ~p sigil
       unquote(verified_routes())
@@ -97,9 +97,9 @@ defmodule PotionUiWeb do
   def verified_routes do
     quote do
       use Phoenix.VerifiedRoutes,
-        endpoint: PotionUiWeb.Endpoint,
-        router: PotionUiWeb.Router,
-        statics: PotionUiWeb.static_paths()
+        endpoint: PotionUIWeb.Endpoint,
+        router: PotionUIWeb.Router,
+        statics: PotionUIWeb.static_paths()
     end
   end
 

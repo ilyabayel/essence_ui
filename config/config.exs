@@ -32,17 +32,17 @@ config :phoenix, :json_library, Jason
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :potion_ui, PotionUi.Mailer, adapter: Swoosh.Adapters.Local
+config :potion_ui, PotionUI.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configures the endpoint
-config :potion_ui, PotionUiWeb.Endpoint,
+config :potion_ui, PotionUIWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [html: PotionUiWeb.ErrorHTML, json: PotionUiWeb.ErrorJSON],
+    formats: [html: PotionUIWeb.ErrorHTML, json: PotionUIWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: PotionUi.PubSub,
+  pubsub_server: PotionUI.PubSub,
   live_view: [signing_salt: "q8KMa2B+"]
 
 config :potion_ui,

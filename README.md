@@ -1,4 +1,4 @@
-# PotionUi
+# PotionUI
 
 To start your Phoenix server:
 

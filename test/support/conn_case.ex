@@ -1,4 +1,4 @@
-defmodule PotionUiWeb.ConnCase do
+defmodule PotionUIWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,7 +11,7 @@ defmodule PotionUiWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use PotionUiWeb.ConnCase, async: true`, although
+  by setting `use PotionUIWeb.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -19,12 +19,13 @@ defmodule PotionUiWeb.ConnCase do
 
   using do
     quote do
-      use PotionUiWeb, :verified_routes
+      use PotionUIWeb, :verified_routes
+
       import Phoenix.ConnTest
       import Plug.Conn
-      import PotionUiWeb.ConnCase
+      import PotionUIWeb.ConnCase
       # The default endpoint for testing
-      @endpoint PotionUiWeb.Endpoint
+      @endpoint PotionUIWeb.Endpoint
 
       # Import conveniences for testing with connections
     end

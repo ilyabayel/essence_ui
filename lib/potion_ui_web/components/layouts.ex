@@ -1,4 +1,4 @@
-defmodule PotionUiWeb.Layouts do
+defmodule PotionUIWeb.Layouts do
   @moduledoc """
   This module holds different layouts used by your application.
 
@@ -7,7 +7,7 @@ defmodule PotionUiWeb.Layouts do
   application router. The "app" layout is rendered as component
   in regular views and live views.
   """
-  use PotionUiWeb, :html
+  use PotionUIWeb, :html
 
   embed_templates "layouts/*"
 end

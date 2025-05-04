@@ -1,4 +1,4 @@
-defmodule PotionUiWeb.Endpoint do
+defmodule PotionUIWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :potion_ui
 
   # The session will be stored in the cookie and signed,
@@ -24,7 +24,7 @@ defmodule PotionUiWeb.Endpoint do
     at: "/",
     from: :potion_ui,
     gzip: not code_reloading?,
-    only: PotionUiWeb.static_paths()
+    only: PotionUIWeb.static_paths()
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -49,5 +49,5 @@ defmodule PotionUiWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug PotionUiWeb.Router
+  plug PotionUIWeb.Router
 end

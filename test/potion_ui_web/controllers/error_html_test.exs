@@ -1,14 +1,14 @@
-defmodule PotionUiWeb.ErrorHTMLTest do
-  use PotionUiWeb.ConnCase, async: true
+defmodule PotionUIWeb.ErrorHTMLTest do
+  use PotionUIWeb.ConnCase, async: true
 
   # Bring render_to_string/4 for testing custom views
   import Phoenix.Template, only: [render_to_string: 4]
 
   test "renders 404.html" do
-    assert render_to_string(PotionUiWeb.ErrorHTML, "404", "html", []) == "Not Found"
+    assert render_to_string(PotionUIWeb.ErrorHTML, "404", "html", []) == "Not Found"
   end
 
   test "renders 500.html" do
-    assert render_to_string(PotionUiWeb.ErrorHTML, "500", "html", []) == "Internal Server Error"
+    assert render_to_string(PotionUIWeb.ErrorHTML, "500", "html", []) == "Internal Server Error"
   end
 end

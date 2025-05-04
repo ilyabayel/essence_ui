@@ -1,4 +1,5 @@
-defmodule PotionUiWeb.Storybook do
+defmodule PotionUIWeb.Storybook do
+  @moduledoc false
   use PhoenixStorybook,
     otp_app: :potion_ui_web,
     content_path: Path.expand("../../storybook", __DIR__),

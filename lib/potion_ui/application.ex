@@ -1,4 +1,4 @@
-defmodule PotionUi.Application do
+defmodule PotionUI.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -8,18 +8,18 @@ defmodule PotionUi.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      PotionUiWeb.Telemetry,
+      PotionUIWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:potion_ui, :dns_cluster_query) || :ignore},
-      {Phoenix.PubSub, name: PotionUi.PubSub},
-      # Start a worker by calling: PotionUi.Worker.start_link(arg)
-      # {PotionUi.Worker, arg},
+      {Phoenix.PubSub, name: PotionUI.PubSub},
+      # Start a worker by calling: PotionUI.Worker.start_link(arg)
+      # {PotionUI.Worker, arg},
       # Start to serve requests, typically the last entry
-      PotionUiWeb.Endpoint
+      PotionUIWeb.Endpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: PotionUi.Supervisor]
+    opts = [strategy: :one_for_one, name: PotionUI.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
@@ -27,7 +27,7 @@ defmodule PotionUi.Application do
   # whenever the application is updated.
   @impl true
   def config_change(changed, _new, removed) do
-    PotionUiWeb.Endpoint.config_change(changed, removed)
+    PotionUIWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end
