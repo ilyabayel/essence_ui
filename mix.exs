@@ -1,9 +1,9 @@
-defmodule PotionUI.MixProject do
+defmodule EssenceUI.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :potion_ui,
+      app: :essence_ui,
       version: "0.1.0",
       elixir: "~> 1.15",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule PotionUI.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {PotionUI.Application, []},
+      mod: {EssenceUI.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -48,7 +48,7 @@ defmodule PotionUI.MixProject do
       {:phoenix_live_dashboard, "~> 0.8.3"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 1.0.9"},
-      {:phoenix_storybook, "~> 0.8.0"},
+      {:phoenix_storybook, "~> 0.8.2"},
       {:req, "~> 0.5"},
       {:styler, "~> 1.4"},
       {:swoosh, "~> 1.16"},
@@ -68,11 +68,11 @@ defmodule PotionUI.MixProject do
     [
       setup: ["deps.get", "assets.setup", "assets.build"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind potion_ui", "esbuild potion_ui"],
+      "assets.build": ["tailwind essence_ui", "esbuild essence_ui"],
       "assets.deploy": [
-        "tailwind potion_ui --minify",
+        "tailwind essence_ui --minify",
         "tailwind storybook --minify",
-        "esbuild potion_ui --minify",
+        "esbuild essence_ui --minify",
         "phx.digest"
       ]
     ]

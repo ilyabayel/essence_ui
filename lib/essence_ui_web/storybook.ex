@@ -1,10 +1,10 @@
-defmodule PotionUIWeb.Storybook do
+defmodule EssenceUIWeb.Storybook do
   @moduledoc false
   use PhoenixStorybook,
-    otp_app: :potion_ui_web,
+    otp_app: :essence_ui_web,
     content_path: Path.expand("../../storybook", __DIR__),
     # assets path are remote path, not local file-system paths
     css_path: "/assets/storybook.css",
     js_path: "/assets/storybook.js",
-    sandbox_class: "potion-ui-web"
+    sandbox_class: "essence-ui-web"
 end

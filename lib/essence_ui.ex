@@ -1,6 +1,6 @@
-defmodule PotionUI do
+defmodule EssenceUI do
   @moduledoc """
-  PotionUI keeps the contexts that define your domain
+  EssenceUI keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

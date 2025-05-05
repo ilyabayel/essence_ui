@@ -23,7 +23,7 @@ erl_crash.dump
 /tmp/
 
 # Ignore package tarball (built via "mix hex.build").
-potion_ui-*.tar
+essence_ui-*.tar
 
 # Ignore assets that are produced by build tools.
 /priv/static/assets/
