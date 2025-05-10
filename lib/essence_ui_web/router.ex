@@ -16,20 +16,6 @@ defmodule EssenceUIWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/" do
-    storybook_assets()
-  end
-
-  scope "/", EssenceUIWeb do
-    pipe_through(:browser)
-    live_storybook("/", backend_module: EssenceUIWeb.Storybook)
-  end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", EssenceUIWeb do
-  #   pipe_through :api
-  # end
-
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:essence_ui, :dev_routes) do
     # If you want to use the LiveDashboard in production, you should put
@@ -46,4 +32,18 @@ defmodule EssenceUIWeb.Router do
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
+
+  scope "/" do
+    storybook_assets()
+  end
+
+  scope "/", EssenceUIWeb do
+    pipe_through(:browser)
+    live_storybook("/", backend_module: EssenceUIWeb.Storybook)
+  end
+
+  # Other scopes may use custom stacks.
+  # scope "/api", EssenceUIWeb do
+  #   pipe_through :api
+  # end
 end

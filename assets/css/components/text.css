@@ -1,0 +1,179 @@
+/* Text Component Styles based on Radix UI Themes */
+
+.essence-text {
+  margin: 0;
+  font-family: var(--font-family, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif);
+  color: var(--text-color, inherit);
+  letter-spacing: var(--letter-spacing, 0);
+  line-height: var(--line-height, 1.5);
+}
+
+/* Size variants */
+.essence-text-size-1 {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  letter-spacing: 0.005em;
+}
+
+.essence-text-size-2 {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  letter-spacing: 0.0025em;
+}
+
+.essence-text-size-3 {
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+.essence-text-size-4 {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  letter-spacing: -0.0025em;
+}
+
+.essence-text-size-5 {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+}
+
+.essence-text-size-6 {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  letter-spacing: -0.0075em;
+}
+
+.essence-text-size-7 {
+  font-size: 1.875rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.essence-text-size-8 {
+  font-size: 2.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.0125em;
+}
+
+.essence-text-size-9 {
+  font-size: 3rem;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+/* Weight variants */
+.essence-text-weight-light {
+  font-weight: 300;
+}
+
+.essence-text-weight-regular {
+  font-weight: 400;
+}
+
+.essence-text-weight-medium {
+  font-weight: 500;
+}
+
+.essence-text-weight-bold {
+  font-weight: 700;
+}
+
+/* Alignment variants */
+.essence-text-align-left {
+  text-align: left;
+}
+
+.essence-text-align-center {
+  text-align: center;
+}
+
+.essence-text-align-right {
+  text-align: right;
+}
+
+/* Trim variants for handling line height spacing */
+.essence-text-trim-start {
+  margin-top: calc(-1 * var(--default-leading-trim-start, 0.42em));
+}
+
+.essence-text-trim-end {
+  margin-bottom: calc(-1 * var(--default-leading-trim-end, 0.36em));
+}
+
+.essence-text-trim-both {
+  margin-top: calc(-1 * var(--default-leading-trim-start, 0.42em));
+  margin-bottom: calc(-1 * var(--default-leading-trim-end, 0.36em));
+}
+
+/* Truncate text with ellipsis */
+.essence-text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* Wrap variants */
+.essence-text-wrap-nowrap {
+  white-space: nowrap;
+}
+
+.essence-text-wrap-wrap {
+  white-space: normal;
+}
+
+.essence-text-wrap-pretty {
+  text-wrap: pretty;
+}
+
+.essence-text-wrap-balance {
+  text-wrap: balance;
+}
+
+/* Color variants - basic set, can be expanded */
+.essence-text-color-gray {
+  color: var(--color-gray-11, #6c7180);
+}
+
+.essence-text-color-indigo {
+  color: var(--color-indigo-11, #3e63dd);
+}
+
+.essence-text-color-cyan {
+  color: var(--color-cyan-11, #0098a1);
+}
+
+.essence-text-color-orange {
+  color: var(--color-orange-11, #d74a00);
+}
+
+.essence-text-color-crimson {
+  color: var(--color-crimson-11, #df1b41);
+}
+
+/* High contrast mode */
+.essence-text-high-contrast {
+  color: var(--high-contrast-color, inherit);
+}
+
+.essence-text-color-gray.essence-text-high-contrast {
+  color: var(--color-gray-12, #1c2024);
+}
+
+.essence-text-color-indigo.essence-text-high-contrast {
+  color: var(--color-indigo-12, #3451b2);
+}
+
+.essence-text-color-cyan.essence-text-high-contrast {
+  color: var(--color-cyan-12, #0c7d84);
+}
+
+.essence-text-color-orange.essence-text-high-contrast {
+  color: var(--color-orange-12, #b93700);
+}
+
+.essence-text-color-crimson.essence-text-high-contrast {
+  color: var(--color-crimson-12, #b30b36);
+}

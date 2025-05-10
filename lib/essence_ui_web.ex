@@ -85,9 +85,10 @@ defmodule EssenceUIWeb do
       # HTML escaping functionality
       import Phoenix.HTML
 
+      alias EssenceUIWeb.Layouts
+
       # Common modules used in templates
       alias Phoenix.LiveView.JS
-      alias EssenceUIWeb.Layouts
 
       # Routes generation with the ~p sigil
       unquote(verified_routes())

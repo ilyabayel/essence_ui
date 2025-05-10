@@ -54,7 +54,8 @@ defmodule EssenceUI.MixProject do
       {:swoosh, "~> 1.16"},
       {:tailwind, "~> 0.3", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 1.0"},
-      {:telemetry_poller, "~> 1.0"}
+      {:telemetry_poller, "~> 1.0"},
+      {:tidewave, "~> 0.1", only: :dev}
     ]
   end
 
