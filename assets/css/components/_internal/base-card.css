@@ -1,24 +1,24 @@
 .rt-BaseCard {
-  display: block;
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--base-card-border-radius);
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--base-card-border-radius);
 
-  /* Don't inherit typographic properties */
-  font-family: var(--default-font-family);
-  font-weight: var(--font-weight-normal);
-  font-style: normal;
-  text-align: start;
+    /* Don't inherit typographic properties */
+    font-family: var(--default-font-family);
+    font-weight: var(--font-weight-normal);
+    font-style: normal;
+    text-align: start;
 
-  --inset-border-width: var(--base-card-border-width);
-  --inset-border-radius: var(--base-card-border-radius);
-  padding-top: var(--base-card-padding-top);
-  padding-right: var(--base-card-padding-right);
-  padding-bottom: var(--base-card-padding-bottom);
-  padding-left: var(--base-card-padding-left);
-  box-sizing: border-box;
+    --inset-border-width: var(--base-card-border-width);
+    --inset-border-radius: var(--base-card-border-radius);
+    padding-top: var(--base-card-padding-top);
+    padding-right: var(--base-card-padding-right);
+    padding-bottom: var(--base-card-padding-bottom);
+    padding-left: var(--base-card-padding-left);
+    box-sizing: border-box;
 
-  /*
+    /*
    * Some layout acrobatics with `var(--base-card-border-width)` because we want:
    * 1. <Card> with fixed height to clip overflowing content.
    * 2. <Inset> that clips to card’s border-box or padding-box depending on the `clip` value.
@@ -26,36 +26,46 @@
    * To have both (1) and (2), we clip the content at the outer edge of `.rt-BaseCard` border, and use
    * a ::before pseudo-element for the background color, which is smaller by the border width on each side.
    */
-  --inset-padding-top: calc(var(--base-card-padding-top) - var(--base-card-border-width));
-  --inset-padding-right: calc(var(--base-card-padding-right) - var(--base-card-border-width));
-  --inset-padding-bottom: calc(var(--base-card-padding-bottom) - var(--base-card-border-width));
-  --inset-padding-left: calc(var(--base-card-padding-left) - var(--base-card-border-width));
+    --inset-padding-top: calc(
+        var(--base-card-padding-top) - var(--base-card-border-width)
+    );
+    --inset-padding-right: calc(
+        var(--base-card-padding-right) - var(--base-card-border-width)
+    );
+    --inset-padding-bottom: calc(
+        var(--base-card-padding-bottom) - var(--base-card-border-width)
+    );
+    --inset-padding-left: calc(
+        var(--base-card-padding-left) - var(--base-card-border-width)
+    );
 
-  /*
+    /*
    * ::before is used for the background color.
    * ::after is used for the inner border that goes on top the children.
    */
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    pointer-events: none;
-    transition: inherit;
-    border-radius: calc(var(--base-card-border-radius) - var(--base-card-border-width));
-    inset: var(--base-card-border-width);
-  }
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+        transition: inherit;
+        border-radius: calc(
+            var(--base-card-border-radius) - var(--base-card-border-width)
+        );
+        inset: var(--base-card-border-width);
+    }
 
-  /*
+    /*
    * Background color:
    * 1. "z-index: -1" so that the background goes below the children
    * 2. "contain: paint" creates a new stacking context so that ::before doesn’t go below the card’s sibling elements
    */
-  &::before {
-    z-index: -1;
-  }
-  & {
-    contain: paint;
-  }
+    &::before {
+        z-index: -1;
+    }
+    & {
+        contain: paint;
+    }
 }
 
 /* * * * * * * * * * * * * * * * * * * */
@@ -64,16 +74,19 @@
 /*                                     */
 /* * * * * * * * * * * * * * * * * * * */
 
-:where(.radix-themes) {
-  --base-card-surface-box-shadow: 0 0 0 1px var(--gray-a5);
-  --base-card-surface-hover-box-shadow: 0 0 0 1px var(--gray-a7);
-  --base-card-surface-active-box-shadow: 0 0 0 1px var(--gray-a6);
+:where(.essence-ui) {
+    --base-card-surface-box-shadow: 0 0 0 1px var(--gray-a5);
+    --base-card-surface-hover-box-shadow: 0 0 0 1px var(--gray-a7);
+    --base-card-surface-active-box-shadow: 0 0 0 1px var(--gray-a6);
 
-  @supports (color: color-mix(in oklab, white, black)) {
-    --base-card-surface-box-shadow: 0 0 0 1px color-mix(in oklab, var(--gray-a5), var(--gray-5) 25%);
-    --base-card-surface-hover-box-shadow: 0 0 0 1px color-mix(in oklab, var(--gray-a7), var(--gray-7) 25%);
-    --base-card-surface-active-box-shadow: 0 0 0 1px color-mix(in oklab, var(--gray-a6), var(--gray-6) 25%);
-  }
+    @supports (color: color-mix(in oklab, white, black)) {
+        --base-card-surface-box-shadow: 0 0 0 1px
+            color-mix(in oklab, var(--gray-a5), var(--gray-5) 25%);
+        --base-card-surface-hover-box-shadow: 0 0 0 1px
+            color-mix(in oklab, var(--gray-a7), var(--gray-7) 25%);
+        --base-card-surface-active-box-shadow: 0 0 0 1px
+            color-mix(in oklab, var(--gray-a6), var(--gray-6) 25%);
+    }
 }
 
 /* * * * * * * * * * * * * * * * * * * */
@@ -90,7 +103,7 @@
  */
 
 /* prettier-ignore */
-:where(.radix-themes) {
+:where(.essence-ui) {
   --base-card-classic-box-shadow-inner:
     0 0 0 1px var(--base-card-classic-border-color),
     0 0 0 1px var(--color-transparent),
@@ -148,7 +161,7 @@
 
 /* prettier-ignore */
 :is(.dark, .dark-theme),
-:is(.dark, .dark-theme) :where(.radix-themes:not(.light, .light-theme)) {
+:is(.dark, .dark-theme) :where(.essence-ui:not(.light, .light-theme)) {
   --base-card-classic-box-shadow-inner:
     0 0 0 1px var(--base-card-classic-border-color),
     0 0 0 1px var(--color-transparent),

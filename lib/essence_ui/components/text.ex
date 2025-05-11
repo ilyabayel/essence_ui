@@ -44,49 +44,52 @@ defmodule EssenceUI.Components.Text do
   slot :inner_block, required: true
 
   def text(assigns) do
+    dbg(assigns)
+
     class =
       [
         "rt-Text",
-        assigns[:size] && "essence-text-size-#{assigns[:size]}",
-        assigns[:weight] && "essence-text-weight-#{assigns[:weight]}",
-        assigns[:align] && "essence-text-align-#{assigns[:align]}",
-        assigns[:trim] && "essence-text-trim-#{assigns[:trim]}",
-        assigns[:truncate] && "essence-text-truncate",
-        assigns[:wrap] && "essence-text-wrap-#{assigns[:wrap]}",
-        assigns[:color] && "essence-text-color-#{assigns[:color]}",
-        assigns[:high_contrast] && "essence-text-high-contrast",
+        assigns[:size] && "rt-r-size-#{assigns[:size]}",
+        assigns[:weight] && "rt-r-weight-#{assigns[:weight]}",
+        assigns[:align] && "rt-r-ta-#{assigns[:align]}",
+        assigns[:trim] && "rt-r-lt-#{assigns[:trim]}",
+        assigns[:truncate] && "rt-truncate",
+        assigns[:wrap] && "rt-r-tw-#{assigns[:wrap]}",
+        assigns[:high_contrast] && "rt-high-contrast",
         assigns[:class]
       ]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 
+    extra_attrs = if assigns[:color], do: %{"data-accent-color" => assigns[:color]}, else: %{}
     assigns = assign(assigns, :class, class)
+    assigns = assign(assigns, :extra_attrs, extra_attrs)
 
     case assigns.as do
       "span" ->
         ~H"""
-        <span class={@class} {@rest}>
+        <span class={@class} {@extra_attrs} {@rest}>
           {render_slot(@inner_block)}
         </span>
         """
 
       "div" ->
         ~H"""
-        <div class={@class} {@rest}>
+        <div class={@class} {@extra_attrs} {@rest}>
           {render_slot(@inner_block)}
         </div>
         """
 
       "label" ->
         ~H"""
-        <label class={@class} {@rest}>
+        <label class={@class} {@extra_attrs} {@rest}>
           {render_slot(@inner_block)}
         </label>
         """
 
       "p" ->
         ~H"""
-        <p class={@class} {@rest}>
+        <p class={@class} {@extra_attrs} {@rest}>
           {render_slot(@inner_block)}
         </p>
         """

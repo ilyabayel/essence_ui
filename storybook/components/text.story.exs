@@ -6,6 +6,8 @@ defmodule EssenceUIWeb.Storybook.Components.Text do
 
   def function, do: &Text.text/1
 
+  def container, do: {:div, "data-scaling": "100%"}
+
   def layout, do: :one_column
 
   def args do
@@ -92,9 +94,21 @@ defmodule EssenceUIWeb.Storybook.Components.Text do
         attributes: %{},
         slots: ["The quick brown fox jumps over the lazy dog."]
       },
+      %Variation{
+        id: :as_elements,
+        description: "As another element",
+        template: """
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <.text as="p">This is a <strong>paragraph</strong> element.</.text>
+          <.text as="label">This is a <strong>label</strong> element.</.text>
+          <.text as="div">This is a <strong>div</strong> element.</.text>
+          <.text as="span">This is a <strong>span</strong> element.</.text>
+        </div>
+        """
+      },
       %VariationGroup{
         id: :sizes,
-        description: "Text sizes",
+        description: "Size",
         variations: [
           %Variation{
             id: :size_1,
@@ -154,17 +168,17 @@ defmodule EssenceUIWeb.Storybook.Components.Text do
       },
       %Variation{
         id: :longform_sizes,
-        description: "Long-form content sizes",
+        description: "Longform content sizes",
         template: """
         <div class="flex flex-col gap-4">
           <.text as="p" size="4" style="margin-bottom: 1rem;">
-            The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant. The question is: What proportion(s) will give us the best results? The golden ratio is often observed in nature where beauty and utility intersect; perhaps we can use this “divine” proportion to enhance these attributes in our typography.
+            The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant. The question is: What proportion(s) will give us the best results? The golden ratio is often observed in nature where beauty and utility intersect; perhaps we can use this "divine" proportion to enhance these attributes in our typography.
           </.text>
           <.text as="p" size="3" style="margin-bottom: 1rem;">
-            The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant. The question is: What proportion(s) will give us the best results? The golden ratio is often observed in nature where beauty and utility intersect; perhaps we can use this “divine” proportion to enhance these attributes in our typography.
+            The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant. The question is: What proportion(s) will give us the best results? The golden ratio is often observed in nature where beauty and utility intersect; perhaps we can use this "divine" proportion to enhance these attributes in our typography.
           </.text>
           <.text as="p" size="2" color="gray">
-            The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant. The question is: What proportion(s) will give us the best results? The golden ratio is often observed in nature where beauty and utility intersect; perhaps we can use this “divine” proportion to enhance these attributes in our typography.
+            The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant. The question is: What proportion(s) will give us the best results? The golden ratio is often observed in nature where beauty and utility intersect; perhaps we can use this "divine" proportion to enhance these attributes in our typography.
           </.text>
         </div>
         """
@@ -195,31 +209,118 @@ defmodule EssenceUIWeb.Storybook.Components.Text do
       },
       %VariationGroup{
         id: :weights,
-        description: "Text weights",
+        description: "Weight",
         variations: [
           %Variation{
             id: :weights_regular,
             description: "Regular",
-            attributes: %{weight: "regular"},
+            attributes: %{weight: "regular", as: "div"},
             slots: ["The quick brown fox jumps over the lazy dog."]
           },
           %Variation{
             id: :weights_medium,
             description: "Medium",
-            attributes: %{weight: "medium"},
+            attributes: %{weight: "medium", as: "div"},
             slots: ["The quick brown fox jumps over the lazy dog."]
           },
           %Variation{
             id: :weights_bold,
             description: "Bold",
-            attributes: %{weight: "bold"},
+            attributes: %{weight: "bold", as: "div"},
             slots: ["The quick brown fox jumps over the lazy dog."]
           }
         ]
       },
+      %Variation{
+        id: :alignment,
+        description: "Align",
+        template: """
+        <div style="display: flex; flex-direction: column; gap: 12px; width: 300px;">
+          <div style="border: 1px solid #ccc; padding: 10px;">
+            <.text align="left" as="div">Left-aligned</.text>
+          </div>
+          <div style="border: 1px solid #ccc; padding: 10px;">
+            <.text align="center" as="div">Center-aligned</.text>
+          </div>
+          <div style="border: 1px solid #ccc; padding: 10px;">
+            <.text align="right" as="div">Right-aligned</.text>
+          </div>
+        </div>
+        """
+      },
+      %Variation{
+        id: :trim,
+        description: "Trim",
+        template: """
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <.text trim="normal" style="background: var(--gray-a2); border-top: 1px dashed var(--gray-a7); border-bottom: 1px dashed var(--gray-a7); padding: 0 16px;">Without trim</.text>
+          <.text trim="both" style="background: var(--gray-a2); border-top: 1px dashed var(--gray-a7); border-bottom: 1px dashed var(--gray-a7); padding: 0 16px;">With trim</.text>
+        </div>
+        """
+      },
+      %Variation{
+        id: :trim_box_example,
+        description: "Trim in box components",
+        template: """
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="background: var(--gray-a2); border: 1px dashed var(--gray-a7); padding: 16px;">
+            <.text weight="bold" size="3" style="margin-bottom: 4px;">Without trim</.text>
+            <.text>
+              The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
+            </.text>
+          </div>
+
+          <div style="background: var(--gray-a2); border: 1px dashed var(--gray-a7); padding: 16px;">
+            <.text weight="bold" size="3" style="margin-bottom: 4px;" trim="start">With trim</.text>
+            <.text trim="end">
+              The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
+            </.text>
+          </div>
+        </div>
+        """
+      },
+      %Variation{
+        id: :truncate,
+        description: "Truncate",
+        template: """
+        <div class="rt-Flex rt-r-max-w" style="--max-width: 300px">
+          <.text truncate as="p">
+            The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
+          </.text>
+        </div>
+        """
+      },
+      %Variation{
+        id: :wrap,
+        description: "Wrap",
+        template: """
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="max-width: 270px; border: 1px solid #ccc; padding: 10px;">
+            <.text wrap="wrap">
+              The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
+            </.text>
+          </div>
+          <div style="max-width: 270px; border: 1px solid #ccc; padding: 10px; overflow-x: auto;">
+            <.text wrap="nowrap">
+              The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
+            </.text>
+          </div>
+          <div style="max-width: 270px; border: 1px solid #ccc; padding: 10px;">
+            <.text wrap="balance">
+              The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
+            </.text>
+          </div>
+          <div style="max-width: 270px; border: 1px solid #ccc; padding: 10px;">
+            <.text wrap="pretty">
+              The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
+            </.text>
+          </div>
+        </div>
+        """
+      },
       %VariationGroup{
         id: :colors,
-        description: "Text colors",
+        description: "Color",
         variations: [
           %Variation{
             id: :color_indigo,
@@ -249,7 +350,7 @@ defmodule EssenceUIWeb.Storybook.Components.Text do
       },
       %Variation{
         id: :high_contrast,
-        description: "High contrast text",
+        description: "High-contrast",
         template: """
         <div class="flex flex-col gap-2">
           <.text color="gray">The quick brown fox jumps over the lazy dog.</.text>
@@ -260,100 +361,27 @@ defmodule EssenceUIWeb.Storybook.Components.Text do
         """
       },
       %Variation{
-        id: :alignment,
-        description: "Text alignment",
+        id: :with_formatting,
+        description: "With formatting",
         template: """
-        <div style="display: flex; flex-direction: column; gap: 12px; width: 300px;">
-          <div style="border: 1px solid #ccc; padding: 10px;">
-            <.text align="left" as="div">
-              Left-aligned. The quick brown fox jumps over the lazy dog.
-            </.text>
-          </div>
-          <div style="border: 1px solid #ccc; padding: 10px;">
-            <.text align="center" as="div">
-              Center-aligned. The quick brown fox jumps over the lazy dog.
-            </.text>
-          </div>
-          <div style="border: 1px solid #ccc; padding: 10px;">
-            <.text align="right" as="div">
-              Right-aligned. The quick brown fox jumps over the lazy dog.
-            </.text>
-          </div>
-        </div>
+        <.text as="p">
+          Look, such a helpful <a href="#" class="text-blue-600 hover:underline">link</a>, an <em>italic emphasis</em>,
+          a piece of computer <code class="bg-gray-100 px-1 py-0.5 rounded">code</code>, and even a hotkey combination
+          <kbd class="bg-gray-100 border border-gray-300 rounded px-1 py-0.5 text-sm">⇧⌘A</kbd> within the text.
+        </.text>
         """
       },
       %Variation{
-        id: :trim,
-        description: "Text trim options",
+        id: :with_form_controls,
+        description: "With form controls",
         template: """
-        <div style="display: flex; flex-direction: column; gap: 12px;">
-          <.text trim="normal" style="background: var(--gray-a2); border-top: 1px dashed var(--gray-a7); border-bottom: 1px dashed var(--gray-a7); padding: 16px;">Without trim</.text>
-          <.text trim="both" style="background: var(--gray-a2); border-top: 1px dashed var(--gray-a7); border-bottom: 1px dashed var(--gray-a7); padding: 16px;">With trim</.text>
-        </div>
-        """
-      },
-      %Variation{
-        id: :trim_longform,
-        description: "Trim with longform content",
-        template: """
-        <div style="display: flex; flex-direction: column; gap: 12px;">
-          <.text style="background: var(--gray-a2); border-top: 1px dashed var(--gray-a7); border-bottom: 1px dashed var(--gray-a7); padding: 16px;">
-            The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
+        <div style="max-width: 300px;">
+          <.text as="label" size="3">
+            <div style="display: flex; gap: 8px; align-items: flex-start;">
+              <input type="checkbox" checked style="margin-top: 0.25em;" />
+              <span>I understand that these documents are confidential and cannot be shared with a third party.</span>
+            </div>
           </.text>
-          <.text trim="end" style="background: #f2f2f2; border: 1px dashed #aaa; padding: 16px;">
-            The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
-          </.text>
-        </div>
-        """
-      },
-      %Variation{
-        id: :truncate,
-        description: "Truncated text with ellipsis",
-        template: """
-        <div style="max-width: 300px; border: 1px solid #ccc; padding: 10px;">
-          <.text truncate={true}>
-            The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
-          </.text>
-        </div>
-        """
-      },
-      %Variation{
-        id: :wrap,
-        description: "Text wrapping options",
-        template: """
-        <div style="display: flex; flex-direction: column; gap: 12px;">
-          <div style="max-width: 270px; border: 1px solid #ccc; padding: 10px;">
-            <.text wrap="wrap">
-              The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
-            </.text>
-          </div>
-          <div style="max-width: 270px; border: 1px solid #ccc; padding: 10px; overflow-x: auto;">
-            <.text wrap="nowrap">
-              The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
-            </.text>
-          </div>
-          <div style="max-width: 270px; border: 1px solid #ccc; padding: 10px;">
-            <.text wrap="balance">
-              The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
-            </.text>
-          </div>
-          <div style="max-width: 270px; border: 1px solid #ccc; padding: 10px;">
-            <.text wrap="pretty">
-              The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
-            </.text>
-          </div>
-        </div>
-        """
-      },
-      %Variation{
-        id: :as_elements,
-        description: "Text component as different HTML elements",
-        template: """
-        <div style="display: flex; flex-direction: column; gap: 12px;">
-          <.text as="p">This is a <strong>paragraph</strong> element.</.text>
-          <.text as="label">This is a <strong>label</strong> element.</.text>
-          <.text as="div">This is a <strong>div</strong> element.</.text>
-          <.text as="span">This is a <strong>span</strong> element.</.text>
         </div>
         """
       }
