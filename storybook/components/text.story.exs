@@ -98,7 +98,7 @@ defmodule EssenceUIWeb.Storybook.Components.Text do
         id: :as_elements,
         description: "As another element",
         template: """
-        <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div class="rt-Flex rt-r-fd-column rt-r-gap-3">
           <.text as="p">This is a <strong>paragraph</strong> element.</.text>
           <.text as="label">This is a <strong>label</strong> element.</.text>
           <.text as="div">This is a <strong>div</strong> element.</.text>
@@ -106,75 +106,32 @@ defmodule EssenceUIWeb.Storybook.Components.Text do
         </div>
         """
       },
-      %VariationGroup{
-        id: :sizes,
+      %Variation{
+        id: :sizes_group,
         description: "Size",
-        variations: [
-          %Variation{
-            id: :size_1,
-            description: "Text size 1",
-            attributes: %{size: "1"},
-            slots: ["The quick brown fox jumps over the lazy dog."]
-          },
-          %Variation{
-            id: :size_2,
-            description: "Text size 2",
-            attributes: %{size: "2"},
-            slots: ["The quick brown fox jumps over the lazy dog."]
-          },
-          %Variation{
-            id: :size_3,
-            description: "Text size 3",
-            attributes: %{size: "3"},
-            slots: ["The quick brown fox jumps over the lazy dog."]
-          },
-          %Variation{
-            id: :size_4,
-            description: "Text size 4",
-            attributes: %{size: "4"},
-            slots: ["The quick brown fox jumps over the lazy dog."]
-          },
-          %Variation{
-            id: :size_5,
-            description: "Text size 5",
-            attributes: %{size: "5"},
-            slots: ["The quick brown fox jumps over the lazy dog."]
-          },
-          %Variation{
-            id: :size_6,
-            description: "Text size 6",
-            attributes: %{size: "6"},
-            slots: ["The quick brown fox jumps over the lazy dog."]
-          },
-          %Variation{
-            id: :size_7,
-            description: "Text size 7",
-            attributes: %{size: "7"},
-            slots: ["The quick brown fox jumps over the lazy dog."]
-          },
-          %Variation{
-            id: :size_8,
-            description: "Text size 8",
-            attributes: %{size: "8"},
-            slots: ["The quick brown fox jumps over the lazy dog."]
-          },
-          %Variation{
-            id: :size_9,
-            description: "Text size 9",
-            attributes: %{size: "9"},
-            slots: ["The quick brown fox jumps over the lazy dog."]
-          }
-        ]
+        template: """
+        <div class="rt-Flex rt-r-fd-column rt-r-gap-3">
+          <.text size="1">The quick brown fox jumps over the lazy dog.</.text>
+          <.text size="2">The quick brown fox jumps over the lazy dog.</.text>
+          <.text size="3">The quick brown fox jumps over the lazy dog.</.text>
+          <.text size="4">The quick brown fox jumps over the lazy dog.</.text>
+          <.text size="5">The quick brown fox jumps over the lazy dog.</.text>
+          <.text size="6">The quick brown fox jumps over the lazy dog.</.text>
+          <.text size="7">The quick brown fox jumps over the lazy dog.</.text>
+          <.text size="8">The quick brown fox jumps over the lazy dog.</.text>
+          <.text size="9">The quick brown fox jumps over the lazy dog.</.text>
+        </div>
+        """
       },
       %Variation{
         id: :longform_sizes,
         description: "Longform content sizes",
         template: """
-        <div class="flex flex-col gap-4">
-          <.text as="p" size="4" style="margin-bottom: 1rem;">
+        <div class="rt-Flex rt-r-fd-column rt-r-gap-5">
+          <.text as="p" size="4" style="margin-bottom: 20px;">
             The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant. The question is: What proportion(s) will give us the best results? The golden ratio is often observed in nature where beauty and utility intersect; perhaps we can use this "divine" proportion to enhance these attributes in our typography.
           </.text>
-          <.text as="p" size="3" style="margin-bottom: 1rem;">
+          <.text as="p" size="3" style="margin-bottom: 20px;">
             The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant. The question is: What proportion(s) will give us the best results? The golden ratio is often observed in nature where beauty and utility intersect; perhaps we can use this "divine" proportion to enhance these attributes in our typography.
           </.text>
           <.text as="p" size="2" color="gray">
@@ -187,7 +144,7 @@ defmodule EssenceUIWeb.Storybook.Components.Text do
         id: :ui_label_sizes,
         description: "UI label sizes",
         template: """
-        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; padding: 12px;">
+        <div class="rt-Grid rt-r-gtc-2 rt-r-ai-center rt-r-gap-5 rt-r-p-3">
           <div style="display: flex; flex-direction: column;">
             <.text size="3" weight="bold">Get started</.text>
             <.text color="gray" size="2">Start your next project in minutes</.text>
@@ -207,44 +164,31 @@ defmodule EssenceUIWeb.Storybook.Components.Text do
         </div>
         """
       },
-      %VariationGroup{
-        id: :weights,
+      %Variation{
+        id: :weights_group,
         description: "Weight",
-        variations: [
-          %Variation{
-            id: :weights_regular,
-            description: "Regular",
-            attributes: %{weight: "regular", as: "div"},
-            slots: ["The quick brown fox jumps over the lazy dog."]
-          },
-          %Variation{
-            id: :weights_medium,
-            description: "Medium",
-            attributes: %{weight: "medium", as: "div"},
-            slots: ["The quick brown fox jumps over the lazy dog."]
-          },
-          %Variation{
-            id: :weights_bold,
-            description: "Bold",
-            attributes: %{weight: "bold", as: "div"},
-            slots: ["The quick brown fox jumps over the lazy dog."]
-          }
-        ]
+        template: """
+        <div style="display: flex; flex-direction: column;">
+          <.text weight="regular" as="div">
+            The quick brown fox jumps over the lazy dog.
+          </.text>
+          <.text weight="medium" as="div">
+            The quick brown fox jumps over the lazy dog.
+          </.text>
+          <.text weight="bold" as="div">
+            The quick brown fox jumps over the lazy dog.
+          </.text>
+        </div>
+        """
       },
       %Variation{
         id: :alignment,
         description: "Align",
         template: """
-        <div style="display: flex; flex-direction: column; gap: 12px; width: 300px;">
-          <div style="border: 1px solid #ccc; padding: 10px;">
-            <.text align="left" as="div">Left-aligned</.text>
-          </div>
-          <div style="border: 1px solid #ccc; padding: 10px;">
-            <.text align="center" as="div">Center-aligned</.text>
-          </div>
-          <div style="border: 1px solid #ccc; padding: 10px;">
-            <.text align="right" as="div">Right-aligned</.text>
-          </div>
+        <div style="width: 100%;">
+          <.text align="left" as="div">Left-aligned</.text>
+          <.text align="center" as="div">Center-aligned</.text>
+          <.text align="right" as="div">Right-aligned</.text>
         </div>
         """
       },
@@ -252,9 +196,19 @@ defmodule EssenceUIWeb.Storybook.Components.Text do
         id: :trim,
         description: "Trim",
         template: """
-        <div style="display: flex; flex-direction: column; gap: 12px;">
-          <.text trim="normal" style="background: var(--gray-a2); border-top: 1px dashed var(--gray-a7); border-bottom: 1px dashed var(--gray-a7); padding: 0 16px;">Without trim</.text>
-          <.text trim="both" style="background: var(--gray-a2); border-top: 1px dashed var(--gray-a7); border-bottom: 1px dashed var(--gray-a7); padding: 0 16px;">With trim</.text>
+        <div class="rt-Flex rt-r-fd-column rt-r-gap-3">
+          <.text
+            trim="normal"
+            style="background: var(--gray-a2); border-top: 1px dashed var(--gray-a7); border-bottom: 1px dashed var(--gray-a7);"
+          >
+            Without trim
+          </.text>
+          <.text
+            trim="both"
+            style="background: var(--gray-a2); border-top: 1px dashed var(--gray-a7); border-bottom: 1px dashed var(--gray-a7);"
+          >
+            With trim
+          </.text>
         </div>
         """
       },
@@ -262,7 +216,7 @@ defmodule EssenceUIWeb.Storybook.Components.Text do
         id: :trim_box_example,
         description: "Trim in box components",
         template: """
-        <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div class="rt-Flex rt-r-fd-column rt-r-gap-3">
           <div style="background: var(--gray-a2); border: 1px dashed var(--gray-a7); padding: 16px;">
             <.text weight="bold" size="3" style="margin-bottom: 4px;">Without trim</.text>
             <.text>
@@ -283,76 +237,63 @@ defmodule EssenceUIWeb.Storybook.Components.Text do
         id: :truncate,
         description: "Truncate",
         template: """
-        <div class="rt-Flex rt-r-max-w" style="--max-width: 300px">
-          <.text truncate as="p">
+        <div class="rt-Flex rt-r-max-w" style="--max-width: 300px;">
+          <.text truncate>
             The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
           </.text>
         </div>
         """
       },
       %Variation{
-        id: :wrap,
-        description: "Wrap",
+        id: :wrap_nowrap,
+        description: "Wrap - nowrap",
         template: """
-        <div style="display: flex; flex-direction: column; gap: 12px;">
-          <div style="max-width: 270px; border: 1px solid #ccc; padding: 10px;">
-            <.text wrap="wrap">
-              The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
-            </.text>
-          </div>
-          <div style="max-width: 270px; border: 1px solid #ccc; padding: 10px; overflow-x: auto;">
-            <.text wrap="nowrap">
-              The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
-            </.text>
-          </div>
-          <div style="max-width: 270px; border: 1px solid #ccc; padding: 10px;">
-            <.text wrap="balance">
-              The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
-            </.text>
-          </div>
-          <div style="max-width: 270px; border: 1px solid #ccc; padding: 10px;">
-            <.text wrap="pretty">
-              The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
-            </.text>
-          </div>
+        <div class="rt-Flex rt-r-max-w" style="--max-width: 270px;">
+          <.text wrap="nowrap">
+            The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
+          </.text>
         </div>
         """
       },
-      %VariationGroup{
-        id: :colors,
+      %Variation{
+        id: :wrap_balance,
+        description: "Wrap - balance",
+        template: """
+        <div class="rt-Flex rt-r-max-w" style="--max-width: 270px;">
+          <.text wrap="balance">
+            The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
+          </.text>
+        </div>
+        """
+      },
+      %Variation{
+        id: :wrap_pretty,
+        description: "Wrap - pretty",
+        template: """
+        <div class="rt-Flex rt-r-max-w" style="--max-width: 270px;">
+          <.text wrap="pretty">
+            The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
+          </.text>
+        </div>
+        """
+      },
+      %Variation{
+        id: :colors_group,
         description: "Color",
-        variations: [
-          %Variation{
-            id: :color_indigo,
-            description: "Indigo",
-            attributes: %{color: "indigo"},
-            slots: ["The quick brown fox jumps over the lazy dog."]
-          },
-          %Variation{
-            id: :color_cyan,
-            description: "Cyan",
-            attributes: %{color: "cyan"},
-            slots: ["The quick brown fox jumps over the lazy dog."]
-          },
-          %Variation{
-            id: :color_orange,
-            description: "Orange",
-            attributes: %{color: "orange"},
-            slots: ["The quick brown fox jumps over the lazy dog."]
-          },
-          %Variation{
-            id: :color_crimson,
-            description: "Crimson",
-            attributes: %{color: "crimson"},
-            slots: ["The quick brown fox jumps over the lazy dog."]
-          }
-        ]
+        template: """
+        <div class="rt-Flex rt-r-fd-column">
+          <.text color="indigo">The quick brown fox jumps over the lazy dog.</.text>
+          <.text color="cyan">The quick brown fox jumps over the lazy dog.</.text>
+          <.text color="orange">The quick brown fox jumps over the lazy dog.</.text>
+          <.text color="crimson">The quick brown fox jumps over the lazy dog.</.text>
+        </div>
+        """
       },
       %Variation{
         id: :high_contrast,
         description: "High-contrast",
         template: """
-        <div class="flex flex-col gap-2">
+        <div style="display: flex; flex-direction: column;">
           <.text color="gray">The quick brown fox jumps over the lazy dog.</.text>
           <.text color="gray" high_contrast={true}>
             The quick brown fox jumps over the lazy dog.
@@ -365,9 +306,9 @@ defmodule EssenceUIWeb.Storybook.Components.Text do
         description: "With formatting",
         template: """
         <.text as="p">
-          Look, such a helpful <a href="#" class="text-blue-600 hover:underline">link</a>, an <em>italic emphasis</em>,
-          a piece of computer <code class="bg-gray-100 px-1 py-0.5 rounded">code</code>, and even a hotkey combination
-          <kbd class="bg-gray-100 border border-gray-300 rounded px-1 py-0.5 text-sm">⇧⌘A</kbd> within the text.
+          Look, such a helpful <a href="#">link</a>, an <em>italic emphasis</em>,
+          a piece of computer <code>code</code>, and even a hotkey combination{" "}
+          <kbd>⇧⌘A</kbd> within the text.
         </.text>
         """
       },
@@ -377,9 +318,9 @@ defmodule EssenceUIWeb.Storybook.Components.Text do
         template: """
         <div style="max-width: 300px;">
           <.text as="label" size="3">
-            <div style="display: flex; gap: 8px; align-items: flex-start;">
-              <input type="checkbox" checked style="margin-top: 0.25em;" />
-              <span>I understand that these documents are confidential and cannot be shared with a third party.</span>
+            <div style="display: flex; gap: 8px;">
+              <input type="checkbox" checked />
+              I understand that these documents are confidential and cannot be shared with a third party.
             </div>
           </.text>
         </div>
