@@ -287,12 +287,8 @@ defmodule EssenceUIWeb.Storybook.Components.Text do
         description: "Text trim options",
         template: """
         <div style="display: flex; flex-direction: column; gap: 12px;">
-          <div style="background: #f2f2f2; border-top: 1px dashed #aaa; border-bottom: 1px dashed #aaa;">
-            <.text trim="normal">Without trim</.text>
-          </div>
-          <div style="background: #f2f2f2; border-top: 1px dashed #aaa; border-bottom: 1px dashed #aaa;">
-            <.text trim="both">With trim</.text>
-          </div>
+          <.text trim="normal" style="background: var(--gray-a2); border-top: 1px dashed var(--gray-a7); border-bottom: 1px dashed var(--gray-a7); padding: 16px;">Without trim</.text>
+          <.text trim="both" style="background: var(--gray-a2); border-top: 1px dashed var(--gray-a7); border-bottom: 1px dashed var(--gray-a7); padding: 16px;">With trim</.text>
         </div>
         """
       },
@@ -301,16 +297,12 @@ defmodule EssenceUIWeb.Storybook.Components.Text do
         description: "Trim with longform content",
         template: """
         <div style="display: flex; flex-direction: column; gap: 12px;">
-          <div style="background: #f2f2f2; border: 1px dashed #aaa; padding: 16px;">
-            <.text>
-              The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
-            </.text>
-          </div>
-          <div style="background: #f2f2f2; border: 1px dashed #aaa; padding: 16px;">
-            <.text trim="end">
-              The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
-            </.text>
-          </div>
+          <.text style="background: var(--gray-a2); border-top: 1px dashed var(--gray-a7); border-bottom: 1px dashed var(--gray-a7); padding: 16px;">
+            The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
+          </.text>
+          <.text trim="end" style="background: #f2f2f2; border: 1px dashed #aaa; padding: 16px;">
+            The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.
+          </.text>
         </div>
         """
       },
