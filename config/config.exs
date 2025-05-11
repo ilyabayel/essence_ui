@@ -12,7 +12,7 @@ config :esbuild,
   version: "0.17.11",
   essence_ui: [
     args:
-      ~w(js/app.js js/storybook.js --bundle --target=es2022 --outdir=../priv/static/assets/js --external:/fonts/* --external:/images/*),
+      ~w(js/storybook.js --bundle --target=es2022 --outdir=../priv/static/assets/js --external:/fonts/* --external:/images/*),
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
@@ -47,23 +47,5 @@ config :logger, :default_formatter,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
-
-# Configure tailwind (the version is required)
-config :tailwind,
-  version: "4.0.9",
-  essence_ui: [
-    args: ~w(
-      --input=assets/css/app.css
-      --output=priv/static/assets/css/app.css
-    ),
-    cd: Path.expand("..", __DIR__)
-  ],
-  storybook: [
-    args: ~w(
-      --input=assets/css/storybook.css
-      --output=priv/static/assets/storybook.css
-    ),
-    cd: Path.expand("..", __DIR__)
-  ]
 
 import_config "#{config_env()}.exs"

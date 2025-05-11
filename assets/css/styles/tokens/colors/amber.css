@@ -1,7 +1,7 @@
-@import './radix/amber.css';
-@import './radix/amber-dark.css';
-@import './radix/amber-alpha.css';
-@import './radix/amber-dark-alpha.css';
+@import '@radix-ui/colors/amber.css';
+@import '@radix-ui/colors/amber-dark.css';
+@import '@radix-ui/colors/amber-alpha.css';
+@import '@radix-ui/colors/amber-dark-alpha.css';
 
 :root {
   --amber-contrast: #21201c; /* light mode sand 12 */

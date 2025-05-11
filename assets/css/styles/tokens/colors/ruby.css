@@ -1,7 +1,7 @@
-@import './radix/ruby.css';
-@import './radix/ruby-dark.css';
-@import './radix/ruby-alpha.css';
-@import './radix/ruby-dark-alpha.css';
+@import '@radix-ui/colors/ruby.css';
+@import '@radix-ui/colors/ruby-dark.css';
+@import '@radix-ui/colors/ruby-alpha.css';
+@import '@radix-ui/colors/ruby-dark-alpha.css';
 
 :root {
   --ruby-contrast: white;

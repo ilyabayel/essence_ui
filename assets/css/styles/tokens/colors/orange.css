@@ -1,7 +1,7 @@
-@import './radix/orange.css';
-@import './radix/orange-dark.css';
-@import './radix/orange-alpha.css';
-@import './radix/orange-dark-alpha.css';
+@import '@radix-ui/colors/orange.css';
+@import '@radix-ui/colors/orange-dark.css';
+@import '@radix-ui/colors/orange-alpha.css';
+@import '@radix-ui/colors/orange-dark-alpha.css';
 
 :root {
   --orange-contrast: white;

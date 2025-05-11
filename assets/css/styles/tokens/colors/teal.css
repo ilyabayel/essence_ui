@@ -1,7 +1,7 @@
-@import './radix/teal.css';
-@import './radix/teal-dark.css';
-@import './radix/teal-alpha.css';
-@import './radix/teal-dark-alpha.css';
+@import '@radix-ui/colors/teal.css';
+@import '@radix-ui/colors/teal-dark.css';
+@import '@radix-ui/colors/teal-alpha.css';
+@import '@radix-ui/colors/teal-dark-alpha.css';
 
 :root {
   --teal-contrast: white;

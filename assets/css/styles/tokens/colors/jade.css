@@ -1,7 +1,7 @@
-@import './radix/jade.css';
-@import './radix/jade-dark.css';
-@import './radix/jade-alpha.css';
-@import './radix/jade-dark-alpha.css';
+@import '@radix-ui/colors/jade.css';
+@import '@radix-ui/colors/jade-dark.css';
+@import '@radix-ui/colors/jade-alpha.css';
+@import '@radix-ui/colors/jade-dark-alpha.css';
 
 :root {
   --jade-contrast: white;

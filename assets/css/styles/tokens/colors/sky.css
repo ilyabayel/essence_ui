@@ -1,7 +1,7 @@
-@import './radix/sky.css';
-@import './radix/sky-dark.css';
-@import './radix/sky-alpha.css';
-@import './radix/sky-dark-alpha.css';
+@import '@radix-ui/colors/sky.css';
+@import '@radix-ui/colors/sky-dark.css';
+@import '@radix-ui/colors/sky-alpha.css';
+@import '@radix-ui/colors/sky-dark-alpha.css';
 
 :root {
   --sky-contrast: #1c2024; /* light mode slate 12 */

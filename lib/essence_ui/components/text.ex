@@ -46,7 +46,7 @@ defmodule EssenceUI.Components.Text do
   def text(assigns) do
     class =
       [
-        "essence-text",
+        "rt-Text",
         assigns[:size] && "essence-text-size-#{assigns[:size]}",
         assigns[:weight] && "essence-text-weight-#{assigns[:weight]}",
         assigns[:align] && "essence-text-align-#{assigns[:align]}",

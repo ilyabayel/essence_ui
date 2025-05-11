@@ -1,7 +1,7 @@
-@import './radix/gold.css';
-@import './radix/gold-dark.css';
-@import './radix/gold-alpha.css';
-@import './radix/gold-dark-alpha.css';
+@import '@radix-ui/colors/gold.css';
+@import '@radix-ui/colors/gold-dark.css';
+@import '@radix-ui/colors/gold-alpha.css';
+@import '@radix-ui/colors/gold-dark-alpha.css';
 
 :root {
   --gold-contrast: white;

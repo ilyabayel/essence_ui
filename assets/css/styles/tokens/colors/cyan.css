@@ -1,7 +1,7 @@
-@import './radix/cyan.css';
-@import './radix/cyan-dark.css';
-@import './radix/cyan-alpha.css';
-@import './radix/cyan-dark-alpha.css';
+@import '@radix-ui/colors/cyan.css';
+@import '@radix-ui/colors/cyan-dark.css';
+@import '@radix-ui/colors/cyan-alpha.css';
+@import '@radix-ui/colors/cyan-dark-alpha.css';
 
 :root {
   --cyan-contrast: white;

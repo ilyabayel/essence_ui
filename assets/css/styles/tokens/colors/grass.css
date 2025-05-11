@@ -1,7 +1,7 @@
-@import './radix/grass.css';
-@import './radix/grass-dark.css';
-@import './radix/grass-alpha.css';
-@import './radix/grass-dark-alpha.css';
+@import '@radix-ui/colors/grass.css';
+@import '@radix-ui/colors/grass-dark.css';
+@import '@radix-ui/colors/grass-alpha.css';
+@import '@radix-ui/colors/grass-dark-alpha.css';
 
 :root {
   --grass-contrast: white;

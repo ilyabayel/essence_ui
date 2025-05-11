@@ -1,7 +1,7 @@
-@import './radix/indigo.css';
-@import './radix/indigo-dark.css';
-@import './radix/indigo-alpha.css';
-@import './radix/indigo-dark-alpha.css';
+@import '@radix-ui/colors/indigo.css';
+@import '@radix-ui/colors/indigo-dark.css';
+@import '@radix-ui/colors/indigo-alpha.css';
+@import '@radix-ui/colors/indigo-dark-alpha.css';
 
 :root {
   --indigo-contrast: white;

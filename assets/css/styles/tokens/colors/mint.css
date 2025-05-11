@@ -1,7 +1,7 @@
-@import './radix/mint.css';
-@import './radix/mint-dark.css';
-@import './radix/mint-alpha.css';
-@import './radix/mint-dark-alpha.css';
+@import '@radix-ui/colors/mint.css';
+@import '@radix-ui/colors/mint-dark.css';
+@import '@radix-ui/colors/mint-alpha.css';
+@import '@radix-ui/colors/mint-dark-alpha.css';
 
 :root {
   --mint-contrast: #1a211e; /* light mode sage 12 */

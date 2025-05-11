@@ -41,7 +41,12 @@ defmodule EssenceUI.MixProject do
       {:floki, ">= 0.30.0", only: :test},
       {:gettext, "~> 0.26"},
       {:heroicons,
-       github: "tailwindlabs/heroicons", tag: "v2.1.1", sparse: "optimized", app: false, compile: false, depth: 1},
+       github: "tailwindlabs/heroicons",
+       tag: "v2.1.1",
+       sparse: "optimized",
+       app: false,
+       compile: false,
+       depth: 1},
       {:jason, "~> 1.2"},
       {:phoenix, "~> 1.8.0-rc.2", override: true},
       {:phoenix_html, "~> 4.1"},
@@ -68,11 +73,9 @@ defmodule EssenceUI.MixProject do
   defp aliases do
     [
       setup: ["deps.get", "assets.setup", "assets.build"],
-      "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind essence_ui", "esbuild essence_ui"],
+      "assets.setup": ["esbuild.install --if-missing"],
+      "assets.build": ["esbuild essence_ui"],
       "assets.deploy": [
-        "tailwind essence_ui --minify",
-        "tailwind storybook --minify",
         "esbuild essence_ui --minify",
         "phx.digest"
       ]

@@ -1,7 +1,7 @@
-@import './radix/crimson.css';
-@import './radix/crimson-dark.css';
-@import './radix/crimson-alpha.css';
-@import './radix/crimson-dark-alpha.css';
+@import '@radix-ui/colors/crimson.css';
+@import '@radix-ui/colors/crimson-dark.css';
+@import '@radix-ui/colors/crimson-alpha.css';
+@import '@radix-ui/colors/crimson-dark-alpha.css';
 
 :root {
   --crimson-contrast: white;

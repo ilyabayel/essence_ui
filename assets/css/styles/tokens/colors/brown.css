@@ -1,7 +1,7 @@
-@import './radix/brown.css';
-@import './radix/brown-dark.css';
-@import './radix/brown-alpha.css';
-@import './radix/brown-dark-alpha.css';
+@import '@radix-ui/colors/brown.css';
+@import '@radix-ui/colors/brown-dark.css';
+@import '@radix-ui/colors/brown-alpha.css';
+@import '@radix-ui/colors/brown-dark-alpha.css';
 
 :root {
   --brown-contrast: white;

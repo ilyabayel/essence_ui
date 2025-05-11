@@ -1,7 +1,7 @@
-@import './radix/purple.css';
-@import './radix/purple-dark.css';
-@import './radix/purple-alpha.css';
-@import './radix/purple-dark-alpha.css';
+@import '@radix-ui/colors/purple.css';
+@import '@radix-ui/colors/purple-dark.css';
+@import '@radix-ui/colors/purple-alpha.css';
+@import '@radix-ui/colors/purple-dark-alpha.css';
 
 :root {
   --purple-contrast: white;

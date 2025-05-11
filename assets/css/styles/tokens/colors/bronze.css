@@ -1,7 +1,7 @@
-@import './radix/bronze.css';
-@import './radix/bronze-dark.css';
-@import './radix/bronze-alpha.css';
-@import './radix/bronze-dark-alpha.css';
+@import '@radix-ui/colors/bronze.css';
+@import '@radix-ui/colors/bronze-dark.css';
+@import '@radix-ui/colors/bronze-alpha.css';
+@import '@radix-ui/colors/bronze-dark-alpha.css';
 
 :root {
   --bronze-contrast: white;

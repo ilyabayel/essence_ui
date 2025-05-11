@@ -1,7 +1,7 @@
-@import './radix/iris.css';
-@import './radix/iris-dark.css';
-@import './radix/iris-alpha.css';
-@import './radix/iris-dark-alpha.css';
+@import '@radix-ui/colors/iris.css';
+@import '@radix-ui/colors/iris-dark.css';
+@import '@radix-ui/colors/iris-alpha.css';
+@import '@radix-ui/colors/iris-dark-alpha.css';
 
 :root {
   --iris-contrast: white;

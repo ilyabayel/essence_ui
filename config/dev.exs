@@ -37,9 +37,7 @@ config :essence_ui, EssenceUIWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "Q+Uio4LUvL1oF7eb2n1/hCCoLoy/xNIgQGX/JTPkW9TeErTT9ZWFWVfVSOMtmdQr",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:essence_ui, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:essence_ui, ~w(--watch)]},
-    storybook_tailwind: {Tailwind, :install_and_run, [:storybook, ~w(--watch)]}
+    esbuild: {Esbuild, :install_and_run, [:essence_ui, ~w(--sourcemap=inline --watch)]}
   ]
 
 config :essence_ui, EssenceUIWeb.Endpoint,

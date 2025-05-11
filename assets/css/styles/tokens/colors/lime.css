@@ -1,7 +1,7 @@
-@import './radix/lime.css';
-@import './radix/lime-dark.css';
-@import './radix/lime-alpha.css';
-@import './radix/lime-dark-alpha.css';
+@import '@radix-ui/colors/lime.css';
+@import '@radix-ui/colors/lime-dark.css';
+@import '@radix-ui/colors/lime-alpha.css';
+@import '@radix-ui/colors/lime-dark-alpha.css';
 
 :root {
   --lime-contrast: #1d211c; /* light mode olive 12 */
