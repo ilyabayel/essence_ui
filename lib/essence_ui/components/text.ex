@@ -7,6 +7,8 @@ defmodule EssenceUI.Components.Text do
 
   use Phoenix.Component
 
+  import EssenceUI.SharedProps.ColorProps
+
   @doc """
   Renders a text component.
 
@@ -30,6 +32,7 @@ defmodule EssenceUI.Components.Text do
     * `class` - Additional CSS classes to add to the element.
     * `rest` - Additional HTML attributes to add to the element.
   """
+  color_attrs()
   attr :as, :string, default: "span", values: ["span", "div", "label", "p"]
   attr :size, :string, values: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
   attr :weight, :string, values: ["light", "regular", "medium", "bold"]
@@ -37,7 +40,6 @@ defmodule EssenceUI.Components.Text do
   attr :trim, :string, values: ["normal", "start", "end", "both"]
   attr :truncate, :boolean, default: false
   attr :wrap, :string, values: ["wrap", "nowrap", "pretty", "balance"]
-  attr :color, :string
   attr :high_contrast, :boolean, default: false
   attr :class, :string, default: nil
   attr :rest, :global
