@@ -1,15 +1,14 @@
-defmodule Storybook.Root do
+defmodule Storybook.Layout.Root do
   # See https://hexdocs.pm/phoenix_storybook/PhoenixStorybook.Index.html for full index
   # documentation.
   @moduledoc false
   use PhoenixStorybook.Index
 
-  def folder_icon, do: {:local, "hero-square-3-stack-3d-solid", "psb-h-4"}
-  def folder_name, do: "Components"
+  def folder_name, do: "Layout"
 
-  def entry("welcome") do
+  def entry("layout") do
     [
-      name: "Welcome Page",
+      name: "Layout",
       icon: {:fa, "hand-wave", :thin}
     ]
   end
