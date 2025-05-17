@@ -15,7 +15,7 @@ defmodule EssenceUI.SharedProps.WeightProps do
 
   defmacro weight_attrs do
     quote do
-      attr :weight, :string, values: unquote(@weights), doc: "Font weight: one of #{Enum.join(@weights, ", ")}."
+      attr :weight, :string, values: unquote(@weights), doc: "Font weight: one of #{unquote(Enum.join(@weights, ", "))}."
     end
   end
 end

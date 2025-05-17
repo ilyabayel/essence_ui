@@ -15,7 +15,9 @@ defmodule EssenceUI.SharedProps.TextWrapProps do
 
   defmacro text_wrap_attrs do
     quote do
-      attr :wrap, :string, values: unquote(@wrap_values), doc: "Text wrapping: one of #{Enum.join(@wrap_values, ", ")}."
+      attr :wrap, :string,
+        values: unquote(@wrap_values),
+        doc: "Text wrapping: one of #{Enum.join(unquote(@wrap_values), ", ")}."
     end
   end
 end

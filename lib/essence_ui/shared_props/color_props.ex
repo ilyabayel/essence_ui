@@ -43,7 +43,7 @@ defmodule EssenceUI.SharedProps.ColorProps do
     "sand"
   ]
 
-  def color_prop_defs do
+  def color_prop_def do
     %{
       color: %{
         type: [:enum, :string],
@@ -55,7 +55,7 @@ defmodule EssenceUI.SharedProps.ColorProps do
     }
   end
 
-  def accent_color_prop_defs do
+  def accent_color_prop_def do
     %{
       color: %{
         type: [:enum, :string],

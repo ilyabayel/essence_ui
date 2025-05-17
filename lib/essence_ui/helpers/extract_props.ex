@@ -3,31 +3,53 @@ defmodule EssenceUI.Helpers.ExtractProps do
 
   @doc """
   Extracts props according to prop definitions, applying defaults, generating class and style, and omitting used keys.
-  Prop defs: %{prop_name => %{type: :enum | :string | :boolean, default: any, values: [any], class: String.t, style: map}}
-  Returns: %{class: String.t, style: map, ...other_props}
+  Merges multiple prop_defs, applies defaults, builds responsive class names and custom properties, and returns a map with :classes, :custom_properties, and the remaining assigns.
   """
+  def call(assigns, prop_defs_list) when is_list(prop_defs_list) do
+    all_prop_defs = Enum.reduce(prop_defs_list, %{}, &Map.merge(&2, &1))
+    call(assigns, all_prop_defs)
+  end
+
   def call(assigns, prop_defs) do
-    Enum.reduce(prop_defs, %{}, fn {key, defs}, acc ->
-      value = Map.get(assigns, key)
+    {extracted, _rest} = Enum.split_with(Map.to_list(assigns), fn {k, _v} -> Map.has_key?(prop_defs, k) end)
 
-      if value do
-        class = Map.get(defs, :class)
+    {classes, custom_properties, used_keys} =
+      Enum.reduce(extracted, {[], [], []}, fn {key, value}, {classes, custom_properties, used_keys} ->
+        prop_definition = Map.get(prop_defs, key)
+        value = if is_nil(value) and Map.has_key?(prop_definition, :default), do: prop_definition[:default], else: value
 
-        custom_properties =
-          defs
-          |> Map.get(:custom_properties, [])
-          |> Enum.map(fn prop ->
-            "#{prop}: #{value};"
-          end)
+        # Enum prop: add class for value, or default if invalid
+        cond do
+          prop_definition[:type] == :boolean and value ->
+            {[prop_definition[:class] | classes], custom_properties, [key | used_keys]}
 
-        responsive = Map.get(defs, :responsive, false)
+          Map.has_key?(prop_definition, :custom_properties) and not is_nil(value) ->
+            props = Enum.map(prop_definition[:custom_properties], fn prop -> "#{prop}: #{value};" end)
+            class = prop_definition[:class]
+            {[class | classes], props ++ custom_properties, [key | used_keys]}
 
-        acc
-        |> Map.put(:classes, [class] ++ (acc[:classes] || []))
-        |> Map.put(:custom_properties, custom_properties ++ (acc[:custom_properties] || []))
-      else
-        acc
-      end
-    end)
+          prop_definition[:type] in [:enum, [:enum, :string]] and not is_nil(value) ->
+            valid = Map.get(prop_definition, :values, [])
+            val = if value in valid, do: value, else: prop_definition[:default]
+            class = if prop_definition[:class], do: "#{prop_definition[:class]}-#{val}"
+            {[class | classes], custom_properties, [key | used_keys]}
+
+          prop_definition[:type] == :string and not is_nil(value) and prop_definition[:class] ->
+            class = "#{prop_definition[:class]}-#{value}"
+            {[class | classes], custom_properties, [key | used_keys]}
+
+          true ->
+            {classes, custom_properties, used_keys}
+        end
+      end)
+
+    # Remove used keys from assigns
+    rest_assigns = Map.drop(assigns, used_keys)
+
+    %{
+      classes: classes |> Enum.filter(& &1) |> Enum.reverse(),
+      custom_properties: Enum.reverse(custom_properties),
+      rest: rest_assigns
+    }
   end
 end

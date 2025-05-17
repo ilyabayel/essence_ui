@@ -15,7 +15,9 @@ defmodule EssenceUI.SharedProps.TextAlignProps do
 
   defmacro text_align_attrs do
     quote do
-      attr :align, :string, values: unquote(@alignments), doc: "Text alignment: one of #{Enum.join(@alignments, ", ")}."
+      attr :align, :string,
+        values: unquote(@alignments),
+        doc: "Text alignment: one of #{Enum.join(unquote(@alignments), ", ")}."
     end
   end
 end

@@ -14,24 +14,12 @@ defmodule EssenceUI.Components.Box do
   alias EssenceUI.Helpers.ExtractProps
 
   @display_values [
-    "block",
-    "inline-block",
+    "none",
     "inline",
-    "flex",
-    "inline-flex",
-    "grid",
-    "inline-grid",
-    "none"
+    "inline-block",
+    "block",
+    "contents"
   ]
-
-  @box_prop_defs %{
-    as: %{type: :string, default: "div"},
-    display: %{
-      type: :enum,
-      values: @display_values,
-      class: "rt-r-display"
-    }
-  }
 
   @doc """
   Renders a box component.
@@ -57,15 +45,24 @@ defmodule EssenceUI.Components.Box do
   margin_attrs()
   height_attrs()
   width_attrs()
-  attr :as, :string
-  attr :class, :string
+  attr :as, :string, default: "div", values: ["div", "span"]
+  attr :class, :string, default: "", doc: "Additional CSS classes to add to the element."
   attr :display, :string, default: "block", values: @display_values
+  attr :style, :string, default: ""
   attr :rest, :global
   slot :inner_block, required: true
 
   def box(assigns) do
     props_defs =
-      @box_prop_defs
+      %{
+        as: %{type: :enum, values: ["div", "span"], default: "div"},
+        display: %{
+          type: :enum,
+          values: @display_values,
+          class: "rt-r-display",
+          responsive: true
+        }
+      }
       |> Map.merge(padding_prop_defs())
       |> Map.merge(margin_prop_defs())
       |> Map.merge(height_prop_defs())
@@ -75,7 +72,7 @@ defmodule EssenceUI.Components.Box do
 
     class = ["rt-Box", assigns[:class], Enum.join(extracted_props[:classes], " ")] |> Enum.filter(& &1) |> Enum.join(" ")
     style = extracted_props[:custom_properties] |> Enum.join(" ") |> String.trim()
-    assigns = assign(assigns, class: class, style: style, tag_name: extracted_props)
+    assigns = assign(assigns, class: class, style: assigns[:style] <> style, tag_name: assigns[:as])
 
     ~H"""
     <.dynamic_tag tag_name={@tag_name} class={@class} style={@style} {@rest}>

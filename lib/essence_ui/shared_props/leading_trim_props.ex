@@ -17,7 +17,7 @@ defmodule EssenceUI.SharedProps.LeadingTrimProps do
     quote do
       attr :trim, :string,
         values: unquote(@leading_trim_values),
-        doc: "Trim leading space: one of #{Enum.join(@leading_trim_values, ", ")}."
+        doc: "Trim leading space: one of #{Enum.join(unquote(@leading_trim_values), ", ")}."
     end
   end
 end
