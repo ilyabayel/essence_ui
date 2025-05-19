@@ -53,8 +53,8 @@ defmodule EssenceUI.Components.Box do
     * `grid_area`, `grid_column`, `grid_column_start`, `grid_column_end`, `grid_row`, `grid_row_start`, `grid_row_end` - Grid layout utilities. Responsive supported.
 
   """
-  LayoutProps.layout_attrs()
-  MarginProps.margin_attrs()
+  LayoutProps.attrs()
+  MarginProps.attrs()
   attr :as, :string, default: "div", values: ["div", "span"]
   attr :class, :string, default: "", doc: "Additional CSS classes to add to the element."
   attr :display, :string, default: "block", values: @display_values
@@ -75,8 +75,8 @@ defmodule EssenceUI.Components.Box do
 
     props_defs =
       box_prop_defs
-      |> Map.merge(LayoutProps.layout_prop_defs())
-      |> Map.merge(MarginProps.margin_prop_defs())
+      |> Map.merge(LayoutProps.prop_defs())
+      |> Map.merge(MarginProps.prop_defs())
 
     extracted_props = ExtractProps.call(assigns, props_defs)
 

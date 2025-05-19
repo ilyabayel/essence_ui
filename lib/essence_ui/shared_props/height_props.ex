@@ -4,7 +4,7 @@ defmodule EssenceUI.SharedProps.HeightProps do
   Inspired by Radix UI Themes.
   """
 
-  def height_prop_defs do
+  def prop_defs do
     %{
       height: %{type: :string, class: "rt-r-h", custom_properties: ["--height"], responsive: true},
       max_height: %{type: :string, class: "rt-r-max-h", custom_properties: ["--max-height"], responsive: true},
@@ -12,7 +12,7 @@ defmodule EssenceUI.SharedProps.HeightProps do
     }
   end
 
-  defmacro height_attrs do
+  defmacro attrs do
     quote do
       attr :height, :any, doc: "Height utility class string or map. `100px` or `%{xs: '100px', sm: '200px'}`"
       attr :max_height, :any, doc: "Max height utility class string or map. `100px` or `%{xs: '100px', sm: '200px'}`"

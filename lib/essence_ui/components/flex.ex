@@ -30,10 +30,10 @@ defmodule EssenceUI.Components.Flex do
   @justify_values ["start", "center", "end", "between"]
   @wrap_values ["nowrap", "wrap", "wrap-reverse"]
 
-  LayoutProps.layout_attrs()
-  MarginProps.margin_attrs()
-  AsChildProps.as_child_attrs()
-  GapProps.gap_attrs()
+  LayoutProps.attrs()
+  MarginProps.attrs()
+  AsChildProps.attrs()
+  GapProps.attrs()
 
   attr :as, :string, default: "div", values: @as_values
   attr :class, :string, default: nil, doc: "Additional CSS classes to add to the element."
@@ -85,10 +85,10 @@ defmodule EssenceUI.Components.Flex do
 
     prop_defs =
       flex_prop_defs
-      |> Map.merge(LayoutProps.layout_prop_defs())
-      |> Map.merge(MarginProps.margin_prop_defs())
-      |> Map.merge(AsChildProps.as_child_prop_defs())
-      |> Map.merge(GapProps.gap_prop_defs())
+      |> Map.merge(LayoutProps.prop_defs())
+      |> Map.merge(MarginProps.prop_defs())
+      |> Map.merge(AsChildProps.prop_defs())
+      |> Map.merge(GapProps.prop_defs())
 
     extracted = ExtractProps.call(assigns, prop_defs)
 

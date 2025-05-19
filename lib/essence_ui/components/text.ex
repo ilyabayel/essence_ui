@@ -7,14 +7,23 @@ defmodule EssenceUI.Components.Text do
 
   use Phoenix.Component
 
-  import EssenceUI.SharedProps.AsChildProps
-  import EssenceUI.SharedProps.ColorProps
-  import EssenceUI.SharedProps.HighContrastProps
-  import EssenceUI.SharedProps.LeadingTrimProps
-  import EssenceUI.SharedProps.TextAlignProps
-  import EssenceUI.SharedProps.TextWrapProps
-  import EssenceUI.SharedProps.TruncateProps
-  import EssenceUI.SharedProps.WeightProps
+  alias EssenceUI.SharedProps.AsChildProps
+  alias EssenceUI.SharedProps.ColorProps
+  alias EssenceUI.SharedProps.HighContrastProps
+  alias EssenceUI.SharedProps.LeadingTrimProps
+  alias EssenceUI.SharedProps.TextAlignProps
+  alias EssenceUI.SharedProps.TextWrapProps
+  alias EssenceUI.SharedProps.TruncateProps
+  alias EssenceUI.SharedProps.WeightProps
+
+  require AsChildProps
+  require ColorProps
+  require HighContrastProps
+  require LeadingTrimProps
+  require TextAlignProps
+  require TextWrapProps
+  require TruncateProps
+  require WeightProps
 
   @doc """
   Renders a text component.
@@ -39,15 +48,14 @@ defmodule EssenceUI.Components.Text do
     * `class` - Additional CSS classes to add to the element.
     * `rest` - Additional HTML attributes to add to the element.
   """
-  # Remove macro calls, use explicit attr definitions for all props
-  color_attrs()
-  text_align_attrs()
-  leading_trim_attrs()
-  text_wrap_attrs()
-  truncate_attrs()
-  weight_attrs()
-  as_child_attrs()
-  high_contrast_attrs()
+  ColorProps.attrs()
+  TextAlignProps.attrs()
+  LeadingTrimProps.attrs()
+  TextWrapProps.attrs()
+  TruncateProps.attrs()
+  WeightProps.attrs()
+  AsChildProps.attrs()
+  HighContrastProps.attrs()
 
   attr :size, :any,
     doc:
@@ -68,13 +76,13 @@ defmodule EssenceUI.Components.Text do
       %{
         size: %{type: :enum, class: "rt-r-size", values: ["1", "2", "3", "4", "5", "6", "7", "8", "9"], responsive: true}
       }
-      |> Map.merge(as_child_prop_defs())
-      |> Map.merge(weight_prop_def())
-      |> Map.merge(text_align_prop_def())
-      |> Map.merge(leading_trim_prop_def())
-      |> Map.merge(truncate_prop_def())
-      |> Map.merge(text_wrap_prop_def())
-      |> Map.merge(high_contrast_prop_def())
+      |> Map.merge(AsChildProps.prop_defs())
+      |> Map.merge(WeightProps.prop_defs())
+      |> Map.merge(TextAlignProps.prop_defs())
+      |> Map.merge(LeadingTrimProps.prop_defs())
+      |> Map.merge(TruncateProps.prop_defs())
+      |> Map.merge(TextWrapProps.prop_defs())
+      |> Map.merge(HighContrastProps.prop_defs())
 
     extracted = EssenceUI.Helpers.ExtractProps.call(assigns, prop_defs)
 

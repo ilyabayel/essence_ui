@@ -3,13 +3,13 @@ defmodule EssenceUI.SharedProps.TruncateProps do
   Prop definition for truncate (truncate text with ellipsis).
   """
 
-  def truncate_prop_def do
+  def prop_defs do
     %{
       truncate: %{type: :boolean, class: "rt-truncate"}
     }
   end
 
-  defmacro truncate_attrs do
+  defmacro attrs do
     quote do
       attr :truncate, :boolean, doc: "Whether to truncate text with ellipsis when it overflows."
     end

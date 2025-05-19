@@ -26,7 +26,7 @@ defmodule EssenceUI.SharedProps.GapProps do
     "-9"
   ]
 
-  def gap_prop_defs do
+  def prop_defs do
     %{
       # Sets the CSS **row-gap** property.
       # Supports space scale values, CSS strings, and responsive objects.
@@ -84,7 +84,7 @@ defmodule EssenceUI.SharedProps.GapProps do
 
   def gap_values, do: @gap_values
 
-  defmacro gap_attrs do
+  defmacro attrs do
     quote do
       attr :gap, :string, values: unquote(@gap_values), doc: "Gap utility class (0-9, -1 to -9)"
       attr :gap_y, :string, values: unquote(@gap_values), doc: "Column gap utility class (0-9, -1 to -9)"

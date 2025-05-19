@@ -5,7 +5,7 @@ defmodule EssenceUI.SharedProps.TextWrapProps do
 
   @wrap_values ["wrap", "nowrap", "pretty", "balance"]
 
-  def text_wrap_prop_def do
+  def prop_defs do
     %{
       wrap: %{type: [:enum, :string], values: @wrap_values, responsive: true, class: "rt-r-tw"}
     }
@@ -13,7 +13,7 @@ defmodule EssenceUI.SharedProps.TextWrapProps do
 
   def text_wrap_values, do: @wrap_values
 
-  defmacro text_wrap_attrs do
+  defmacro attrs do
     quote do
       attr :wrap, :string,
         values: unquote(@wrap_values),

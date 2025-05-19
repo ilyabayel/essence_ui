@@ -5,7 +5,7 @@ defmodule EssenceUI.SharedProps.TextAlignProps do
 
   @alignments ["left", "center", "right"]
 
-  def text_align_prop_def do
+  def prop_defs do
     %{
       align: %{type: [:enum, :string], values: @alignments, responsive: true, class: "rt-r-ta"}
     }
@@ -13,7 +13,7 @@ defmodule EssenceUI.SharedProps.TextAlignProps do
 
   def text_align_values, do: @alignments
 
-  defmacro text_align_attrs do
+  defmacro attrs do
     quote do
       attr :align, :string,
         values: unquote(@alignments),

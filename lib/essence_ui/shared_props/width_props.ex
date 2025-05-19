@@ -4,7 +4,7 @@ defmodule EssenceUI.SharedProps.WidthProps do
   Inspired by Radix UI Themes.
   """
 
-  def width_prop_defs do
+  def prop_defs do
     %{
       width: %{type: :string, class: "rt-r-w", custom_properties: ["--width"], responsive: true},
       max_width: %{type: :string, class: "rt-r-max-w", custom_properties: ["--max-width"], responsive: true},
@@ -12,7 +12,7 @@ defmodule EssenceUI.SharedProps.WidthProps do
     }
   end
 
-  defmacro width_attrs do
+  defmacro attrs do
     quote do
       attr :width, :any, doc: "Width utility class string or map. `100px` or `%{xs: '100px', sm: '200px'}`"
       attr :max_width, :any, doc: "Max width utility class string or map. `100px` or `%{xs: '100px', sm: '200px'}`"

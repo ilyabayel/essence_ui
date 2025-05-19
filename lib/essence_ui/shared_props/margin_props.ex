@@ -4,7 +4,7 @@ defmodule EssenceUI.SharedProps.MarginProps do
   Inspired by Radix UI Themes.
   """
 
-  def margin_prop_defs do
+  def prop_defs do
     %{
       m: %{
         type: [:enum, :string],
@@ -82,7 +82,7 @@ defmodule EssenceUI.SharedProps.MarginProps do
     ]
   end
 
-  defmacro margin_attrs do
+  defmacro attrs do
     quote do
       attr :m, :any, doc: "Margin utility class string or map. Example: `1` or `%{xs: '1', sm: '2'}`"
       attr :mx, :any, doc: "Margin utility class string or map. Example: `1` or `%{xs: '1', sm: '2'}`"

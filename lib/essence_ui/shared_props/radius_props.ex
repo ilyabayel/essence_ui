@@ -6,13 +6,13 @@ defmodule EssenceUI.SharedProps.RadiusProps do
 
   @radii ["none", "small", "medium", "large", "full"]
 
-  def radius_prop_defs do
+  def prop_defs do
     %{
       radius: %{type: :enum, values: @radii, class: "rt-r-rd", responsive: true, default: nil}
     }
   end
 
-  defmacro radius_attrs do
+  defmacro attrs do
     quote do
       attr :radius, :string,
         values: unquote(@radii),

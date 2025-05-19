@@ -5,7 +5,7 @@ defmodule EssenceUI.SharedProps.WeightProps do
 
   @weights ["light", "regular", "medium", "bold"]
 
-  def weight_prop_def do
+  def prop_defs do
     %{
       weight: %{type: [:enum, :string], values: @weights, responsive: true, class: "rt-r-weight"}
     }
@@ -13,7 +13,7 @@ defmodule EssenceUI.SharedProps.WeightProps do
 
   def weight_values, do: @weights
 
-  defmacro weight_attrs do
+  defmacro attrs do
     quote do
       attr :weight, :string, values: unquote(@weights), doc: "Font weight: one of #{unquote(Enum.join(@weights, ", "))}."
     end

@@ -34,10 +34,10 @@ defmodule EssenceUI.SharedProps.LayoutProps do
   @flex_shrink_values ["0", "1"]
   @flex_grow_values ["0", "1"]
 
-  def layout_prop_defs do
-    PaddingProps.padding_prop_defs()
-    |> Map.merge(WidthProps.width_prop_defs())
-    |> Map.merge(HeightProps.height_prop_defs())
+  def prop_defs do
+    PaddingProps.prop_defs()
+    |> Map.merge(WidthProps.prop_defs())
+    |> Map.merge(HeightProps.prop_defs())
     |> Map.merge(%{
       position: %{type: :enum, values: @position_values, class: "rt-r-position", responsive: true},
       inset: %{
@@ -103,11 +103,11 @@ defmodule EssenceUI.SharedProps.LayoutProps do
     })
   end
 
-  defmacro layout_attrs do
+  defmacro attrs do
     quote do
-      EssenceUI.SharedProps.PaddingProps.padding_attrs()
-      EssenceUI.SharedProps.WidthProps.width_attrs()
-      EssenceUI.SharedProps.HeightProps.height_attrs()
+      EssenceUI.SharedProps.PaddingProps.attrs()
+      EssenceUI.SharedProps.WidthProps.attrs()
+      EssenceUI.SharedProps.HeightProps.attrs()
 
       attr :position, :string, values: unquote(@position_values), doc: "CSS position property. Responsive supported."
 

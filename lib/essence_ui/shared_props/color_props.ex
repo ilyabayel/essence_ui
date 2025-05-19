@@ -49,8 +49,7 @@ defmodule EssenceUI.SharedProps.ColorProps do
         type: [:enum, :string],
         values: @accent_colors,
         responsive: false,
-        class: "rt-r-color",
-        custom_properties: ["--color"]
+        class: "rt-r-color"
       }
     }
   end
@@ -61,8 +60,7 @@ defmodule EssenceUI.SharedProps.ColorProps do
         type: [:enum, :string],
         values: @accent_colors,
         responsive: false,
-        class: "rt-r-accent-color",
-        custom_properties: ["--accent-color"]
+        class: "rt-r-accent-color"
       }
     }
   end
@@ -70,7 +68,7 @@ defmodule EssenceUI.SharedProps.ColorProps do
   def accent_colors, do: @accent_colors
   def gray_colors, do: @gray_colors
 
-  defmacro color_attrs do
+  defmacro attrs do
     quote do
       attr :color, :string, doc: "Color utility class string. One of: #{Enum.join(unquote(@accent_colors), ", ")}."
     end

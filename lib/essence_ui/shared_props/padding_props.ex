@@ -4,7 +4,7 @@ defmodule EssenceUI.SharedProps.PaddingProps do
   Inspired by Radix UI Themes.
   """
 
-  def padding_prop_defs do
+  def prop_defs do
     %{
       p: %{
         type: [:enum, :string],
@@ -85,7 +85,7 @@ defmodule EssenceUI.SharedProps.PaddingProps do
   @doc """
   Generates padding attributes for components.
   """
-  defmacro padding_attrs do
+  defmacro attrs do
     quote do
       attr :p, :any, doc: "Padding utility class string or map. Example: `1` or `%{xs: '1', sm: '2'}`"
       attr :px, :any, doc: "Padding utility class string or map. Example: `1` or `%{xs: '1', sm: '2'}`"
