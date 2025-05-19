@@ -41,6 +41,7 @@ defmodule EssenceUI.MixProject do
       {:floki, ">= 0.30.0", only: :test},
       {:gettext, "~> 0.26"},
       {:jason, "~> 1.2"},
+      {:mix_test_watch, "~> 1.0", only: [:dev, :test], runtime: false},
       {:phoenix, "~> 1.8.0-rc.2", override: true},
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_dashboard, "~> 0.8.3"},

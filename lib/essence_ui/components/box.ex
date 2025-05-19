@@ -6,12 +6,18 @@ defmodule EssenceUI.Components.Box do
   """
   use Phoenix.Component
 
-  import EssenceUI.SharedProps.HeightProps
-  import EssenceUI.SharedProps.MarginProps
-  import EssenceUI.SharedProps.PaddingProps
-  import EssenceUI.SharedProps.WidthProps
-
   alias EssenceUI.Helpers.ExtractProps
+  alias EssenceUI.SharedProps.HeightProps
+  alias EssenceUI.SharedProps.LayoutProps
+  alias EssenceUI.SharedProps.MarginProps
+  alias EssenceUI.SharedProps.PaddingProps
+  alias EssenceUI.SharedProps.WidthProps
+
+  require HeightProps
+  require LayoutProps
+  require MarginProps
+  require PaddingProps
+  require WidthProps
 
   @display_values [
     "none",
@@ -31,20 +37,24 @@ defmodule EssenceUI.Components.Box do
 
   ## Props
 
-    * `as` - The element to render. Defaults to "div".
-    * `p` - Padding utility class (e.g., "1", "2", ... "9").
-    * `pt`, `pr`, `pb`, `pl`, `px`, `py` - Padding for each side/axis.
-    * `m` - Margin utility class.
-    * `mt`, `mr`, `mb`, `ml`, `mx`, `my` - Margin for each side/axis.
-    * `width` - Width utility class (e.g., "full", "auto", "screen").
-    * `height` - Height utility class (e.g., "full", "auto", "screen").
-    * `class` - Additional CSS classes.
+    * `as` - The element to render. Defaults to "div". Accepts: "div", "span".
+    * `display` - CSS display property. Accepts: none, inline, inline-block, block, contents. Responsive supported.
+    * `class` - Additional CSS classes to add to the element.
+    * `style` - Additional inline styles.
     * `rest` - Additional HTML attributes.
+    * `p`, `pt`, `pr`, `pb`, `pl`, `px`, `py` - Padding utilities (see theme scale). Responsive supported.
+    * `m`, `mt`, `mr`, `mb`, `ml`, `mx`, `my` - Margin utilities (see theme scale). Responsive supported.
+    * `width`, `min_width`, `max_width` - Width utilities. Responsive supported.
+    * `height`, `min_height`, `max_height` - Height utilities. Responsive supported.
+    * `position` - CSS position property. Accepts: static, relative, absolute, fixed, sticky. Responsive supported.
+    * `inset`, `top`, `right`, `bottom`, `left` - Edge/inset utilities (see theme scale). Responsive supported.
+    * `overflow`, `overflow_x`, `overflow_y` - CSS overflow properties. Responsive supported.
+    * `flex_basis`, `flex_shrink`, `flex_grow` - Flexbox layout utilities. Responsive supported.
+    * `grid_area`, `grid_column`, `grid_column_start`, `grid_column_end`, `grid_row`, `grid_row_start`, `grid_row_end` - Grid layout utilities. Responsive supported.
+
   """
-  padding_attrs()
-  margin_attrs()
-  height_attrs()
-  width_attrs()
+  LayoutProps.layout_attrs()
+  MarginProps.margin_attrs()
   attr :as, :string, default: "div", values: ["div", "span"]
   attr :class, :string, default: "", doc: "Additional CSS classes to add to the element."
   attr :display, :string, default: "block", values: @display_values
@@ -53,29 +63,28 @@ defmodule EssenceUI.Components.Box do
   slot :inner_block, required: true
 
   def box(assigns) do
-    props_defs =
-      %{
-        as: %{type: :enum, values: ["div", "span"], default: "div"},
-        display: %{
-          type: :enum,
-          values: @display_values,
-          class: "rt-r-display",
-          responsive: true
-        }
+    box_prop_defs = %{
+      display: %{
+        type: :enum,
+        values: @display_values,
+        class: "rt-r-display",
+        responsive: true,
+        default: "block"
       }
-      |> Map.merge(padding_prop_defs())
-      |> Map.merge(margin_prop_defs())
-      |> Map.merge(height_prop_defs())
-      |> Map.merge(width_prop_defs())
+    }
+
+    props_defs =
+      box_prop_defs
+      |> Map.merge(LayoutProps.layout_prop_defs())
+      |> Map.merge(MarginProps.margin_prop_defs())
 
     extracted_props = ExtractProps.call(assigns, props_defs)
 
-    class = ["rt-Box", assigns[:class], Enum.join(extracted_props[:classes], " ")] |> Enum.filter(& &1) |> Enum.join(" ")
-    style = extracted_props[:custom_properties] |> Enum.join(" ") |> String.trim()
-    assigns = assign(assigns, class: class, style: assigns[:style] <> style, tag_name: assigns[:as])
+    class = Enum.join(["rt-Box", extracted_props[:class]], " ")
+    assigns = assign(assigns, class: class, style: extracted_props[:style])
 
     ~H"""
-    <.dynamic_tag tag_name={@tag_name} class={@class} style={@style} {@rest}>
+    <.dynamic_tag tag_name={@as} class={@class} style={@style} {@rest}>
       {render_slot(@inner_block)}
     </.dynamic_tag>
     """

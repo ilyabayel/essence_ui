@@ -1,7 +1,7 @@
 defmodule Storybook.Root do
   # See https://hexdocs.pm/phoenix_storybook/PhoenixStorybook.Index.html for full index
   # documentation.
-
+  @moduledoc false
   use PhoenixStorybook.Index
 
   def folder_icon, do: {:fa, "book-open", :light, "psb-mr-1"}
@@ -9,8 +9,7 @@ defmodule Storybook.Root do
 
   def entry("welcome") do
     [
-      name: "Welcome Page",
-      icon: {:fa, "hand-wave", :thin}
+      name: "Essence UI"
     ]
   end
 end
