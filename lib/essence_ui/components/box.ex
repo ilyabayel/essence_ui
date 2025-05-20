@@ -42,13 +42,13 @@ defmodule EssenceUI.Components.Box do
     * `class` - Additional CSS classes to add to the element.
     * `style` - Additional inline styles.
     * `rest` - Additional HTML attributes.
-    * `p`, `pt`, `pr`, `pb`, `pl`, `px`, `py` - Padding utilities (see theme scale). Responsive supported.
-    * `m`, `mt`, `mr`, `mb`, `ml`, `mx`, `my` - Margin utilities (see theme scale). Responsive supported.
+    * `p`, `pt`, `pr`, `pb`, `pl`, `px`, `py` - Padding utilities (theme scale). Responsive supported.
+    * `m`, `mt`, `mr`, `mb`, `ml`, `mx`, `my` - Margin utilities (theme scale). Responsive supported.
     * `width`, `min_width`, `max_width` - Width utilities. Responsive supported.
     * `height`, `min_height`, `max_height` - Height utilities. Responsive supported.
     * `position` - CSS position property. Accepts: static, relative, absolute, fixed, sticky. Responsive supported.
-    * `inset`, `top`, `right`, `bottom`, `left` - Edge/inset utilities (see theme scale). Responsive supported.
-    * `overflow`, `overflow_x`, `overflow_y` - CSS overflow properties. Responsive supported.
+    * `inset`, `top`, `right`, `bottom`, `left` - Edge/inset utilities (theme scale). Responsive supported.
+    * `overflow`, `overflow_x`, `overflow_y` - CSS overflow properties. Accepts: visible, hidden, clip, scroll, auto. Responsive supported.
     * `flex_basis`, `flex_shrink`, `flex_grow` - Flexbox layout utilities. Responsive supported.
     * `grid_area`, `grid_column`, `grid_column_start`, `grid_column_end`, `grid_row`, `grid_row_start`, `grid_row_end` - Grid layout utilities. Responsive supported.
 

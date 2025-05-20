@@ -36,16 +36,18 @@ defmodule EssenceUI.Components.Text do
 
   ## Props
 
-    * `as` - The element to render. Can be `span`, `div`, `label`, or `p`. Defaults to `span`.
-    * `size` - Text size from `1` to `9`. Controls font size, line height, and letter spacing.
-    * `weight` - Font weight: `light`, `regular`, `medium`, or `bold`.
-    * `align` - Text alignment: `left`, `center`, or `right`.
-    * `trim` - Trim leading space: `normal`, `start`, `end`, or `both`.
+    * `as` - The element to render. Can be `"span"`, `"div"`, `"label"`, or `"p"`. Defaults to `"span"`.
+    * `size` - Text size from `1` to `9`. Controls font size, line height, and letter spacing. Can be a string or a responsive map.
+    * `weight` - Font weight: one of `"light"`, `"regular"`, `"medium"`, or `"bold"`.
+    * `align` - Text alignment: one of `"left"`, `"center"`, or `"right"`.
+    * `trim` - Trim leading space: one of `"normal"`, `"start"`, `"end"`, or `"both"`.
     * `truncate` - Whether to truncate text with ellipsis when it overflows.
-    * `wrap` - Text wrapping: `wrap`, `nowrap`, `pretty`, or `balance`.
-    * `color` - The text color.
+    * `wrap` - Text wrapping: one of `"wrap"`, `"nowrap"`, `"pretty"`, or `"balance"`.
+    * `color` - The text color. One of: `gray`, `gold`, `bronze`, `brown`, `yellow`, `amber`, `orange`, `tomato`, `red`, `ruby`, `crimson`, `pink`, `plum`, `purple`, `violet`, `iris`, `indigo`, `blue`, `cyan`, `teal`, `jade`, `green`, `grass`, `lime`, `mint`, `sky`.
     * `high_contrast` - Whether to increase color contrast with the background.
+    * `as_child` - Composes the component into its immediate child instead of rendering its own HTML element.
     * `class` - Additional CSS classes to add to the element.
+    * `style` - Additional inline styles.
     * `rest` - Additional HTML attributes to add to the element.
   """
   ColorProps.attrs()

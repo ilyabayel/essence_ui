@@ -63,14 +63,15 @@ defmodule EssenceUI.Components.Flex do
     * `justify` - Justify content. Accepts: start, center, end, between. Responsive supported.
     * `wrap` - Flex wrap. Accepts: nowrap, wrap, wrap-reverse. Responsive supported.
     * `gap`, `gap_x`, `gap_y` - Gap utilities for flex/grid layouts. Responsive supported.
-    * `p`, `pt`, `pr`, `pb`, `pl`, `px`, `py` - Padding utilities (see theme scale). Responsive supported.
-    * `m`, `mt`, `mr`, `mb`, `ml`, `mx`, `my` - Margin utilities (see theme scale). Responsive supported.
+    * `p`, `pt`, `pr`, `pb`, `pl`, `px`, `py` - Padding utilities (theme scale). Responsive supported.
+    * `m`, `mt`, `mr`, `mb`, `ml`, `mx`, `my` - Margin utilities (theme scale). Responsive supported.
     * `width`, `min_width`, `max_width` - Width utilities. Responsive supported.
     * `height`, `min_height`, `max_height` - Height utilities. Responsive supported.
     * `flex_basis`, `flex_shrink`, `flex_grow` - Flexbox layout utilities. Responsive supported.
     * `class` - Additional CSS classes to add to the element.
     * `style` - Additional inline styles.
     * `rest` - Additional HTML attributes.
+    * `as_child` - Composes the component into its immediate child instead of rendering its own HTML element.
     * `inner_block` - Slot for flex children.
 
   """
