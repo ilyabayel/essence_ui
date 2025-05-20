@@ -46,7 +46,9 @@ defmodule EssenceUI.Helpers.ExtractProps do
   # enum
   defp handle_prop(%{type: :enum, values: values} = definition, value) when is_binary(value) and value != "" do
     if value in values do
-      %{class: "#{definition[:class]}-#{value}", custom_properties: []}
+      {sign, value} = split_value(value)
+
+      %{class: "#{sign}#{definition[:class]}-#{value}", custom_properties: []}
     else
       %{class: "", custom_properties: []}
     end
@@ -92,5 +94,18 @@ defmodule EssenceUI.Helpers.ExtractProps do
 
   defp handle_prop(_, _) do
     %{class: "", custom_properties: []}
+  end
+
+  defp split_value(value) do
+    case Integer.parse(value) do
+      {int_value, ""} when int_value < 0 ->
+        {"-", "#{abs(int_value)}"}
+
+      {int_value, ""} ->
+        {"", "#{int_value}"}
+
+      _ ->
+        {"", value}
+    end
   end
 end
