@@ -18,7 +18,7 @@ defmodule EssenceUIWeb.Storybook.Layout.Flex do
 
   def layout, do: :one_column
 
-  def imports, do: [{EssenceUI.Components.Box, box: 1}]
+  def imports, do: [{EssenceUI.Components.Box, box: 1}, {EssenceUIWeb.DecorationBox, decoration_box: 1}]
 
   def args do
     [
@@ -119,9 +119,9 @@ defmodule EssenceUIWeb.Storybook.Layout.Flex do
         attributes: %{direction: "row", align: "center", justify: "center", gap: "2"},
         slots: [
           """
-          #{@square}
-          #{@square}
-          #{@square}
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
           """
         ]
       },
@@ -131,9 +131,9 @@ defmodule EssenceUIWeb.Storybook.Layout.Flex do
         attributes: %{direction: "column", align: "stretch", justify: "start", gap: "2"},
         slots: [
           """
-          #{@square}
-          #{@square}
-          #{@square}
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
           """
         ]
       },
@@ -143,10 +143,9 @@ defmodule EssenceUIWeb.Storybook.Layout.Flex do
         attributes: %{wrap: "wrap", width: "calc(360px + 8px)", height: "32", gap: "2"},
         slots: [
           """
-          #{@rectangle}
-          #{@rectangle}
-          #{@rectangle}
-          #{@rectangle}
+          <.decoration_box height="64px"/>
+          <.decoration_box height="64px"/>
+          <.decoration_box height="64px"/>
           """
         ]
       },
@@ -156,12 +155,12 @@ defmodule EssenceUIWeb.Storybook.Layout.Flex do
         attributes: %{wrap: "wrap", width: "calc(360px + 8px * 2)", height: "32", gap_x: "2", gap_y: "6"},
         slots: [
           """
-          #{@rectangle}
-          #{@rectangle}
-          #{@rectangle}
-          #{@rectangle}
-          #{@rectangle}
-          #{@rectangle}
+          <.decoration_box height="64px"/>
+          <.decoration_box height="64px"/>
+          <.decoration_box height="64px"/>
+          <.decoration_box height="64px"/>
+          <.decoration_box height="64px"/>
+          <.decoration_box height="64px"/>
           """
         ]
       }

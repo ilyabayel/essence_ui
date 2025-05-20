@@ -10,6 +10,8 @@ defmodule EssenceUIWeb.Storybook.Layout.Box do
 
   def layout, do: :one_column
 
+  def imports, do: [{EssenceUIWeb.DecorationBox, decoration_box: 1}]
+
   @spec args() :: [{atom(), nil | <<_::24, _::_*64>>}, ...]
   def args do
     [
@@ -144,7 +146,7 @@ defmodule EssenceUIWeb.Storybook.Layout.Box do
         attributes: %{width: "64px", height: "64px"},
         slots: [
           """
-          <div class="rt-Box rt-r-h" style="--height: 100%; background-color: var(--gray-a3); background-clip: padding-box; border: 1px solid var(--gray-a5); border-radius: var(--radius-1); background-image: url(&quot;data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.2' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E&quot;);"></div>
+          <.decoration_box height="64px" width="64px"/>
           """
         ]
       },
@@ -152,7 +154,11 @@ defmodule EssenceUIWeb.Storybook.Layout.Box do
         id: :padding_margin,
         description: "With padding and margin",
         attributes: %{p: "4", m: "2", style: "border: 1px solid var(--color-overlay); border-radius: var(--radius-1);"},
-        slots: ["Box with padding and margin"]
+        slots: [
+          """
+            <.decoration_box height="64px" width="calc(64px * 3)"/>
+          """
+        ]
       },
       %Variation{
         id: :as_section,
@@ -160,10 +166,13 @@ defmodule EssenceUIWeb.Storybook.Layout.Box do
         attributes: %{
           as: "section",
           width: "100%",
-          height: "32",
-          style: "border: 1px solid var(--color-overlay); border-radius: var(--radius-1);"
+          height: "32"
         },
-        slots: ["Section Box"]
+        slots: [
+          """
+            <.decoration_box height="64px"/>
+          """
+        ]
       }
     ]
   end

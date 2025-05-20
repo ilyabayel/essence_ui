@@ -4,13 +4,9 @@ defmodule EssenceUIWeb.Storybook.Layout.Grid do
 
   alias EssenceUI.Components.Grid
 
-  @square """
-  <.box width="64px" height="64px" style="background-color: var(--gray-a3); background-clip: padding-box; border: 1px solid var(--gray-a5); border-radius: var(--radius-1); background-image: url('data:image/svg+xml,%3Csvg width=\\'6\\' height=\\'6\\' viewBox=\\'0 0 6 6\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cg fill=\\'%239C92AC\\' fill-opacity=\\'0.2\\' fill-rule=\\'evenodd\\'%3E%3Cpath d=\\'M5 0h1L0 6V5zM6 5v1H5z\\'/%3E%3C/g%3E%3C/svg%3E'); background-size: 6px 6px;"></.box>
-  """
-
   def function, do: &Grid.grid/1
 
-  def imports, do: [{EssenceUI.Components.Box, box: 1}]
+  def imports, do: [{EssenceUIWeb.DecorationBox, decoration_box: 1}]
 
   def container, do: {:div, "data-scaling": "100%", "data-radius": "medium"}
 
@@ -105,12 +101,12 @@ defmodule EssenceUIWeb.Storybook.Layout.Grid do
         attributes: %{columns: "3", gap: "4"},
         slots: [
           """
-          #{@square}
-          #{@square}
-          #{@square}
-          #{@square}
-          #{@square}
-          #{@square}
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
           """
         ]
       },
@@ -120,14 +116,14 @@ defmodule EssenceUIWeb.Storybook.Layout.Grid do
         attributes: %{columns: %{xs: "1", sm: "2", md: "3", lg: "4"}, gap: "3"},
         slots: [
           """
-          #{@square}
-          #{@square}
-          #{@square}
-          #{@square}
-          #{@square}
-          #{@square}
-          #{@square}
-          #{@square}
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
           """
         ]
       },
@@ -137,10 +133,10 @@ defmodule EssenceUIWeb.Storybook.Layout.Grid do
         attributes: %{columns: "2", gap_x: "6", gap_y: "2"},
         slots: [
           """
-          #{@square}
-          #{@square}
-          #{@square}
-          #{@square}
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
           """
         ]
       },
@@ -156,8 +152,8 @@ defmodule EssenceUIWeb.Storybook.Layout.Grid do
         },
         slots: [
           """
-          #{@square}
-          #{@square}
+          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box height="64px" width="64px"/>
           """
         ]
       }
