@@ -6,7 +6,7 @@ defmodule EssenceUIWeb.Storybook.Layout.Flex do
 
   def function, do: &Flex.flex/1
 
-  def container, do: {:div, "data-scaling": "100%", "data-radius": "medium"}
+  def container, do: {:div, "data-scaling": "100%", "data-radius": "medium", "data-gray-color": "slate"}
 
   def layout, do: :one_column
 

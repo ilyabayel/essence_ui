@@ -7,7 +7,13 @@ defmodule Storybook.Typography.Code do
   def function, do: &Code.code/1
 
   def container,
-    do: {:div, "data-scaling": "100%", style: "display: block;", "data-accent-color": "indigo", "data-radius": "medium"}
+    do:
+      {:div,
+       "data-scaling": "100%",
+       style: "display: block;",
+       "data-accent-color": "indigo",
+       "data-radius": "medium",
+       "data-gray-color": "slate"}
 
   def layout, do: :one_column
 

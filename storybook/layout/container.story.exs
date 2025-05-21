@@ -6,7 +6,7 @@ defmodule EssenceUIWeb.Storybook.Layout.Container do
 
   def function, do: &Container.container/1
 
-  def container, do: {:div, "data-scaling": "100%", "data-radius": "medium"}
+  def container, do: {:div, "data-scaling": "100%", "data-radius": "medium", "data-gray-color": "slate"}
 
   def layout, do: :one_column
 

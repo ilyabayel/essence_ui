@@ -6,7 +6,7 @@ defmodule EssenceUIWeb.Storybook.Typography.Em do
 
   def function, do: &Em.em/1
 
-  def container, do: {:div, "data-scaling": "100%", style: "display: block;"}
+  def container, do: {:div, "data-scaling": "100%", style: "display: block;", "data-gray-color": "slate"}
 
   def layout, do: :one_column
 

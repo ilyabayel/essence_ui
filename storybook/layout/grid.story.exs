@@ -8,7 +8,7 @@ defmodule EssenceUIWeb.Storybook.Layout.Grid do
 
   def imports, do: [{EssenceUIWeb.DecorationBox, decoration_box: 1}]
 
-  def container, do: {:div, "data-scaling": "100%", "data-radius": "medium"}
+  def container, do: {:div, "data-scaling": "100%", "data-radius": "medium", "data-gray-color": "slate"}
 
   def layout, do: :one_column
 

@@ -6,7 +6,7 @@ defmodule EssenceUIWeb.Storybook.Typography.Text do
 
   def function, do: &Text.text/1
 
-  def container, do: {:div, "data-scaling": "100%", style: "display: block;"}
+  def container, do: {:div, "data-scaling": "100%", style: "display: block;", "data-gray-color": "slate"}
 
   def imports,
     do: [{EssenceUI.Components.Flex, flex: 1}, {EssenceUI.Components.Grid, grid: 1}, {EssenceUI.Components.Box, box: 1}]

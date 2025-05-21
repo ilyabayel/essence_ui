@@ -6,7 +6,8 @@ defmodule EssenceUIWeb.Storybook.Typography.Heading do
 
   def function, do: &Heading.heading/1
 
-  def container, do: {:div, "data-scaling": "100%", "data-radius": "medium", style: "display: block;"}
+  def container,
+    do: {:div, "data-scaling": "100%", "data-radius": "medium", style: "display: block;", "data-gray-color": "slate"}
 
   def imports, do: [{EssenceUI.Components.Flex, flex: 1}]
 

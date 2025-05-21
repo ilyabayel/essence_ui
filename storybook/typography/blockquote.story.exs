@@ -7,7 +7,13 @@ defmodule EssenceUIWeb.Storybook.Typography.Blockquote do
   def function, do: &Blockquote.blockquote/1
 
   def container,
-    do: {:div, "data-scaling": "100%", "data-radius": "medium", style: "display: block;", "data-accent-color": "indigo"}
+    do:
+      {:div,
+       "data-scaling": "100%",
+       "data-radius": "medium",
+       style: "display: block;",
+       "data-accent-color": "indigo",
+       "data-gray-color": "slate"}
 
   def layout, do: :one_column
 

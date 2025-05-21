@@ -8,4 +8,6 @@ defmodule Storybook.MyPage do
     ~H"""
     """
   end
+
+  def container, do: {:div, "data-gray-color": "slate"}
 end
