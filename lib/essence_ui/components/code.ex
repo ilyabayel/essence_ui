@@ -10,15 +10,15 @@ defmodule EssenceUI.Components.Code do
   alias EssenceUI.SharedProps.AsChildProps
   alias EssenceUI.SharedProps.ColorProps
   alias EssenceUI.SharedProps.HighContrastProps
-  alias EssenceUI.SharedProps.TruncateProps
   alias EssenceUI.SharedProps.TextWrapProps
+  alias EssenceUI.SharedProps.TruncateProps
   alias EssenceUI.SharedProps.WeightProps
 
   require AsChildProps
   require ColorProps
   require HighContrastProps
-  require TruncateProps
   require TextWrapProps
+  require TruncateProps
   require WeightProps
 
   @doc """
@@ -104,7 +104,7 @@ defmodule EssenceUI.Components.Code do
 
     ~H"""
     <code class={@class} style={@style} data-accent-color={@color} {@rest}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </code>
     """
   end

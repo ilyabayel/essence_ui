@@ -21,9 +21,10 @@ defmodule EssenceUIWeb.ConnCase do
     quote do
       use EssenceUIWeb, :verified_routes
 
+      import EssenceUIWeb.ConnCase
       import Phoenix.ConnTest
       import Plug.Conn
-      import EssenceUIWeb.ConnCase
+
       # The default endpoint for testing
       @endpoint EssenceUIWeb.Endpoint
 
