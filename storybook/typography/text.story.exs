@@ -6,7 +6,7 @@ defmodule EssenceUIWeb.Storybook.Typography.Text do
 
   def function, do: &Text.text/1
 
-  def container, do: {:div, "data-scaling": "100%"}
+  def container, do: {:div, "data-scaling": "100%", style: "display: block;"}
 
   def layout, do: :one_column
 
