@@ -1,29 +1,6 @@
 defmodule EssenceUI.Components.Container do
   @moduledoc """
-  The Container component is a layout primitive for constraining content width and centering content.
-
-  Based on Radix UI Themes Container component.
-
-  ## Examples
-
-      <.container size="2">
-        <p>Content goes here</p>
-      </.container>
-
-  ## Props
-
-    * `as` - The element to render. Defaults to "div". Accepts: "div".
-    * `as_child` - Composes the component into its immediate child instead of rendering its own HTML element.
-    * `size` - Controls the max-width of the content. Accepts: "1" (448px), "2" (688px), "3" (880px), "4" (1136px). Responsive supported. Defaults to "4".
-    * `display` - Controls whether the container is visible or hidden. Accepts: "none", "initial". Responsive supported.
-    * `align` - Controls the alignment of the content. Accepts: "left", "center", "right". Responsive supported.
-    * `width`, `min_width`, `max_width` - Width utilities. Responsive supported.
-    * `height`, `min_height`, `max_height` - Height utilities. Responsive supported.
-    * `m`, `mt`, `mr`, `mb`, `ml`, `mx`, `my` - Margin utilities (theme scale). Responsive supported.
-    * `class` - Additional CSS classes to add to the element.
-    * `style` - Additional inline styles.
-    * `rest` - Additional HTML attributes.
-    * `inner_block` - Slot for container children.
+  Module for Container component.
   """
   use Phoenix.Component
 
@@ -65,7 +42,32 @@ defmodule EssenceUI.Components.Container do
   attr :rest, :global
   slot :inner_block, required: true
 
-  @doc false
+  @doc """
+  The Container component is a layout primitive for constraining content width and centering content.
+
+  Based on Radix UI Themes Container component.
+
+  ## Examples
+
+      <.container size="2">
+        <p>Content goes here</p>
+      </.container>
+
+  ## Props
+
+    * `as` - The element to render. Defaults to "div". Accepts: "div".
+    * `as_child` - Composes the component into its immediate child instead of rendering its own HTML element.
+    * `size` - Controls the max-width of the content. Accepts: "1" (448px), "2" (688px), "3" (880px), "4" (1136px). Responsive supported. Defaults to "4".
+    * `display` - Controls whether the container is visible or hidden. Accepts: "none", "initial". Responsive supported.
+    * `align` - Controls the alignment of the content. Accepts: "left", "center", "right". Responsive supported.
+    * `width`, `min_width`, `max_width` - Width utilities. Responsive supported.
+    * `height`, `min_height`, `max_height` - Height utilities. Responsive supported.
+    * `m`, `mt`, `mr`, `mb`, `ml`, `mx`, `my` - Margin utilities (theme scale). Responsive supported.
+    * `class` - Additional CSS classes to add to the element.
+    * `style` - Additional inline styles.
+    * `rest` - Additional HTML attributes.
+    * `inner_block` - Slot for container children.
+  """
   def container(assigns) do
     container_prop_defs = %{
       size: %{type: :enum, values: @size_values, class: "rt-r-size", responsive: true, default: "4"},

@@ -1,37 +1,6 @@
 defmodule EssenceUI.Components.Grid do
   @moduledoc """
   The Grid component is a low-level layout primitive for building grid layouts.
-
-  Based on Radix UI Themes Grid component.
-
-  ## Examples
-
-      <.grid columns="3" gap="4">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-      </.grid>
-
-  ## Props
-
-    * `as` - The element to render. Defaults to "div". Accepts: "div", "span".
-    * `as_child` - Composes the component into its immediate child instead of rendering its own HTML element.
-    * `display` - CSS display property. Accepts: "none", "inline-grid", "grid". Responsive supported.
-    * `areas` - Grid template areas. Accepts a string or responsive map.
-    * `columns` - Grid template columns. Accepts: 1-9, CSS string, or responsive map.
-    * `rows` - Grid template rows. Accepts: 1-9, CSS string, or responsive map.
-    * `flow` - Grid auto flow. Accepts: "row", "column", "dense", "row-dense", "column-dense". Responsive supported.
-    * `align` - Align items. Accepts: "start", "center", "end", "baseline", "stretch". Responsive supported.
-    * `justify` - Justify content. Accepts: "start", "center", "end", "between". Responsive supported.
-    * `gap`, `gap_x`, `gap_y` - Gap utilities for grid layouts. Responsive supported.
-    * `p`, `pt`, `pr`, `pb`, `pl`, `px`, `py` - Padding utilities (theme scale). Responsive supported.
-    * `m`, `mt`, `mr`, `mb`, `ml`, `mx`, `my` - Margin utilities (theme scale). Responsive supported.
-    * `width`, `min_width`, `max_width` - Width utilities. Responsive supported.
-    * `height`, `min_height`, `max_height` - Height utilities. Responsive supported.
-    * `class` - Additional CSS classes to add to the element.
-    * `style` - Additional inline styles.
-    * `rest` - Additional HTML attributes.
-    * `inner_block` - Slot for grid children.
   """
   use Phoenix.Component
 
@@ -78,7 +47,40 @@ defmodule EssenceUI.Components.Grid do
   attr :rest, :global
   slot :inner_block, required: true
 
-  @doc false
+  @doc """
+  The Grid component is a low-level layout primitive for building grid layouts.
+
+  Based on Radix UI Themes Grid component.
+
+  ## Examples
+
+      <.grid columns="3" gap="4">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+      </.grid>
+
+  ## Props
+
+    * `as` - The element to render. Defaults to "div". Accepts: "div", "span".
+    * `as_child` - Composes the component into its immediate child instead of rendering its own HTML element.
+    * `display` - CSS display property. Accepts: "none", "inline-grid", "grid". Responsive supported.
+    * `areas` - Grid template areas. Accepts a string or responsive map.
+    * `columns` - Grid template columns. Accepts: 1-9, CSS string, or responsive map.
+    * `rows` - Grid template rows. Accepts: 1-9, CSS string, or responsive map.
+    * `flow` - Grid auto flow. Accepts: "row", "column", "dense", "row-dense", "column-dense". Responsive supported.
+    * `align` - Align items. Accepts: "start", "center", "end", "baseline", "stretch". Responsive supported.
+    * `justify` - Justify content. Accepts: "start", "center", "end", "between". Responsive supported.
+    * `gap`, `gap_x`, `gap_y` - Gap utilities for grid layouts. Responsive supported.
+    * `p`, `pt`, `pr`, `pb`, `pl`, `px`, `py` - Padding utilities (theme scale). Responsive supported.
+    * `m`, `mt`, `mr`, `mb`, `ml`, `mx`, `my` - Margin utilities (theme scale). Responsive supported.
+    * `width`, `min_width`, `max_width` - Width utilities. Responsive supported.
+    * `height`, `min_height`, `max_height` - Height utilities. Responsive supported.
+    * `class` - Additional CSS classes to add to the element.
+    * `style` - Additional inline styles.
+    * `rest` - Additional HTML attributes.
+    * `inner_block` - Slot for grid children.
+  """
   def grid(assigns) do
     grid_prop_defs = %{
       display: %{type: :enum, values: @display_values, class: "rt-r-display", responsive: true},

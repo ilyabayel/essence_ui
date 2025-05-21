@@ -70,7 +70,9 @@ defmodule EssenceUI.SharedProps.ColorProps do
 
   defmacro attrs do
     quote do
-      attr :color, :string, doc: "Color utility class string. One of: #{Enum.join(unquote(@accent_colors), ", ")}."
+      attr :color, :string,
+        doc: "Color utility class string. One of: #{Enum.join(unquote(@accent_colors), ", ")}.",
+        values: unquote(@accent_colors)
     end
   end
 end
