@@ -81,7 +81,7 @@ defmodule EssenceUI.Components.Box do
     extracted_props = ExtractProps.call(assigns, props_defs)
 
     class = Enum.join(["rt-Box", extracted_props[:class]], " ")
-    assigns = assign(assigns, class: class, style: extracted_props[:style])
+    assigns = assign(assigns, class: class, style: extracted_props[:style] || false)
 
     ~H"""
     <.dynamic_tag tag_name={@as} class={@class} style={@style} {@rest}>

@@ -90,7 +90,7 @@ defmodule EssenceUI.Components.Text do
 
     class = ["rt-Text", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
 
-    assigns = assign(assigns, class: class, color: assigns[:color] || "")
+    assigns = assign(assigns, class: class, color: assigns[:color] || false)
 
     ~H"""
     <.dynamic_tag tag_name={@as} class={@class} style={@style} data-accent-color={@color} {@rest}>

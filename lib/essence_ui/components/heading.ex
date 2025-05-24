@@ -48,7 +48,6 @@ defmodule EssenceUI.Components.Heading do
   def heading(assigns) do
     prop_defs =
       %{
-        as: %{type: :enum, values: @heading_tags, default: "h1"},
         size: %{type: :enum, values: @size_values, class: "rt-r-size", responsive: true}
       }
       |> Map.merge(WeightProps.prop_defs())
@@ -68,7 +67,7 @@ defmodule EssenceUI.Components.Heading do
       |> Enum.join(" ")
 
     style = [extracted.style, assigns[:style]] |> Enum.filter(& &1) |> Enum.join("; ")
-    color = assigns[:color] || ""
+    color = assigns[:color] || false
 
     assigns = assign(assigns, class: class, style: style, color: color)
 

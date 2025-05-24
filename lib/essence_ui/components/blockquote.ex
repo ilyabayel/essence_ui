@@ -77,9 +77,7 @@ defmodule EssenceUI.Components.Blockquote do
       )
 
     ~H"""
-    <blockquote class={@class} style={@style} data-accent-color={@color} {@rest}>
-      {render_slot(@inner_block)}
-    </blockquote>
+    <blockquote class={@class} style={@style} data-accent-color={@color} {@rest} phx-no-format>{render_slot(@inner_block)}</blockquote>
     """
   end
 end

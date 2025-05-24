@@ -6,10 +6,4 @@ defmodule Storybook.Root do
 
   def folder_icon, do: {:fa, "book-open", :light, "psb-mr-1"}
   def folder_name, do: "Storybook"
-
-  def entry("welcome") do
-    [
-      name: "Essence UI"
-    ]
-  end
 end

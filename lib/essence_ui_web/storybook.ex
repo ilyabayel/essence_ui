@@ -6,5 +6,7 @@ defmodule EssenceUIWeb.Storybook do
     # assets path are remote path, not local file-system paths
     css_path: "/assets/storybook.css",
     js_path: "/assets/storybook.js",
-    sandbox_class: "essence-ui"
+    sandbox_class: "essence-ui",
+    color_mode: true,
+    color_mode_sandbox_dark_class: "dark"
 end

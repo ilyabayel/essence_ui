@@ -93,19 +93,17 @@ defmodule EssenceUI.Components.Code do
     # Code ghost color prop should work as text color by default
     color =
       if assigns[:variant] == "ghost" do
-        assigns[:color] || nil
+        assigns[:color] || false
       else
         assigns[:color]
       end
 
     class = ["rt-Code", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
 
-    assigns = assign(assigns, class: class, color: color || "")
+    assigns = assign(assigns, class: class, color: color || false)
 
     ~H"""
-    <code class={@class} style={@style} data-accent-color={@color} {@rest}>
-      {render_slot(@inner_block)}
-    </code>
+    <code class={@class} style={@style} data-accent-color={@color} {@rest} phx-no-format>{render_slot(@inner_block)}</code>
     """
   end
 end
