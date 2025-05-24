@@ -1,4 +1,4 @@
-defmodule EssenceUIWeb.Storybook.Typography.Heading do
+defmodule Storybook.Typography.Heading do
   @moduledoc false
   use PhoenixStorybook.Story, :component
 

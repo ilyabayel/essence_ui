@@ -1,4 +1,4 @@
-defmodule EssenceUIWeb.Storybook.Layout.Grid do
+defmodule Storybook.Layout.Grid do
   @moduledoc false
   use PhoenixStorybook.Story, :component
 

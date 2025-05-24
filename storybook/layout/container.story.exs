@@ -1,4 +1,4 @@
-defmodule EssenceUIWeb.Storybook.Layout.Container do
+defmodule Storybook.Layout.Container do
   @moduledoc false
   use PhoenixStorybook.Story, :component
 

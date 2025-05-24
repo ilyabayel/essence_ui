@@ -1,4 +1,4 @@
-defmodule EssenceUI.Storybook.Components.ButtonStory do
+defmodule Storybook.Components.ButtonStory do
   @moduledoc false
   use PhoenixStorybook.Story, :component
 

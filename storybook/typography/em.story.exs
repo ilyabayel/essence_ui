@@ -1,4 +1,4 @@
-defmodule EssenceUIWeb.Storybook.Typography.Em do
+defmodule Storybook.Typography.Em do
   @moduledoc false
   use PhoenixStorybook.Story, :component
 

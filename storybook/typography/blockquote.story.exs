@@ -1,4 +1,4 @@
-defmodule EssenceUIWeb.Storybook.Typography.Blockquote do
+defmodule Storybook.Typography.Blockquote do
   @moduledoc false
   use PhoenixStorybook.Story, :component
 
