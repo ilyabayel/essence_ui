@@ -12,7 +12,6 @@ defmodule Storybook.GettingStarted do
   import EssenceUI.Components.Text
 
   alias EssenceUI.Components.Link
-  alias EssenceUI.Components.Quote
 
   def render(assigns) do
     ~H"""
