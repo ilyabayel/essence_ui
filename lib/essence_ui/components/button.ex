@@ -102,21 +102,23 @@ defmodule EssenceUI.Components.Button do
         class: class,
         style: extracted.style,
         color: assigns[:color] || false,
-        disabled: assigns[:disabled],
-        rest: assigns[:rest]
+        rest: assigns[:rest],
+        props: %{
+          disabled: assigns[:disabled] or assigns[:loading]
+        }
       )
 
     ~H"""
-    <dynamic_tag
+    <.dynamic_tag
       tag_name={@tag}
       type={@type}
       class={@class}
       style={@style}
-      disabled={@disabled or @loading}
       data-disabled={@disabled or @loading}
       data-accent-color={@color}
       data-radius={@radius}
       {@rest}
+      {@props}
     >
       <%= if @loading do %>
         <.flex
@@ -147,7 +149,7 @@ defmodule EssenceUI.Components.Button do
       <% else %>
         {render_slot(@inner_block)}
       <% end %>
-    </dynamic_tag>
+    </.dynamic_tag>
     """
   end
 end
