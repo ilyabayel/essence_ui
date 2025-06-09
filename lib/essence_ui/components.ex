@@ -9,7 +9,8 @@ defmodule EssenceUI.Components do
     * `em/1` - See `EssenceUI.Components.Em`
     * `link/1` - See `EssenceUI.Components.Link`
     * `avatar/1` - See `EssenceUI.Components.Avatar`
-
+    * `badge/1` - See `EssenceUI.Components.Badge`
+    * `callout/1` - See `EssenceUI.Components.Callout`
   """
 
   defdelegate text(assigns), to: EssenceUI.Components.Text
@@ -17,4 +18,6 @@ defmodule EssenceUI.Components do
   defdelegate em(assigns), to: EssenceUI.Components.Em
   defdelegate link(assigns), to: EssenceUI.Components.Link
   defdelegate avatar(assigns), to: EssenceUI.Components.Avatar
+  defdelegate badge(assigns), to: EssenceUI.Components.Badge
+  defdelegate callout(assigns), to: EssenceUI.Components.Callout
 end

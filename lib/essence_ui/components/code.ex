@@ -26,7 +26,7 @@ defmodule EssenceUI.Components.Code do
 
   ## Examples
 
-      <.code>console.log()</.code>
+      <.code>IO.inspect()</.code>
       <.code size="4" variant="solid" color="indigo">terminal.start()</.code>
       <.code weight="bold" truncate={true}>const veryLongSyntaxExample = "truncated"</.code>
 

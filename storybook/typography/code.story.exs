@@ -23,22 +23,22 @@ defmodule Storybook.Typography.Code do
         id: :default,
         description: "Default code",
         attributes: %{},
-        slots: ["console.log()"]
+        slots: ["Repo.all()"]
       },
       %Variation{
         id: :sizes_group,
         description: "Size",
         template: """
         <div class="rt-Flex rt-r-fd-column rt-r-gap-3 rt-r-ai-start">
-          <.code size="1">console.log()</.code>
-          <.code size="2">console.log()</.code>
-          <.code size="3">console.log()</.code>
-          <.code size="4">console.log()</.code>
-          <.code size="5">console.log()</.code>
-          <.code size="6">console.log()</.code>
-          <.code size="7">console.log()</.code>
-          <.code size="8">console.log()</.code>
-          <.code size="9">console.log()</.code>
+          <.code size="1">Repo.all()</.code>
+          <.code size="2">Repo.all()</.code>
+          <.code size="3">Repo.all()</.code>
+          <.code size="4">Repo.all()</.code>
+          <.code size="5">Repo.all()</.code>
+          <.code size="6">Repo.all()</.code>
+          <.code size="7">Repo.all()</.code>
+          <.code size="8">Repo.all()</.code>
+          <.code size="9">Repo.all()</.code>
         </div>
         """
       },
@@ -47,10 +47,10 @@ defmodule Storybook.Typography.Code do
         description: "Variant",
         template: """
         <div class="rt-Flex rt-r-fd-column rt-r-ai-start rt-r-gap-2">
-          <.code variant="solid">console.log()</.code>
-          <.code variant="soft">console.log()</.code>
-          <.code variant="outline">console.log()</.code>
-          <.code variant="ghost">console.log()</.code>
+          <.code variant="solid">Repo.all()</.code>
+          <.code variant="soft">Repo.all()</.code>
+          <.code variant="outline">Repo.all()</.code>
+          <.code variant="ghost">Repo.all()</.code>
         </div>
         """
       },
@@ -59,10 +59,10 @@ defmodule Storybook.Typography.Code do
         description: "Color",
         template: """
         <div class="rt-Flex rt-r-fd-column rt-r-ai-start rt-r-gap-2">
-          <.code color="indigo">console.log()</.code>
-          <.code color="crimson">console.log()</.code>
-          <.code color="cyan">console.log()</.code>
-          <.code color="orange">console.log()</.code>
+          <.code color="indigo">Repo.all()</.code>
+          <.code color="crimson">Repo.all()</.code>
+          <.code color="cyan">Repo.all()</.code>
+          <.code color="orange">Repo.all()</.code>
         </div>
         """
       },
@@ -73,31 +73,31 @@ defmodule Storybook.Typography.Code do
         <div class="rt-Flex rt-r-gap-3">
           <div class="rt-Flex rt-r-fd-column rt-r-ai-start rt-r-gap-2">
             <.code color="gray" variant="solid">
-              console.log()
+              Repo.all()
             </.code>
             <.code color="gray" variant="soft">
-              console.log()
+              Repo.all()
             </.code>
             <.code color="gray" variant="outline">
-              console.log()
+              Repo.all()
             </.code>
             <.code color="gray" variant="ghost">
-              console.log()
+              Repo.all()
             </.code>
           </div>
 
           <div class="rt-Flex rt-r-fd-column rt-r-ai-start rt-r-gap-2">
             <.code color="gray" variant="solid" high_contrast={true}>
-              console.log()
+              Repo.all()
             </.code>
             <.code color="gray" variant="soft" high_contrast={true}>
-              console.log()
+              Repo.all()
             </.code>
             <.code color="gray" variant="outline" high_contrast={true}>
-              console.log()
+              Repo.all()
             </.code>
             <.code color="gray" variant="ghost" high_contrast={true}>
-              console.log()
+              Repo.all()
             </.code>
           </div>
         </div>
@@ -108,8 +108,8 @@ defmodule Storybook.Typography.Code do
         description: "Weight",
         template: """
         <div class="rt-Flex rt-r-fd-column rt-r-gap-2 rt-r-ai-start">
-          <.code weight="regular">console.log()</.code>
-          <.code weight="bold">console.log()</.code>
+          <.code weight="regular">Repo.all()</.code>
+          <.code weight="bold">Repo.all()</.code>
         </div>
         """
       },
