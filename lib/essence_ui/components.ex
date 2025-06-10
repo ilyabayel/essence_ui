@@ -11,6 +11,7 @@ defmodule EssenceUI.Components do
     * `avatar/1` - See `EssenceUI.Components.Avatar`
     * `badge/1` - See `EssenceUI.Components.Badge`
     * `callout/1` - See `EssenceUI.Components.Callout`
+    * `card/1` - See `EssenceUI.Components.Card`
   """
 
   defdelegate text(assigns), to: EssenceUI.Components.Text
@@ -20,4 +21,5 @@ defmodule EssenceUI.Components do
   defdelegate avatar(assigns), to: EssenceUI.Components.Avatar
   defdelegate badge(assigns), to: EssenceUI.Components.Badge
   defdelegate callout(assigns), to: EssenceUI.Components.Callout
+  defdelegate card(assigns), to: EssenceUI.Components.Card
 end
