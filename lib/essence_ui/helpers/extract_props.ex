@@ -28,7 +28,7 @@ defmodule EssenceUI.Helpers.ExtractProps do
       |> Enum.map_join("; ", fn {property, value} -> "#{property}: #{value}" end)
 
     Map.merge(other_assigns, %{
-      class: (assigns[:class] || "") <> class,
+      class: "#{assigns[:class] || ""} #{class}",
       style: (assigns[:style] || "") <> style
     })
   end
