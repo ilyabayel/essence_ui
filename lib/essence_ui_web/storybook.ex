@@ -4,8 +4,8 @@ defmodule EssenceUIWeb.Storybook do
     otp_app: :essence_ui_web,
     content_path: Path.expand("../../storybook", __DIR__),
     # assets path are remote path, not local file-system paths
-    css_path: "/assets/storybook.css",
-    js_path: "/assets/storybook.js",
+    css_path: "/assets/css/storybook.css",
+    js_path: "/assets/js/storybook.js",
     sandbox_class: "essence-ui",
     color_mode: true,
     color_mode_sandbox_dark_class: "dark"

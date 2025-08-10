@@ -69,6 +69,8 @@ defmodule EssenceUI.MixProject do
       "assets.setup": ["esbuild.install --if-missing"],
       "assets.build": ["esbuild essence_ui"],
       "assets.deploy": [
+        # Ensure Storybook CSS is built before digesting assets
+        "cmd --cd assets npm run build:css",
         "esbuild essence_ui --minify",
         "phx.digest"
       ]
