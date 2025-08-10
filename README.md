@@ -85,11 +85,6 @@ This library aims for API and UX parity with Radix Themes. See the Radix Themes 
 - [x] `Checkbox`
 - [x] `CheckboxGroup`
 
-### Repo hygiene
-
-- [ ] Add `lib/essence_ui/components/checkbox_group.ex`
-- [ ] Add `storybook/components/checkbox_group.story.exs`
-- [ ] Commit changes in `lib/essence_ui/components/checkbox.ex` and `lib/essence_ui/helpers/extract_props.ex`
 
 ### Phase 1: Foundations and consistency
 
