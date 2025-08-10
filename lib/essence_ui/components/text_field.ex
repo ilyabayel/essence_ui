@@ -67,9 +67,11 @@ defmodule EssenceUI.Components.TextField do
     include: ~w(id form required minlength maxlength min max step pattern aria-label aria-labelledby aria-describedby),
     doc: "Global attributes and event handlers."
 
-  slot :slot, doc: "Optional adornment slot. Use :side => 'left' or 'right'.", do: [
-         attr(:side, :string, values: ["left", "right"]) 
-       ]
+  slot :slot,
+    doc: "Optional adornment slot. Use :side => 'left' or 'right'.",
+    do: [
+      attr(:side, :string, values: ["left", "right"])
+    ]
 
   def text_field(assigns) do
     prop_defs =
@@ -106,7 +108,7 @@ defmodule EssenceUI.Components.TextField do
         name={@name}
         value={@value}
         placeholder={@placeholder}
-        class={"rt-TextFieldInput rt-reset"}
+        class="rt-TextFieldInput rt-reset"
         disabled={@disabled}
         readonly={@readonly}
         autocomplete={@autocomplete}
@@ -115,12 +117,10 @@ defmodule EssenceUI.Components.TextField do
       />
       <%= for slot <- @slot do %>
         <span class="rt-TextFieldSlot" data-side={if slot[:side] == "right", do: "right", else: nil}>
-          <%= render_slot(slot) %>
+          {render_slot(slot)}
         </span>
       <% end %>
     </div>
     """
   end
 end
-
-

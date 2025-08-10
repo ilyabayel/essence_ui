@@ -77,5 +77,3 @@ defmodule Storybook.Components.TextFieldStory do
     ]
   end
 end
-
-
