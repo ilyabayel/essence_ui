@@ -65,12 +65,10 @@ defmodule EssenceUI.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "assets.setup", "assets.build"],
+      setup: ["deps.get", "assets.setup", "assets.build", "cmd --cd assets npm run build:css"],
       "assets.setup": ["esbuild.install --if-missing"],
       "assets.build": ["esbuild essence_ui"],
       "assets.deploy": [
-        # Ensure Storybook CSS is built before digesting assets
-        "cmd --cd assets npm run build:css",
         "esbuild essence_ui --minify",
         "phx.digest"
       ]
