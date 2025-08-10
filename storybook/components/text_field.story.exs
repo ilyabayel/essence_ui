@@ -11,7 +11,7 @@ defmodule Storybook.Components.TextFieldStory do
       {:div,
        "data-scaling": "100%",
        "data-radius": "medium",
-       style: "display: block;",
+       style: "display: grid; gap: 16px;",
        "data-gray-color": "slate",
        "data-accent-color": "indigo"}
 
@@ -32,28 +32,28 @@ defmodule Storybook.Components.TextFieldStory do
         id: :sizes,
         description: "Sizes",
         variations: [
-          %Variation{id: :s1, attributes: %{size: "1"}, slots: ["<:slot>🔍</:slot>"]},
-          %Variation{id: :s2, attributes: %{size: "2"}, slots: ["<:slot>🔍</:slot>"]},
-          %Variation{id: :s3, attributes: %{size: "3"}, slots: ["<:slot>🔍</:slot>"]}
+          %Variation{id: :s1, attributes: %{size: "1", placeholder: "Size 1"}, slots: ["<:slot>🔍</:slot>"]},
+          %Variation{id: :s2, attributes: %{size: "2", placeholder: "Size 2"}, slots: ["<:slot>🔍</:slot>"]},
+          %Variation{id: :s3, attributes: %{size: "3", placeholder: "Size 3"}, slots: ["<:slot>🔍</:slot>"]}
         ]
       },
       %VariationGroup{
         id: :variants,
         description: "Variants",
         variations: [
-          %Variation{id: :surface, attributes: %{variant: "surface"}},
-          %Variation{id: :classic, attributes: %{variant: "classic"}},
-          %Variation{id: :soft, attributes: %{variant: "soft"}}
+          %Variation{id: :surface, attributes: %{variant: "surface", placeholder: "Surface"}},
+          %Variation{id: :classic, attributes: %{variant: "classic", placeholder: "Classic"}},
+          %Variation{id: :soft, attributes: %{variant: "soft", placeholder: "Soft"}}
         ]
       },
       %VariationGroup{
         id: :types,
         description: "Input types",
         variations: [
-          %Variation{id: :text, attributes: %{type: "text"}, description: "Text"},
-          %Variation{id: :email, attributes: %{type: "email"}, description: "Email"},
-          %Variation{id: :password, attributes: %{type: "password"}, description: "Password"},
-          %Variation{id: :number, attributes: %{type: "number"}, description: "Number"},
+          %Variation{id: :text, attributes: %{type: "text", placeholder: "Text"}, description: "Text"},
+          %Variation{id: :email, attributes: %{type: "email", placeholder: "Email"}, description: "Email"},
+          %Variation{id: :password, attributes: %{type: "password", placeholder: "Password"}, description: "Password"},
+          %Variation{id: :number, attributes: %{type: "number", placeholder: "Number"}, description: "Number"},
           %Variation{id: :date, attributes: %{type: "date"}, description: "Date"}
         ]
       },

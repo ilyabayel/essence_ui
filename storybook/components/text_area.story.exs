@@ -11,7 +11,7 @@ defmodule Storybook.Components.TextAreaStory do
       {:div,
        "data-scaling": "100%",
        "data-radius": "medium",
-       style: "display: block;",
+       style: "display: grid; gap: 16px;",
        "data-gray-color": "slate",
        "data-accent-color": "indigo"}
 
@@ -32,28 +32,28 @@ defmodule Storybook.Components.TextAreaStory do
         id: :sizes,
         description: "Sizes",
         variations: [
-          %Variation{id: :s1, attributes: %{size: "1"}},
-          %Variation{id: :s2, attributes: %{size: "2"}},
-          %Variation{id: :s3, attributes: %{size: "3"}}
+          %Variation{id: :s1, attributes: %{size: "1", placeholder: "Size 1"}},
+          %Variation{id: :s2, attributes: %{size: "2", placeholder: "Size 2"}},
+          %Variation{id: :s3, attributes: %{size: "3", placeholder: "Size 3"}}
         ]
       },
       %VariationGroup{
         id: :variants,
         description: "Variants",
         variations: [
-          %Variation{id: :surface, attributes: %{variant: "surface"}},
-          %Variation{id: :classic, attributes: %{variant: "classic"}},
-          %Variation{id: :soft, attributes: %{variant: "soft"}}
+          %Variation{id: :surface, attributes: %{variant: "surface", placeholder: "Surface"}},
+          %Variation{id: :classic, attributes: %{variant: "classic", placeholder: "Classic"}},
+          %Variation{id: :soft, attributes: %{variant: "soft", placeholder: "Soft"}}
         ]
       },
       %VariationGroup{
         id: :resize,
         description: "Resize options (applied on root)",
         variations: [
-          %Variation{id: :none, attributes: %{resize: "none"}},
-          %Variation{id: :both, attributes: %{resize: "both"}},
-          %Variation{id: :horizontal, attributes: %{resize: "horizontal"}},
-          %Variation{id: :vertical, attributes: %{resize: "vertical"}}
+          %Variation{id: :none, attributes: %{resize: "none", placeholder: "None"}},
+          %Variation{id: :both, attributes: %{resize: "both", placeholder: "Both"}},
+          %Variation{id: :horizontal, attributes: %{resize: "horizontal", placeholder: "Horizontal"}},
+          %Variation{id: :vertical, attributes: %{resize: "vertical", placeholder: "Vertical"}}
         ]
       },
       %Variation{
