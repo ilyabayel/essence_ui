@@ -84,6 +84,7 @@ This library aims for API and UX parity with Radix Themes. See the Radix Themes 
 - [x] `Card`
 - [x] `Checkbox`
 - [x] `CheckboxGroup`
+- [x] `TextField`
 
 
 ### Phase 1: Foundations and consistency
