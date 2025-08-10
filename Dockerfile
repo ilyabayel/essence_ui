@@ -44,15 +44,15 @@ RUN mkdir config
 # to ensure any relevant config change will trigger the dependencies
 # to be re-compiled.
 COPY config/config.exs config/${MIX_ENV}.exs config/
+
+COPY assets assets
+
 RUN mix deps.compile
 
 RUN mix assets.setup
 
 COPY priv priv
-
 COPY lib lib
-
-COPY assets assets
 
 COPY storybook storybook
 
@@ -62,6 +62,11 @@ RUN cd assets \
   && npm run build:css
 
 RUN mix assets.deploy
+
+# compile phoenix_storybook assets
+# RUN cd deps/phoenix_storybook && mix deps.get
+# RUN cd deps/phoenix_storybook && npm ci --prefix assets
+# RUN cd deps/phoenix_storybook && MIX_ENV=dev mix assets.build
 
 # Compile the release
 RUN mix compile
@@ -76,7 +81,7 @@ RUN mix release
 # the compiled release and other runtime necessities
 FROM ${RUNNER_IMAGE} AS final
 
-RUN apt-get update \
+RUN apt-get update \ 
   && apt-get install -y --no-install-recommends libstdc++6 openssl libncurses5 locales ca-certificates \
   && rm -rf /var/lib/apt/lists/*
 
@@ -96,13 +101,7 @@ ENV MIX_ENV="prod"
 
 # Only copy the final release from the build stage
 COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/essence_ui ./
-COPY storybook ./storybook
 
 USER nobody
-
-# If using an environment that doesn't automatically reap zombie processes, it is
-# advised to add an init process such as tini via `apt-get install`
-# above and adding an entrypoint. See https://github.com/krallin/tini for details
-# ENTRYPOINT ["/tini", "--"]
 
 CMD ["/app/bin/server"]
