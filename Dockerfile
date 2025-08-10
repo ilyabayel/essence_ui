@@ -22,7 +22,7 @@ FROM ${BUILDER_IMAGE} AS builder
 
 # install build dependencies
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends build-essential git \
+  && apt-get install -y --no-install-recommends build-essential git nodejs npm \
   && rm -rf /var/lib/apt/lists/*
 
 # prepare build dir
@@ -55,6 +55,10 @@ COPY lib lib
 COPY assets assets
 
 # compile assets
+RUN cd assets \
+  && npm ci --no-audit --no-fund \
+  && npm run build:css
+
 RUN mix assets.deploy
 
 # Compile the release
@@ -90,6 +94,7 @@ ENV MIX_ENV="prod"
 
 # Only copy the final release from the build stage
 COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/essence_ui ./
+COPY storybook storybook
 
 USER nobody
 
