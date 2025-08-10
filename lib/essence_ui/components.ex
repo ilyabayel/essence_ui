@@ -24,4 +24,5 @@ defmodule EssenceUI.Components do
   defdelegate callout(assigns), to: EssenceUI.Components.Callout
   defdelegate card(assigns), to: EssenceUI.Components.Card
   defdelegate checkbox(assigns), to: EssenceUI.Components.Checkbox
+  defdelegate text_field(assigns), to: EssenceUI.Components.TextField
 end
