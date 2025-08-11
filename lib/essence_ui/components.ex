@@ -26,4 +26,5 @@ defmodule EssenceUI.Components do
   defdelegate checkbox(assigns), to: EssenceUI.Components.Checkbox
   defdelegate text_field(assigns), to: EssenceUI.Components.TextField
   defdelegate text_area(assigns), to: EssenceUI.Components.TextArea
+  defdelegate select(assigns), to: EssenceUI.Components.Select
 end
