@@ -77,10 +77,15 @@ defmodule EssenceUI.Components.Select do
 
     content_id = "select-content-" <> Integer.to_string(System.unique_integer([:positive]))
 
+    root_style =
+      [extracted.style, "position: relative;", "display: inline-block;"]
+      |> Enum.reject(&(&1 in [nil, ""]))
+      |> Enum.join(" ")
+
     assigns =
       assign(assigns,
         class: class,
-        style: extracted.style <> "position: relative;",
+        style: root_style,
         color: assigns[:color] || false,
         selected_slot: selected_slot,
         has_selected: has_selected,
@@ -144,7 +149,7 @@ defmodule EssenceUI.Components.Select do
             "rt-r-size-" <> @size,
             @high_contrast && "rt-high-contrast"
           ]}
-          style="position: absolute; top: -1px; left: -1px; right: -1px;"
+          style="position: absolute; top: calc(100% + var(--space-1)); left: 0; min-width: 100%;"
           data-side="bottom"
           id={@content_id}
           role="listbox"
@@ -166,6 +171,8 @@ defmodule EssenceUI.Components.Select do
                 aria-selected={Map.get(opt, :selected) || false}
                 phx-click={@on_change}
                 phx-value-value={Map.get(opt, :value)}
+                onmouseenter="this.setAttribute('data-highlighted','')"
+                onmouseleave="this.removeAttribute('data-highlighted')"
               >
                 <%= if Map.get(opt, :selected) do %>
                   <span class="rt-SelectItemIndicator" aria-hidden>
