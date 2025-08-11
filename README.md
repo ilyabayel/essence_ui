@@ -96,7 +96,6 @@ This library aims for API and UX parity with Radix Themes. See the Radix Themes 
 
 ### Phase 2: Form inputs and selections
 
-- [ ] `TextField` (assets/css/components/text-field.css)
 - [ ] `Select` (assets/css/components/select.css)
 - [ ] `SegmentedControl` (assets/css/components/segmented-control.css)
 - [ ] `Switch` (assets/css/components/switch.css)
