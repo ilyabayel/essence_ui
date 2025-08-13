@@ -19,10 +19,16 @@ defmodule EssenceUI.Components.SegmentedControl do
         <.segmented_control_item value="tab2">Tab 2</.segmented_control_item>
       </.segmented_control>
 
+      <.segmented_control radius="large" variant="surface" value="rounded">
+        <.segmented_control_item value="rounded">Rounded</.segmented_control_item>
+        <.segmented_control_item value="sharp">Sharp</.segmented_control_item>
+      </.segmented_control>
+
   ## Props
 
   - `size` - Control size: "1", "2", "3" (default: "2")
   - `variant` - Visual variant: "surface", "classic" (default: "surface")
+  - `radius` - Border radius: "none", "small", "medium", "large", "full" (default: none)
   - `color` - Color theme from accent color palette (default: none)
   - `high_contrast` - Increase color contrast (default: false)
   - `value` - Controlled selected value
@@ -41,6 +47,7 @@ defmodule EssenceUI.Components.SegmentedControl do
   alias EssenceUI.SharedProps.HighContrastProps
   alias EssenceUI.SharedProps.LayoutProps
   alias EssenceUI.SharedProps.PaddingProps
+  alias EssenceUI.SharedProps.RadiusProps
   alias EssenceUI.SharedProps.WidthProps
 
   require ColorProps
@@ -48,6 +55,7 @@ defmodule EssenceUI.Components.SegmentedControl do
   require HighContrastProps
   require LayoutProps
   require PaddingProps
+  require RadiusProps
   require WidthProps
 
   @sizes ["1", "2", "3"]
@@ -66,6 +74,10 @@ defmodule EssenceUI.Components.SegmentedControl do
     values: @variants,
     default: "surface",
     doc: "Visual style variant. One of 'surface' or 'classic'."
+
+  attr :radius, :string,
+    values: RadiusProps.radii(),
+    doc: "Border radius utility. Accepts: none, small, medium, large, full. Responsive supported."
 
   attr :value, :string, default: nil, doc: "Controlled selected value."
   attr :default_value, :string, default: nil, doc: "Initial selected value."
@@ -121,7 +133,8 @@ defmodule EssenceUI.Components.SegmentedControl do
         class: class,
         style: extracted.style,
         value: value,
-        color: assigns[:color] || false
+        color: assigns[:color] || false,
+        radius: assigns[:radius] || "medium"
       )
 
     ~H"""
@@ -129,11 +142,12 @@ defmodule EssenceUI.Components.SegmentedControl do
       role="tablist"
       data-accent-color={@color}
       data-disabled={@disabled}
+      data-radius={@radius}
       class={@class}
       style={@style}
       {@rest}
     >
-      <%= for {entry, idx} <- Enum.with_index(@option) do %>
+      <%= for entry <- @option do %>
         <.segmented_control_item
           value={entry.value}
           disabled={entry[:disabled] || @disabled}

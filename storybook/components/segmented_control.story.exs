@@ -6,7 +6,7 @@ defmodule Storybook.Components.SegmentedControlStory do
 
   def function, do: &SegmentedControl.segmented_control/1
 
-  def imports, do: [{SegmentedControl, segmented_control_item: 1}]
+  def imports, do: [{SegmentedControl, segmented_control_item: 1}, {EssenceUI.Components.Grid, grid: 1}]
 
   def container,
     do:
@@ -30,44 +30,28 @@ defmodule Storybook.Components.SegmentedControlStory do
         </.segmented_control>
         """
       },
-      %VariationGroup{
+      %Variation{
         id: :sizes,
         description: "Different sizes of segmented control",
-        variations: [
-          %Variation{
-            id: :size1,
-            attributes: %{size: "1", value: "size1"},
-            slots: [
-              """
-              <:option value="size1">Size 1</:option>
-              <:option value="size2">Size 2</:option>
-              <:option value="size3">Size 3</:option>
-              """
-            ]
-          },
-          %Variation{
-            id: :size2,
-            attributes: %{size: "2", value: "size2"},
-            slots: [
-              """
-              <:option value="size1">Size 1</:option>
-              <:option value="size2">Size 2</:option>
-              <:option value="size3">Size 3</:option>
-              """
-            ]
-          },
-          %Variation{
-            id: :size3,
-            attributes: %{size: "3", value: "size3"},
-            slots: [
-              """
-              <:option value="size1">Size 1</:option>
-              <:option value="size2">Size 2</:option>
-              <:option value="size3">Size 3</:option>
-              """
-            ]
-          }
-        ]
+        template: """
+        <.grid columns="1" gap="4" style="width: max-content;">
+          <.segmented_control size="1" value="size1">
+            <:option value="size1">Size 1</:option>
+            <:option value="size2">Size 2</:option>
+            <:option value="size3">Size 3</:option>
+          </.segmented_control>
+          <.segmented_control size="2" value="size2">
+            <:option value="size1">Size 1</:option>
+            <:option value="size2">Size 2</:option>
+            <:option value="size3">Size 3</:option>
+          </.segmented_control>
+          <.segmented_control size="3" value="size3">
+            <:option value="size1">Size 1</:option>
+            <:option value="size2">Size 2</:option>
+            <:option value="size3">Size 3</:option>
+          </.segmented_control>
+        </.grid>
+        """
       },
       %VariationGroup{
         id: :variants,
@@ -152,6 +136,49 @@ defmodule Storybook.Components.SegmentedControlStory do
           <:option value="normal">Normal</:option>
           <:option value="high">High Contrast</:option>
         </.segmented_control>
+        """
+      },
+      %Variation{
+        id: :radius,
+        description: "Use the radius prop to assign a specific radius value",
+        template: """
+        <.grid columns="1" gap="4" style="width: max-content;">
+          <.segmented_control radius="none" value="none">
+            <:option value="none">None</:option>
+            <:option value="small">Small</:option>
+            <:option value="medium">Medium</:option>
+            <:option value="large">Large</:option>
+            <:option value="full">Full</:option>
+          </.segmented_control>
+          <.segmented_control radius="small" value="small">
+            <:option value="none">None</:option>
+            <:option value="small">Small</:option>
+            <:option value="medium">Medium</:option>
+            <:option value="large">Large</:option>
+            <:option value="full">Full</:option>
+          </.segmented_control>
+          <.segmented_control radius="medium" value="medium">
+            <:option value="none">None</:option>
+            <:option value="small">Small</:option>
+            <:option value="medium">Medium</:option>
+            <:option value="large">Large</:option>
+            <:option value="full">Full</:option>
+          </.segmented_control>
+          <.segmented_control radius="large" value="large">
+            <:option value="none">None</:option>
+            <:option value="small">Small</:option>
+            <:option value="medium">Medium</:option>
+            <:option value="large">Large</:option>
+            <:option value="full">Full</:option>
+          </.segmented_control>
+          <.segmented_control radius="full" value="full">
+            <:option value="none">None</:option>
+            <:option value="small">Small</:option>
+            <:option value="medium">Medium</:option>
+            <:option value="large">Large</:option>
+            <:option value="full">Full</:option>
+          </.segmented_control>
+        </.grid>
         """
       }
     ]

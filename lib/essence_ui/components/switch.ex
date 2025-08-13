@@ -133,6 +133,7 @@ defmodule EssenceUI.Components.Switch do
       role="switch"
       aria-checked={@checked_state == "checked"}
       data-state={@checked_state}
+      data-disabled={@disabled}
       data-accent-color={@color}
       class={@class}
       style={@style <> "cursor: pointer;"}

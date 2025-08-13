@@ -17,7 +17,8 @@ defmodule Storybook.Components.SwitchStory do
 
   def layout, do: :one_column
 
-  def imports, do: [{EssenceUI.Components.Flex, flex: 1}, {EssenceUI.Components.Text, text: 1}]
+  def imports,
+    do: [{EssenceUI.Components.Flex, flex: 1}, {EssenceUI.Components.Text, text: 1}, {EssenceUI.Components.Grid, grid: 1}]
 
   def variations do
     [
@@ -35,32 +36,19 @@ defmodule Storybook.Components.SwitchStory do
         <.switch checked />
         """
       },
-      %VariationGroup{
+      %Variation{
         id: :variants,
         description: "Switch visual variants.",
-        variations: [
-          %Variation{
-            id: :surface,
-            attributes: %{variant: "surface"},
-            template: """
-            <.switch variant="surface" />
-            """
-          },
-          %Variation{
-            id: :classic,
-            attributes: %{variant: "classic"},
-            template: """
-            <.switch variant="classic" />
-            """
-          },
-          %Variation{
-            id: :soft,
-            attributes: %{variant: "soft"},
-            template: """
-            <.switch variant="soft" />
-            """
-          }
-        ]
+        template: """
+        <.grid columns="2" gap="2" style="width: max-content;">
+          <.switch variant="surface"/>
+          <.switch variant="surface" checked/>
+          <.switch variant="classic"/>
+          <.switch variant="classic" checked/>
+          <.switch variant="soft"/>
+          <.switch variant="soft" checked/>
+        </.grid>
+        """
       },
       %VariationGroup{
         id: :sizes,
@@ -68,24 +56,15 @@ defmodule Storybook.Components.SwitchStory do
         variations: [
           %Variation{
             id: :size1,
-            attributes: %{size: "1"},
-            template: """
-            <.switch size="1" />
-            """
+            attributes: %{size: "1"}
           },
           %Variation{
             id: :size2,
-            attributes: %{size: "2"},
-            template: """
-            <.switch size="2" />
-            """
+            attributes: %{size: "2"}
           },
           %Variation{
             id: :size3,
-            attributes: %{size: "3"},
-            template: """
-            <.switch size="3" />
-            """
+            attributes: %{size: "3"}
           }
         ]
       },
@@ -95,31 +74,19 @@ defmodule Storybook.Components.SwitchStory do
         variations: [
           %Variation{
             id: :indigo,
-            attributes: %{color: "indigo"},
-            template: """
-            <.switch color="indigo" />
-            """
+            attributes: %{color: "indigo", checked: true}
           },
           %Variation{
             id: :crimson,
-            attributes: %{color: "crimson"},
-            template: """
-            <.switch color="crimson" />
-            """
+            attributes: %{color: "crimson", checked: true}
           },
           %Variation{
             id: :grass,
-            attributes: %{color: "grass"},
-            template: """
-            <.switch color="grass" />
-            """
+            attributes: %{color: "grass", checked: true}
           },
           %Variation{
             id: :orange,
-            attributes: %{color: "orange"},
-            template: """
-            <.switch color="orange" />
-            """
+            attributes: %{color: "orange", checked: true}
           }
         ]
       },
@@ -128,6 +95,7 @@ defmodule Storybook.Components.SwitchStory do
         description: "Disabled switch.",
         template: """
         <.switch disabled />
+        <.switch disabled checked />
         """
       },
       %Variation{
@@ -135,6 +103,7 @@ defmodule Storybook.Components.SwitchStory do
         description: "High contrast variant.",
         template: """
         <.switch high_contrast />
+        <.switch high_contrast checked/>
         """
       }
     ]
