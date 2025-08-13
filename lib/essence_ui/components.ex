@@ -13,6 +13,8 @@ defmodule EssenceUI.Components do
     * `callout/1` - See `EssenceUI.Components.Callout`
     * `card/1` - See `EssenceUI.Components.Card`
     * `checkbox/1` - See `EssenceUI.Components.Checkbox`
+    * `segmented_control/1` - See `EssenceUI.Components.SegmentedControl`
+    * `switch/1` - See `EssenceUI.Components.Switch`
   """
 
   defdelegate text(assigns), to: EssenceUI.Components.Text
@@ -27,4 +29,6 @@ defmodule EssenceUI.Components do
   defdelegate text_field(assigns), to: EssenceUI.Components.TextField
   defdelegate text_area(assigns), to: EssenceUI.Components.TextArea
   defdelegate select(assigns), to: EssenceUI.Components.Select
+  defdelegate segmented_control(assigns), to: EssenceUI.Components.SegmentedControl
+  defdelegate switch(assigns), to: EssenceUI.Components.Switch
 end

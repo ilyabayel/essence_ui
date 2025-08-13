@@ -86,6 +86,9 @@ This library aims for API and UX parity with Radix Themes. See the Radix Themes 
 - [x] `CheckboxGroup`
 - [x] `TextField`
 - [x] `TextArea`
+- [x] `Select`
+- [x] `SegmentedControl`
+- [x] `Switch`
 
 
 ### Phase 1: Foundations and consistency
@@ -96,9 +99,9 @@ This library aims for API and UX parity with Radix Themes. See the Radix Themes 
 
 ### Phase 2: Form inputs and selections
 
-- [ ] `Select` (assets/css/components/select.css)
-- [ ] `SegmentedControl` (assets/css/components/segmented-control.css)
-- [ ] `Switch` (assets/css/components/switch.css)
+- [x] `Select` (assets/css/components/select.css)
+- [x] `SegmentedControl` (assets/css/components/segmented-control.css)
+- [x] `Switch` (assets/css/components/switch.css)
 - [ ] `Slider` (assets/css/components/slider.css)
 - [ ] `Radio`, `RadioGroup`, `RadioCards` (assets/css/components/radio*.css)
 - [ ] `Progress` (assets/css/components/progress.css)
