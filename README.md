@@ -89,6 +89,7 @@ This library aims for API and UX parity with Radix Themes. See the Radix Themes 
 - [x] `Select`
 - [x] `SegmentedControl`
 - [x] `Switch`
+- [x] `Slider`
 
 
 ### Phase 1: Foundations and consistency
@@ -102,7 +103,7 @@ This library aims for API and UX parity with Radix Themes. See the Radix Themes 
 - [x] `Select` (assets/css/components/select.css)
 - [x] `SegmentedControl` (assets/css/components/segmented-control.css)
 - [x] `Switch` (assets/css/components/switch.css)
-- [ ] `Slider` (assets/css/components/slider.css)
+- [x] `Slider` (assets/css/components/slider.css)
 - [ ] `Radio`, `RadioGroup`, `RadioCards` (assets/css/components/radio*.css)
 - [ ] `Progress` (assets/css/components/progress.css)
 - [ ] Stories + a11y coverage for the above

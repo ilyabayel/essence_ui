@@ -15,6 +15,7 @@ defmodule EssenceUI.Components do
     * `checkbox/1` - See `EssenceUI.Components.Checkbox`
     * `segmented_control/1` - See `EssenceUI.Components.SegmentedControl`
     * `switch/1` - See `EssenceUI.Components.Switch`
+    * `slider/1` - See `EssenceUI.Components.Slider`
   """
 
   defdelegate text(assigns), to: EssenceUI.Components.Text
@@ -31,4 +32,5 @@ defmodule EssenceUI.Components do
   defdelegate select(assigns), to: EssenceUI.Components.Select
   defdelegate segmented_control(assigns), to: EssenceUI.Components.SegmentedControl
   defdelegate switch(assigns), to: EssenceUI.Components.Switch
+  defdelegate slider(assigns), to: EssenceUI.Components.Slider
 end
