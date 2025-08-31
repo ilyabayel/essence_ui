@@ -34,26 +34,26 @@ defmodule EssenceUI.MixProject do
   defp deps do
     # styler:sort
     [
-      {:bandit, "~> 1.5"},
+      {:bandit, "~> 1.8"},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
-      {:dns_cluster, "~> 0.1.1"},
-      {:esbuild, "~> 0.9", runtime: Mix.env() == :dev},
-      {:floki, ">= 0.30.0", only: :test},
+      {:dns_cluster, "~> 0.2"},
+      {:esbuild, "~> 0.10", runtime: Mix.env() == :dev},
+      {:floki, ">= 0.38.0", only: :test},
       {:gettext, "~> 0.26"},
-      {:jason, "~> 1.2"},
-      {:mix_test_watch, "~> 1.0", only: [:dev, :test], runtime: false},
-      {:phoenix, "~> 1.8.0-rc.2", override: true},
-      {:phoenix_html, "~> 4.1"},
-      {:phoenix_live_dashboard, "~> 0.8.3"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 1.0.9"},
-      {:phoenix_storybook, "~> 0.8.2"},
+      {:jason, "~> 1.4"},
+      {:mix_test_watch, "~> 1.3", only: [:dev, :test], runtime: false},
+      {:phoenix, "~> 1.8.1", override: true},
+      {:phoenix_html, "~> 4.2.1"},
+      {:phoenix_live_dashboard, "~> 0.8.7"},
+      {:phoenix_live_reload, "~> 1.6", only: :dev},
+      {:phoenix_live_view, "~> 1.1.8"},
+      {:phoenix_storybook, "~> 0.9.2"},
       {:req, "~> 0.5"},
-      {:styler, "~> 1.4"},
-      {:swoosh, "~> 1.16"},
-      {:telemetry_metrics, "~> 1.0"},
-      {:telemetry_poller, "~> 1.0"},
-      {:tidewave, "~> 0.1", only: :dev}
+      {:styler, "~> 1.7"},
+      {:swoosh, "~> 1.19"},
+      {:telemetry_metrics, "~> 1.1"},
+      {:telemetry_poller, "~> 1.3"},
+      {:tidewave, "~> 0.4", only: :dev}
     ]
   end
 

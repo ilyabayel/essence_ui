@@ -1,7 +1,7 @@
 defmodule EssenceUIWeb.Storybook do
   @moduledoc false
   use PhoenixStorybook,
-    otp_app: :essence_ui_web,
+    otp_app: :essence_ui,
     content_path: Path.expand("../../storybook", __DIR__),
     # assets path are remote path, not local file-system paths
     css_path: "/assets/storybook.css",
