@@ -1,14 +1,14 @@
-// If your components require any hooks or custom uploaders, or if your pages
-// require connect parameters, uncomment the following lines and declare them as
-// such:
-//
-// import * as Hooks from "./hooks";
-// import * as Params from "./params";
-// import * as Uploaders from "./uploaders";
+// Import dialog hooks for Essence UI components
+import { Dialog } from "./hooks/dialog";
 
-// (function () {
-//   window.storybook = { Hooks, Params, Uploaders };
-// })();
+// Hooks object for storybook
+const Hooks = {
+    Dialog
+};
+
+(function () {
+    window.storybook = { Hooks };
+})();
 
 
 // If your components require alpinejs, you'll need to start

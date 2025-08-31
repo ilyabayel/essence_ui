@@ -430,7 +430,10 @@ custom classes must fully style the input
 #### Components
 - Components are stored in `lib/essence_ui/components`
 - Re-use `lib/essence_ui/shared_props` for components props
-- Do not create unit tests for components yet
+- **Always** use client-side state for interactive things like select option, open dropdown or open/close dialog
+- **Never** use phoenix state for things that should be smooth and should work without delay. Like text input, open/close dialog, show dropdown, open context menu.
+- **Do not** create unit tests for components yet
+- **Do not** create any CSS for components since all of the CSS already exists in `assets/**/*.css`
 
 #### Storybook
 - We create storybook in <root>/storybook folder for each component we created
