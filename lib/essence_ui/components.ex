@@ -34,5 +34,5 @@ defmodule EssenceUI.Components do
   defdelegate segmented_control(assigns), to: EssenceUI.Components.SegmentedControl
   defdelegate switch(assigns), to: EssenceUI.Components.Switch
   defdelegate slider(assigns), to: EssenceUI.Components.Slider
-  defdelegate dialog(assigns), to: Dialog
+  defdelegate dialog(assigns), to: EssenceUI.Components.Dialog
 end

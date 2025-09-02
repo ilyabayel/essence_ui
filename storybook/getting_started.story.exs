@@ -77,10 +77,10 @@ defmodule Storybook.GettingStarted do
         </pre>
       </.code>
       <.text as="p" mb="4">
-        You can customize
-        <.code color="gray" high_contrast>data-accent-color</.code>,
-        <.code color="gray" high_contrast>data-gray-color</.code>,
-        <.code color="gray" high_contrast>data-radius</.code>, and
+        You can customize <.code color="gray" high_contrast>data-accent-color</.code>, <.code
+          color="gray"
+          high_contrast
+        >data-gray-color</.code>, <.code color="gray" high_contrast>data-radius</.code>, and
         <.code color="gray" high_contrast>data-scaling</.code>
         to match your brand or preferences.
       </.text>

@@ -1,1 +1,10 @@
 @import './_internal/base-dialog.css';
+
+
+.es-DialogRoot {
+    visibility: hidden;
+}
+
+.es-DialogRoot>[data-state="open"] {
+    visibility: visible;
+}

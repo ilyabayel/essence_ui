@@ -438,6 +438,7 @@ custom classes must fully style the input
 #### Storybook
 - We create storybook in <root>/storybook folder for each component we created
 - Docs for storybook are here: https://hexdocs.pm/phoenix_storybook/index.html or can be accessed via Tidewave MCP
+- Prefer Variation with template over VariationGroup
   
 
 #### Test

@@ -7,11 +7,16 @@
 
 export const Dialog = {
     mounted() {
-        this.el.addEventListener("open", () => {
-            alert("Dialog opened");
-        });
-        this.el.addEventListener("close", () => {
-            alert("Dialog closed");
-        });
+        this.el.setAttribute("data-state", this.el.getAttribute("data-default-state"));
+        this.el.addEventListener("open", this.open.bind(this));
+        this.el.addEventListener("close", this.close.bind(this));
+    },
+    close(e) {
+        e.stopPropagation();
+        this.el.setAttribute("data-state", "close");
+    },
+    open(e) {
+        e.stopPropagation();
+        this.el.setAttribute("data-state", "open");
     }
 }

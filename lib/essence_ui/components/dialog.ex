@@ -16,36 +16,49 @@ defmodule EssenceUI.Components.Dialog do
 
   require MarginProps
 
-  attr :open, :boolean, default: false, doc: "Whether the dialog is open"
-  attr :modal, :boolean, default: true, doc: "Whether the dialog is modal"
+  attr :target, :string, required: true, doc: "CSS selector for portal target"
+  attr :default_state, :string, default: "closed", doc: "open closed"
   attr :id, :string, default: nil, doc: "Unique identifier for the dialog"
   slot :inner_block, required: true
 
   def dialog(assigns) do
     ~H"""
-    <div id={@id} phx-hook="Dialog" class="rt-Dialog">
-      <.dialog_overlay id={@id <> "Overlay"} />
-      <.dialog_content>
-        {render_slot(@inner_block)}
-      </.dialog_content>
-    </div>
+    <.portal target={@target} id={@id <> "portal"} class="es-DialogRoot">
+      <div
+        id={@id}
+        data-default-state={@default_state}
+        class="rt-BaseDialogOverlay"
+        style="inset: 0"
+        phx-hook="Dialog"
+      >
+        <.dialog_content dialog_id={@id}>
+          {render_slot(@inner_block)}
+        </.dialog_content>
+      </div>
+    </.portal>
     """
   end
 
-  attr :id, :string, default: nil, doc: "Unique identifier for the dialog"
-
-  def dialog_overlay(assigns) do
-    ~H"""
-    <div class="rt-DialogOverlay" id={@id} phx-click={JS.dispatch("close", to: "#{@id}")}>
-      <div class="rt-DialogOverlayBackdrop" />
-    </div>
-    """
-  end
+  attr :dialog_id, :string, required: true, doc: "Unique identifier for the dialog"
+  slot :inner_block, required: true
 
   def dialog_content(assigns) do
     ~H"""
-    <div class="rt-DialogContent">
-      {render_slot(@inner_block)}
+    <div class="rt-BaseDialogScroll">
+      <div class="rt-BaseDialogScrollPadding rt-r-align-center">
+        <div
+          role="alertdialog"
+          id="radix-:Rh86pn6:"
+          aria-describedby="radix-:Rh86pn6H2:"
+          aria-labelledby="radix-:Rh86pn6H1:"
+          class="rt-BaseDialogContent rt-AlertDialogContent rt-r-size-3 rt-r-max-w"
+          tabindex="-1"
+          style="--max-width: 450px; pointer-events: auto;"
+          phx-click-away={JS.dispatch("close", to: "##{@dialog_id}")}
+        >
+          {render_slot(@inner_block)}
+        </div>
+      </div>
     </div>
     """
   end
