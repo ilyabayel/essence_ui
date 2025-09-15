@@ -439,6 +439,16 @@ custom classes must fully style the input
 - We create storybook in <root>/storybook folder for each component we created
 - Docs for storybook are here: https://hexdocs.pm/phoenix_storybook/index.html or can be accessed via Tidewave MCP
 - Prefer Variation with template over VariationGroup
+- Do not import the same component that is in `def function`
+```elixir
+def function, do: &EssenceUI.Components.separator/1
+
+# do not
+def imports, do: [{EssenceUI.Components, [separator: 1]}]
+
+# do 
+def imports, do: []
+```
   
 
 #### Test

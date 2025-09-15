@@ -13,12 +13,17 @@ defmodule EssenceUI.Components do
     * `checkbox/1` - See `EssenceUI.Components.Checkbox`
     * `dialog/1` - See `EssenceUI.Components.Dialog`
     * `alert_dialog/1` - See `EssenceUI.Components.AlertDialog`
+    * `icon_button/1` - See `EssenceUI.Components.IconButton`
+    * `progress/1` - See `EssenceUI.Components.Progress`
     * `segmented_control/1` - See `EssenceUI.Components.SegmentedControl`
     * `select/1` - See `EssenceUI.Components.Select`
+    * `separator/1` - See `EssenceUI.Components.Separator`
     * `slider/1` - See `EssenceUI.Components.Slider`
+    * `spinner/1` - See `EssenceUI.Components.Spinner`
     * `switch/1` - See `EssenceUI.Components.Switch`
     * `text_field/1` - See `EssenceUI.Components.TextField`
     * `text_area/1` - See `EssenceUI.Components.TextArea`
+    * `tooltip/1` - See `EssenceUI.Components.Tooltip`
 
   ### Typography
     * `blockquote/1` - See `EssenceUI.Components.Blockquote`
@@ -49,12 +54,17 @@ defmodule EssenceUI.Components do
   defdelegate checkbox(assigns), to: EssenceUI.Components.Checkbox
   defdelegate dialog(assigns), to: EssenceUI.Components.Dialog
   defdelegate alert_dialog(assigns), to: EssenceUI.Components.AlertDialog
+  defdelegate icon_button(assigns), to: EssenceUI.Components.IconButton
+  defdelegate progress(assigns), to: EssenceUI.Components.Progress
   defdelegate segmented_control(assigns), to: EssenceUI.Components.SegmentedControl
   defdelegate select(assigns), to: EssenceUI.Components.Select
+  defdelegate separator(assigns), to: EssenceUI.Components.Separator
   defdelegate slider(assigns), to: EssenceUI.Components.Slider
+  defdelegate spinner(assigns), to: EssenceUI.Components.Spinner
   defdelegate switch(assigns), to: EssenceUI.Components.Switch
   defdelegate text_field(assigns), to: EssenceUI.Components.TextField
   defdelegate text_area(assigns), to: EssenceUI.Components.TextArea
+  defdelegate tooltip(assigns), to: EssenceUI.Components.Tooltip
 
   # Typography
   defdelegate blockquote(assigns), to: EssenceUI.Components.Blockquote
