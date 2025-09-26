@@ -15,12 +15,20 @@ defmodule EssenceUI.Components do
     * `alert_dialog/1` - See `EssenceUI.Components.AlertDialog`
     * `icon_button/1` - See `EssenceUI.Components.IconButton`
     * `progress/1` - See `EssenceUI.Components.Progress`
+    * `radio/1` - See `EssenceUI.Components.Radio`
+    * `radio_group/1` - See `EssenceUI.Components.RadioGroup`
     * `segmented_control/1` - See `EssenceUI.Components.SegmentedControl`
     * `select/1` - See `EssenceUI.Components.Select`
     * `separator/1` - See `EssenceUI.Components.Separator`
+    * `skeleton/1` - See `EssenceUI.Components.Skeleton`
     * `slider/1` - See `EssenceUI.Components.Slider`
     * `spinner/1` - See `EssenceUI.Components.Spinner`
     * `switch/1` - See `EssenceUI.Components.Switch`
+    * `table/1` - See `EssenceUI.Components.Table`
+    * `table_row/1` - See `EssenceUI.Components.Table`
+    * `table_cell/1` - See `EssenceUI.Components.Table`
+    * `table_column_header_cell/1` - See `EssenceUI.Components.Table`
+    * `table_row_header_cell/1` - See `EssenceUI.Components.Table`
     * `text_field/1` - See `EssenceUI.Components.TextField`
     * `text_area/1` - See `EssenceUI.Components.TextArea`
     * `tooltip/1` - See `EssenceUI.Components.Tooltip`
@@ -44,6 +52,7 @@ defmodule EssenceUI.Components do
     * `grid/1` - See `EssenceUI.Components.Grid`
     * `section/1` - See `EssenceUI.Components.Section`
   """
+  alias EssenceUI.Components.Table
 
   # Components
   defdelegate avatar(assigns), to: EssenceUI.Components.Avatar
@@ -56,12 +65,20 @@ defmodule EssenceUI.Components do
   defdelegate alert_dialog(assigns), to: EssenceUI.Components.AlertDialog
   defdelegate icon_button(assigns), to: EssenceUI.Components.IconButton
   defdelegate progress(assigns), to: EssenceUI.Components.Progress
+  defdelegate radio(assigns), to: EssenceUI.Components.Radio
+  defdelegate radio_group(assigns), to: EssenceUI.Components.RadioGroup
   defdelegate segmented_control(assigns), to: EssenceUI.Components.SegmentedControl
   defdelegate select(assigns), to: EssenceUI.Components.Select
   defdelegate separator(assigns), to: EssenceUI.Components.Separator
+  defdelegate skeleton(assigns), to: EssenceUI.Components.Skeleton
   defdelegate slider(assigns), to: EssenceUI.Components.Slider
   defdelegate spinner(assigns), to: EssenceUI.Components.Spinner
   defdelegate switch(assigns), to: EssenceUI.Components.Switch
+  defdelegate table(assigns), to: Table
+  defdelegate table_row(assigns), to: Table
+  defdelegate table_cell(assigns), to: Table
+  defdelegate table_column_header_cell(assigns), to: Table
+  defdelegate table_row_header_cell(assigns), to: Table
   defdelegate text_field(assigns), to: EssenceUI.Components.TextField
   defdelegate text_area(assigns), to: EssenceUI.Components.TextArea
   defdelegate tooltip(assigns), to: EssenceUI.Components.Tooltip
