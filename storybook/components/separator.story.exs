@@ -11,86 +11,74 @@ defmodule Storybook.Components.Separator do
        "data-radius": "medium",
        style: "display: grid; gap: 16px;",
        "data-gray-color": "slate",
-       "data-accent-color": "indigo"}
+       "data-accent-color": "gray"}
 
   def imports, do: [{EssenceUI.Components, [box: 1, text: 1, flex: 1]}]
+
+  def layout, do: :one_column
 
   def variations do
     [
       %Variation{
         id: :default,
         template: """
-        <.box p="4">
-          <.text>Above separator</.text>
-          <.separator my="3" />
-          <.text>Below separator</.text>
-        </.box>
-        """
-      },
-      %Variation{
-        id: :horizontal,
-        description: "Horizontal separator (default)",
-        template: """
-        <.box p="4">
-          <.text>First section</.text>
-          <.separator orientation="horizontal" my="3" />
-          <.text>Second section</.text>
-        </.box>
-        """
-      },
-      %Variation{
-        id: :vertical,
-        description: "Vertical separator",
-        template: """
-        <.flex align="center" gap="3" p="4">
-          <.text>Left content</.text>
-          <.separator orientation="vertical" />
-          <.text>Right content</.text>
-        </.flex>
+        <.text size="2">
+          <.text>Tools for building high-quality, accessible UI</.text>
+          <.separator my="3" size="4" />
+          <.flex align="center" gap="3">
+            <.text>Components</.text>
+            <.separator orientation="vertical" mx="3" />
+            <.text>Typography</.text>
+            <.separator orientation="vertical" mx="3" />
+            <.text>Colors</.text>
+          </.flex>
+        </.text>
         """
       },
       %Variation{
         id: :sizes,
         description: "Different sizes",
         template: """
-        <.box p="4" class="space-y-4">
-          <.box>
-            <.text size="1">Size 1</.text>
-            <.separator size="1" my="2" />
-          </.box>
-          <.box>
-            <.text size="2">Size 2</.text>
-            <.separator size="2" my="2" />
-          </.box>
-          <.box>
-            <.text size="3">Size 3</.text>
-            <.separator size="3" my="2" />
-          </.box>
-          <.box>
-            <.text size="4">Size 4</.text>
-            <.separator size="4" my="2" />
-          </.box>
-        </.box>
+        <.flex direction="column" gap="4">
+          <.separator size="1" />
+          <.separator size="2" />
+          <.separator size="3" />
+          <.separator size="4" />
+        </.flex>
+        """
+      },
+      %Variation{
+        id: :sizes_vertical,
+        description: "Different sizes (vertical)",
+        template: """
+        <.flex align="center" gap="4" style="height: 96px;">
+          <.separator size="1" orientation="vertical" />
+          <.separator size="2" orientation="vertical" />
+          <.separator size="3" orientation="vertical" />
+          <.separator size="4" orientation="vertical" />
+        </.flex>
         """
       },
       %Variation{
         id: :colors,
         description: "Different colors",
         template: """
-        <.box p="4" class="space-y-4">
-          <.box>
-            <.text>Red separator</.text>
-            <.separator color="red" my="2" />
-          </.box>
-          <.box>
-            <.text>Blue separator</.text>
-            <.separator color="blue" my="2" />
-          </.box>
-          <.box>
-            <.text>Green separator</.text>
-            <.separator color="green" my="2" />
-          </.box>
-        </.box>
+        <.flex direction="column" gap="4">
+          <.separator size="4" color="indigo" />
+          <.separator size="4" color="cyan" />
+          <.separator size="4" color="orange" />
+          <.separator size="4" color="crimson" />
+        </.flex>
+        """
+      },
+      %Variation{
+        id: :orientation,
+        description: "Orientation",
+        template: """
+        <.flex align="center" gap="3" p="4">
+          <.separator orientation="horizontal" />
+          <.separator orientation="vertical" />
+        </.flex>
         """
       }
     ]
