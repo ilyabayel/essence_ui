@@ -28,8 +28,8 @@ defmodule EssenceUI.Helpers.ExtractProps do
       |> Enum.map_join("; ", fn {property, value} -> "#{property}: #{value}" end)
 
     Map.merge(other_assigns, %{
-      class: "#{assigns[:class] || ""} #{class}",
-      style: (assigns[:style] || "") <> style
+      class: merge_classes(assigns[:class], class),
+      style: merge_styles(assigns[:style], style)
     })
   end
 
@@ -108,4 +108,39 @@ defmodule EssenceUI.Helpers.ExtractProps do
         {"", value}
     end
   end
+
+  defp merge_classes(nil, class), do: merge_classes("", class)
+
+  defp merge_classes(existing, class) do
+    [existing, class]
+    |> Enum.map(&normalize_class/1)
+    |> Enum.reject(&(&1 == ""))
+    |> Enum.join(" ")
+  end
+
+  defp normalize_class(nil), do: ""
+  defp normalize_class(class) when is_binary(class), do: String.trim(class)
+  defp normalize_class(_), do: ""
+
+  defp merge_styles(existing, new) do
+    existing = normalize_style(existing)
+    new = normalize_style(new)
+
+    cond do
+      existing == "" and new == "" -> ""
+      existing == "" -> new
+      new == "" -> existing
+      true -> existing <> "; " <> new
+    end
+  end
+
+  defp normalize_style(nil), do: ""
+
+  defp normalize_style(style) when is_binary(style) do
+    style
+    |> String.trim()
+    |> String.trim_trailing(";")
+  end
+
+  defp normalize_style(_), do: ""
 end
