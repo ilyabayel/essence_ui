@@ -107,6 +107,46 @@ This is a web application written using the Phoenix web framework.
 
   Within `phx-no-curly-interpolation` annotated tags, you can use `{` and `}` without escaping them, and dynamic Elixir expressions can still be used with `<%= ... %>` syntax
 
+- HEEx does not support nested slots. Instead of using multiple slots consider using some of the slots just as another component.
+  
+  **Never** do this:
+
+  <.tabs default_value="account">
+    <:list>
+      <:trigger value="account">Account</:trigger>
+      <:trigger value="documents">Documents</:trigger>
+      <:trigger value="settings">Settings</:trigger>
+    </:list>
+    <:content value="account">
+      <.text>Make changes to your account here.</.text>
+    </:content>
+    <:content value="documents">
+      <.text>Access and update your documents.</.text>
+    </:content>
+    <:content value="settings">
+      <.text>Manage your account settings.</.text>
+    </:content>
+  </.tabs>
+
+  **Always** do this:
+  
+  <.tabs default_value="account">
+    <:trigger_list>
+      <.tabs_trigger value="account">Account</.tabs_trigger>
+      <.tabs_trigger value="documents">Documents</.tabs_trigger>
+      <.tabs_trigger value="settings">Settings</.tabs_trigger>
+    </:trigger_list>
+    <:content value="account">
+      <.text>Make changes to your account here.</.text>
+    </:content>
+    <:content value="documents">
+      <.text>Access and update your documents.</.text>
+    </:content>
+    <:content value="settings">
+      <.text>Manage your account settings.</.text>
+    </:content>
+  </.tabs>
+
 - HEEx class attrs support lists, but you must **always** use list `[...]` syntax. You can use the class list syntax to conditionally add classes, **always do this for multiple class values**:
 
       <a class={[

@@ -1,9 +1,11 @@
-// Import dialog hooks for Essence UI components
+// Import hooks for Essence UI components
 import { Dialog } from "./hooks/dialog";
+import { Tabs } from "./hooks/tabs";
 
 // Hooks object for storybook
 const Hooks = {
-    Dialog
+    Dialog,
+    Tabs
 };
 
 (function () {

@@ -3,7 +3,7 @@ defmodule Storybook.Examples.SelectStory do
   use PhoenixStorybook.Story, :example
   use Phoenix.Component
 
-  import EssenceUI.Components
+  import EssenceUI.Components, only: [select: 1]
 
   def container,
     do:
