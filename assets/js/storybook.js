@@ -1,11 +1,13 @@
 // Import hooks for Essence UI components
 import { Dialog } from "./hooks/dialog";
 import { Tabs } from "./hooks/tabs";
+import { CheckboxCards } from "./hooks/checkbox_cards";
 
 // Hooks object for storybook
 const Hooks = {
     Dialog,
-    Tabs
+    Tabs,
+    CheckboxCards
 };
 
 (function () {

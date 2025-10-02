@@ -52,18 +52,16 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 This library aims for API and UX parity with Radix Themes. See the Radix Themes overview for reference: [Getting started with Radix Themes](https://www.radix-ui.com/themes/docs/overview/getting-started).
 
-### Implemented components
+### ✅ Completed Components (25/52)
 
-#### Layout
-
+#### Layout (5/5) ✅
 - [x] `Box`
 - [x] `Flex`
 - [x] `Grid`
 - [x] `Container`
 - [x] `Section`
 
-#### Typography
-
+#### Typography (9/9) ✅
 - [x] `Text`
 - [x] `Heading`
 - [x] `Blockquote`
@@ -74,83 +72,116 @@ This library aims for API and UX parity with Radix Themes. See the Radix Themes 
 - [x] `Quote`
 - [x] `Strong`
 
-#### Components
+#### Components (11/38)
+- [x] `AlertDialog` ✅
+- [x] `AspectRatio` ✅
+- [x] `Avatar` ✅
+- [x] `Badge` ✅
+- [x] `Button` ✅
+- [x] `Callout` ✅
+- [x] `Card` ✅
+- [x] `Checkbox` ✅
+- [x] `CheckboxCards` ✅
+- [x] `Dialog` ✅
+- [x] `IconButton` ✅
+- [x] `Progress` ✅
+- [x] `Radio` ✅
+- [x] `RadioGroup` ✅
+- [x] `SegmentedControl` ✅
+- [x] `Select` ✅
+- [x] `Separator` ✅
+- [x] `Skeleton` ✅
+- [x] `Slider` ✅
+- [x] `Spinner` ✅
+- [x] `Switch` ✅
+- [x] `Table` ✅
+- [x] `Tabs` ✅
+- [x] `TextArea` ✅
+- [x] `TextField` ✅
+- [x] `Tooltip` ✅
 
-- [x] `AspectRatio`
-- [x] `Avatar`
-- [x] `Badge`
-- [x] `Button`
-- [x] `Callout`
-- [x] `Card`
-- [x] `Checkbox`
-- [x] `CheckboxGroup`
-- [x] `TextField`
-- [x] `TextArea`
-- [x] `Select`
-- [x] `SegmentedControl`
-- [x] `Switch`
-- [x] `Slider`
+### 🚧 Remaining Components (27/52)
 
+#### Form Components (2)
+- [ ] `CheckboxGroup` - Group of checkboxes (need to verify implementation)
+- [ ] `RadioCards` - Radio group with card-style layout
 
-### Phase 1: Foundations and consistency
+#### Overlay & Menu Components (4)
+- [ ] `ContextMenu` - Right-click context menu
+- [ ] `DropdownMenu` - Dropdown menu with items
+- [ ] `HoverCard` - Popover that opens on hover
+- [ ] `Popover` - Floating content container
 
-- [ ] `EssenceUI.Theme` root component (appearance, accent, gray, radius, scaling)
-- [ ] Normalize props across existing components using `shared_props` modules
-- [ ] Tests: `checkbox`, `checkbox_group`, `extract_props` edge cases
+#### Navigation Components (1)
+- [ ] `TabNav` - Tab navigation (different from Tabs)
 
-### Phase 2: Form inputs and selections
+#### Data Display Components (2)
+- [ ] `DataList` - Key-value pair list
+- [ ] `ScrollArea` - Custom scrollable area
 
-- [x] `Select` (assets/css/components/select.css)
-- [x] `SegmentedControl` (assets/css/components/segmented-control.css)
-- [x] `Switch` (assets/css/components/switch.css)
-- [x] `Slider` (assets/css/components/slider.css)
-- [ ] `Radio`, `RadioGroup`, `RadioCards` (assets/css/components/radio*.css)
-- [ ] `Progress` (assets/css/components/progress.css)
-- [ ] Stories + a11y coverage for the above
+#### Utility Components (5)
+- [ ] `AccessibleIcon` - Accessible icon wrapper
+- [ ] `Inset` - Negative margin utility
+- [ ] `Portal` - Render content in different DOM location
+- [ ] `Reset` - CSS reset component
+- [ ] `Slot` - Slot composition primitive
+- [ ] `VisuallyHidden` - Visually hidden but screen-reader accessible
 
-### Phase 3: Overlays and menus
+#### Theme Component (1)
+- [ ] `Theme` - Root theme configuration component
 
-- [ ] `Dialog` (assets/css/components/dialog.css)
-- [ ] `AlertDialog` (assets/css/components/alert-dialog.css)
-- [ ] `Popover` (assets/css/components/popover.css)
-- [ ] `HoverCard` (assets/css/components/hover-card.css)
-- [ ] `Tooltip` (assets/css/components/tooltip.css)
-- [ ] `DropdownMenu` (assets/css/components/dropdown-menu.css)
-- [ ] `ContextMenu` (assets/css/components/context-menu.css)
-- [ ] Overlay primitives (portal mount, focus trap, dismiss logic, ARIA)
-- [ ] Stories + keyboard navigation coverage
+### Phase 1: Complete Form Components
 
-### Phase 4: Navigation and data display
+- [ ] `CheckboxGroup` - Verify and complete if needed
+- [ ] `CheckboxCards` - Card-style checkbox group
+- [ ] `RadioCards` - Card-style radio group
+- [ ] Add stories for all form components
+- [ ] Add a11y coverage tests
 
-- [ ] `Tabs` (assets/css/components/tabs.css) with panels
-- [ ] `TabNav` (assets/css/components/tab-nav.css)
-- [ ] `Table` (assets/css/components/table.css)
-- [ ] `DataList` (assets/css/components/data-list.css)
-- [ ] `ScrollArea` (assets/css/components/scroll-area.css)
-- [ ] `Separator` (assets/css/components/separator.css)
-- [ ] `Skeleton` (assets/css/components/skeleton.css)
-- [ ] `Spinner` (assets/css/components/spinner.css)
-- [ ] `IconButton` (assets/css/components/icon-button.css)
-- [ ] `Inset` (assets/css/components/inset.css)
-- [ ] Stories with dense examples
+### Phase 2: Overlay & Menu Components
 
-### Phase 5: Theming, polish, and DX
+- [ ] `Popover` with positioning
+- [ ] `HoverCard` with hover trigger
+- [ ] `DropdownMenu` with nested items
+- [ ] `ContextMenu` with right-click trigger
+- [ ] Implement overlay primitives (portal, focus trap, dismiss)
+- [ ] Add keyboard navigation coverage
 
-- [ ] `ThemePanel` (assets/css/components/theme-panel.css), dev-only toggle in Storybook
-- [ ] Dark mode/appearance docs and examples
-- [ ] Add prop tables in stories; unify variants/sizes across components
-- [ ] Establish a11y checks in CI (roles/labels snapshot tests)
+### Phase 3: Navigation & Data Display
+
+- [ ] `TabNav` component
+- [ ] `DataList` component
+- [ ] `ScrollArea` with custom scrollbars
+- [ ] Add dense data display examples
+
+### Phase 4: Utility Components
+
+- [ ] `AccessibleIcon` wrapper
+- [ ] `Inset` utility
+- [ ] `Portal` primitive
+- [ ] `Slot` composition
+- [ ] `VisuallyHidden` utility
+- [ ] `Reset` component
+
+### Phase 5: Theme & Polish
+
+- [ ] `Theme` root component (appearance, accent, gray, radius, scaling)
+- [ ] `ThemePanel` dev-only component
+- [ ] Normalize props across all components using `shared_props`
+- [ ] Dark mode documentation and examples
+- [ ] Add prop tables in storybook
+- [ ] Establish a11y checks in CI
 
 ### Docs and examples
 
-- [ ] Storybook category parity with Radix Themes sections (Layout, Typography, Components, Utilities)
-- [ ] Usage patterns guide (controlled vs uncontrolled, `as_child`, composition patterns)
-- [ ] Migration notes from plain HTML classes to components
+- [ ] Storybook category parity with Radix Themes
+- [ ] Usage patterns guide (controlled vs uncontrolled, `as_child`, composition)
+- [ ] Migration guide from plain HTML to components
 
 ### Nice-to-have later
 
-- [ ] Composables for state machines used by menus/overlays
-- [ ] Visual regression tests for core components
+- [ ] Composables for state machines
+- [ ] Visual regression tests
 
 ## Learn more
 

@@ -479,6 +479,7 @@ custom classes must fully style the input
 - We create storybook in <root>/storybook folder for each component we created
 - Docs for storybook are here: https://hexdocs.pm/phoenix_storybook/index.html or can be accessed via Tidewave MCP
 - Prefer Variation with template over VariationGroup
+- **Always** use Variation.template instead of Variation.slots and Variation.attributes
 - Do not import the same component that is in `def function`
 ```elixir
 def function, do: &EssenceUI.Components.separator/1
@@ -489,6 +490,7 @@ def imports, do: [{EssenceUI.Components, [separator: 1]}]
 # do 
 def imports, do: []
 ```
+- Storybook is hosted on http://localost:4000/, not on http://localhost:4000/storybook
   
 
 #### Test
