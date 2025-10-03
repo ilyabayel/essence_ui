@@ -43,6 +43,7 @@ defmodule EssenceUI.Components.CheckboxCards do
 
   alias EssenceUI.Helpers.ExtractProps
   alias EssenceUI.SharedProps.ColorProps
+  alias EssenceUI.SharedProps.GapProps
   alias EssenceUI.SharedProps.HighContrastProps
   alias EssenceUI.SharedProps.MarginProps
 
@@ -68,10 +69,10 @@ defmodule EssenceUI.Components.CheckboxCards do
     default: "surface",
     doc: "Visual style variant. One of 'surface' or 'classic'."
 
-  attr :columns, :any,
-    doc: "Number of columns: 1-9 or CSS value. Responsive supported."
+  attr :columns, :any, doc: "Number of columns: 1-9 or CSS value. Responsive supported."
 
   attr :gap, :string,
+    default: "4",
     doc: "Gap between cards. Responsive supported."
 
   attr :default_value, :list,
@@ -112,18 +113,16 @@ defmodule EssenceUI.Components.CheckboxCards do
           class: "rt-r-gtc",
           custom_properties: ["--grid-template-columns"],
           responsive: true
-        },
-        gap: %{
-          type: :string,
-          class: "rt-r-gap",
-          responsive: true
         }
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(HighContrastProps.prop_defs())
       |> Map.merge(MarginProps.prop_defs())
+      |> Map.merge(GapProps.prop_defs())
 
     extracted = ExtractProps.call(assigns, prop_defs)
+
+    dbg(extracted.class)
 
     class =
       [
@@ -159,7 +158,7 @@ defmodule EssenceUI.Components.CheckboxCards do
       phx-hook="CheckboxCards"
       {@rest}
     >
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end
@@ -191,8 +190,11 @@ defmodule EssenceUI.Components.CheckboxCards do
       )
 
     ~H"""
-    <label class={["rt-BaseCard", "rt-CheckboxCardsItem", @class] |> Enum.filter(& &1) |> Enum.join(" ")} style={@style}>
-      <%= render_slot(@inner_block) %>
+    <label
+      class={["rt-BaseCard", "rt-CheckboxCardsItem", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      style={@style}
+    >
+      {render_slot(@inner_block)}
       <button
         type="button"
         role="checkbox"
