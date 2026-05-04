@@ -17,15 +17,6 @@ config :esbuild,
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
-# Configures the mailer
-#
-# By default it uses the "Local" adapter which stores the emails
-# locally. You can see the emails in your browser, at "/dev/mailbox".
-#
-# For production it's recommended to configure a different adapter
-# at the `config/runtime.exs`.
-config :essence_ui, EssenceUI.Mailer, adapter: Swoosh.Adapters.Local
-
 # Configures the endpoint
 config :essence_ui, EssenceUIWeb.Endpoint,
   url: [host: "localhost"],

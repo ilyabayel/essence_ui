@@ -1,8 +1,5 @@
 import Config
 
-# In test we don't send emails
-config :essence_ui, EssenceUI.Mailer, adapter: Swoosh.Adapters.Test
-
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :essence_ui, EssenceUIWeb.Endpoint,
@@ -19,6 +16,3 @@ config :phoenix, :plug_init_mode, :runtime
 # Enable helpful, but potentially expensive runtime checks
 config :phoenix_live_view,
   enable_expensive_runtime_checks: true
-
-# Disable swoosh api client as it is only required for production adapters
-config :swoosh, :api_client, false
