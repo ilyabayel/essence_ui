@@ -11,12 +11,16 @@ defmodule EssenceUI.Components do
     * `callout/1` - See `EssenceUI.Components.Callout`
     * `card/1` - See `EssenceUI.Components.Card`
     * `checkbox/1` - See `EssenceUI.Components.Checkbox`
+    * `checkbox_cards_root/1` - See `EssenceUI.Components.CheckboxCards`
+    * `checkbox_cards_item/1` - See `EssenceUI.Components.CheckboxCards`
     * `checkbox_group/1` - See `EssenceUI.Components.CheckboxGroup`
     * `dialog/1` - See `EssenceUI.Components.Dialog`
     * `alert_dialog/1` - See `EssenceUI.Components.AlertDialog`
     * `icon_button/1` - See `EssenceUI.Components.IconButton`
     * `progress/1` - See `EssenceUI.Components.Progress`
     * `radio/1` - See `EssenceUI.Components.Radio`
+    * `radio_cards_root/1` - See `EssenceUI.Components.RadioCards`
+    * `radio_cards_item/1` - See `EssenceUI.Components.RadioCards`
     * `radio_group/1` - See `EssenceUI.Components.RadioGroup`
     * `segmented_control/1` - See `EssenceUI.Components.SegmentedControl`
     * `select/1` - See `EssenceUI.Components.Select`
@@ -53,6 +57,8 @@ defmodule EssenceUI.Components do
     * `grid/1` - See `EssenceUI.Components.Grid`
     * `section/1` - See `EssenceUI.Components.Section`
   """
+  alias EssenceUI.Components.CheckboxCards
+  alias EssenceUI.Components.RadioCards
   alias EssenceUI.Components.Table
 
   # Components
@@ -62,12 +68,16 @@ defmodule EssenceUI.Components do
   defdelegate callout(assigns), to: EssenceUI.Components.Callout
   defdelegate card(assigns), to: EssenceUI.Components.Card
   defdelegate checkbox(assigns), to: EssenceUI.Components.Checkbox
+  defdelegate checkbox_cards_root(assigns), to: CheckboxCards
+  defdelegate checkbox_cards_item(assigns), to: CheckboxCards
   defdelegate checkbox_group(assigns), to: EssenceUI.Components.CheckboxGroup
   defdelegate dialog(assigns), to: EssenceUI.Components.Dialog
   defdelegate alert_dialog(assigns), to: EssenceUI.Components.AlertDialog
   defdelegate icon_button(assigns), to: EssenceUI.Components.IconButton
   defdelegate progress(assigns), to: EssenceUI.Components.Progress
   defdelegate radio(assigns), to: EssenceUI.Components.Radio
+  defdelegate radio_cards_root(assigns), to: RadioCards
+  defdelegate radio_cards_item(assigns), to: RadioCards
   defdelegate radio_group(assigns), to: EssenceUI.Components.RadioGroup
   defdelegate segmented_control(assigns), to: EssenceUI.Components.SegmentedControl
   defdelegate select(assigns), to: EssenceUI.Components.Select

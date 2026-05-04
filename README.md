@@ -99,12 +99,10 @@ This library aims for API and UX parity with Radix Themes. See the Radix Themes 
 - [x] `TextArea` ✅
 - [x] `TextField` ✅
 - [x] `Tooltip` ✅
+- [x] `CheckboxGroup` ✅
+- [x] `RadioCards` ✅
 
-### 🚧 Remaining Components (27/52)
-
-#### Form Components (2)
-- [ ] `CheckboxGroup` - Group of checkboxes (need to verify implementation)
-- [ ] `RadioCards` - Radio group with card-style layout
+### 🚧 Remaining Components (26/52)
 
 #### Overlay & Menu Components (4)
 - [ ] `ContextMenu` - Right-click context menu

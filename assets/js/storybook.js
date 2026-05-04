@@ -2,12 +2,14 @@
 import { Dialog } from "./hooks/dialog";
 import { Tabs } from "./hooks/tabs";
 import { CheckboxCards } from "./hooks/checkbox_cards";
+import { RadioCards } from "./hooks/radio_cards";
 
 // Hooks object for storybook
 const Hooks = {
     Dialog,
     Tabs,
-    CheckboxCards
+    CheckboxCards,
+    RadioCards
 };
 
 (function () {
