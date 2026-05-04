@@ -11,6 +11,7 @@ defmodule EssenceUI.Components do
     * `callout/1` - See `EssenceUI.Components.Callout`
     * `card/1` - See `EssenceUI.Components.Card`
     * `checkbox/1` - See `EssenceUI.Components.Checkbox`
+    * `checkbox_group/1` - See `EssenceUI.Components.CheckboxGroup`
     * `dialog/1` - See `EssenceUI.Components.Dialog`
     * `alert_dialog/1` - See `EssenceUI.Components.AlertDialog`
     * `icon_button/1` - See `EssenceUI.Components.IconButton`
@@ -61,6 +62,7 @@ defmodule EssenceUI.Components do
   defdelegate callout(assigns), to: EssenceUI.Components.Callout
   defdelegate card(assigns), to: EssenceUI.Components.Card
   defdelegate checkbox(assigns), to: EssenceUI.Components.Checkbox
+  defdelegate checkbox_group(assigns), to: EssenceUI.Components.CheckboxGroup
   defdelegate dialog(assigns), to: EssenceUI.Components.Dialog
   defdelegate alert_dialog(assigns), to: EssenceUI.Components.AlertDialog
   defdelegate icon_button(assigns), to: EssenceUI.Components.IconButton
