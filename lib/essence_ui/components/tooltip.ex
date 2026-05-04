@@ -75,7 +75,7 @@ defmodule EssenceUI.Components.Tooltip do
       <div
         class="rt-TooltipTrigger"
         data-state="closed"
-        phx-hook=".Tooltip"
+        phx-hook="Tooltip"
         id={"#{@tooltip_id}-trigger"}
         data-tooltip-id={@tooltip_id}
         data-open-delay={@open_delay}
@@ -93,7 +93,7 @@ defmodule EssenceUI.Components.Tooltip do
           |> Enum.filter(& &1)
           |> Enum.join(" ")
         }
-        style={@extracted_style}
+        style={"display: none; #{@extracted_style}"}
         role="tooltip"
         id={@tooltip_id}
         data-side={@side}
@@ -102,97 +102,24 @@ defmodule EssenceUI.Components.Tooltip do
         data-state="closed"
         {@rest}
       >
-        {@content}
-        <div class="rt-TooltipArrow" data-side={@side}></div>
+        <span
+          class="rt-Text rt-TooltipText rt-r-size-1"
+          style="display: block; font-size: var(--font-size-1); line-height: var(--line-height-1);"
+        >
+          {@content}
+        </span>
+        <svg
+          width="10"
+          height="5"
+          viewBox="0 0 30 10"
+          preserveAspectRatio="none"
+          class="rt-TooltipArrow"
+          style="position: absolute; top: 100%;"
+        >
+          <polygon points="0,0 30,0 15,10" />
+        </svg>
       </div>
     </div>
-
-    <script :type={Phoenix.LiveView.ColocatedHook} name=".Tooltip">
-      export default {
-        mounted() {
-          this.openDelay = parseInt(this.el.dataset.openDelay) || 700;
-          this.closeDelay = parseInt(this.el.dataset.closeDelay) || 300;
-          this.tooltipId = this.el.dataset.tooltipId;
-          this.tooltip = document.getElementById(this.tooltipId);
-
-          this.openTimeout = null;
-          this.closeTimeout = null;
-
-          this.el.addEventListener('mouseenter', () => this.show());
-          this.el.addEventListener('mouseleave', () => this.hide());
-          this.el.addEventListener('focusin', () => this.show());
-          this.el.addEventListener('focusout', () => this.hide());
-        },
-
-        show() {
-          if (this.closeTimeout) {
-            clearTimeout(this.closeTimeout);
-            this.closeTimeout = null;
-          }
-
-          if (!this.openTimeout) {
-            this.openTimeout = setTimeout(() => {
-              this.tooltip.dataset.state = 'open';
-              this.el.dataset.state = 'open';
-              this.positionTooltip();
-              this.openTimeout = null;
-            }, this.openDelay);
-          }
-        },
-
-        hide() {
-          if (this.openTimeout) {
-            clearTimeout(this.openTimeout);
-            this.openTimeout = null;
-          }
-
-          if (!this.closeTimeout) {
-            this.closeTimeout = setTimeout(() => {
-              this.tooltip.dataset.state = 'closed';
-              this.el.dataset.state = 'closed';
-              this.closeTimeout = null;
-            }, this.closeDelay);
-          }
-        },
-
-        positionTooltip() {
-          // Simple positioning - can be enhanced with proper floating-ui integration
-          const triggerRect = this.el.getBoundingClientRect();
-          const side = this.tooltip.dataset.side;
-
-          let top, left;
-
-          switch(side) {
-            case 'top':
-              top = triggerRect.top - this.tooltip.offsetHeight - 8;
-              left = triggerRect.left + (triggerRect.width / 2) - (this.tooltip.offsetWidth / 2);
-              break;
-            case 'bottom':
-              top = triggerRect.bottom + 8;
-              left = triggerRect.left + (triggerRect.width / 2) - (this.tooltip.offsetWidth / 2);
-              break;
-            case 'left':
-              top = triggerRect.top + (triggerRect.height / 2) - (this.tooltip.offsetHeight / 2);
-              left = triggerRect.left - this.tooltip.offsetWidth - 8;
-              break;
-            case 'right':
-              top = triggerRect.top + (triggerRect.height / 2) - (this.tooltip.offsetHeight / 2);
-              left = triggerRect.right + 8;
-              break;
-          }
-
-          this.tooltip.style.position = 'fixed';
-          this.tooltip.style.top = top + 'px';
-          this.tooltip.style.left = left + 'px';
-          this.tooltip.style.zIndex = '9999';
-        },
-
-        destroyed() {
-          if (this.openTimeout) clearTimeout(this.openTimeout);
-          if (this.closeTimeout) clearTimeout(this.closeTimeout);
-        }
-      }
-    </script>
     """
   end
 end
