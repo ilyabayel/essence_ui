@@ -124,6 +124,18 @@ export const ContextMenu = {
       const content = sub.querySelector('[data-context-menu-sub-content]');
       if (!trigger || !content) return;
 
+      // Copy context classes (size, variant, color) from parent to submenu to inherit styling (like border radius)
+      const parentClasses = Array.from(this.content.classList).filter(c => 
+        c.startsWith('rt-r-size-') || 
+        c.startsWith('rt-variant-') || 
+        c === 'rt-high-contrast' || 
+        c.startsWith('rt-r-color-') ||
+        c.startsWith('rt-r-gray-color-')
+      );
+      if (parentClasses.length > 0) {
+        content.classList.add(...parentClasses);
+      }
+
       let timeout;
       
       const openSub = () => {

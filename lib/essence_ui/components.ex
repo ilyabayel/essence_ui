@@ -59,6 +59,7 @@ defmodule EssenceUI.Components do
   """
   alias EssenceUI.Components.CheckboxCards
   alias EssenceUI.Components.ContextMenu
+  alias EssenceUI.Components.DropdownMenu
   alias EssenceUI.Components.RadioCards
   alias EssenceUI.Components.Table
 
@@ -82,6 +83,18 @@ defmodule EssenceUI.Components do
   defdelegate context_menu_sub(assigns), to: ContextMenu
   defdelegate context_menu_sub_trigger(assigns), to: ContextMenu
   defdelegate context_menu_sub_content(assigns), to: ContextMenu
+  defdelegate dropdown_menu_root(assigns), to: DropdownMenu
+  defdelegate dropdown_menu_trigger(assigns), to: DropdownMenu
+  defdelegate dropdown_menu_trigger_icon(assigns), to: DropdownMenu
+  defdelegate dropdown_menu_content(assigns), to: DropdownMenu
+  defdelegate dropdown_menu_item(assigns), to: DropdownMenu
+  defdelegate dropdown_menu_separator(assigns), to: DropdownMenu
+  defdelegate dropdown_menu_label(assigns), to: DropdownMenu
+  defdelegate dropdown_menu_checkbox_item(assigns), to: DropdownMenu
+  defdelegate dropdown_menu_radio_item(assigns), to: DropdownMenu
+  defdelegate dropdown_menu_sub(assigns), to: DropdownMenu
+  defdelegate dropdown_menu_sub_trigger(assigns), to: DropdownMenu
+  defdelegate dropdown_menu_sub_content(assigns), to: DropdownMenu
   defdelegate dialog(assigns), to: EssenceUI.Components.Dialog
   defdelegate alert_dialog(assigns), to: EssenceUI.Components.AlertDialog
   defdelegate icon_button(assigns), to: EssenceUI.Components.IconButton
