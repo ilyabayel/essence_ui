@@ -3,13 +3,15 @@ import { Dialog } from "./hooks/dialog";
 import { Tabs } from "./hooks/tabs";
 import { CheckboxCards } from "./hooks/checkbox_cards";
 import { RadioCards } from "./hooks/radio_cards";
+import { ContextMenu } from "./hooks/context_menu";
 
 // Hooks object for storybook
 const Hooks = {
     Dialog,
     Tabs,
     CheckboxCards,
-    RadioCards
+    RadioCards,
+    ContextMenu
 };
 
 (function () {

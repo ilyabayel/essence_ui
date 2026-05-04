@@ -101,11 +101,11 @@ This library aims for API and UX parity with Radix Themes. See the Radix Themes 
 - [x] `Tooltip` ✅
 - [x] `CheckboxGroup` ✅
 - [x] `RadioCards` ✅
+- [x] `ContextMenu` ✅
 
 ### 🚧 Remaining Components (26/52)
 
 #### Overlay & Menu Components (4)
-- [ ] `ContextMenu` - Right-click context menu
 - [ ] `DropdownMenu` - Dropdown menu with items
 - [ ] `HoverCard` - Popover that opens on hover
 - [ ] `Popover` - Floating content container
