@@ -34,7 +34,7 @@ defmodule EssenceUI.MixProject do
   defp deps do
     # styler:sort
     [
-      {:bandit, "~> 1.8"},
+      {:bandit, "~> 1.11"},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:dns_cluster, "~> 0.2"},
       {:esbuild, "~> 0.10", runtime: Mix.env() == :dev},

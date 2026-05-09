@@ -1,191 +1,43 @@
 This is a web application written using the Phoenix web framework.
 
-## Elixir guidelines
+## Project guidelines
 
-- Elixir lists **do not support index based access via the access syntax**
+### Information
+- This is a port of RadixUI Themes from React to Phoenix LiveView
+- This port want to be as close as possible to original behavior
 
-  **Never do this (invalid)**:
+### Sources
+- Docs: https://www.radix-ui.com/themes/docs/components/<component-name-in-kebab-case>.md
+- React Source: https://github.com/radix-ui/themes/blob/main/packages/radix-ui-themes/src/components/<component-name-in-kebab-case>.tsx
+- Props Source: https://github.com/radix-ui/themes/blob/main/packages/radix-ui-themes/src/components/<component-name-in-kebab-case>.props.tsx
+- Primitive Source: https://github.com/radix-ui/primitives/blob/main/packages/react/<primitive-name-in-kebab-case>/src/<primitive-name-in-kebab-case>.tsx
 
-      i = 0
-      mylist = ["blue", "green"]
-      mylist[i]
+### Project structure
 
-  Instead, **always** use `Enum.at`, pattern matching, or `List` for index based list access, ie:
+#### Components
+- Components are stored in `lib/essence_ui/components`
+- Re-use `lib/essence_ui/shared_props` for components props
+- **Always** use client-side state for interactive things like select option, open dropdown or open/close dialog
+- **Never** use phoenix state for things that should be smooth and should work without delay. Like text input, open/close dialog, show dropdown, open context menu.
+- **Do not** create unit tests for components yet
+- **Do not** create any CSS for components since all of the CSS already exists in `assets/**/*.css`
 
-      i = 0
-      mylist = ["blue", "green"]
-      Enum.at(mylist, i)
+#### Storybook
+- We create storybook in <root>/storybook folder for each component we created
+- Docs for storybook are here: https://hexdocs.pm/phoenix_storybook/index.html or can be accessed via Tidewave MCP
+- Prefer Variation with template over VariationGroup
+- **Always** use Variation.template instead of Variation.slots and Variation.attributes
+- Do not import the same component that is in `def function`
+```elixir
+def function, do: &EssenceUI.Components.separator/1
 
-- Elixir supports `if/else` but **does NOT support `if/else if` or `if/elsif`. **Never use `else if` or `elseif` in Elixir**, **always** use `cond` or `case` for multiple conditionals.
+# do not
+def imports, do: [{EssenceUI.Components, [separator: 1]}]
 
-  **Never do this (invalid)**:
-
-      <%= if condition do %>
-        ...
-      <% else if other_condition %>
-        ...
-      <% end %>
-
-  Instead **always** do this:
-
-      <%= cond do %>
-        <% condition -> %>
-          ...
-        <% condition2 -> %>
-          ...
-        <% true -> %>
-          ...
-      <% end %>
-
-- Elixir variables are immutable, but can be rebound, so for block expressions like `if`, `case`, `cond`, etc
-  you *must* bind the result of the expression to a variable if you want to use it and you CANNOT rebind the result inside the expression, ie:
-
-      # INVALID: we are rebinding inside the `if` and the result never gets assigned
-      if connected?(socket) do
-        socket = assign(socket, :val, val)
-      end
-
-      # VALID: we rebind the result of the `if` to a new variable
-      socket =
-        if connected?(socket) do
-          assign(socket, :val, val)
-        end
-
-- Use `with` for chaining operations that return `{:ok, _}` or `{:error, _}`
-- **Never** nest multiple modules in the same file as it can cause cyclic dependencies and compilation errors
-- **Never** use map access syntax (`changeset[:field]`) on structs as they do not implement the Access behaviour by default. For regular structs, you **must** access the fields directly, such as `my_struct.field` or use higher level APIs that are available on the struct if they exist, `Ecto.Changeset.get_field/2` for changesets
-- Elixir's standard library has everything necessary for date and time manipulation. Familiarize yourself with the common `Time`, `Date`, `DateTime`, and `Calendar` interfaces by accessing their documentation as necessary. **Never** install additional dependencies unless asked or for date/time parsing (which you can use the `date_time_parser` package)
-- Don't use `String.to_atom/1` on user input (memory leak risk)
-- Predicate function names should not start with `is_` and should end in a question mark. Names like `is_thing` should be reserved for guards
-- Elixir's builtin OTP primitives like `DynamicSupervisor` and `Registry`, require names in the child spec, such as `{DynamicSupervisor, name: MyApp.MyDynamicSup}`, then you can use `DynamicSupervisor.start_child(MyApp.MyDynamicSup, child_spec)`
-- Use `Task.async_stream(collection, callback, options)` for concurrent enumeration with back-pressure. The majority of times you will want to pass `timeout: :infinity` as option
-
-## Mix guidelines
-
-- Read the docs and options before using tasks (by using `mix help task_name`)
-- To debug test failures, run tests in a specific file with `mix test test/my_test.exs` or run all previously failed tests with `mix test --failed`
-- `mix deps.clean --all` is **almost never needed**. **Avoid** using it unless you have good reason
-
-## Phoenix guidelines
-
-- Remember Phoenix router `scope` blocks include an optional alias which is prefixed for all routes within the scope. **Always** be mindful of this when creating routes within a scope to avoid duplicate module prefixes.
-
-- You **never** need to create your own `alias` for route definitions! The `scope` provides the alias, ie:
-
-      scope "/admin", AppWeb.Admin do
-        pipe_through :browser
-
-        live "/users", UserLive, :index
-      end
-
-  the UserLive route would point to the `AppWeb.Admin.UserLive` module
-
-- `Phoenix.View` no longer is needed or included with Phoenix, don't use it
-
-## Ecto Guidelines
-
-- **Always** preload Ecto associations in queries when they'll be accessed in templates, ie a message that needs to reference the `message.user.email`
-- Remember `import Ecto.Query` and other supporting modules when you write `seeds.exs`
-- `Ecto.Schema` fields always use the `:string` type, even for `:text`, columns, ie: `field :name, :string`
-- `Ecto.Changeset.validate_number/2` **DOES NOT SUPPORT the `:allow_nil` option**. By default, Ecto validations only run if a change for the given field exists and the change value is not nil, so such as option is never needed
-- You **must** use `Ecto.Changeset.get_field(changeset, :field)` to access changeset fields
-- Fields which are set programatically, such as `user_id`, must not be listed in `cast` calls or similar for security purposes. Instead they must be explicitly set when creating the struct
-
-## Phoenix HTML guidelines
-
-- Phoenix templates **always** use `~H` or .html.heex files (known as HEEx), **never** use `~E`
-- **Always** use the imported `Phoenix.Component.form/1` and `Phoenix.Component.inputs_for/1` function to build forms. **Never** use `Phoenix.HTML.form_for` or `Phoenix.HTML.inputs_for` as they are outdated
-- When building forms **always** use the already imported `Phoenix.Component.to_form/2` (`assign(socket, form: to_form(...))` and `<.form for={@form} id="msg-form">`), then access those forms in the template via `@form[:field]`
-- **Always** add unique DOM IDs to key elements (like forms, buttons, etc) when writing templates, these IDs can later be used in tests (`<.form for={@form} id="product-form">`)
-- For "app wide" template imports, you can import/alias into the `my_app_web.ex`'s `html_helpers` block, so they will be available to all LiveViews, LiveComponent's, and all modules that do `use MyAppWeb, :html` (replace "my_app" by the actual app name)
-
-- HEEx require special tag annotation if you want to insert literal curly's like `{` or `}`. If you want to show a textual code snippet on the page in a `<pre>` or `<code>` block you *must* annotate the parent tag with `phx-no-curly-interpolation`:
-
-      <code phx-no-curly-interpolation>
-        let obj = {key: "val"}
-      </code>
-
-  Within `phx-no-curly-interpolation` annotated tags, you can use `{` and `}` without escaping them, and dynamic Elixir expressions can still be used with `<%= ... %>` syntax
-
-- HEEx does not support nested slots. Instead of using multiple slots consider using some of the slots just as another component.
-  
-  **Never** do this:
-
-  <.tabs default_value="account">
-    <:list>
-      <:trigger value="account">Account</:trigger>
-      <:trigger value="documents">Documents</:trigger>
-      <:trigger value="settings">Settings</:trigger>
-    </:list>
-    <:content value="account">
-      <.text>Make changes to your account here.</.text>
-    </:content>
-    <:content value="documents">
-      <.text>Access and update your documents.</.text>
-    </:content>
-    <:content value="settings">
-      <.text>Manage your account settings.</.text>
-    </:content>
-  </.tabs>
-
-  **Always** do this:
-  
-  <.tabs default_value="account">
-    <:trigger_list>
-      <.tabs_trigger value="account">Account</.tabs_trigger>
-      <.tabs_trigger value="documents">Documents</.tabs_trigger>
-      <.tabs_trigger value="settings">Settings</.tabs_trigger>
-    </:trigger_list>
-    <:content value="account">
-      <.text>Make changes to your account here.</.text>
-    </:content>
-    <:content value="documents">
-      <.text>Access and update your documents.</.text>
-    </:content>
-    <:content value="settings">
-      <.text>Manage your account settings.</.text>
-    </:content>
-  </.tabs>
-
-- HEEx class attrs support lists, but you must **always** use list `[...]` syntax. You can use the class list syntax to conditionally add classes, **always do this for multiple class values**:
-
-      <a class={[
-        "px-2 text-white",
-        @some_flag && "py-5",
-        if(@other_condition, do: "border-red-500", else: "border-blue-100"),
-        ...
-      ]}>Text</a>
-
-  and **always** wrap `if`'s inside `{...}` expressions with parens, like done above (`if(@other_condition, do: "...", else: "...")`)
-
-  and **never** do this, since it's invalid (note the missing `[` and `]`):
-
-      <a class={
-        "px-2 text-white",
-        @some_flag && "py-5"
-      }> ...
-      => Raises compile syntax error on invalid HEEx attr syntax
-
-- **Never** use `<% Enum.each %>` or non-for comprehensions for generating template content, instead **always** use `<%= for item <- @collection do %>`
-- HEEx HTML comments use `<%!-- comment --%>`. **Always** use the HEEx HTML comment syntax for template comments (`<%!-- comment --%>`)
-- HEEx allows interpolation via `{...}` and `<%= ... %>`, but the `<%= %>` **only** works within tag bodies. **Always** use the `{...}` syntax for interpolation within tag attributes, and for interpolation of values within tag bodies. **Always** interpolate block constructs (if, cond, case, for) within tag bodies using `<%= ... %>`.
-
-  **Always** do this:
-
-      <div id={@id}>
-        {@my_assign}
-        <%= if @some_block_condition do %>
-          {@another_assign}
-        <% end %>
-      </div>
-
-  and **Never** do this – the program will terminate with a syntax error:
-
-      <%!-- THIS IS INVALID NEVER EVER DO THIS --%>
-      <div id="<%= @invalid_interpolation %>">
-        {if @invalid_block_construct do}
-        {end}
-      </div>
+# do 
+def imports, do: []
+```
+- Storybook is hosted on http://localost:4000/, not on http://localhost:4000/storybook
 
 ## Phoenix LiveView guidelines
 
@@ -434,109 +286,9 @@ And **never** do this:
 - If you override the default input classes (`<.input class="myclass px-2 py-1 rounded-lg">)`) class with your own values, no default classes are inherited, so your
 custom classes must fully style the input
 
-### JS and CSS guidelines
-
-- **Use Tailwind CSS classes and custom CSS rules** to create polished, responsive, and visually stunning interfaces.
-- Tailwindcss v4 **no longer needs a tailwind.config.js** and uses a new import syntax in `app.css`:
-
-      @import "tailwindcss" source(none);
-      @source "../css";
-      @source "../js";
-      @source "../../lib/my_app_web";
-
-- **Always use and maintain this import syntax** in the app.css file for projects generated with `phx.new`
-- **Never** use `@apply` when writing raw css
-- **Always** manually write your own tailwind-based components instead of using daisyUI for a unique, world-class design
-- Out of the box **only the app.js and app.css bundles are supported**
-  - You cannot reference an external vendor'd script `src` or link `href` in the layouts
-  - You must import the vendor deps into app.js and app.css to use them
-  - **Never write inline <script>custom js</script> tags within templates**
-
 ### UI/UX & design guidelines
 
 - **Produce world-class UI designs** with a focus on usability, aesthetics, and modern design principles
 - Implement **subtle micro-interactions** (e.g., button hover effects, and smooth transitions)
 - Ensure **clean typography, spacing, and layout balance** for a refined, premium look
 - Focus on **delightful details** like hover effects, loading states, and smooth page transitions
-
-## Essence UI
-
-### Information
-- This is a port of RadixUI Themes from React to Phoenix LiveView
-- This port want to be as close as possible to original behavior
-
-### Project structure
-
-#### Components
-- Components are stored in `lib/essence_ui/components`
-- Re-use `lib/essence_ui/shared_props` for components props
-- **Always** use client-side state for interactive things like select option, open dropdown or open/close dialog
-- **Never** use phoenix state for things that should be smooth and should work without delay. Like text input, open/close dialog, show dropdown, open context menu.
-- **Do not** create unit tests for components yet
-- **Do not** create any CSS for components since all of the CSS already exists in `assets/**/*.css`
-
-#### Storybook
-- We create storybook in <root>/storybook folder for each component we created
-- Docs for storybook are here: https://hexdocs.pm/phoenix_storybook/index.html or can be accessed via Tidewave MCP
-- Prefer Variation with template over VariationGroup
-- **Always** use Variation.template instead of Variation.slots and Variation.attributes
-- Do not import the same component that is in `def function`
-```elixir
-def function, do: &EssenceUI.Components.separator/1
-
-# do not
-def imports, do: [{EssenceUI.Components, [separator: 1]}]
-
-# do 
-def imports, do: []
-```
-- Storybook is hosted on http://localost:4000/, not on http://localhost:4000/storybook
-  
-
-#### Test
-- E2E Tests not implemented yet (planned for future)
-- Unit tests are for utilities only, not for components
-
-## Authentication
-
-- **Always** handle authentication flow at the router level with proper redirects
-- **Always** be mindful of where to place routes. `phx.gen.auth` creates multiple router plugs and `live_session` scopes:
-  - A `live_session :current_user` scope - For routes that need the current user but don't require authentication
-  - A `live_session :require_authenticated_user` scope - For routes that require authentication
-  - In both cases, a `@current_scope` is assigned to the Plug connection and LiveView socket
-- **Always let the user know in which router scopes, `live_session`, and pipeline you are placing the route, AND SAY WHY**
-- `phx.gen.auth` assigns the `current_scope` assign - it **does not assign the `current_user` assign**.
-- To derive/access `current_user`, **always use the `current_scope.user` assign**, never use **`@current_user`** in templates or LiveViews
-- **Never** duplicate `live_session` names. A `live_session :current_user` can only be defined __once__ in the router, so all routes for the `live_session :current_user`  must be grouped in a single block
-- Anytime you hit `current_scope` errors or the logged in session isn't displaying the right content, **always double check the router and ensure you are using the correct `live_session` described below**
-
-### Routes that require authentication
-
-LiveViews that require login should **always be placed inside the __existing__ `live_session :require_authenticated_user` block**:
-
-    scope "/", AppWeb do
-      pipe_through [:browser, :require_authenticated_user]
-
-      live_session :require_authenticated_user,
-        on_mount: [{AppWeb.UserAuth, :ensure_authenticated}] do
-        # phx.gen.auth generated routes
-        live "/users/settings", UserSettingsLive, :edit
-        live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
-        # our own routes that require logged in user
-        live "/", MyLiveThatRequiresAuth, :index
-      end
-    end
-
-### Routes that work with or without authentication
-
-LiveViews that can work with or without authentication, **always use the __existing__ `:current_user` scope**, ie:
-
-    scope "/", MyAppWeb do
-      pipe_through [:browser]
-
-      live_session :current_user,
-        on_mount: [{MyAppWeb.UserAuth, :mount_current_scope}] do
-        # our own routes that work with or without authentication
-        live "/", PublicLive
-      end
-    end
