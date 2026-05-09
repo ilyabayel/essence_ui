@@ -26,16 +26,21 @@ defmodule EssenceUI.Components do
     * `select/1` - See `EssenceUI.Components.Select`
     * `separator/1` - See `EssenceUI.Components.Separator`
     * `skeleton/1` - See `EssenceUI.Components.Skeleton`
+    * `scroll_area/1` - See `EssenceUI.Components.ScrollArea`
     * `slider/1` - See `EssenceUI.Components.Slider`
     * `spinner/1` - See `EssenceUI.Components.Spinner`
     * `switch/1` - See `EssenceUI.Components.Switch`
     * `table/1` - See `EssenceUI.Components.Table`
+    * `table_header/1` - See `EssenceUI.Components.Table`
+    * `table_body/1` - See `EssenceUI.Components.Table`
     * `table_row/1` - See `EssenceUI.Components.Table`
     * `table_cell/1` - See `EssenceUI.Components.Table`
     * `table_column_header_cell/1` - See `EssenceUI.Components.Table`
     * `table_row_header_cell/1` - See `EssenceUI.Components.Table`
     * `text_field/1` - See `EssenceUI.Components.TextField`
     * `text_area/1` - See `EssenceUI.Components.TextArea`
+    * `data_list/1` - See `EssenceUI.Components.DataList`
+    * `data_list_item/1` - See `EssenceUI.Components.DataList`
     * `hover_card_root/1` - See `EssenceUI.Components.HoverCard`
     * `hover_card_trigger/1` - See `EssenceUI.Components.HoverCard`
     * `hover_card_content/1` - See `EssenceUI.Components.HoverCard`
@@ -43,6 +48,8 @@ defmodule EssenceUI.Components do
     * `popover_trigger/1` - See `EssenceUI.Components.Popover`
     * `popover_content/1` - See `EssenceUI.Components.Popover`
     * `popover_close/1` - See `EssenceUI.Components.Popover`
+    * `tab_nav/1` - See `EssenceUI.Components.TabNav`
+    * `tab_nav_link/1` - See `EssenceUI.Components.TabNav`
     * `tooltip/1` - See `EssenceUI.Components.Tooltip`
 
   ### Typography
@@ -66,10 +73,13 @@ defmodule EssenceUI.Components do
   """
   alias EssenceUI.Components.CheckboxCards
   alias EssenceUI.Components.ContextMenu
+  alias EssenceUI.Components.DataList
   alias EssenceUI.Components.DropdownMenu
   alias EssenceUI.Components.HoverCard
   alias EssenceUI.Components.Popover
   alias EssenceUI.Components.RadioCards
+  alias EssenceUI.Components.ScrollArea
+  alias EssenceUI.Components.TabNav
   alias EssenceUI.Components.Table
 
   # Components
@@ -116,16 +126,21 @@ defmodule EssenceUI.Components do
   defdelegate select(assigns), to: EssenceUI.Components.Select
   defdelegate separator(assigns), to: EssenceUI.Components.Separator
   defdelegate skeleton(assigns), to: EssenceUI.Components.Skeleton
+  defdelegate scroll_area(assigns), to: ScrollArea
   defdelegate slider(assigns), to: EssenceUI.Components.Slider
   defdelegate spinner(assigns), to: EssenceUI.Components.Spinner
   defdelegate switch(assigns), to: EssenceUI.Components.Switch
   defdelegate table(assigns), to: Table
+  defdelegate table_header(assigns), to: Table
+  defdelegate table_body(assigns), to: Table
   defdelegate table_row(assigns), to: Table
   defdelegate table_cell(assigns), to: Table
   defdelegate table_column_header_cell(assigns), to: Table
   defdelegate table_row_header_cell(assigns), to: Table
   defdelegate text_field(assigns), to: EssenceUI.Components.TextField
   defdelegate text_area(assigns), to: EssenceUI.Components.TextArea
+  defdelegate data_list(assigns), to: DataList
+  defdelegate data_list_item(assigns), to: DataList
   defdelegate hover_card_root(assigns), to: HoverCard
   defdelegate hover_card_trigger(assigns), to: HoverCard
   defdelegate hover_card_content(assigns), to: HoverCard
@@ -133,6 +148,8 @@ defmodule EssenceUI.Components do
   defdelegate popover_trigger(assigns), to: Popover
   defdelegate popover_content(assigns), to: Popover
   defdelegate popover_close(assigns), to: Popover
+  defdelegate tab_nav(assigns), to: TabNav
+  defdelegate tab_nav_link(assigns), to: TabNav
   defdelegate tooltip(assigns), to: EssenceUI.Components.Tooltip
 
   # Typography

@@ -105,11 +105,9 @@ This library aims for API and UX parity with Radix Themes. See the Radix Themes 
 - [x] `DropdownMenu` ✅
 - [x] `HoverCard` ✅
 - [x] `Popover` ✅
+- [x] `TabNav` - Tab navigation (different from Tabs)
 
-### 🚧 Remaining Components (22/52)
-
-#### Navigation Components (1)
-- [ ] `TabNav` - Tab navigation (different from Tabs)
+### 🚧 Remaining Components (21/52)
 
 #### Data Display Components (2)
 - [ ] `DataList` - Key-value pair list
@@ -126,29 +124,12 @@ This library aims for API and UX parity with Radix Themes. See the Radix Themes 
 #### Theme Component (1)
 - [ ] `Theme` - Root theme configuration component
 
-### Phase 1: Complete Form Components
-
-- [ ] `CheckboxGroup` - Verify and complete if needed
-- [ ] `CheckboxCards` - Card-style checkbox group
-- [ ] `RadioCards` - Card-style radio group
-- [ ] Add stories for all form components
-- [ ] Add a11y coverage tests
-
-### Phase 2: Overlay & Menu Components
-
-- [ ] `Popover` with positioning
-- [ ] `HoverCard` with hover trigger
-- [ ] `DropdownMenu` with nested items
-- [ ] `ContextMenu` with right-click trigger
-- [ ] Implement overlay primitives (portal, focus trap, dismiss)
-- [ ] Add keyboard navigation coverage
-
 ### Phase 3: Navigation & Data Display
 
-- [ ] `TabNav` component
-- [ ] `DataList` component
-- [ ] `ScrollArea` with custom scrollbars
-- [ ] Add dense data display examples
+- [x] `TabNav` component
+- [x] `DataList` component
+- [x] `ScrollArea` with custom scrollbars
+- [x] Add dense data display examples
 
 ### Phase 4: Utility Components
 

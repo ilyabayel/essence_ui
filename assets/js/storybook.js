@@ -8,9 +8,11 @@ import { DropdownMenu } from "./hooks/dropdown_menu";
 import { Tooltip } from "./hooks/tooltip";
 import { HoverCard } from "./hooks/hover_card";
 import { Popover } from "./hooks/popover";
+import { ScrollArea } from "./hooks/scroll_area";
 
-// Hooks object for storybook
-const Hooks = {
+// Storybook integration
+(function() {
+  const EssenceUIHooks = {
     Dialog,
     Tabs,
     CheckboxCards,
@@ -19,11 +21,13 @@ const Hooks = {
     DropdownMenu,
     Tooltip,
     HoverCard,
-    Popover
-};
+    Popover,
+    ScrollArea
+  };
 
-(function () {
-    window.storybook = { Hooks };
+  window.storybook = {
+    Hooks: EssenceUIHooks
+  };
 })();
 
 
