@@ -5,6 +5,7 @@
   outline: 0;
   overflow: auto;
   position: relative;
+  z-index: var(--z-index-popover, 1000);
 
   --inset-padding-top: var(--popover-content-padding);
   --inset-padding-right: var(--popover-content-padding);
@@ -14,6 +15,26 @@
   box-sizing: border-box;
 
   transform-origin: var(--radix-popover-content-transform-origin);
+  animation-duration: 250ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.rt-PopoverContent[data-state="open"] {
+  animation-name: rt-fade-in, rt-slide-in;
+}
+
+.rt-PopoverContent[data-state="closed"] {
+  animation-name: rt-fade-out;
+}
+
+@keyframes rt-slide-in {
+  from {
+    transform: translateY(4px) scale(0.98);
+  }
+  to {
+    transform: translateY(0) scale(1);
+  }
 }
 
 /***************************************************************************************************

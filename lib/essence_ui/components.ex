@@ -36,6 +36,13 @@ defmodule EssenceUI.Components do
     * `table_row_header_cell/1` - See `EssenceUI.Components.Table`
     * `text_field/1` - See `EssenceUI.Components.TextField`
     * `text_area/1` - See `EssenceUI.Components.TextArea`
+    * `hover_card_root/1` - See `EssenceUI.Components.HoverCard`
+    * `hover_card_trigger/1` - See `EssenceUI.Components.HoverCard`
+    * `hover_card_content/1` - See `EssenceUI.Components.HoverCard`
+    * `popover_root/1` - See `EssenceUI.Components.Popover`
+    * `popover_trigger/1` - See `EssenceUI.Components.Popover`
+    * `popover_content/1` - See `EssenceUI.Components.Popover`
+    * `popover_close/1` - See `EssenceUI.Components.Popover`
     * `tooltip/1` - See `EssenceUI.Components.Tooltip`
 
   ### Typography
@@ -60,6 +67,8 @@ defmodule EssenceUI.Components do
   alias EssenceUI.Components.CheckboxCards
   alias EssenceUI.Components.ContextMenu
   alias EssenceUI.Components.DropdownMenu
+  alias EssenceUI.Components.HoverCard
+  alias EssenceUI.Components.Popover
   alias EssenceUI.Components.RadioCards
   alias EssenceUI.Components.Table
 
@@ -117,6 +126,13 @@ defmodule EssenceUI.Components do
   defdelegate table_row_header_cell(assigns), to: Table
   defdelegate text_field(assigns), to: EssenceUI.Components.TextField
   defdelegate text_area(assigns), to: EssenceUI.Components.TextArea
+  defdelegate hover_card_root(assigns), to: HoverCard
+  defdelegate hover_card_trigger(assigns), to: HoverCard
+  defdelegate hover_card_content(assigns), to: HoverCard
+  defdelegate popover_root(assigns), to: Popover
+  defdelegate popover_trigger(assigns), to: Popover
+  defdelegate popover_content(assigns), to: Popover
+  defdelegate popover_close(assigns), to: Popover
   defdelegate tooltip(assigns), to: EssenceUI.Components.Tooltip
 
   # Typography

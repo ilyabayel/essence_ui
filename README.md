@@ -103,12 +103,10 @@ This library aims for API and UX parity with Radix Themes. See the Radix Themes 
 - [x] `RadioCards` ✅
 - [x] `ContextMenu` ✅
 - [x] `DropdownMenu` ✅
+- [x] `HoverCard` ✅
+- [x] `Popover` ✅
 
-### 🚧 Remaining Components (24/52)
-
-#### Overlay & Menu Components (2)
-- [ ] `HoverCard` - Popover that opens on hover
-- [ ] `Popover` - Floating content container
+### 🚧 Remaining Components (22/52)
 
 #### Navigation Components (1)
 - [ ] `TabNav` - Tab navigation (different from Tabs)

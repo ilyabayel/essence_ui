@@ -6,6 +6,8 @@ import { RadioCards } from "./hooks/radio_cards";
 import { ContextMenu } from "./hooks/context_menu";
 import { DropdownMenu } from "./hooks/dropdown_menu";
 import { Tooltip } from "./hooks/tooltip";
+import { HoverCard } from "./hooks/hover_card";
+import { Popover } from "./hooks/popover";
 
 // Hooks object for storybook
 const Hooks = {
@@ -15,7 +17,9 @@ const Hooks = {
     RadioCards,
     ContextMenu,
     DropdownMenu,
-    Tooltip
+    Tooltip,
+    HoverCard,
+    Popover
 };
 
 (function () {
