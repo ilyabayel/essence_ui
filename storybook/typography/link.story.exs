@@ -2,13 +2,9 @@ defmodule Storybook.Typography.LinkStory do
   @moduledoc false
   use PhoenixStorybook.Story, :component
 
-  alias EssenceUI.Components.Link
+  import EssenceUI.Components, only: [es_link: 1]
 
-  def e_link(assigns) do
-    Link.link(assigns)
-  end
-
-  def function, do: &e_link/1
+  def function, do: &es_link/1
 
   def container,
     do:

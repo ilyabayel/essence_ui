@@ -4,7 +4,6 @@ defmodule Storybook.Examples.RecruitingCrm do
   use Phoenix.Component
 
   import EssenceUI.Components, except: [quote: 1]
-  import EssenceUI.Components.Tabs
 
   @impl true
   def render(assigns) do

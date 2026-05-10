@@ -23,8 +23,8 @@ defmodule EssenceUI.Components.Quote do
 
   ## Examples
 
-      <.quote>Styles come and go. Good design is a language, not a style</.quote>
-      <.quote truncate>Long quote that will be truncated if too long.</.quote>
+      <.es_quote>Styles come and go. Good design is a language, not a style</.es_quote>
+      <.es_quote truncate>Long quote that will be truncated if too long.</.es_quote>
 
   ## Props
     * `wrap` - Text wrapping: one of "wrap", "nowrap", "pretty", or "balance".
@@ -39,7 +39,7 @@ defmodule EssenceUI.Components.Quote do
   attr :rest, :any, default: %{}, doc: "Additional HTML attributes."
   slot :inner_block, required: true
 
-  def quote(assigns) do
+  def es_quote(assigns) do
     prop_defs =
       %{}
       |> Map.merge(TruncateProps.prop_defs())

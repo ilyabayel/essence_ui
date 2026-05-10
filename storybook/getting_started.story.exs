@@ -107,9 +107,9 @@ defmodule Storybook.GettingStarted do
       <.heading as="h2" size="5" mt="6" mb="2">Customizing your theme</.heading>
       <.text as="p">
         You can further customize your theme by adjusting the data attributes on your root element. See the
-        <Link.link href="https://www.radix-ui.com/themes/docs/components/theme" target="_blank">
+        <Link.es_link href="https://www.radix-ui.com/themes/docs/components/theme" target="_blank">
           Theme documentation
-        </Link.link>
+        </Link.es_link>
         for all available options.
       </.text>
 
@@ -119,34 +119,34 @@ defmodule Storybook.GettingStarted do
       </.text>
       <ul style="margin-bottom: 2rem;">
         <li>
-          <Link.link href="https://www.radix-ui.com/themes/docs/overview/styling" target="_blank">
+          <Link.es_link href="https://www.radix-ui.com/themes/docs/overview/styling" target="_blank">
             Styling
-          </Link.link>: Learn how to approach styling and overrides.
+          </Link.es_link>: Learn how to approach styling and overrides.
         </li>
         <li>
-          <Link.link href="https://www.radix-ui.com/themes/docs/overview/layout" target="_blank">
+          <Link.es_link href="https://www.radix-ui.com/themes/docs/overview/layout" target="_blank">
             Layout
-          </Link.link>: Get to know the layout primitives and their properties.
+          </Link.es_link>: Get to know the layout primitives and their properties.
         </li>
         <li>
-          <Link.link href="https://www.radix-ui.com/themes/docs/theme/overview" target="_blank">
+          <Link.es_link href="https://www.radix-ui.com/themes/docs/theme/overview" target="_blank">
             Theme overview
-          </Link.link>: Anatomy of a theme and how to create your style.
+          </Link.es_link>: Anatomy of a theme and how to create your style.
         </li>
         <li>
-          <Link.link href="https://www.radix-ui.com/themes/docs/theme/color" target="_blank">
+          <Link.es_link href="https://www.radix-ui.com/themes/docs/theme/color" target="_blank">
             Color
-          </Link.link>: Understand the color system and its application.
+          </Link.es_link>: Understand the color system and its application.
         </li>
         <li>
-          <Link.link href="https://www.radix-ui.com/themes/docs/theme/dark-mode" target="_blank">
+          <Link.es_link href="https://www.radix-ui.com/themes/docs/theme/dark-mode" target="_blank">
             Dark mode
-          </Link.link>: Integrate a great looking dark mode.
+          </Link.es_link>: Integrate a great looking dark mode.
         </li>
         <li>
-          <Link.link href="https://www.radix-ui.com/themes/docs/theme/typography" target="_blank">
+          <Link.es_link href="https://www.radix-ui.com/themes/docs/theme/typography" target="_blank">
             Typography
-          </Link.link>: Add custom typefaces and fine tune typographic details.
+          </Link.es_link>: Add custom typefaces and fine tune typographic details.
         </li>
       </ul>
 

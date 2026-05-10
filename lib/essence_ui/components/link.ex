@@ -31,7 +31,7 @@ defmodule EssenceUI.Components.Link do
   attr :rest, :global
   slot :inner_block, required: true
 
-  def link(assigns) do
+  def es_link(assigns) do
     prop_defs =
       %{
         underline: %{type: :enum, values: @underline_values, class: "rt-underline", default: "auto"}

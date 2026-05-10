@@ -17,6 +17,7 @@ defmodule Storybook.Examples.SelectStory do
   attr :open, :boolean, default: false
   attr :value, :string, default: nil
 
+  @impl true
   def render(assigns) do
     ~H"""
     <div

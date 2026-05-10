@@ -59,7 +59,7 @@ defmodule EssenceUI.Components do
     * `heading/1` - See `EssenceUI.Components.Heading`
     * `kbd/1` - See `EssenceUI.Components.Kbd`
     * `link/1` - See `EssenceUI.Components.Link`
-    * `quote/1` - See `EssenceUI.Components.Quote`
+    * `es_quote/1` - See `EssenceUI.Components.Quote`
     * `strong/1` - See `EssenceUI.Components.Strong`
     * `text/1` - See `EssenceUI.Components.Text`
 
@@ -81,6 +81,7 @@ defmodule EssenceUI.Components do
   alias EssenceUI.Components.ScrollArea
   alias EssenceUI.Components.Table
   alias EssenceUI.Components.TabNav
+  alias EssenceUI.Components.Tabs
 
   # Components
   defdelegate avatar(assigns), to: EssenceUI.Components.Avatar
@@ -158,8 +159,8 @@ defmodule EssenceUI.Components do
   defdelegate em(assigns), to: EssenceUI.Components.Em
   defdelegate heading(assigns), to: EssenceUI.Components.Heading
   defdelegate kbd(assigns), to: EssenceUI.Components.Kbd
-  defdelegate link(assigns), to: EssenceUI.Components.Link
-  defdelegate quote(assigns), to: EssenceUI.Components.Quote
+  defdelegate es_link(assigns), to: EssenceUI.Components.Link
+  defdelegate es_quote(assigns), to: EssenceUI.Components.Quote
   defdelegate strong(assigns), to: EssenceUI.Components.Strong
   defdelegate text(assigns), to: EssenceUI.Components.Text
 
@@ -172,6 +173,6 @@ defmodule EssenceUI.Components do
   defdelegate section(assigns), to: EssenceUI.Components.Section
 
   # Overlays
-  defdelegate tabs(assigns), to: EssenceUI.Components.Tabs
-  defdelegate tabs_list(assigns), to: EssenceUI.Components.Tabs
+  defdelegate tabs(assigns), to: Tabs
+  defdelegate tabs_list(assigns), to: Tabs
 end
