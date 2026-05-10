@@ -1,4 +1,6 @@
 // Import hooks for Essence UI components
+import { Socket } from "phoenix";
+import { LiveSocket } from "phoenix_live_view";
 import { Dialog } from "./hooks/dialog";
 import { Tabs } from "./hooks/tabs";
 import { CheckboxCards } from "./hooks/checkbox_cards";
@@ -10,46 +12,37 @@ import { HoverCard } from "./hooks/hover_card";
 import { Popover } from "./hooks/popover";
 import { ScrollArea } from "./hooks/scroll_area";
 
-// Storybook integration
-(function() {
-  const EssenceUIHooks = {
-    Dialog,
-    Tabs,
-    CheckboxCards,
-    RadioCards,
-    ContextMenu,
-    DropdownMenu,
-    Tooltip,
-    HoverCard,
-    Popover,
-    ScrollArea
-  };
+let hooks = {
+  Dialog,
+  Tabs,
+  CheckboxCards,
+  RadioCards,
+  ContextMenu,
+  DropdownMenu,
+  Tooltip,
+  HoverCard,
+  Popover,
+  ScrollArea
+};
 
+// Initialize LiveSocket if we are not inside Storybook iframe (which handles its own socket)
+// Or always if we want standalone views to work.
+if (!window.storybook_socket_initialized) {
+    let csrfToken = document.querySelector("meta[name='csrf-token']")?.getAttribute("content");
+    if (csrfToken) {
+        let liveSocket = new LiveSocket("/live", Socket, {
+            params: { _csrf_token: csrfToken },
+            hooks: hooks
+        });
+        liveSocket.connect();
+        window.liveSocket = liveSocket;
+        window.storybook_socket_initialized = true;
+    }
+}
+
+// Storybook integration (legacy)
+(function() {
   window.storybook = {
-    Hooks: EssenceUIHooks
+    Hooks: hooks
   };
 })();
-
-
-// If your components require alpinejs, you'll need to start
-// alpine after the DOM is loaded and pass in an onBeforeElUpdated
-// 
-// import Alpine from 'alpinejs'
-// window.Alpine = Alpine
-// document.addEventListener('DOMContentLoaded', () => {
-//   window.Alpine.start();
-// });
-
-// (function () {
-//   window.storybook = {
-//     LiveSocketOptions: {
-//       dom: {
-//         onBeforeElUpdated(from, to) {
-//           if (from._x_dataStack) {
-//             window.Alpine.clone(from, to)
-//           }
-//         }
-//       }
-//     }
-//   };
-// })();
