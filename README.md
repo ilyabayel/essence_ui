@@ -133,12 +133,12 @@ This library aims for API and UX parity with Radix Themes. See the Radix Themes 
 
 ### Phase 4: Utility Components
 
-- [ ] `AccessibleIcon` wrapper
-- [ ] `Inset` utility
-- [ ] `Portal` primitive
-- [ ] `Slot` composition
-- [ ] `VisuallyHidden` utility
-- [ ] `Reset` component
+- [x] `AccessibleIcon` wrapper
+- [x] `Inset` utility
+- [x] `Portal` primitive
+- [x] `Slot` composition
+- [x] `VisuallyHidden` utility
+- [x] `Reset` component
 
 ### Phase 5: Theme & Polish
 

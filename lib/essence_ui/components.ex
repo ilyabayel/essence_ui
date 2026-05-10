@@ -79,8 +79,8 @@ defmodule EssenceUI.Components do
   alias EssenceUI.Components.Popover
   alias EssenceUI.Components.RadioCards
   alias EssenceUI.Components.ScrollArea
-  alias EssenceUI.Components.TabNav
   alias EssenceUI.Components.Table
+  alias EssenceUI.Components.TabNav
 
   # Components
   defdelegate avatar(assigns), to: EssenceUI.Components.Avatar
