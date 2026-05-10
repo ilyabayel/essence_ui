@@ -52,7 +52,8 @@ defmodule EssenceUI.MixProject do
       {:styler, "~> 1.7"},
       {:swoosh, "~> 1.19"},
       {:telemetry_metrics, "~> 1.1"},
-      {:telemetry_poller, "~> 1.3"}
+      {:telemetry_poller, "~> 1.3"},
+      {:tidewave, "~> 0.5", only: [:dev]}
     ]
   end
 

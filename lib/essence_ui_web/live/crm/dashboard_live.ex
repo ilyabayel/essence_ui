@@ -1,10 +1,22 @@
-defmodule Storybook.Examples.RecruitingCrm do
-  @moduledoc false
-  use PhoenixStorybook.Story, :example
-  use Phoenix.Component
+defmodule EssenceUIWeb.CRM.DashboardLive do
+  use EssenceUIWeb, :live_view
 
   import EssenceUI.Components, except: [quote: 1]
-  import EssenceUI.Components.Tabs
+
+  @impl true
+  def mount(_params, _session, socket) do
+    {:ok, assign(socket, open_modal: false)}
+  end
+
+  @impl true
+  def handle_event("open-detail", _params, socket) do
+    {:noreply, push_event(socket, "js-exec", %{to: "#candidate-detail", attr: "open"})}
+  end
+
+  @impl true
+  def handle_event("close-modal", _params, socket) do
+    {:noreply, assign(socket, open_modal: false)}
+  end
 
   @impl true
   def render(assigns) do
@@ -36,8 +48,7 @@ defmodule Storybook.Examples.RecruitingCrm do
               stroke="currentColor"
               stroke-width="2"
             >
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="9" y1="3" x2="9" y2="21"></line>
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line>
             </svg>
           </.icon_button>
           <.icon_button variant="soft" size="3">
@@ -63,10 +74,7 @@ defmodule Storybook.Examples.RecruitingCrm do
               stroke="currentColor"
               stroke-width="2"
             >
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-              <circle cx="9" cy="7" r="4"></circle>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
             </svg>
           </.icon_button>
         </.flex>
@@ -105,8 +113,7 @@ defmodule Storybook.Examples.RecruitingCrm do
                   stroke="currentColor"
                   stroke-width="2"
                 >
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
               </:slot>
             </.text_field>
@@ -147,21 +154,21 @@ defmodule Storybook.Examples.RecruitingCrm do
                 stroke="currentColor"
                 stroke-width="2"
               >
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>
               </svg>
               Add Candidate
             </.button>
           </.flex>
         </.flex>
+
         <.scroll_area style="flex: 1; padding: 24px;">
           <.flex gap="6" style="min-height: 100%;">
             <%= for {stage, count} <- [{"Sourced", 4}, {"Screening", 3}, {"Interview", 3}, {"Offer", 2}] do %>
               <.flex direction="column" gap="4" style="width: 280px; flex-shrink: 0;">
                 <.flex align="center" justify="between">
                   <.flex align="center" gap="2">
-                    <.heading size="3" weight="bold">{stage}</.heading>
-                    <.badge variant="soft" color="gray" size="1">{count}</.badge>
+                    <.heading size="3" weight="bold"><%= stage %></.heading>
+                    <.badge variant="soft" color="gray" size="1"><%= count %></.badge>
                   </.flex>
                   <.icon_button variant="ghost" size="1" color="gray">
                     <svg
@@ -173,9 +180,7 @@ defmodule Storybook.Examples.RecruitingCrm do
                       stroke="currentColor"
                       stroke-width="2"
                     >
-                      <circle cx="12" cy="12" r="1"></circle>
-                      <circle cx="12" cy="5" r="1"></circle>
-                      <circle cx="12" cy="19" r="1"></circle>
+                      <circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle>
                     </svg>
                   </.icon_button>
                 </.flex>
@@ -249,8 +254,8 @@ defmodule Storybook.Examples.RecruitingCrm do
             </.flex>
 
             <.tabs default_value="overview">
-              <:list :let={ctx}>
-                <.tabs_list size="2" tabs_id={ctx.tabs_id} default_value={ctx.default_value}>
+              <:list>
+                <.tabs_list size="2">
                   <:trigger value="overview">Overview</:trigger>
                   <:trigger value="evaluation">Evaluation</:trigger>
                   <:trigger value="notes">Notes</:trigger>
@@ -294,15 +299,16 @@ defmodule Storybook.Examples.RecruitingCrm do
                       <:item value="hold">Hold</:item>
                       <:item value="no">No Hire</:item>
                     </.radio_group>
-                    </.flex>
+                  </.flex>
 
-                    <.flex direction="column" gap="2">
+                  <.flex direction="column" gap="2">
                     <.text size="2" weight="bold">Verified Skills</.text>
                     <.checkbox_group name="skills" default_value={["elixir", "react"]}>
                       <:item value="elixir">Elixir</:item>
                       <:item value="react">React</:item>
                       <:item value="db">PostgreSQL</:item>
-                    </.checkbox_group>                  </.flex>
+                    </.checkbox_group>
+                  </.flex>
                 </.flex>
               </:content>
 
@@ -334,6 +340,10 @@ defmodule Storybook.Examples.RecruitingCrm do
     """
   end
 
+  defp open_detail(js \\ %JS{}) do
+    JS.dispatch(js, "open", to: "#candidate-detail")
+  end
+
   defp candidate_card(assigns) do
     ~H"""
     <.context_menu_root>
@@ -342,14 +352,15 @@ defmodule Storybook.Examples.RecruitingCrm do
           p="3"
           style="cursor: pointer; transition: transform 0.1s; border: 1px solid var(--gray-4);"
           class="hover-lift"
+          phx-click={open_detail()}
         >
           <.flex direction="column" gap="3">
             <.flex justify="between" align="start">
               <.flex gap="3" align="center">
                 <.avatar size="1" src={@src} fallback={@fallback} />
                 <.flex direction="column">
-                  <.strong size="2">{@name}</.strong>
-                  <.text size="1" color="gray">{@role}</.text>
+                  <.strong size="2"><%= @name %></.strong>
+                  <.text size="1" color="gray"><%= @role %></.text>
                 </.flex>
               </.flex>
               <.hover_card_root>
@@ -364,9 +375,7 @@ defmodule Storybook.Examples.RecruitingCrm do
                       stroke="currentColor"
                       stroke-width="2"
                     >
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <line x1="12" y1="16" x2="12" y2="12"></line>
-                      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                      <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line>
                     </svg>
                   </.icon_button>
                 </.hover_card_trigger>
@@ -378,7 +387,7 @@ defmodule Storybook.Examples.RecruitingCrm do
                     style="background-color: var(--gray-1); border: 1px solid var(--gray-4); border-radius: var(--radius-2); box-shadow: var(--shadow-3);"
                   >
                     <.strong size="2">Last Activity</.strong>
-                    <.text size="1">Updated status to {@name} 2 days ago.</.text>
+                    <.text size="1">Updated status to <%= @name %> 2 days ago.</.text>
                   </.flex>
                 </.hover_card_content>
               </.hover_card_root>
@@ -386,7 +395,7 @@ defmodule Storybook.Examples.RecruitingCrm do
 
             <.flex gap="2" wrap="wrap">
               <%= for tag <- @tags do %>
-                <.badge variant="surface" size="1" color="blue">{tag}</.badge>
+                <.badge variant="surface" size="1" color="blue"><%= tag %></.badge>
               <% end %>
             </.flex>
           </.flex>
@@ -400,10 +409,5 @@ defmodule Storybook.Examples.RecruitingCrm do
       </.context_menu_content>
     </.context_menu_root>
     """
-  end
-
-  @impl true
-  def mount(_params, _session, socket) do
-    {:ok, socket}
   end
 end

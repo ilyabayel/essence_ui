@@ -13,7 +13,7 @@ export const Dialog = {
     },
     close(e) {
         e.stopPropagation();
-        this.el.setAttribute("data-state", "close");
+        this.el.setAttribute("data-state", "closed");
     },
     open(e) {
         e.stopPropagation();

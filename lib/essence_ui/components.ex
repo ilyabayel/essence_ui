@@ -170,4 +170,59 @@ defmodule EssenceUI.Components do
   defdelegate flex(assigns), to: EssenceUI.Components.Flex
   defdelegate grid(assigns), to: EssenceUI.Components.Grid
   defdelegate section(assigns), to: EssenceUI.Components.Section
+
+  # Overlays
+  defdelegate dialog(assigns), to: EssenceUI.Components.Dialog
+  defdelegate dropdown_menu_root(assigns), to: EssenceUI.Components.DropdownMenu, as: :dropdown_menu_root
+
+  defdelegate dropdown_menu_trigger(assigns),
+    to: EssenceUI.Components.DropdownMenu,
+    as: :dropdown_menu_trigger
+
+  defdelegate dropdown_menu_content(assigns),
+    to: EssenceUI.Components.DropdownMenu,
+    as: :dropdown_menu_content
+
+  defdelegate dropdown_menu_item(assigns),
+    to: EssenceUI.Components.DropdownMenu,
+    as: :dropdown_menu_item
+
+  defdelegate dropdown_menu_separator(assigns),
+    to: EssenceUI.Components.DropdownMenu,
+    as: :dropdown_menu_separator
+
+  defdelegate tabs(assigns), to: EssenceUI.Components.Tabs
+  defdelegate tabs_list(assigns), to: EssenceUI.Components.Tabs
+
+  defdelegate context_menu_root(assigns),
+    to: EssenceUI.Components.ContextMenu,
+    as: :context_menu_root
+
+  defdelegate context_menu_trigger(assigns),
+    to: EssenceUI.Components.ContextMenu,
+    as: :context_menu_trigger
+
+  defdelegate context_menu_content(assigns),
+    to: EssenceUI.Components.ContextMenu,
+    as: :context_menu_content
+
+  defdelegate context_menu_item(assigns),
+    to: EssenceUI.Components.ContextMenu,
+    as: :context_menu_item
+
+  defdelegate context_menu_separator(assigns),
+    to: EssenceUI.Components.ContextMenu,
+    as: :context_menu_separator
+
+  defdelegate hover_card_root(assigns),
+    to: EssenceUI.Components.HoverCard,
+    as: :hover_card_root
+
+  defdelegate hover_card_trigger(assigns),
+    to: EssenceUI.Components.HoverCard,
+    as: :hover_card_trigger
+
+  defdelegate hover_card_content(assigns),
+    to: EssenceUI.Components.HoverCard,
+    as: :hover_card_content
 end
