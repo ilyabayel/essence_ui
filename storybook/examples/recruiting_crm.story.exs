@@ -41,8 +41,40 @@ defmodule Storybook.Examples.RecruitingCRMStory do
 
       <%!-- Main Content Area --%>
       <.flex direction="column" style="flex: 1; overflow: hidden;">
-        <%!-- Content will be added in subsequent tasks --%>
-        <div id="main-header"></div>
+        <%!-- Top Header --%>
+        <.flex align="center" justify="between" px="6" py="4" style="border-bottom: 1px solid var(--gray-4); background-color: var(--gray-1);">
+          <.flex align="center" gap="4">
+            <.heading size="5" weight="bold">Pipeline: Software Engineering</.heading>
+            <.badge variant="surface" color="gray">12 Candidates</.badge>
+          </.flex>
+          
+          <.flex align="center" gap="3">
+            <.text_field placeholder="Search candidates..." size="2" style="width: 250px;">
+              <:slot_left>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              </:slot_left>
+            </.text_field>
+            
+            <.dropdown_menu>
+              <:trigger>
+                <.button variant="soft" color="gray">
+                  All Stages
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </.button>
+              </:trigger>
+              <.dropdown_menu_item>Sourced</.dropdown_menu_item>
+              <.dropdown_menu_item>Screening</.dropdown_menu_item>
+              <.dropdown_menu_item>Interview</.dropdown_menu_item>
+              <.dropdown_menu_separator />
+              <.dropdown_menu_item color="red">Reset Filters</.dropdown_menu_item>
+            </.dropdown_menu>
+            
+            <.button variant="solid">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Add Candidate
+            </.button>
+          </.flex>
+        </.flex>
         <div id="kanban-board" style="flex: 1; overflow: auto;"></div>
       </.flex>
     </div>
