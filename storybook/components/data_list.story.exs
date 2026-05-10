@@ -12,7 +12,7 @@ defmodule Storybook.Components.DataList do
       {EssenceUI.Components.Code, code: 1},
       {EssenceUI.Components.Flex, flex: 1},
       {EssenceUI.Components.IconButton, icon_button: 1},
-      {EssenceUI.Components.Link, link: 1},
+      {EssenceUI.Components.Link, es_link: 1},
       {EssenceUI.Components.Text, text: 1},
       {DataList, data_list_item: 1}
     ]
@@ -76,13 +76,13 @@ defmodule Storybook.Components.DataList do
           <.data_list_item>
             <:label>Email</:label>
             <:value>
-              <.link href="mailto:john@example.com">john@example.com</.link>
+              <.es_link href="mailto:john@example.com">john@example.com</.es_link>
             </:value>
           </.data_list_item>
           <.data_list_item>
             <:label>Company</:label>
             <:value>
-              <.link href="https://workos.com" target="_blank">WorkOS</.link>
+              <.es_link href="https://workos.com" target="_blank">WorkOS</.es_link>
             </:value>
           </.data_list_item>
         </.data_list>
