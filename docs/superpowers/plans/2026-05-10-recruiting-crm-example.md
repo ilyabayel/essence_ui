@@ -40,7 +40,7 @@ defmodule Storybook.Examples.RecruitingCRMStory do
       <.flex
         direction="column"
         align="center"
-        justify="between"
+        justify="space-between"
         p="4"
         style="width: 64px; border-right: 1px solid var(--gray-4); background-color: var(--gray-2);"
       >
@@ -95,7 +95,7 @@ git commit -m "feat: scaffold recruiting cm story example"
 ```elixir
 <%!-- Update render/1 inside the Main Content Area flex --%>
         <%!-- Top Header --%>
-        <.flex align="center" justify="between" px="6" py="4" style="border-bottom: 1px solid var(--gray-4); background-color: var(--gray-1);">
+        <.flex align="center" justify="space-between" px="6" py="4" style="border-bottom: 1px solid var(--gray-4); background-color: var(--gray-1);">
           <.flex align="center" gap="4">
             <.heading size="5" weight="bold">Pipeline: Software Engineering</.heading>
             <.badge variant="surface" color="gray">12 Candidates</.badge>
@@ -152,7 +152,7 @@ git commit -m "feat: add header and controls to recruiting crm example"
           <.flex gap="6" style="min-height: 100%;">
             <%= for {stage, count} <- [{"Sourced", 4}, {"Screening", 3}, {"Interview", 3}, {"Offer", 2}] do %>
               <.flex direction="column" gap="4" style="width: 280px; flex-shrink: 0;">
-                <.flex align="center" justify="between">
+                <.flex align="center" justify="space-between">
                   <.flex align="center" gap="2">
                     <.heading size="3" weight="bold"><%= stage %></.heading>
                     <.badge variant="soft" color="gray" size="1"><%= count %></.badge>
@@ -196,7 +196,7 @@ git commit -m "feat: add kanban board columns to recruiting crm example"
       <:trigger>
         <.card p="3" style="cursor: pointer; transition: transform 0.1s;" class="hover-lift">
           <.flex direction="column" gap="3">
-            <.flex justify="between" align="start">
+            <.flex justify="space-between" align="start">
               <.flex gap="3" align="center">
                 <.avatar size="1" src={@src} fallback={@fallback} />
                 <.flex direction="column">
@@ -259,7 +259,7 @@ git commit -m "feat: add candidate cards to recruiting crm example"
 <%!-- Add this to the bottom of the main render/1 div --%>
         <.dialog id="candidate-detail" target="body" default_state="closed">
           <.flex direction="column" gap="4" p="6" style="max-width: 600px;">
-            <.flex justify="between" align="center">
+            <.flex justify="space-between" align="center">
               <.flex gap="4" align="center">
                 <.avatar size="4" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&q=80" fallback="AJ" />
                 <.flex direction="column">
@@ -337,7 +337,7 @@ git commit -m "feat: add candidate cards to recruiting crm example"
               
               <.tabs_content value="settings">
                 <.flex direction="column" gap="4" mt="4">
-                  <.flex justify="between" align="center">
+                  <.flex justify="space-between" align="center">
                     <.flex direction="column">
                       <.strong size="2">Email Notifications</.strong>
                       <.text size="1" color="gray">Receive updates on candidate progress</.text>

@@ -27,7 +27,7 @@ defmodule EssenceUI.Components.Flex do
   @display_values ["none", "inline-flex", "flex"]
   @direction_values ["row", "column", "row-reverse", "column-reverse"]
   @align_values ["start", "center", "end", "baseline", "stretch"]
-  @justify_values ["start", "center", "end", "between"]
+  @justify_values ["start", "center", "end", "space-between"]
   @wrap_values ["nowrap", "wrap", "wrap-reverse"]
 
   LayoutProps.attrs()
@@ -52,7 +52,7 @@ defmodule EssenceUI.Components.Flex do
   ## Examples
 
       <.flex direction="row" gap="2"><div>Item 1</div><div>Item 2</div></.flex>
-      <.flex as="span" align="center" justify="between" wrap="wrap">...</.flex>
+      <.flex as="span" align="center" justify="space-between" wrap="wrap">...</.flex>
 
   ## Props
 

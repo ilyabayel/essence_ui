@@ -39,6 +39,30 @@ defmodule Storybook.Layout.Flex do
         ]
       },
       %Variation{
+        id: :jusify,
+        description: "Column direction",
+        template: """
+        <div style="display: relative; width: 50vh;">
+          <.flex justify="start">
+            <.decoration_box height="64px" width="64px"/>
+            <.decoration_box height="64px" width="64px"/>
+          </.flex>
+          <.flex justify="center">
+            <.decoration_box height="64px" width="64px"/>
+            <.decoration_box height="64px" width="64px"/>
+          </.flex>
+          <.flex justify="space-between">
+            <.decoration_box height="64px" width="64px"/>
+            <.decoration_box height="64px" width="64px"/>
+          </.flex>
+          <.flex justify="end">
+            <.decoration_box height="64px" width="64px"/>
+            <.decoration_box height="64px" width="64px"/>
+          </.flex>
+        </div>
+        """
+      },
+      %Variation{
         id: :wrap,
         description: "Wrap items",
         attributes: %{wrap: "wrap", width: "calc(360px + 8px)", height: "32", gap: "2"},

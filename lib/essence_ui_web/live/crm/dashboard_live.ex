@@ -145,7 +145,7 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
       <.flex
         direction="column"
         align="center"
-        justify="between"
+        justify="space-between"
         p="4"
         style="width: 64px; border-right: 1px solid var(--gray-4); background-color: var(--gray-2); flex-shrink: 0;"
       >
@@ -225,7 +225,7 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
         <%!-- Top Header --%>
         <.flex
           align="center"
-          justify="between"
+          justify="space-between"
           px="6"
           py="4"
           style="border-bottom: 1px solid var(--gray-4); background-color: var(--gray-1); flex-shrink: 0;"
@@ -314,7 +314,7 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
             <%= for stage <- @stages do %>
               <% stage_candidates = Enum.filter(@filtered_candidates, &(&1.stage == stage)) %>
               <.flex direction="column" gap="4" style="width: 320px; flex-shrink: 0;">
-                <.flex align="center" justify="between">
+                <.flex align="center" justify="space-between">
                   <.flex align="center" gap="2">
                     <.heading size="4" weight="bold">{stage}</.heading>
                     <.badge variant="soft" color="gray" size="1">{length(stage_candidates)}</.badge>
@@ -370,7 +370,7 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
   defp candidate_detail_content(assigns) do
     ~H"""
     <div style="position: relative;">
-      <.flex justify="between" align="center">
+      <.flex justify="space-between" align="center">
         <.flex gap="4" align="center">
           <.avatar
             size="4"
@@ -498,7 +498,7 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
 
         <:content value="settings">
           <.flex direction="column" gap="4" mt="4">
-            <.flex justify="between" align="center">
+            <.flex justify="space-between" align="center">
               <.flex direction="column">
                 <.strong size="2">Email Notifications</.strong>
                 <.text size="1" color="gray">Receive updates on candidate progress</.text>
@@ -537,7 +537,7 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
           phx-click={open_detail(@candidate.id)}
         >
           <.flex direction="column" gap="3">
-            <.flex justify="between" align="start">
+            <.flex justify="space-between" align="start">
               <.flex gap="3" align="center">
                 <.avatar
                   size="1"

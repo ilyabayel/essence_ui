@@ -18,7 +18,7 @@ defmodule Storybook.Examples.DashboardStory do
     >
       <.flex direction="column" gap="4" p="6" style="max-width: 1400px; margin: 0 auto;">
         <%!-- Header --%>
-        <.flex justify="between" align="center" mb="4">
+        <.flex justify="space-between" align="center" mb="4">
           <.heading size="6" weight="bold" mr="2">Shadboard</.heading>
           <.flex gap="3" align="center">
             <.badge variant="soft" size="2" mr="2">
@@ -101,7 +101,7 @@ defmodule Storybook.Examples.DashboardStory do
           <%!-- Unique Visitors --%>
           <.card p="4">
             <.flex direction="column" gap="3">
-              <.flex justify="between" align="center">
+              <.flex justify="space-between" align="center">
                 <.heading as="h3" size="2" color="gray">Unique Visitors</.heading>
                 <.icon_button variant="ghost" size="1" style="color: #666;">
                   <svg
@@ -128,7 +128,7 @@ defmodule Storybook.Examples.DashboardStory do
           <%!-- Avg. Session Duration --%>
           <.card p="4">
             <.flex direction="column" gap="3">
-              <.flex justify="between" align="center">
+              <.flex justify="space-between" align="center">
                 <.heading as="h3" size="2" color="gray">Avg. Session Duration</.heading>
                 <.icon_button variant="ghost" size="1" style="color: #666;">
                   <svg
@@ -161,7 +161,7 @@ defmodule Storybook.Examples.DashboardStory do
           <%!-- Bounce Rate --%>
           <.card p="4">
             <.flex direction="column" gap="3">
-              <.flex justify="between" align="center">
+              <.flex justify="space-between" align="center">
                 <.heading as="h3" size="2" color="gray">Bounce Rate</.heading>
                 <.icon_button variant="ghost" size="1" style="color: #666;">
                   <svg
@@ -196,7 +196,7 @@ defmodule Storybook.Examples.DashboardStory do
           <%!-- Conversion Rate --%>
           <.card p="4">
             <.flex direction="column" gap="3">
-              <.flex justify="between" align="center">
+              <.flex justify="space-between" align="center">
                 <.heading as="h3" size="2" color="gray">Conversion Rate</.heading>
                 <.icon_button variant="ghost" size="1" style="color: #666;">
                   <svg
@@ -347,7 +347,7 @@ defmodule Storybook.Examples.DashboardStory do
                 <div style="flex: 65; background: #3b82f6;"></div>
                 <div style="flex: 35; background: #10b981;"></div>
               </.flex>
-              <.flex justify="between">
+              <.flex justify="space-between">
                 <.flex direction="column" gap="1">
                   <.flex gap="2" align="center">
                     <div style="width: 8px; height: 8px; background: #3b82f6; border-radius: 50%;">
@@ -373,7 +373,7 @@ defmodule Storybook.Examples.DashboardStory do
         <%!-- Customer Insights --%>
         <.card p="5">
           <.flex direction="column" gap="4">
-            <.flex justify="between" align="center">
+            <.flex justify="space-between" align="center">
               <.flex direction="column" gap="1">
                 <.heading as="h3" size="5" weight="bold">Customer Insights</.heading>
                 <.text size="2" color="gray">Last month</.text>

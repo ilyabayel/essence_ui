@@ -21,7 +21,7 @@ defmodule Storybook.Examples.RecruitingCrm do
       <.flex
         direction="column"
         align="center"
-        justify="between"
+        justify="space-between"
         p="4"
         style="width: 64px; border-right: 1px solid var(--gray-4); background-color: var(--gray-2);"
       >
@@ -83,7 +83,7 @@ defmodule Storybook.Examples.RecruitingCrm do
         <%!-- Top Header --%>
         <.flex
           align="center"
-          justify="between"
+          justify="space-between"
           px="6"
           py="4"
           style="border-bottom: 1px solid var(--gray-4); background-color: var(--gray-1);"
@@ -158,7 +158,7 @@ defmodule Storybook.Examples.RecruitingCrm do
           <.flex gap="6" style="min-height: 100%;">
             <%= for {stage, count} <- [{"Sourced", 4}, {"Screening", 3}, {"Interview", 3}, {"Offer", 2}] do %>
               <.flex direction="column" gap="4" style="width: 280px; flex-shrink: 0;">
-                <.flex align="center" justify="between">
+                <.flex align="center" justify="space-between">
                   <.flex align="center" gap="2">
                     <.heading size="3" weight="bold">{stage}</.heading>
                     <.badge variant="soft" color="gray" size="1">{count}</.badge>
@@ -233,7 +233,7 @@ defmodule Storybook.Examples.RecruitingCrm do
             p="6"
             style="max-width: 600px; background-color: var(--gray-1); border-radius: var(--radius-4);"
           >
-            <.flex justify="between" align="center">
+            <.flex justify="space-between" align="center">
               <.flex gap="4" align="center">
                 <.avatar
                   size="4"
@@ -294,15 +294,16 @@ defmodule Storybook.Examples.RecruitingCrm do
                       <:item value="hold">Hold</:item>
                       <:item value="no">No Hire</:item>
                     </.radio_group>
-                    </.flex>
+                  </.flex>
 
-                    <.flex direction="column" gap="2">
+                  <.flex direction="column" gap="2">
                     <.text size="2" weight="bold">Verified Skills</.text>
                     <.checkbox_group name="skills" default_value={["elixir", "react"]}>
                       <:item value="elixir">Elixir</:item>
                       <:item value="react">React</:item>
                       <:item value="db">PostgreSQL</:item>
-                    </.checkbox_group>                  </.flex>
+                    </.checkbox_group>
+                  </.flex>
                 </.flex>
               </:content>
 
@@ -315,7 +316,7 @@ defmodule Storybook.Examples.RecruitingCrm do
 
               <:content value="settings">
                 <.flex direction="column" gap="4" mt="4">
-                  <.flex justify="between" align="center">
+                  <.flex justify="space-between" align="center">
                     <.flex direction="column">
                       <.strong size="2">Email Notifications</.strong>
                       <.text size="1" color="gray">Receive updates on candidate progress</.text>
@@ -344,7 +345,7 @@ defmodule Storybook.Examples.RecruitingCrm do
           class="hover-lift"
         >
           <.flex direction="column" gap="3">
-            <.flex justify="between" align="start">
+            <.flex justify="space-between" align="start">
               <.flex gap="3" align="center">
                 <.avatar size="1" src={@src} fallback={@fallback} />
                 <.flex direction="column">

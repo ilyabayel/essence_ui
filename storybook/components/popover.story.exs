@@ -56,7 +56,7 @@ defmodule Storybook.Components.Popover do
               />
               <.box grow="1">
                 <.text_area placeholder="Write a comment…" style="height: 80px" />
-                <.flex gap="3" mt="3" justify="between">
+                <.flex gap="3" mt="3" justify="space-between">
                   <.flex align="center" gap="2" as="label">
                     <.checkbox default_checked />
                     <.text size="2">Send to group</.text>

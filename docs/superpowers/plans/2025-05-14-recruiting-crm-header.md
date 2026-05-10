@@ -19,7 +19,7 @@
 
 ```elixir
         <%!-- Top Header --%>
-        <.flex align="center" justify="between" px="6" py="4" style="border-bottom: 1px solid var(--gray-4); background-color: var(--gray-1);">
+        <.flex align="center" justify="space-between" px="6" py="4" style="border-bottom: 1px solid var(--gray-4); background-color: var(--gray-1);">
           <.flex align="center" gap="4">
             <.heading size="5" weight="bold">Pipeline: Software Engineering</.heading>
             <.badge variant="surface" color="gray">12 Candidates</.badge>
