@@ -14,12 +14,13 @@ defmodule EssenceUI.Primitives.Collapsible do
     """
   end
 
-  attr :id, :string, required: true
+  attr :id, :string, required: true, doc: "The ID of the content this trigger controls"
+  attr :trigger_id, :string, default: nil, doc: "Optional ID for the trigger element itself"
   attr :rest, :global
   slot :inner_block, required: true
   def trigger(assigns) do
     ~H"""
-    <button type="button" data-essence-collapsible-trigger aria-controls={@id} aria-expanded="false" {@rest}>
+    <button id={@trigger_id} type="button" data-essence-collapsible-trigger aria-controls={@id} aria-expanded="false" {@rest}>
       {render_slot(@inner_block)}
     </button>
     """

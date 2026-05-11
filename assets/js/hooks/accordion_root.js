@@ -2,120 +2,106 @@ export const AccordionRoot = {
   mounted() {
     this.type = this.el.dataset.type || "single";
     this.collapsible = this.el.dataset.collapsible === "true";
-    this.refreshItems();
+    this.orientation = this.el.dataset.orientation || "vertical";
+    this.dir = this.el.getAttribute("dir") || "ltr";
 
-    this.el.addEventListener('keydown', (e) => {
-      const activeElement = document.activeElement;
-      if (!this.el.contains(activeElement)) return;
-      
-      const trigger = activeElement.closest('[data-essence-accordion-trigger]');
+    // Coordination via event delegation (capture phase to intercept Collapsible click)
+    this.el.addEventListener('click', (e) => {
+      const trigger = e.target.closest('[data-essence-accordion-trigger]');
       if (!trigger) return;
 
-      const triggers = this.items.map(item => item.querySelector('[data-essence-accordion-trigger]')).filter(Boolean);
-      const index = triggers.indexOf(trigger);
+      const item = trigger.closest('[data-essence-accordion-item]');
+      if (!item || item.dataset.disabled === 'true') return;
+
+      const isOpen = item.dataset.state === 'open';
+
+      if (this.type === 'single') {
+        if (isOpen) {
+          if (this.collapsible) {
+            // Allow closing
+          } else {
+            // Prevent closing by stopping propagation
+            e.stopImmediatePropagation();
+            e.preventDefault();
+          }
+        } else {
+          // Opening: close others
+          this.closeAllExcept(item);
+        }
+      }
+    }, true);
+
+    // Keyboard navigation
+    this.el.addEventListener('keydown', (e) => {
+      const target = e.target;
+      if (!target.closest('[data-essence-accordion-trigger]')) return;
+
+      const items = Array.from(this.el.querySelectorAll('[data-essence-accordion-item]'));
+      const triggers = items
+        .map(i => i.querySelector('[data-essence-accordion-trigger]'))
+        .filter(t => t && t.closest('[data-essence-accordion-item]').dataset.disabled !== 'true');
+      
+      const index = triggers.indexOf(target);
+      if (index === -1) return;
+
+      const isLtr = this.dir === 'ltr';
+      const isVertical = this.orientation === 'vertical';
+      const isHorizontal = this.orientation === 'horizontal';
+
+      let nextIndex = index;
+      const count = triggers.length;
+
+      const moveNext = () => { nextIndex = (index + 1) % count; };
+      const movePrev = () => { nextIndex = (index - 1 + count) % count; };
 
       switch (e.key) {
-        case 'ArrowDown':
-          e.preventDefault();
-          triggers[(index + 1) % triggers.length]?.focus();
-          break;
-        case 'ArrowUp':
-          e.preventDefault();
-          triggers[(index - 1 + triggers.length) % triggers.length]?.focus();
-          break;
         case 'Home':
           e.preventDefault();
-          triggers[0]?.focus();
+          nextIndex = 0;
           break;
         case 'End':
           e.preventDefault();
-          triggers[triggers.length - 1]?.focus();
+          nextIndex = count - 1;
           break;
+        case 'ArrowDown':
+          if (isVertical) {
+            e.preventDefault();
+            moveNext();
+          }
+          break;
+        case 'ArrowUp':
+          if (isVertical) {
+            e.preventDefault();
+            movePrev();
+          }
+          break;
+        case 'ArrowRight':
+          if (isHorizontal) {
+            e.preventDefault();
+            isLtr ? moveNext() : movePrev();
+          }
+          break;
+        case 'ArrowLeft':
+          if (isHorizontal) {
+            e.preventDefault();
+            isLtr ? movePrev() : moveNext();
+          }
+          break;
+        default:
+          return;
+      }
+
+      if (nextIndex !== index) {
+        triggers[nextIndex].focus();
       }
     });
   },
 
-  refreshItems() {
-    // We use a custom attribute data-essence-accordion-item to avoid conflict with existing classes
-    this.items = Array.from(this.el.querySelectorAll('[data-essence-accordion-item]'));
-
-    this.items.forEach(item => {
-      const trigger = item.querySelector('[data-essence-accordion-trigger]');
-      const content = item.querySelector('[data-essence-accordion-content]');
-
-      if (!trigger || !content) return;
-
-      // Ensure we don't attach multiple listeners if mounted is called again (though LiveView usually handles this)
-      if (trigger._accordion_initialized) return;
-      trigger._accordion_initialized = true;
-
-      trigger.addEventListener('click', () => {
-        const isOpen = item.dataset.state === 'open';
-        
-        if (this.type === 'single') {
-          if (!isOpen) {
-            this.closeAll();
-            this.openItem(item);
-          } else if (this.collapsible) {
-            this.closeItem(item);
-          }
-        } else {
-          // multiple mode
-          if (isOpen) {
-            this.closeItem(item);
-          } else {
-            this.openItem(item);
-          }
-        }
-      });
-      
-      if (item.dataset.state === 'open') {
-        this.updateHeight(content);
-      }
-    });
-  },
-
-  updateHeight(content) {
-    const height = content.scrollHeight;
-    content.style.setProperty('--essence-accordion-content-height', `${height}px`);
-  },
-
-  openItem(item) {
-    const content = item.querySelector('[data-essence-accordion-content]');
-    const trigger = item.querySelector('[data-essence-accordion-trigger]');
-
-    this.updateHeight(content);
-
-    item.dataset.state = 'open';
-    if (trigger) {
-        trigger.dataset.state = 'open';
-        trigger.setAttribute('aria-expanded', 'true');
-    }
-    if (content) {
-        content.dataset.state = 'open';
-        content.hidden = false;
-    }
-  },
-
-  closeItem(item) {
-    const content = item.querySelector('[data-essence-accordion-content]');
-    const trigger = item.querySelector('[data-essence-accordion-trigger]');
-
-    item.dataset.state = 'closed';
-    if (trigger) {
-        trigger.dataset.state = 'closed';
-        trigger.setAttribute('aria-expanded', 'false');
-    }
-    if (content) {
-        content.dataset.state = 'closed';
-        content.hidden = true;
-    }
-  },
-
-  closeAll() {
-    this.items.forEach(item => {
-      if (item.dataset.state === 'open') {
-        this.closeItem(item);
+  closeAllExcept(activeItem) {
+    const items = this.el.querySelectorAll('[data-essence-accordion-item]');
+    items.forEach(item => {
+      if (item !== activeItem && item.dataset.state === 'open') {
+        item.dispatchEvent(new CustomEvent('essence:collapsible:close', { bubbles: false }));
       }
     });
   }

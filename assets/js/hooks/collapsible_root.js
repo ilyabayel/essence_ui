@@ -26,6 +26,12 @@ export const CollapsibleRoot = {
     this.content?.addEventListener('animationend', this._onAnimationEnd);
     this.content?.addEventListener('transitionend', this._onAnimationEnd);
 
+    // Support external orchestration (e.g. from Accordion)
+    this._onExternalOpen = () => this.open();
+    this._onExternalClose = () => this.close();
+    this.el.addEventListener('essence:collapsible:open', this._onExternalOpen);
+    this.el.addEventListener('essence:collapsible:close', this._onExternalClose);
+
     if (this.el.dataset.state === 'open') {
       this.open(true);
     }
@@ -39,6 +45,8 @@ export const CollapsibleRoot = {
   destroyed() {
     this.content?.removeEventListener('animationend', this._onAnimationEnd);
     this.content?.removeEventListener('transitionend', this._onAnimationEnd);
+    this.el.removeEventListener('essence:collapsible:open', this._onExternalOpen);
+    this.el.removeEventListener('essence:collapsible:close', this._onExternalClose);
   },
 
   open(isInitial = false) {
@@ -55,25 +63,39 @@ export const CollapsibleRoot = {
     const originalStyles = {
       transitionDuration: node.style.transitionDuration,
       animationName: node.style.animationName,
+      display: node.style.display,
     };
 
     // Block any animations/transitions so the element renders at its full dimensions
     node.style.transitionDuration = '0s';
     node.style.animationName = 'none';
+    
+    // Ensure it's not hidden and has a display for measurement
     node.hidden = false;
+    node.style.display = 'block'; 
 
-    // Get width and height from full dimensions
-    const rect = node.getBoundingClientRect();
-    const height = rect.height;
-    const width = rect.width;
+    // Use scrollHeight for robust height measurement
+    const height = node.scrollHeight;
+    const width = node.getBoundingClientRect().width;
 
+    // Set all possible variable names for compatibility
     node.style.setProperty('--essence-collapsible-content-height', `${height}px`);
     node.style.setProperty('--essence-collapsible-content-width', `${width}px`);
+    node.style.setProperty('--radix-collapsible-content-height', `${height}px`);
+    node.style.setProperty('--radix-collapsible-content-width', `${width}px`);
 
-    // Kick off any animations/transitions that were originally set up if it isn't the initial mount
+    // Restore styles
+    node.style.display = originalStyles.display;
     if (!this.isMountAnimationPrevented && !isInitial) {
       node.style.transitionDuration = originalStyles.transitionDuration;
       node.style.animationName = originalStyles.animationName;
+    } else if (isInitial) {
+      // For initial mount, we still need to clear the overrides so that
+      // subsequent close transitions (which are NOT initial) work properly.
+      requestAnimationFrame(() => {
+        node.style.transitionDuration = originalStyles.transitionDuration;
+        node.style.animationName = originalStyles.animationName;
+      });
     }
 
     node.dataset.state = 'open';
@@ -89,20 +111,17 @@ export const CollapsibleRoot = {
     }
 
     this.content.dataset.state = 'closed';
-    // We do NOT set hidden = true here. 
-    // The animationend/transitionend listener will handle it for Presence.
     
-    // If no animations/transitions are active, hidden should be set immediately.
-    // We check this by seeing if the element is still visible after a short tick 
-    // if the user didn't define any animations.
-    requestAnimationFrame(() => {
+    // Presence logic: Wait for animations/transitions to end before hiding
+    // If no animations are detected after a tick, hide immediately
+    setTimeout(() => {
       const style = getComputedStyle(this.content);
-      const hasAnimation = style.animationName !== 'none' && style.animationDuration !== '0s';
-      const hasTransition = style.transitionProperty !== 'none' && style.transitionDuration !== '0s';
+      const hasAnimation = style.animationName !== 'none' && parseFloat(style.animationDuration) > 0;
+      const hasTransition = style.transitionProperty !== 'none' && parseFloat(style.transitionDuration) > 0;
       
-      if (!hasAnimation && !hasTransition) {
+      if (!hasAnimation && !hasTransition && this.el.dataset.state === 'closed') {
         this.content.hidden = true;
       }
-    });
+    }, 50); // Small delay to allow CSS state changes to reflect in computed style
   }
 };

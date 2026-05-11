@@ -16,7 +16,9 @@ defmodule EssenceUI.Components.Accordion do
 
   attr :type, :string, values: ["single", "multiple"], default: "single"
   attr :collapsible, :boolean, default: false
-  attr :default_value, :string, default: nil
+  attr :default_value, :any, default: nil, doc: "A string for type='single' or a list of strings for type='multiple'"
+  attr :orientation, :string, values: ["vertical", "horizontal"], default: "vertical"
+  attr :dir, :string, values: ["ltr", "rtl"], default: "ltr"
   attr :id, :string, default: nil
   attr :class, :string, default: nil
   attr :style, :string, default: nil
@@ -33,11 +35,19 @@ defmodule EssenceUI.Components.Accordion do
     prop_defs = MarginProps.prop_defs()
     extracted = ExtractProps.call(assigns, prop_defs)
 
+    default_values =
+      case assigns[:default_value] do
+        nil -> []
+        val when is_list(val) -> val
+        val -> [val]
+      end
+
     assigns =
       assign(assigns,
         accordion_id: accordion_id,
         class: extracted.class,
-        style: extracted.style
+        style: extracted.style,
+        default_values: default_values
       )
 
     ~H"""
@@ -45,19 +55,29 @@ defmodule EssenceUI.Components.Accordion do
       id={@accordion_id}
       type={@type}
       collapsible={@collapsible}
+      orientation={@orientation}
+      dir={@dir}
       class={["AccordionRoot", @class]}
       style={@style}
       {@rest}
     >
       <%= for item <- @item do %>
-        <% state = if item.value == @default_value, do: "open", else: "closed" %>
+        <%
+          is_open = item.value in @default_values
+          state = if is_open, do: "open", else: "closed"
+          # Unique IDs for ARIA and hooks
+          root_id = "#{@accordion_id}-item-#{item.value}"
+          content_id = "#{@accordion_id}-content-#{item.value}"
+          trigger_id = "#{@accordion_id}-trigger-#{item.value}"
+        %>
         <Primitive.item
+          id={root_id}
           value={item.value}
           disabled={item[:disabled] || false}
+          open={is_open}
           class="AccordionItem"
-          data-state={state}
         >
-          {render_slot(item, %{state: state})}
+          {render_slot(item, %{state: state, id: content_id, trigger_id: trigger_id})}
         </Primitive.item>
       <% end %>
     </Primitive.root>
@@ -68,11 +88,12 @@ defmodule EssenceUI.Components.Accordion do
   The header component for an accordion item.
   """
   attr :class, :string, default: nil
+  attr :id, :string, default: nil
   slot :inner_block, required: true
 
   def accordion_header(assigns) do
     ~H"""
-    <Primitive.header class={["AccordionHeader", @class]}>
+    <Primitive.header id={@id} class={["AccordionHeader", @class]}>
       {render_slot(@inner_block)}
     </Primitive.header>
     """
@@ -83,14 +104,17 @@ defmodule EssenceUI.Components.Accordion do
   """
   attr :class, :string, default: nil
   attr :state, :string, doc: "Passed from item slot"
+  attr :id, :string, required: true, doc: "Passed from item slot"
+  attr :trigger_id, :string, required: true, doc: "Passed from item slot"
   slot :inner_block, required: true
 
   def accordion_trigger(assigns) do
     ~H"""
     <Primitive.trigger
+      id={@id}
+      trigger_id={@trigger_id}
       class={["AccordionTrigger", @class]}
       data-state={@state}
-      aria-expanded={if @state == "open", do: "true", else: "false"}
     >
       <span>{render_slot(@inner_block)}</span>
       <svg
@@ -119,11 +143,18 @@ defmodule EssenceUI.Components.Accordion do
   """
   attr :class, :string, default: nil
   attr :state, :string, doc: "Passed from item slot"
+  attr :id, :string, required: true, doc: "Passed from item slot"
+  attr :trigger_id, :string, required: true, doc: "Passed from item slot"
   slot :inner_block, required: true
 
   def accordion_content(assigns) do
     ~H"""
-    <Primitive.content class={["AccordionContent", @class]} data-state={@state}>
+    <Primitive.content
+      id={@id}
+      aria-labelledby={@trigger_id}
+      class={["AccordionContent", @class]}
+      data-state={@state}
+    >
       <div class="AccordionContentText">
         {render_slot(@inner_block)}
       </div>
