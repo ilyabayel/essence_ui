@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "type": "module",
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "autoprefixer": "^10.4.21",
     "classnames": "^2.5.1",
     "postcss": "^8.5.3",
