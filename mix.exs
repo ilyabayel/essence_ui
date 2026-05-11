@@ -40,6 +40,7 @@ defmodule EssenceUI.MixProject do
       {:esbuild, "~> 0.10", runtime: Mix.env() == :dev},
       {:floki, ">= 0.38.0", only: :test},
       {:gettext, "~> 0.26"},
+      {:hackney, "~> 1.9"},
       {:igniter, "~> 0.6", only: [:dev, :test]},
       {:jason, "~> 1.4"},
       {:mix_test_watch, "~> 1.3", only: [:dev, :test], runtime: false},
@@ -53,8 +54,7 @@ defmodule EssenceUI.MixProject do
       {:swoosh, "~> 1.19"},
       {:telemetry_metrics, "~> 1.1"},
       {:telemetry_poller, "~> 1.3"},
-      {:tidewave, "~> 0.5", only: [:dev]},
-      {:hackney, "~> 1.9"}
+      {:tidewave, "~> 0.5", only: [:dev]}
     ]
   end
 

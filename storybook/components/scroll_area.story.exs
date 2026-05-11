@@ -2,6 +2,7 @@ defmodule Storybook.Components.ScrollArea do
   @moduledoc false
   use PhoenixStorybook.Story, :component
 
+  alias EssenceUI.Components.DataList
   alias EssenceUI.Components.ScrollArea
 
   def function, do: &ScrollArea.scroll_area/1
@@ -12,8 +13,8 @@ defmodule Storybook.Components.ScrollArea do
       {EssenceUI.Components.Flex, flex: 1},
       {EssenceUI.Components.Text, text: 1},
       {EssenceUI.Components.Heading, heading: 1},
-      {EssenceUI.Components.DataList, data_list: 1},
-      {EssenceUI.Components.DataList, data_list_item: 1},
+      {DataList, data_list: 1},
+      {DataList, data_list_item: 1},
       {EssenceUI.Components.Badge, badge: 1}
     ]
 

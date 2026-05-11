@@ -66,27 +66,34 @@ defmodule EssenceUI.Components.ScrollArea do
     ~H"""
     <div
       class={["rt-ScrollAreaRoot", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
-      style={["position: relative; overflow: hidden;", @extracted_style, @style] |> Enum.filter(& &1) |> Enum.join("; ")}
+      style={
+        ["position: relative; overflow: hidden;", @extracted_style, @style]
+        |> Enum.filter(& &1)
+        |> Enum.join("; ")
+      }
       data-type={@type}
       data-scroll-hide-delay={@scroll_hide_delay}
       phx-hook="ScrollArea"
       id={assigns[:id] || "scroll-area-#{System.unique_integer([:positive])}"}
       {@rest}
     >
-      <div class="rt-ScrollAreaViewport" style="overflow: scroll; scrollbar-width: none; -ms-overflow-style: none; width: 100%; height: 100%;">
+      <div
+        class="rt-ScrollAreaViewport"
+        style="overflow: scroll; scrollbar-width: none; -ms-overflow-style: none; width: 100%; height: 100%;"
+      >
         {render_slot(@inner_block)}
       </div>
       <div class="rt-ScrollAreaViewportFocusRing"></div>
 
-      <div 
-        class={["rt-ScrollAreaScrollbar rt-r-size-#{@size}"] |> Enum.join(" ")} 
+      <div
+        class={["rt-ScrollAreaScrollbar rt-r-size-#{@size}"] |> Enum.join(" ")}
         data-orientation="vertical"
         style="position: absolute; top: 0; right: 0; bottom: 0;"
       >
         <div class="rt-ScrollAreaThumb"></div>
       </div>
-      <div 
-        class={["rt-ScrollAreaScrollbar rt-r-size-#{@size}"] |> Enum.join(" ")} 
+      <div
+        class={["rt-ScrollAreaScrollbar rt-r-size-#{@size}"] |> Enum.join(" ")}
         data-orientation="horizontal"
         style="position: absolute; left: 0; bottom: 0; right: 0;"
       >
@@ -96,5 +103,4 @@ defmodule EssenceUI.Components.ScrollArea do
     </div>
     """
   end
-
 end

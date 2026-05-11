@@ -111,7 +111,11 @@ defmodule EssenceUI.Components.TabNav do
     ~H"""
     <.dynamic_tag
       tag_name={@as}
-      class={["rt-reset", "rt-BaseTabListTrigger", "rt-TabNavLink", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={
+        ["rt-reset", "rt-BaseTabListTrigger", "rt-TabNavLink", @class]
+        |> Enum.filter(& &1)
+        |> Enum.join(" ")
+      }
       style={@style}
       data-active={@active}
       {Map.merge(%{href: @href}, @rest)}

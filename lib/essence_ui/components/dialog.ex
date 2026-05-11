@@ -65,9 +65,17 @@ defmodule EssenceUI.Components.Dialog do
         <div
           role="alertdialog"
           id={"#{@dialog_id}-content"}
-          class={["rt-BaseDialogContent rt-AlertDialogContent rt-r-size-3 rt-r-max-w", @class] |> Enum.filter(& &1 != "") |> Enum.join(" ")}
+          class={
+            ["rt-BaseDialogContent rt-AlertDialogContent rt-r-size-3 rt-r-max-w", @class]
+            |> Enum.filter(&(&1 != ""))
+            |> Enum.join(" ")
+          }
           tabindex="-1"
-          style={["--max-width: 450px; pointer-events: auto;", @style] |> Enum.filter(& &1 != "") |> Enum.join("; ")}
+          style={
+            ["--max-width: 450px; pointer-events: auto;", @style]
+            |> Enum.filter(&(&1 != ""))
+            |> Enum.join("; ")
+          }
           phx-click-away={JS.dispatch("close", to: "##{@dialog_id}")}
         >
           {render_slot(@inner_block)}

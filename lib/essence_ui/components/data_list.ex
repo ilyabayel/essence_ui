@@ -56,18 +56,20 @@ defmodule EssenceUI.Components.DataList do
 
   def data_list(assigns) do
     prop_defs =
-      %{
-        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
-        orientation: %{
-          type: :enum,
-          class: "rt-r-orientation",
-          values: @orientations,
-          default: "horizontal",
-          responsive: true
+      Map.merge(
+        %{
+          size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
+          orientation: %{
+            type: :enum,
+            class: "rt-r-orientation",
+            values: @orientations,
+            default: "horizontal",
+            responsive: true
+          },
+          trim: %{type: :enum, class: "rt-r-trim", values: @trims, responsive: true}
         },
-        trim: %{type: :enum, class: "rt-r-trim", values: @trims, responsive: true}
-      }
-      |> Map.merge(MarginProps.prop_defs())
+        MarginProps.prop_defs()
+      )
 
     extracted = ExtractProps.call(assigns, prop_defs)
 

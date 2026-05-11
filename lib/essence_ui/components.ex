@@ -71,6 +71,7 @@ defmodule EssenceUI.Components do
     * `grid/1` - See `EssenceUI.Components.Grid`
     * `section/1` - See `EssenceUI.Components.Section`
   """
+  alias EssenceUI.Components.Accordion
   alias EssenceUI.Components.CheckboxCards
   alias EssenceUI.Components.ContextMenu
   alias EssenceUI.Components.DataList
@@ -84,6 +85,10 @@ defmodule EssenceUI.Components do
   alias EssenceUI.Components.Tabs
 
   # Components
+  defdelegate accordion(assigns), to: Accordion
+  defdelegate accordion_header(assigns), to: Accordion
+  defdelegate accordion_trigger(assigns), to: Accordion
+  defdelegate accordion_content(assigns), to: Accordion
   defdelegate avatar(assigns), to: EssenceUI.Components.Avatar
   defdelegate badge(assigns), to: EssenceUI.Components.Badge
   defdelegate button(assigns), to: EssenceUI.Components.Button

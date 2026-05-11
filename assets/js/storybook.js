@@ -2,6 +2,7 @@
 import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
 import { Dialog } from "./hooks/dialog";
+import { Accordion } from "./hooks/accordion";
 import { Tabs } from "./hooks/tabs";
 import { CheckboxCards } from "./hooks/checkbox_cards";
 import { RadioCards } from "./hooks/radio_cards";
@@ -14,6 +15,7 @@ import { ScrollArea } from "./hooks/scroll_area";
 
 let hooks = {
   Dialog,
+  Accordion,
   Tabs,
   CheckboxCards,
   RadioCards,

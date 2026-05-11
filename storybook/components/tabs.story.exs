@@ -2,7 +2,9 @@ defmodule Storybook.Components.TabsStory do
   @moduledoc false
   use PhoenixStorybook.Story, :component
 
-  def function, do: &EssenceUI.Components.Tabs.tabs/1
+  alias EssenceUI.Components.Tabs
+
+  def function, do: &Tabs.tabs/1
 
   def container,
     do:
@@ -15,12 +17,7 @@ defmodule Storybook.Components.TabsStory do
 
   def layout, do: :one_column
 
-  def imports,
-    do: [
-      {EssenceUI.Components.Text, text: 1},
-      {EssenceUI.Components.Box, box: 1},
-      {EssenceUI.Components.Tabs, tabs_list: 1}
-    ]
+  def imports, do: [{EssenceUI.Components.Text, text: 1}, {EssenceUI.Components.Box, box: 1}, {Tabs, tabs_list: 1}]
 
   def variations do
     [
