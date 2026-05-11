@@ -15,19 +15,50 @@ defmodule Storybook.Primitives.SeparatorStory do
         id: :horizontal,
         description: "Horizontal separator",
         template: """
-        <div>Section 1</div>
-        <Separator.separator orientation="horizontal" style="margin: 10px 0; border-top: 1px solid gray;" />
-        <div>Section 2</div>
-        """
-      },
-      %Variation{
-        id: :vertical,
-        description: "Vertical separator",
-        template: """
-        <div style="display: flex; height: 20px; align-items: center;">
-          <div>Item 1</div>
-          <Separator.separator orientation="vertical" style="margin: 0 10px; border-left: 1px solid gray; height: 100%;" />
-          <div>Item 2</div>
+        <div style="width: 100%; max-width: 300px; margin: 15px 0">
+          <h1 class="Text" style="font-weight: 600">
+            EssenceUI Primitives
+          </h1>
+          <p class="Text">An open-source UI component library.</p>
+          <Separator.separator class="SeparatorRoot" style="margin: 15px 0" />
+          <div style="display: flex; height: 20px; align-items: center;">
+            <p class="Text">Blog</p>
+            <Separator.separator
+              class="SeparatorRoot"
+              decorative
+              orientation="vertical"
+              style="margin: 0 15px"
+            />
+            <p class="Text">Docs</p>
+            <Separator.separator
+              class="SeparatorRoot"
+              decorative
+              orientation="vertical"
+              style="margin: 0 15px"
+            />
+            <p class="Text">Source</p>
+          </div>
+
+          <style>
+            .SeparatorRoot {
+              background-color: gray;
+            }
+            .SeparatorRoot[data-orientation="horizontal"] {
+              height: 1px;
+              width: 100%;
+            }
+            .SeparatorRoot[data-orientation="vertical"] {
+              height: 100%;
+              width: 1px;
+            }
+            .Text {
+              color: black;
+              font-size: 15px;
+              line-height: 20px;
+              margin: 0;
+              padding: 0;
+            }
+          </style>
         </div>
         """
       }
