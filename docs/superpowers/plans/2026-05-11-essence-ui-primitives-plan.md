@@ -1,42 +1,46 @@
-# Implementation Plan: EssenceUI Primitives
+# Implementation Plan: EssenceUI Primitives (Full Parity)
 
-## 🏗️ Phase 1: Foundation & Proof of Concept
+## 🏗️ Phase 1: Foundation & Base Primitives
 - [ ] Create `lib/essence_ui/primitives.ex` (Shared helpers)
 - [ ] Setup Playwright test infrastructure
 - [ ] **Accordion**
-  - [ ] Implement `EssenceUI.Primitives.Accordion` (Root, Item, Header, Trigger, Content)
-  - [ ] Refactor `assets/js/hooks/accordion.js` into a generic primitive hook
-  - [ ] Add Playwright tests for Accordion
-  - [ ] Migrate `EssenceUI.Components.Accordion` to use the primitive
+- [ ] **Collapsible**
+- [ ] **Label**
+- [ ] **Separator**
+- [ ] **Aspect Ratio**
 
-## 🏗️ Phase 2: Overlays (Layering & Focus)
+## 🏗️ Phase 2: Form & Input Primitives
+- [ ] **Checkbox**
+- [ ] **Switch**
+- [ ] **Select**
+- [ ] **Radio Group**
+- [ ] **Slider**
+- [ ] **Toggle**
+- [ ] **Toggle Group**
+- [ ] **One-Time Password Field**
+- [ ] **Password Toggle Field**
+- [ ] **Form** (Validation & Structure)
+
+## 🏗️ Phase 3: Overlays & Portals
 - [ ] **Dialog**
-  - [ ] Primitive implementation
-  - [ ] Hook refactor (Focus trap, scroll lock)
-  - [ ] Playwright tests
-  - [ ] Component migration
+- [ ] **Alert Dialog**
 - [ ] **Popover**
 - [ ] **Tooltip**
 - [ ] **Hover Card**
-
-## 🏗️ Phase 3: Selection & Forms
-- [ ] **Checkbox & Checkbox Group**
-- [ ] **Radio Group**
-- [ ] **Switch**
-- [ ] **Select**
-- [ ] **Slider**
+- [ ] **Toast**
 
 ## 🏗️ Phase 4: Navigation & Menus
 - [ ] **Tabs**
 - [ ] **Dropdown Menu**
 - [ ] **Context Menu**
-- [ ] **Segmented Control**
+- [ ] **Menubar**
+- [ ] **Navigation Menu**
+- [ ] **Toolbar**
 
-## 🏗️ Phase 5: Utilities & Polish
+## 🏗️ Phase 5: Display & Utilities
+- [ ] **Avatar**
+- [ ] **Progress**
 - [ ] **Scroll Area**
-- [ ] **Aspect Ratio**
-- [ ] **Progress & Spinner**
-- [ ] **Skeleton**
 
 ## ✅ Completed
 *None yet.*
