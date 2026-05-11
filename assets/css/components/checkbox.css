@@ -16,3 +16,15 @@
     }
   }
 }
+
+.rt-CheckboxIndicator :where(svg) {
+  display: none;
+}
+
+.rt-CheckboxIndicator[data-state='checked'] :where(svg[data-state='checked']) {
+  display: block;
+}
+
+.rt-CheckboxIndicator[data-state='indeterminate'] :where(svg[data-state='indeterminate']) {
+  display: block;
+}

@@ -4,6 +4,7 @@ import { LiveSocket } from "phoenix_live_view";
 import { Dialog } from "./hooks/dialog";
 import { Accordion } from "./hooks/accordion";
 import { AccordionRoot } from "./hooks/accordion_root";
+import { CheckboxRoot } from "./hooks/checkbox_root";
 import { CollapsibleRoot } from "./hooks/collapsible_root";
 import { Tabs } from "./hooks/tabs";
 import { CheckboxCards } from "./hooks/checkbox_cards";
@@ -19,6 +20,7 @@ let hooks = {
   Dialog,
   Accordion,
   AccordionRoot,
+  CheckboxRoot,
   CollapsibleRoot,
   Tabs,
   CheckboxCards,
