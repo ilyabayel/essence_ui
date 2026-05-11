@@ -1,13 +1,12 @@
-import { defineConfig } from '@playwright/test';
+import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
-  testDir: './test',
+  testDir: "./test",
   use: {
-    baseURL: 'http://localhost:4000',
+    baseURL: "http://localhost:4000",
   },
   webServer: {
-    command: 'cd .. && mix phx.server',
-    url: 'http://localhost:4000',
+    url: "http://localhost:4000",
     reuseExistingServer: !process.env.CI,
   },
 });
