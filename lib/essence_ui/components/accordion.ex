@@ -2,10 +2,11 @@ defmodule EssenceUI.Components.Accordion do
   @moduledoc """
   A vertically stacked set of interactive headings that each reveal an associated section of content.
 
-  Based on Radix UI Accordion primitive.
+  Based on EssenceUI.Primitives.Accordion.
   """
   use Phoenix.Component
 
+  alias EssenceUI.Primitives.Accordion, as: Primitive
   alias EssenceUI.Helpers.ExtractProps
   alias EssenceUI.SharedProps.MarginProps
 
@@ -40,22 +41,26 @@ defmodule EssenceUI.Components.Accordion do
       )
 
     ~H"""
-    <div
+    <Primitive.root
       id={@accordion_id}
+      type={@type}
+      collapsible={@collapsible}
       class={["AccordionRoot", @class]}
       style={@style}
-      data-type={@type}
-      data-collapsible={to_string(@collapsible)}
-      phx-hook="Accordion"
       {@rest}
     >
       <%= for item <- @item do %>
         <% state = if item.value == @default_value, do: "open", else: "closed" %>
-        <div class="AccordionItem" data-state={state} data-disabled={if item[:disabled], do: "true"}>
+        <Primitive.item
+          value={item.value}
+          disabled={item[:disabled] || false}
+          class="AccordionItem"
+          data-state={state}
+        >
           {render_slot(item, %{state: state})}
-        </div>
+        </Primitive.item>
       <% end %>
-    </div>
+    </Primitive.root>
     """
   end
 
@@ -67,9 +72,9 @@ defmodule EssenceUI.Components.Accordion do
 
   def accordion_header(assigns) do
     ~H"""
-    <h3 class={["AccordionHeader", @class]}>
+    <Primitive.header class={["AccordionHeader", @class]}>
       {render_slot(@inner_block)}
-    </h3>
+    </Primitive.header>
     """
   end
 
@@ -82,8 +87,7 @@ defmodule EssenceUI.Components.Accordion do
 
   def accordion_trigger(assigns) do
     ~H"""
-    <button
-      type="button"
+    <Primitive.trigger
       class={["AccordionTrigger", @class]}
       data-state={@state}
       aria-expanded={if @state == "open", do: "true", else: "false"}
@@ -106,7 +110,7 @@ defmodule EssenceUI.Components.Accordion do
         >
         </path>
       </svg>
-    </button>
+    </Primitive.trigger>
     """
   end
 
@@ -119,11 +123,11 @@ defmodule EssenceUI.Components.Accordion do
 
   def accordion_content(assigns) do
     ~H"""
-    <div class={["AccordionContent", @class]} data-state={@state}>
+    <Primitive.content class={["AccordionContent", @class]} data-state={@state}>
       <div class="AccordionContentText">
         {render_slot(@inner_block)}
       </div>
-    </div>
+    </Primitive.content>
     """
   end
 end

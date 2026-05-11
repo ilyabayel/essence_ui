@@ -3,6 +3,7 @@ import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
 import { Dialog } from "./hooks/dialog";
 import { Accordion } from "./hooks/accordion";
+import { AccordionRoot } from "./hooks/accordion_root";
 import { Tabs } from "./hooks/tabs";
 import { CheckboxCards } from "./hooks/checkbox_cards";
 import { RadioCards } from "./hooks/radio_cards";
@@ -16,6 +17,7 @@ import { ScrollArea } from "./hooks/scroll_area";
 let hooks = {
   Dialog,
   Accordion,
+  AccordionRoot,
   Tabs,
   CheckboxCards,
   RadioCards,
@@ -27,22 +29,7 @@ let hooks = {
   ScrollArea
 };
 
-// Initialize LiveSocket if we are not inside Storybook iframe (which handles its own socket)
-// Or always if we want standalone views to work.
-if (!window.storybook_socket_initialized) {
-    let csrfToken = document.querySelector("meta[name='csrf-token']")?.getAttribute("content");
-    if (csrfToken) {
-        let liveSocket = new LiveSocket("/live", Socket, {
-            params: { _csrf_token: csrfToken },
-            hooks: hooks
-        });
-        liveSocket.connect();
-        window.liveSocket = liveSocket;
-        window.storybook_socket_initialized = true;
-    }
-}
-
-// Storybook integration (legacy)
+// Storybook integration
 (function() {
   window.storybook = {
     Hooks: hooks
