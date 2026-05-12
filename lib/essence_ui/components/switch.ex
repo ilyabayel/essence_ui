@@ -35,6 +35,7 @@ defmodule EssenceUI.Components.Switch do
   use Phoenix.Component
 
   alias EssenceUI.Helpers.ExtractProps
+  import EssenceUI.Primitives.Switch, only: [root: 1, thumb: 1]
   alias EssenceUI.SharedProps.ColorProps
   alias EssenceUI.SharedProps.HighContrastProps
   alias EssenceUI.SharedProps.MarginProps
@@ -50,6 +51,7 @@ defmodule EssenceUI.Components.Switch do
   HighContrastProps.attrs()
   MarginProps.attrs()
 
+  attr :id, :string, default: nil
   attr :size, :string,
     values: @sizes,
     default: "2",
@@ -72,13 +74,16 @@ defmodule EssenceUI.Components.Switch do
     default: false,
     doc: "Whether the switch is disabled."
 
+  attr :required, :boolean, default: false, doc: "Whether the switch is required."
+  attr :form, :string, default: nil, doc: "The form ID this switch belongs to."
+  attr :on_checked_change, :string, default: nil, doc: "LiveView event to push when the checked state changes."
   attr :name, :string, default: nil, doc: "Form name attribute."
   attr :value, :string, default: nil, doc: "Form value attribute."
   attr :class, :string, default: nil, doc: "Additional CSS classes to add to the element."
   attr :style, :string, default: ""
 
   attr :rest, :global,
-    include: ~w(id form required aria-label aria-labelledby aria-describedby),
+    include: ~w(aria-label aria-labelledby aria-describedby),
     doc: "Global attributes and event handlers."
 
   def switch(assigns) do
@@ -104,10 +109,8 @@ defmodule EssenceUI.Components.Switch do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    checked = assigns[:checked] || assigns[:default_checked]
-
-    # Determine checked state
-    checked_state = if checked, do: "checked", else: "unchecked"
+    # We ensure an id exists for the primitive and hook.
+    id = assigns[:id] || "switch-#{5 |> :crypto.strong_rand_bytes() |> Base.encode32(padding: false, case: :lower)}"
 
     # Build CSS classes
     class =
@@ -121,29 +124,30 @@ defmodule EssenceUI.Components.Switch do
 
     assigns =
       assign(assigns,
+        id: id,
         class: class,
         style: extracted.style,
-        checked_state: checked_state,
         color: assigns[:color] || false
       )
 
     ~H"""
-    <button
-      type="button"
-      role="switch"
-      aria-checked={@checked_state == "checked"}
-      data-state={@checked_state}
-      data-disabled={@disabled}
-      data-accent-color={@color}
-      class={@class}
-      style={@style <> "cursor: pointer;"}
+    <.root
+      id={@id}
+      checked={@checked}
+      default_checked={@default_checked}
+      disabled={@disabled}
+      required={@required}
+      form={@form}
+      on_checked_change={@on_checked_change}
       name={@name}
       value={@value}
-      disabled={@disabled}
+      class={@class}
+      style={@style}
+      data-accent-color={@color}
       {@rest}
     >
-      <div class="rt-SwitchThumb" data-state={@checked_state}></div>
-    </button>
+      <.thumb class="rt-SwitchThumb" />
+    </.root>
     """
   end
 end
