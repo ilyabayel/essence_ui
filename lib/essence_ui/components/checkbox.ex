@@ -36,7 +36,7 @@ defmodule EssenceUI.Components.Checkbox do
   use Phoenix.Component
 
   alias EssenceUI.Helpers.ExtractProps
-  alias EssenceUI.Primitives.Checkbox, as: CheckboxPrimitive
+  import EssenceUI.Primitives.Checkbox, only: [root: 1, indicator: 1]
   alias EssenceUI.SharedProps.ColorProps
   alias EssenceUI.SharedProps.HighContrastProps
   alias EssenceUI.SharedProps.MarginProps
@@ -111,11 +111,8 @@ defmodule EssenceUI.Components.Checkbox do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    # We use assign_new to ensure an id exists for the primitive and hook.
-    assigns =
-      assign_new(assigns, :id, fn ->
-        "checkbox-#{5 |> :crypto.strong_rand_bytes() |> Base.encode32(padding: false, case: :lower)}"
-      end)
+    # We ensure an id exists for the primitive and hook.
+    id = assigns[:id] || "checkbox-#{5 |> :crypto.strong_rand_bytes() |> Base.encode32(padding: false, case: :lower)}"
 
     # Build CSS classes
     class =
@@ -130,18 +127,21 @@ defmodule EssenceUI.Components.Checkbox do
 
     assigns =
       assign(assigns,
+        id: id,
         class: class,
         style: extracted.style,
         color: assigns[:color] || false
       )
 
     ~H"""
-    <CheckboxPrimitive.root
+    <.root
       id={@id}
       checked={@checked}
       default_checked={@default_checked}
       disabled={@disabled}
       required={@required}
+      form={@form}
+      on_checked_change={@on_checked_change}
       name={@name}
       value={@value}
       class={@class}
@@ -149,14 +149,14 @@ defmodule EssenceUI.Components.Checkbox do
       data-accent-color={@color}
       {@rest}
     >
-      <CheckboxPrimitive.indicator class="rt-BaseCheckboxIndicator rt-CheckboxIndicator">
+      <.indicator class="rt-BaseCheckboxIndicator rt-CheckboxIndicator">
         <svg
-          :if={@checked == true}
           width="9"
           height="9"
           viewBox="0 0 9 9"
           fill="currentcolor"
           xmlns="http://www.w3.org/2000/svg"
+          data-state="checked"
         >
           <path
             fill-rule="evenodd"
@@ -165,12 +165,12 @@ defmodule EssenceUI.Components.Checkbox do
           />
         </svg>
         <svg
-          :if={@checked == "indeterminate"}
           width="9"
           height="9"
           viewBox="0 0 9 9"
           fill="currentcolor"
           xmlns="http://www.w3.org/2000/svg"
+          data-state="indeterminate"
         >
           <path
             fill-rule="evenodd"
@@ -178,8 +178,8 @@ defmodule EssenceUI.Components.Checkbox do
             d="M0.75 4.5C0.75 4.08579 1.08579 3.75 1.5 3.75H7.5C7.91421 3.75 8.25 4.08579 8.25 4.5C8.25 4.91421 7.91421 5.25 7.5 5.25H1.5C1.08579 5.25 0.75 4.91421 0.75 4.5Z"
           />
         </svg>
-      </CheckboxPrimitive.indicator>
-    </CheckboxPrimitive.root>
+      </.indicator>
+    </.root>
     """
   end
 end

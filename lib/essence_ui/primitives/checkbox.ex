@@ -94,7 +94,7 @@ defmodule EssenceUI.Primitives.Checkbox do
     ~H"""
     <span
       data-essence-checkbox-indicator
-      style="pointer-events: none;"
+      style="pointer-events: none; display: flex; align-items: center; justify-content: center;"
       {@rest}
     >
       {render_slot(@inner_block)}
