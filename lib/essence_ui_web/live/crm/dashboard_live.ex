@@ -454,10 +454,13 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
             </.grid>
             <.flex direction="column" gap="1">
               <.text size="2" weight="bold">Source</.text>
-              <.select placeholder="Select source..." value="LinkedIn">
-                <:option value="LinkedIn" selected>LinkedIn</:option>
-                <:option value="Referral">Referral</:option>
-              </.select>
+              <.select_root id="candidate-source" value="LinkedIn">
+                <.select_trigger placeholder="Select source..." />
+                <.select_content>
+                  <.select_item value="LinkedIn">LinkedIn</.select_item>
+                  <.select_item value="Referral">Referral</.select_item>
+                </.select_content>
+              </.select_root>
             </.flex>
           </.flex>
         </:content>

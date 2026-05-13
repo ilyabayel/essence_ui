@@ -16,6 +16,7 @@ import { Tooltip } from "./hooks/tooltip";
 import { HoverCard } from "./hooks/hover_card";
 import { Popover } from "./hooks/popover";
 import { ScrollArea } from "./hooks/scroll_area";
+import { SelectRoot } from "./hooks/select_root";
 
 let hooks = {
   Dialog,
@@ -32,7 +33,8 @@ let hooks = {
   Tooltip,
   HoverCard,
   Popover,
-  ScrollArea
+  ScrollArea,
+  SelectRoot
 };
 
 // Storybook integration

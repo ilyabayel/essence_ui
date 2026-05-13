@@ -3,7 +3,7 @@ defmodule Storybook.Examples.SelectStory do
   use PhoenixStorybook.Story, :example
   use Phoenix.Component
 
-  import EssenceUI.Components, only: [select: 1]
+  import EssenceUI.Components
 
   def container,
     do:
@@ -13,9 +13,6 @@ defmodule Storybook.Examples.SelectStory do
        style: "display: block;",
        "data-gray-color": "slate",
        "data-accent-color": "indigo"}
-
-  attr :open, :boolean, default: false
-  attr :value, :string, default: nil
 
   @impl true
   def render(assigns) do
@@ -28,33 +25,25 @@ defmodule Storybook.Examples.SelectStory do
       data-accent-color="indigo"
       class="essence-ui"
     >
-      <.select
-        placeholder="Select a fruit"
-        on_toggle="toggle_open"
-        on_change="toggle_change"
-        value={@value}
-        open={@open}
-      >
-        <:option value="apple">Apple</:option>
-        <:option value="banana">Banana</:option>
-        <:option value="orange">Orange</:option>
-      </.select>
+      <.select_root id="example-select" value={@value} on_change="change">
+        <.select_trigger placeholder="Select a fruit" />
+        <.select_content>
+          <.select_item value="apple">Apple</.select_item>
+          <.select_item value="banana">Banana</.select_item>
+          <.select_item value="orange">Orange</.select_item>
+        </.select_content>
+      </.select_root>
     </div>
     """
   end
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, open: false, value: nil)}
+    {:ok, assign(socket, value: "apple")}
   end
 
   @impl true
-  def handle_event("toggle_open", _value, socket) do
-    {:noreply, assign(socket, :open, !socket.assigns.open)}
-  end
-
-  @impl true
-  def handle_event("toggle_change", %{"value" => value}, socket) do
-    {:noreply, assign(socket, open: false, value: value)}
+  def handle_event("change", %{"value" => value}, socket) do
+    {:noreply, assign(socket, value: value)}
   end
 end

@@ -1,14 +1,11 @@
 defmodule EssenceUI.Components.Select do
   @moduledoc """
   Select component styled per Radix Themes Select.
-
-  This is a basic, non-portal implementation that renders a trigger and an optional menu.
-  The `open` prop controls whether content is rendered. Overlay primitives will come later.
   """
-
   use Phoenix.Component
 
   alias EssenceUI.Helpers.ExtractProps
+  alias EssenceUI.Primitives.Select, as: SelectPrimitive
   alias EssenceUI.SharedProps.ColorProps
   alias EssenceUI.SharedProps.HighContrastProps
   alias EssenceUI.SharedProps.MarginProps
@@ -19,189 +16,234 @@ defmodule EssenceUI.Components.Select do
 
   @sizes ["1", "2", "3"]
   @trigger_variants ["surface", "classic", "soft", "ghost"]
-  @content_variants ["solid", "soft"]
 
-  ColorProps.attrs()
-  HighContrastProps.attrs()
-  MarginProps.attrs()
-
-  attr :size, :string, values: @sizes, default: "2", doc: "Control trigger/content size."
-  attr :trigger_variant, :string, values: @trigger_variants, default: "surface"
-  attr :content_variant, :string, values: @content_variants, default: "solid"
-  attr :placeholder, :string, default: nil
+  @doc """
+  The root container for the select component.
+  """
+  attr :id, :string, required: true
+  attr :value, :string, default: nil
+  attr :on_change, :string, default: nil
   attr :disabled, :boolean, default: false
-  attr :open, :boolean, default: false, doc: "Whether to render the content menu."
-  attr :on_toggle, :string, default: nil, doc: "Event handler for toggle."
-  attr :on_change, :string, default: nil, doc: "Event handler for change."
-  attr :value, :string, default: nil, doc: "The value of the selected option."
-
-  attr :class, :string, default: nil
-  attr :style, :string, default: ""
-
+  attr :dir, :string, values: ["ltr", "rtl"], default: "ltr"
+  attr :name, :string, default: nil
+  attr :required, :boolean, default: false
   attr :rest, :global
+  slot :inner_block, required: true
 
-  slot :option,
-    doc: "Option item in the menu. Use attributes: value, disabled, selected.",
-    required: false,
-    do: [
-      attr(:value, :string),
-      attr(:disabled, :boolean),
-      attr(:selected, :boolean)
-    ]
+  def select_root(assigns) do
+    ~H"""
+    <SelectPrimitive.root
+      id={@id}
+      value={@value}
+      phx-change={@on_change}
+      disabled={@disabled}
+      dir={@dir}
+      name={@name}
+      required={@required}
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </SelectPrimitive.root>
+    """
+  end
 
-  slot :label, doc: "Optional section label shown inside the menu."
-  slot :separator, doc: "Optional separator line between groups inside the menu."
+  @doc """
+  The trigger area that opens the select menu.
+  """
+  attr :variant, :string, values: @trigger_variants, default: "surface"
+  attr :size, :string, values: @sizes, default: "2"
+  attr :placeholder, :string, default: nil
+  attr :color, :string, default: nil
+  attr :class, :string, default: nil
+  attr :value, :string, default: nil, doc: "Initial value for SSR"
+  attr :rest, :global
+  slot :inner_block, required: false
 
-  def select(assigns) do
-    prop_defs =
-      %{
-        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true}
-      }
-      |> Map.merge(ColorProps.color_prop_def())
-      |> Map.merge(HighContrastProps.prop_defs())
-      |> Map.merge(MarginProps.prop_defs())
+  def select_trigger(assigns) do
+    prop_defs = %{
+      size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
+      variant: %{type: :enum, class: "rt-variant", values: @trigger_variants, default: "surface"}
+    }
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    class =
-      [
-        "rt-reset",
-        extracted.class
-      ]
-      |> Enum.filter(& &1)
-      |> Enum.join(" ")
-
-    selected_slot = Enum.find(assigns.option, &Map.get(&1, :selected))
-    has_selected = not is_nil(selected_slot)
-    data_placeholder = if not has_selected and assigns[:placeholder], do: true
-
-    content_id = "select-content-" <> Integer.to_string(System.unique_integer([:positive]))
-
-    root_style =
-      [extracted.style, "position: relative;", "display: inline-block;"]
-      |> Enum.reject(&(&1 in [nil, ""]))
-      |> Enum.join(" ")
-
     assigns =
       assign(assigns,
-        class: class,
-        style: root_style,
-        color: assigns[:color] || false,
-        selected_slot: selected_slot,
-        has_selected: has_selected,
-        data_placeholder: data_placeholder,
-        content_id: content_id,
-        high_contrast: extracted[:high_contrast] || false
+        class: ["rt-reset", "rt-SelectTrigger", extracted.class, assigns.class] |> Enum.filter(& &1) |> Enum.join(" "),
+        color: assigns[:color] || false
       )
 
     ~H"""
-    <div class={@class} style={@style} data-accent-color={@color}>
-      <button
-        type="button"
-        class={[
-          "rt-SelectTrigger",
-          "rt-variant-" <> @trigger_variant,
-          "rt-r-size-" <> @size,
-          "rt-reset"
-        ]}
-        {@rest}
-        phx-click={@on_toggle}
-        data-state={if @open, do: "open", else: "closed"}
-        data-placeholder={@data_placeholder}
-        disabled={@disabled}
-        aria-haspopup="listbox"
-        aria-expanded={@open}
-        aria-controls={@content_id}
-      >
-        <span class="rt-SelectTriggerInner">
-          <%= if @value do %>
-            {@value}
-          <% else %>
-            {@placeholder}
-          <% end %>
-        </span>
-        <span class="rt-SelectIcon" aria-hidden>
-          <!-- simple chevron icon -->
-          <svg
-            width="10"
-            height="6"
-            viewBox="0 0 10 6"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M1 1l4 4 4-4"
-              stroke="currentColor"
-              stroke-width="1.5"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </span>
-      </button>
-
-      <%= if @open do %>
-        <div
-          class={[
-            "rt-SelectContent",
-            "rt-variant-" <> @content_variant,
-            "rt-r-size-" <> @size,
-            @high_contrast && "rt-high-contrast"
-          ]}
-          style="position: absolute; top: calc(100% + var(--space-1)); left: 0; min-width: 100%;"
-          data-side="bottom"
-          id={@content_id}
-          role="listbox"
+    <SelectPrimitive.trigger
+      id={@rest[:id] || "select-trigger-#{System.unique_integer([:positive])}"}
+      class={[@class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
+      data-accent-color={@color}
+      {Map.delete(@rest, :class)}
+    >
+      <span class="rt-SelectTriggerInner">
+        <SelectPrimitive.value placeholder={@placeholder} />
+      </span>
+      <SelectPrimitive.icon class="rt-SelectIcon">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <div class="rt-SelectViewport">
-            <%= for label <- @label do %>
-              <div class="rt-SelectLabel">{render_slot(label)}</div>
-            <% end %>
+          <path
+            d="M3 4.5L6 7.5L9 4.5"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </SelectPrimitive.icon>
+    </SelectPrimitive.trigger>
+    """
+  end
 
-            <%= for _sep <- @separator do %>
-              <div class="rt-SelectSeparator" role="separator"></div>
-            <% end %>
+  @content_variants ["solid", "soft"]
 
-            <%= for opt <- @option do %>
-              <div
-                class="rt-SelectItem"
-                data-disabled={Map.get(opt, :disabled) || nil}
-                role="option"
-                aria-selected={Map.get(opt, :selected) || false}
-                phx-click={@on_change}
-                phx-value-value={Map.get(opt, :value)}
-                onmouseenter="this.setAttribute('data-highlighted','')"
-                onmouseleave="this.removeAttribute('data-highlighted')"
-              >
-                <%= if Map.get(opt, :selected) do %>
-                  <span class="rt-SelectItemIndicator" aria-hidden>
-                    <svg
-                      class="rt-SelectItemIndicatorIcon"
-                      width="10"
-                      height="10"
-                      viewBox="0 0 10 10"
-                      fill="currentColor"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M2 5l2 2 4-4"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </span>
-                <% end %>
-                <span>{render_slot(opt)}</span>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-    </div>
+  @doc """
+  The select menu content.
+  """
+  attr :variant, :string, values: @content_variants, default: "solid"
+  attr :size, :string, values: @sizes, default: "2"
+  attr :position, :string, values: ["item-aligned", "popper"], default: "item-aligned"
+  attr :class, :string, default: nil
+  ColorProps.attrs()
+  HighContrastProps.attrs()
+  attr :rest, :global
+  slot :inner_block, required: true
+
+  def select_content(assigns) do
+    prop_defs =
+      %{
+        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
+        variant: %{type: :enum, class: "rt-variant", values: @content_variants, default: "solid"}
+      }
+      |> Map.merge(ColorProps.color_prop_def())
+      |> Map.merge(HighContrastProps.prop_defs())
+
+    extracted = ExtractProps.call(assigns, prop_defs)
+
+    assigns =
+      assign(assigns,
+        class:
+          ["rt-SelectContent", extracted.class, assigns.class]
+          |> Enum.filter(& &1)
+          |> Enum.join(" ")
+      )
+
+    ~H"""
+    <SelectPrimitive.content
+      id={@rest[:id] || "select-content-#{System.unique_integer([:positive])}"}
+      class={[@class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
+      data-accent-color={assigns[:color]}
+      data-position={@position}
+      {Map.delete(@rest, :class)}
+    >
+      <SelectPrimitive.viewport class="rt-SelectViewport">
+        {render_slot(@inner_block)}
+      </SelectPrimitive.viewport>
+    </SelectPrimitive.content>
+    """
+  end
+
+  @doc """
+  An item in the select menu.
+  """
+  attr :value, :string, required: true
+  attr :disabled, :boolean, default: false
+  attr :class, :string, default: nil
+  attr :rest, :global
+  slot :inner_block, required: true
+
+  def select_item(assigns) do
+    ~H"""
+    <SelectPrimitive.item
+      value={@value}
+      disabled={@disabled}
+      class={
+        ["rt-reset", "rt-SelectItem", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")
+      }
+      {Map.delete(@rest, :class)}
+    >
+      <SelectPrimitive.item_indicator class="rt-SelectItemIndicator">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="rt-SelectItemIndicatorIcon"
+        >
+          <path
+            d="M10 3L4.5 8.5L2 6"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </SelectPrimitive.item_indicator>
+      <SelectPrimitive.item_text>
+        {render_slot(@inner_block)}
+      </SelectPrimitive.item_text>
+    </SelectPrimitive.item>
+    """
+  end
+
+  @doc """
+  A group of items.
+  """
+  attr :class, :string, default: nil
+  attr :rest, :global
+  slot :inner_block, required: true
+
+  def select_group(assigns) do
+    ~H"""
+    <SelectPrimitive.group
+      class={["rt-SelectGroup", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </SelectPrimitive.group>
+    """
+  end
+
+  @doc """
+  A label for a group.
+  """
+  attr :class, :string, default: nil
+  attr :rest, :global
+  slot :inner_block, required: true
+
+  def select_label(assigns) do
+    ~H"""
+    <SelectPrimitive.label
+      class={["rt-SelectLabel", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </SelectPrimitive.label>
+    """
+  end
+
+  @doc """
+  A visual separator between items or groups.
+  """
+  attr :class, :string, default: nil
+  attr :rest, :global
+
+  def select_separator(assigns) do
+    ~H"""
+    <SelectPrimitive.separator
+      class={["rt-SelectSeparator", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
+      {@rest}
+    />
     """
   end
 end

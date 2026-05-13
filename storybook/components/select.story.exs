@@ -1,126 +1,181 @@
-defmodule Storybook.Components.SelectStory do
+defmodule Storybook.Components.Select do
   @moduledoc false
   use PhoenixStorybook.Story, :component
 
   alias EssenceUI.Components.Select
 
-  def function, do: &Select.select/1
+  def function, do: &Select.select_root/1
+
+  def imports,
+    do: [
+      {EssenceUI.Components.Flex, flex: 1},
+      {EssenceUI.Components.Grid, grid: 1},
+      {Select, select_trigger: 1},
+      {Select, select_content: 1},
+      {Select, select_item: 1},
+      {Select, select_group: 1},
+      {Select, select_label: 1},
+      {Select, select_separator: 1}
+    ]
 
   def container,
     do:
       {:div,
        "data-scaling": "100%",
        "data-radius": "medium",
-       style: "display: block;",
+       style: "display: grid; gap: 16px; min-height: 400px; padding: 24px;",
        "data-gray-color": "slate",
        "data-accent-color": "indigo"}
-
-  def layout, do: :one_column
-
-  def imports, do: [{EssenceUI.Components.Box, box: 1}]
 
   def variations do
     [
       %Variation{
         id: :default,
-        description: "Default select (closed)",
+        description: "Default select",
         template: """
-        <.select placeholder="Select a fruit">
-          <:option value="apple">Apple</:option>
-          <:option value="banana">Banana</:option>
-          <:option value="orange">Orange</:option>
-        </.select>
+        <.select_root id="select-default" value="apple">
+          <.select_trigger placeholder="Select a fruit..." />
+          <.select_content>
+            <.select_group>
+              <.select_label>Fruits</.select_label>
+              <.select_item value="apple">Apple</.select_item>
+              <.select_item value="orange">Orange</.select_item>
+              <.select_item value="banana">Banana</.select_item>
+            </.select_group>
+            <.select_separator />
+            <.select_group>
+              <.select_label>Vegetables</.select_label>
+              <.select_item value="carrot">Carrot</.select_item>
+              <.select_item value="potato">Potato</.select_item>
+            </.select_group>
+          </.select_content>
+        </.select_root>
         """
       },
       %Variation{
-        id: :open,
-        description: "Open select with content",
+        id: :size,
+        description: "Size",
         template: """
-        <.box mb="200px">
-          <.select placeholder="Select a fruit" open>
-            <:label>Fruits</:label>
-            <:option value="apple" selected>Apple</:option>
-            <:option value="banana">Banana</:option>
-            <:option value="orange">Orange</:option>
-            <:separator />
-            <:label>Citrus</:label>
-            <:option value="lemon">Lemon</:option>
-          </.select>
-        </.box>
+        <.flex gap="4" align="center">
+          <.select_root id="select-size-1" value="apple">
+            <.select_trigger size="1" />
+            <.select_content size="1">
+              <.select_item value="apple">Apple</.select_item>
+              <.select_item value="orange">Orange</.select_item>
+            </.select_content>
+          </.select_root>
+
+          <.select_root id="select-size-2" value="apple">
+            <.select_trigger size="2" />
+            <.select_content size="2">
+              <.select_item value="apple">Apple</.select_item>
+              <.select_item value="orange">Orange</.select_item>
+            </.select_content>
+          </.select_root>
+
+          <.select_root id="select-size-3" value="apple">
+            <.select_trigger size="3" />
+            <.select_content size="3">
+              <.select_item value="apple">Apple</.select_item>
+              <.select_item value="orange">Orange</.select_item>
+            </.select_content>
+          </.select_root>
+        </.flex>
         """
       },
       %Variation{
-        id: :sizes,
-        description: "Sizes",
+        id: :variant,
+        description: "Variant",
         template: """
-        <.select placeholder="Size 1" open size="1">
-          <:option value="1">One</:option>
-          <:option value="2" selected>Two</:option>
-          <:option value="3">Three</:option>
-        </.select>
+        <.flex gap="4" align="center">
+          <.select_root id="select-variant-surface" value="apple">
+            <.select_trigger variant="surface" />
+            <.select_content variant="solid">
+              <.select_item value="apple">Apple</.select_item>
+              <.select_item value="orange">Orange</.select_item>
+            </.select_content>
+          </.select_root>
 
-        <.select placeholder="Size 2" open size="2">
-          <:option value="1">One</:option>
-          <:option value="2" selected>Two</:option>
-          <:option value="3">Three</:option>
-        </.select>
+          <.select_root id="select-variant-soft" value="apple">
+            <.select_trigger variant="soft" />
+            <.select_content variant="soft">
+              <.select_item value="apple">Apple</.select_item>
+              <.select_item value="orange">Orange</.select_item>
+            </.select_content>
+          </.select_root>
 
-        <.select placeholder="Size 3" open size="3">
-          <:option value="1">One</:option>
-          <:option value="2" selected>Two</:option>
-          <:option value="3">Three</:option>
-        </.select>
+          <.select_root id="select-variant-outline" value="apple">
+            <.select_trigger variant="classic" />
+            <.select_content variant="solid">
+              <.select_item value="apple">Apple</.select_item>
+              <.select_item value="orange">Orange</.select_item>
+            </.select_content>
+          </.select_root>
+        </.flex>
         """
       },
       %Variation{
-        id: :trigger_variants,
-        description: "Trigger variants",
+        id: :color,
+        description: "Color",
         template: """
-        <div style="margin-bottom: 10rem;">
-          <.select placeholder="Surface" open trigger_variant="surface">
-            <:option value="a" selected>A</:option>
-            <:option value="b">B</:option>
-          </.select>
-        </div>
+        <.flex gap="4" wrap="wrap">
+          <.select_root id="select-color-indigo" value="apple">
+            <.select_trigger color="indigo" />
+            <.select_content color="indigo">
+              <.select_item value="apple">Apple</.select_item>
+              <.select_item value="orange">Orange</.select_item>
+            </.select_content>
+          </.select_root>
 
-        <.select placeholder="Classic" open trigger_variant="classic">
-          <:option value="a" selected>A</:option>
-          <:option value="b">B</:option>
-        </.select>
+          <.select_root id="select-color-cyan" value="apple">
+            <.select_trigger color="cyan" />
+            <.select_content color="cyan">
+              <.select_item value="apple">Apple</.select_item>
+              <.select_item value="orange">Orange</.select_item>
+            </.select_content>
+          </.select_root>
 
-        <.select placeholder="Soft" open trigger_variant="soft">
-          <:option value="a" selected>A</:option>
-          <:option value="b">B</:option>
-        </.select>
+          <.select_root id="select-color-orange" value="apple">
+            <.select_trigger color="orange" />
+            <.select_content color="orange">
+              <.select_item value="apple">Apple</.select_item>
+              <.select_item value="orange">Orange</.select_item>
+            </.select_content>
+          </.select_root>
 
-        <.select placeholder="Ghost" open trigger_variant="ghost">
-          <:option value="a" selected>A</:option>
-          <:option value="b">B</:option>
-        </.select>
+          <.select_root id="select-color-crimson" value="apple">
+            <.select_trigger color="crimson" />
+            <.select_content color="crimson">
+              <.select_item value="apple">Apple</.select_item>
+              <.select_item value="orange">Orange</.select_item>
+            </.select_content>
+          </.select_root>
+        </.flex>
         """
       },
       %Variation{
-        id: :content_variants,
-        description: "Menu variants",
+        id: :position,
+        description: "Position",
         template: """
-        <.select placeholder="Solid" open content_variant="solid">
-          <:option value="a" selected>A</:option>
-          <:option value="b">B</:option>
-        </.select>
+        <.flex gap="4">
+          <.select_root id="select-position-item-aligned" value="apple">
+            <.select_trigger placeholder="Item aligned (default)" />
+            <.select_content position="item-aligned">
+              <.select_item value="apple">Apple</.select_item>
+              <.select_item value="orange">Orange</.select_item>
+              <.select_item value="banana">Banana</.select_item>
+            </.select_content>
+          </.select_root>
 
-        <.select placeholder="Soft" open content_variant="soft">
-          <:option value="a" selected>A</:option>
-          <:option value="b">B</:option>
-        </.select>
-        """
-      },
-      %Variation{
-        id: :disabled,
-        description: "Disabled trigger",
-        template: """
-        <.select placeholder="Disabled" disabled>
-          <:option value="x">X</:option>
-        </.select>
+          <.select_root id="select-position-popper" value="apple">
+            <.select_trigger placeholder="Popper" />
+            <.select_content position="popper">
+              <.select_item value="apple">Apple</.select_item>
+              <.select_item value="orange">Orange</.select_item>
+              <.select_item value="banana">Banana</.select_item>
+            </.select_content>
+          </.select_root>
+        </.flex>
         """
       }
     ]

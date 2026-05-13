@@ -3,10 +3,11 @@ import { defineConfig } from "@playwright/test";
 export default defineConfig({
   testDir: "./test",
   use: {
-    baseURL: "http://localhost:4000",
+    baseURL: "http://127.0.0.1:4000",
   },
   webServer: {
-    url: "http://localhost:4000",
+    command: "mix phx.server",
+    url: "http://127.0.0.1:4000",
     reuseExistingServer: !process.env.CI,
   },
 });
