@@ -1,10 +1,12 @@
 defmodule EssenceUI.Primitives do
+  @moduledoc false
   use Phoenix.Component
 
   defmacro __using__(_) do
     quote do
-      import EssenceUI.Primitives
       use Phoenix.Component
+
+      import EssenceUI.Primitives
     end
   end
 

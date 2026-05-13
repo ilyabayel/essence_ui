@@ -1,11 +1,13 @@
 defmodule EssenceUI.Components.SwitchTest do
   use EssenceUIWeb.ConnCase, async: true
+
   import Phoenix.LiveViewTest
+
   alias EssenceUI.Components.Switch
 
   test "renders switch component" do
     html = render_component(&Switch.switch/1, %{id: "s1"})
-    
+
     assert html =~ ~s[button id="s1"]
     assert html =~ ~s[phx-hook="SwitchRoot"]
     assert html =~ ~s[role="switch"]
@@ -16,15 +18,16 @@ defmodule EssenceUI.Components.SwitchTest do
   end
 
   test "renders with custom props" do
-    html = render_component(&Switch.switch/1, %{
-      id: "s2",
-      size: "3",
-      variant: "soft",
-      color: "blue",
-      high_contrast: true,
-      m: "2"
-    })
-    
+    html =
+      render_component(&Switch.switch/1, %{
+        id: "s2",
+        size: "3",
+        variant: "soft",
+        color: "blue",
+        high_contrast: true,
+        m: "2"
+      })
+
     assert html =~ "rt-r-size-3"
     assert html =~ "rt-variant-soft"
     assert html =~ ~s(data-accent-color="blue")

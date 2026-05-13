@@ -19,6 +19,7 @@ defmodule Storybook.Components.Radio do
         id: :default,
         description: "Default radio button",
         attributes: %{
+          id: "radio-single-default",
           name: "default_example",
           value: "option1"
         }
@@ -27,6 +28,7 @@ defmodule Storybook.Components.Radio do
         id: :checked,
         description: "Checked radio button",
         attributes: %{
+          id: "radio-single-checked",
           name: "checked_example",
           value: "option2",
           checked: true
@@ -36,6 +38,7 @@ defmodule Storybook.Components.Radio do
         id: :disabled,
         description: "Disabled radio button",
         attributes: %{
+          id: "radio-single-disabled",
           name: "disabled_example",
           value: "option3",
           disabled: true
@@ -45,6 +48,7 @@ defmodule Storybook.Components.Radio do
         id: :disabled_checked,
         description: "Disabled and checked radio button",
         attributes: %{
+          id: "radio-single-disabled-checked",
           name: "disabled_checked_example",
           value: "option4",
           disabled: true,
@@ -111,6 +115,7 @@ defmodule Storybook.Components.Radio do
         id: :high_contrast,
         description: "High contrast variant",
         attributes: %{
+          id: "radio-single-high-contrast",
           name: "contrast_example",
           value: "high_contrast",
           checked: true,

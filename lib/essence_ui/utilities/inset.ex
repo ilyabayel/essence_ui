@@ -32,20 +32,32 @@ defmodule EssenceUI.Utilities.Inset do
   @doc """
   Renders an inset utility container.
   """
-  attr :side, :string, values: @sides, default: "all"
-  attr :clip, :string, values: @clips, default: "border-box"
-  attr :class, :string, default: nil
-  attr :style, :string, default: nil
+  attr(:side, :string, values: @sides, default: "all")
+  attr(:clip, :string, values: @clips, default: "border-box")
+  attr(:class, :string, default: nil)
+  attr(:style, :string, default: nil)
   MarginProps.attrs()
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def inset(assigns) do
     prop_defs =
       Map.merge(
         %{
-          side: %{type: :enum, class: "rt-r-side", values: @sides, default: "all", responsive: true},
-          clip: %{type: :enum, class: "rt-r-clip", values: @clips, default: "border-box", responsive: true}
+          side: %{
+            type: :enum,
+            class: "rt-r-side",
+            values: @sides,
+            default: "all",
+            responsive: true
+          },
+          clip: %{
+            type: :enum,
+            class: "rt-r-clip",
+            values: @clips,
+            default: "border-box",
+            responsive: true
+          }
         },
         MarginProps.prop_defs()
       )

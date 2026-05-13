@@ -17,6 +17,7 @@ import { HoverCard } from "./hooks/hover_card";
 import { Popover } from "./hooks/popover";
 import { ScrollArea } from "./hooks/scroll_area";
 import { SelectRoot } from "./hooks/select_root";
+import { RadioGroupRoot } from "./hooks/radio_group_root";
 
 let hooks = {
   Dialog,
@@ -34,7 +35,8 @@ let hooks = {
   HoverCard,
   Popover,
   ScrollArea,
-  SelectRoot
+  SelectRoot,
+  RadioGroupRoot
 };
 
 // Storybook integration

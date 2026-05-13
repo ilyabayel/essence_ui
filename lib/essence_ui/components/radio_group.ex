@@ -1,44 +1,11 @@
 defmodule EssenceUI.Components.RadioGroup do
   @moduledoc """
-  A group of radio buttons where only one can be selected at a time.
-
-  Based on Radix UI Themes Radio Group component with support for various sizes, variants,
-  and colors. Radio Group provides layout and state management for a collection of
-  radio buttons, ensuring only one can be selected at a time.
-
-  ## Examples
-
-      <.radio_group name="theme" default_value="light">
-        <.radio_group_item value="light">Light</.radio_group_item>
-        <.radio_group_item value="dark">Dark</.radio_group_item>
-        <.radio_group_item value="system">System</.radio_group_item>
-      </.radio_group>
-
-      <.radio_group name="size" size="3" variant="soft" color="blue" default_value="medium">
-        <.radio_group_item value="small">Small</.radio_group_item>
-        <.radio_group_item value="medium">Medium</.radio_group_item>
-        <.radio_group_item value="large">Large</.radio_group_item>
-      </.radio_group>
-
-  ## Props
-
-  - `size` - Radio button size: "1", "2", "3" (default: "2")
-  - `variant` - Radio variant: "surface", "classic", "soft" (default: "surface")
-  - `color` - Color theme from accent color palette (default: none)
-  - `high_contrast` - Increase color contrast (default: false)
-  - `default_value` - Initial selected value
-  - `value` - Controlled selected value
-  - `disabled` - Whether the entire group is disabled
-  - `name` - Form name attribute (required for form submission)
-  - Plus margin props (m, mx, my, mt, mr, mb, ml) for spacing control
+  Radio Group component styled per Radix Themes Radio Group.
   """
-
   use Phoenix.Component
 
-  import EssenceUI.Components.Radio, only: [radio: 1]
-  import EssenceUI.Components.Text, only: [text: 1]
-
   alias EssenceUI.Helpers.ExtractProps
+  alias EssenceUI.Primitives.RadioGroup, as: RadioGroupPrimitive
   alias EssenceUI.SharedProps.ColorProps
   alias EssenceUI.SharedProps.HighContrastProps
   alias EssenceUI.SharedProps.MarginProps
@@ -50,108 +17,150 @@ defmodule EssenceUI.Components.RadioGroup do
   @sizes ["1", "2", "3"]
   @variants ["surface", "classic", "soft"]
 
-  ColorProps.attrs()
-  HighContrastProps.attrs()
+  @doc """
+  The root container for the radio group.
+  """
+  attr :id, :string, required: true
+  attr :size, :string, values: @sizes, default: "2"
+  attr :variant, :string, values: @variants, default: "surface"
+  attr :value, :string, default: nil
+  attr :default_value, :string, default: nil
+  attr :on_change, :string, default: nil
+  attr :disabled, :boolean, default: false
+  attr :name, :string, default: nil
+  attr :required, :boolean, default: false
+  attr :orientation, :string, values: ["horizontal", "vertical", "undefined"], default: "vertical"
+  attr :color, :string, default: nil
+  attr :high_contrast, :boolean, default: false
+  attr :as_child, :boolean, default: false
+  attr :class, :string, default: nil
   MarginProps.attrs()
+  attr :rest, :global
+  slot :inner_block, required: true
 
-  attr :size, :string,
-    values: @sizes,
-    default: "2",
-    doc: "Radio button size from 1 to 3. Controls overall dimensions and indicator size."
-
-  attr :variant, :string,
-    values: @variants,
-    default: "surface",
-    doc: "Visual style variant. One of 'surface', 'classic', or 'soft'."
-
-  attr :default_value, :string,
-    default: nil,
-    doc: "Initial selected value."
-
-  attr :value, :string,
-    default: nil,
-    doc: "Controlled selected value."
-
-  attr :disabled, :boolean,
-    default: false,
-    doc: "Whether the entire radio group is disabled."
-
-  attr :name, :string, required: true, doc: "Form name attribute for the radio group."
-  attr :class, :string, default: nil, doc: "Additional CSS classes to add to the element."
-  attr :style, :string, default: ""
-
-  attr :rest, :global,
-    include: ~w(id form aria-label aria-labelledby aria-describedby),
-    doc: "Global attributes and event handlers."
-
-  slot :item, required: true, doc: "Radio group item"
-
-  def radio_group(assigns) do
+  def radio_group_root(assigns) do
     prop_defs =
-      %{
-        size: %{
-          type: :enum,
-          class: "rt-r-size",
-          values: @sizes,
-          default: "2",
-          responsive: true
+      Map.merge(
+        %{
+          size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
+          variant: %{type: :enum, class: "rt-variant", values: @variants, default: "surface"},
+          high_contrast: %{type: :boolean, class: "rt-high-contrast"}
         },
-        variant: %{
-          type: :enum,
-          class: "rt-variant",
-          values: @variants,
-          default: "surface"
-        }
-      }
-      |> Map.merge(ColorProps.color_prop_def())
-      |> Map.merge(HighContrastProps.prop_defs())
-      |> Map.merge(MarginProps.prop_defs())
+        MarginProps.prop_defs()
+      )
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
     selected_value = assigns[:value] || assigns[:default_value]
 
-    # Build CSS classes
-    class =
-      [
-        "rt-RadioGroupRoot",
-        extracted.class
-      ]
-      |> Enum.filter(& &1)
-      |> Enum.join(" ")
-
     assigns =
       assign(assigns,
-        class: class,
+        class: ["rt-RadioGroupRoot", extracted.class] |> Enum.filter(& &1) |> Enum.join(" "),
         style: extracted.style,
-        selected_value: selected_value,
-        color: assigns[:color] || false
+        color: assigns[:color],
+        current_value: selected_value
       )
 
     ~H"""
-    <div
-      role="radiogroup"
-      data-accent-color={@color}
+    <RadioGroupPrimitive.root
+      id={@id}
+      value={@current_value}
+      disabled={@disabled}
+      name={@name}
+      required={@required}
+      orientation={@orientation}
       class={@class}
       style={@style}
-      tabindex="0"
+      data-accent-color={@color}
+      data-on-value-change={@on_change}
       {@rest}
     >
-      <%= for item <- @item do %>
-        <.text as="label" class="rt-RadioGroupItem" style="align-items: center;" size={@size}>
-          <.radio
-            name={@name}
-            value={item[:value]}
-            checked={item[:value] == @selected_value}
-            disabled={@disabled || item[:disabled]}
-            size={@size}
-          />
-          <span class="rt-RadioGroupItemInner">
-            {render_slot(item)}
-          </span>
-        </.text>
-      <% end %>
-    </div>
+      {render_slot(@inner_block)}
+    </RadioGroupPrimitive.root>
+    """
+  end
+
+  @doc """
+  An item in the radio group.
+  """
+  attr :id, :string, default: nil
+  attr :value, :string, required: true
+  attr :disabled, :boolean, default: false
+  attr :checked, :boolean, default: false
+  attr :size, :string, values: @sizes, default: "2"
+  attr :variant, :string, values: @variants, default: "surface"
+  attr :color, :string, default: nil
+  attr :high_contrast, :boolean, default: nil
+  attr :class, :string, default: nil
+  MarginProps.attrs()
+  attr :rest, :global
+  slot :inner_block, required: false
+
+  def radio_group_item(assigns) do
+    # Size and variant classes are handled differently for label vs button
+    size = assigns[:size] || "2"
+    variant = assigns[:variant] || "surface"
+    size_class = "rt-r-size-#{size}"
+    variant_class = "rt-variant-#{variant}"
+    high_contrast_class = if assigns[:high_contrast], do: "rt-high-contrast"
+
+    prop_defs =
+      Map.merge(
+        %{
+          size: %{type: :enum, class: "rt-r-size", values: @sizes, responsive: true},
+          variant: %{type: :enum, class: "rt-variant", values: @variants, responsive: true},
+          high_contrast: %{type: :boolean, class: "rt-high-contrast"}
+        },
+        MarginProps.prop_defs()
+      )
+
+    # These are used for responsive logic and style extraction
+    extracted = ExtractProps.call(assigns, prop_defs)
+    assigns = assign_new(assigns, :id, fn -> "radio-item-#{System.unique_integer([:positive])}" end)
+
+    # We manually build classes to match Radix Themes precisely
+    # Label gets: rt-RadioGroupItem rt-Text rt-r-size-*
+    # Button gets: rt-reset rt-BaseRadioRoot rt-r-size-* rt-variant-* [rt-high-contrast]
+
+    assigns =
+      assign(assigns,
+        label_class: ["rt-RadioGroupItem", "rt-Text", size_class, assigns.class] |> Enum.filter(& &1) |> Enum.join(" "),
+        button_class:
+          ["rt-reset", "rt-BaseRadioRoot", size_class, variant_class, high_contrast_class]
+          |> Enum.filter(& &1)
+          |> Enum.join(" "),
+        style: extracted.style,
+        color: assigns[:color]
+      )
+
+    ~H"""
+    <%= if render_slot(@inner_block) != "" do %>
+      <label class={@label_class} style={@style} for={@id}>
+        <RadioGroupPrimitive.item
+          id={@id}
+          value={@value}
+          disabled={@disabled}
+          checked={@checked}
+          class={@button_class}
+          data-accent-color={@color}
+          {@rest}
+        />
+        <span class="rt-RadioGroupItemInner">
+          {render_slot(@inner_block)}
+        </span>
+      </label>
+    <% else %>
+      <RadioGroupPrimitive.item
+        id={@id}
+        value={@value}
+        disabled={@disabled}
+        checked={@checked}
+        class={["rt-RadioGroupItem", @button_class, @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+        style={@style}
+        data-accent-color={@color}
+        {@rest}
+      />
+    <% end %>
     """
   end
 end

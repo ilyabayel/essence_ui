@@ -19,8 +19,9 @@ defmodule EssenceUI.Components do
     * `icon_button/1` - See `EssenceUI.Components.IconButton`
     * `progress/1` - See `EssenceUI.Components.Progress`
     * `radio/1` - See `EssenceUI.Components.Radio`
+    * `radio_group_root/1` - See `EssenceUI.Components.RadioGroup`
+    * `radio_group_item/1` - See `EssenceUI.Components.RadioGroup`
     * `radio_cards_root/1` - See `EssenceUI.Components.RadioCards`
-    * `radio_cards_item/1` - See `EssenceUI.Components.RadioCards`
     * `radio_group/1` - See `EssenceUI.Components.RadioGroup`
     * `segmented_control/1` - See `EssenceUI.Components.SegmentedControl`
     * `select_root/1` - See `EssenceUI.Components.Select`
@@ -85,7 +86,9 @@ defmodule EssenceUI.Components do
   alias EssenceUI.Components.HoverCard
   alias EssenceUI.Components.Popover
   alias EssenceUI.Components.RadioCards
+  alias EssenceUI.Components.RadioGroup
   alias EssenceUI.Components.ScrollArea
+  alias EssenceUI.Components.Select
   alias EssenceUI.Components.Table
   alias EssenceUI.Components.TabNav
   alias EssenceUI.Components.Tabs
@@ -133,15 +136,16 @@ defmodule EssenceUI.Components do
   defdelegate radio(assigns), to: EssenceUI.Components.Radio
   defdelegate radio_cards_root(assigns), to: RadioCards
   defdelegate radio_cards_item(assigns), to: RadioCards
-  defdelegate radio_group(assigns), to: EssenceUI.Components.RadioGroup
+  defdelegate radio_group_root(assigns), to: RadioGroup
+  defdelegate radio_group_item(assigns), to: RadioGroup
   defdelegate segmented_control(assigns), to: EssenceUI.Components.SegmentedControl
-  defdelegate select_root(assigns), to: EssenceUI.Components.Select
-  defdelegate select_trigger(assigns), to: EssenceUI.Components.Select
-  defdelegate select_content(assigns), to: EssenceUI.Components.Select
-  defdelegate select_item(assigns), to: EssenceUI.Components.Select
-  defdelegate select_group(assigns), to: EssenceUI.Components.Select
-  defdelegate select_label(assigns), to: EssenceUI.Components.Select
-  defdelegate select_separator(assigns), to: EssenceUI.Components.Select
+  defdelegate select_root(assigns), to: Select
+  defdelegate select_trigger(assigns), to: Select
+  defdelegate select_content(assigns), to: Select
+  defdelegate select_item(assigns), to: Select
+  defdelegate select_group(assigns), to: Select
+  defdelegate select_label(assigns), to: Select
+  defdelegate select_separator(assigns), to: Select
   defdelegate separator(assigns), to: EssenceUI.Components.Separator
   defdelegate skeleton(assigns), to: EssenceUI.Components.Skeleton
   defdelegate scroll_area(assigns), to: ScrollArea

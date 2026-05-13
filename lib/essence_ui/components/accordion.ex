@@ -6,8 +6,8 @@ defmodule EssenceUI.Components.Accordion do
   """
   use Phoenix.Component
 
-  alias EssenceUI.Primitives.Accordion, as: Primitive
   alias EssenceUI.Helpers.ExtractProps
+  alias EssenceUI.Primitives.Accordion, as: Primitive
   alias EssenceUI.SharedProps.MarginProps
 
   require MarginProps
@@ -62,14 +62,12 @@ defmodule EssenceUI.Components.Accordion do
       {@rest}
     >
       <%= for item <- @item do %>
-        <%
-          is_open = item.value in @default_values
-          state = if is_open, do: "open", else: "closed"
-          # Unique IDs for ARIA and hooks
-          root_id = "#{@accordion_id}-item-#{item.value}"
-          content_id = "#{@accordion_id}-content-#{item.value}"
-          trigger_id = "#{@accordion_id}-trigger-#{item.value}"
-        %>
+        <% is_open = item.value in @default_values
+        state = if is_open, do: "open", else: "closed"
+        # Unique IDs for ARIA and hooks
+        root_id = "#{@accordion_id}-item-#{item.value}"
+        content_id = "#{@accordion_id}-content-#{item.value}"
+        trigger_id = "#{@accordion_id}-trigger-#{item.value}" %>
         <Primitive.item
           id={root_id}
           value={item.value}

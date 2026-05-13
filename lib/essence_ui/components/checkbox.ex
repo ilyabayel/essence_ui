@@ -35,8 +35,9 @@ defmodule EssenceUI.Components.Checkbox do
 
   use Phoenix.Component
 
-  alias EssenceUI.Helpers.ExtractProps
   import EssenceUI.Primitives.Checkbox, only: [root: 1, indicator: 1]
+
+  alias EssenceUI.Helpers.ExtractProps
   alias EssenceUI.SharedProps.ColorProps
   alias EssenceUI.SharedProps.HighContrastProps
   alias EssenceUI.SharedProps.MarginProps

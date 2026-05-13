@@ -1,11 +1,13 @@
 defmodule EssenceUI.Primitives.Checkbox do
+  @moduledoc false
   use EssenceUI.Primitives
 
   @doc """
   The root container for the checkbox.
   """
   attr :id, :string, required: true
-  attr :checked, :any, default: nil # true | false | "indeterminate"
+  # true | false | "indeterminate"
+  attr :checked, :any, default: nil
   attr :default_checked, :any, default: false
   attr :disabled, :boolean, default: false
   attr :required, :boolean, default: false
@@ -58,6 +60,7 @@ defmodule EssenceUI.Primitives.Checkbox do
   attr :on_checked_change, :string, default: nil
   attr :rest, :global
   slot :inner_block, required: true
+
   def trigger(assigns) do
     state = get_state(assigns[:checked] || assigns[:default_checked])
     assigns = assign(assigns, :state, state)
@@ -90,6 +93,7 @@ defmodule EssenceUI.Primitives.Checkbox do
   """
   attr :rest, :global
   slot :inner_block, required: true
+
   def indicator(assigns) do
     ~H"""
     <span
@@ -113,6 +117,7 @@ defmodule EssenceUI.Primitives.Checkbox do
   attr :value, :string, default: "on"
   attr :form, :string, default: nil
   attr :rest, :global
+
   def bubble_input(assigns) do
     checked = (assigns[:checked] || assigns[:default_checked]) == true
     assigns = assign(assigns, :checked_attr, checked)

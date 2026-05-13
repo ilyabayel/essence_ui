@@ -1,9 +1,11 @@
 defmodule EssenceUI.Primitives.Separator do
+  @moduledoc false
   use EssenceUI.Primitives
 
   attr :orientation, :string, values: ["horizontal", "vertical"], default: "horizontal"
   attr :decorative, :boolean, default: false
   attr :rest, :global
+
   def separator(assigns) do
     ~H"""
     <div

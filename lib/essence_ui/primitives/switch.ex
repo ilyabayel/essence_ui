@@ -1,4 +1,5 @@
 defmodule EssenceUI.Primitives.Switch do
+  @moduledoc false
   use EssenceUI.Primitives
 
   @doc """

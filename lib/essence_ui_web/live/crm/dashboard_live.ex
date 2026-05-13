@@ -474,11 +474,13 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
 
             <.flex direction="column" gap="2">
               <.text size="2" weight="bold">Recommendation</.text>
-              <.radio_group name="recommendation" default_value="hire">
-                <:item value="hire">Strong Hire</:item>
-                <:item value="hold">Hold</:item>
-                <:item value="no">No Hire</:item>
-              </.radio_group>
+              <.radio_group_root id="crm-recommendation" name="recommendation" default_value="hire">
+                <.flex direction="column" gap="2">
+                  <.radio_group_item value="hire">Strong Hire</.radio_group_item>
+                  <.radio_group_item value="hold">Hold</.radio_group_item>
+                  <.radio_group_item value="no">No Hire</.radio_group_item>
+                </.flex>
+              </.radio_group_root>
             </.flex>
 
             <.flex direction="column" gap="2">

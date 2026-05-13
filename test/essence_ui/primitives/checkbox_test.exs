@@ -1,6 +1,8 @@
 defmodule EssenceUI.Primitives.CheckboxTest do
   use EssenceUIWeb.ConnCase, async: true
+
   import Phoenix.LiveViewTest
+
   alias EssenceUI.Primitives.Checkbox
 
   test "renders radix-like structure" do
@@ -9,7 +11,7 @@ defmodule EssenceUI.Primitives.CheckboxTest do
     assert html =~ ~s[phx-hook="CheckboxRoot"]
     assert html =~ ~s[role="checkbox"]
     assert html =~ ~s[data-state="unchecked"]
-    
+
     assert html =~ ~s[input type="checkbox"]
     assert html =~ ~s[data-essence-checkbox-input]
   end
@@ -24,15 +26,16 @@ defmodule EssenceUI.Primitives.CheckboxTest do
   end
 
   test "renders attributes correctly" do
-    html = render_component(&Checkbox.root/1, %{
-      id: "c1", 
-      name: "terms", 
-      value: "on", 
-      disabled: true, 
-      required: true,
-      inner_block: []
-    })
-    
+    html =
+      render_component(&Checkbox.root/1, %{
+        id: "c1",
+        name: "terms",
+        value: "on",
+        disabled: true,
+        required: true,
+        inner_block: []
+      })
+
     assert html =~ ~s[name="terms"]
     assert html =~ ~s[value="on"]
     assert html =~ ~s[disabled]

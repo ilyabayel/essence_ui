@@ -34,8 +34,9 @@ defmodule EssenceUI.Components.Switch do
 
   use Phoenix.Component
 
-  alias EssenceUI.Helpers.ExtractProps
   import EssenceUI.Primitives.Switch, only: [root: 1, thumb: 1]
+
+  alias EssenceUI.Helpers.ExtractProps
   alias EssenceUI.SharedProps.ColorProps
   alias EssenceUI.SharedProps.HighContrastProps
   alias EssenceUI.SharedProps.MarginProps
@@ -52,6 +53,7 @@ defmodule EssenceUI.Components.Switch do
   MarginProps.attrs()
 
   attr :id, :string, default: nil
+
   attr :size, :string,
     values: @sizes,
     default: "2",

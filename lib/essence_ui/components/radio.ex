@@ -95,7 +95,6 @@ defmodule EssenceUI.Components.Radio do
           default: "surface"
         }
       }
-      |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(HighContrastProps.prop_defs())
       |> Map.merge(MarginProps.prop_defs())
 
@@ -103,19 +102,14 @@ defmodule EssenceUI.Components.Radio do
 
     checked = assigns[:checked] || assigns[:default_checked]
 
-    # Determine checked state
-    checked_state = if checked, do: "checked", else: "unchecked"
-
-    # Determine aria-checked value
-    aria_checked = if checked, do: "true", else: "false"
-
     # Build CSS classes
     class =
       [
         "rt-reset",
         "rt-BaseRadioRoot",
         "rt-RadioRoot",
-        extracted.class
+        extracted.class,
+        assigns.class
       ]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
@@ -124,17 +118,14 @@ defmodule EssenceUI.Components.Radio do
       assign(assigns,
         class: class,
         style: extracted.style,
-        checked_state: checked_state,
-        aria_checked: aria_checked,
-        color: assigns[:color] || false
+        color: assigns[:color],
+        is_checked: checked
       )
 
     ~H"""
-    <button
-      type="button"
-      role="radio"
-      aria-checked={@aria_checked}
-      data-state={@checked_state}
+    <input
+      type="radio"
+      checked={@is_checked}
       data-accent-color={@color}
       class={@class}
       style={@style}
@@ -142,8 +133,7 @@ defmodule EssenceUI.Components.Radio do
       value={@value}
       disabled={@disabled}
       {@rest}
-    >
-    </button>
+    />
     """
   end
 end

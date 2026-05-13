@@ -1,4 +1,5 @@
 defmodule EssenceUI.Primitives.Accordion do
+  @moduledoc false
   use EssenceUI.Primitives
 
   alias EssenceUI.Primitives.Collapsible
@@ -10,6 +11,7 @@ defmodule EssenceUI.Primitives.Accordion do
   attr :dir, :string, values: ["ltr", "rtl"], default: "ltr"
   attr :rest, :global
   slot :inner_block, required: true
+
   def root(assigns) do
     ~H"""
     <div
@@ -32,6 +34,7 @@ defmodule EssenceUI.Primitives.Accordion do
   attr :open, :boolean, default: false
   attr :rest, :global
   slot :inner_block, required: true
+
   def item(assigns) do
     ~H"""
     <Collapsible.root
@@ -49,6 +52,7 @@ defmodule EssenceUI.Primitives.Accordion do
 
   attr :rest, :global
   slot :inner_block, required: true
+
   def header(assigns) do
     ~H"""
     <h3 data-essence-accordion-header {@rest}>
@@ -61,6 +65,7 @@ defmodule EssenceUI.Primitives.Accordion do
   attr :trigger_id, :string, required: true, doc: "The ID of this trigger element"
   attr :rest, :global
   slot :inner_block, required: true
+
   def trigger(assigns) do
     ~H"""
     <Collapsible.trigger
@@ -77,6 +82,7 @@ defmodule EssenceUI.Primitives.Accordion do
   attr :id, :string, required: true
   attr :rest, :global
   slot :inner_block, required: true
+
   def content(assigns) do
     ~H"""
     <Collapsible.content
