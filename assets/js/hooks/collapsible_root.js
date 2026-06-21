@@ -2,7 +2,7 @@ export const CollapsibleRoot = {
   mounted() {
     this.trigger = this.el.querySelector('[data-essence-collapsible-trigger]');
     this.content = this.el.querySelector('[data-essence-collapsible-content]');
-    this.disabled = this.el.dataset.disabled === 'true';
+    this.disabled = this.el.hasAttribute('data-disabled');
     this.isMountAnimationPrevented = true;
 
     if (this.trigger && this.content) {
@@ -53,6 +53,7 @@ export const CollapsibleRoot = {
     if (!this.content) return;
 
     this.el.dataset.state = 'open';
+    if (!isInitial) this.pushOpenChange(true);
     if (this.trigger) {
       this.trigger.setAttribute('aria-expanded', 'true');
       this.trigger.dataset.state = 'open';
@@ -105,6 +106,7 @@ export const CollapsibleRoot = {
     if (!this.content) return;
 
     this.el.dataset.state = 'closed';
+    this.pushOpenChange(false);
     if (this.trigger) {
       this.trigger.setAttribute('aria-expanded', 'false');
       this.trigger.dataset.state = 'closed';
@@ -123,5 +125,10 @@ export const CollapsibleRoot = {
         this.content.hidden = true;
       }
     }, 50); // Small delay to allow CSS state changes to reflect in computed style
+  },
+
+  pushOpenChange(open) {
+    const event = this.el.dataset.onOpenChange;
+    if (event) this.pushEvent(event, { open });
   }
 };

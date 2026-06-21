@@ -16,7 +16,7 @@ defmodule Storybook.Primitives.CollapsibleStory do
         description: "Headless collapsible primitive",
         template: """
         <Collapsible.root id="collapsible-primitive">
-          <Collapsible.trigger id="collapsible-trigger">Toggle</Collapsible.trigger>
+          <Collapsible.trigger id="collapsible-trigger" content_id="collapsible-content">Toggle</Collapsible.trigger>
           <Collapsible.content id="collapsible-content">
             Content that can be collapsed
           </Collapsible.content>
