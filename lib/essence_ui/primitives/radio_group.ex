@@ -1,24 +1,24 @@
 defmodule EssenceUI.Primitives.RadioGroup do
-  @moduledoc """
-  Radio Group primitive based on Radix UI Radio Group.
-  """
+  @moduledoc false
+
   use EssenceUI.Primitives
 
-  @doc """
-  The root container for the radio group.
-  """
   attr :id, :string, required: true
   attr :value, :string, default: nil
+  attr :default_value, :string, default: nil
   attr :disabled, :boolean, default: false
   attr :name, :string, default: nil
   attr :required, :boolean, default: false
-  attr :orientation, :string, values: ["horizontal", "vertical", "undefined"], default: "vertical"
+  attr :orientation, :string, values: ["horizontal", "vertical"], default: "vertical"
   attr :dir, :string, values: ["ltr", "rtl"], default: "ltr"
   attr :loop, :boolean, default: true
+  attr :on_value_change, :string, default: nil
   attr :rest, :global
   slot :inner_block, required: true
 
   def root(assigns) do
+    assigns = assign(assigns, :value_attr, assigns.value || assigns.default_value)
+
     ~H"""
     <div
       id={@id}
@@ -27,11 +27,13 @@ defmodule EssenceUI.Primitives.RadioGroup do
       aria-orientation={@orientation}
       aria-required={if @required, do: "true"}
       data-essence-radio-group-root
-      data-value={@value}
+      data-value={@value_attr}
+      data-name={@name}
       data-disabled={if @disabled, do: ""}
       data-required={if @required, do: ""}
       data-orientation={@orientation}
       data-loop={if !@loop, do: "false"}
+      data-on-value-change={@on_value_change}
       dir={@dir}
       {@rest}
     >
@@ -40,9 +42,6 @@ defmodule EssenceUI.Primitives.RadioGroup do
     """
   end
 
-  @doc """
-  An item in the radio group.
-  """
   attr :id, :string, default: nil
   attr :value, :string, required: true
   attr :disabled, :boolean, default: false
@@ -58,7 +57,7 @@ defmodule EssenceUI.Primitives.RadioGroup do
       type="button"
       role="radio"
       id={@id}
-      checked={@checked}
+      value={@value}
       data-essence-radio-group-item
       data-value={@value}
       data-disabled={if @disabled, do: ""}
@@ -72,10 +71,8 @@ defmodule EssenceUI.Primitives.RadioGroup do
     """
   end
 
-  @doc """
-  An indicator shown when the item is checked.
-  """
   attr :checked, :boolean, default: false
+  attr :force_mount, :boolean, default: false
   attr :rest, :global
   slot :inner_block, required: true
 
@@ -83,6 +80,7 @@ defmodule EssenceUI.Primitives.RadioGroup do
     ~H"""
     <span
       data-essence-radio-group-indicator
+      data-force-mount={if @force_mount, do: ""}
       aria-hidden="true"
       style={if @checked, do: "display: inline-flex;", else: "display: none;"}
       data-state={if @checked, do: "checked", else: "unchecked"}
