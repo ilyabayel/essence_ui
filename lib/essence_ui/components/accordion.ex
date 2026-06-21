@@ -149,7 +149,7 @@ defmodule EssenceUI.Components.Accordion do
     ~H"""
     <Primitive.content
       id={@id}
-      aria-labelledby={@trigger_id}
+      trigger_id={@trigger_id}
       class={["AccordionContent", @class]}
       data-state={@state}
     >
