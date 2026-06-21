@@ -14,7 +14,7 @@ export const CheckboxRoot = {
     this._updateState();
 
     this._onClick = (event) => {
-      if (this.el.dataset.disabled === "true") return;
+      if (this.el.hasAttribute("data-disabled")) return;
 
       const currentState = this.el.dataset.state;
       const nextChecked =
@@ -78,7 +78,7 @@ export const CheckboxRoot = {
 
   _updateState() {
     const state = this.el.dataset.state;
-    const disabled = this.el.dataset.disabled === "true";
+    const disabled = this.el.hasAttribute("data-disabled");
 
     this.trigger.setAttribute(
       "aria-checked",

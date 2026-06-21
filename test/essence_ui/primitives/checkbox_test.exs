@@ -10,6 +10,7 @@ defmodule EssenceUI.Primitives.CheckboxTest do
     assert html =~ ~s[button id="c1"]
     assert html =~ ~s[phx-hook="CheckboxRoot"]
     assert html =~ ~s[role="checkbox"]
+    assert html =~ ~s[aria-checked="false"]
     assert html =~ ~s[data-state="unchecked"]
 
     assert html =~ ~s[input type="checkbox"]
@@ -23,6 +24,7 @@ defmodule EssenceUI.Primitives.CheckboxTest do
 
     html = render_component(&Checkbox.root/1, %{id: "c1", checked: "indeterminate", inner_block: []})
     assert html =~ ~s[data-state="indeterminate"]
+    assert html =~ ~s[aria-checked="mixed"]
   end
 
   test "renders attributes correctly" do
@@ -40,7 +42,8 @@ defmodule EssenceUI.Primitives.CheckboxTest do
     assert html =~ ~s[value="on"]
     assert html =~ ~s[disabled]
     assert html =~ ~s[required]
-    assert html =~ ~s[data-disabled="true"]
-    assert html =~ ~s[data-required="true"]
+    assert html =~ ~s[aria-required="true"]
+    assert html =~ ~s[data-disabled]
+    assert html =~ ~s[data-required]
   end
 end

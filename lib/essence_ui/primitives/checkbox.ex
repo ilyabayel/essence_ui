@@ -1,12 +1,9 @@
 defmodule EssenceUI.Primitives.Checkbox do
   @moduledoc false
+
   use EssenceUI.Primitives
 
-  @doc """
-  The root container for the checkbox.
-  """
   attr :id, :string, required: true
-  # true | false | "indeterminate"
   attr :checked, :any, default: nil
   attr :default_checked, :any, default: false
   attr :disabled, :boolean, default: false
@@ -46,9 +43,6 @@ defmodule EssenceUI.Primitives.Checkbox do
     """
   end
 
-  @doc """
-  The clickable button that toggles the checkbox state.
-  """
   attr :id, :string, default: nil
   attr :checked, :any, default: nil
   attr :default_checked, :any, default: false
@@ -71,9 +65,11 @@ defmodule EssenceUI.Primitives.Checkbox do
       phx-hook="CheckboxRoot"
       type="button"
       role="checkbox"
+      aria-checked={aria_checked(@state)}
+      aria-required={if @required, do: "true"}
       data-state={@state}
-      data-disabled={to_string(@disabled)}
-      data-required={to_string(@required)}
+      data-disabled={if @disabled, do: ""}
+      data-required={if @required, do: ""}
       data-name={@name}
       data-value={@value}
       data-form={@form}
@@ -81,6 +77,7 @@ defmodule EssenceUI.Primitives.Checkbox do
       data-on-checked-change={@on_checked_change}
       data-essence-checkbox-trigger
       disabled={@disabled}
+      value={@value}
       {@rest}
     >
       {render_slot(@inner_block)}
@@ -88,9 +85,7 @@ defmodule EssenceUI.Primitives.Checkbox do
     """
   end
 
-  @doc """
-  The visual indicator shown when the checkbox is checked or indeterminate.
-  """
+  attr :force_mount, :boolean, default: false
   attr :rest, :global
   slot :inner_block, required: true
 
@@ -98,6 +93,8 @@ defmodule EssenceUI.Primitives.Checkbox do
     ~H"""
     <span
       data-essence-checkbox-indicator
+      data-state="unchecked"
+      data-force-mount={if @force_mount, do: ""}
       style="pointer-events: none; display: flex; align-items: center; justify-content: center;"
       {@rest}
     >
@@ -106,9 +103,6 @@ defmodule EssenceUI.Primitives.Checkbox do
     """
   end
 
-  @doc """
-  The hidden input used for form submission.
-  """
   attr :checked, :any, default: nil
   attr :default_checked, :any, default: false
   attr :disabled, :boolean, default: false
@@ -139,6 +133,10 @@ defmodule EssenceUI.Primitives.Checkbox do
     />
     """
   end
+
+  defp aria_checked("indeterminate"), do: "mixed"
+  defp aria_checked("checked"), do: "true"
+  defp aria_checked(_), do: "false"
 
   defp get_state("indeterminate"), do: "indeterminate"
   defp get_state(true), do: "checked"
