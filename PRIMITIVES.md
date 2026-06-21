@@ -1,46 +1,53 @@
-# Implementation Plan: EssenceUI Primitives (Full Parity)
+# EssenceUI Primitives Parity
 
-## 🏗️ Phase 1: Foundation & Base Primitives
-- [x] Create `lib/essence_ui/primitives.ex` (Shared helpers)
-- [x] Setup Playwright test infrastructure
-- [x] **Accordion**
-- [x] **Collapsible**
-- [x] **Label**
-- [x] **Separator**
-- [x] **Aspect Ratio**
+Target: Radix public docs API, implemented for Phoenix LiveView with small client hooks where native HTML and LiveView are not enough.
 
-## 🏗️ Phase 2: Form & Input Primitives
-- [x] **Checkbox**
-- [x] **Switch**
-- [x] **Select**
-- [ ] **Radio Group**
-- [ ] **Slider**
-- [ ] **Toggle**
-- [ ] **Toggle Group**
-- [ ] **One-Time Password Field**
-- [ ] **Password Toggle Field**
-- [ ] **Form** (Validation & Structure)
+## Implemented
 
-## 🏗️ Phase 3: Overlays & Portals
-- [ ] **Dialog**
-- [ ] **Alert Dialog**
-- [ ] **Popover**
-- [ ] **Tooltip**
-- [ ] **Hover Card**
-- [ ] **Toast**
+- [x] Accessible Icon
+- [x] Accordion
+- [x] Aspect Ratio
+- [x] Avatar
+- [x] Checkbox
+- [x] Collapsible
+- [x] Direction Provider
+- [x] Label
+- [x] Portal
+- [x] Progress
+- [x] Radio Group
+- [x] Select
+- [x] Separator
+- [x] Slot
+- [x] Switch
+- [x] Toggle
+- [x] Toggle Group
+- [x] Visually Hidden
 
-## 🏗️ Phase 4: Navigation & Menus
-- [ ] **Tabs**
-- [ ] **Dropdown Menu**
-- [ ] **Context Menu**
-- [ ] **Menubar**
-- [ ] **Navigation Menu**
-- [ ] **Toolbar**
+## Missing
 
-## 🏗️ Phase 5: Display & Utilities
-- [ ] **Avatar**
-- [ ] **Progress**
-- [ ] **Scroll Area**
+- [ ] Alert Dialog
+- [ ] Context Menu
+- [ ] Dialog
+- [ ] Dropdown Menu
+- [ ] Form
+- [ ] Hover Card
+- [ ] Menubar
+- [ ] Navigation Menu
+- [ ] One-Time Password Field
+- [ ] Password Toggle Field
+- [ ] Popover
+- [ ] Scroll Area
+- [ ] Slider
+- [ ] Tabs
+- [ ] Toast
+- [ ] Toolbar
+- [ ] Tooltip
 
-## ✅ Completed
-*None yet.*
+## Implementation Rule
+
+Each primitive needs:
+
+- `EssenceUI.Primitives.<Name>` API matching Radix public parts where practical.
+- A primitive Storybook example.
+- ExUnit render coverage.
+- Browser coverage for hook-backed keyboard, focus, dismissal, typeahead, or form behavior.

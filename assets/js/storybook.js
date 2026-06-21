@@ -18,6 +18,9 @@ import { Popover } from "./hooks/popover";
 import { ScrollArea } from "./hooks/scroll_area";
 import { SelectRoot } from "./hooks/select_root";
 import { RadioGroupRoot } from "./hooks/radio_group_root";
+import { AvatarRoot } from "./hooks/avatar_root";
+import { ToggleRoot } from "./hooks/toggle_root";
+import { ToggleGroupRoot } from "./hooks/toggle_group_root";
 
 let hooks = {
   Dialog,
@@ -36,7 +39,10 @@ let hooks = {
   Popover,
   ScrollArea,
   SelectRoot,
-  RadioGroupRoot
+  RadioGroupRoot,
+  AvatarRoot,
+  ToggleRoot,
+  ToggleGroupRoot
 };
 
 // Storybook integration
