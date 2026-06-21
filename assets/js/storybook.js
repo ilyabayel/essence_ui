@@ -21,6 +21,7 @@ import { RadioGroupRoot } from "./hooks/radio_group_root";
 import { AvatarRoot } from "./hooks/avatar_root";
 import { ToggleRoot } from "./hooks/toggle_root";
 import { ToggleGroupRoot } from "./hooks/toggle_group_root";
+import { LabelRoot } from "./hooks/label_root";
 
 let hooks = {
   Dialog,
@@ -42,7 +43,8 @@ let hooks = {
   RadioGroupRoot,
   AvatarRoot,
   ToggleRoot,
-  ToggleGroupRoot
+  ToggleGroupRoot,
+  LabelRoot
 };
 
 // Storybook integration
