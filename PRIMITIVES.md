@@ -32,16 +32,16 @@ Target: Radix public docs API, implemented for Phoenix LiveView with small clien
 - [x] Popover
 - [x] Toast
 - [x] Tooltip
+- [x] Tabs
+- [x] Scroll Area
+- [x] Slider
+- [x] Toolbar
 
 ## Missing
 
 - [ ] Form
 - [ ] One-Time Password Field
 - [ ] Password Toggle Field
-- [ ] Scroll Area
-- [ ] Slider
-- [ ] Tabs
-- [ ] Toolbar
 
 ## Implementation Rule
 

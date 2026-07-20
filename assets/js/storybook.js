@@ -9,6 +9,7 @@ import { CheckboxRoot } from "./hooks/checkbox_root";
 import { SwitchRoot } from "./hooks/switch_root";
 import { CollapsibleRoot } from "./hooks/collapsible_root";
 import { Tabs } from "./hooks/tabs";
+import { TabsRoot } from "./hooks/tabs_root";
 import { CheckboxCards } from "./hooks/checkbox_cards";
 import { RadioCards } from "./hooks/radio_cards";
 import { ContextMenu } from "./hooks/context_menu";
@@ -24,6 +25,7 @@ import { HoverCardRoot } from "./hooks/hover_card_root";
 import { Popover } from "./hooks/popover";
 import { PopoverRoot } from "./hooks/popover_root";
 import { ScrollArea } from "./hooks/scroll_area";
+import { ScrollAreaRoot } from "./hooks/scroll_area_root";
 import { SelectRoot } from "./hooks/select_root";
 import { RadioGroupRoot } from "./hooks/radio_group_root";
 import { AvatarRoot } from "./hooks/avatar_root";
@@ -32,6 +34,8 @@ import { ToggleGroupRoot } from "./hooks/toggle_group_root";
 import { LabelRoot } from "./hooks/label_root";
 import { ToastRoot } from "./hooks/toast_root";
 import { ToastViewport } from "./hooks/toast_viewport";
+import { SliderRoot } from "./hooks/slider_root";
+import { ToolbarRoot } from "./hooks/toolbar_root";
 
 let hooks = {
   Dialog,
@@ -43,6 +47,7 @@ let hooks = {
   SwitchRoot,
   CollapsibleRoot,
   Tabs,
+  TabsRoot,
   CheckboxCards,
   RadioCards,
   ContextMenu,
@@ -58,6 +63,7 @@ let hooks = {
   Popover,
   PopoverRoot,
   ScrollArea,
+  ScrollAreaRoot,
   SelectRoot,
   RadioGroupRoot,
   AvatarRoot,
@@ -65,7 +71,9 @@ let hooks = {
   ToggleGroupRoot,
   LabelRoot,
   ToastRoot,
-  ToastViewport
+  ToastViewport,
+  SliderRoot,
+  ToolbarRoot
 };
 
 // Storybook integration
