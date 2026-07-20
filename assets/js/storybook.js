@@ -2,6 +2,7 @@
 import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
 import { Dialog } from "./hooks/dialog";
+import { DialogRoot, AlertDialogRoot } from "./hooks/dialog_root";
 import { Accordion } from "./hooks/accordion";
 import { AccordionRoot } from "./hooks/accordion_root";
 import { CheckboxRoot } from "./hooks/checkbox_root";
@@ -13,8 +14,11 @@ import { RadioCards } from "./hooks/radio_cards";
 import { ContextMenu } from "./hooks/context_menu";
 import { DropdownMenu } from "./hooks/dropdown_menu";
 import { Tooltip } from "./hooks/tooltip";
+import { TooltipRoot } from "./hooks/tooltip_root";
 import { HoverCard } from "./hooks/hover_card";
+import { HoverCardRoot } from "./hooks/hover_card_root";
 import { Popover } from "./hooks/popover";
+import { PopoverRoot } from "./hooks/popover_root";
 import { ScrollArea } from "./hooks/scroll_area";
 import { SelectRoot } from "./hooks/select_root";
 import { RadioGroupRoot } from "./hooks/radio_group_root";
@@ -27,6 +31,8 @@ import { ToastViewport } from "./hooks/toast_viewport";
 
 let hooks = {
   Dialog,
+  DialogRoot,
+  AlertDialogRoot,
   Accordion,
   AccordionRoot,
   CheckboxRoot,
@@ -38,8 +44,11 @@ let hooks = {
   ContextMenu,
   DropdownMenu,
   Tooltip,
+  TooltipRoot,
   HoverCard,
+  HoverCardRoot,
   Popover,
+  PopoverRoot,
   ScrollArea,
   SelectRoot,
   RadioGroupRoot,

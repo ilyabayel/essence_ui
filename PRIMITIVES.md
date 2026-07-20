@@ -8,8 +8,10 @@ Target: Radix public docs API, implemented for Phoenix LiveView with small clien
 - [x] Accordion
 - [x] Aspect Ratio
 - [x] Avatar
+- [x] Alert Dialog
 - [x] Checkbox
 - [x] Collapsible
+- [x] Dialog
 - [x] Direction Provider
 - [x] Label
 - [x] Portal — via Phoenix.Component.portal (no EssenceUI.Primitives.Portal module)
@@ -25,9 +27,7 @@ Target: Radix public docs API, implemented for Phoenix LiveView with small clien
 
 ## Missing
 
-- [ ] Alert Dialog
 - [ ] Context Menu
-- [ ] Dialog
 - [ ] Dropdown Menu
 - [ ] Form
 - [ ] Hover Card
