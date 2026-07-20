@@ -12,53 +12,22 @@ defmodule Storybook.Primitives.SeparatorStory do
   def variations do
     [
       %Variation{
-        id: :horizontal,
-        description: "Horizontal separator",
+        id: :primitive,
+        description: "Radix docs separator demo",
         template: """
-        <div style="width: 100%; max-width: 300px; margin: 15px 0">
-          <h1 class="Text" style="font-weight: 600">
-            EssenceUI Primitives
-          </h1>
-          <p class="Text">An open-source UI component library.</p>
-          <Separator.separator class="SeparatorRoot" style="margin: 15px 0" />
-          <div style="display: flex; height: 20px; align-items: center;">
-            <p class="Text">Blog</p>
-            <Separator.separator
-              class="SeparatorRoot"
-              decorative
-              orientation="vertical"
-              style="margin: 0 15px"
-            />
-            <p class="Text">Docs</p>
-            <Separator.separator
-              class="SeparatorRoot"
-              decorative
-              orientation="vertical"
-              style="margin: 0 15px"
-            />
-            <p class="Text">Source</p>
+        <div class="radix-demo" data-component="separator">
+          <div style="width: 100%; max-width: 300px; margin: 0 15px;">
+            <div class="Text" style="font-weight: 500;">Radix Primitives</div>
+            <div class="Text">An open-source UI component library.</div>
+            <Separator.separator class="SeparatorRoot" style="margin: 15px 0;" />
+            <div style="display: flex; height: 20px; align-items: center;">
+              <div class="Text">Blog</div>
+              <Separator.separator class="SeparatorRoot" decorative orientation="vertical" style="margin: 0 15px;" />
+              <div class="Text">Docs</div>
+              <Separator.separator class="SeparatorRoot" decorative orientation="vertical" style="margin: 0 15px;" />
+              <div class="Text">Source</div>
+            </div>
           </div>
-
-          <style>
-            .SeparatorRoot {
-              background-color: gray;
-            }
-            .SeparatorRoot[data-orientation="horizontal"] {
-              height: 1px;
-              width: 100%;
-            }
-            .SeparatorRoot[data-orientation="vertical"] {
-              height: 100%;
-              width: 1px;
-            }
-            .Text {
-              color: black;
-              font-size: 15px;
-              line-height: 20px;
-              margin: 0;
-              padding: 0;
-            }
-          </style>
         </div>
         """
       }

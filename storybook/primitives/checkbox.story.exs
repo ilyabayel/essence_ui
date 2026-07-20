@@ -6,56 +6,29 @@ defmodule Storybook.Primitives.CheckboxStory do
 
   def function, do: &Checkbox.root/1
 
+  def container, do: :div
+  def layout, do: :one_column
+
   def variations do
     [
       %Variation{
         id: :primitive,
+        description: "Radix docs checkbox demo",
         template: """
-        <form style="display: flex; gap: 1rem;">
-          <Checkbox.root class="CheckboxRoot" default_checked id="checkbox-1">
-            <Checkbox.indicator class="CheckboxIndicator">
-              <svg fill="#000000" width="18px" height="18px" viewBox="-96 -96 2112.00 2112.00" xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="76.8"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M1827.701 303.065 698.835 1431.801 92.299 825.266 0 917.564 698.835 1616.4 1919.869 395.234z" fill-rule="evenodd"></path> </g></svg>
-            </Checkbox.indicator>
-          </Checkbox.root>
-          <label className="Label" for="checkbox-1">
-            Accept terms and conditions.
-          </label>
-          <style>
-            button {
-              all: unset;
-            }
-
-            .CheckboxRoot {
-              background-color: white;
-              width: 25px;
-              height: 25px;
-              border-radius: 4px;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              box-shadow: 0 2px 10px var(--black-a7);
-            }
-            .CheckboxRoot:hover {
-              background-color: var(--violet-3);
-            }
-            .CheckboxRoot:focus {
-              box-shadow: 0 0 0 2px black;
-            }
-
-            .CheckboxIndicator {
-              display: grid;
-              place-content: center;
-              color: var(--violet-11);
-            }
-
-            .Label {
-              color: white;
-              padding-left: 15px;
-              font-size: 15px;
-              line-height: 1;
-            }
-          </style>
-        </form>
+        <div class="radix-demo" data-component="checkbox">
+          <form>
+            <div style="display: flex; align-items: center;">
+              <Checkbox.root class="CheckboxRoot" default_checked id="c1">
+                <Checkbox.indicator class="CheckboxIndicator">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </Checkbox.indicator>
+              </Checkbox.root>
+              <label class="Label" for="c1">
+                Accept terms and conditions.
+              </label>
+            </div>
+          </form>
+        </div>
         """
       }
     ]

@@ -1,0 +1,97 @@
+@import "@radix-ui/colors/black-alpha.css";
+@import "@radix-ui/colors/violet.css";
+@import "@radix-ui/colors/mauve.css";
+
+/* reset */
+.radix-demo[data-component="form"] input,
+.radix-demo[data-component="form"] textarea,
+.radix-demo[data-component="form"] button {
+	all: unset;
+	box-sizing: border-box;
+}
+
+.radix-demo[data-component="form"] .FormRoot {
+	width: 260px;
+}
+
+.radix-demo[data-component="form"] .FormField {
+	display: grid;
+	margin-bottom: 10px;
+}
+
+.radix-demo[data-component="form"] .FormLabel {
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 35px;
+	color: white;
+}
+
+.radix-demo[data-component="form"] .FormMessage {
+	font-size: 13px;
+	color: white;
+	opacity: 0.8;
+}
+
+.radix-demo[data-component="form"] .Input,
+.radix-demo[data-component="form"] .Textarea {
+	width: 100%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 4px;
+	font-size: 15px;
+	color: white;
+	background-color: var(--black-a2);
+	box-shadow: 0 0 0 1px var(--black-a6);
+}
+
+.radix-demo[data-component="form"] .Input:hover,
+.radix-demo[data-component="form"] .Textarea:hover {
+	box-shadow: 0 0 0 1px black;
+}
+
+.radix-demo[data-component="form"] .Input:focus,
+.radix-demo[data-component="form"] .Textarea:focus {
+	box-shadow: 0 0 0 2px black;
+}
+
+.radix-demo[data-component="form"] .Input::selection,
+.radix-demo[data-component="form"] .Textarea::selection {
+	background-color: var(--black-a6);
+	color: white;
+}
+
+.radix-demo[data-component="form"] .Input {
+	padding: 0 10px;
+	height: 35px;
+	line-height: 1;
+}
+
+.radix-demo[data-component="form"] .Textarea {
+	resize: none;
+	padding: 10px;
+}
+
+.radix-demo[data-component="form"] .Button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 4px;
+	padding: 0 15px;
+	font-size: 15px;
+	line-height: 1;
+	font-weight: 500;
+	height: 35px;
+	width: 100%;
+	background-color: white;
+	color: var(--violet-11);
+	box-shadow: 0 2px 10px var(--black-a4);
+}
+
+.radix-demo[data-component="form"] .Button:hover {
+	background-color: var(--mauve-3);
+}
+
+.radix-demo[data-component="form"] .Button:focus {
+	box-shadow: 0 0 0 2px black;
+}

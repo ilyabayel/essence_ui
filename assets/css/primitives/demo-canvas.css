@@ -1,0 +1,145 @@
+/* Radix docs-style demo canvas (matches primitives documentation previews) */
+.radix-demo {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	min-height: 320px;
+	padding: 50px 20px;
+	border-radius: 8px;
+	background-image: linear-gradient(
+		330deg,
+		hsl(272, 53%, 50%) 0%,
+		hsl(226, 68%, 40%) 100%
+	);
+	font-family:
+		"Inter",
+		-apple-system,
+		BlinkMacSystemFont,
+		"Segoe UI",
+		Helvetica,
+		Arial,
+		sans-serif,
+		"Apple Color Emoji",
+		"Segoe UI Emoji";
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	line-height: 1.5;
+	color: white;
+}
+
+.radix-demo *,
+.radix-demo *::before,
+.radix-demo *::after {
+	box-sizing: border-box;
+}
+
+/* Per-component demo canvas backgrounds (Radix docs DemoContainer) */
+.radix-demo[data-component="accordion"] {
+	background-image: linear-gradient(120deg, var(--tomato-5), var(--indigo-7));
+}
+.radix-demo[data-component="dialog"],
+.radix-demo[data-component="alert-dialog"] {
+	background-image: linear-gradient(120deg, var(--indigo-6), var(--crimson-5));
+}
+.radix-demo[data-component="dropdown-menu"],
+.radix-demo[data-component="context-menu"],
+.radix-demo[data-component="menubar"] {
+	background-image: linear-gradient(120deg, var(--crimson-5), var(--blue-5));
+}
+.radix-demo[data-component="popover"],
+.radix-demo[data-component="hover-card"],
+.radix-demo[data-component="tooltip"] {
+	background-image: linear-gradient(120deg, var(--blue-5), var(--lime-3));
+}
+.radix-demo[data-component="slider"] {
+	background-image: linear-gradient(120deg, var(--lime-3), var(--pink-4));
+}
+.radix-demo[data-component="scroll-area"] {
+	background-image: linear-gradient(120deg, var(--pink-4), var(--gold-5));
+}
+.radix-demo[data-component="tabs"] {
+	background-image: linear-gradient(120deg, var(--gold-5), var(--tomato-5));
+}
+.radix-demo[data-component="radio-group"] {
+	background-image: linear-gradient(120deg, var(--indigo-7), var(--cyan-3));
+}
+.radix-demo[data-component="toggle-group"],
+.radix-demo[data-component="toolbar"] {
+	background-image: linear-gradient(120deg, var(--cyan-3), var(--mint-5));
+}
+.radix-demo[data-component="switch"],
+.radix-demo[data-component="checkbox"] {
+	background-image: linear-gradient(120deg, var(--mint-5), var(--red-3));
+}
+.radix-demo[data-component="select"],
+.radix-demo[data-component="toast"] {
+	background-image: linear-gradient(120deg, var(--indigo-6), var(--violet-6));
+}
+.radix-demo[data-component="form"],
+.radix-demo[data-component="one-time-password-field"],
+.radix-demo[data-component="password-toggle-field"] {
+	background-image: linear-gradient(120deg, var(--violet-5), var(--indigo-6));
+}
+.radix-demo[data-component="navigation-menu"] {
+	background-image: linear-gradient(120deg, var(--indigo-5), var(--cyan-4));
+	min-height: 400px;
+	align-items: flex-start;
+	padding-top: 40px;
+}
+
+/* Shared utility demo controls (Accessible Icon, Slot, Visually Hidden, etc.) */
+.radix-demo[data-component="accessible-icon"] button,
+.radix-demo[data-component="visually-hidden"] button,
+.radix-demo[data-component="slot"] button,
+.radix-demo[data-component="direction-provider"] button {
+	all: unset;
+}
+
+.radix-demo[data-component="accessible-icon"] .IconButton,
+.radix-demo[data-component="visually-hidden"] .IconButton {
+	font-family: inherit;
+	border-radius: 100%;
+	height: 35px;
+	width: 35px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--violet-11);
+	background-color: white;
+	box-shadow: 0 2px 10px var(--black-a7);
+	cursor: pointer;
+}
+
+.radix-demo[data-component="accessible-icon"] .IconButton:hover,
+.radix-demo[data-component="visually-hidden"] .IconButton:hover {
+	background-color: var(--violet-3);
+}
+
+.radix-demo[data-component="visually-hidden"] .Button,
+.radix-demo[data-component="slot"] .Button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 4px;
+	padding: 0 15px;
+	font-size: 15px;
+	line-height: 1;
+	font-weight: 500;
+	height: 35px;
+	user-select: none;
+	cursor: pointer;
+}
+
+.radix-demo[data-component="visually-hidden"] .Button.violet,
+.radix-demo[data-component="slot"] .Button.violet {
+	background-color: white;
+	color: var(--violet-11);
+	box-shadow: 0 2px 10px var(--black-a7);
+}
+
+.radix-demo[data-component="visually-hidden"] .Button.violet:hover,
+.radix-demo[data-component="slot"] .Button.violet:hover {
+	background-color: var(--mauve-3);
+}

@@ -15,9 +15,11 @@ defmodule Storybook.Primitives.SlotStory do
         id: :primitive,
         description: "Prop composition with Slot",
         template: """
-        <Slot.slot as="button" class="rt-Button rt-variant-solid rt-r-size-2">
-          Composed Button
-        </Slot.slot>
+        <div class="radix-demo" data-component="slot">
+          <Slot.slot as="button" class="Button violet">
+            Composed Button
+          </Slot.slot>
+        </div>
         """
       }
     ]

@@ -15,18 +15,24 @@ defmodule Storybook.Primitives.AlertDialogStory do
         id: :primitive,
         description: "Headless alert dialog primitive",
         template: """
-        <AlertDialog.root id="alert-dialog-primitive">
-          <AlertDialog.trigger id="alert-dialog-trigger">Open</AlertDialog.trigger>
-          <AlertDialog.portal id="alert-dialog-portal">
-            <AlertDialog.overlay />
-            <AlertDialog.content id="alert-dialog-content">
-              <AlertDialog.title>Are you sure?</AlertDialog.title>
-              <AlertDialog.description>This action cannot be undone.</AlertDialog.description>
-              <AlertDialog.cancel>Cancel</AlertDialog.cancel>
-              <AlertDialog.action>Continue</AlertDialog.action>
-            </AlertDialog.content>
-          </AlertDialog.portal>
-        </AlertDialog.root>
+        <div class="radix-demo" data-component="alert-dialog">
+          <AlertDialog.root id="alert-dialog-primitive">
+            <AlertDialog.trigger id="alert-dialog-trigger" class="Button violet">Delete account</AlertDialog.trigger>
+            <AlertDialog.portal id="alert-dialog-portal">
+              <AlertDialog.overlay class="AlertDialogOverlay" />
+              <AlertDialog.content id="alert-dialog-content" class="AlertDialogContent">
+                <AlertDialog.title class="AlertDialogTitle">Are you absolutely sure?</AlertDialog.title>
+                <AlertDialog.description class="AlertDialogDescription">
+                  This action cannot be undone. This will permanently delete your account and remove your data from our servers.
+                </AlertDialog.description>
+                <div style="display: flex; gap: 25px; justify-content: flex-end;">
+                  <AlertDialog.cancel class="Button mauve">Cancel</AlertDialog.cancel>
+                  <AlertDialog.action class="Button red">Yes, delete account</AlertDialog.action>
+                </div>
+              </AlertDialog.content>
+            </AlertDialog.portal>
+          </AlertDialog.root>
+        </div>
         """
       }
     ]

@@ -5,6 +5,7 @@ defmodule Storybook.Primitives.ScrollAreaStory do
   alias EssenceUI.Primitives.ScrollArea
 
   def function, do: &ScrollArea.root/1
+
   def container, do: :div
   def layout, do: :one_column
 
@@ -12,52 +13,74 @@ defmodule Storybook.Primitives.ScrollAreaStory do
     [
       %Variation{
         id: :primitive,
-        description: "Headless scroll area primitive",
+        description: "Radix docs scroll area demo",
         template: """
-        <ScrollArea.root id="scroll-area-primitive" type="always" class="ScrollAreaRoot">
-          <ScrollArea.viewport class="ScrollAreaViewport">
-            <div style="padding: 15px; width: 100%;">
-              <p style="margin: 0 0 8px;">Tag 1</p>
-              <p style="margin: 0 0 8px;">Tag 2</p>
-              <p style="margin: 0 0 8px;">Tag 3</p>
-              <p style="margin: 0 0 8px;">Tag 4</p>
-              <p style="margin: 0 0 8px;">Tag 5</p>
-              <p style="margin: 0 0 8px;">Tag 6</p>
-              <p style="margin: 0 0 8px;">Tag 7</p>
-              <p style="margin: 0 0 8px;">Tag 8</p>
-              <p style="margin: 0 0 8px;">Tag 9</p>
-              <p style="margin: 0 0 8px;">Tag 10</p>
-              <p style="margin: 0 0 8px;">Tag 11</p>
-              <p style="margin: 0 0 8px;">Tag 12</p>
-              <p style="margin: 0 0 8px;">Tag 13</p>
-              <p style="margin: 0 0 8px;">Tag 14</p>
-              <p style="margin: 0 0 8px;">Tag 15</p>
-              <p style="margin: 0 0 8px;">Tag 16</p>
-              <p style="margin: 0 0 8px;">Tag 17</p>
-              <p style="margin: 0 0 8px;">Tag 18</p>
-              <p style="margin: 0 0 8px;">Tag 19</p>
-              <p style="margin: 0 0 8px;">Tag 20</p>
-            </div>
-          </ScrollArea.viewport>
-          <ScrollArea.scrollbar orientation="vertical" class="ScrollAreaScrollbar">
-            <ScrollArea.thumb class="ScrollAreaThumb" />
-          </ScrollArea.scrollbar>
-          <ScrollArea.corner />
-        </ScrollArea.root>
-
-        <style>
-          .ScrollAreaRoot { border: 1px solid #ccc; border-radius: 4px; height: 150px; width: 200px; }
-          .ScrollAreaViewport { border-radius: 4px; height: 100%; }
-          .ScrollAreaScrollbar {
-            display: flex; position: absolute; top: 0; right: 0; bottom: 0;
-            width: 10px; background: #eee; padding: 2px;
-          }
-          .ScrollAreaScrollbar[data-state="hidden"] { opacity: 0; }
-          .ScrollAreaThumb {
-            flex: 1; background: #999; border-radius: 10px; position: relative;
-            min-height: 20px;
-          }
-        </style>
+        <div class="radix-demo" data-component="scroll-area">
+          <ScrollArea.root id="scroll-area-primitive" class="ScrollAreaRoot" type="always">
+            <ScrollArea.viewport class="ScrollAreaViewport">
+              <div style="padding: 15px 20px;">
+                <div class="Text">Tags</div>
+                  <div class="Tag">v1.2.0-beta.50</div>
+                  <div class="Tag">v1.2.0-beta.49</div>
+                  <div class="Tag">v1.2.0-beta.48</div>
+                  <div class="Tag">v1.2.0-beta.47</div>
+                  <div class="Tag">v1.2.0-beta.46</div>
+                  <div class="Tag">v1.2.0-beta.45</div>
+                  <div class="Tag">v1.2.0-beta.44</div>
+                  <div class="Tag">v1.2.0-beta.43</div>
+                  <div class="Tag">v1.2.0-beta.42</div>
+                  <div class="Tag">v1.2.0-beta.41</div>
+                  <div class="Tag">v1.2.0-beta.40</div>
+                  <div class="Tag">v1.2.0-beta.39</div>
+                  <div class="Tag">v1.2.0-beta.38</div>
+                  <div class="Tag">v1.2.0-beta.37</div>
+                  <div class="Tag">v1.2.0-beta.36</div>
+                  <div class="Tag">v1.2.0-beta.35</div>
+                  <div class="Tag">v1.2.0-beta.34</div>
+                  <div class="Tag">v1.2.0-beta.33</div>
+                  <div class="Tag">v1.2.0-beta.32</div>
+                  <div class="Tag">v1.2.0-beta.31</div>
+                  <div class="Tag">v1.2.0-beta.30</div>
+                  <div class="Tag">v1.2.0-beta.29</div>
+                  <div class="Tag">v1.2.0-beta.28</div>
+                  <div class="Tag">v1.2.0-beta.27</div>
+                  <div class="Tag">v1.2.0-beta.26</div>
+                  <div class="Tag">v1.2.0-beta.25</div>
+                  <div class="Tag">v1.2.0-beta.24</div>
+                  <div class="Tag">v1.2.0-beta.23</div>
+                  <div class="Tag">v1.2.0-beta.22</div>
+                  <div class="Tag">v1.2.0-beta.21</div>
+                  <div class="Tag">v1.2.0-beta.20</div>
+                  <div class="Tag">v1.2.0-beta.19</div>
+                  <div class="Tag">v1.2.0-beta.18</div>
+                  <div class="Tag">v1.2.0-beta.17</div>
+                  <div class="Tag">v1.2.0-beta.16</div>
+                  <div class="Tag">v1.2.0-beta.15</div>
+                  <div class="Tag">v1.2.0-beta.14</div>
+                  <div class="Tag">v1.2.0-beta.13</div>
+                  <div class="Tag">v1.2.0-beta.12</div>
+                  <div class="Tag">v1.2.0-beta.11</div>
+                  <div class="Tag">v1.2.0-beta.10</div>
+                  <div class="Tag">v1.2.0-beta.9</div>
+                  <div class="Tag">v1.2.0-beta.8</div>
+                  <div class="Tag">v1.2.0-beta.7</div>
+                  <div class="Tag">v1.2.0-beta.6</div>
+                  <div class="Tag">v1.2.0-beta.5</div>
+                  <div class="Tag">v1.2.0-beta.4</div>
+                  <div class="Tag">v1.2.0-beta.3</div>
+                  <div class="Tag">v1.2.0-beta.2</div>
+                  <div class="Tag">v1.2.0-beta.1</div>
+              </div>
+            </ScrollArea.viewport>
+            <ScrollArea.scrollbar class="ScrollAreaScrollbar" orientation="vertical">
+              <ScrollArea.thumb class="ScrollAreaThumb" />
+            </ScrollArea.scrollbar>
+            <ScrollArea.scrollbar class="ScrollAreaScrollbar" orientation="horizontal">
+              <ScrollArea.thumb class="ScrollAreaThumb" />
+            </ScrollArea.scrollbar>
+            <ScrollArea.corner class="ScrollAreaCorner" />
+          </ScrollArea.root>
+        </div>
         """
       }
     ]

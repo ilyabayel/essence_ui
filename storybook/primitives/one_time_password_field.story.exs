@@ -5,6 +5,7 @@ defmodule Storybook.Primitives.OneTimePasswordFieldStory do
   alias EssenceUI.Primitives.OneTimePasswordField
 
   def function, do: &OneTimePasswordField.root/1
+
   def container, do: :div
   def layout, do: :one_column
 
@@ -12,22 +13,18 @@ defmodule Storybook.Primitives.OneTimePasswordFieldStory do
     [
       %Variation{
         id: :primitive,
-        description: "Headless one-time password field primitive",
+        description: "Radix docs one-time password field demo",
         template: """
-        <OneTimePasswordField.root id="otp-primitive" length={6} name="otp" class="OtpRoot" />
-
-        <style>
-          .OtpRoot {
-            display: inline-flex; gap: 0.4rem; align-items: center;
-          }
-          .OtpRoot [data-essence-otp-input] {
-            width: 2.25rem; height: 2.5rem; text-align: center;
-            font-size: 1.1rem; border: 1px solid #ccc; border-radius: 4px;
-          }
-          .OtpRoot [data-essence-otp-input]:focus {
-            outline: 2px solid #333; outline-offset: 1px;
-          }
-        </style>
+        <div class="radix-demo" data-component="one-time-password-field">
+          <OneTimePasswordField.root id="otp-primitive" class="OTPRoot" length={6} name="otp">
+            <OneTimePasswordField.input class="OTPInput" index={0} />
+            <OneTimePasswordField.input class="OTPInput" index={1} />
+            <OneTimePasswordField.input class="OTPInput" index={2} />
+            <OneTimePasswordField.input class="OTPInput" index={3} />
+            <OneTimePasswordField.input class="OTPInput" index={4} />
+            <OneTimePasswordField.input class="OTPInput" index={5} />
+          </OneTimePasswordField.root>
+        </div>
         """
       }
     ]

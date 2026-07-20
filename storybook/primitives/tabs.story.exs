@@ -5,6 +5,7 @@ defmodule Storybook.Primitives.TabsStory do
   alias EssenceUI.Primitives.Tabs
 
   def function, do: &Tabs.root/1
+
   def container, do: :div
   def layout, do: :one_column
 
@@ -12,55 +13,55 @@ defmodule Storybook.Primitives.TabsStory do
     [
       %Variation{
         id: :primitive,
-        description: "Headless tabs primitive",
+        description: "Radix docs tabs demo",
         template: """
-        <Tabs.root id="tabs-primitive" default_value="account" class="TabsRoot">
-          <Tabs.list class="TabsList" aria-label="Manage your account">
-            <Tabs.trigger class="TabsTrigger" value="account">Account</Tabs.trigger>
-            <Tabs.trigger class="TabsTrigger" value="documents">Documents</Tabs.trigger>
-            <Tabs.trigger class="TabsTrigger" value="settings">Settings</Tabs.trigger>
-          </Tabs.list>
-          <Tabs.content class="TabsContent" value="account">
-            Make changes to your account here.
-          </Tabs.content>
-          <Tabs.content class="TabsContent" value="documents">
-            Access and update your documents.
-          </Tabs.content>
-          <Tabs.content class="TabsContent" value="settings">
-            Edit your settings or preferences.
-          </Tabs.content>
-        </Tabs.root>
-
-        <style>
-          .TabsRoot { font-family: system-ui, sans-serif; width: 300px; }
-          .TabsList { display: flex; border-bottom: 1px solid #ccc; }
-          .TabsTrigger {
-            all: unset; padding: 8px 16px; cursor: pointer;
-            border-bottom: 2px solid transparent;
-          }
-          .TabsTrigger[data-state="active"] { border-bottom-color: #585ad4; color: #585ad4; }
-          .TabsTrigger:focus { outline: 2px solid black; outline-offset: 2px; }
-          .TabsContent { padding: 16px 0; }
-        </style>
-        """
-      },
-      %Variation{
-        id: :vertical,
-        description: "Vertical tabs",
-        template: """
-        <Tabs.root id="tabs-vertical" default_value="tab1" orientation="vertical" class="TabsRootVertical">
-          <Tabs.list class="TabsListVertical" aria-label="Vertical tabs">
-            <Tabs.trigger class="TabsTrigger" value="tab1">One</Tabs.trigger>
-            <Tabs.trigger class="TabsTrigger" value="tab2">Two</Tabs.trigger>
-          </Tabs.list>
-          <Tabs.content class="TabsContent" value="tab1">First panel</Tabs.content>
-          <Tabs.content class="TabsContent" value="tab2">Second panel</Tabs.content>
-        </Tabs.root>
-
-        <style>
-          .TabsRootVertical { display: flex; gap: 16px; }
-          .TabsListVertical { display: flex; flex-direction: column; }
-        </style>
+        <div class="radix-demo" data-component="tabs">
+          <Tabs.root id="tabs-primitive" class="TabsRoot" default_value="account">
+            <Tabs.list class="TabsList" aria-label="Manage your account">
+              <Tabs.trigger class="TabsTrigger" value="account">Account</Tabs.trigger>
+              <Tabs.trigger class="TabsTrigger" value="documents">Documents</Tabs.trigger>
+              <Tabs.trigger class="TabsTrigger" value="settings">Settings</Tabs.trigger>
+            </Tabs.list>
+            <Tabs.content class="TabsContent" value="account">
+              <p class="Text">Make changes to your account here. Click save when you are done.</p>
+              <fieldset class="Fieldset">
+                <label class="Label" for="name">Name</label>
+                <input class="Input" id="name" value="Pedro Duarte" />
+              </fieldset>
+              <fieldset class="Fieldset">
+                <label class="Label" for="username">Username</label>
+                <input class="Input" id="username" value="@peduarte" />
+              </fieldset>
+              <div style="display: flex; margin-top: 20px; justify-content: flex-end;">
+                <button class="Button green" type="button">Save changes</button>
+              </div>
+            </Tabs.content>
+            <Tabs.content class="TabsContent" value="documents">
+              <p class="Text">Access and update your documents here.</p>
+              <fieldset class="Fieldset">
+                <label class="Label" for="doc-title">Title</label>
+                <input class="Input" id="doc-title" value="Project brief" />
+              </fieldset>
+              <div style="display: flex; margin-top: 20px; justify-content: flex-end;">
+                <button class="Button green" type="button">Save documents</button>
+              </div>
+            </Tabs.content>
+            <Tabs.content class="TabsContent" value="settings">
+              <p class="Text">Edit your settings or preferences.</p>
+              <fieldset class="Fieldset">
+                <label class="Label" for="currentPassword">Current password</label>
+                <input class="Input" id="currentPassword" type="password" />
+              </fieldset>
+              <fieldset class="Fieldset">
+                <label class="Label" for="newPassword">New password</label>
+                <input class="Input" id="newPassword" type="password" />
+              </fieldset>
+              <div style="display: flex; margin-top: 20px; justify-content: flex-end;">
+                <button class="Button green" type="button">Change password</button>
+              </div>
+            </Tabs.content>
+          </Tabs.root>
+        </div>
         """
       }
     ]

@@ -15,16 +15,53 @@ defmodule Storybook.Primitives.HoverCardStory do
         id: :primitive,
         description: "Headless hover card primitive",
         template: """
-        <HoverCard.root id="hover-card-primitive" open_delay={100} close_delay={100}>
-          <HoverCard.trigger id="hover-card-trigger" content_id="hover-card-content" style="display: inline-flex; color: #2563eb; text-decoration: underline; cursor: default;">
-            @radix-ui
-          </HoverCard.trigger>
-          <HoverCard.content id="hover-card-content" style="background: white; border: 1px solid #ccc; border-radius: 6px; padding: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); min-width: 220px;">
-            <strong>Radix UI</strong>
-            <p style="margin: 4px 0 0;">Component primitives for the web.</p>
-            <HoverCard.arrow />
-          </HoverCard.content>
-        </HoverCard.root>
+        <div class="radix-demo" data-component="hover-card">
+          <HoverCard.root id="hover-card-primitive" open_delay={100} close_delay={100}>
+            <HoverCard.trigger id="hover-card-trigger" content_id="hover-card-content">
+              <a
+                class="ImageTrigger"
+                href="https://twitter.com/radix_ui"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <img
+                  class="Image normal"
+                  src="https://pbs.twimg.com/profile_images/1337055608613253126/r_eiMp2H_400x400.png"
+                  alt="Radix UI"
+                />
+              </a>
+            </HoverCard.trigger>
+            <HoverCard.content id="hover-card-content" class="HoverCardContent" side_offset={5}>
+              <div style="display: flex; flex-direction: column; gap: 7px;">
+                <img
+                  class="Image large"
+                  src="https://pbs.twimg.com/profile_images/1337055608613253126/r_eiMp2H_400x400.png"
+                  alt="Radix UI"
+                />
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                  <div>
+                    <div class="Text bold">Radix</div>
+                    <div class="Text faded">@radix_ui</div>
+                  </div>
+                  <div class="Text">
+                    Components, icons, colors, and templates for building high-quality, accessible UI. Free and open-source.
+                  </div>
+                  <div style="display: flex; gap: 15px;">
+                    <div style="display: flex; gap: 5px;">
+                      <div class="Text bold">0</div>
+                      <div class="Text faded">Following</div>
+                    </div>
+                    <div style="display: flex; gap: 5px;">
+                      <div class="Text bold">2,900</div>
+                      <div class="Text faded">Followers</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <HoverCard.arrow class="HoverCardArrow" />
+            </HoverCard.content>
+          </HoverCard.root>
+        </div>
         """
       }
     ]
