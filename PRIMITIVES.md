@@ -12,7 +12,7 @@ Target: Radix public docs API, implemented for Phoenix LiveView with small clien
 - [x] Collapsible
 - [x] Direction Provider
 - [x] Label
-- [x] Portal
+- [x] Portal — via Phoenix.Component.portal (no EssenceUI.Primitives.Portal module)
 - [x] Progress
 - [x] Radio Group
 - [x] Select
