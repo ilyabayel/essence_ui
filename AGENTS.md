@@ -103,3 +103,13 @@ rtk pip list            rtk pnpm install        rtk npm run <script>
 - For debugging, use raw command without rtk prefix
 - `rtk proxy <cmd>` runs command without filtering but tracks usage
 <!-- /headroom:rtk-instructions -->
+
+## Cursor Cloud specific instructions
+
+Single Phoenix (Elixir) app: a UI component library showcased via Phoenix Storybook, plus a CRM demo. No database or external services. Erlang/OTP + Elixir and `inotify-tools` are baked into the VM image; the startup update script only refreshes deps (`npm --prefix assets ci` then `mix setup`).
+
+- Dev server: `mix phx.server` (Bandit on `127.0.0.1:4000`). Storybook is at `/` (redirects to `/getting_started`); CRM demo at `/crm`; LiveDashboard at `/dev/dashboard`.
+- Standard commands are in `README.md` and the `mix.exs` `setup` alias. Note `mix setup` does NOT run `npm install`; the `assets/` npm deps (postcss) must be installed first (`npm --prefix assets ci`), otherwise `build:css` fails with `postcss: not found`.
+- CSS is not wired into Phoenix watchers. After editing `assets/css/*`, rebuild with `npm --prefix assets run build:css` (or run `npm --prefix assets run watch:css` in a second terminal). JS is auto-bundled by the esbuild watcher.
+- Tests: `mix test` (no server needed). A pre-existing failure `EssenceUI.Primitives.Slot.slot/1 is undefined` exists on a clean checkout (the module lives at `lib/essence_ui/utilities/slot.ex`, not under `Primitives`); unrelated to environment setup. Browser E2E: `npx playwright test` from `assets/` (auto-starts the server).
+- Lint: `mix credo` and `mix format --check-formatted` both run (they report pre-existing findings).
