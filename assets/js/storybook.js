@@ -36,6 +36,9 @@ import { ToastRoot } from "./hooks/toast_root";
 import { ToastViewport } from "./hooks/toast_viewport";
 import { SliderRoot } from "./hooks/slider_root";
 import { ToolbarRoot } from "./hooks/toolbar_root";
+import { FormRoot } from "./hooks/form_root";
+import { PasswordToggleFieldRoot } from "./hooks/password_toggle_field_root";
+import { OneTimePasswordFieldRoot } from "./hooks/one_time_password_field_root";
 
 let hooks = {
   Dialog,
@@ -73,7 +76,10 @@ let hooks = {
   ToastRoot,
   ToastViewport,
   SliderRoot,
-  ToolbarRoot
+  ToolbarRoot,
+  FormRoot,
+  PasswordToggleFieldRoot,
+  OneTimePasswordFieldRoot
 };
 
 // Storybook integration

@@ -36,12 +36,13 @@ Target: Radix public docs API, implemented for Phoenix LiveView with small clien
 - [x] Scroll Area
 - [x] Slider
 - [x] Toolbar
+- [x] Form
+- [x] One-Time Password Field
+- [x] Password Toggle Field
 
 ## Missing
 
-- [ ] Form
-- [ ] One-Time Password Field
-- [ ] Password Toggle Field
+_(none — all listed Radix public primitives covered)_
 
 ## Implementation Rule
 
