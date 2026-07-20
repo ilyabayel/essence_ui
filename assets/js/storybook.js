@@ -12,7 +12,11 @@ import { Tabs } from "./hooks/tabs";
 import { CheckboxCards } from "./hooks/checkbox_cards";
 import { RadioCards } from "./hooks/radio_cards";
 import { ContextMenu } from "./hooks/context_menu";
+import { ContextMenuRoot } from "./hooks/context_menu_root";
 import { DropdownMenu } from "./hooks/dropdown_menu";
+import { DropdownMenuRoot } from "./hooks/dropdown_menu_root";
+import { MenubarRoot } from "./hooks/menubar_root";
+import { NavigationMenuRoot } from "./hooks/navigation_menu_root";
 import { Tooltip } from "./hooks/tooltip";
 import { TooltipRoot } from "./hooks/tooltip_root";
 import { HoverCard } from "./hooks/hover_card";
@@ -42,7 +46,11 @@ let hooks = {
   CheckboxCards,
   RadioCards,
   ContextMenu,
+  ContextMenuRoot,
   DropdownMenu,
+  DropdownMenuRoot,
+  MenubarRoot,
+  NavigationMenuRoot,
   Tooltip,
   TooltipRoot,
   HoverCard,

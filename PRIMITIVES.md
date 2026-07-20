@@ -11,9 +11,13 @@ Target: Radix public docs API, implemented for Phoenix LiveView with small clien
 - [x] Alert Dialog
 - [x] Checkbox
 - [x] Collapsible
+- [x] Context Menu
 - [x] Dialog
 - [x] Direction Provider
+- [x] Dropdown Menu
 - [x] Label
+- [x] Menubar
+- [x] Navigation Menu
 - [x] Portal — via Phoenix.Component.portal (no EssenceUI.Primitives.Portal module)
 - [x] Progress
 - [x] Radio Group
@@ -26,21 +30,17 @@ Target: Radix public docs API, implemented for Phoenix LiveView with small clien
 - [x] Visually Hidden
 - [x] Hover Card
 - [x] Popover
+- [x] Toast
 - [x] Tooltip
 
 ## Missing
 
-- [ ] Context Menu
-- [ ] Dropdown Menu
 - [ ] Form
-- [ ] Menubar
-- [ ] Navigation Menu
 - [ ] One-Time Password Field
 - [ ] Password Toggle Field
 - [ ] Scroll Area
 - [ ] Slider
 - [ ] Tabs
-- [ ] Toast
 - [ ] Toolbar
 
 ## Implementation Rule
