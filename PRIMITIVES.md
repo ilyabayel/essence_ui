@@ -24,24 +24,24 @@ Target: Radix public docs API, implemented for Phoenix LiveView with small clien
 - [x] Toggle
 - [x] Toggle Group
 - [x] Visually Hidden
+- [x] Hover Card
+- [x] Popover
+- [x] Tooltip
 
 ## Missing
 
 - [ ] Context Menu
 - [ ] Dropdown Menu
 - [ ] Form
-- [ ] Hover Card
 - [ ] Menubar
 - [ ] Navigation Menu
 - [ ] One-Time Password Field
 - [ ] Password Toggle Field
-- [ ] Popover
 - [ ] Scroll Area
 - [ ] Slider
 - [ ] Tabs
 - [ ] Toast
 - [ ] Toolbar
-- [ ] Tooltip
 
 ## Implementation Rule
 
