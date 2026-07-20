@@ -22,6 +22,8 @@ import { AvatarRoot } from "./hooks/avatar_root";
 import { ToggleRoot } from "./hooks/toggle_root";
 import { ToggleGroupRoot } from "./hooks/toggle_group_root";
 import { LabelRoot } from "./hooks/label_root";
+import { ToastRoot } from "./hooks/toast_root";
+import { ToastViewport } from "./hooks/toast_viewport";
 
 let hooks = {
   Dialog,
@@ -44,7 +46,9 @@ let hooks = {
   AvatarRoot,
   ToggleRoot,
   ToggleGroupRoot,
-  LabelRoot
+  LabelRoot,
+  ToastRoot,
+  ToastViewport
 };
 
 // Storybook integration
