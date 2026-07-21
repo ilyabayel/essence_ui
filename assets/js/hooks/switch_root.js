@@ -78,7 +78,7 @@ export const SwitchRoot = {
     
     if (disabled) {
       this.trigger.setAttribute('disabled', '');
-      this.trigger.dataset.disabled = '';
+      this.trigger.dataset.disabled = 'true';
     } else {
       this.trigger.removeAttribute('disabled');
       delete this.trigger.dataset.disabled;
@@ -87,7 +87,7 @@ export const SwitchRoot = {
     if (this.thumb) {
       this.thumb.dataset.state = state;
       if (disabled) {
-        this.thumb.dataset.disabled = '';
+        this.thumb.dataset.disabled = 'true';
       } else {
         delete this.thumb.dataset.disabled;
       }
