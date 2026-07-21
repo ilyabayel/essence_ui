@@ -48,6 +48,7 @@ test.describe("Tabs Primitive", () => {
       '[data-essence-tabs-trigger][data-value="settings"]',
     );
 
+    await expect(account).toHaveAttribute("data-state", "active");
     await account.focus();
     await page.keyboard.press("ArrowRight");
     await expect(documents).toBeFocused();
