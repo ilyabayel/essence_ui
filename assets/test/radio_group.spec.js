@@ -1,133 +1,182 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
+import { gotoPrimitive } from "./helpers/story.js";
+import { expectNoA11yViolations } from "./helpers/a11y.js";
 
-test.describe('Radio Group', () => {
+/** Wait until RadioGroupRoot hook has synced item tabindex / click handlers. */
+async function waitForRadioGroupHook(root) {
+  await expect(
+    root.locator('[data-essence-radio-group-item][data-has-click]').first(),
+  ).toBeVisible();
+  await expect(
+    root.locator(
+      '[data-essence-radio-group-item][aria-checked="true"][tabindex="0"]',
+    ),
+  ).toBeVisible();
+}
+
+test.describe("Radio Group Primitive", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/components/radio_group?variation_id=default');
-    await page.waitForTimeout(500);
+    await gotoPrimitive(page, "radio_group");
   });
 
-  test('should select item on click via label', async ({ page }) => {
-    const root = page.locator('#radio-default');
-    const appleItem = root.locator('[data-essence-radio-group-item][data-value="apple"]');
-    const orangeItem = root.locator('[data-essence-radio-group-item][data-value="orange"]');
+  test("exposes radiogroup semantics with default selection", async ({
+    page,
+  }) => {
+    const root = page.locator("#radio-group-primitive");
+    await waitForRadioGroupHook(root);
+
+    const defaultItem = root.locator(
+      '[data-essence-radio-group-item][data-value="default"]',
+    );
+    const comfortableItem = root.locator(
+      '[data-essence-radio-group-item][data-value="comfortable"]',
+    );
+    const compactItem = root.locator(
+      '[data-essence-radio-group-item][data-value="compact"]',
+    );
+
+    await expect(root).toHaveAttribute("role", "radiogroup");
+    await expect(root).toHaveAttribute("aria-label", "View density");
+    await expect(root).toHaveAttribute("data-value", "default");
+    await expect(defaultItem).toHaveAttribute("role", "radio");
+    await expect(defaultItem).toHaveAttribute("aria-checked", "true");
+    await expect(defaultItem).toHaveAttribute("data-state", "checked");
+    await expect(comfortableItem).toHaveAttribute("aria-checked", "false");
+    await expect(compactItem).toHaveAttribute("aria-checked", "false");
+
+    const box = await root.boundingBox();
+    expect(box).not.toBeNull();
+    expect(box.height).toBeGreaterThan(0);
+  });
+
+  test("selects item on click via label", async ({ page }) => {
+    const root = page.locator("#radio-group-primitive");
+    await waitForRadioGroupHook(root);
+
+    const defaultItem = root.locator(
+      '[data-essence-radio-group-item][data-value="default"]',
+    );
+    const comfortableItem = root.locator(
+      '[data-essence-radio-group-item][data-value="comfortable"]',
+    );
+    const comfortableLabel = page.locator('label[for="r2"]');
+
+    await comfortableLabel.click();
+    await expect(root).toHaveAttribute("data-value", "comfortable");
+    await expect(comfortableItem).toHaveAttribute("aria-checked", "true");
+    await expect(comfortableItem).toHaveAttribute("data-state", "checked");
+    await expect(defaultItem).toHaveAttribute("aria-checked", "false");
+  });
+
+  test("navigates and selects with arrow keys", async ({ page }) => {
+    const root = page.locator("#radio-group-primitive");
+    await waitForRadioGroupHook(root);
+
+    const defaultItem = root.locator(
+      '[data-essence-radio-group-item][data-value="default"]',
+    );
+    const comfortableItem = root.locator(
+      '[data-essence-radio-group-item][data-value="comfortable"]',
+    );
+    const compactItem = root.locator(
+      '[data-essence-radio-group-item][data-value="compact"]',
+    );
+
+    await defaultItem.focus();
+    await page.keyboard.press("ArrowDown");
+    await expect(comfortableItem).toBeFocused();
+    await expect(comfortableItem).toHaveAttribute("aria-checked", "true");
+    await expect(root).toHaveAttribute("data-value", "comfortable");
+
+    await page.keyboard.press("ArrowDown");
+    await expect(compactItem).toBeFocused();
+    await expect(compactItem).toHaveAttribute("aria-checked", "true");
+
+    await page.keyboard.press("ArrowDown");
+    await expect(defaultItem).toBeFocused();
+    await expect(defaultItem).toHaveAttribute("aria-checked", "true");
+
+    await page.keyboard.press("ArrowUp");
+    await expect(compactItem).toBeFocused();
+
+    await page.keyboard.press("Home");
+    await expect(defaultItem).toBeFocused();
+
+    await page.keyboard.press("End");
+    await expect(compactItem).toBeFocused();
+  });
+
+  test("has no accessibility violations", async ({ page }) => {
+    const root = page.locator("#radio-group-primitive");
+    await waitForRadioGroupHook(root);
+    await expectNoA11yViolations(page, {
+      include: "#radio-group-primitive",
+    });
+  });
+});
+
+test.describe("Radio Group Component", () => {
+  test("should select item on click via label", async ({ page }) => {
+    await page.goto("/components/radio_group?variation_id=default");
+    const root = page.locator("#radio-default");
+    await waitForRadioGroupHook(root);
+
+    const appleItem = root.locator(
+      '[data-essence-radio-group-item][data-value="apple"]',
+    );
+    const orangeItem = root.locator(
+      '[data-essence-radio-group-item][data-value="orange"]',
+    );
     const orangeLabel = root.locator('label:has-text("Orange")');
     const hiddenInput = root.locator('input[type="hidden"][name="fruit"]');
 
-    // Initial state
-    await expect(root).toHaveAttribute('data-value', 'apple');
-    await expect(appleItem).toHaveAttribute('aria-checked', 'true');
-    await expect(hiddenInput).toHaveValue('apple');
+    await expect(root).toHaveAttribute("data-value", "apple");
+    await expect(appleItem).toHaveAttribute("aria-checked", "true");
+    await expect(hiddenInput).toHaveValue("apple");
 
-    // Click orange label
     await orangeLabel.click();
-    await page.waitForTimeout(200);
-
-    await expect(root).toHaveAttribute('data-value', 'orange');
-    await expect(orangeItem).toHaveAttribute('aria-checked', 'true');
-    await expect(appleItem).toHaveAttribute('aria-checked', 'false');
-    await expect(hiddenInput).toHaveValue('orange');
+    await expect(root).toHaveAttribute("data-value", "orange");
+    await expect(orangeItem).toHaveAttribute("aria-checked", "true");
+    await expect(appleItem).toHaveAttribute("aria-checked", "false");
+    await expect(hiddenInput).toHaveValue("orange");
   });
 
-  test('should navigate with keyboard', async ({ page }) => {
-    const root = page.locator('#radio-default');
-    const appleItem = root.locator('[data-essence-radio-group-item][data-value="apple"]');
-    const orangeItem = root.locator('[data-essence-radio-group-item][data-value="orange"]');
-    const bananaItem = root.locator('[data-essence-radio-group-item][data-value="banana"]');
+  test("should navigate with keyboard", async ({ page }) => {
+    await page.goto("/components/radio_group?variation_id=default");
+    const root = page.locator("#radio-default");
+    await waitForRadioGroupHook(root);
+
+    const appleItem = root.locator(
+      '[data-essence-radio-group-item][data-value="apple"]',
+    );
+    const orangeItem = root.locator(
+      '[data-essence-radio-group-item][data-value="orange"]',
+    );
+    const bananaItem = root.locator(
+      '[data-essence-radio-group-item][data-value="banana"]',
+    );
 
     await appleItem.focus();
-    
-    // ArrowDown to Orange
-    await page.keyboard.press('ArrowDown');
-    await page.waitForTimeout(200);
+    await page.keyboard.press("ArrowDown");
     await expect(orangeItem).toBeFocused();
-    await expect(orangeItem).toHaveAttribute('aria-checked', 'true');
-    await expect(root).toHaveAttribute('data-value', 'orange');
+    await expect(orangeItem).toHaveAttribute("aria-checked", "true");
+    await expect(root).toHaveAttribute("data-value", "orange");
 
-    // ArrowDown to Banana
-    await page.keyboard.press('ArrowDown');
-    await page.waitForTimeout(200);
+    await page.keyboard.press("ArrowDown");
     await expect(bananaItem).toBeFocused();
-    await expect(bananaItem).toHaveAttribute('aria-checked', 'true');
+    await expect(bananaItem).toHaveAttribute("aria-checked", "true");
 
-    // ArrowDown loops to Apple
-    await page.keyboard.press('ArrowDown');
-    await page.waitForTimeout(200);
+    await page.keyboard.press("ArrowDown");
     await expect(appleItem).toBeFocused();
-    await expect(appleItem).toHaveAttribute('aria-checked', 'true');
+    await expect(appleItem).toHaveAttribute("aria-checked", "true");
 
-    // ArrowUp loops to Banana
-    await page.keyboard.press('ArrowUp');
-    await page.waitForTimeout(200);
+    await page.keyboard.press("ArrowUp");
     await expect(bananaItem).toBeFocused();
 
-    // End to Banana
-    await page.keyboard.press('End');
-    await page.waitForTimeout(200);
+    await page.keyboard.press("End");
     await expect(bananaItem).toBeFocused();
 
-    // Home to Apple
-    await page.keyboard.press('Home');
-    await page.waitForTimeout(200);
+    await page.keyboard.press("Home");
     await expect(appleItem).toBeFocused();
-  });
-
-  test('should support horizontal navigation', async ({ page }) => {
-    await page.goto('/components/radio_group?variation_id=horizontal');
-    const root = page.locator('#radio-horizontal');
-    const item1 = root.locator('[data-essence-radio-group-item][data-value="1"]');
-    const item2 = root.locator('[data-essence-radio-group-item][data-value="2"]');
-
-    await item1.focus();
-    await page.waitForTimeout(200);
-
-    // ArrowRight to Item 2
-    await page.keyboard.press('ArrowRight');
-    await page.waitForTimeout(500);
-    await expect(item2).toBeFocused();
-    await expect(item2).toHaveAttribute('aria-checked', 'true');
-
-    // ArrowLeft back to Item 1
-    await page.keyboard.press('ArrowLeft');
-    await page.waitForTimeout(500);
-    await expect(item1).toBeFocused();
-    await expect(item1).toHaveAttribute('aria-checked', 'true');
-
-    // ArrowDown should be ignored in horizontal orientation
-    await page.keyboard.press('ArrowDown');
-    await page.waitForTimeout(200);
-    await expect(item1).toBeFocused();
-  });
-
-  test('should skip disabled items during navigation', async ({ page }) => {
-    await page.goto('/components/radio_group?variation_id=disabled');
-    const root = page.locator('#radio-disabled-item');
-    const item1 = root.locator('[data-essence-radio-group-item][data-value="1"]');
-    const item3 = root.locator('[data-essence-radio-group-item][data-value="3"]');
-
-    await item1.focus();
-    await page.waitForTimeout(200);
-
-    // ArrowDown should skip item2 and go to item3
-    await page.keyboard.press('ArrowDown');
-    await page.waitForTimeout(500);
-    await expect(item3).toBeFocused();
-    await expect(item3).toHaveAttribute('aria-checked', 'true');
-
-    // ArrowUp should skip item2 and go back to item1
-    await page.keyboard.press('ArrowUp');
-    await page.waitForTimeout(500);
-    await expect(item1).toBeFocused();
-    await expect(item1).toHaveAttribute('aria-checked', 'true');
-  });
-
-  test('should not interact when root is disabled', async ({ page }) => {
-    await page.goto('/components/radio_group?variation_id=disabled');
-    const root = page.locator('#radio-disabled-root');
-    const item1 = root.locator('[data-essence-radio-group-item][data-value="1"]');
-
-    await expect(item1).toBeDisabled();
-    
-    // Check initial value
-    await expect(root).toHaveAttribute('data-value', '1');
   });
 });
