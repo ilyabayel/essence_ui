@@ -27,6 +27,7 @@ export const MenubarRoot = {
 
     this.bindMenus();
     this.el.addEventListener("keydown", this.onRootKeyDown);
+    this.el.setAttribute("data-hydrated", "");
   },
 
   updated() {

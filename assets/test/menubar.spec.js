@@ -1,29 +1,35 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
+import { gotoPrimitive } from "./helpers/story.js";
+import { expectNoA11yViolations } from "./helpers/a11y.js";
 
-test.describe('Menubar Primitive', () => {
+test.describe("Menubar Primitive", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/primitives/menubar?variation_id=primitive');
-    await page.waitForTimeout(500);
+    await gotoPrimitive(page, "menubar");
+    await expect(page.locator("#menubar-primitive[data-hydrated]")).toBeVisible();
   });
 
-  test('should open on trigger click and close on escape', async ({ page }) => {
-    const fileTrigger = page.locator('#file-trigger');
-    const fileContent = page.locator('#file-content');
+  test("opens on trigger click and closes on escape", async ({ page }) => {
+    const fileTrigger = page.locator("#file-trigger");
+    const fileContent = page.locator("#file-content");
 
     await expect(fileContent).toBeHidden();
     await fileTrigger.click();
     await expect(fileContent).toBeVisible();
-    await expect(fileTrigger).toHaveAttribute('aria-expanded', 'true');
+    await expect(fileTrigger).toHaveAttribute("aria-expanded", "true");
 
-    await page.keyboard.press('Escape');
+    const box = await fileContent.boundingBox();
+    expect(box).not.toBeNull();
+    expect(box.height).toBeGreaterThan(0);
+
+    await page.keyboard.press("Escape");
     await expect(fileContent).toBeHidden();
   });
 
-  test('should switch menus on hover when one is open', async ({ page }) => {
-    const fileTrigger = page.locator('#file-trigger');
-    const editTrigger = page.locator('#edit-trigger');
-    const fileContent = page.locator('#file-content');
-    const editContent = page.locator('#edit-content');
+  test("switches menus on hover when one is open", async ({ page }) => {
+    const fileTrigger = page.locator("#file-trigger");
+    const editTrigger = page.locator("#edit-trigger");
+    const fileContent = page.locator("#file-content");
+    const editContent = page.locator("#edit-content");
 
     await fileTrigger.click();
     await expect(fileContent).toBeVisible();
@@ -31,5 +37,12 @@ test.describe('Menubar Primitive', () => {
     await editTrigger.hover();
     await expect(editContent).toBeVisible();
     await expect(fileContent).toBeHidden();
+  });
+
+  test("has no accessibility violations", async ({ page }) => {
+    await expect(page.locator("#menubar-primitive")).toBeVisible();
+    await expectNoA11yViolations(page, {
+      include: "#menubar-primitive",
+    });
   });
 });
