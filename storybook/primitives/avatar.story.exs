@@ -1,23 +1,43 @@
 defmodule Storybook.Primitives.AvatarStory do
   @moduledoc false
-
   use PhoenixStorybook.Story, :component
 
   alias EssenceUI.Primitives.Avatar
 
   def function, do: &Avatar.root/1
+
   def container, do: :div
   def layout, do: :one_column
 
   def variations do
     [
       %Variation{
-        id: :image_with_fallback,
+        id: :primitive,
+        description: "Radix docs avatar demo",
         template: """
-        <Avatar.root id="avatar-primitive">
-          <Avatar.image src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop" alt="User" style="width: 48px; height: 48px; border-radius: 999px;" />
-          <Avatar.fallback style="display: inline-flex; width: 48px; height: 48px; align-items: center; justify-content: center; border-radius: 999px; background: #eee;">AB</Avatar.fallback>
-        </Avatar.root>
+        <div class="radix-demo" data-component="avatar">
+          <div style="display: flex; gap: 20px;">
+            <Avatar.root id="avatar-1" class="AvatarRoot">
+              <Avatar.image
+                class="AvatarImage"
+                src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
+                alt="Colm Tuite"
+              />
+              <Avatar.fallback class="AvatarFallback" delay_ms={600}>CT</Avatar.fallback>
+            </Avatar.root>
+            <Avatar.root id="avatar-2" class="AvatarRoot">
+              <Avatar.image
+                class="AvatarImage"
+                src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
+                alt="Pedro Duarte"
+              />
+              <Avatar.fallback class="AvatarFallback" delay_ms={600}>JD</Avatar.fallback>
+            </Avatar.root>
+            <Avatar.root id="avatar-3" class="AvatarRoot">
+              <Avatar.fallback class="AvatarFallback">PD</Avatar.fallback>
+            </Avatar.root>
+          </div>
+        </div>
         """
       }
     ]

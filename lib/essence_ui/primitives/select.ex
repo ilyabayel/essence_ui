@@ -93,16 +93,19 @@ defmodule EssenceUI.Primitives.Select do
   end
 
   @doc """
-  A portal that renders the select content into the body.
+  A portal that renders the select content into a target container via Phoenix.Component.portal.
   """
-  attr :rest, :global
+  attr :id, :string, required: true
+  attr :target, :string, default: "body"
   slot :inner_block, required: true
 
   def portal(assigns) do
     ~H"""
-    <div data-essence-select-portal {@rest}>
-      {render_slot(@inner_block)}
-    </div>
+    <Phoenix.Component.portal id={@id} target={@target}>
+      <div data-essence-select-portal>
+        {render_slot(@inner_block)}
+      </div>
+    </Phoenix.Component.portal>
     """
   end
 

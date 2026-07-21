@@ -12,8 +12,16 @@ defmodule Storybook.Primitives.VisuallyHiddenStory do
   def variations do
     [
       %Variation{
-        id: :default,
-        slots: ["Screen reader text"]
+        id: :primitive,
+        description: "Visually hidden but available to screen readers",
+        template: """
+        <div class="radix-demo" data-component="visually-hidden">
+          <button class="Button violet" type="button">
+            Save
+            <VisuallyHidden.visually_hidden> the document</VisuallyHidden.visually_hidden>
+          </button>
+        </div>
+        """
       }
     ]
   end

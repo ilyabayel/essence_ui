@@ -1,29 +1,26 @@
 defmodule Storybook.Primitives.ProgressStory do
   @moduledoc false
-
   use PhoenixStorybook.Story, :component
 
   alias EssenceUI.Primitives.Progress
 
   def function, do: &Progress.root/1
+
   def container, do: :div
   def layout, do: :one_column
 
   def variations do
     [
       %Variation{
-        id: :loading,
-        attributes: %{value: 50},
+        id: :primitive,
+        description: "Radix docs progress demo",
         template: """
-        <Progress.root value={50} style="width: 240px; height: 12px; background: #eee;">
-          <Progress.indicator value={50} style="display: block; width: 50%; height: 100%; background: #111;" />
-        </Progress.root>
+        <div class="radix-demo" data-component="progress">
+          <Progress.root class="ProgressRoot" value={66}>
+            <Progress.indicator class="ProgressIndicator" value={66} style="transform: translateX(-34%);" />
+          </Progress.root>
+        </div>
         """
-      },
-      %Variation{
-        id: :indeterminate,
-        attributes: %{},
-        slots: ["Indeterminate"]
       }
     ]
   end
