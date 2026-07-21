@@ -16,7 +16,7 @@ defmodule Storybook.Primitives.ProgressStory do
         description: "Radix docs progress demo",
         template: """
         <div class="radix-demo" data-component="progress">
-          <Progress.root class="ProgressRoot" value={66}>
+          <Progress.root class="ProgressRoot" value={66} aria-label="Progress">
             <Progress.indicator class="ProgressIndicator" value={66} style="transform: translateX(-34%);" />
           </Progress.root>
         </div>
