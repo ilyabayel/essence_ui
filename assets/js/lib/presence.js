@@ -57,9 +57,16 @@ export function setClosed(el, options = {}) {
     return;
   }
 
-  const onAnimationEnd = () => {
+  let settled = false;
+  const settle = () => {
+    if (settled) return;
+    settled = true;
     el.removeEventListener("animationend", onAnimationEnd);
     hide();
   };
+
+  const onAnimationEnd = () => settle();
   el.addEventListener("animationend", onAnimationEnd);
+  // Fallback when open animations leave animation-name set but no close animation runs.
+  setTimeout(settle, 200);
 }

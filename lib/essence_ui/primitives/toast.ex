@@ -54,7 +54,7 @@ defmodule EssenceUI.Primitives.Toast do
       |> assign(:open?, open?)
 
     ~H"""
-    <li
+    <div
       id={@id}
       phx-hook="ToastRoot"
       role="status"
@@ -71,7 +71,7 @@ defmodule EssenceUI.Primitives.Toast do
       {@rest}
     >
       {render_slot(@inner_block)}
-    </li>
+    </div>
     """
   end
 
@@ -147,10 +147,11 @@ defmodule EssenceUI.Primitives.Toast do
     assigns = assign(assigns, :resolved_label, label)
 
     ~H"""
-    <ol
+    <div
       id={@id}
       phx-hook="ToastViewport"
       tabindex="-1"
+      role="region"
       data-essence-toast-viewport
       data-hotkey={@hotkey}
       data-label={@resolved_label}
@@ -158,7 +159,7 @@ defmodule EssenceUI.Primitives.Toast do
       {@rest}
     >
       {render_slot(@inner_block)}
-    </ol>
+    </div>
     """
   end
 end

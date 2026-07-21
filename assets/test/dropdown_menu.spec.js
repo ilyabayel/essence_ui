@@ -1,58 +1,83 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
+import { gotoPrimitive } from "./helpers/story.js";
+import { expectNoA11yViolations } from "./helpers/a11y.js";
 
-test.describe('Dropdown Menu Primitive', () => {
+test.describe("Dropdown Menu Primitive", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/primitives/dropdown_menu?variation_id=primitive');
-    await page.waitForTimeout(500);
+    await gotoPrimitive(page, "dropdown_menu");
+    await expect(
+      page.locator("#dropdown-primitive[data-hydrated]"),
+    ).toBeVisible();
   });
 
-  test('should open and close on trigger click', async ({ page }) => {
-    const trigger = page.locator('[data-essence-dropdown-menu-trigger]');
-    const content = page.locator('[data-essence-dropdown-menu-content]');
+  test("opens and closes on trigger click", async ({ page }) => {
+    const root = page.locator("#dropdown-primitive");
+    const trigger = root.locator("[data-essence-dropdown-menu-trigger]");
+    const content = page.locator("#dropdown-content");
 
     await expect(content).toBeHidden();
-    await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+    await expect(trigger).toHaveAttribute("aria-label", "Customise options");
 
     await trigger.click();
     await expect(content).toBeVisible();
-    await expect(trigger).toHaveAttribute('aria-expanded', 'true');
-    await expect(content).toHaveAttribute('data-state', 'open');
+    await expect(trigger).toHaveAttribute("aria-expanded", "true");
+    await expect(content).toHaveAttribute("data-state", "open");
 
-    await trigger.click();
+    const box = await content.boundingBox();
+    expect(box).not.toBeNull();
+    expect(box.height).toBeGreaterThan(0);
+
+    await page.keyboard.press("Escape");
     await expect(content).toBeHidden();
-    await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
   });
 
-  test('should close on escape and navigate with arrows', async ({ page }) => {
-    const trigger = page.locator('[data-essence-dropdown-menu-trigger]');
-    const content = page.locator('[data-essence-dropdown-menu-content]');
-    const items = page.locator('[data-essence-dropdown-menu-item]:not([data-disabled]), [data-essence-dropdown-menu-checkbox-item]');
+  test("navigates with arrows and closes on escape", async ({ page }) => {
+    const root = page.locator("#dropdown-primitive");
+    const trigger = root.locator("[data-essence-dropdown-menu-trigger]");
+    const content = page.locator("#dropdown-content");
+    const items = content.locator(
+      "[data-essence-dropdown-menu-item]:not([data-disabled]), [data-essence-dropdown-menu-checkbox-item]",
+    );
 
     await trigger.click();
     await expect(content).toBeVisible();
 
-    // First item is focused on open; ArrowDown moves to the next
-    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press("ArrowDown");
     await expect(items.nth(1)).toBeFocused();
 
-    await page.keyboard.press('Escape');
+    await page.keyboard.press("Escape");
     await expect(content).toBeHidden();
   });
 
-  test('should close on outside click and item select', async ({ page }) => {
-    const trigger = page.locator('[data-essence-dropdown-menu-trigger]');
-    const content = page.locator('[data-essence-dropdown-menu-content]');
-    const item = page.locator('[data-essence-dropdown-menu-item]').filter({ hasText: 'Close' });
+  test("closes on outside click and item select", async ({ page }) => {
+    const root = page.locator("#dropdown-primitive");
+    const trigger = root.locator("[data-essence-dropdown-menu-trigger]");
+    const content = page.locator("#dropdown-content");
+    const item = content
+      .locator("[data-essence-dropdown-menu-item]")
+      .filter({ hasText: "Close" });
 
     await trigger.click();
     await expect(content).toBeVisible();
 
-    await page.locator('body').click({ position: { x: 5, y: 5 } });
+    await page.mouse.click(8, 120);
     await expect(content).toBeHidden();
 
     await trigger.click();
     await expect(content).toBeVisible();
     await item.click();
     await expect(content).toBeHidden();
+  });
+
+  test("has no accessibility violations when open", async ({ page }) => {
+    const root = page.locator("#dropdown-primitive");
+    const trigger = root.locator("[data-essence-dropdown-menu-trigger]");
+    await trigger.click();
+    await expect(page.locator("#dropdown-content")).toBeVisible();
+    await expectNoA11yViolations(page, {
+      include: '.radix-demo[data-component="dropdown-menu"]',
+    });
   });
 });

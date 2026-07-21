@@ -30,6 +30,7 @@ export const ContextMenuRoot = {
     if (this.el.dataset.state === "open") {
       this.open(true);
     }
+    this.el.setAttribute("data-hydrated", "");
   },
 
   updated() {
@@ -167,8 +168,7 @@ export const ContextMenuRoot = {
 
     this.isOpen = true;
     setOpen(this.content, [this.trigger, this.el]);
-    this.trigger.setAttribute("aria-expanded", "true");
-
+    
     this.positionAtPointer();
 
     this.bindSubmenus();
@@ -230,8 +230,7 @@ export const ContextMenuRoot = {
     this.closeAllSubs();
 
     if (this.trigger) {
-      this.trigger.setAttribute("aria-expanded", "false");
-    }
+          }
 
     setClosed(this.content, {
       extras: [this.trigger, this.el],
@@ -303,8 +302,7 @@ export const ContextMenuRoot = {
     if (!sub || !content) return;
 
     trigger.setAttribute("data-state", "open");
-    trigger.setAttribute("aria-expanded", "true");
-    sub.dataset.state = "open";
+        sub.dataset.state = "open";
     setOpen(content);
 
     const side = content.dataset.side || "right";
@@ -339,8 +337,7 @@ export const ContextMenuRoot = {
 
     if (trigger) {
       trigger.setAttribute("data-state", "closed");
-      trigger.setAttribute("aria-expanded", "false");
-    }
+          }
     sub.dataset.state = "closed";
     if (content) {
       setClosed(content, { waitForAnimation: false });

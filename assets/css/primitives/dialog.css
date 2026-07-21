@@ -10,14 +10,16 @@
 	all: unset;
 }
 
-.radix-demo[data-component="dialog"] .DialogOverlay {
+.radix-demo[data-component="dialog"] .DialogOverlay,
+[data-essence-dialog-overlay].DialogOverlay {
 	background-color: var(--black-a9);
 	position: fixed;
 	inset: 0;
 	animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.radix-demo[data-component="dialog"] .DialogContent {
+.radix-demo[data-component="dialog"] .DialogContent,
+[data-essence-dialog-content].DialogContent {
 	background-color: var(--gray-1);
 	border-radius: 6px;
 	box-shadow: var(--shadow-6);
@@ -31,7 +33,8 @@
 	padding: 25px;
 	animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-.radix-demo[data-component="dialog"] .DialogContent:focus {
+.radix-demo[data-component="dialog"] .DialogContent:focus,
+[data-essence-dialog-content].DialogContent:focus {
 	outline: none;
 }
 

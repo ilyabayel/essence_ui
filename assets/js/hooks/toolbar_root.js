@@ -10,6 +10,7 @@ export const ToolbarRoot = {
 
     this.syncToggleGroups();
     this.syncTabIndexes();
+    this.el.setAttribute("data-hydrated", "");
   },
 
   updated() {

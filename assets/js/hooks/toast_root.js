@@ -49,6 +49,7 @@ export const ToastRoot = {
     if (this.el.dataset.state === "open") {
       this.open(true);
     }
+    this.el.setAttribute("data-hydrated", "");
   },
 
   updated() {

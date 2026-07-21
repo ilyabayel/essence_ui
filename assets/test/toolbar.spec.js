@@ -1,44 +1,69 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
+import { gotoPrimitive } from "./helpers/story.js";
+import { expectNoA11yViolations } from "./helpers/a11y.js";
 
-test.describe('Toolbar Primitive', () => {
+test.describe("Toolbar Primitive", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/primitives/toolbar?variation_id=primitive');
-    await page.waitForTimeout(500);
+    await gotoPrimitive(page, "toolbar");
+    await expect(page.locator("#toolbar-primitive[data-hydrated]")).toBeVisible();
   });
 
-  test('should navigate focusable items with arrow keys', async ({ page }) => {
-    const root = page.locator('#toolbar-primitive');
-    const cut = root.locator('[data-essence-toolbar-button]', { hasText: 'Cut' });
-    const copy = root.locator('[data-essence-toolbar-button]', { hasText: 'Copy' });
-    const paste = root.locator('[data-essence-toolbar-button]', { hasText: 'Paste' });
+  test("navigates focusable items with arrow keys", async ({ page }) => {
+    const root = page.locator("#toolbar-primitive");
+    const bold = root.locator(
+      '[data-essence-toolbar-toggle-item][data-value="bold"]',
+    );
+    const italic = root.locator(
+      '[data-essence-toolbar-toggle-item][data-value="italic"]',
+    );
+    const strike = root.locator(
+      '[data-essence-toolbar-toggle-item][data-value="strikethrough"]',
+    );
 
-    await cut.focus();
-    await expect(cut).toBeFocused();
+    await bold.focus();
+    await expect(bold).toBeFocused();
 
-    await page.keyboard.press('ArrowRight');
-    await expect(copy).toBeFocused();
+    await page.keyboard.press("ArrowRight");
+    await expect(italic).toBeFocused();
 
-    await page.keyboard.press('ArrowRight');
-    await expect(paste).toBeFocused();
+    await page.keyboard.press("ArrowRight");
+    await expect(strike).toBeFocused();
 
-    await page.keyboard.press('Home');
-    await expect(cut).toBeFocused();
+    await page.keyboard.press("Home");
+    await expect(bold).toBeFocused();
 
-    await page.keyboard.press('End');
-    const last = root.locator('[data-essence-toolbar-link]');
-    await expect(last).toBeFocused();
+    await page.keyboard.press("End");
+    const share = root.locator("[data-essence-toolbar-button]", {
+      hasText: "Share",
+    });
+    await expect(share).toBeFocused();
+
+    const box = await root.boundingBox();
+    expect(box).not.toBeNull();
+    expect(box.width).toBeGreaterThan(0);
   });
 
-  test('should toggle items in toggle group', async ({ page }) => {
-    const root = page.locator('#toolbar-primitive');
-    const left = root.locator('[data-essence-toolbar-toggle-item][data-value="left"]');
-    const center = root.locator('[data-essence-toolbar-toggle-item][data-value="center"]');
+  test("toggles items in toggle group", async ({ page }) => {
+    const root = page.locator("#toolbar-primitive");
+    const left = root.locator(
+      '[data-essence-toolbar-toggle-item][data-value="left"]',
+    );
+    const center = root.locator(
+      '[data-essence-toolbar-toggle-item][data-value="center"]',
+    );
 
-    await expect(center).toHaveAttribute('data-state', 'on');
-    await expect(center).toHaveAttribute('aria-pressed', 'true');
+    await expect(center).toHaveAttribute("data-state", "on");
+    await expect(center).toHaveAttribute("aria-pressed", "true");
 
     await left.click();
-    await expect(left).toHaveAttribute('data-state', 'on');
-    await expect(center).toHaveAttribute('data-state', 'off');
+    await expect(left).toHaveAttribute("data-state", "on");
+    await expect(center).toHaveAttribute("data-state", "off");
+  });
+
+  test("has no accessibility violations", async ({ page }) => {
+    await expect(page.locator("#toolbar-primitive")).toBeVisible();
+    await expectNoA11yViolations(page, {
+      include: "#toolbar-primitive",
+    });
   });
 });
