@@ -52,6 +52,7 @@ export const TooltipRoot = {
     if (this.el.dataset.state === "open") {
       this.show(true);
     }
+    this.el.setAttribute("data-hydrated", "");
   },
 
   updated() {
