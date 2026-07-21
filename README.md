@@ -160,6 +160,18 @@ This library aims for API and UX parity with Radix Themes. See the Radix Themes 
 - [ ] Composables for state machines
 - [ ] Visual regression tests
 
+## E2E (Playwright)
+
+Primitive and component browser tests live under `assets/test/`.
+
+```bash
+npm --prefix assets ci
+npx --prefix assets playwright install chromium
+npm --prefix assets run test:e2e
+```
+
+Playwright starts `mix phx.server` automatically. Shared helpers: `assets/test/helpers/story.js` (`gotoPrimitive`) and `assets/test/helpers/a11y.js` (`expectNoA11yViolations` via axe).
+
 ## Learn more
 
 * Official website: https://www.phoenixframework.org/
