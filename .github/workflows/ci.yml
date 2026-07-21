@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main, master]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: "1.16.3"
+          otp-version: "26.2"
+
+      - name: Cache Mix deps and build
+        uses: actions/cache@v4
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-unit-${{ hashFiles('mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-unit-
+
+      - name: Install Mix dependencies
+        run: mix deps.get
+
+      - name: Run unit tests
+        run: mix test
+
+  e2e:
+    name: E2E tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: "1.16.3"
+          otp-version: "26.2"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: assets/package-lock.json
+
+      - name: Cache Mix deps and build
+        uses: actions/cache@v4
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-e2e-${{ hashFiles('mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-e2e-
+
+      - name: Install Mix dependencies
+        run: mix deps.get
+
+      - name: Install and build assets
+        run: |
+          mix assets.setup
+          mix assets.build
+          npm --prefix assets ci
+          npm --prefix assets run build:css
+
+      - name: Install Playwright browsers
+        working-directory: assets
+        run: npx playwright install --with-deps chromium
+
+      - name: Run E2E tests
+        working-directory: assets
+        run: npx playwright test
+        env:
+          CI: true
