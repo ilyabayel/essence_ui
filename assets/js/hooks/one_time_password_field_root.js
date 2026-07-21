@@ -17,6 +17,7 @@ export const OneTimePasswordFieldRoot = {
     this._completed = false;
     this._bind();
     this._syncFromInputs();
+    this.el.setAttribute("data-hydrated", "");
   },
 
   updated() {
