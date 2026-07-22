@@ -8,6 +8,7 @@ export async function gotoPrimitive(page, name, variation = "primitive") {
   const path = `/primitives/${name}?variation_id=${variation}`;
   await page.goto(path);
   await page.waitForLoadState("domcontentloaded");
+  await waitForStoryHooks(page);
 }
 
 /**
@@ -20,9 +21,20 @@ export async function gotoComponent(page, name, variation) {
   const qs = variation ? `?variation_id=${variation}` : "";
   await page.goto(`/components/${name}${qs}`);
   await page.waitForLoadState("domcontentloaded");
+  await waitForStoryHooks(page);
+}
+
+/**
+ * Wait until story (non-chrome) LiveView hooks have mounted.
+ * Storybook chrome hooks like ColorMode may keep phx-hook without data-phx-id.
+ * @param {import('@playwright/test').Page} page
+ */
+async function waitForStoryHooks(page) {
   await page.waitForFunction(() => {
-    const hooks = document.querySelectorAll("[phx-hook]");
+    const hooks = Array.from(document.querySelectorAll("[phx-hook]")).filter(
+      (el) => !el.id?.startsWith("psb-"),
+    );
     if (hooks.length === 0) return true;
-    return Array.from(hooks).every((el) => el.hasAttribute("data-phx-id"));
+    return hooks.every((el) => el.hasAttribute("data-phx-id"));
   });
 }
