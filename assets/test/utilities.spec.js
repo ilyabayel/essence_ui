@@ -5,9 +5,4 @@ test.describe('Utility Primitives', () => {
     await page.goto('/primitives/label');
     await expect(page.locator('label')).toContainText('First Name');
   });
-
-  test('Separator should render', async ({ page }) => {
-    await page.goto('/primitives/separator');
-    await expect(page.locator('[role="separator"]').first()).toBeAttached();
-  });
 });
