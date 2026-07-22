@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.SeparatorStory do
 
   def function, do: &Separator.separator/1
 
-  def container, do: :div
+  def container, do: :iframe
   def layout, do: :one_column
 
   def variations do
@@ -28,6 +28,25 @@ defmodule Storybook.Primitives.SeparatorStory do
               <div class="Text">Source</div>
             </div>
           </div>
+          <style>
+            .SeparatorRoot {
+              background-color: var(--violet-6);
+            }
+            .SeparatorRoot[data-orientation="horizontal"] {
+              height: 1px;
+              width: 100%;
+            }
+            .SeparatorRoot[data-orientation="vertical"] {
+              height: 100%;
+              width: 1px;
+            }
+
+            .Text {
+              color: white;
+              font-size: 15px;
+              line-height: 20px;
+            }
+          </style>
         </div>
         """
       }

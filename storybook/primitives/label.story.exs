@@ -17,7 +17,7 @@ defmodule Storybook.Primitives.LabelStory do
         template: """
         <div class="radix-demo" data-component="label">
           <div style="display: flex; padding: 0 20px; flex-wrap: wrap; gap: 15px; align-items: center;">
-            <Label.label class="LabelRoot" for="firstName">First Name</Label.label>
+            <Label.label id="label-first-name" class="LabelRoot" for="firstName">First Name</Label.label>
             <input class="Input" type="text" id="firstName" value="Pedro Duarte" />
           </div>
         </div>
