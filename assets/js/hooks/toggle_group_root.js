@@ -32,10 +32,14 @@ export const ToggleGroupRoot = {
     this.items().forEach((item, index) => {
       const pressed = values.includes(item.dataset.value);
       item.dataset.state = pressed ? "on" : "off";
-      item.setAttribute("aria-pressed", single ? "false" : String(pressed));
       if (single) {
+        item.removeAttribute("aria-pressed");
         item.setAttribute("role", "radio");
         item.setAttribute("aria-checked", String(pressed));
+      } else {
+        item.removeAttribute("role");
+        item.removeAttribute("aria-checked");
+        item.setAttribute("aria-pressed", String(pressed));
       }
       item.tabIndex = index === 0 || pressed ? 0 : -1;
       if (disabled) item.disabled = true;
