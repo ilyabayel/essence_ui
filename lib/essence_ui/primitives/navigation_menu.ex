@@ -146,9 +146,15 @@ defmodule EssenceUI.Primitives.NavigationMenu do
 
   def indicator(assigns) do
     ~H"""
-    <div id={@id} data-essence-navigation-menu-indicator data-state="hidden" {@rest}>
+    <li
+      id={@id}
+      data-essence-navigation-menu-indicator
+      data-state="hidden"
+      aria-hidden="true"
+      {@rest}
+    >
       {render_slot(@inner_block)}
-    </div>
+    </li>
     """
   end
 end

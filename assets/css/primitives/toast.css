@@ -39,6 +39,9 @@
 	column-gap: 15px;
 	align-items: center;
 }
+.radix-demo[data-component="toast"] .ToastRoot[hidden] {
+	display: none;
+}
 .radix-demo[data-component="toast"] .ToastRoot[data-state="open"] {
 	animation: slideIn 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }

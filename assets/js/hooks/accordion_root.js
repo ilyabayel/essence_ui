@@ -61,6 +61,10 @@ export const AccordionRoot = {
     const item = trigger.closest("[data-essence-accordion-item]");
     if (!item || item.dataset.disabled === "true") return;
 
+    // Accordion owns open state; prevent CollapsibleRoot from also toggling.
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
     const type = this.el.dataset.type || "single";
     const collapsible = this.el.dataset.collapsible === "true";
     const value = item.dataset.value;
@@ -69,15 +73,7 @@ export const AccordionRoot = {
 
     if (type === "single") {
       if (open && !collapsible) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
         return;
-      }
-
-      if (!open) {
-        this.items().forEach((other) => {
-          if (other !== item) this.setItemOpen(other, false);
-        });
       }
 
       values = open ? [] : [value];
@@ -88,6 +84,7 @@ export const AccordionRoot = {
     }
 
     this.el.dataset.value = values.join(",");
+    this.sync();
     this.pushValueChange(values);
   },
 
@@ -141,7 +138,12 @@ export const AccordionRoot = {
   },
 
   setItemOpen(item, open) {
-    item.dispatchEvent(new CustomEvent(open ? "essence:collapsible:open" : "essence:collapsible:close", { bubbles: false }));
+    item.dataset.state = open ? "open" : "closed";
+    item.dispatchEvent(
+      new CustomEvent(open ? "essence:collapsible:open" : "essence:collapsible:close", {
+        bubbles: false,
+      }),
+    );
   },
 
   syncTriggerLocks() {

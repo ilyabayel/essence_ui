@@ -9,10 +9,11 @@ test.describe("Playwright helpers", () => {
   });
 
   test("expectNoA11yViolations runs axe on a simple story", async ({ page }) => {
-    await gotoPrimitive(page, "separator");
-    await expect(page.locator('[role="separator"]').first()).toBeAttached();
+    await gotoPrimitive(page, "label");
+    const demo = page.locator('.radix-demo[data-component="label"]');
+    await expect(demo.locator("label").first()).toBeVisible();
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="separator"], [role="separator"]',
+      include: '.radix-demo[data-component="label"]',
     });
   });
 });

@@ -37,6 +37,7 @@ export const SelectRoot = {
     
     this.syncValue();
     this.bindHoverEvents();
+    this.el.setAttribute('data-hydrated', '');
   },
 
   updated() {

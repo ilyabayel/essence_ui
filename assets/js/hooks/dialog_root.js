@@ -38,6 +38,7 @@ function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {
       } else {
         this.applyClosedUI(true);
       }
+      this.el.setAttribute("data-hydrated", "");
     },
 
     updated() {
@@ -178,27 +179,25 @@ function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {
           return;
         }
 
-        setTimeout(() => {
-          if (this.el.dataset.state !== "closed") return;
-          const style = getComputedStyle(el);
-          const hasAnimation =
-            style.animationName !== "none" && parseFloat(style.animationDuration) > 0;
-          const hasTransition =
-            style.transitionProperty !== "none" && parseFloat(style.transitionDuration) > 0;
-
-          if (!hasAnimation && !hasTransition) {
-            el.hidden = true;
-          }
-        }, 50);
-
-        const onEnd = (e) => {
-          if (e.target !== el || this.el.dataset.state !== "closed") return;
+        let settled = false;
+        const settle = () => {
+          if (settled || this.el.dataset.state !== "closed") return;
+          settled = true;
           el.hidden = true;
           el.removeEventListener("animationend", onEnd);
           el.removeEventListener("transitionend", onEnd);
         };
+
+        const onEnd = (e) => {
+          if (e.target !== el) return;
+          settle();
+        };
         el.addEventListener("animationend", onEnd);
         el.addEventListener("transitionend", onEnd);
+
+        // Fallback: open animations leave animation-name set, so animationend
+        // may not fire again on close when no close animation is defined.
+        setTimeout(settle, 200);
       });
     },
 

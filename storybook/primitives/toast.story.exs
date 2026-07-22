@@ -52,6 +52,7 @@ defmodule Storybook.Primitives.ToastStory do
                 <.action alt_text="Goto schedule to undo" class="ToastAction Button small green">
                   Undo
                 </.action>
+                <.close class="ToastClose" aria-label="Close">×</.close>
               </.root>
             </.viewport>
           </.provider>

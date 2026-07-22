@@ -17,6 +17,7 @@ export const NavigationMenuRoot = {
     this.bindItems();
     this.el.addEventListener("keydown", this.onKeyDown);
     document.addEventListener("pointerdown", this.onDocumentClick, true);
+    this.el.setAttribute("data-hydrated", "");
   },
 
   updated() {

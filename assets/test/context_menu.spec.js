@@ -1,51 +1,67 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
+import { gotoPrimitive } from "./helpers/story.js";
+import { expectNoA11yViolations } from "./helpers/a11y.js";
 
-test.describe('Context Menu Primitive', () => {
+test.describe("Context Menu Primitive", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/primitives/context_menu?variation_id=primitive');
-    await page.waitForTimeout(500);
+    await gotoPrimitive(page, "context_menu");
+    await expect(page.locator("#context-primitive[data-hydrated]")).toBeVisible();
   });
 
-  test('should open on right click and close on escape', async ({ page }) => {
-    const trigger = page.locator('[data-essence-context-menu-trigger]');
-    const content = page.locator('[data-essence-context-menu-content]');
+  test("opens on right click and closes on escape", async ({ page }) => {
+    const trigger = page.locator("[data-essence-context-menu-trigger]");
+    const content = page.locator("[data-essence-context-menu-content]");
 
     await expect(content).toBeHidden();
 
-    await trigger.click({ button: 'right' });
+    await trigger.click({ button: "right" });
     await expect(content).toBeVisible();
-    await expect(trigger).toHaveAttribute('aria-expanded', 'true');
-    await expect(content).toHaveAttribute('data-state', 'open');
+    await expect(content).toHaveAttribute("data-state", "open");
+    await expect(trigger).toHaveAttribute("data-state", "open");
 
-    await page.keyboard.press('Escape');
+    const box = await content.boundingBox();
+    expect(box).not.toBeNull();
+    expect(box.height).toBeGreaterThan(0);
+
+    await page.keyboard.press("Escape");
     await expect(content).toBeHidden();
-    await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    await expect(trigger).toHaveAttribute("data-state", "closed");
   });
 
-  test('should navigate with keyboard and close on item click', async ({ page }) => {
-    const trigger = page.locator('[data-essence-context-menu-trigger]');
-    const content = page.locator('[data-essence-context-menu-content]');
-    const items = page.locator('[data-essence-context-menu-item]');
+  test("navigates with keyboard and closes on item click", async ({ page }) => {
+    const trigger = page.locator("[data-essence-context-menu-trigger]");
+    const content = page.locator("[data-essence-context-menu-content]");
+    const back = content.getByRole("menuitem", { name: /Back/ });
+    const reload = content.getByRole("menuitem", { name: /Reload/ });
 
-    await trigger.click({ button: 'right' });
+    await trigger.click({ button: "right" });
     await expect(content).toBeVisible();
+    await expect(back).toBeFocused();
 
-    // First item is focused on open; ArrowDown moves to the next
-    await page.keyboard.press('ArrowDown');
-    await expect(items.nth(1)).toBeFocused();
+    await page.keyboard.press("ArrowDown");
+    await expect(reload).toBeFocused();
 
-    await items.filter({ hasText: 'Reload' }).click();
+    await reload.click();
     await expect(content).toBeHidden();
   });
 
-  test('should close on outside click', async ({ page }) => {
-    const trigger = page.locator('[data-essence-context-menu-trigger]');
-    const content = page.locator('[data-essence-context-menu-content]');
+  test("closes on outside click", async ({ page }) => {
+    const trigger = page.locator("[data-essence-context-menu-trigger]");
+    const content = page.locator("[data-essence-context-menu-content]");
 
-    await trigger.click({ button: 'right' });
+    await trigger.click({ button: "right" });
     await expect(content).toBeVisible();
 
-    await page.locator('body').click({ position: { x: 5, y: 5 } });
+    await page.mouse.click(8, 120);
     await expect(content).toBeHidden();
+  });
+
+  test("has no accessibility violations when open", async ({ page }) => {
+    const trigger = page.locator("[data-essence-context-menu-trigger]");
+    await trigger.click({ button: "right" });
+    await expect(page.locator("[data-essence-context-menu-content]")).toBeVisible();
+    await expectNoA11yViolations(page, {
+      include: '.radix-demo[data-component="context-menu"]',
+    });
   });
 });

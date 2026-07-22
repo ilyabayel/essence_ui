@@ -44,7 +44,6 @@ defmodule EssenceUI.Primitives.ContextMenu do
       id={@id}
       data-essence-context-menu-trigger
       aria-haspopup="menu"
-      aria-expanded="false"
       aria-controls={@content_id}
       data-state="closed"
       data-disabled={if @disabled, do: ""}

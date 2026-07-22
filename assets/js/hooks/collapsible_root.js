@@ -42,6 +42,17 @@ export const CollapsibleRoot = {
     });
   },
 
+  updated() {
+    const shouldOpen = this.el.dataset.state === 'open';
+    const contentOpen = this.content && !this.content.hidden && this.content.dataset.state === 'open';
+
+    if (shouldOpen && !contentOpen) {
+      this.open(true);
+    } else if (!shouldOpen && contentOpen) {
+      this.close();
+    }
+  },
+
   destroyed() {
     this.content?.removeEventListener('animationend', this._onAnimationEnd);
     this.content?.removeEventListener('transitionend', this._onAnimationEnd);
