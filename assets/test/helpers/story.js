@@ -20,4 +20,9 @@ export async function gotoComponent(page, name, variation) {
   const qs = variation ? `?variation_id=${variation}` : "";
   await page.goto(`/components/${name}${qs}`);
   await page.waitForLoadState("domcontentloaded");
+  await page.waitForFunction(() => {
+    const hooks = document.querySelectorAll("[phx-hook]");
+    if (hooks.length === 0) return true;
+    return Array.from(hooks).every((el) => el.hasAttribute("data-phx-id"));
+  });
 }
