@@ -46,7 +46,6 @@ defmodule EssenceUI.Primitives.Slider do
       data-min-steps-between-thumbs={@min_steps_between_thumbs}
       data-on-value-change={@on_value_change}
       aria-disabled={if @disabled, do: "true"}
-      aria-orientation={@orientation}
       dir={@dir}
       {@rest}
     >
