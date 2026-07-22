@@ -58,6 +58,10 @@ function syncField(form, field) {
   const clientInvalid = control ? !control.validity.valid : false;
   const invalid = serverInvalid || clientInvalid;
 
+  if (control) {
+    associateLabel(field, control);
+  }
+
   if (invalid) {
     field.setAttribute("data-invalid", "");
   } else {
@@ -103,6 +107,20 @@ function syncField(form, field) {
       stateEl.setAttribute("data-invalid", "");
     } else {
       stateEl.removeAttribute("data-invalid");
+    }
+  }
+}
+
+function associateLabel(field, control) {
+  if (!control.id) {
+    const name = field.dataset.name || "field";
+    control.id = `essence-form-${name}-${Math.random().toString(36).slice(2, 9)}`;
+  }
+
+  const labels = Array.from(field.querySelectorAll("[data-essence-form-label]"));
+  for (const label of labels) {
+    if (!label.getAttribute("for")) {
+      label.setAttribute("for", control.id);
     }
   }
 }
