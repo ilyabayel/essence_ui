@@ -43,6 +43,8 @@ test.describe("Dropdown Menu Primitive", () => {
 
     await trigger.click();
     await expect(content).toBeVisible();
+    // Opening via pointer focuses the first enabled item; wait before arrows.
+    await expect(items.first()).toBeFocused();
 
     await page.keyboard.press("ArrowDown");
     await expect(items.nth(1)).toBeFocused();
