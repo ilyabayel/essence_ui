@@ -49,7 +49,7 @@ defmodule EssenceUI.MixProject do
       {:phoenix_live_dashboard, "~> 0.8.7"},
       {:phoenix_live_reload, "~> 1.6", only: :dev},
       {:phoenix_live_view, "~> 1.1.8"},
-      {:phoenix_storybook, "~> 1.0"},
+      {:phoenix_storybook, "~> 1.3"},
       {:styler, "~> 1.7"},
       {:swoosh, "~> 1.19"},
       {:telemetry_metrics, "~> 1.1"},
