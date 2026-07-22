@@ -42,6 +42,7 @@ defmodule EssenceUI.Primitives.ScrollArea do
     ~H"""
     <div
       data-essence-scroll-area-viewport
+      tabindex="0"
       style="overflow: auto; width: 100%; height: 100%;"
       {@rest}
     >
