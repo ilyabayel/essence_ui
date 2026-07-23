@@ -7,6 +7,7 @@ import {
   handleArrowKeys,
   createTypeahead,
   closeOnItemClick,
+  bindMenuPointerHighlight,
   findMenuPart,
   toggleCheckboxItem,
   selectRadioItem,
@@ -173,6 +174,7 @@ export const ContextMenuRoot = {
 
     this.bindSubmenus();
     closeOnItemClick(this.content, () => this.close());
+    bindMenuPointerHighlight(this.content);
 
     this.content.removeEventListener("click", this.onItemClick);
     this.content.addEventListener("click", this.onItemClick);
@@ -318,6 +320,7 @@ export const ContextMenuRoot = {
     });
 
     closeOnItemClick(content, () => this.close());
+    bindMenuPointerHighlight(content);
   },
 
   closeSub(sub) {
