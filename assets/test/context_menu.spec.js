@@ -56,6 +56,38 @@ test.describe("Context Menu Primitive", () => {
     await expect(content).toBeHidden();
   });
 
+  test("highlights item under pointer on hover", async ({ page }) => {
+    const trigger = page.locator("[data-essence-context-menu-trigger]");
+    const content = page.locator("[data-essence-context-menu-content]");
+    const back = content.getByRole("menuitem", { name: /Back/ });
+    const reload = content.getByRole("menuitem", { name: /Reload/ });
+
+    await trigger.click({ button: "right" });
+    await expect(content).toBeVisible();
+    await expect(back).toHaveAttribute("data-highlighted", "");
+
+    await reload.hover();
+    await expect(reload).toHaveAttribute("data-highlighted", "");
+    await expect(back).not.toHaveAttribute("data-highlighted");
+  });
+
+  test("closes after selecting checkbox and radio items", async ({ page }) => {
+    const trigger = page.locator("[data-essence-context-menu-trigger]");
+    const content = page.locator("[data-essence-context-menu-content]");
+
+    await trigger.click({ button: "right" });
+    await expect(content).toBeVisible();
+
+    await content.getByRole("menuitemcheckbox", { name: /Show Full URLs/ }).click();
+    await expect(content).toBeHidden();
+
+    await trigger.click({ button: "right" });
+    await expect(content).toBeVisible();
+
+    await content.getByRole("menuitemradio", { name: /Colm Tuite/ }).click();
+    await expect(content).toBeHidden();
+  });
+
   test("has no accessibility violations when open", async ({ page }) => {
     const trigger = page.locator("[data-essence-context-menu-trigger]");
     await trigger.click({ button: "right" });

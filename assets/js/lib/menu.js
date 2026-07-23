@@ -29,7 +29,7 @@ export function focusItem(item, items = []) {
   if (!item) return;
   items.forEach((el) => el.removeAttribute("data-highlighted"));
   item.setAttribute("data-highlighted", "");
-  item.focus();
+  item.focus({ preventScroll: true });
 }
 
 /**
@@ -141,7 +141,9 @@ export function typeahead(key, items, state = { query: "", timeout: null }) {
 
 /**
  * Whether clicking an item should close the menu.
- * Sub-triggers and checkbox/radio items stay open by default.
+ * Matches Radix: all items close on select except sub-triggers.
+ * Checkbox/radio stay open only when the consumer prevents the select
+ * (e.g. `onSelect` + `preventDefault`); by default they close.
  * @param {Element} item
  * @returns {boolean}
  */
@@ -154,9 +156,34 @@ export function shouldCloseOnItemClick(item) {
   ) {
     return false;
   }
-  const role = item.getAttribute("role");
-  if (role === "menuitemcheckbox" || role === "menuitemradio") return false;
   return true;
+}
+
+/**
+ * Highlight menu items on mouse pointer move (Radix MenuItemImpl).
+ * Focuses the item under the cursor so `[data-highlighted]` styles apply.
+ * @param {Element} content
+ */
+export function bindMenuPointerHighlight(content) {
+  if (!content || content.hasAttribute("data-menu-pointer-bound")) return;
+  content.setAttribute("data-menu-pointer-bound", "true");
+
+  content.addEventListener("pointermove", (event) => {
+    if (event.pointerType !== "mouse") return;
+
+    const item = event.target.closest(ITEM_SELECTOR);
+    if (!item || !content.contains(item)) return;
+    if (
+      item.hasAttribute("data-disabled") ||
+      item.disabled ||
+      item.getAttribute("aria-disabled") === "true"
+    ) {
+      return;
+    }
+    if (document.activeElement === item) return;
+
+    focusItem(item, getMenuItems(content));
+  });
 }
 
 /**
