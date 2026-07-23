@@ -1,40 +1,32 @@
 defmodule EssenceUI.Components.TabNav do
   @moduledoc """
-  A set of links for navigating between different views.
+  TabNav component styled per Radix Themes TabNav.
 
-  Based on Radix UI Themes TabNav component. Use `TabNav` for navigation links
-  that styled like tabs.
+  Wraps `EssenceUI.Primitives.NavigationMenu` root, list, item, and link.
 
   ## Examples
 
-      <.tab_nav>
+      <.tab_nav id="account-nav">
         <.tab_nav_link href="/account" active>Account</.tab_nav_link>
         <.tab_nav_link href="/documents">Documents</.tab_nav_link>
         <.tab_nav_link href="/settings">Settings</.tab_nav_link>
-      </.tab_nav>
-
-      <.tab_nav color="blue" size="1">
-        <.tab_nav_link href="/overview" active>Overview</.tab_nav_link>
-        <.tab_nav_link href="/details">Details</.tab_nav_link>
       </.tab_nav>
   """
   use Phoenix.Component
 
   alias EssenceUI.Helpers.ExtractProps
-  alias EssenceUI.SharedProps.ColorProps
-  alias EssenceUI.SharedProps.HighContrastProps
+  alias EssenceUI.Primitives.NavigationMenu
   alias EssenceUI.SharedProps.MarginProps
 
-  require ColorProps
-  require HighContrastProps
   require MarginProps
 
   @doc """
-  TabNav root component.
+  TabNav root (NavigationMenu root + list).
   """
+  attr :id, :string, default: nil
   attr :size, :string, values: ["1", "2"], default: "2"
-  attr :wrap, :string, values: ["nowrap", "wrap", "wrap-reverse"], doc: "Flex wrap. Responsive supported."
-  attr :justify, :string, values: ["start", "center", "end"], doc: "Justify content. Responsive supported."
+  attr :wrap, :string, values: ["nowrap", "wrap", "wrap-reverse"]
+  attr :justify, :string, values: ["start", "center", "end"]
   attr :color, :string, default: nil
   attr :high_contrast, :boolean, default: false
   attr :class, :string, default: nil
@@ -58,49 +50,46 @@ defmodule EssenceUI.Components.TabNav do
           class: "rt-r-jc",
           values: ["start", "center", "end"],
           responsive: true
-        }
+        },
+        high_contrast: %{type: :boolean, class: "rt-high-contrast"}
       }
-      |> Map.merge(ColorProps.color_prop_def())
-      |> Map.merge(HighContrastProps.prop_defs())
       |> Map.merge(MarginProps.prop_defs())
 
     extracted = ExtractProps.call(assigns, prop_defs)
+    id = assigns[:id] || "tab-nav-#{System.unique_integer([:positive])}"
+
+    list_class =
+      ["rt-reset", "rt-BaseTabList", "rt-TabNavList", extracted.class, assigns[:class]]
+      |> Enum.filter(& &1)
+      |> Enum.join(" ")
 
     assigns =
       assign(assigns,
-        extracted_class: extracted.class,
-        extracted_style: extracted.style,
-        color: assigns[:color] || false,
-        high_contrast: assigns[:high_contrast] || false
+        id: id,
+        list_class: list_class,
+        list_style: [extracted.style, assigns[:style]] |> Enum.filter(& &1) |> Enum.join("; "),
+        color: assigns[:color]
       )
 
     ~H"""
-    <nav
-      class={
-        [
-          "rt-BaseTabList",
-          "rt-TabNavRoot",
-          @high_contrast && "rt-high-contrast",
-          @extracted_class,
-          @class
-        ]
-        |> Enum.filter(& &1)
-        |> Enum.join(" ")
-      }
-      style={[@extracted_style, @style] |> Enum.filter(& &1) |> Enum.join("; ")}
+    <NavigationMenu.root
+      id={@id}
+      class="rt-TabNavRoot"
       data-accent-color={@color}
       {@rest}
     >
-      {render_slot(@inner_block)}
-    </nav>
+      <NavigationMenu.list class={@list_class} style={@list_style}>
+        {render_slot(@inner_block)}
+      </NavigationMenu.list>
+    </NavigationMenu.root>
     """
   end
 
   @doc """
-  Individual link within TabNav.
+  Individual link within TabNav (NavigationMenu item + link).
   """
+  attr :id, :string, default: nil
   attr :href, :string, default: nil
-  attr :as, :string, default: "a"
   attr :active, :boolean, default: false
   attr :class, :string, default: nil
   attr :style, :string, default: nil
@@ -108,25 +97,31 @@ defmodule EssenceUI.Components.TabNav do
   slot :inner_block, required: true
 
   def tab_nav_link(assigns) do
+    class =
+      ["rt-reset", "rt-BaseTabListTrigger", "rt-TabNavLink", assigns[:class]]
+      |> Enum.filter(& &1)
+      |> Enum.join(" ")
+
+    assigns = assign(assigns, class: class)
+
     ~H"""
-    <.dynamic_tag
-      tag_name={@as}
-      class={
-        ["rt-reset", "rt-BaseTabListTrigger", "rt-TabNavLink", @class]
-        |> Enum.filter(& &1)
-        |> Enum.join(" ")
-      }
-      style={@style}
-      data-active={@active}
-      {Map.merge(%{href: @href}, @rest)}
-    >
-      <span class="rt-BaseTabListTriggerInner rt-TabNavLinkInner">
-        {render_slot(@inner_block)}
-      </span>
-      <span class="rt-BaseTabListTriggerInnerHidden rt-TabNavLinkInnerHidden" aria-hidden="true">
-        {render_slot(@inner_block)}
-      </span>
-    </.dynamic_tag>
+    <NavigationMenu.item class="rt-TabNavItem">
+      <NavigationMenu.link
+        id={@id}
+        href={@href}
+        active={@active}
+        class={@class}
+        style={@style}
+        {@rest}
+      >
+        <span class="rt-BaseTabListTriggerInner rt-TabNavLinkInner">
+          {render_slot(@inner_block)}
+        </span>
+        <span class="rt-BaseTabListTriggerInnerHidden rt-TabNavLinkInnerHidden" aria-hidden="true">
+          {render_slot(@inner_block)}
+        </span>
+      </NavigationMenu.link>
+    </NavigationMenu.item>
     """
   end
 end

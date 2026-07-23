@@ -35,6 +35,11 @@ defmodule EssenceUI.Components do
     * `radio_cards_root/1` - See `EssenceUI.Components.RadioCards`
     * `radio_group/1` - See `EssenceUI.Components.RadioGroup`
     * `segmented_control/1` - See `EssenceUI.Components.SegmentedControl`
+    * `segmented_control_item/1` - See `EssenceUI.Components.SegmentedControl`
+    * `tabs_root/1` - See `EssenceUI.Components.Tabs`
+    * `tabs_list/1` - See `EssenceUI.Components.Tabs`
+    * `tabs_trigger/1` - See `EssenceUI.Components.Tabs`
+    * `tabs_content/1` - See `EssenceUI.Components.Tabs`
     * `select_root/1` - See `EssenceUI.Components.Select`
     * `select_trigger/1` - See `EssenceUI.Components.Select`
     * `select_content/1` - See `EssenceUI.Components.Select`
@@ -166,6 +171,7 @@ defmodule EssenceUI.Components do
   defdelegate radio_group_root(assigns), to: RadioGroup
   defdelegate radio_group_item(assigns), to: RadioGroup
   defdelegate segmented_control(assigns), to: EssenceUI.Components.SegmentedControl
+  defdelegate segmented_control_item(assigns), to: EssenceUI.Components.SegmentedControl
   defdelegate select_root(assigns), to: Select
   defdelegate select_trigger(assigns), to: Select
   defdelegate select_content(assigns), to: Select
@@ -222,6 +228,8 @@ defmodule EssenceUI.Components do
   defdelegate section(assigns), to: EssenceUI.Components.Section
 
   # Overlays
-  defdelegate tabs(assigns), to: Tabs
+  defdelegate tabs_root(assigns), to: Tabs
   defdelegate tabs_list(assigns), to: Tabs
+  defdelegate tabs_trigger(assigns), to: Tabs
+  defdelegate tabs_content(assigns), to: Tabs
 end

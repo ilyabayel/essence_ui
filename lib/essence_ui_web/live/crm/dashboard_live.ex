@@ -429,17 +429,16 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
         </.flex>
       </.flex>
 
-      <.tabs default_value="overview" mt="4">
-        <:list :let={ctx}>
-          <.tabs_list size="2" {ctx}>
-            <:trigger value="overview">Overview</:trigger>
-            <:trigger value="evaluation">Evaluation</:trigger>
-            <:trigger value="notes">Notes</:trigger>
-            <:trigger value="settings">Settings</:trigger>
+      <.tabs_root id="crm-candidate-tabs" default_value="overview" mt="4">
+          <.tabs_list size="2">
+            <.tabs_trigger value="overview">Overview</.tabs_trigger>
+            <.tabs_trigger value="evaluation">Evaluation</.tabs_trigger>
+            <.tabs_trigger value="notes">Notes</.tabs_trigger>
+            <.tabs_trigger value="settings">Settings</.tabs_trigger>
           </.tabs_list>
-        </:list>
+        
 
-        <:content value="overview">
+        <.tabs_content value="overview">
           <.flex direction="column" gap="4" mt="4">
             <.grid columns="2" gap="4">
               <.flex direction="column" gap="1">
@@ -462,9 +461,9 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
               </.select_root>
             </.flex>
           </.flex>
-        </:content>
+        </.tabs_content>
 
-        <:content value="evaluation">
+        <.tabs_content value="evaluation">
           <.flex direction="column" gap="5" mt="4">
             <.flex direction="column" gap="2">
               <.text size="2" weight="bold">Technical Skill Score</.text>
@@ -491,16 +490,16 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
               </.checkbox_group>
             </.flex>
           </.flex>
-        </:content>
+        </.tabs_content>
 
-        <:content value="notes">
+        <.tabs_content value="notes">
           <.flex direction="column" gap="3" mt="4">
             <.text_area placeholder="Add private feedback notes..." style="height: 150px;" />
             <.button variant="solid">Save Note</.button>
           </.flex>
-        </:content>
+        </.tabs_content>
 
-        <:content value="settings">
+        <.tabs_content value="settings">
           <.flex direction="column" gap="4" mt="4">
             <.flex justify="space-between" align="center">
               <.flex direction="column">
@@ -512,8 +511,8 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
             <.separator size="4" style="width: 100%;" />
             <.button variant="soft" color="red" style="width: 100%;">Archive Candidate</.button>
           </.flex>
-        </:content>
-      </.tabs>
+        </.tabs_content>
+      </.tabs_root>
     </div>
     """
   end

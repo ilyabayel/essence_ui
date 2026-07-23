@@ -1,218 +1,187 @@
 defmodule EssenceUI.Components.Tabs do
   @moduledoc """
-  A set of content sections to be displayed one at a time.
+  Tabs component styled per Radix Themes Tabs.
 
-  Based on Radix UI Themes Tabs component with support for various sizes and colors.
-  The Tabs component uses client-side JavaScript to handle tab switching for smooth
-  interactions without server round-trips.
+  Wraps `EssenceUI.Primitives.Tabs` with Themes parts:
+  `tabs_root/1`, `tabs_list/1`, `tabs_trigger/1`, `tabs_content/1`.
 
   ## Examples
 
-      <.tabs default_value="account">
-        <:list>
-          <.tabs_list size="2">
-            <:trigger value="account">Account</:trigger>
-            <:trigger value="documents">Documents</:trigger>
-            <:trigger value="settings">Settings</:trigger>
-          </.tabs_list>
-        </:list>
-        <:content value="account">
+      <.tabs_root id="account-tabs" default_value="account">
+        <.tabs_list size="2">
+          <.tabs_trigger value="account">Account</.tabs_trigger>
+          <.tabs_trigger value="documents">Documents</.tabs_trigger>
+          <.tabs_trigger value="settings">Settings</.tabs_trigger>
+        </.tabs_list>
+        <.tabs_content value="account">
           <.text>Make changes to your account here.</.text>
-        </:content>
-        <:content value="documents">
+        </.tabs_content>
+        <.tabs_content value="documents">
           <.text>Access and update your documents.</.text>
-        </:content>
-        <:content value="settings">
+        </.tabs_content>
+        <.tabs_content value="settings">
           <.text>Manage your account settings.</.text>
-        </:content>
-      </.tabs>
-
-      <.tabs default_value="overview" color="blue">
-        <:list>
-          <.tabs_list size="1">
-            <:trigger value="overview">Overview</:trigger>
-            <:trigger value="details">Details</:trigger>
-          </.tabs_list>
-        </:list>
-        <:content value="overview">
-          Overview content
-        </:content>
-        <:content value="details">
-          Details content
-        </:content>
-      </.tabs>
-
-  ## Props
-
-  - `default_value` - Initial active tab value (required)
-  - `color` - Color theme from accent color palette (default: none)
-  - `high_contrast` - Increase color contrast (default: false)
-  - Plus margin props (m, mx, my, mt, mr, mb, ml) for spacing control
-
-  ## Accessibility
-
-  - Uses proper ARIA roles and attributes
-  - Keyboard navigation with arrow keys
-  - Focus management
+        </.tabs_content>
+      </.tabs_root>
   """
 
   use Phoenix.Component
 
-  alias EssenceUI.SharedProps.ColorProps
-  alias EssenceUI.SharedProps.HighContrastProps
+  alias EssenceUI.Helpers.ExtractProps
+  alias EssenceUI.Primitives.Tabs, as: TabsPrimitive
   alias EssenceUI.SharedProps.MarginProps
 
-  require ColorProps
-  require HighContrastProps
   require MarginProps
 
-  ColorProps.attrs()
-  HighContrastProps.attrs()
+  @sizes ["1", "2"]
+
+  @doc """
+  Tabs root container.
+  """
+  attr :id, :string, required: true
+  attr :value, :string, default: nil
+  attr :default_value, :string, default: nil
+  attr :orientation, :string, values: ["horizontal", "vertical"], default: "horizontal"
+  attr :activation_mode, :string, values: ["automatic", "manual"], default: "automatic"
+  attr :dir, :string, values: ["ltr", "rtl"], default: "ltr"
+  attr :on_value_change, :string, default: nil
+  attr :class, :string, default: nil
   MarginProps.attrs()
+  attr :rest, :global
+  slot :inner_block, required: true
 
-  attr :default_value, :string,
-    required: true,
-    doc: "Initial active tab value."
+  def tabs_root(assigns) do
+    extracted = ExtractProps.call(assigns, MarginProps.prop_defs())
 
-  attr :class, :string, default: nil, doc: "Additional CSS classes to add to the root element."
+    class =
+      ["rt-TabsRoot", extracted.class, assigns[:class]]
+      |> Enum.filter(& &1)
+      |> Enum.join(" ")
 
-  attr :rest, :global,
-    include: ~w(id aria-label aria-labelledby aria-describedby),
-    doc: "Global attributes and event handlers."
-
-  slot :list, required: true, doc: "Tab list container"
-
-  slot :content, required: true, doc: "Tab content panel" do
-    attr :value, :string, required: true, doc: "Tab value to match with trigger"
-  end
-
-  def tabs(assigns) do
-    # Generate unique ID for this tabs instance
-    tabs_id = assigns[:id] || "tabs-#{:erlang.unique_integer([:positive])}"
-
-    assigns =
-      assign(assigns,
-        tabs_id: tabs_id,
-        color: assigns[:color] || false,
-        high_contrast: assigns[:high_contrast] || false
-      )
+    assigns = assign(assigns, class: class, style: extracted.style)
 
     ~H"""
-    <div
-      id={@tabs_id}
-      dir="ltr"
-      data-orientation="horizontal"
-      class="rt-TabsRoot"
-      data-accent-color={@color}
+    <TabsPrimitive.root
+      id={@id}
+      value={@value}
+      default_value={@default_value}
+      orientation={@orientation}
+      activation_mode={@activation_mode}
+      dir={@dir}
+      on_value_change={@on_value_change}
+      class={@class}
+      style={@style}
       {@rest}
-      phx-hook="Tabs"
     >
-      {render_slot(@list, %{
-        tabs_id: @tabs_id,
-        default_value: @default_value,
-        high_contrast: @high_contrast
-      })}
-
-      <%= for content <- @content do %>
-        <div
-          data-state={if(content.value == @default_value, do: "active", else: "inactive")}
-          data-orientation="horizontal"
-          role="tabpanel"
-          aria-labelledby={"#{@tabs_id}-trigger-#{content.value}"}
-          id={"#{@tabs_id}-content-#{content.value}"}
-          tabindex="0"
-          class="rt-TabsContent"
-          hidden={content.value != @default_value}
-        >
-          {render_slot(content)}
-        </div>
-      <% end %>
-    </div>
+      {render_slot(@inner_block)}
+    </TabsPrimitive.root>
     """
   end
 
   @doc """
-  Tab list component containing tab triggers.
-
-  Must be used inside the `:list` slot of the `tabs` component.
-
-  ## Props
-
-  - `size` - Tab size: "1", "2" (default: "2")
-  - `high_contrast` - Increase color contrast (default: false)
+  Tab list containing triggers.
   """
-  attr :size, :string,
-    values: ["1", "2"],
-    default: "2",
-    doc: "Tab size from 1 to 2. Controls overall dimensions."
-
-  attr :high_contrast, :boolean, default: false, doc: "Increase color contrast"
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
-
-  slot :trigger, required: true, doc: "Tab trigger button" do
-    attr :value, :string, required: true, doc: "Tab value to match with content"
-    attr :disabled, :boolean, doc: "Whether the tab is disabled"
-  end
+  attr :size, :string, values: @sizes, default: "2"
+  attr :color, :string, default: nil
+  attr :high_contrast, :boolean, default: false
+  attr :loop, :boolean, default: true
+  attr :class, :string, default: nil
+  MarginProps.attrs()
+  attr :rest, :global
+  slot :inner_block, required: true
 
   def tabs_list(assigns) do
-    # Get context from parent slot
-    tabs_id = assigns[:tabs_id]
-    default_value = assigns[:default_value]
-    high_contrast = assigns[:high_contrast] || false
+    prop_defs =
+      %{
+        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
+        high_contrast: %{type: :boolean, class: "rt-high-contrast"}
+      }
+      |> Map.merge(MarginProps.prop_defs())
 
-    # Build CSS classes for list
-    list_class =
-      [
-        "rt-BaseTabList",
-        "rt-TabsList",
-        "rt-r-size-#{assigns.size}",
-        high_contrast && "rt-high-contrast",
-        assigns[:class]
-      ]
+    extracted = ExtractProps.call(assigns, prop_defs)
+
+    class =
+      ["rt-BaseTabList", "rt-TabsList", extracted.class, assigns[:class]]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 
-    assigns =
-      assign(assigns,
-        list_class: list_class,
-        tabs_id: tabs_id,
-        default_value: default_value
-      )
+    assigns = assign(assigns, class: class, style: extracted.style, color: assigns[:color])
 
     ~H"""
-    <div
-      class={@list_class}
-      role="tablist"
-      aria-orientation="horizontal"
-      data-orientation="horizontal"
-      data-default-value={@default_value}
-      data-tabs-id={@tabs_id}
-      tabindex="0"
+    <TabsPrimitive.list
+      loop={@loop}
+      class={@class}
+      style={@style}
+      data-accent-color={@color}
+      {@rest}
     >
-      <%= for trigger <- @trigger do %>
-        <button
-          type="button"
-          role="tab"
-          class="rt-reset rt-BaseTabListTrigger rt-TabsTrigger"
-          data-value={trigger.value}
-          data-state={if(trigger.value == @default_value, do: "active", else: "inactive")}
-          aria-selected={if(trigger.value == @default_value, do: "true", else: "false")}
-          aria-controls={"#{@tabs_id}-content-#{trigger.value}"}
-          id={"#{@tabs_id}-trigger-#{trigger.value}"}
-          tabindex={if(trigger.value == @default_value, do: "0", else: "-1")}
-          data-orientation="horizontal"
-          data-radix-collection-item=""
-          disabled={trigger[:disabled]}
-        >
-          <span class="rt-BaseTabListTriggerInner rt-TabsTriggerInner">
-            {render_slot(trigger)}
-          </span>
-          <span class="rt-BaseTabListTriggerInnerHidden rt-TabsTriggerInnerHidden" aria-hidden="true">
-            {render_slot(trigger)}
-          </span>
-        </button>
-      <% end %>
-    </div>
+      {render_slot(@inner_block)}
+    </TabsPrimitive.list>
+    """
+  end
+
+  @doc """
+  Tab trigger button with Themes Inner / InnerHidden spans.
+  """
+  attr :id, :string, default: nil
+  attr :value, :string, required: true
+  attr :disabled, :boolean, default: false
+  attr :class, :string, default: nil
+  attr :rest, :global
+  slot :inner_block, required: true
+
+  def tabs_trigger(assigns) do
+    class =
+      ["rt-reset", "rt-BaseTabListTrigger", "rt-TabsTrigger", assigns[:class]]
+      |> Enum.filter(& &1)
+      |> Enum.join(" ")
+
+    assigns = assign(assigns, class: class)
+
+    ~H"""
+    <TabsPrimitive.trigger id={@id} value={@value} disabled={@disabled} class={@class} {@rest}>
+      <span class="rt-BaseTabListTriggerInner rt-TabsTriggerInner">
+        {render_slot(@inner_block)}
+      </span>
+      <span class="rt-BaseTabListTriggerInnerHidden rt-TabsTriggerInnerHidden" aria-hidden="true">
+        {render_slot(@inner_block)}
+      </span>
+    </TabsPrimitive.trigger>
+    """
+  end
+
+  @doc """
+  Tab content panel.
+  """
+  attr :id, :string, default: nil
+  attr :value, :string, required: true
+  attr :force_mount, :boolean, default: false
+  attr :class, :string, default: nil
+  MarginProps.attrs()
+  attr :rest, :global
+  slot :inner_block, required: true
+
+  def tabs_content(assigns) do
+    extracted = ExtractProps.call(assigns, MarginProps.prop_defs())
+
+    class =
+      ["rt-TabsContent", extracted.class, assigns[:class]]
+      |> Enum.filter(& &1)
+      |> Enum.join(" ")
+
+    assigns = assign(assigns, class: class, style: extracted.style)
+
+    ~H"""
+    <TabsPrimitive.content
+      id={@id}
+      value={@value}
+      force_mount={@force_mount}
+      class={@class}
+      style={@style}
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </TabsPrimitive.content>
     """
   end
 end

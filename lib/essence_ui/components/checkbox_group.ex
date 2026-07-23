@@ -1,110 +1,60 @@
 defmodule EssenceUI.Components.CheckboxGroup do
   @moduledoc """
-  A group of checkboxes.
+  Checkbox Group component styled per Radix Themes Checkbox Group.
 
-  Based on Radix UI Themes Checkbox Group component with support for various sizes, variants,
-  and colors. Checkbox Group provides layout and state management for a collection of
-  checkboxes, allowing multiple selections.
+  Uses `EssenceUI.Primitives.Checkbox` for each item.
 
   ## Examples
 
       <.checkbox_group name="interests" default_value={["coding", "music"]}>
-        <.checkbox_group_item value="coding">Coding</.checkbox_group_item>
-        <.checkbox_group_item value="music">Music</.checkbox_group_item>
-        <.checkbox_group_item value="sports">Sports</.checkbox_group_item>
+        <:item value="coding">Coding</:item>
+        <:item value="music">Music</:item>
+        <:item value="sports">Sports</:item>
       </.checkbox_group>
-
-      <.checkbox_group name="roles[]" size="3" variant="soft" color="blue" default_value={["admin"]}>
-        <.checkbox_group_item value="admin">Admin</.checkbox_group_item>
-        <.checkbox_group_item value="editor">Editor</.checkbox_group_item>
-        <.checkbox_group_item value="viewer">Viewer</.checkbox_group_item>
-      </.checkbox_group>
-
-  ## Props
-
-  - `size` - Checkbox size: "1", "2", "3" (default: "2")
-  - `variant` - Visual variant: "surface", "classic", "soft" (default: "surface")
-  - `color` - Color theme from accent color palette (default: none)
-  - `high_contrast` - Increase color contrast (default: false)
-  - `default_value` - Initial selected values (list of strings)
-  - `value` - Controlled selected values (list of strings)
-  - `disabled` - Whether the entire group is disabled
-  - `name` - Form name attribute
-  - Plus margin props (m, mx, my, mt, mr, mb, ml) for spacing control
   """
 
   use Phoenix.Component
 
-  import EssenceUI.Components.Checkbox, only: [checkbox: 1]
-  import EssenceUI.Components.Text, only: [text: 1]
+  import EssenceUI.Primitives.Checkbox, only: [root: 1, indicator: 1]
 
   alias EssenceUI.Helpers.ExtractProps
-  alias EssenceUI.SharedProps.ColorProps
-  alias EssenceUI.SharedProps.HighContrastProps
   alias EssenceUI.SharedProps.MarginProps
 
-  require ColorProps
-  require HighContrastProps
   require MarginProps
 
   @sizes ["1", "2", "3"]
   @variants ["surface", "classic", "soft"]
 
-  ColorProps.attrs()
-  HighContrastProps.attrs()
-  MarginProps.attrs()
-
-  attr :size, :string,
-    values: @sizes,
-    default: "2",
-    doc: "Checkbox button size from 1 to 3. Controls overall dimensions and indicator size."
-
-  attr :variant, :string,
-    values: @variants,
-    default: "surface",
-    doc: "Visual style variant. One of 'surface', 'classic', or 'soft'."
-
-  attr :default_value, :list,
-    default: [],
-    doc: "Initial selected values."
-
-  attr :value, :list,
-    default: nil,
-    doc: "Controlled selected values."
-
-  attr :disabled, :boolean,
-    default: false,
-    doc: "Whether the entire checkbox group is disabled."
-
-  attr :name, :string, required: true, doc: "Form name attribute for the checkbox group."
-  attr :class, :string, default: nil, doc: "Additional CSS classes to add to the element."
+  @doc """
+  Checkbox group root with `:item` slots.
+  """
+  attr :id, :string, default: nil
+  attr :size, :string, values: @sizes, default: "2"
+  attr :variant, :string, values: @variants, default: "surface"
+  attr :color, :string, default: nil
+  attr :high_contrast, :boolean, default: false
+  attr :default_value, :list, default: []
+  attr :value, :list, default: nil
+  attr :disabled, :boolean, default: false
+  attr :name, :string, required: true
+  attr :class, :string, default: nil
   attr :style, :string, default: ""
+  MarginProps.attrs()
+  attr :rest, :global, include: ~w(form aria-label aria-labelledby aria-describedby dir)
 
-  attr :rest, :global,
-    include: ~w(id form aria-label aria-labelledby aria-describedby dir),
-    doc: "Global attributes and event handlers."
-
-  slot :item, required: true, doc: "Checkbox group item"
+  slot :item, required: true do
+    attr :value, :string, required: true
+    attr :disabled, :boolean
+    attr :id, :string
+  end
 
   def checkbox_group(assigns) do
     prop_defs =
       %{
-        size: %{
-          type: :enum,
-          class: "rt-r-size",
-          values: @sizes,
-          default: "2",
-          responsive: true
-        },
-        variant: %{
-          type: :enum,
-          class: "rt-variant",
-          values: @variants,
-          default: "surface"
-        }
+        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
+        variant: %{type: :enum, class: "rt-variant", values: @variants, default: "surface"},
+        high_contrast: %{type: :boolean, class: "rt-high-contrast"}
       }
-      |> Map.merge(ColorProps.color_prop_def())
-      |> Map.merge(HighContrastProps.prop_defs())
       |> Map.merge(MarginProps.prop_defs())
 
     extracted = ExtractProps.call(assigns, prop_defs)
@@ -113,25 +63,36 @@ defmodule EssenceUI.Components.CheckboxGroup do
     selected_values = if is_list(selected_values), do: selected_values, else: [selected_values]
     selected_values = Enum.map(selected_values, &to_string/1)
 
-    # Build CSS classes
     class =
-      [
-        "rt-CheckboxGroupRoot",
-        extracted.class
-      ]
+      ["rt-CheckboxGroupRoot", extracted.class, assigns[:class]]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 
+    id = assigns[:id] || "checkbox-group-#{System.unique_integer([:positive])}"
+
     assigns =
       assign(assigns,
+        id: id,
         class: class,
         style: extracted.style,
         selected_values: selected_values,
-        color: assigns[:color] || false
+        color: assigns[:color],
+        checkbox_class:
+          [
+            "rt-reset",
+            "rt-BaseCheckboxRoot",
+            "rt-CheckboxGroupItemCheckbox",
+            "rt-r-size-#{assigns.size}",
+            "rt-variant-#{assigns.variant}",
+            assigns.high_contrast && "rt-high-contrast"
+          ]
+          |> Enum.filter(& &1)
+          |> Enum.join(" ")
       )
 
     ~H"""
     <div
+      id={@id}
       role="group"
       dir={assigns[:rest][:dir] || "ltr"}
       data-accent-color={@color}
@@ -140,22 +101,38 @@ defmodule EssenceUI.Components.CheckboxGroup do
       tabindex="0"
       {@rest}
     >
-      <%= for item <- @item do %>
-        <.text as="label" class="rt-CheckboxGroupItem" style="align-items: center;" size={@size}>
-          <.checkbox
+      <%= for {item, index} <- Enum.with_index(@item) do %>
+        <label class={"rt-Text rt-CheckboxGroupItem rt-r-size-#{@size}"}>
+          <.root
+            id={item[:id] || "#{@id}-item-#{index}"}
             name={@name}
             value={item[:value]}
-            checked={to_string(item[:value]) in @selected_values}
+            default_checked={to_string(item[:value]) in @selected_values}
             disabled={@disabled || Map.get(item, :disabled, false)}
-            size={@size}
-            variant={@variant}
-            color={assigns[:color]}
-            high_contrast={assigns[:high_contrast]}
-          />
+            class={@checkbox_class}
+            data-accent-color={@color}
+          >
+            <.indicator class="rt-BaseCheckboxIndicator">
+              <svg
+                width="9"
+                height="9"
+                viewBox="0 0 9 9"
+                fill="currentcolor"
+                xmlns="http://www.w3.org/2000/svg"
+                data-state="checked"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M8.53547 0.62293C8.88226 0.849446 8.97976 1.3142 8.75325 1.66099L4.5083 8.1599C4.38833 8.34356 4.19397 8.4655 3.9764 8.49358C3.75883 8.52167 3.53987 8.45309 3.3772 8.30591L0.616113 5.80777C0.308959 5.52987 0.285246 5.05559 0.563148 4.74844C0.84105 4.44128 1.31533 4.41757 1.62249 4.69547L3.73256 6.60459L7.49741 0.840706C7.72393 0.493916 8.18868 0.396414 8.53547 0.62293Z"
+                />
+              </svg>
+            </.indicator>
+          </.root>
           <span class="rt-CheckboxGroupItemInner">
             {render_slot(item)}
           </span>
-        </.text>
+        </label>
       <% end %>
     </div>
     """
