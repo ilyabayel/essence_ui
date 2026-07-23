@@ -2,14 +2,21 @@ defmodule Storybook.Components.DialogStory do
   @moduledoc false
   use PhoenixStorybook.Story, :component
 
-  def function, do: &EssenceUI.Components.Dialog.dialog/1
+  def function, do: &EssenceUI.Components.Dialog.dialog_root/1
 
   def imports,
     do: [
-      {EssenceUI.Components.Button, button: 1},
-      {EssenceUI.Components.Text, text: 1},
-      {EssenceUI.Components.Heading, heading: 1},
-      {EssenceUI.Components.Flex, flex: 1}
+      {EssenceUI.Components,
+       [
+         dialog_trigger: 1,
+         dialog_content: 1,
+         dialog_title: 1,
+         dialog_description: 1,
+         dialog_close: 1,
+         button: 1,
+         text: 1,
+         flex: 1
+       ]}
     ]
 
   def container,
@@ -28,25 +35,25 @@ defmodule Storybook.Components.DialogStory do
       %Variation{
         id: :default,
         template: """
-        <.dialog id="dialog" target=".psb-sandbox" default_state="closed">
-          <.heading as="h2" color="indigo">
-            Hello, there!
-          </.heading>
-          <.text my="4">
-            This is a dialog example.
-          </.text>
-          <.flex gap="2" mt="2">
-            <.button>
-              Apply
-            </.button>
-            <.button phx-click={JS.dispatch("close", to: "#dialog")} color="red">
-              Close
-            </.button>
-          </.flex>
-        </.dialog>
-        <.button phx-click={JS.dispatch("open", to: "#dialog")}>
-          Open Dialog
-        </.button>
+        <.dialog_root id="dialog">
+          <.dialog_trigger>
+            <.button>Edit profile</.button>
+          </.dialog_trigger>
+          <.dialog_content id="dialog-content" target=".psb-sandbox">
+            <.dialog_title>Edit profile</.dialog_title>
+            <.dialog_description>
+              Make changes to your profile here. Click save when you're done.
+            </.dialog_description>
+            <.flex gap="3" mt="4" justify="end">
+              <.dialog_close>
+                <.button variant="soft" color="gray">Cancel</.button>
+              </.dialog_close>
+              <.dialog_close>
+                <.button>Save</.button>
+              </.dialog_close>
+            </.flex>
+          </.dialog_content>
+        </.dialog_root>
         """
       }
     ]

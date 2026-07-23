@@ -30,12 +30,26 @@ defmodule EssenceUI.Primitives.AlertDialog do
   end
 
   attr :id, :string, default: nil
+  attr :as_child, :boolean, default: false
   attr :rest, :global
   slot :inner_block, required: true
 
   def trigger(assigns) do
     ~H"""
+    <span
+      :if={@as_child}
+      id={@id}
+      data-essence-alert-dialog-trigger
+      data-state="closed"
+      aria-haspopup="dialog"
+      aria-expanded="false"
+      style="display: contents;"
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </span>
     <button
+      :if={!@as_child}
       id={@id}
       type="button"
       data-essence-alert-dialog-trigger
@@ -125,24 +139,44 @@ defmodule EssenceUI.Primitives.AlertDialog do
   end
 
   attr :id, :string, default: nil
+  attr :as_child, :boolean, default: false
   attr :rest, :global
   slot :inner_block, required: true
 
   def cancel(assigns) do
     ~H"""
-    <button id={@id} type="button" data-essence-alert-dialog-cancel {@rest}>
+    <span
+      :if={@as_child}
+      id={@id}
+      data-essence-alert-dialog-cancel
+      style="display: contents;"
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </span>
+    <button :if={!@as_child} id={@id} type="button" data-essence-alert-dialog-cancel {@rest}>
       {render_slot(@inner_block)}
     </button>
     """
   end
 
   attr :id, :string, default: nil
+  attr :as_child, :boolean, default: false
   attr :rest, :global
   slot :inner_block, required: true
 
   def action(assigns) do
     ~H"""
-    <button id={@id} type="button" data-essence-alert-dialog-action {@rest}>
+    <span
+      :if={@as_child}
+      id={@id}
+      data-essence-alert-dialog-action
+      style="display: contents;"
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </span>
+    <button :if={!@as_child} id={@id} type="button" data-essence-alert-dialog-action {@rest}>
       {render_slot(@inner_block)}
     </button>
     """

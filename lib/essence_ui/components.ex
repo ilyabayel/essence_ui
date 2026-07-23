@@ -14,8 +14,19 @@ defmodule EssenceUI.Components do
     * `checkbox_cards_root/1` - See `EssenceUI.Components.CheckboxCards`
     * `checkbox_cards_item/1` - See `EssenceUI.Components.CheckboxCards`
     * `checkbox_group/1` - See `EssenceUI.Components.CheckboxGroup`
-    * `dialog/1` - See `EssenceUI.Components.Dialog`
-    * `alert_dialog/1` - See `EssenceUI.Components.AlertDialog`
+    * `dialog_root/1` - See `EssenceUI.Components.Dialog`
+    * `dialog_trigger/1` - See `EssenceUI.Components.Dialog`
+    * `dialog_content/1` - See `EssenceUI.Components.Dialog`
+    * `dialog_title/1` - See `EssenceUI.Components.Dialog`
+    * `dialog_description/1` - See `EssenceUI.Components.Dialog`
+    * `dialog_close/1` - See `EssenceUI.Components.Dialog`
+    * `alert_dialog_root/1` - See `EssenceUI.Components.AlertDialog`
+    * `alert_dialog_trigger/1` - See `EssenceUI.Components.AlertDialog`
+    * `alert_dialog_content/1` - See `EssenceUI.Components.AlertDialog`
+    * `alert_dialog_title/1` - See `EssenceUI.Components.AlertDialog`
+    * `alert_dialog_description/1` - See `EssenceUI.Components.AlertDialog`
+    * `alert_dialog_action/1` - See `EssenceUI.Components.AlertDialog`
+    * `alert_dialog_cancel/1` - See `EssenceUI.Components.AlertDialog`
     * `icon_button/1` - See `EssenceUI.Components.IconButton`
     * `progress/1` - See `EssenceUI.Components.Progress`
     * `radio/1` - See `EssenceUI.Components.Radio`
@@ -132,8 +143,19 @@ defmodule EssenceUI.Components do
   defdelegate dropdown_menu_sub(assigns), to: DropdownMenu
   defdelegate dropdown_menu_sub_trigger(assigns), to: DropdownMenu
   defdelegate dropdown_menu_sub_content(assigns), to: DropdownMenu
-  defdelegate dialog(assigns), to: EssenceUI.Components.Dialog
-  defdelegate alert_dialog(assigns), to: EssenceUI.Components.AlertDialog
+  defdelegate dialog_root(assigns), to: EssenceUI.Components.Dialog
+  defdelegate dialog_trigger(assigns), to: EssenceUI.Components.Dialog
+  defdelegate dialog_content(assigns), to: EssenceUI.Components.Dialog
+  defdelegate dialog_title(assigns), to: EssenceUI.Components.Dialog
+  defdelegate dialog_description(assigns), to: EssenceUI.Components.Dialog
+  defdelegate dialog_close(assigns), to: EssenceUI.Components.Dialog
+  defdelegate alert_dialog_root(assigns), to: EssenceUI.Components.AlertDialog
+  defdelegate alert_dialog_trigger(assigns), to: EssenceUI.Components.AlertDialog
+  defdelegate alert_dialog_content(assigns), to: EssenceUI.Components.AlertDialog
+  defdelegate alert_dialog_title(assigns), to: EssenceUI.Components.AlertDialog
+  defdelegate alert_dialog_description(assigns), to: EssenceUI.Components.AlertDialog
+  defdelegate alert_dialog_action(assigns), to: EssenceUI.Components.AlertDialog
+  defdelegate alert_dialog_cancel(assigns), to: EssenceUI.Components.AlertDialog
   defdelegate icon_button(assigns), to: EssenceUI.Components.IconButton
   defdelegate progress(assigns), to: EssenceUI.Components.Progress
   defdelegate radio(assigns), to: EssenceUI.Components.Radio

@@ -352,14 +352,11 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
           </.flex>
         </.scroll_area>
 
-        <.alert_dialog
-          id="candidate-detail"
-          target="body"
-          default_state="closed"
-          style="--max-width: 600px;"
-        >
-          <.candidate_detail_content candidate={@selected_candidate} stages={@stages} />
-        </.alert_dialog>
+        <.alert_dialog_root id="candidate-detail" open={not is_nil(@selected_candidate)}>
+          <.alert_dialog_content id="candidate-detail-content" style="--max-width: 600px;">
+            <.candidate_detail_content candidate={@selected_candidate} stages={@stages} />
+          </.alert_dialog_content>
+        </.alert_dialog_root>
       </.flex>
     </div>
     """
@@ -413,20 +410,22 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
             </.dropdown_menu_content>
           </.dropdown_menu_root>
 
-          <.icon_button variant="ghost" color="gray" phx-click={close_detail()}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </.icon_button>
+          <.alert_dialog_cancel>
+            <.icon_button variant="ghost" color="gray" phx-click={close_detail()}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </.icon_button>
+          </.alert_dialog_cancel>
         </.flex>
       </.flex>
 
@@ -520,15 +519,11 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
   end
 
   defp open_detail(id) do
-    "select-candidate"
-    |> JS.push(value: %{id: id})
-    |> JS.set_attribute({"data-state", "open"}, to: "#candidate-detail")
+    JS.push("select-candidate", value: %{id: id})
   end
 
   defp close_detail do
-    "close-modal"
-    |> JS.push()
-    |> JS.set_attribute({"data-state", "closed"}, to: "#candidate-detail")
+    JS.push("close-modal")
   end
 
   defp candidate_card(assigns) do

@@ -225,7 +225,8 @@ defmodule Storybook.Examples.RecruitingCrm do
           </.flex>
         </.scroll_area>
 
-        <.dialog id="candidate-detail" target="body" default_state="closed">
+        <.dialog_root id="candidate-detail">
+          <.dialog_content id="candidate-detail-content" target="body">
           <.flex
             direction="column"
             gap="4"
@@ -337,7 +338,8 @@ defmodule Storybook.Examples.RecruitingCrm do
               </:content>
             </.tabs>
           </.flex>
-        </.dialog>
+          </.dialog_content>
+        </.dialog_root>
       </.flex>
     </div>
     """
