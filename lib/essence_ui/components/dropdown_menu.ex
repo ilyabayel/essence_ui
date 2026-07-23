@@ -1,47 +1,65 @@
 defmodule EssenceUI.Components.DropdownMenu do
   @moduledoc """
-  A Dropdown Menu component that displays a menu when a user clicks a button.
+  Dropdown Menu component compatible with Radix UI Themes DropdownMenu API.
 
-  Based on Radix UI DropdownMenu component.
+  Based on EssenceUI.Primitives.DropdownMenu.
+  See: https://www.radix-ui.com/themes/docs/components/dropdown-menu
   """
   use Phoenix.Component
 
   alias EssenceUI.Helpers.ExtractProps
+  alias EssenceUI.Primitives.DropdownMenu, as: DropdownMenuPrimitive
   alias EssenceUI.SharedProps.ColorProps
   alias EssenceUI.SharedProps.HighContrastProps
 
   require ColorProps
   require HighContrastProps
 
-  @doc """
-  Root container for dropdown menu.
-  """
+  @sizes ["1", "2"]
+  @variants ["solid", "soft"]
+
+  attr :id, :string, default: nil
+  attr :open, :boolean, default: false
+  attr :default_open, :boolean, default: false
+  attr :on_open_change, :string, default: nil
+  attr :dir, :string, values: ["ltr", "rtl"], default: "ltr"
+  attr :modal, :boolean, default: true
   attr :class, :string, default: nil
   attr :style, :string, default: ""
+  attr :rest, :global
   slot :inner_block, required: true
 
   def dropdown_menu_root(assigns) do
-    assigns = assign_new(assigns, :id, fn -> "dropdown-menu-#{System.unique_integer([:positive])}" end)
+    id =
+      assigns[:id] ||
+        "dropdown-menu-#{5 |> :crypto.strong_rand_bytes() |> Base.encode32(padding: false, case: :lower)}"
+
+    assigns = assign(assigns, id: id)
 
     ~H"""
-    <div
+    <DropdownMenuPrimitive.root
       id={@id}
+      open={@open}
+      default_open={@default_open}
+      on_open_change={@on_open_change}
+      dir={@dir}
+      modal={@modal}
       class={["rt-DropdownMenuRoot", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={
         ["display: inline-block; position: relative;", @style]
         |> Enum.filter(&(&1 != ""))
         |> Enum.join("; ")
       }
-      phx-hook="DropdownMenu"
+      {@rest}
     >
       {render_slot(@inner_block)}
-    </div>
+    </DropdownMenuPrimitive.root>
     """
   end
 
-  @doc """
-  The trigger area that opens the dropdown menu on click.
-  """
+  attr :id, :string, default: nil
+  attr :content_id, :string, default: nil
+  attr :disabled, :boolean, default: false
   attr :class, :string, default: nil
   attr :style, :string, default: ""
   attr :rest, :global
@@ -49,20 +67,20 @@ defmodule EssenceUI.Components.DropdownMenu do
 
   def dropdown_menu_trigger(assigns) do
     ~H"""
-    <div
+    <DropdownMenuPrimitive.trigger
+      id={@id}
+      content_id={@content_id}
+      disabled={@disabled}
+      as_child
       class={["rt-DropdownMenuTrigger", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={["display: inline-flex;", @style] |> Enum.filter(&(&1 != "")) |> Enum.join("; ")}
-      data-dropdown-menu-trigger
       {@rest}
     >
       {render_slot(@inner_block)}
-    </div>
+    </DropdownMenuPrimitive.trigger>
     """
   end
 
-  @doc """
-  An optional icon part for the trigger.
-  """
   attr :class, :string, default: nil
 
   def dropdown_menu_trigger_icon(assigns) do
@@ -87,18 +105,19 @@ defmodule EssenceUI.Components.DropdownMenu do
     """
   end
 
-  @sizes ["1", "2"]
-  @variants ["solid", "soft"]
-
-  @doc """
-  The dropdown menu content.
-  """
+  attr :id, :string, default: nil
+  attr :target, :string, default: "body"
   attr :size, :string, values: @sizes, default: "2"
   attr :variant, :string, values: @variants, default: "solid"
+  attr :side, :string, values: ["top", "right", "bottom", "left"], default: "bottom"
+  attr :align, :string, values: ["start", "center", "end"], default: "start"
+  attr :side_offset, :integer, default: 4
+  attr :loop, :boolean, default: true
   attr :class, :string, default: nil
   attr :style, :string, default: ""
   ColorProps.attrs()
   HighContrastProps.attrs()
+  attr :rest, :global
   slot :inner_block, required: true
 
   def dropdown_menu_content(assigns) do
@@ -112,39 +131,79 @@ defmodule EssenceUI.Components.DropdownMenu do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
+    id =
+      assigns[:id] ||
+        "dropdown-menu-content-#{5 |> :crypto.strong_rand_bytes() |> Base.encode32(padding: false, case: :lower)}"
+
+    class =
+      [
+        "rt-PopperContent",
+        "rt-BaseMenuContent",
+        "rt-DropdownMenuContent",
+        extracted.class,
+        assigns[:class]
+      ]
+      |> Enum.filter(& &1)
+      |> Enum.join(" ")
+
+    style =
+      [extracted.style, assigns[:style]]
+      |> Enum.filter(&(&1 != "" and &1))
+      |> Enum.join("; ")
+
     assigns =
       assign(assigns,
-        class:
-          ["rt-BaseMenuContent", "rt-DropdownMenuContent", extracted.class, assigns.class]
-          |> Enum.filter(& &1)
-          |> Enum.join(" "),
-        style:
-          ["display: none; position: fixed; z-index: 9999; min-width: 8rem;", extracted.style, assigns.style]
-          |> Enum.filter(&(&1 != ""))
-          |> Enum.join("; ")
+        id: id,
+        portal_id: "#{id}-portal",
+        class: class,
+        style: style
       )
 
     ~H"""
-    <div
-      class={@class}
-      style={@style}
-      data-dropdown-menu-content
-      data-accent-color={assigns[:color]}
-      tabindex="-1"
-    >
-      <div class="rt-BaseMenuViewport" role="menu">
-        {render_slot(@inner_block)}
-      </div>
-    </div>
+    <DropdownMenuPrimitive.portal id={@portal_id} target={@target}>
+      <DropdownMenuPrimitive.content
+        id={@id}
+        side={@side}
+        align={@align}
+        side_offset={@side_offset}
+        loop={@loop}
+        class={@class}
+        style={@style}
+        data-accent-color={assigns[:color]}
+        {@rest}
+      >
+        <div class="rt-BaseMenuViewport">
+          {render_slot(@inner_block)}
+        </div>
+      </DropdownMenuPrimitive.content>
+    </DropdownMenuPrimitive.portal>
     """
   end
 
-  @doc """
-  A standard menu item.
-  """
+  attr :id, :string, default: nil
+  attr :class, :string, default: nil
+  attr :rest, :global
+  slot :inner_block, required: true
+
+  def dropdown_menu_label(assigns) do
+    ~H"""
+    <DropdownMenuPrimitive.label
+      id={@id}
+      class={
+        ["rt-BaseMenuLabel", "rt-DropdownMenuLabel", @class] |> Enum.filter(& &1) |> Enum.join(" ")
+      }
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </DropdownMenuPrimitive.label>
+    """
+  end
+
+  attr :id, :string, default: nil
   attr :shortcut, :string, default: nil
   attr :color, :string, default: nil
   attr :disabled, :boolean, default: false
+  attr :text_value, :string, default: nil
   attr :class, :string, default: nil
   attr :style, :string, default: ""
   attr :rest, :global, include: ~w(phx-click phx-target value href)
@@ -152,195 +211,217 @@ defmodule EssenceUI.Components.DropdownMenu do
 
   def dropdown_menu_item(assigns) do
     ~H"""
-    <div
-      role="menuitem"
+    <DropdownMenuPrimitive.item
+      id={@id}
+      disabled={@disabled}
+      text_value={@text_value}
       class={
         ["rt-reset", "rt-BaseMenuItem", "rt-DropdownMenuItem", @class]
         |> Enum.filter(& &1)
         |> Enum.join(" ")
       }
       style={@style}
-      data-disabled={if @disabled, do: "", else: nil}
       data-accent-color={@color}
-      tabindex="-1"
       {@rest}
     >
       {render_slot(@inner_block)}
       <%= if @shortcut do %>
         <div class="rt-BaseMenuShortcut">{@shortcut}</div>
       <% end %>
-    </div>
+    </DropdownMenuPrimitive.item>
     """
   end
 
-  @doc """
-  Visual separator between items.
-  """
+  attr :id, :string, default: nil
   attr :class, :string, default: nil
-
-  def dropdown_menu_separator(assigns) do
-    ~H"""
-    <div
-      role="separator"
-      class={
-        ["rt-BaseMenuSeparator", "rt-DropdownMenuSeparator", @class]
-        |> Enum.filter(& &1)
-        |> Enum.join(" ")
-      }
-    >
-    </div>
-    """
-  end
-
-  @doc """
-  Non-interactive label.
-  """
-  attr :class, :string, default: nil
+  attr :rest, :global
   slot :inner_block, required: true
 
-  def dropdown_menu_label(assigns) do
+  def dropdown_menu_group(assigns) do
     ~H"""
-    <div class={
-      ["rt-BaseMenuLabel", "rt-DropdownMenuLabel", @class] |> Enum.filter(& &1) |> Enum.join(" ")
-    }>
+    <DropdownMenuPrimitive.group
+      id={@id}
+      class={["rt-DropdownMenuGroup", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      {@rest}
+    >
       {render_slot(@inner_block)}
-    </div>
+    </DropdownMenuPrimitive.group>
     """
   end
 
-  @doc """
-  Menu item with checkbox functionality.
-  """
+  attr :id, :string, default: nil
   attr :checked, :boolean, default: false
   attr :shortcut, :string, default: nil
   attr :disabled, :boolean, default: false
+  attr :text_value, :string, default: nil
   attr :class, :string, default: nil
   attr :rest, :global
   slot :inner_block, required: true
 
   def dropdown_menu_checkbox_item(assigns) do
     ~H"""
-    <div
-      role="menuitemcheckbox"
-      aria-checked={to_string(@checked)}
+    <DropdownMenuPrimitive.checkbox_item
+      id={@id}
+      checked={@checked}
+      disabled={@disabled}
+      text_value={@text_value}
       class={
         ["rt-reset", "rt-BaseMenuItem", "rt-DropdownMenuItem", "rt-BaseMenuCheckboxItem", @class]
         |> Enum.filter(& &1)
         |> Enum.join(" ")
       }
-      data-disabled={if @disabled, do: "", else: nil}
-      tabindex="-1"
       {@rest}
     >
-      <div class="rt-BaseMenuItemIndicator">
-        <%= if @checked do %>
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 15 15"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="rt-BaseMenuItemIndicatorIcon"
+      <DropdownMenuPrimitive.item_indicator class="rt-BaseMenuItemIndicator" force_mount={@checked}>
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 15 15"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="rt-BaseMenuItemIndicatorIcon"
+        >
+          <path
+            d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+            clip-rule="evenodd"
           >
-            <path
-              d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z"
-              fill="currentColor"
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-            >
-            </path>
-          </svg>
-        <% end %>
-      </div>
+          </path>
+        </svg>
+      </DropdownMenuPrimitive.item_indicator>
       {render_slot(@inner_block)}
       <%= if @shortcut do %>
         <div class="rt-BaseMenuShortcut">{@shortcut}</div>
       <% end %>
-    </div>
+    </DropdownMenuPrimitive.checkbox_item>
     """
   end
 
-  @doc """
-  Menu item with radio functionality.
-  """
+  attr :id, :string, default: nil
+  attr :value, :string, default: nil
+  attr :class, :string, default: nil
+  attr :rest, :global
+  slot :inner_block, required: true
+
+  def dropdown_menu_radio_group(assigns) do
+    ~H"""
+    <DropdownMenuPrimitive.radio_group
+      id={@id}
+      value={@value}
+      class={["rt-DropdownMenuRadioGroup", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </DropdownMenuPrimitive.radio_group>
+    """
+  end
+
+  attr :id, :string, default: nil
+  attr :value, :string, required: true
   attr :checked, :boolean, default: false
   attr :shortcut, :string, default: nil
   attr :disabled, :boolean, default: false
+  attr :text_value, :string, default: nil
   attr :class, :string, default: nil
   attr :rest, :global
   slot :inner_block, required: true
 
   def dropdown_menu_radio_item(assigns) do
     ~H"""
-    <div
-      role="menuitemradio"
-      aria-checked={to_string(@checked)}
+    <DropdownMenuPrimitive.radio_item
+      id={@id}
+      value={@value}
+      checked={@checked}
+      disabled={@disabled}
+      text_value={@text_value}
       class={
         ["rt-reset", "rt-BaseMenuItem", "rt-DropdownMenuItem", "rt-BaseMenuRadioItem", @class]
         |> Enum.filter(& &1)
         |> Enum.join(" ")
       }
-      data-disabled={if @disabled, do: "", else: nil}
-      tabindex="-1"
       {@rest}
     >
-      <div class="rt-BaseMenuItemIndicator">
-        <%= if @checked do %>
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 15 15"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="rt-BaseMenuItemIndicatorIcon"
+      <DropdownMenuPrimitive.item_indicator class="rt-BaseMenuItemIndicator" force_mount={@checked}>
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 15 15"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="rt-BaseMenuItemIndicatorIcon"
+        >
+          <path
+            d="M7.5 10C8.88071 10 10 8.88071 10 7.5C10 6.11929 8.88071 5 7.5 5C6.11929 5 5 6.11929 5 7.5C5 8.88071 6.11929 10 7.5 10Z"
+            fill="currentColor"
           >
-            <path
-              d="M7.5 10C8.88071 10 10 8.88071 10 7.5C10 6.11929 8.88071 5 7.5 5C6.11929 5 5 6.11929 5 7.5C5 8.88071 6.11929 10 7.5 10Z"
-              fill="currentColor"
-            >
-            </path>
-          </svg>
-        <% end %>
-      </div>
+          </path>
+        </svg>
+      </DropdownMenuPrimitive.item_indicator>
       {render_slot(@inner_block)}
       <%= if @shortcut do %>
         <div class="rt-BaseMenuShortcut">{@shortcut}</div>
       <% end %>
-    </div>
+    </DropdownMenuPrimitive.radio_item>
     """
   end
 
-  @doc """
-  Sub-menu container.
-  """
+  attr :id, :string, default: nil
+  attr :class, :string, default: nil
+  attr :rest, :global
+
+  def dropdown_menu_separator(assigns) do
+    ~H"""
+    <DropdownMenuPrimitive.separator
+      id={@id}
+      class={
+        ["rt-BaseMenuSeparator", "rt-DropdownMenuSeparator", @class]
+        |> Enum.filter(& &1)
+        |> Enum.join(" ")
+      }
+      {@rest}
+    />
+    """
+  end
+
+  attr :id, :string, default: nil
+  attr :open, :boolean, default: false
+  attr :class, :string, default: nil
+  attr :rest, :global
   slot :inner_block, required: true
 
   def dropdown_menu_sub(assigns) do
     ~H"""
-    <div class="rt-DropdownMenuSub" data-dropdown-menu-sub>
+    <DropdownMenuPrimitive.sub
+      id={@id}
+      open={@open}
+      class={["rt-DropdownMenuSub", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      {@rest}
+    >
       {render_slot(@inner_block)}
-    </div>
+    </DropdownMenuPrimitive.sub>
     """
   end
 
-  @doc """
-  Trigger for a sub-menu.
-  """
+  attr :id, :string, default: nil
+  attr :disabled, :boolean, default: false
+  attr :text_value, :string, default: nil
   attr :class, :string, default: nil
+  attr :rest, :global
   slot :inner_block, required: true
 
   def dropdown_menu_sub_trigger(assigns) do
     ~H"""
-    <div
-      role="menuitem"
-      aria-haspopup="menu"
+    <DropdownMenuPrimitive.sub_trigger
+      id={@id}
+      disabled={@disabled}
+      text_value={@text_value}
       class={
         ["rt-reset", "rt-BaseMenuItem", "rt-DropdownMenuSubTrigger", @class]
         |> Enum.filter(& &1)
         |> Enum.join(" ")
       }
-      data-dropdown-menu-sub-trigger
-      tabindex="-1"
+      {@rest}
     >
       {render_slot(@inner_block)}
       <div class="rt-BaseMenuShortcut">
@@ -361,36 +442,41 @@ defmodule EssenceUI.Components.DropdownMenu do
           </path>
         </svg>
       </div>
-    </div>
+    </DropdownMenuPrimitive.sub_trigger>
     """
   end
 
-  @doc """
-  Content of a sub-menu.
-  """
+  attr :id, :string, default: nil
+  attr :side, :string, values: ["top", "right", "bottom", "left"], default: "right"
+  attr :align, :string, values: ["start", "center", "end"], default: "start"
+  attr :side_offset, :integer, default: 0
   attr :class, :string, default: nil
   attr :style, :string, default: ""
+  attr :rest, :global
   slot :inner_block, required: true
 
   def dropdown_menu_sub_content(assigns) do
+    class =
+      ["rt-PopperContent", "rt-BaseMenuContent", "rt-DropdownMenuSubContent", assigns[:class]]
+      |> Enum.filter(& &1)
+      |> Enum.join(" ")
+
+    assigns = assign(assigns, class: class)
+
     ~H"""
-    <div
-      class={
-        ["rt-BaseMenuContent", "rt-DropdownMenuSubContent", @class]
-        |> Enum.filter(& &1)
-        |> Enum.join(" ")
-      }
-      style={
-        ["display: none; position: fixed; z-index: 10001; min-width: 8rem;", @style]
-        |> Enum.filter(&(&1 != ""))
-        |> Enum.join("; ")
-      }
-      data-dropdown-menu-sub-content
+    <DropdownMenuPrimitive.sub_content
+      id={@id}
+      side={@side}
+      align={@align}
+      side_offset={@side_offset}
+      class={@class}
+      style={@style}
+      {@rest}
     >
-      <div class="rt-BaseMenuViewport" role="menu">
+      <div class="rt-BaseMenuViewport">
         {render_slot(@inner_block)}
       </div>
-    </div>
+    </DropdownMenuPrimitive.sub_content>
     """
   end
 end

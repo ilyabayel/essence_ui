@@ -136,9 +136,11 @@ defmodule EssenceUI.Components do
   defdelegate dropdown_menu_trigger_icon(assigns), to: DropdownMenu
   defdelegate dropdown_menu_content(assigns), to: DropdownMenu
   defdelegate dropdown_menu_item(assigns), to: DropdownMenu
+  defdelegate dropdown_menu_group(assigns), to: DropdownMenu
   defdelegate dropdown_menu_separator(assigns), to: DropdownMenu
   defdelegate dropdown_menu_label(assigns), to: DropdownMenu
   defdelegate dropdown_menu_checkbox_item(assigns), to: DropdownMenu
+  defdelegate dropdown_menu_radio_group(assigns), to: DropdownMenu
   defdelegate dropdown_menu_radio_item(assigns), to: DropdownMenu
   defdelegate dropdown_menu_sub(assigns), to: DropdownMenu
   defdelegate dropdown_menu_sub_trigger(assigns), to: DropdownMenu

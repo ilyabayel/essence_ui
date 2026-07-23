@@ -35,12 +35,28 @@ defmodule EssenceUI.Primitives.DropdownMenu do
   attr :id, :string, default: nil
   attr :content_id, :string, default: nil
   attr :disabled, :boolean, default: false
+  attr :as_child, :boolean, default: false
   attr :rest, :global
   slot :inner_block, required: true
 
   def trigger(assigns) do
     ~H"""
+    <span
+      :if={@as_child}
+      id={@id}
+      data-essence-dropdown-menu-trigger
+      aria-haspopup="menu"
+      aria-expanded="false"
+      aria-controls={@content_id}
+      data-state="closed"
+      data-disabled={if @disabled, do: ""}
+      {@rest}
+      style="display: contents;"
+    >
+      {render_slot(@inner_block)}
+    </span>
     <button
+      :if={!@as_child}
       id={@id}
       type="button"
       data-essence-dropdown-menu-trigger
