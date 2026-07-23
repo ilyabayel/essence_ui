@@ -2,10 +2,11 @@ defmodule EssenceUI.Components.Progress do
   @moduledoc """
   A Progress component that displays the completion progress of a task.
 
-  Based on Radix UI Progress component with support for various sizes,
-  colors, and styling options.
+  Based on EssenceUI.Primitives.Progress / Radix UI Themes Progress.
   """
   use Phoenix.Component
+
+  import EssenceUI.Primitives.Progress, only: [root: 1, indicator: 1]
 
   alias EssenceUI.Helpers.ExtractProps
   alias EssenceUI.SharedProps.ColorProps
@@ -28,16 +29,6 @@ defmodule EssenceUI.Components.Progress do
       <.progress value={50} />
       <.progress value={75} size="2" color="green" />
       <.progress value={25} variant="soft" radius="full" max={100} />
-
-  ## Props
-
-  - `value` - Current progress value (required)
-  - `max` - Maximum progress value (default: 100)
-  - `variant` - Progress variant: "classic", "surface", "soft" (default: "surface")
-  - `size` - Progress size: "1", "2", "3" (default: "2")
-  - `color` - Color theme (default: accent color)
-  - `radius` - Border radius: "none", "small", "medium", "large", "full" (default: "full")
-  - Plus margin props (m, mx, my, mt, mr, mb, ml)
   """
 
   ColorProps.attrs()
@@ -63,45 +54,35 @@ defmodule EssenceUI.Components.Progress do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    class = ["rt-reset", "rt-ProgressRoot", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["rt-ProgressRoot", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
 
-    # Calculate percentage and ensure it's within bounds
-    percentage =
-      case {assigns.value, assigns.max} do
-        {value, max} when is_number(value) and is_number(max) and max > 0 ->
-          min(100, max(0, value / max * 100))
-
-        _ ->
-          0
-      end
+    style =
+      [
+        "--progress-value: #{assigns.value};",
+        "--progress-max: #{assigns.max};",
+        extracted.style,
+        assigns[:style]
+      ]
+      |> Enum.filter(& &1)
+      |> Enum.join(" ")
 
     assigns =
       assigns
-      |> assign(class: class, style: extracted.style)
+      |> assign(class: class, style: style)
       |> assign(color: assigns[:color] || false)
-      |> assign(percentage: percentage)
 
     ~H"""
-    <div
+    <.root
+      value={@value}
+      max={@max}
       class={@class}
-      style={
-        ["--progress-value: #{@value};", "--progress-max: #{@max};", @style]
-        |> Enum.filter(& &1)
-        |> Enum.join(" ")
-      }
-      role="progressbar"
-      aria-valuemin="0"
-      aria-valuemax={@max}
-      aria-valuenow={@value}
-      data-state={if @value == @max, do: "complete", else: "loading"}
-      data-value={@value}
-      data-max={@max}
+      style={@style}
       data-accent-color={@color}
       data-radius={@radius}
       {@rest}
     >
-      <div class="rt-ProgressIndicator"></div>
-    </div>
+      <.indicator value={@value} max={@max} class="rt-ProgressIndicator" />
+    </.root>
     """
   end
 end
