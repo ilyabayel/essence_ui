@@ -195,6 +195,7 @@ defmodule EssenceUI.Components do
   defdelegate popover_trigger(assigns), to: Popover
   defdelegate popover_content(assigns), to: Popover
   defdelegate popover_close(assigns), to: Popover
+  defdelegate popover_anchor(assigns), to: Popover
   defdelegate tab_nav(assigns), to: TabNav
   defdelegate tab_nav_link(assigns), to: TabNav
   defdelegate tooltip(assigns), to: EssenceUI.Components.Tooltip

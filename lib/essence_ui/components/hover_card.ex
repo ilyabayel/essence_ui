@@ -1,64 +1,57 @@
 defmodule EssenceUI.Components.HoverCard do
   @moduledoc """
-  A HoverCard component for sighted users to preview content available behind a link.
+  HoverCard component compatible with Radix UI Themes HoverCard API.
 
-  Based on Radix UI HoverCard component. Shows a card when hovering over a trigger element,
-  with configurable open/close delays, positioning, and sizing.
+  Based on EssenceUI.Primitives.HoverCard.
+  See: https://www.radix-ui.com/themes/docs/components/hover-card
   """
   use Phoenix.Component
 
   alias EssenceUI.Helpers.ExtractProps
+  alias EssenceUI.Primitives.HoverCard, as: HoverCardPrimitive
   alias EssenceUI.SharedProps.HeightProps
   alias EssenceUI.SharedProps.WidthProps
 
   require HeightProps
   require WidthProps
 
-  @doc """
-  Root container for hover card. Wraps trigger and content.
-
-  ## Examples
-
-      <.hover_card_root>
-        <.hover_card_trigger>
-          <.link href="#">Hover me</.link>
-        </.hover_card_trigger>
-        <.hover_card_content>
-          <p>Preview content here</p>
-        </.hover_card_content>
-      </.hover_card_root>
-  """
-  attr :open_delay, :integer, default: 200, doc: "Delay before showing (ms)"
-  attr :close_delay, :integer, default: 150, doc: "Delay before hiding (ms)"
+  attr :id, :string, default: nil
+  attr :open, :boolean, default: false
+  attr :default_open, :boolean, default: false
+  attr :open_delay, :integer, default: 200
+  attr :close_delay, :integer, default: 150
+  attr :on_open_change, :string, default: nil
   attr :class, :string, default: nil
   attr :style, :string, default: ""
+  attr :rest, :global
   slot :inner_block, required: true
 
   def hover_card_root(assigns) do
-    assigns = assign_new(assigns, :id, fn -> "hover-card-#{System.unique_integer([:positive])}" end)
+    id =
+      assigns[:id] ||
+        "hover-card-#{5 |> :crypto.strong_rand_bytes() |> Base.encode32(padding: false, case: :lower)}"
+
+    assigns = assign(assigns, id: id)
 
     ~H"""
-    <div
+    <HoverCardPrimitive.root
       id={@id}
+      open={@open}
+      default_open={@default_open}
+      open_delay={@open_delay}
+      close_delay={@close_delay}
+      on_open_change={@on_open_change}
       class={["rt-HoverCardRoot", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
-      style={
-        ["display: inline-block; position: relative;", @style]
-        |> Enum.filter(&(&1 != ""))
-        |> Enum.join("; ")
-      }
-      phx-hook="HoverCard"
-      data-open-delay={@open_delay}
-      data-close-delay={@close_delay}
+      style={@style}
+      {@rest}
     >
       {render_slot(@inner_block)}
-    </div>
+    </HoverCardPrimitive.root>
     """
   end
 
-  @doc """
-  The trigger area that opens the hover card on hover.
-  Wraps the link or element that triggers the hover card.
-  """
+  attr :id, :string, default: nil
+  attr :content_id, :string, default: nil
   attr :class, :string, default: nil
   attr :style, :string, default: ""
   attr :rest, :global
@@ -66,30 +59,22 @@ defmodule EssenceUI.Components.HoverCard do
 
   def hover_card_trigger(assigns) do
     ~H"""
-    <div
+    <HoverCardPrimitive.trigger
+      id={@id}
+      content_id={@content_id}
       class={["rt-HoverCardTrigger", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={["display: inline-flex;", @style] |> Enum.filter(&(&1 != "")) |> Enum.join("; ")}
-      data-hover-card-trigger
       {@rest}
     >
       {render_slot(@inner_block)}
-    </div>
+    </HoverCardPrimitive.trigger>
     """
   end
 
   @sizes ["1", "2", "3"]
 
-  @doc """
-  The hover card content that appears on hover.
-
-  ## Props
-
-  - `size` - Size of the content: "1", "2", "3" (default: "2")
-  - `side` - Placement side: "top", "bottom" (default: "bottom")
-  - `align` - Alignment: "start", "center", "end" (default: "start")
-  - `max_width` - Maximum width (default: "480px")
-  - Plus width/height props
-  """
+  attr :id, :string, default: nil
+  attr :target, :string, default: "body"
   attr :size, :string, values: @sizes, default: "2"
   attr :side, :string, values: ["top", "bottom", "left", "right"], default: "bottom"
   attr :align, :string, values: ["start", "center", "end"], default: "start"
@@ -110,31 +95,42 @@ defmodule EssenceUI.Components.HoverCard do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
+    id =
+      assigns[:id] ||
+        "hover-card-content-#{5 |> :crypto.strong_rand_bytes() |> Base.encode32(padding: false, case: :lower)}"
+
+    class =
+      ["rt-PopperContent", "rt-HoverCardContent", extracted.class, assigns[:class]]
+      |> Enum.filter(& &1)
+      |> Enum.join(" ")
+
+    style =
+      [extracted.style, assigns[:style]]
+      |> Enum.filter(&(&1 != "" and &1))
+      |> Enum.join("; ")
+
     assigns =
       assign(assigns,
-        extracted_class: extracted.class,
-        extracted_style: extracted.style
+        id: id,
+        portal_id: "#{id}-portal",
+        class: class,
+        style: style
       )
 
     ~H"""
-    <div
-      class={
-        ["rt-PopperContent", "rt-HoverCardContent", @extracted_class, @class]
-        |> Enum.filter(& &1)
-        |> Enum.join(" ")
-      }
-      style={
-        ["display: none; position: fixed; z-index: 9999;", @extracted_style, @style]
-        |> Enum.filter(&(&1 != ""))
-        |> Enum.join("; ")
-      }
-      data-hover-card-content
-      data-side={@side}
-      data-align={@align}
-      {@rest}
-    >
-      {render_slot(@inner_block)}
-    </div>
+    <HoverCardPrimitive.portal id={@portal_id} target={@target}>
+      <HoverCardPrimitive.content
+        id={@id}
+        side={@side}
+        align={@align}
+        side_offset={8}
+        class={@class}
+        style={@style}
+        {@rest}
+      >
+        {render_slot(@inner_block)}
+      </HoverCardPrimitive.content>
+    </HoverCardPrimitive.portal>
     """
   end
 end

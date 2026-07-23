@@ -31,12 +31,27 @@ defmodule EssenceUI.Primitives.Popover do
 
   attr :id, :string, default: nil
   attr :content_id, :string, default: nil
+  attr :as_child, :boolean, default: false
   attr :rest, :global
   slot :inner_block, required: true
 
   def trigger(assigns) do
     ~H"""
+    <span
+      :if={@as_child}
+      id={@id}
+      data-essence-popover-trigger
+      aria-haspopup="dialog"
+      aria-expanded="false"
+      aria-controls={@content_id}
+      data-state="closed"
+      style="display: contents;"
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </span>
     <button
+      :if={!@as_child}
       id={@id}
       type="button"
       data-essence-popover-trigger
@@ -104,12 +119,22 @@ defmodule EssenceUI.Primitives.Popover do
   end
 
   attr :id, :string, default: nil
+  attr :as_child, :boolean, default: false
   attr :rest, :global
   slot :inner_block, required: true
 
   def close(assigns) do
     ~H"""
-    <button id={@id} type="button" data-essence-popover-close {@rest}>
+    <span
+      :if={@as_child}
+      id={@id}
+      data-essence-popover-close
+      style="display: contents;"
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </span>
+    <button :if={!@as_child} id={@id} type="button" data-essence-popover-close {@rest}>
       {render_slot(@inner_block)}
     </button>
     """
