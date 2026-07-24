@@ -13,9 +13,12 @@ defmodule Storybook.Components.ContextMenu do
       {ContextMenu, context_menu_trigger: 1},
       {ContextMenu, context_menu_content: 1},
       {ContextMenu, context_menu_item: 1},
+      {ContextMenu, context_menu_group: 1},
       {ContextMenu, context_menu_separator: 1},
       {ContextMenu, context_menu_label: 1},
       {ContextMenu, context_menu_checkbox_item: 1},
+      {ContextMenu, context_menu_radio_group: 1},
+      {ContextMenu, context_menu_radio_item: 1},
       {ContextMenu, context_menu_sub: 1},
       {ContextMenu, context_menu_sub_trigger: 1},
       {ContextMenu, context_menu_sub_content: 1}
@@ -80,6 +83,12 @@ defmodule Storybook.Components.ContextMenu do
             <.context_menu_checkbox_item checked>Show Grid</.context_menu_checkbox_item>
             <.context_menu_checkbox_item>Show Rulers</.context_menu_checkbox_item>
             <.context_menu_checkbox_item checked disabled>Snap to Grid</.context_menu_checkbox_item>
+            <.context_menu_separator />
+            <.context_menu_label>Mode</.context_menu_label>
+            <.context_menu_radio_group value="select">
+              <.context_menu_radio_item value="select" checked>Select</.context_menu_radio_item>
+              <.context_menu_radio_item value="move">Move</.context_menu_radio_item>
+            </.context_menu_radio_group>
           </.context_menu_content>
         </.context_menu_root>
         """
