@@ -3,4 +3,11 @@
 .rt-ContextMenuContent {
   max-height: var(--radix-context-menu-content-available-height);
   transform-origin: var(--radix-context-menu-content-transform-origin);
+  z-index: 9999;
+  min-width: 8rem;
+}
+
+.rt-ContextMenuSubContent {
+  z-index: 10001;
+  min-width: 8rem;
 }

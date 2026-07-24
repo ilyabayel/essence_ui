@@ -107,4 +107,27 @@ defmodule EssenceUI.Components.ContextMenuTest do
     assert html =~ "One"
     refute html =~ ~s[phx-hook="ContextMenu"]
   end
+
+  test "auto-generates root and content ids when omitted" do
+    html =
+      render_component(
+        fn assigns ->
+          ~H"""
+          <ContextMenu.context_menu_root>
+            <ContextMenu.context_menu_trigger>Right-click</ContextMenu.context_menu_trigger>
+            <ContextMenu.context_menu_content>
+              <ContextMenu.context_menu_item>Edit</ContextMenu.context_menu_item>
+            </ContextMenu.context_menu_content>
+          </ContextMenu.context_menu_root>
+          """
+        end,
+        %{}
+      )
+
+    assert html =~ ~r/id="context-menu-\d+"/
+    assert html =~ ~s[phx-hook="ContextMenuRoot"]
+    assert html =~ ~r/id="context-menu-content-\d+"/
+    assert html =~ ~r/id="context-menu-content-\d+-portal"/
+    refute html =~ ~s[id="-portal"]
+  end
 end
