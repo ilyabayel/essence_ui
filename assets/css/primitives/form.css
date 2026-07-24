@@ -29,7 +29,7 @@
 .radix-demo[data-component="form"] .FormMessage {
 	font-size: 13px;
 	color: white;
-	opacity: 0.8;
+	opacity: 0.9;
 }
 
 .radix-demo[data-component="form"] .Input,
@@ -41,8 +41,8 @@
 	border-radius: 4px;
 	font-size: 15px;
 	color: white;
-	background-color: var(--black-a2);
-	box-shadow: 0 0 0 1px var(--black-a6);
+	background-color: var(--white-a2);
+	box-shadow: 0 0 0 1px var(--white-a6);
 }
 
 .radix-demo[data-component="form"] .Input:hover,
