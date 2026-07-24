@@ -152,6 +152,16 @@ export const ContextMenuRoot = {
 
     if (e.key === "Enter" || e.key === " ") {
       const active = document.activeElement;
+      if (active?.hasAttribute("data-essence-context-menu-sub-trigger")) {
+        e.preventDefault();
+        this.openSub(active);
+        const sub = active
+          .closest("[data-essence-context-menu-sub]")
+          ?.querySelector("[data-essence-context-menu-sub-content]");
+        const subItems = getMenuItems(sub);
+        if (subItems[0]) focusItem(subItems[0], subItems);
+        return;
+      }
       if (active && items.includes(active)) {
         e.preventDefault();
         active.click();
@@ -290,8 +300,8 @@ export const ContextMenuRoot = {
           closeTimer = setTimeout(() => this.closeSub(sub), 150);
         };
 
+        // Open on pointer hover only — not on focus (keyboard uses ArrowRight/Enter/Space).
         trigger.addEventListener("mouseenter", open);
-        trigger.addEventListener("focus", open);
         trigger.addEventListener("mouseleave", scheduleClose);
         content.addEventListener("mouseenter", () => clearTimeout(closeTimer));
         content.addEventListener("mouseleave", scheduleClose);

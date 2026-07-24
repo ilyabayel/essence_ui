@@ -157,6 +157,15 @@ export const MenubarRoot = {
     }
 
     if (e.key === prevKey || e.key === nextKey) {
+      const active = document.activeElement;
+      // Submenu owns ArrowRight on its trigger and ArrowLeft inside its content.
+      if (
+        (e.key === nextKey &&
+          active?.hasAttribute("data-essence-menubar-sub-trigger")) ||
+        active?.closest("[data-essence-menubar-sub-content]")
+      ) {
+        return;
+      }
       e.preventDefault();
       const menus = this.getMenus();
       const idx = menus.indexOf(this.activeMenu);
@@ -187,8 +196,51 @@ export const MenubarRoot = {
 
     if (handleArrowKeys(e, items)) return;
 
+    if (e.key === "ArrowRight") {
+      const active = document.activeElement;
+      if (active?.hasAttribute("data-essence-menubar-sub-trigger")) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.openSub(active);
+        const sub = active
+          .closest("[data-essence-menubar-sub]")
+          ?.querySelector("[data-essence-menubar-sub-content]");
+        const subItems = getMenuItems(sub);
+        if (subItems[0]) focusItem(subItems[0], subItems);
+      }
+      return;
+    }
+
+    if (e.key === "ArrowLeft") {
+      const active = document.activeElement;
+      const subContent = active?.closest(
+        "[data-essence-menubar-sub-content]"
+      );
+      if (subContent) {
+        e.preventDefault();
+        e.stopPropagation();
+        const sub = subContent.closest("[data-essence-menubar-sub]");
+        const trigger = sub?.querySelector(
+          "[data-essence-menubar-sub-trigger]"
+        );
+        this.closeSub(sub);
+        if (trigger) focusItem(trigger, items);
+      }
+      return;
+    }
+
     if (e.key === "Enter" || e.key === " ") {
       const active = document.activeElement;
+      if (active?.hasAttribute("data-essence-menubar-sub-trigger")) {
+        e.preventDefault();
+        this.openSub(active);
+        const sub = active
+          .closest("[data-essence-menubar-sub]")
+          ?.querySelector("[data-essence-menubar-sub-content]");
+        const subItems = getMenuItems(sub);
+        if (subItems[0]) focusItem(subItems[0], subItems);
+        return;
+      }
       if (active && items.includes(active)) {
         e.preventDefault();
         active.click();
@@ -296,7 +348,7 @@ export const MenubarRoot = {
         clearTimeout(closeTimer);
         this.openSub(trigger);
       });
-      trigger.addEventListener("focus", () => this.openSub(trigger));
+      // Open on pointer hover only — not on focus (keyboard uses ArrowRight/Enter/Space).
       trigger.addEventListener("mouseleave", () => {
         closeTimer = setTimeout(() => this.closeSub(sub), 150);
       });
