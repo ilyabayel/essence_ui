@@ -29,11 +29,13 @@ export const HoverCardRoot = {
     this.openTimeout = null;
     this.closeTimeout = null;
     this.isOpen = false;
+    this._raf = null;
 
     this.onTriggerEnter = this.onTriggerEnter.bind(this);
     this.onTriggerLeave = this.onTriggerLeave.bind(this);
     this.onContentEnter = this.onContentEnter.bind(this);
     this.onContentLeave = this.onContentLeave.bind(this);
+    this.scheduleUpdate = this.scheduleUpdate.bind(this);
 
     this.resolveParts();
     this.bindEvents();
@@ -52,6 +54,7 @@ export const HoverCardRoot = {
   destroyed() {
     this.clearTimers();
     this.unbindEvents();
+    this.unbindPositionUpdates();
   },
 
   resolveParts() {
@@ -82,6 +85,48 @@ export const HoverCardRoot = {
     this.content?.removeEventListener("mouseenter", this.onContentEnter);
     this.content?.removeEventListener("mouseleave", this.onContentLeave);
     this._bound = false;
+  },
+
+  updatePosition() {
+    if (!this.isOpen || !this.trigger || !this.content) return;
+
+    const side = this.content.dataset.side || "bottom";
+    const align = this.content.dataset.align || "center";
+    const sideOffset = parseInt(this.content.dataset.sideOffset, 10) || 8;
+
+    positionFloating({
+      trigger: this.trigger,
+      content: this.content,
+      side,
+      align,
+      sideOffset,
+    });
+  },
+
+  scheduleUpdate() {
+    if (this._raf != null) return;
+    this._raf = requestAnimationFrame(() => {
+      this._raf = null;
+      this.updatePosition();
+    });
+  },
+
+  bindPositionUpdates() {
+    if (this._positionBound) return;
+    document.addEventListener("scroll", this.scheduleUpdate, true);
+    window.addEventListener("resize", this.scheduleUpdate);
+    this._positionBound = true;
+  },
+
+  unbindPositionUpdates() {
+    if (this._raf != null) {
+      cancelAnimationFrame(this._raf);
+      this._raf = null;
+    }
+    if (!this._positionBound) return;
+    document.removeEventListener("scroll", this.scheduleUpdate, true);
+    window.removeEventListener("resize", this.scheduleUpdate);
+    this._positionBound = false;
   },
 
   onTriggerEnter() {
@@ -118,19 +163,9 @@ export const HoverCardRoot = {
       setOpen(this.content, [this.trigger, this.el]);
       this.content.style.display = "block";
 
-      const side = this.content.dataset.side || "bottom";
-      const align = this.content.dataset.align || "center";
-      const sideOffset = parseInt(this.content.dataset.sideOffset, 10) || 8;
-
-      positionFloating({
-        trigger: this.trigger,
-        content: this.content,
-        side,
-        align,
-        sideOffset,
-      });
-
       this.isOpen = true;
+      this.updatePosition();
+      this.bindPositionUpdates();
       this.openTimeout = null;
       if (!immediate) this.pushOpenChange(true);
     };
@@ -153,6 +188,7 @@ export const HoverCardRoot = {
 
     this.closeTimeout = setTimeout(() => {
       this.isOpen = false;
+      this.unbindPositionUpdates();
       setClosed(this.content, {
         extras: [this.trigger, this.el],
         waitForAnimation: false,
