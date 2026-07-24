@@ -1,7 +1,6 @@
 defmodule Storybook.Examples.RecruitingCrm do
   @moduledoc false
   use PhoenixStorybook.Story, :example
-  use Phoenix.Component
 
   import EssenceUI.Components, except: [quote: 1]
 
