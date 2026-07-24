@@ -15,11 +15,22 @@ defmodule Storybook.Examples.DenseDisplayStory do
       data-accent-color="indigo"
       class="essence-ui"
     >
-      <.grid columns={%{initial: "1", md: "2"}} gap="6">
+      <.grid
+        columns={%{initial: "1", md: "2"}}
+        gap="6"
+      >
         <%!-- Account Information (Dense DataList) --%>
         <.card p="4">
-          <.flex direction="column" gap="3">
-            <.heading size="4" mb="2">Account Information</.heading>
+          <.flex
+            direction="column"
+            gap="3"
+          >
+            <.heading
+              size="4"
+              mb="2"
+            >
+              Account Information
+            </.heading>
             <.data_list size="1">
               <.data_list_item>
                 <:label>Full Name</:label>
@@ -46,18 +57,35 @@ defmodule Storybook.Examples.DenseDisplayStory do
         </.card>
 
         <%!-- Recent Logs (ScrollArea) --%>
-        <.card p="0" style="overflow: hidden;">
-          <.box p="4" style="border-bottom: 1px solid var(--gray-5)">
+        <.card
+          p="0"
+          style="overflow: hidden;"
+        >
+          <.box
+            p="4"
+            style="border-bottom: 1px solid var(--gray-5)"
+          >
             <.heading size="4">System Logs</.heading>
           </.box>
           <.scroll_area style="height: 200px">
             <.box p="4">
               <%= for i <- 1..20 do %>
-                <.flex gap="2" mb="2" align="center">
-                  <.text size="1" color="gray" style="font-family: monospace; white-space: nowrap;">
+                <.flex
+                  gap="2"
+                  mb="2"
+                  align="center"
+                >
+                  <.text
+                    size="1"
+                    color="gray"
+                    style="font-family: monospace; white-space: nowrap;"
+                  >
                     [2026-05-09 15:52:{10 + i}]
                   </.text>
-                  <.badge size="1" color={if rem(i, 5) == 0, do: "red", else: "blue"}>
+                  <.badge
+                    size="1"
+                    color={if rem(i, 5) == 0, do: "red", else: "blue"}
+                  >
                     {if rem(i, 5) == 0, do: "ERROR", else: "INFO"}
                   </.badge>
                   <.text size="1">Event {i} processed successfully.</.text>
@@ -68,8 +96,14 @@ defmodule Storybook.Examples.DenseDisplayStory do
         </.card>
 
         <%!-- Compact Table --%>
-        <.card p="0" style="overflow: hidden; grid-column: span 2">
-          <.box p="4" style="border-bottom: 1px solid var(--gray-5)">
+        <.card
+          p="0"
+          style="overflow: hidden; grid-column: span 2"
+        >
+          <.box
+            p="4"
+            style="border-bottom: 1px solid var(--gray-5)"
+          >
             <.heading size="4">Active Projects</.heading>
           </.box>
           <.table size="1">
@@ -86,11 +120,23 @@ defmodule Storybook.Examples.DenseDisplayStory do
                 <.table_row>
                   <.table_row_header_cell>{project}</.table_row_header_cell>
                   <.table_cell>
-                    <.badge size="1" variant="soft" color="jade" radius="full">Active</.badge>
+                    <.badge
+                      size="1"
+                      variant="soft"
+                      color="jade"
+                      radius="full"
+                    >
+                      Active
+                    </.badge>
                   </.table_cell>
                   <.table_cell>Vlad E.</.table_cell>
                   <.table_cell>
-                    <.text color="gray" size="1">High</.text>
+                    <.text
+                      color="gray"
+                      size="1"
+                    >
+                      High
+                    </.text>
                   </.table_cell>
                 </.table_row>
               <% end %>

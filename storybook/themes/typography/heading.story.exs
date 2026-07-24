@@ -167,8 +167,18 @@ defmodule Storybook.Themes.Typography.Heading do
         description: "Trim leading space",
         template: """
         <div class="rt-Flex rt-r-fd-column rt-r-gap-3">
-          <.heading trim="normal" style="background: var(--gray-a2); border-top: 1px dashed var(--gray-a7); border-bottom: 1px dashed var(--gray-a7);">Without trim</.heading>
-          <.heading trim="both" style="background: var(--gray-a2); border-top: 1px dashed var(--gray-a7); border-bottom: 1px dashed var(--gray-a7);">With trim</.heading>
+          <.heading
+            trim="normal"
+            style="background: var(--gray-a2); border-top: 1px dashed var(--gray-a7); border-bottom: 1px dashed var(--gray-a7);"
+          >
+            Without trim
+          </.heading>
+          <.heading
+            trim="both"
+            style="background: var(--gray-a2); border-top: 1px dashed var(--gray-a7); border-bottom: 1px dashed var(--gray-a7);"
+          >
+            With trim
+          </.heading>
         </div>
         """
       },
@@ -187,7 +197,11 @@ defmodule Storybook.Themes.Typography.Heading do
         description: "Text wrapping",
         attributes: %{},
         template: """
-        <.flex max_width="300px" gap="5" direction="column">
+        <.flex
+          max_width="300px"
+          gap="5"
+          direction="column"
+        >
           <.heading wrap="nowrap">The quick brown fox jumps over the lazy dog</.heading>
           <.heading wrap="balance">The quick brown fox jumps over the lazy dog</.heading>
           <.heading wrap="pretty">The quick brown fox jumps over the lazy dog</.heading>

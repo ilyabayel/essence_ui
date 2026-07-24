@@ -34,18 +34,31 @@ defmodule Storybook.Themes.Components.SegmentedControlStory do
         id: :sizes,
         description: "Different sizes of segmented control",
         template: """
-        <.grid columns="1" gap="4" style="width: max-content;">
-          <.segmented_control size="1" value="size1">
+        <.grid
+          columns="1"
+          gap="4"
+          style="width: max-content;"
+        >
+          <.segmented_control
+            size="1"
+            value="size1"
+          >
             <:option value="size1">Size 1</:option>
             <:option value="size2">Size 2</:option>
             <:option value="size3">Size 3</:option>
           </.segmented_control>
-          <.segmented_control size="2" value="size2">
+          <.segmented_control
+            size="2"
+            value="size2"
+          >
             <:option value="size1">Size 1</:option>
             <:option value="size2">Size 2</:option>
             <:option value="size3">Size 3</:option>
           </.segmented_control>
-          <.segmented_control size="3" value="size3">
+          <.segmented_control
+            size="3"
+            value="size3"
+          >
             <:option value="size1">Size 1</:option>
             <:option value="size2">Size 2</:option>
             <:option value="size3">Size 3</:option>
@@ -122,7 +135,10 @@ defmodule Storybook.Themes.Components.SegmentedControlStory do
         id: :disabled,
         description: "Disabled segmented control",
         template: """
-        <.segmented_control value="enabled" disabled>
+        <.segmented_control
+          value="enabled"
+          disabled
+        >
           <:option value="enabled">Enabled</:option>
           <:option value="disabled">Disabled</:option>
         </.segmented_control>
@@ -132,7 +148,10 @@ defmodule Storybook.Themes.Components.SegmentedControlStory do
         id: :high_contrast,
         description: "High contrast variant",
         template: """
-        <.segmented_control value="normal" high_contrast>
+        <.segmented_control
+          value="normal"
+          high_contrast
+        >
           <:option value="normal">Normal</:option>
           <:option value="high">High Contrast</:option>
         </.segmented_control>
@@ -142,36 +161,55 @@ defmodule Storybook.Themes.Components.SegmentedControlStory do
         id: :radius,
         description: "Use the radius prop to assign a specific radius value",
         template: """
-        <.grid columns="1" gap="4" style="width: max-content;">
-          <.segmented_control radius="none" value="none">
+        <.grid
+          columns="1"
+          gap="4"
+          style="width: max-content;"
+        >
+          <.segmented_control
+            radius="none"
+            value="none"
+          >
             <:option value="none">None</:option>
             <:option value="small">Small</:option>
             <:option value="medium">Medium</:option>
             <:option value="large">Large</:option>
             <:option value="full">Full</:option>
           </.segmented_control>
-          <.segmented_control radius="small" value="small">
+          <.segmented_control
+            radius="small"
+            value="small"
+          >
             <:option value="none">None</:option>
             <:option value="small">Small</:option>
             <:option value="medium">Medium</:option>
             <:option value="large">Large</:option>
             <:option value="full">Full</:option>
           </.segmented_control>
-          <.segmented_control radius="medium" value="medium">
+          <.segmented_control
+            radius="medium"
+            value="medium"
+          >
             <:option value="none">None</:option>
             <:option value="small">Small</:option>
             <:option value="medium">Medium</:option>
             <:option value="large">Large</:option>
             <:option value="full">Full</:option>
           </.segmented_control>
-          <.segmented_control radius="large" value="large">
+          <.segmented_control
+            radius="large"
+            value="large"
+          >
             <:option value="none">None</:option>
             <:option value="small">Small</:option>
             <:option value="medium">Medium</:option>
             <:option value="large">Large</:option>
             <:option value="full">Full</:option>
           </.segmented_control>
-          <.segmented_control radius="full" value="full">
+          <.segmented_control
+            radius="full"
+            value="full"
+          >
             <:option value="none">None</:option>
             <:option value="small">Small</:option>
             <:option value="medium">Medium</:option>

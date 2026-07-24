@@ -26,7 +26,12 @@ defmodule Storybook.Themes.Components.TabNav do
         description: "Basic tab navigation",
         template: """
         <.tab_nav>
-          <.tab_nav_link href="#" active>Account</.tab_nav_link>
+          <.tab_nav_link
+            href="#"
+            active
+          >
+            Account
+          </.tab_nav_link>
           <.tab_nav_link href="#">Documents</.tab_nav_link>
           <.tab_nav_link href="#">Settings</.tab_nav_link>
         </.tab_nav>
@@ -38,13 +43,23 @@ defmodule Storybook.Themes.Components.TabNav do
         template: """
         <div style="display: flex; flex-direction: column; gap: 24px;">
           <.tab_nav size="1">
-            <.tab_nav_link href="#" active>Account</.tab_nav_link>
+            <.tab_nav_link
+              href="#"
+              active
+            >
+              Account
+            </.tab_nav_link>
             <.tab_nav_link href="#">Documents</.tab_nav_link>
             <.tab_nav_link href="#">Settings</.tab_nav_link>
           </.tab_nav>
 
           <.tab_nav size="2">
-            <.tab_nav_link href="#" active>Account</.tab_nav_link>
+            <.tab_nav_link
+              href="#"
+              active
+            >
+              Account
+            </.tab_nav_link>
             <.tab_nav_link href="#">Documents</.tab_nav_link>
             <.tab_nav_link href="#">Settings</.tab_nav_link>
           </.tab_nav>
@@ -57,13 +72,23 @@ defmodule Storybook.Themes.Components.TabNav do
         template: """
         <div style="display: flex; flex-direction: column; gap: 24px;">
           <.tab_nav color="crimson">
-            <.tab_nav_link href="#" active>Account</.tab_nav_link>
+            <.tab_nav_link
+              href="#"
+              active
+            >
+              Account
+            </.tab_nav_link>
             <.tab_nav_link href="#">Documents</.tab_nav_link>
             <.tab_nav_link href="#">Settings</.tab_nav_link>
           </.tab_nav>
 
           <.tab_nav color="teal">
-            <.tab_nav_link href="#" active>Account</.tab_nav_link>
+            <.tab_nav_link
+              href="#"
+              active
+            >
+              Account
+            </.tab_nav_link>
             <.tab_nav_link href="#">Documents</.tab_nav_link>
             <.tab_nav_link href="#">Settings</.tab_nav_link>
           </.tab_nav>
@@ -74,8 +99,16 @@ defmodule Storybook.Themes.Components.TabNav do
         id: :high_contrast,
         description: "High contrast",
         template: """
-        <.tab_nav high_contrast color="crimson">
-          <.tab_nav_link href="#" active>Account</.tab_nav_link>
+        <.tab_nav
+          high_contrast
+          color="crimson"
+        >
+          <.tab_nav_link
+            href="#"
+            active
+          >
+            Account
+          </.tab_nav_link>
           <.tab_nav_link href="#">Documents</.tab_nav_link>
           <.tab_nav_link href="#">Settings</.tab_nav_link>
         </.tab_nav>
@@ -87,19 +120,34 @@ defmodule Storybook.Themes.Components.TabNav do
         template: """
         <div style="display: flex; flex-direction: column; gap: 24px;">
           <.tab_nav justify="start">
-            <.tab_nav_link href="#" active>Account</.tab_nav_link>
+            <.tab_nav_link
+              href="#"
+              active
+            >
+              Account
+            </.tab_nav_link>
             <.tab_nav_link href="#">Documents</.tab_nav_link>
             <.tab_nav_link href="#">Settings</.tab_nav_link>
           </.tab_nav>
 
           <.tab_nav justify="center">
-            <.tab_nav_link href="#" active>Account</.tab_nav_link>
+            <.tab_nav_link
+              href="#"
+              active
+            >
+              Account
+            </.tab_nav_link>
             <.tab_nav_link href="#">Documents</.tab_nav_link>
             <.tab_nav_link href="#">Settings</.tab_nav_link>
           </.tab_nav>
 
           <.tab_nav justify="end">
-            <.tab_nav_link href="#" active>Account</.tab_nav_link>
+            <.tab_nav_link
+              href="#"
+              active
+            >
+              Account
+            </.tab_nav_link>
             <.tab_nav_link href="#">Documents</.tab_nav_link>
             <.tab_nav_link href="#">Settings</.tab_nav_link>
           </.tab_nav>
@@ -112,7 +160,12 @@ defmodule Storybook.Themes.Components.TabNav do
         template: """
         <div style="width: 250px; border: 1px solid var(--gray-5); padding: 8px;">
           <.tab_nav wrap="wrap">
-            <.tab_nav_link href="#" active>Account</.tab_nav_link>
+            <.tab_nav_link
+              href="#"
+              active
+            >
+              Account
+            </.tab_nav_link>
             <.tab_nav_link href="#">Documents</.tab_nav_link>
             <.tab_nav_link href="#">Settings</.tab_nav_link>
             <.tab_nav_link href="#">Notifications</.tab_nav_link>

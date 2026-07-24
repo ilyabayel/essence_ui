@@ -6,7 +6,8 @@ defmodule Storybook.Primitives.VisuallyHiddenStory do
   alias EssenceUI.Primitives.VisuallyHidden
 
   def function, do: &VisuallyHidden.visually_hidden/1
-  def container, do: :div
+  def container, do: {:div, class: "radix-demo", "data-component": "visually-hidden"}
+
   def layout, do: :one_column
 
   def variations do
@@ -15,12 +16,13 @@ defmodule Storybook.Primitives.VisuallyHiddenStory do
         id: :primitive,
         description: "Visually hidden but available to screen readers",
         template: """
-        <div class="radix-demo" data-component="visually-hidden">
-          <button class="Button violet" type="button">
-            Save
-            <VisuallyHidden.visually_hidden> the document</VisuallyHidden.visually_hidden>
-          </button>
-        </div>
+        <button
+          class="Button violet"
+          type="button"
+        >
+          Save
+          <VisuallyHidden.visually_hidden> the document</VisuallyHidden.visually_hidden>
+        </button>
         """
       }
     ]

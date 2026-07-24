@@ -63,7 +63,12 @@ defmodule Storybook.Themes.Components.ContextMenu do
             <.context_menu_item>Share</.context_menu_item>
             <.context_menu_item>Add to favorites</.context_menu_item>
             <.context_menu_separator />
-            <.context_menu_item shortcut="⌘ ⌫" color="red">Delete</.context_menu_item>
+            <.context_menu_item
+              shortcut="⌘ ⌫"
+              color="red"
+            >
+              Delete
+            </.context_menu_item>
           </.context_menu_content>
         </.context_menu_root>
         """
@@ -82,11 +87,21 @@ defmodule Storybook.Themes.Components.ContextMenu do
             <.context_menu_label>Options</.context_menu_label>
             <.context_menu_checkbox_item checked>Show Grid</.context_menu_checkbox_item>
             <.context_menu_checkbox_item>Show Rulers</.context_menu_checkbox_item>
-            <.context_menu_checkbox_item checked disabled>Snap to Grid</.context_menu_checkbox_item>
+            <.context_menu_checkbox_item
+              checked
+              disabled
+            >
+              Snap to Grid
+            </.context_menu_checkbox_item>
             <.context_menu_separator />
             <.context_menu_label>Mode</.context_menu_label>
             <.context_menu_radio_group value="select">
-              <.context_menu_radio_item value="select" checked>Select</.context_menu_radio_item>
+              <.context_menu_radio_item
+                value="select"
+                checked
+              >
+                Select
+              </.context_menu_radio_item>
               <.context_menu_radio_item value="move">Move</.context_menu_radio_item>
             </.context_menu_radio_group>
           </.context_menu_content>
@@ -97,7 +112,10 @@ defmodule Storybook.Themes.Components.ContextMenu do
         id: :size,
         description: "Size",
         template: """
-        <.flex gap="4" wrap="wrap">
+        <.flex
+          gap="4"
+          wrap="wrap"
+        >
           <.context_menu_root>
             <.context_menu_trigger>
               <div style="height: 150px; width: 200px; border: 1px dashed var(--gray-a7); border-radius: var(--radius-3); display: flex; align-items: center; justify-content: center; background: var(--gray-a2); user-select: none;">
@@ -110,7 +128,12 @@ defmodule Storybook.Themes.Components.ContextMenu do
               <.context_menu_separator />
               <.context_menu_item shortcut="⌘ N">Archive</.context_menu_item>
               <.context_menu_separator />
-              <.context_menu_item shortcut="⌘ ⌫" color="red">Delete</.context_menu_item>
+              <.context_menu_item
+                shortcut="⌘ ⌫"
+                color="red"
+              >
+                Delete
+              </.context_menu_item>
             </.context_menu_content>
           </.context_menu_root>
 
@@ -126,7 +149,12 @@ defmodule Storybook.Themes.Components.ContextMenu do
               <.context_menu_separator />
               <.context_menu_item shortcut="⌘ N">Archive</.context_menu_item>
               <.context_menu_separator />
-              <.context_menu_item shortcut="⌘ ⌫" color="red">Delete</.context_menu_item>
+              <.context_menu_item
+                shortcut="⌘ ⌫"
+                color="red"
+              >
+                Delete
+              </.context_menu_item>
             </.context_menu_content>
           </.context_menu_root>
         </.flex>
@@ -136,7 +164,10 @@ defmodule Storybook.Themes.Components.ContextMenu do
         id: :variant,
         description: "Variant",
         template: """
-        <.flex gap="4" wrap="wrap">
+        <.flex
+          gap="4"
+          wrap="wrap"
+        >
           <.context_menu_root>
             <.context_menu_trigger>
               <div style="height: 150px; width: 200px; border: 1px dashed var(--gray-a7); border-radius: var(--radius-3); display: flex; align-items: center; justify-content: center; background: var(--gray-a2); user-select: none;">
@@ -149,7 +180,12 @@ defmodule Storybook.Themes.Components.ContextMenu do
               <.context_menu_separator />
               <.context_menu_item shortcut="⌘ N">Archive</.context_menu_item>
               <.context_menu_separator />
-              <.context_menu_item shortcut="⌘ ⌫" color="red">Delete</.context_menu_item>
+              <.context_menu_item
+                shortcut="⌘ ⌫"
+                color="red"
+              >
+                Delete
+              </.context_menu_item>
             </.context_menu_content>
           </.context_menu_root>
 
@@ -165,7 +201,12 @@ defmodule Storybook.Themes.Components.ContextMenu do
               <.context_menu_separator />
               <.context_menu_item shortcut="⌘ N">Archive</.context_menu_item>
               <.context_menu_separator />
-              <.context_menu_item shortcut="⌘ ⌫" color="red">Delete</.context_menu_item>
+              <.context_menu_item
+                shortcut="⌘ ⌫"
+                color="red"
+              >
+                Delete
+              </.context_menu_item>
             </.context_menu_content>
           </.context_menu_root>
         </.flex>
@@ -175,7 +216,10 @@ defmodule Storybook.Themes.Components.ContextMenu do
         id: :color,
         description: "Color",
         template: """
-        <.flex gap="4" wrap="wrap">
+        <.flex
+          gap="4"
+          wrap="wrap"
+        >
           <.context_menu_root>
             <.context_menu_trigger>
               <div style="height: 150px; width: 200px; border: 1px dashed var(--gray-a7); border-radius: var(--radius-3); display: flex; align-items: center; justify-content: center; background: var(--gray-a2); user-select: none;">
@@ -188,7 +232,12 @@ defmodule Storybook.Themes.Components.ContextMenu do
               <.context_menu_separator />
               <.context_menu_item shortcut="⌘ N">Archive</.context_menu_item>
               <.context_menu_separator />
-              <.context_menu_item shortcut="⌘ ⌫" color="red">Delete</.context_menu_item>
+              <.context_menu_item
+                shortcut="⌘ ⌫"
+                color="red"
+              >
+                Delete
+              </.context_menu_item>
             </.context_menu_content>
           </.context_menu_root>
 
@@ -204,7 +253,12 @@ defmodule Storybook.Themes.Components.ContextMenu do
               <.context_menu_separator />
               <.context_menu_item shortcut="⌘ N">Archive</.context_menu_item>
               <.context_menu_separator />
-              <.context_menu_item shortcut="⌘ ⌫" color="red">Delete</.context_menu_item>
+              <.context_menu_item
+                shortcut="⌘ ⌫"
+                color="red"
+              >
+                Delete
+              </.context_menu_item>
             </.context_menu_content>
           </.context_menu_root>
 
@@ -220,7 +274,12 @@ defmodule Storybook.Themes.Components.ContextMenu do
               <.context_menu_separator />
               <.context_menu_item shortcut="⌘ N">Archive</.context_menu_item>
               <.context_menu_separator />
-              <.context_menu_item shortcut="⌘ ⌫" color="red">Delete</.context_menu_item>
+              <.context_menu_item
+                shortcut="⌘ ⌫"
+                color="red"
+              >
+                Delete
+              </.context_menu_item>
             </.context_menu_content>
           </.context_menu_root>
 
@@ -236,7 +295,12 @@ defmodule Storybook.Themes.Components.ContextMenu do
               <.context_menu_separator />
               <.context_menu_item shortcut="⌘ N">Archive</.context_menu_item>
               <.context_menu_separator />
-              <.context_menu_item shortcut="⌘ ⌫" color="red">Delete</.context_menu_item>
+              <.context_menu_item
+                shortcut="⌘ ⌫"
+                color="red"
+              >
+                Delete
+              </.context_menu_item>
             </.context_menu_content>
           </.context_menu_root>
         </.flex>
@@ -246,7 +310,10 @@ defmodule Storybook.Themes.Components.ContextMenu do
         id: :high_contrast,
         description: "High-contrast",
         template: """
-        <.flex gap="4" wrap="wrap">
+        <.flex
+          gap="4"
+          wrap="wrap"
+        >
           <.context_menu_root>
             <.context_menu_trigger>
               <div style="height: 150px; width: 200px; border: 1px dashed var(--gray-a7); border-radius: var(--radius-3); display: flex; align-items: center; justify-content: center; background: var(--gray-a2); user-select: none;">
@@ -267,7 +334,10 @@ defmodule Storybook.Themes.Components.ContextMenu do
                 <.text>High-contrast</.text>
               </div>
             </.context_menu_trigger>
-            <.context_menu_content color="gray" high_contrast>
+            <.context_menu_content
+              color="gray"
+              high_contrast
+            >
               <.context_menu_item shortcut="⌘ E">Edit</.context_menu_item>
               <.context_menu_item shortcut="⌘ D">Duplicate</.context_menu_item>
               <.context_menu_separator />

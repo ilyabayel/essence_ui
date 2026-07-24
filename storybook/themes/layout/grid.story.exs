@@ -20,12 +20,30 @@ defmodule Storybook.Themes.Layout.Grid do
         attributes: %{columns: "3", gap: "4"},
         slots: [
           """
-          <.decoration_box height="64px" width="64px"/>
-          <.decoration_box height="64px" width="64px"/>
-          <.decoration_box height="64px" width="64px"/>
-          <.decoration_box height="64px" width="64px"/>
-          <.decoration_box height="64px" width="64px"/>
-          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
           """
         ]
       },
@@ -35,14 +53,38 @@ defmodule Storybook.Themes.Layout.Grid do
         attributes: %{columns: %{xs: "1", sm: "2", md: "3", lg: "4"}, gap: "3"},
         slots: [
           """
-          <.decoration_box height="64px" width="64px"/>
-          <.decoration_box height="64px" width="64px"/>
-          <.decoration_box height="64px" width="64px"/>
-          <.decoration_box height="64px" width="64px"/>
-          <.decoration_box height="64px" width="64px"/>
-          <.decoration_box height="64px" width="64px"/>
-          <.decoration_box height="64px" width="64px"/>
-          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
           """
         ]
       },
@@ -52,10 +94,22 @@ defmodule Storybook.Themes.Layout.Grid do
         attributes: %{columns: "2", gap_x: "6", gap_y: "2"},
         slots: [
           """
-          <.decoration_box height="64px" width="64px"/>
-          <.decoration_box height="64px" width="64px"/>
-          <.decoration_box height="64px" width="64px"/>
-          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
           """
         ]
       },
@@ -71,8 +125,14 @@ defmodule Storybook.Themes.Layout.Grid do
         },
         slots: [
           """
-          <.decoration_box height="64px" width="64px"/>
-          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
           """
         ]
       }

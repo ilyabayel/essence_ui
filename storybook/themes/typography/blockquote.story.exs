@@ -84,7 +84,10 @@ defmodule Storybook.Themes.Typography.Blockquote do
         id: :weights,
         description: "Weight",
         template: """
-        <div class="rt-Flex rt-r-fd-column rt-r-gap-3" style="max-width: 500px;">
+        <div
+          class="rt-Flex rt-r-fd-column rt-r-gap-3"
+          style="max-width: 500px;"
+        >
           <.blockquote weight="regular">
             Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy.
           </.blockquote>
@@ -101,7 +104,10 @@ defmodule Storybook.Themes.Typography.Blockquote do
         id: :colors,
         description: "Color",
         template: """
-        <div class="rt-Flex rt-r-fd-column rt-r-gap-3" style="max-width: 500px;">
+        <div
+          class="rt-Flex rt-r-fd-column rt-r-gap-3"
+          style="max-width: 500px;"
+        >
           <.blockquote color="indigo">
             Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy.
           </.blockquote>
@@ -121,11 +127,17 @@ defmodule Storybook.Themes.Typography.Blockquote do
         id: :high_contrast,
         description: "High-contrast",
         template: """
-        <div class="rt-Flex rt-r-fd-column rt-r-gap-3" style="max-width: 500px;">
+        <div
+          class="rt-Flex rt-r-fd-column rt-r-gap-3"
+          style="max-width: 500px;"
+        >
           <.blockquote color="gray">
             Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy.
           </.blockquote>
-          <.blockquote color="gray" high_contrast={true}>
+          <.blockquote
+            color="gray"
+            high_contrast={true}
+          >
             Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy.
           </.blockquote>
         </div>
@@ -135,7 +147,10 @@ defmodule Storybook.Themes.Typography.Blockquote do
         id: :truncate,
         description: "Truncate",
         template: """
-        <div class="rt-Flex" style="max-width: 500px;">
+        <div
+          class="rt-Flex"
+          style="max-width: 500px;"
+        >
           <.blockquote truncate>
             Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy.
           </.blockquote>

@@ -34,7 +34,12 @@ defmodule Storybook.Themes.Components.HoverCard do
         template: """
         <.hover_card_root>
           <.hover_card_trigger>
-            <a href="#" class="rt-Link rt-reset rt-Text">@radix_ui</a>
+            <a
+              href="#"
+              class="rt-Link rt-reset rt-Text"
+            >
+              @radix_ui
+            </a>
           </.hover_card_trigger>
           <.hover_card_content max_width="300px">
             <.flex gap="4">
@@ -45,9 +50,24 @@ defmodule Storybook.Themes.Components.HoverCard do
                 src="https://pbs.twimg.com/profile_images/1337055608613253126/r_eiMp2H_400x400.png"
               />
               <.box>
-                <.heading size="3" as="h3">Radix</.heading>
-                <.text as="div" size="2" color="gray" mb="2">@radix_ui</.text>
-                <.text as="div" size="2">
+                <.heading
+                  size="3"
+                  as="h3"
+                >
+                  Radix
+                </.heading>
+                <.text
+                  as="div"
+                  size="2"
+                  color="gray"
+                  mb="2"
+                >
+                  @radix_ui
+                </.text>
+                <.text
+                  as="div"
+                  size="2"
+                >
                   React components, icons, and colors for building high-quality, accessible UI.
                 </.text>
               </.box>
@@ -62,10 +82,21 @@ defmodule Storybook.Themes.Components.HoverCard do
         template: """
         <.hover_card_root>
           <.hover_card_trigger>
-            <a href="#" class="rt-Link rt-reset rt-Text">Size 1</a>
+            <a
+              href="#"
+              class="rt-Link rt-reset rt-Text"
+            >
+              Size 1
+            </a>
           </.hover_card_trigger>
-          <.hover_card_content size="1" max_width="240px">
-            <.text as="div" size="1">
+          <.hover_card_content
+            size="1"
+            max_width="240px"
+          >
+            <.text
+              as="div"
+              size="1"
+            >
               <strong>Typography</strong> is the art and technique of arranging type to make
               written language legible, readable and appealing when displayed.
             </.text>
@@ -79,10 +110,21 @@ defmodule Storybook.Themes.Components.HoverCard do
         template: """
         <.hover_card_root>
           <.hover_card_trigger>
-            <a href="#" class="rt-Link rt-reset rt-Text">Size 2</a>
+            <a
+              href="#"
+              class="rt-Link rt-reset rt-Text"
+            >
+              Size 2
+            </a>
           </.hover_card_trigger>
-          <.hover_card_content size="2" max_width="280px">
-            <.text as="div" size="2">
+          <.hover_card_content
+            size="2"
+            max_width="280px"
+          >
+            <.text
+              as="div"
+              size="2"
+            >
               <strong>Typography</strong> is the art and technique of arranging type to make
               written language legible, readable and appealing when displayed.
             </.text>
@@ -96,10 +138,21 @@ defmodule Storybook.Themes.Components.HoverCard do
         template: """
         <.hover_card_root>
           <.hover_card_trigger>
-            <a href="#" class="rt-Link rt-reset rt-Text">Size 3</a>
+            <a
+              href="#"
+              class="rt-Link rt-reset rt-Text"
+            >
+              Size 3
+            </a>
           </.hover_card_trigger>
-          <.hover_card_content size="3" max_width="320px">
-            <.text as="div" size="3">
+          <.hover_card_content
+            size="3"
+            max_width="320px"
+          >
+            <.text
+              as="div"
+              size="3"
+            >
               <strong>Typography</strong> is the art and technique of arranging type to make
               written language legible, readable and appealing when displayed.
             </.text>
@@ -111,12 +164,23 @@ defmodule Storybook.Themes.Components.HoverCard do
         id: :custom_delays,
         description: "Custom open and close delays",
         template: """
-        <.hover_card_root open_delay={500} close_delay={300}>
+        <.hover_card_root
+          open_delay={500}
+          close_delay={300}
+        >
           <.hover_card_trigger>
-            <a href="#" class="rt-Link rt-reset rt-Text">Slow open (500ms)</a>
+            <a
+              href="#"
+              class="rt-Link rt-reset rt-Text"
+            >
+              Slow open (500ms)
+            </a>
           </.hover_card_trigger>
           <.hover_card_content max_width="280px">
-            <.text as="div" size="2">
+            <.text
+              as="div"
+              size="2"
+            >
               This hover card opens after 500ms and closes after 300ms.
             </.text>
           </.hover_card_content>
@@ -129,10 +193,21 @@ defmodule Storybook.Themes.Components.HoverCard do
         template: """
         <.hover_card_root>
           <.hover_card_trigger>
-            <a href="#" class="rt-Link rt-reset rt-Text">Open above</a>
+            <a
+              href="#"
+              class="rt-Link rt-reset rt-Text"
+            >
+              Open above
+            </a>
           </.hover_card_trigger>
-          <.hover_card_content side="top" max_width="280px">
-            <.text as="div" size="2">
+          <.hover_card_content
+            side="top"
+            max_width="280px"
+          >
+            <.text
+              as="div"
+              size="2"
+            >
               This hover card opens above the trigger element.
             </.text>
           </.hover_card_content>
@@ -145,10 +220,21 @@ defmodule Storybook.Themes.Components.HoverCard do
         template: """
         <.hover_card_root>
           <.hover_card_trigger>
-            <a href="#" class="rt-Link rt-reset rt-Text">Center aligned</a>
+            <a
+              href="#"
+              class="rt-Link rt-reset rt-Text"
+            >
+              Center aligned
+            </a>
           </.hover_card_trigger>
-          <.hover_card_content align="center" max_width="280px">
-            <.text as="div" size="2">
+          <.hover_card_content
+            align="center"
+            max_width="280px"
+          >
+            <.text
+              as="div"
+              size="2"
+            >
               This hover card is center-aligned relative to the trigger.
             </.text>
           </.hover_card_content>

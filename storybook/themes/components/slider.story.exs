@@ -42,15 +42,28 @@ defmodule Storybook.Themes.Components.SliderStory do
         id: :sizes,
         description: "Slider sizes from 1 to 3.",
         template: """
-        <.flex direction="column" gap="4" style="max-width: 300px;">
+        <.flex
+          direction="column"
+          gap="4"
+          style="max-width: 300px;"
+        >
           <.text size="2">Size 1</.text>
-          <.slider size="1" default_value={[25]} />
+          <.slider
+            size="1"
+            default_value={[25]}
+          />
 
           <.text size="2">Size 2</.text>
-          <.slider size="2" default_value={[50]} />
+          <.slider
+            size="2"
+            default_value={[50]}
+          />
 
           <.text size="2">Size 3</.text>
-          <.slider size="3" default_value={[75]} />
+          <.slider
+            size="3"
+            default_value={[75]}
+          />
         </.flex>
         """
       },
@@ -58,15 +71,28 @@ defmodule Storybook.Themes.Components.SliderStory do
         id: :variants,
         description: "Slider visual variants.",
         template: """
-        <.flex direction="column" gap="4" style="max-width: 300px;">
+        <.flex
+          direction="column"
+          gap="4"
+          style="max-width: 300px;"
+        >
           <.text size="2">Surface</.text>
-          <.slider variant="surface" default_value={[25]} />
+          <.slider
+            variant="surface"
+            default_value={[25]}
+          />
 
           <.text size="2">Classic</.text>
-          <.slider variant="classic" default_value={[50]} />
+          <.slider
+            variant="classic"
+            default_value={[50]}
+          />
 
           <.text size="2">Soft</.text>
-          <.slider variant="soft" default_value={[75]} />
+          <.slider
+            variant="soft"
+            default_value={[75]}
+          />
         </.flex>
         """
       },
@@ -74,18 +100,34 @@ defmodule Storybook.Themes.Components.SliderStory do
         id: :colors,
         description: "Accent color variants.",
         template: """
-        <.flex direction="column" gap="4" style="max-width: 300px;">
+        <.flex
+          direction="column"
+          gap="4"
+          style="max-width: 300px;"
+        >
           <.text size="2">Indigo</.text>
-          <.slider color="indigo" default_value={[20]} />
+          <.slider
+            color="indigo"
+            default_value={[20]}
+          />
 
           <.text size="2">Cyan</.text>
-          <.slider color="cyan" default_value={[40]} />
+          <.slider
+            color="cyan"
+            default_value={[40]}
+          />
 
           <.text size="2">Orange</.text>
-          <.slider color="orange" default_value={[60]} />
+          <.slider
+            color="orange"
+            default_value={[60]}
+          />
 
           <.text size="2">Crimson</.text>
-          <.slider color="crimson" default_value={[80]} />
+          <.slider
+            color="crimson"
+            default_value={[80]}
+          />
         </.flex>
         """
       },
@@ -93,23 +135,69 @@ defmodule Storybook.Themes.Components.SliderStory do
         id: :high_contrast,
         description: "High contrast variants.",
         template: """
-        <.grid columns="2" gap="4">
-          <.flex direction="column" gap="2" style="max-width: 200px;">
+        <.grid
+          columns="2"
+          gap="4"
+        >
+          <.flex
+            direction="column"
+            gap="2"
+            style="max-width: 200px;"
+          >
             <.text size="2">Regular</.text>
-            <.slider color="indigo" default_value={[10]} />
-            <.slider color="cyan" default_value={[30]} />
-            <.slider color="orange" default_value={[50]} />
-            <.slider color="crimson" default_value={[70]} />
-            <.slider color="gray" default_value={[90]} />
+            <.slider
+              color="indigo"
+              default_value={[10]}
+            />
+            <.slider
+              color="cyan"
+              default_value={[30]}
+            />
+            <.slider
+              color="orange"
+              default_value={[50]}
+            />
+            <.slider
+              color="crimson"
+              default_value={[70]}
+            />
+            <.slider
+              color="gray"
+              default_value={[90]}
+            />
           </.flex>
 
-          <.flex direction="column" gap="2" style="max-width: 200px;">
+          <.flex
+            direction="column"
+            gap="2"
+            style="max-width: 200px;"
+          >
             <.text size="2">High Contrast</.text>
-            <.slider color="indigo" high_contrast default_value={[10]} />
-            <.slider color="cyan" high_contrast default_value={[30]} />
-            <.slider color="orange" high_contrast default_value={[50]} />
-            <.slider color="crimson" high_contrast default_value={[70]} />
-            <.slider color="gray" high_contrast default_value={[90]} />
+            <.slider
+              color="indigo"
+              high_contrast
+              default_value={[10]}
+            />
+            <.slider
+              color="cyan"
+              high_contrast
+              default_value={[30]}
+            />
+            <.slider
+              color="orange"
+              high_contrast
+              default_value={[50]}
+            />
+            <.slider
+              color="crimson"
+              high_contrast
+              default_value={[70]}
+            />
+            <.slider
+              color="gray"
+              high_contrast
+              default_value={[90]}
+            />
           </.flex>
         </.grid>
         """
@@ -118,15 +206,28 @@ defmodule Storybook.Themes.Components.SliderStory do
         id: :radius,
         description: "Border radius variants.",
         template: """
-        <.flex direction="column" gap="4" style="max-width: 300px;">
+        <.flex
+          direction="column"
+          gap="4"
+          style="max-width: 300px;"
+        >
           <.text size="2">None</.text>
-          <.slider radius="none" default_value={[25]} />
+          <.slider
+            radius="none"
+            default_value={[25]}
+          />
 
           <.text size="2">Small</.text>
-          <.slider radius="small" default_value={[50]} />
+          <.slider
+            radius="small"
+            default_value={[50]}
+          />
 
           <.text size="2">Full</.text>
-          <.slider radius="full" default_value={[75]} />
+          <.slider
+            radius="full"
+            default_value={[75]}
+          />
         </.flex>
         """
       },
@@ -134,12 +235,25 @@ defmodule Storybook.Themes.Components.SliderStory do
         id: :custom_range,
         description: "Custom min/max/step values.",
         template: """
-        <.flex direction="column" gap="4" style="max-width: 300px;">
+        <.flex
+          direction="column"
+          gap="4"
+          style="max-width: 300px;"
+        >
           <.text size="2">0-10, step 0.5</.text>
-          <.slider min={0} max={10} step={0.5} default_value={[2.5]} />
+          <.slider
+            min={0}
+            max={10}
+            step={0.5}
+            default_value={[2.5]}
+          />
 
           <.text size="2">-50 to 50</.text>
-          <.slider min={-50} max={50} default_value={[-10, 30]} />
+          <.slider
+            min={-50}
+            max={50}
+            default_value={[-10, 30]}
+          />
         </.flex>
         """
       },
@@ -147,10 +261,25 @@ defmodule Storybook.Themes.Components.SliderStory do
         id: :vertical,
         description: "Vertical orientation slider.",
         template: """
-        <.flex gap="6" style="height: 200px;">
-          <.slider orientation="vertical" default_value={[30]} />
-          <.slider orientation="vertical" default_value={[20, 80]} />
-          <.slider orientation="vertical" size="3" variant="soft" color="crimson" default_value={[60]} />
+        <.flex
+          gap="6"
+          style="height: 200px;"
+        >
+          <.slider
+            orientation="vertical"
+            default_value={[30]}
+          />
+          <.slider
+            orientation="vertical"
+            default_value={[20, 80]}
+          />
+          <.slider
+            orientation="vertical"
+            size="3"
+            variant="soft"
+            color="crimson"
+            default_value={[60]}
+          />
         </.flex>
         """
       }

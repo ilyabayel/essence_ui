@@ -40,13 +40,26 @@ defmodule Storybook.Themes.Components.SwitchStory do
         id: :variants,
         description: "Switch visual variants.",
         template: """
-        <.grid columns="2" gap="2" style="width: max-content;">
+        <.grid
+          columns="2"
+          gap="2"
+          style="width: max-content;"
+        >
           <.switch variant="surface"/>
-          <.switch variant="surface" checked/>
+          <.switch
+            variant="surface"
+            checked
+          />
           <.switch variant="classic"/>
-          <.switch variant="classic" checked/>
+          <.switch
+            variant="classic"
+            checked
+          />
           <.switch variant="soft"/>
-          <.switch variant="soft" checked/>
+          <.switch
+            variant="soft"
+            checked
+          />
         </.grid>
         """
       },
@@ -95,7 +108,10 @@ defmodule Storybook.Themes.Components.SwitchStory do
         description: "Disabled switch.",
         template: """
         <.switch disabled />
-        <.switch disabled checked />
+        <.switch
+          disabled
+          checked
+        />
         """
       },
       %Variation{
@@ -103,7 +119,10 @@ defmodule Storybook.Themes.Components.SwitchStory do
         description: "High contrast variant.",
         template: """
         <.switch high_contrast />
-        <.switch high_contrast checked/>
+        <.switch
+          high_contrast
+          checked
+        />
         """
       }
     ]

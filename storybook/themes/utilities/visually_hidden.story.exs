@@ -25,7 +25,10 @@ defmodule Storybook.Themes.Utilities.VisuallyHidden do
         id: :default,
         description: "Visually hidden but screen-reader accessible",
         template: """
-        <.flex gap="3" align="center">
+        <.flex
+          gap="3"
+          align="center"
+        >
           <.text>There is a hidden message here: </.text>
           <.visually_hidden>This message is only for screen readers.</.visually_hidden>
           <.text>(Check the DOM to see it)</.text>

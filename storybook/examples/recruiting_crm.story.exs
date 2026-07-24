@@ -23,8 +23,16 @@ defmodule Storybook.Examples.RecruitingCrm do
         p="4"
         style="width: 64px; border-right: 1px solid var(--gray-4); background-color: var(--gray-2);"
       >
-        <.flex direction="column" gap="4" align="center">
-          <.icon_button variant="ghost" size="3" color="gray">
+        <.flex
+          direction="column"
+          gap="4"
+          align="center"
+        >
+          <.icon_button
+            variant="ghost"
+            size="3"
+            color="gray"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -34,11 +42,28 @@ defmodule Storybook.Examples.RecruitingCrm do
               stroke="currentColor"
               stroke-width="2"
             >
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="9" y1="3" x2="9" y2="21"></line>
+              <rect
+                x="3"
+                y="3"
+                width="18"
+                height="18"
+                rx="2"
+                ry="2"
+              >
+              </rect>
+              <line
+                x1="9"
+                y1="3"
+                x2="9"
+                y2="21"
+              >
+              </line>
             </svg>
           </.icon_button>
-          <.icon_button variant="soft" size="3">
+          <.icon_button
+            variant="soft"
+            size="3"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -51,7 +76,11 @@ defmodule Storybook.Examples.RecruitingCrm do
               <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
             </svg>
           </.icon_button>
-          <.icon_button variant="ghost" size="3" color="gray">
+          <.icon_button
+            variant="ghost"
+            size="3"
+            color="gray"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -62,7 +91,12 @@ defmodule Storybook.Examples.RecruitingCrm do
               stroke-width="2"
             >
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-              <circle cx="9" cy="7" r="4"></circle>
+              <circle
+                cx="9"
+                cy="7"
+                r="4"
+              >
+              </circle>
               <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
               <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
             </svg>
@@ -77,7 +111,10 @@ defmodule Storybook.Examples.RecruitingCrm do
       </.flex>
 
       <%!-- Main Content Area --%>
-      <.flex direction="column" style="flex: 1; overflow: hidden;">
+      <.flex
+        direction="column"
+        style="flex: 1; overflow: hidden;"
+      >
         <%!-- Top Header --%>
         <.flex
           align="center"
@@ -86,13 +123,33 @@ defmodule Storybook.Examples.RecruitingCrm do
           py="4"
           style="border-bottom: 1px solid var(--gray-4); background-color: var(--gray-1);"
         >
-          <.flex align="center" gap="4">
-            <.heading size="5" weight="bold">Pipeline: Software Engineering</.heading>
-            <.badge variant="surface" color="gray">12 Candidates</.badge>
+          <.flex
+            align="center"
+            gap="4"
+          >
+            <.heading
+              size="5"
+              weight="bold"
+            >
+              Pipeline: Software Engineering
+            </.heading>
+            <.badge
+              variant="surface"
+              color="gray"
+            >
+              12 Candidates
+            </.badge>
           </.flex>
 
-          <.flex align="center" gap="3">
-            <.text_field placeholder="Search candidates..." size="2" style="width: 250px;">
+          <.flex
+            align="center"
+            gap="3"
+          >
+            <.text_field
+              placeholder="Search candidates..."
+              size="2"
+              style="width: 250px;"
+            >
               <:slot side="left">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -103,15 +160,29 @@ defmodule Storybook.Examples.RecruitingCrm do
                   stroke="currentColor"
                   stroke-width="2"
                 >
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <circle
+                    cx="11"
+                    cy="11"
+                    r="8"
+                  >
+                  </circle>
+                  <line
+                    x1="21"
+                    y1="21"
+                    x2="16.65"
+                    y2="16.65"
+                  >
+                  </line>
                 </svg>
               </:slot>
             </.text_field>
 
             <.dropdown_menu_root>
               <.dropdown_menu_trigger>
-                <.button variant="soft" color="gray">
+                <.button
+                  variant="soft"
+                  color="gray"
+                >
                   All Stages
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -145,23 +216,63 @@ defmodule Storybook.Examples.RecruitingCrm do
                 stroke="currentColor"
                 stroke-width="2"
               >
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <line
+                  x1="12"
+                  y1="5"
+                  x2="12"
+                  y2="19"
+                >
+                </line>
+                <line
+                  x1="5"
+                  y1="12"
+                  x2="19"
+                  y2="12"
+                >
+                </line>
               </svg>
               Add Candidate
             </.button>
           </.flex>
         </.flex>
         <.scroll_area style="flex: 1; padding: 24px;">
-          <.flex gap="6" style="min-height: 100%;">
+          <.flex
+            gap="6"
+            style="min-height: 100%;"
+          >
             <%= for {stage, count} <- [{"Sourced", 4}, {"Screening", 3}, {"Interview", 3}, {"Offer", 2}] do %>
-              <.flex direction="column" gap="4" style="width: 280px; flex-shrink: 0;">
-                <.flex align="center" justify="space-between">
-                  <.flex align="center" gap="2">
-                    <.heading size="3" weight="bold">{stage}</.heading>
-                    <.badge variant="soft" color="gray" size="1">{count}</.badge>
+              <.flex
+                direction="column"
+                gap="4"
+                style="width: 280px; flex-shrink: 0;"
+              >
+                <.flex
+                  align="center"
+                  justify="space-between"
+                >
+                  <.flex
+                    align="center"
+                    gap="2"
+                  >
+                    <.heading
+                      size="3"
+                      weight="bold"
+                    >
+                      {stage}
+                    </.heading>
+                    <.badge
+                      variant="soft"
+                      color="gray"
+                      size="1"
+                    >
+                      {count}
+                    </.badge>
                   </.flex>
-                  <.icon_button variant="ghost" size="1" color="gray">
+                  <.icon_button
+                    variant="ghost"
+                    size="1"
+                    color="gray"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -171,9 +282,24 @@ defmodule Storybook.Examples.RecruitingCrm do
                       stroke="currentColor"
                       stroke-width="2"
                     >
-                      <circle cx="12" cy="12" r="1"></circle>
-                      <circle cx="12" cy="5" r="1"></circle>
-                      <circle cx="12" cy="19" r="1"></circle>
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="1"
+                      >
+                      </circle>
+                      <circle
+                        cx="12"
+                        cy="5"
+                        r="1"
+                      >
+                      </circle>
+                      <circle
+                        cx="12"
+                        cy="19"
+                        r="1"
+                      >
+                      </circle>
                     </svg>
                   </.icon_button>
                 </.flex>
@@ -224,15 +350,25 @@ defmodule Storybook.Examples.RecruitingCrm do
           </.flex>
         </.scroll_area>
 
-        <.dialog id="candidate-detail" target="body" default_state="closed">
+        <.dialog
+          id="candidate-detail"
+          target="body"
+          default_state="closed"
+        >
           <.flex
             direction="column"
             gap="4"
             p="6"
             style="max-width: 600px; background-color: var(--gray-1); border-radius: var(--radius-4);"
           >
-            <.flex justify="space-between" align="center">
-              <.flex gap="4" align="center">
+            <.flex
+              justify="space-between"
+              align="center"
+            >
+              <.flex
+                gap="4"
+                align="center"
+              >
                 <.avatar
                   size="4"
                   src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&q=80"
@@ -243,12 +379,21 @@ defmodule Storybook.Examples.RecruitingCrm do
                   <.text color="gray">Senior Fullstack Engineer</.text>
                 </.flex>
               </.flex>
-              <.badge size="3" variant="soft">Sourced</.badge>
+              <.badge
+                size="3"
+                variant="soft"
+              >
+                Sourced
+              </.badge>
             </.flex>
 
             <.tabs default_value="overview">
               <:list :let={ctx}>
-                <.tabs_list size="2" tabs_id={ctx.tabs_id} default_value={ctx.default_value}>
+                <.tabs_list
+                  size="2"
+                  tabs_id={ctx.tabs_id}
+                  default_value={ctx.default_value}
+                >
                   <:trigger value="overview">Overview</:trigger>
                   <:trigger value="evaluation">Evaluation</:trigger>
                   <:trigger value="notes">Notes</:trigger>
@@ -257,20 +402,54 @@ defmodule Storybook.Examples.RecruitingCrm do
               </:list>
 
               <:content value="overview">
-                <.flex direction="column" gap="4" mt="4">
-                  <.grid columns="2" gap="4">
-                    <.flex direction="column" gap="1">
-                      <.text size="2" weight="bold">Email</.text>
+                <.flex
+                  direction="column"
+                  gap="4"
+                  mt="4"
+                >
+                  <.grid
+                    columns="2"
+                    gap="4"
+                  >
+                    <.flex
+                      direction="column"
+                      gap="1"
+                    >
+                      <.text
+                        size="2"
+                        weight="bold"
+                      >
+                        Email
+                      </.text>
                       <.text_field value="alice.j@example.com" />
                     </.flex>
-                    <.flex direction="column" gap="1">
-                      <.text size="2" weight="bold">Phone</.text>
+                    <.flex
+                      direction="column"
+                      gap="1"
+                    >
+                      <.text
+                        size="2"
+                        weight="bold"
+                      >
+                        Phone
+                      </.text>
                       <.text_field value="+1 (555) 000-0000" />
                     </.flex>
                   </.grid>
-                  <.flex direction="column" gap="1">
-                    <.text size="2" weight="bold">Source</.text>
-                    <.select_root id="crm-candidate-source" value="LinkedIn">
+                  <.flex
+                    direction="column"
+                    gap="1"
+                  >
+                    <.text
+                      size="2"
+                      weight="bold"
+                    >
+                      Source
+                    </.text>
+                    <.select_root
+                      id="crm-candidate-source"
+                      value="LinkedIn"
+                    >
                       <.select_trigger placeholder="Select source..." />
                       <.select_content>
                         <.select_item value="LinkedIn">LinkedIn</.select_item>
@@ -282,20 +461,43 @@ defmodule Storybook.Examples.RecruitingCrm do
               </:content>
 
               <:content value="evaluation">
-                <.flex direction="column" gap="5" mt="4">
-                  <.flex direction="column" gap="2">
-                    <.text size="2" weight="bold">Technical Skill Score</.text>
+                <.flex
+                  direction="column"
+                  gap="5"
+                  mt="4"
+                >
+                  <.flex
+                    direction="column"
+                    gap="2"
+                  >
+                    <.text
+                      size="2"
+                      weight="bold"
+                    >
+                      Technical Skill Score
+                    </.text>
                     <.slider default_value={[80]} />
                   </.flex>
 
-                  <.flex direction="column" gap="2">
-                    <.text size="2" weight="bold">Recommendation</.text>
+                  <.flex
+                    direction="column"
+                    gap="2"
+                  >
+                    <.text
+                      size="2"
+                      weight="bold"
+                    >
+                      Recommendation
+                    </.text>
                     <.radio_group_root
                       id="recruiting-crm-recommendation"
                       name="recommendation"
                       default_value="hire"
                     >
-                      <.flex direction="column" gap="2">
+                      <.flex
+                        direction="column"
+                        gap="2"
+                      >
                         <.radio_group_item value="hire">Strong Hire</.radio_group_item>
                         <.radio_group_item value="hold">Hold</.radio_group_item>
                         <.radio_group_item value="no">No Hire</.radio_group_item>
@@ -303,9 +505,20 @@ defmodule Storybook.Examples.RecruitingCrm do
                     </.radio_group_root>
                   </.flex>
 
-                  <.flex direction="column" gap="2">
-                    <.text size="2" weight="bold">Verified Skills</.text>
-                    <.checkbox_group name="skills" default_value={["elixir", "react"]}>
+                  <.flex
+                    direction="column"
+                    gap="2"
+                  >
+                    <.text
+                      size="2"
+                      weight="bold"
+                    >
+                      Verified Skills
+                    </.text>
+                    <.checkbox_group
+                      name="skills"
+                      default_value={["elixir", "react"]}
+                    >
                       <:item value="elixir">Elixir</:item>
                       <:item value="react">React</:item>
                       <:item value="db">PostgreSQL</:item>
@@ -315,23 +528,48 @@ defmodule Storybook.Examples.RecruitingCrm do
               </:content>
 
               <:content value="notes">
-                <.flex direction="column" gap="3" mt="4">
-                  <.text_area placeholder="Add private feedback notes..." style="height: 150px;" />
+                <.flex
+                  direction="column"
+                  gap="3"
+                  mt="4"
+                >
+                  <.text_area
+                    placeholder="Add private feedback notes..."
+                    style="height: 150px;"
+                  />
                   <.button variant="solid">Save Note</.button>
                 </.flex>
               </:content>
 
               <:content value="settings">
-                <.flex direction="column" gap="4" mt="4">
-                  <.flex justify="space-between" align="center">
+                <.flex
+                  direction="column"
+                  gap="4"
+                  mt="4"
+                >
+                  <.flex
+                    justify="space-between"
+                    align="center"
+                  >
                     <.flex direction="column">
                       <.strong size="2">Email Notifications</.strong>
-                      <.text size="1" color="gray">Receive updates on candidate progress</.text>
+                      <.text
+                        size="1"
+                        color="gray"
+                      >
+                        Receive updates on candidate progress
+                      </.text>
                     </.flex>
                     <.switch default_checked />
                   </.flex>
                   <.separator size="4" />
-                  <.button variant="soft" color="red" style="width: 100%;">Archive Candidate</.button>
+                  <.button
+                    variant="soft"
+                    color="red"
+                    style="width: 100%;"
+                  >
+                    Archive Candidate
+                  </.button>
                 </.flex>
               </:content>
             </.tabs>
@@ -351,18 +589,40 @@ defmodule Storybook.Examples.RecruitingCrm do
           style="cursor: pointer; transition: transform 0.1s; border: 1px solid var(--gray-4);"
           class="hover-lift"
         >
-          <.flex direction="column" gap="3">
-            <.flex justify="space-between" align="start">
-              <.flex gap="3" align="center">
-                <.avatar size="1" src={@src} fallback={@fallback} />
+          <.flex
+            direction="column"
+            gap="3"
+          >
+            <.flex
+              justify="space-between"
+              align="start"
+            >
+              <.flex
+                gap="3"
+                align="center"
+              >
+                <.avatar
+                  size="1"
+                  src={@src}
+                  fallback={@fallback}
+                />
                 <.flex direction="column">
                   <.strong size="2">{@name}</.strong>
-                  <.text size="1" color="gray">{@role}</.text>
+                  <.text
+                    size="1"
+                    color="gray"
+                  >
+                    {@role}
+                  </.text>
                 </.flex>
               </.flex>
               <.hover_card_root>
                 <.hover_card_trigger>
-                  <.icon_button variant="ghost" size="1" color="gray">
+                  <.icon_button
+                    variant="ghost"
+                    size="1"
+                    color="gray"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="14"
@@ -372,9 +632,26 @@ defmodule Storybook.Examples.RecruitingCrm do
                       stroke="currentColor"
                       stroke-width="2"
                     >
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <line x1="12" y1="16" x2="12" y2="12"></line>
-                      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                      >
+                      </circle>
+                      <line
+                        x1="12"
+                        y1="16"
+                        x2="12"
+                        y2="12"
+                      >
+                      </line>
+                      <line
+                        x1="12"
+                        y1="8"
+                        x2="12.01"
+                        y2="8"
+                      >
+                      </line>
                     </svg>
                   </.icon_button>
                 </.hover_card_trigger>
@@ -392,9 +669,18 @@ defmodule Storybook.Examples.RecruitingCrm do
               </.hover_card_root>
             </.flex>
 
-            <.flex gap="2" wrap="wrap">
+            <.flex
+              gap="2"
+              wrap="wrap"
+            >
               <%= for tag <- @tags do %>
-                <.badge variant="surface" size="1" color="blue">{tag}</.badge>
+                <.badge
+                  variant="surface"
+                  size="1"
+                  color="blue"
+                >
+                  {tag}
+                </.badge>
               <% end %>
             </.flex>
           </.flex>

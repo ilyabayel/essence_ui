@@ -71,15 +71,42 @@ defmodule Storybook.Themes.Components.Avatar do
         description: "Avatar sizes",
         template: """
         <div style="display: flex; align-items: end; gap: 16px;">
-          <.avatar size="1" fallback="1" />
-          <.avatar size="2" fallback="2" />
-          <.avatar size="3" fallback="3" />
-          <.avatar size="4" fallback="4" />
-          <.avatar size="5" fallback="5" />
-          <.avatar size="6" fallback="6" />
-          <.avatar size="7" fallback="7" />
-          <.avatar size="8" fallback="8" />
-          <.avatar size="9" fallback="9" />
+          <.avatar
+            size="1"
+            fallback="1"
+          />
+          <.avatar
+            size="2"
+            fallback="2"
+          />
+          <.avatar
+            size="3"
+            fallback="3"
+          />
+          <.avatar
+            size="4"
+            fallback="4"
+          />
+          <.avatar
+            size="5"
+            fallback="5"
+          />
+          <.avatar
+            size="6"
+            fallback="6"
+          />
+          <.avatar
+            size="7"
+            fallback="7"
+          />
+          <.avatar
+            size="8"
+            fallback="8"
+          />
+          <.avatar
+            size="9"
+            fallback="9"
+          />
         </div>
         """
       },
@@ -88,8 +115,14 @@ defmodule Storybook.Themes.Components.Avatar do
         description: "Avatar variants",
         template: """
         <div style="display: flex; align-items: center; gap: 16px;">
-          <.avatar variant="soft" fallback="S" />
-          <.avatar variant="solid" fallback="S" />
+          <.avatar
+            variant="soft"
+            fallback="S"
+          />
+          <.avatar
+            variant="solid"
+            fallback="S"
+          />
         </div>
         """
       },
@@ -98,32 +131,110 @@ defmodule Storybook.Themes.Components.Avatar do
         description: "Avatar colors",
         template: """
         <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
-        <.avatar color="gray" fallback="G" />
-        <.avatar color="gold" fallback="G" />
-        <.avatar color="bronze" fallback="B" />
-          <.avatar color="brown" fallback="B" />
-          <.avatar color="yellow" fallback="Y" />
-          <.avatar color="amber" fallback="A" />
-          <.avatar color="orange" fallback="O" />
-          <.avatar color="tomato" fallback="T" />
-          <.avatar color="red" fallback="R" />
-          <.avatar color="ruby" fallback="R" />
-          <.avatar color="crimson" fallback="C" />
-          <.avatar color="pink" fallback="P" />
-          <.avatar color="plum" fallback="P" />
-          <.avatar color="purple" fallback="P" />
-          <.avatar color="violet" fallback="V" />
-          <.avatar color="iris" fallback="I" />
-          <.avatar color="indigo" fallback="I" />
-          <.avatar color="blue" fallback="B" />
-          <.avatar color="cyan" fallback="C" />
-          <.avatar color="teal" fallback="T" />
-          <.avatar color="jade" fallback="J" />
-          <.avatar color="green" fallback="G" />
-          <.avatar color="grass" fallback="G" />
-          <.avatar color="lime" fallback="L" />
-          <.avatar color="mint" fallback="M" />
-          <.avatar color="sky" fallback="S" />
+        <.avatar
+          color="gray"
+          fallback="G"
+        />
+        <.avatar
+          color="gold"
+          fallback="G"
+        />
+        <.avatar
+          color="bronze"
+          fallback="B"
+        />
+          <.avatar
+            color="brown"
+            fallback="B"
+          />
+          <.avatar
+            color="yellow"
+            fallback="Y"
+          />
+          <.avatar
+            color="amber"
+            fallback="A"
+          />
+          <.avatar
+            color="orange"
+            fallback="O"
+          />
+          <.avatar
+            color="tomato"
+            fallback="T"
+          />
+          <.avatar
+            color="red"
+            fallback="R"
+          />
+          <.avatar
+            color="ruby"
+            fallback="R"
+          />
+          <.avatar
+            color="crimson"
+            fallback="C"
+          />
+          <.avatar
+            color="pink"
+            fallback="P"
+          />
+          <.avatar
+            color="plum"
+            fallback="P"
+          />
+          <.avatar
+            color="purple"
+            fallback="P"
+          />
+          <.avatar
+            color="violet"
+            fallback="V"
+          />
+          <.avatar
+            color="iris"
+            fallback="I"
+          />
+          <.avatar
+            color="indigo"
+            fallback="I"
+          />
+          <.avatar
+            color="blue"
+            fallback="B"
+          />
+          <.avatar
+            color="cyan"
+            fallback="C"
+          />
+          <.avatar
+            color="teal"
+            fallback="T"
+          />
+          <.avatar
+            color="jade"
+            fallback="J"
+          />
+          <.avatar
+            color="green"
+            fallback="G"
+          />
+          <.avatar
+            color="grass"
+            fallback="G"
+          />
+          <.avatar
+            color="lime"
+            fallback="L"
+          />
+          <.avatar
+            color="mint"
+            fallback="M"
+          />
+          <.avatar
+            color="sky"
+            fallback="S"
+          />
         </div>
         """
       },
@@ -132,18 +243,63 @@ defmodule Storybook.Themes.Components.Avatar do
         description: "High contrast avatars",
         template: """
         <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
-          <.avatar variant="solid" color="indigo" fallback="S" />
-          <.avatar variant="solid" color="blue" fallback="S" />
-          <.avatar variant="solid" color="orange" fallback="S" />
-          <.avatar variant="solid" color="pink" fallback="S" />
-          <.avatar variant="solid" color="gray" fallback="S" />
+          <.avatar
+            variant="solid"
+            color="indigo"
+            fallback="S"
+          />
+          <.avatar
+            variant="solid"
+            color="blue"
+            fallback="S"
+          />
+          <.avatar
+            variant="solid"
+            color="orange"
+            fallback="S"
+          />
+          <.avatar
+            variant="solid"
+            color="pink"
+            fallback="S"
+          />
+          <.avatar
+            variant="solid"
+            color="gray"
+            fallback="S"
+          />
         </div>
         <div style="display: flex; align-items: center; gap: 16px;">
-          <.avatar variant="solid" color="indigo" high_contrast fallback="S" />
-          <.avatar variant="solid" color="blue" high_contrast fallback="S" />
-          <.avatar variant="solid" color="orange" high_contrast fallback="S" />
-          <.avatar variant="solid" color="pink" high_contrast fallback="S" />
-          <.avatar variant="solid" color="gray" high_contrast fallback="S" />
+          <.avatar
+            variant="solid"
+            color="indigo"
+            high_contrast
+            fallback="S"
+          />
+          <.avatar
+            variant="solid"
+            color="blue"
+            high_contrast
+            fallback="S"
+          />
+          <.avatar
+            variant="solid"
+            color="orange"
+            high_contrast
+            fallback="S"
+          />
+          <.avatar
+            variant="solid"
+            color="pink"
+            high_contrast
+            fallback="S"
+          />
+          <.avatar
+            variant="solid"
+            color="gray"
+            high_contrast
+            fallback="S"
+          />
         </div>
         """
       },
@@ -152,11 +308,26 @@ defmodule Storybook.Themes.Components.Avatar do
         description: "Avatar radius variations",
         template: """
         <div style="display: flex; align-items: center; gap: 16px;">
-          <.avatar radius="none" fallback="N" />
-          <.avatar radius="small" fallback="S" />
-          <.avatar radius="medium" fallback="M" />
-          <.avatar radius="large" fallback="L" />
-          <.avatar radius="full" fallback="F" />
+          <.avatar
+            radius="none"
+            fallback="N"
+          />
+          <.avatar
+            radius="small"
+            fallback="S"
+          />
+          <.avatar
+            radius="medium"
+            fallback="M"
+          />
+          <.avatar
+            radius="large"
+            fallback="L"
+          />
+          <.avatar
+            radius="full"
+            fallback="F"
+          />
         </div>
         """
       }

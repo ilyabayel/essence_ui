@@ -42,7 +42,10 @@ defmodule Storybook.Themes.Components.Callout do
         description: "Different visual variants",
         attributes: %{},
         template: """
-        <.flex gap="4" direction="column">
+        <.flex
+          gap="4"
+          direction="column"
+        >
           <.callout variant="soft">
             <:icon>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info-icon lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
@@ -77,7 +80,10 @@ defmodule Storybook.Themes.Components.Callout do
         description: "Different sizes",
         attributes: %{},
         template: """
-        <.flex gap="4" direction="column">
+        <.flex
+          gap="4"
+          direction="column"
+        >
           <.callout size="1">
             <:icon>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info-icon lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
@@ -112,7 +118,10 @@ defmodule Storybook.Themes.Components.Callout do
         description: "Different accent colors",
         attributes: %{},
         template: """
-        <.flex gap="4" direction="column">
+        <.flex
+          gap="4"
+          direction="column"
+        >
           <.callout color="gray">
             <:icon>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-icon lucide-badge"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/></svg>
@@ -165,8 +174,14 @@ defmodule Storybook.Themes.Components.Callout do
         description: "High contrast variations",
         attributes: %{},
         template: """
-        <.flex gap="4" direction="column">
-          <.callout color="blue" high_contrast={false}>
+        <.flex
+          gap="4"
+          direction="column"
+        >
+          <.callout
+            color="blue"
+            high_contrast={false}
+          >
             <:icon>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info-icon lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
             </:icon>
@@ -175,7 +190,10 @@ defmodule Storybook.Themes.Components.Callout do
             </:text>
           </.callout>
 
-          <.callout color="blue" high_contrast={true}>
+          <.callout
+            color="blue"
+            high_contrast={true}
+          >
             <:icon>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info-icon lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
             </:icon>
@@ -184,7 +202,10 @@ defmodule Storybook.Themes.Components.Callout do
             </:text>
           </.callout>
 
-          <.callout color="red" high_contrast={false}>
+          <.callout
+            color="red"
+            high_contrast={false}
+          >
             <:icon>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x-icon lucide-circle-x"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
             </:icon>
@@ -193,7 +214,10 @@ defmodule Storybook.Themes.Components.Callout do
             </:text>
           </.callout>
 
-          <.callout color="red" high_contrast={true}>
+          <.callout
+            color="red"
+            high_contrast={true}
+          >
             <:icon>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x-icon lucide-circle-x"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
             </:icon>
@@ -221,14 +245,23 @@ defmodule Storybook.Themes.Components.Callout do
         description: "Callout with complex content",
         attributes: %{},
         template: """
-        <.callout size="3" color="yellow" variant="surface">
+        <.callout
+          size="3"
+          color="yellow"
+          variant="surface"
+        >
           <:icon>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-alert-icon lucide-circle-alert"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
           </:icon>
           <:text>
             <strong>Important Notice:</strong> Your trial period will expire in 3 days.
             Please upgrade your plan to continue using all features.
-            <a href="#" class="underline">View pricing options</a>.
+            <a
+              href="#"
+              class="underline"
+            >
+              View pricing options</a>.
+              View pricing options</a>.
           </:text>
         </.callout>
         """
@@ -241,10 +274,23 @@ defmodule Storybook.Themes.Components.Callout do
         <div>
           <p>Some content before</p>
 
-          <.callout mt="4" mb="4">
+          <.callout
+            mt="4"
+            mb="4"
+          >
             <:icon>
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
             </:icon>
             <:text>
@@ -252,10 +298,23 @@ defmodule Storybook.Themes.Components.Callout do
             </:text>
           </.callout>
 
-          <.callout mx="8" my="2">
+          <.callout
+            mx="8"
+            my="2"
+          >
             <:icon>
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
             </:icon>
             <:text>

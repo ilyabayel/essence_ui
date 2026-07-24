@@ -34,21 +34,49 @@ defmodule Storybook.Themes.Components.ScrollArea do
         description: "Vertical scroll area",
         template: """
         <.scroll_area style="height: 180px">
-          <.box p="4" pr="8">
-            <.heading size="4" mb="2" weight="bold">Principles of the design system</.heading>
-            <.text as="p" size="2" mb="4">
+          <.box
+            p="4"
+            pr="8"
+          >
+            <.heading
+              size="4"
+              mb="2"
+              weight="bold"
+            >
+              Principles of the design system
+            </.heading>
+            <.text
+              as="p"
+              size="2"
+              mb="4"
+            >
               The goal of the design system is to create a consistent and cohesive user experience across all of our products.
             </.text>
-            <.text as="p" size="2" mb="4">
+            <.text
+              as="p"
+              size="2"
+              mb="4"
+            >
               It provides a set of reusable components, styles, and guidelines that help designers and developers work together more efficiently.
             </.text>
-            <.text as="p" size="2" mb="4">
+            <.text
+              as="p"
+              size="2"
+              mb="4"
+            >
               By following these principles, we can ensure that our products are accessible, easy to use, and visually appealing.
             </.text>
-            <.text as="p" size="2" mb="4">
+            <.text
+              as="p"
+              size="2"
+              mb="4"
+            >
               Consistency is key. Use the same patterns and components throughout the application to reduce cognitive load for users.
             </.text>
-            <.text as="p" size="2">
+            <.text
+              as="p"
+              size="2"
+            >
               Accessibility is not an afterthought. Design with all users in mind from the beginning.
             </.text>
           </.box>
@@ -60,7 +88,11 @@ defmodule Storybook.Themes.Components.ScrollArea do
         description: "Horizontal scroll area",
         template: """
         <.scroll_area style="width: 300px">
-          <.flex gap="4" p="4" style="width: 600px">
+          <.flex
+            gap="4"
+            p="4"
+            style="width: 600px"
+          >
             <%= for i <- 1..10 do %>
               <.box
                 style="width: 80px; height: 80px; background-color: var(--accent-a3); border-radius: var(--radius-3); flex-shrink: 0;"
@@ -84,7 +116,12 @@ defmodule Storybook.Themes.Components.ScrollArea do
         >
           <.scroll_area style="height: 300px">
             <.box p="4">
-              <.heading size="3" mb="4">Customer Details</.heading>
+              <.heading
+                size="3"
+                mb="4"
+              >
+                Customer Details
+              </.heading>
               <.data_list size="1">
                 <.data_list_item>
                   <:label>Status</:label>

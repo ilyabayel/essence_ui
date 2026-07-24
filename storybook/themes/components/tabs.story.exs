@@ -27,7 +27,11 @@ defmodule Storybook.Themes.Components.TabsStory do
         template: """
         <.tabs default_value="account">
           <:list :let={ctx}>
-            <.tabs_list size="2" tabs_id={ctx.tabs_id} default_value={ctx.default_value}>
+            <.tabs_list
+              size="2"
+              tabs_id={ctx.tabs_id}
+              default_value={ctx.default_value}
+            >
               <:trigger value="account">Account</:trigger>
               <:trigger value="documents">Documents</:trigger>
               <:trigger value="settings">Settings</:trigger>
@@ -56,10 +60,20 @@ defmodule Storybook.Themes.Components.TabsStory do
         description: "Tab sizes",
         template: """
         <.box mb="5">
-          <.text size="2" weight="bold" mb="2">Size 1</.text>
+          <.text
+            size="2"
+            weight="bold"
+            mb="2"
+          >
+            Size 1
+          </.text>
           <.tabs default_value="tab1">
             <:list :let={ctx}>
-              <.tabs_list size="1" tabs_id={ctx.tabs_id} default_value={ctx.default_value}>
+              <.tabs_list
+                size="1"
+                tabs_id={ctx.tabs_id}
+                default_value={ctx.default_value}
+              >
                 <:trigger value="tab1">Tab 1</:trigger>
                 <:trigger value="tab2">Tab 2</:trigger>
                 <:trigger value="tab3">Tab 3</:trigger>
@@ -78,10 +92,20 @@ defmodule Storybook.Themes.Components.TabsStory do
         </.box>
 
         <.box>
-          <.text size="2" weight="bold" mb="2">Size 2 (default)</.text>
+          <.text
+            size="2"
+            weight="bold"
+            mb="2"
+          >
+            Size 2 (default)
+          </.text>
           <.tabs default_value="tab1">
             <:list :let={ctx}>
-              <.tabs_list size="2" tabs_id={ctx.tabs_id} default_value={ctx.default_value}>
+              <.tabs_list
+                size="2"
+                tabs_id={ctx.tabs_id}
+                default_value={ctx.default_value}
+              >
                 <:trigger value="tab1">Tab 1</:trigger>
                 <:trigger value="tab2">Tab 2</:trigger>
                 <:trigger value="tab3">Tab 3</:trigger>
@@ -105,10 +129,21 @@ defmodule Storybook.Themes.Components.TabsStory do
         description: "Tab colors",
         template: """
         <.box mb="5">
-          <.text weight="bold" mb="2">Blue</.text>
-          <.tabs default_value="overview" color="blue">
+          <.text
+            weight="bold"
+            mb="2"
+          >
+            Blue
+          </.text>
+          <.tabs
+            default_value="overview"
+            color="blue"
+          >
             <:list :let={ctx}>
-              <.tabs_list tabs_id={ctx.tabs_id} default_value={ctx.default_value}>
+              <.tabs_list
+                tabs_id={ctx.tabs_id}
+                default_value={ctx.default_value}
+              >
                 <:trigger value="overview">Overview</:trigger>
                 <:trigger value="details">Details</:trigger>
               </.tabs_list>
@@ -123,10 +158,21 @@ defmodule Storybook.Themes.Components.TabsStory do
         </.box>
 
         <.box mb="5">
-          <.text weight="bold" mb="2">Green</.text>
-          <.tabs default_value="overview" color="green">
+          <.text
+            weight="bold"
+            mb="2"
+          >
+            Green
+          </.text>
+          <.tabs
+            default_value="overview"
+            color="green"
+          >
             <:list :let={ctx}>
-              <.tabs_list tabs_id={ctx.tabs_id} default_value={ctx.default_value}>
+              <.tabs_list
+                tabs_id={ctx.tabs_id}
+                default_value={ctx.default_value}
+              >
                 <:trigger value="overview">Overview</:trigger>
                 <:trigger value="details">Details</:trigger>
               </.tabs_list>
@@ -141,10 +187,21 @@ defmodule Storybook.Themes.Components.TabsStory do
         </.box>
 
         <.box mb="5">
-          <.text weight="bold" mb="2">Red</.text>
-          <.tabs default_value="overview" color="red">
+          <.text
+            weight="bold"
+            mb="2"
+          >
+            Red
+          </.text>
+          <.tabs
+            default_value="overview"
+            color="red"
+          >
             <:list :let={ctx}>
-              <.tabs_list tabs_id={ctx.tabs_id} default_value={ctx.default_value}>
+              <.tabs_list
+                tabs_id={ctx.tabs_id}
+                default_value={ctx.default_value}
+              >
                 <:trigger value="overview">Overview</:trigger>
                 <:trigger value="details">Details</:trigger>
               </.tabs_list>
@@ -159,10 +216,21 @@ defmodule Storybook.Themes.Components.TabsStory do
         </.box>
 
         <.box>
-          <.text weight="bold" mb="2">Purple</.text>
-          <.tabs default_value="overview" color="purple">
+          <.text
+            weight="bold"
+            mb="2"
+          >
+            Purple
+          </.text>
+          <.tabs
+            default_value="overview"
+            color="purple"
+          >
             <:list :let={ctx}>
-              <.tabs_list tabs_id={ctx.tabs_id} default_value={ctx.default_value}>
+              <.tabs_list
+                tabs_id={ctx.tabs_id}
+                default_value={ctx.default_value}
+              >
                 <:trigger value="overview">Overview</:trigger>
                 <:trigger value="details">Details</:trigger>
               </.tabs_list>
@@ -181,9 +249,17 @@ defmodule Storybook.Themes.Components.TabsStory do
         id: :high_contrast,
         description: "High contrast tabs",
         template: """
-        <.tabs default_value="features" color="crimson" high_contrast>
+        <.tabs
+          default_value="features"
+          color="crimson"
+          high_contrast
+        >
           <:list :let={ctx}>
-            <.tabs_list tabs_id={ctx.tabs_id} default_value={ctx.default_value} high_contrast={ctx.high_contrast}>
+            <.tabs_list
+              tabs_id={ctx.tabs_id}
+              default_value={ctx.default_value}
+              high_contrast={ctx.high_contrast}
+            >
               <:trigger value="features">Features</:trigger>
               <:trigger value="pricing">Pricing</:trigger>
               <:trigger value="support">Support</:trigger>
@@ -213,7 +289,10 @@ defmodule Storybook.Themes.Components.TabsStory do
         template: """
         <.tabs default_value="enabled">
           <:list :let={ctx}>
-            <.tabs_list tabs_id={ctx.tabs_id} default_value={ctx.default_value}>
+            <.tabs_list
+              tabs_id={ctx.tabs_id}
+              default_value={ctx.default_value}
+            >
               <:trigger value="enabled">Enabled</:trigger>
               <:trigger value="disabled" disabled>Disabled</:trigger>
               <:trigger value="also_enabled">Also Enabled</:trigger>
@@ -243,7 +322,10 @@ defmodule Storybook.Themes.Components.TabsStory do
         template: """
         <.tabs default_value="profile">
           <:list :let={ctx}>
-            <.tabs_list tabs_id={ctx.tabs_id} default_value={ctx.default_value}>
+            <.tabs_list
+              tabs_id={ctx.tabs_id}
+              default_value={ctx.default_value}
+            >
               <:trigger value="profile">Profile</:trigger>
               <:trigger value="notifications">Notifications</:trigger>
               <:trigger value="security">Security</:trigger>
@@ -251,7 +333,13 @@ defmodule Storybook.Themes.Components.TabsStory do
           </:list>
           <:content value="profile">
             <.box pt="4">
-              <.text size="4" weight="bold" mb="3">User Profile</.text>
+              <.text
+                size="4"
+                weight="bold"
+                mb="3"
+              >
+                User Profile
+              </.text>
               <.text mb="2">Name: John Doe</.text>
               <.text mb="2">Email: john@example.com</.text>
               <.text>Member since: January 2024</.text>
@@ -259,7 +347,13 @@ defmodule Storybook.Themes.Components.TabsStory do
           </:content>
           <:content value="notifications">
             <.box pt="4">
-              <.text size="4" weight="bold" mb="3">Notification Settings</.text>
+              <.text
+                size="4"
+                weight="bold"
+                mb="3"
+              >
+                Notification Settings
+              </.text>
               <.text mb="2">✓ Email notifications</.text>
               <.text mb="2">✓ Push notifications</.text>
               <.text>✗ SMS notifications</.text>
@@ -267,7 +361,13 @@ defmodule Storybook.Themes.Components.TabsStory do
           </:content>
           <:content value="security">
             <.box pt="4">
-              <.text size="4" weight="bold" mb="3">Security Settings</.text>
+              <.text
+                size="4"
+                weight="bold"
+                mb="3"
+              >
+                Security Settings
+              </.text>
               <.text mb="2">Two-factor authentication: Enabled</.text>
               <.text mb="2">Last password change: 30 days ago</.text>
               <.text>Active sessions: 2</.text>

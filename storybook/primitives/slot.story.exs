@@ -6,7 +6,8 @@ defmodule Storybook.Primitives.SlotStory do
 
   def function, do: &Slot.slot/1
 
-  def container, do: :div
+  def container, do: {:div, class: "radix-demo", "data-component": "slot"}
+
   def layout, do: :one_column
 
   def variations do
@@ -15,11 +16,12 @@ defmodule Storybook.Primitives.SlotStory do
         id: :primitive,
         description: "Prop composition with Slot",
         template: """
-        <div class="radix-demo" data-component="slot">
-          <Slot.slot as="button" class="Button violet">
-            Composed Button
-          </Slot.slot>
-        </div>
+        <Slot.slot
+          as="button"
+          class="Button violet"
+        >
+          Composed Button
+        </Slot.slot>
         """
       }
     ]

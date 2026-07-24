@@ -29,18 +29,45 @@ defmodule Storybook.Themes.Components.Progress do
         id: :variants,
         description: "Different variants",
         template: """
-        <.box p="4" class="space-y-4">
+        <.box
+          p="4"
+          class="space-y-4"
+        >
           <.box>
-            <.text size="2" weight="medium">Classic</.text>
-            <.progress value={75} variant="classic" />
+            <.text
+              size="2"
+              weight="medium"
+            >
+              Classic
+            </.text>
+            <.progress
+              value={75}
+              variant="classic"
+            />
           </.box>
           <.box>
-            <.text size="2" weight="medium">Surface</.text>
-            <.progress value={50} variant="surface" />
+            <.text
+              size="2"
+              weight="medium"
+            >
+              Surface
+            </.text>
+            <.progress
+              value={50}
+              variant="surface"
+            />
           </.box>
           <.box>
-            <.text size="2" weight="medium">Soft</.text>
-            <.progress value={25} variant="soft" />
+            <.text
+              size="2"
+              weight="medium"
+            >
+              Soft
+            </.text>
+            <.progress
+              value={25}
+              variant="soft"
+            />
           </.box>
         </.box>
         """
@@ -49,18 +76,30 @@ defmodule Storybook.Themes.Components.Progress do
         id: :sizes,
         description: "Different sizes",
         template: """
-        <.box p="4" class="space-y-4">
+        <.box
+          p="4"
+          class="space-y-4"
+        >
           <.box>
             <.text size="1">Size 1</.text>
-            <.progress value={60} size="1" />
+            <.progress
+              value={60}
+              size="1"
+            />
           </.box>
           <.box>
             <.text size="2">Size 2</.text>
-            <.progress value={70} size="2" />
+            <.progress
+              value={70}
+              size="2"
+            />
           </.box>
           <.box>
             <.text size="3">Size 3</.text>
-            <.progress value={80} size="3" />
+            <.progress
+              value={80}
+              size="3"
+            />
           </.box>
         </.box>
         """
@@ -69,18 +108,45 @@ defmodule Storybook.Themes.Components.Progress do
         id: :colors,
         description: "Different colors",
         template: """
-        <.box p="4" class="space-y-4">
+        <.box
+          p="4"
+          class="space-y-4"
+        >
           <.box>
-            <.text size="2" color="red">Red progress</.text>
-            <.progress value={30} color="red" />
+            <.text
+              size="2"
+              color="red"
+            >
+              Red progress
+            </.text>
+            <.progress
+              value={30}
+              color="red"
+            />
           </.box>
           <.box>
-            <.text size="2" color="blue">Blue progress</.text>
-            <.progress value={60} color="blue" />
+            <.text
+              size="2"
+              color="blue"
+            >
+              Blue progress
+            </.text>
+            <.progress
+              value={60}
+              color="blue"
+            />
           </.box>
           <.box>
-            <.text size="2" color="green">Green progress</.text>
-            <.progress value={90} color="green" />
+            <.text
+              size="2"
+              color="green"
+            >
+              Green progress
+            </.text>
+            <.progress
+              value={90}
+              color="green"
+            />
           </.box>
         </.box>
         """
@@ -89,26 +155,44 @@ defmodule Storybook.Themes.Components.Progress do
         id: :radius,
         description: "Different radius options",
         template: """
-        <.box p="4" class="space-y-4">
+        <.box
+          p="4"
+          class="space-y-4"
+        >
           <.box>
             <.text size="2">No radius</.text>
-            <.progress value={40} radius="none" />
+            <.progress
+              value={40}
+              radius="none"
+            />
           </.box>
           <.box>
             <.text size="2">Small radius</.text>
-            <.progress value={50} radius="small" />
+            <.progress
+              value={50}
+              radius="small"
+            />
           </.box>
           <.box>
             <.text size="2">Medium radius</.text>
-            <.progress value={60} radius="medium" />
+            <.progress
+              value={60}
+              radius="medium"
+            />
           </.box>
           <.box>
             <.text size="2">Large radius</.text>
-            <.progress value={70} radius="large" />
+            <.progress
+              value={70}
+              radius="large"
+            />
           </.box>
           <.box>
             <.text size="2">Full radius</.text>
-            <.progress value={80} radius="full" />
+            <.progress
+              value={80}
+              radius="full"
+            />
           </.box>
         </.box>
         """
@@ -117,7 +201,10 @@ defmodule Storybook.Themes.Components.Progress do
         id: :values,
         description: "Different progress values",
         template: """
-        <.box p="4" class="space-y-4">
+        <.box
+          p="4"
+          class="space-y-4"
+        >
           <.box>
             <.text size="2">0% Complete</.text>
             <.progress value={0} />

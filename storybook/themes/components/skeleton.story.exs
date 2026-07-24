@@ -50,7 +50,10 @@ defmodule Storybook.Themes.Components.Skeleton do
         id: :text_skeleton,
         description: "With text",
         template: """
-        <.flex direction="column" gap="3">
+        <.flex
+          direction="column"
+          gap="3"
+        >
           <.text>
             <.skeleton>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -70,7 +73,10 @@ defmodule Storybook.Themes.Components.Skeleton do
         description: "The difference is especially noticeable when wrapping longer paragraphs",
         template: """
         <.container size="1">
-        	<.flex direction="column" gap="3">
+        	<.flex
+        	  direction="column"
+        	  gap="3"
+        	>
         		<.text>
         			<.skeleton>
         				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque

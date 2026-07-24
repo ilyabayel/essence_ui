@@ -33,7 +33,11 @@ defmodule Storybook.Themes.Typography.Kbd do
         id: :sizes,
         description: "Size",
         template: """
-        <.flex direction="column" gap="3" align="start">
+        <.flex
+          direction="column"
+          gap="3"
+          align="start"
+        >
           <.kbd size="1">Shift + Tab</.kbd>
           <.kbd size="2">Shift + Tab</.kbd>
           <.kbd size="3">Shift + Tab</.kbd>

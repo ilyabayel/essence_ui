@@ -20,7 +20,10 @@ defmodule Storybook.Themes.Layout.Box do
         attributes: %{width: "64px", height: "64px"},
         slots: [
           """
-          <.decoration_box height="64px" width="64px"/>
+          <.decoration_box
+            height="64px"
+            width="64px"
+          />
           """
         ]
       },
@@ -30,7 +33,10 @@ defmodule Storybook.Themes.Layout.Box do
         attributes: %{p: "4", m: "2", style: "border: 1px solid var(--color-overlay); border-radius: var(--radius-1);"},
         slots: [
           """
-          <.decoration_box height="64px" width="calc(64px * 3)"/>
+          <.decoration_box
+            height="64px"
+            width="calc(64px * 3)"
+          />
           """
         ]
       },

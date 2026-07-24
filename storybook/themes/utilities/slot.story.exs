@@ -23,7 +23,10 @@ defmodule Storybook.Themes.Utilities.Slot do
         id: :default,
         description: "Prop composition with Slot",
         template: """
-        <.slot as="button" class="rt-Button rt-variant-solid rt-r-size-2">
+        <.slot
+          as="button"
+          class="rt-Button rt-variant-solid rt-r-size-2"
+        >
           Composed Button
         </.slot>
         """

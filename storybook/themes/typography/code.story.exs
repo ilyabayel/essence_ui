@@ -72,31 +72,59 @@ defmodule Storybook.Themes.Typography.Code do
         template: """
         <div class="rt-Flex rt-r-gap-3">
           <div class="rt-Flex rt-r-fd-column rt-r-ai-start rt-r-gap-2">
-            <.code color="gray" variant="solid">
+            <.code
+              color="gray"
+              variant="solid"
+            >
               Repo.all()
             </.code>
-            <.code color="gray" variant="soft">
+            <.code
+              color="gray"
+              variant="soft"
+            >
               Repo.all()
             </.code>
-            <.code color="gray" variant="outline">
+            <.code
+              color="gray"
+              variant="outline"
+            >
               Repo.all()
             </.code>
-            <.code color="gray" variant="ghost">
+            <.code
+              color="gray"
+              variant="ghost"
+            >
               Repo.all()
             </.code>
           </div>
 
           <div class="rt-Flex rt-r-fd-column rt-r-ai-start rt-r-gap-2">
-            <.code color="gray" variant="solid" high_contrast={true}>
+            <.code
+              color="gray"
+              variant="solid"
+              high_contrast={true}
+            >
               Repo.all()
             </.code>
-            <.code color="gray" variant="soft" high_contrast={true}>
+            <.code
+              color="gray"
+              variant="soft"
+              high_contrast={true}
+            >
               Repo.all()
             </.code>
-            <.code color="gray" variant="outline" high_contrast={true}>
+            <.code
+              color="gray"
+              variant="outline"
+              high_contrast={true}
+            >
               Repo.all()
             </.code>
-            <.code color="gray" variant="ghost" high_contrast={true}>
+            <.code
+              color="gray"
+              variant="ghost"
+              high_contrast={true}
+            >
               Repo.all()
             </.code>
           </div>
@@ -117,7 +145,10 @@ defmodule Storybook.Themes.Typography.Code do
         id: :truncate_example,
         description: "Truncate",
         template: """
-        <div class="rt-Flex rt-r-max-w" style="--max-width: 200px;">
+        <div
+          class="rt-Flex rt-r-max-w"
+          style="--max-width: 200px;"
+        >
           <.code truncate={true}>linear-gradient(red, orange, yellow, green, blue);</.code>
         </div>
         """

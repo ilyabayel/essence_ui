@@ -60,9 +60,21 @@ defmodule Storybook.Themes.Components.Radio do
         description: "Different sizes",
         template: """
         <div style="display: flex; align-items: center; gap: 12px;">
-          <.radio name="size_example" value="small" size="1" />
-          <.radio name="size_example" value="medium" size="2" />
-          <.radio name="size_example" value="large" size="3" />
+          <.radio
+            name="size_example"
+            value="small"
+            size="1"
+          />
+          <.radio
+            name="size_example"
+            value="medium"
+            size="2"
+          />
+          <.radio
+            name="size_example"
+            value="large"
+            size="3"
+          />
         </div>
         """
       },
@@ -71,9 +83,22 @@ defmodule Storybook.Themes.Components.Radio do
         description: "Different variants",
         template: """
         <div style="display: flex; align-items: center; gap: 12px;">
-          <.radio name="variant_example" value="surface" variant="surface" checked />
-          <.radio name="variant_example" value="classic" variant="classic" />
-          <.radio name="variant_example" value="soft" variant="soft" />
+          <.radio
+            name="variant_example"
+            value="surface"
+            variant="surface"
+            checked
+          />
+          <.radio
+            name="variant_example"
+            value="classic"
+            variant="classic"
+          />
+          <.radio
+            name="variant_example"
+            value="soft"
+            variant="soft"
+          />
         </div>
         """
       },
@@ -82,32 +107,137 @@ defmodule Storybook.Themes.Components.Radio do
         description: "Different colors",
         template: """
         <div style="display: flex; align-items: center; gap: 12px;">
-          <.radio name="color_example" value="gray" color="gray" checked />
-          <.radio name="color_example" value="gold" color="gold" />
-          <.radio name="color_example" value="bronze" color="bronze" />
-          <.radio name="color_example" value="brown" color="brown" />
-          <.radio name="color_example" value="yellow" color="yellow" />
-          <.radio name="color_example" value="amber" color="amber" />
-          <.radio name="color_example" value="orange" color="orange" />
-          <.radio name="color_example" value="tomato" color="tomato" />
-          <.radio name="color_example" value="red" color="red" />
-          <.radio name="color_example" value="ruby" color="ruby" />
-          <.radio name="color_example" value="crimson" color="crimson" />
-          <.radio name="color_example" value="pink" color="pink" />
-          <.radio name="color_example" value="plum" color="plum" />
-          <.radio name="color_example" value="purple" color="purple" />
-          <.radio name="color_example" value="violet" color="violet" />
-          <.radio name="color_example" value="iris" color="iris" />
-          <.radio name="color_example" value="indigo" color="indigo" />
-          <.radio name="color_example" value="blue" color="blue" />
-          <.radio name="color_example" value="cyan" color="cyan" />
-          <.radio name="color_example" value="teal" color="teal" />
-          <.radio name="color_example" value="jade" color="jade" />
-          <.radio name="color_example" value="green" color="green" />
-          <.radio name="color_example" value="grass" color="grass" />
-          <.radio name="color_example" value="lime" color="lime" />
-          <.radio name="color_example" value="mint" color="mint" />
-          <.radio name="color_example" value="sky" color="sky" />
+          <.radio
+            name="color_example"
+            value="gray"
+            color="gray"
+            checked
+          />
+          <.radio
+            name="color_example"
+            value="gold"
+            color="gold"
+          />
+          <.radio
+            name="color_example"
+            value="bronze"
+            color="bronze"
+          />
+          <.radio
+            name="color_example"
+            value="brown"
+            color="brown"
+          />
+          <.radio
+            name="color_example"
+            value="yellow"
+            color="yellow"
+          />
+          <.radio
+            name="color_example"
+            value="amber"
+            color="amber"
+          />
+          <.radio
+            name="color_example"
+            value="orange"
+            color="orange"
+          />
+          <.radio
+            name="color_example"
+            value="tomato"
+            color="tomato"
+          />
+          <.radio
+            name="color_example"
+            value="red"
+            color="red"
+          />
+          <.radio
+            name="color_example"
+            value="ruby"
+            color="ruby"
+          />
+          <.radio
+            name="color_example"
+            value="crimson"
+            color="crimson"
+          />
+          <.radio
+            name="color_example"
+            value="pink"
+            color="pink"
+          />
+          <.radio
+            name="color_example"
+            value="plum"
+            color="plum"
+          />
+          <.radio
+            name="color_example"
+            value="purple"
+            color="purple"
+          />
+          <.radio
+            name="color_example"
+            value="violet"
+            color="violet"
+          />
+          <.radio
+            name="color_example"
+            value="iris"
+            color="iris"
+          />
+          <.radio
+            name="color_example"
+            value="indigo"
+            color="indigo"
+          />
+          <.radio
+            name="color_example"
+            value="blue"
+            color="blue"
+          />
+          <.radio
+            name="color_example"
+            value="cyan"
+            color="cyan"
+          />
+          <.radio
+            name="color_example"
+            value="teal"
+            color="teal"
+          />
+          <.radio
+            name="color_example"
+            value="jade"
+            color="jade"
+          />
+          <.radio
+            name="color_example"
+            value="green"
+            color="green"
+          />
+          <.radio
+            name="color_example"
+            value="grass"
+            color="grass"
+          />
+          <.radio
+            name="color_example"
+            value="lime"
+            color="lime"
+          />
+          <.radio
+            name="color_example"
+            value="mint"
+            color="mint"
+          />
+          <.radio
+            name="color_example"
+            value="sky"
+            color="sky"
+          />
         </div>
         """
       },
@@ -129,15 +259,25 @@ defmodule Storybook.Themes.Components.Radio do
         template: """
         <div style="display: flex; flex-direction: column; gap: 8px;">
           <label style="display: flex; align-items: center; gap: 8px;">
-            <.radio name="size_preference" value="small" />
+            <.radio
+              name="size_preference"
+              value="small"
+            />
             <span>Small</span>
           </label>
           <label style="display: flex; align-items: center; gap: 8px;">
-            <.radio name="size_preference" value="medium" checked />
+            <.radio
+              name="size_preference"
+              value="medium"
+              checked
+            />
             <span>Medium</span>
           </label>
           <label style="display: flex; align-items: center; gap: 8px;">
-            <.radio name="size_preference" value="large" />
+            <.radio
+              name="size_preference"
+              value="large"
+            />
             <span>Large</span>
           </label>
         </div>

@@ -32,7 +32,10 @@ defmodule Storybook.Themes.Components.Card do
         template: """
         <.box max_width="240px">
         	<.card>
-        		<.flex gap="3" align="center">
+        		<.flex
+        		  gap="3"
+        		  align="center"
+        		>
         			<.avatar
         				size="3"
         				src="https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?&w=64&h=64&dpr=2&q=70&crop=focalpoint&fp-x=0.67&fp-y=0.5&fp-z=1.4&fit=crop"
@@ -40,10 +43,18 @@ defmodule Storybook.Themes.Components.Card do
         				fallback="T"
         			/>
         			<.box>
-        				<.text as="div" size="2" weight="bold">
+        				<.text
+        				  as="div"
+        				  size="2"
+        				  weight="bold"
+        				>
         					Teodros Girmay
         				</.text>
-        				<.text as="div" size="2" color="gray">
+        				<.text
+        				  as="div"
+        				  size="2"
+        				  color="gray"
+        				>
         					Engineering
         				</.text>
         			</.box>
@@ -57,16 +68,35 @@ defmodule Storybook.Themes.Components.Card do
         description: "Different card sizes",
         attributes: %{},
         template: """
-        <.flex gap="3" direction="column">
+        <.flex
+          gap="3"
+          direction="column"
+        >
           <.box width="350px">
             <.card size="1">
-              <.flex gap="3" align="center">
-                <.avatar size="3" radius="full" fallback="T" color="indigo" />
+              <.flex
+                gap="3"
+                align="center"
+              >
+                <.avatar
+                  size="3"
+                  radius="full"
+                  fallback="T"
+                  color="indigo"
+                />
                 <.box>
-                  <.text as="div" size="2" weight="bold">
+                  <.text
+                    as="div"
+                    size="2"
+                    weight="bold"
+                  >
                     Teodros Girmay
                   </.text>
-                  <.text as="div" size="2" color="gray">
+                  <.text
+                    as="div"
+                    size="2"
+                    color="gray"
+                  >
                     Engineering
                   </.text>
                 </.box>
@@ -76,13 +106,27 @@ defmodule Storybook.Themes.Components.Card do
 
           <.box width="400px">
             <.card size="2">
-              <.flex gap="4" align="center">
-                <.avatar size="4" radius="full" fallback="T" color="indigo" />
+              <.flex
+                gap="4"
+                align="center"
+              >
+                <.avatar
+                  size="4"
+                  radius="full"
+                  fallback="T"
+                  color="indigo"
+                />
                 <.box>
-                  <.text as="div" weight="bold">
+                  <.text
+                    as="div"
+                    weight="bold"
+                  >
                     Teodros Girmay
                   </.text>
-                  <.text as="div" color="gray">
+                  <.text
+                    as="div"
+                    color="gray"
+                  >
                     Engineering
                   </.text>
                 </.box>
@@ -92,13 +136,29 @@ defmodule Storybook.Themes.Components.Card do
 
           <.box width="500px">
             <.card size="3">
-              <.flex gap="4" align="center">
-                <.avatar size="5" radius="full" fallback="T" color="indigo" />
+              <.flex
+                gap="4"
+                align="center"
+              >
+                <.avatar
+                  size="5"
+                  radius="full"
+                  fallback="T"
+                  color="indigo"
+                />
                 <.box>
-                  <.text as="div" size="4" weight="bold">
+                  <.text
+                    as="div"
+                    size="4"
+                    weight="bold"
+                  >
                     Teodros Girmay
                   </.text>
-                  <.text as="div" size="4" color="gray">
+                  <.text
+                    as="div"
+                    size="4"
+                    color="gray"
+                  >
                     Engineering
                   </.text>
                 </.box>
@@ -113,21 +173,41 @@ defmodule Storybook.Themes.Components.Card do
         description: "Different card variants",
         attributes: %{},
         template: """
-        <.flex direction="column" gap="3" maxWidth="350px">
+        <.flex
+          direction="column"
+          gap="3"
+          maxWidth="350px"
+        >
           <.card variant="surface">
-            <.text as="div" size="2" weight="bold">
+            <.text
+              as="div"
+              size="2"
+              weight="bold"
+            >
               Quick start
             </.text>
-            <.text as="div" color="gray" size="2">
+            <.text
+              as="div"
+              color="gray"
+              size="2"
+            >
               Start building your next project in minutes
             </.text>
           </.card>
 
           <.card variant="classic">
-            <.text as="div" size="2" weight="bold">
+            <.text
+              as="div"
+              size="2"
+              weight="bold"
+            >
               Quick start
             </.text>
-            <.text as="div" color="gray" size="2">
+            <.text
+              as="div"
+              color="gray"
+              size="2"
+            >
               Start building your next project in minutes
             </.text>
           </.card>
@@ -164,52 +244,116 @@ defmodule Storybook.Themes.Components.Card do
         template: """
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
           <.card size="1">
-            <.flex gap="3" align="center">
-              <.avatar size="3" radius="full" fallback="T" color="indigo" />
+            <.flex
+              gap="3"
+              align="center"
+            >
+              <.avatar
+                size="3"
+                radius="full"
+                fallback="T"
+                color="indigo"
+              />
               <.box>
-                <.text as="div" size="2" weight="bold">
+                <.text
+                  as="div"
+                  size="2"
+                  weight="bold"
+                >
                   Teodros Girmay
                 </.text>
-                <.text as="div" size="2" color="gray">
+                <.text
+                  as="div"
+                  size="2"
+                  color="gray"
+                >
                   Engineering
                 </.text>
               </.box>
             </.flex>
           </.card>
           <.card size="1">
-            <.flex gap="3" align="center">
-              <.avatar size="3" radius="full" fallback="T" color="indigo" />
+            <.flex
+              gap="3"
+              align="center"
+            >
+              <.avatar
+                size="3"
+                radius="full"
+                fallback="T"
+                color="indigo"
+              />
               <.box>
-                <.text as="div" size="2" weight="bold">
+                <.text
+                  as="div"
+                  size="2"
+                  weight="bold"
+                >
                   Teodros Girmay
                 </.text>
-                <.text as="div" size="2" color="gray">
+                <.text
+                  as="div"
+                  size="2"
+                  color="gray"
+                >
                   Engineering
                 </.text>
               </.box>
             </.flex>
           </.card>
           <.card size="1">
-            <.flex gap="3" align="center">
-              <.avatar size="3" radius="full" fallback="T" color="indigo" />
+            <.flex
+              gap="3"
+              align="center"
+            >
+              <.avatar
+                size="3"
+                radius="full"
+                fallback="T"
+                color="indigo"
+              />
               <.box>
-                <.text as="div" size="2" weight="bold">
+                <.text
+                  as="div"
+                  size="2"
+                  weight="bold"
+                >
                   Teodros Girmay
                 </.text>
-                <.text as="div" size="2" color="gray">
+                <.text
+                  as="div"
+                  size="2"
+                  color="gray"
+                >
                   Engineering
                 </.text>
               </.box>
             </.flex>
           </.card>
           <.card size="1">
-            <.flex gap="3" align="center">
-              <.avatar size="3" radius="full" fallback="T" color="indigo" />
+            <.flex
+              gap="3"
+              align="center"
+            >
+              <.avatar
+                size="3"
+                radius="full"
+                fallback="T"
+                color="indigo"
+              />
               <.box>
-                <.text as="div" size="2" weight="bold">
+                <.text
+                  as="div"
+                  size="2"
+                  weight="bold"
+                >
                   Teodros Girmay
                 </.text>
-                <.text as="div" size="2" color="gray">
+                <.text
+                  as="div"
+                  size="2"
+                  color="gray"
+                >
                   Engineering
                 </.text>
               </.box>

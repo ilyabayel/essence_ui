@@ -68,7 +68,10 @@ defmodule Storybook.Themes.Components.DropdownMenu do
             <.dropdown_menu_item>Share</.dropdown_menu_item>
             <.dropdown_menu_item>Add to favorites</.dropdown_menu_item>
             <.dropdown_menu_separator />
-            <.dropdown_menu_item shortcut="⌘ ⌫" color="red">
+            <.dropdown_menu_item
+              shortcut="⌘ ⌫"
+              color="red"
+            >
               Delete
             </.dropdown_menu_item>
           </.dropdown_menu_content>
@@ -79,10 +82,16 @@ defmodule Storybook.Themes.Components.DropdownMenu do
         id: :size,
         description: "Size",
         template: """
-        <.flex gap="4" align="center">
+        <.flex
+          gap="4"
+          align="center"
+        >
           <.dropdown_menu_root>
             <.dropdown_menu_trigger>
-              <.button variant="soft" size="1">
+              <.button
+                variant="soft"
+                size="1"
+              >
                 Options
                 <.dropdown_menu_trigger_icon />
               </.button>
@@ -93,13 +102,21 @@ defmodule Storybook.Themes.Components.DropdownMenu do
               <.dropdown_menu_separator />
               <.dropdown_menu_item shortcut="⌘ N">Archive</.dropdown_menu_item>
               <.dropdown_menu_separator />
-              <.dropdown_menu_item shortcut="⌘ ⌫" color="red">Delete</.dropdown_menu_item>
+              <.dropdown_menu_item
+                shortcut="⌘ ⌫"
+                color="red"
+              >
+                Delete
+              </.dropdown_menu_item>
             </.dropdown_menu_content>
           </.dropdown_menu_root>
 
           <.dropdown_menu_root>
             <.dropdown_menu_trigger>
-              <.button variant="soft" size="2">
+              <.button
+                variant="soft"
+                size="2"
+              >
                 Options
                 <.dropdown_menu_trigger_icon />
               </.button>
@@ -110,7 +127,12 @@ defmodule Storybook.Themes.Components.DropdownMenu do
               <.dropdown_menu_separator />
               <.dropdown_menu_item shortcut="⌘ N">Archive</.dropdown_menu_item>
               <.dropdown_menu_separator />
-              <.dropdown_menu_item shortcut="⌘ ⌫" color="red">Delete</.dropdown_menu_item>
+              <.dropdown_menu_item
+                shortcut="⌘ ⌫"
+                color="red"
+              >
+                Delete
+              </.dropdown_menu_item>
             </.dropdown_menu_content>
           </.dropdown_menu_root>
         </.flex>
@@ -120,7 +142,10 @@ defmodule Storybook.Themes.Components.DropdownMenu do
         id: :variant,
         description: "Variant",
         template: """
-        <.flex gap="4" align="center">
+        <.flex
+          gap="4"
+          align="center"
+        >
           <.dropdown_menu_root>
             <.dropdown_menu_trigger>
               <.button variant="solid">
@@ -134,7 +159,12 @@ defmodule Storybook.Themes.Components.DropdownMenu do
               <.dropdown_menu_separator />
               <.dropdown_menu_item shortcut="⌘ N">Archive</.dropdown_menu_item>
               <.dropdown_menu_separator />
-              <.dropdown_menu_item shortcut="⌘ ⌫" color="red">Delete</.dropdown_menu_item>
+              <.dropdown_menu_item
+                shortcut="⌘ ⌫"
+                color="red"
+              >
+                Delete
+              </.dropdown_menu_item>
             </.dropdown_menu_content>
           </.dropdown_menu_root>
 
@@ -151,7 +181,12 @@ defmodule Storybook.Themes.Components.DropdownMenu do
               <.dropdown_menu_separator />
               <.dropdown_menu_item shortcut="⌘ N">Archive</.dropdown_menu_item>
               <.dropdown_menu_separator />
-              <.dropdown_menu_item shortcut="⌘ ⌫" color="red">Delete</.dropdown_menu_item>
+              <.dropdown_menu_item
+                shortcut="⌘ ⌫"
+                color="red"
+              >
+                Delete
+              </.dropdown_menu_item>
             </.dropdown_menu_content>
           </.dropdown_menu_root>
         </.flex>
@@ -161,10 +196,16 @@ defmodule Storybook.Themes.Components.DropdownMenu do
         id: :color,
         description: "Color",
         template: """
-        <.flex gap="4" wrap="wrap">
+        <.flex
+          gap="4"
+          wrap="wrap"
+        >
           <.dropdown_menu_root>
             <.dropdown_menu_trigger>
-              <.button variant="soft" color="indigo">
+              <.button
+                variant="soft"
+                color="indigo"
+              >
                 Options
                 <.dropdown_menu_trigger_icon />
               </.button>
@@ -179,7 +220,10 @@ defmodule Storybook.Themes.Components.DropdownMenu do
 
           <.dropdown_menu_root>
             <.dropdown_menu_trigger>
-              <.button variant="soft" color="cyan">
+              <.button
+                variant="soft"
+                color="cyan"
+              >
                 Options
                 <.dropdown_menu_trigger_icon />
               </.button>
@@ -194,7 +238,10 @@ defmodule Storybook.Themes.Components.DropdownMenu do
 
           <.dropdown_menu_root>
             <.dropdown_menu_trigger>
-              <.button variant="soft" color="orange">
+              <.button
+                variant="soft"
+                color="orange"
+              >
                 Options
                 <.dropdown_menu_trigger_icon />
               </.button>
@@ -209,7 +256,10 @@ defmodule Storybook.Themes.Components.DropdownMenu do
 
           <.dropdown_menu_root>
             <.dropdown_menu_trigger>
-              <.button variant="soft" color="crimson">
+              <.button
+                variant="soft"
+                color="crimson"
+              >
                 Options
                 <.dropdown_menu_trigger_icon />
               </.button>
@@ -228,7 +278,11 @@ defmodule Storybook.Themes.Components.DropdownMenu do
         id: :high_contrast,
         description: "High-contrast",
         template: """
-        <.grid columns="2" gap="3" display="inline-grid">
+        <.grid
+          columns="2"
+          gap="3"
+          display="inline-grid"
+        >
           <.dropdown_menu_root>
             <.dropdown_menu_trigger>
               <.button color="gray">
@@ -246,12 +300,18 @@ defmodule Storybook.Themes.Components.DropdownMenu do
 
           <.dropdown_menu_root>
             <.dropdown_menu_trigger>
-              <.button color="gray" high_contrast>
+              <.button
+                color="gray"
+                high_contrast
+              >
                 Options
                 <.dropdown_menu_trigger_icon />
               </.button>
             </.dropdown_menu_trigger>
-            <.dropdown_menu_content color="gray" high_contrast>
+            <.dropdown_menu_content
+              color="gray"
+              high_contrast
+            >
               <.dropdown_menu_item shortcut="⌘ E">Edit</.dropdown_menu_item>
               <.dropdown_menu_item shortcut="⌘ D">Duplicate</.dropdown_menu_item>
               <.dropdown_menu_separator />
@@ -261,12 +321,18 @@ defmodule Storybook.Themes.Components.DropdownMenu do
 
           <.dropdown_menu_root>
             <.dropdown_menu_trigger>
-              <.button color="gray" variant="soft">
+              <.button
+                color="gray"
+                variant="soft"
+              >
                 Options
                 <.dropdown_menu_trigger_icon />
               </.button>
             </.dropdown_menu_trigger>
-            <.dropdown_menu_content color="gray" variant="soft">
+            <.dropdown_menu_content
+              color="gray"
+              variant="soft"
+            >
               <.dropdown_menu_item shortcut="⌘ E">Edit</.dropdown_menu_item>
               <.dropdown_menu_item shortcut="⌘ D">Duplicate</.dropdown_menu_item>
               <.dropdown_menu_separator />
@@ -276,12 +342,20 @@ defmodule Storybook.Themes.Components.DropdownMenu do
 
           <.dropdown_menu_root>
             <.dropdown_menu_trigger>
-              <.button color="gray" variant="soft" high_contrast>
+              <.button
+                color="gray"
+                variant="soft"
+                high_contrast
+              >
                 Options
                 <.dropdown_menu_trigger_icon />
               </.button>
             </.dropdown_menu_trigger>
-            <.dropdown_menu_content color="gray" variant="soft" high_contrast>
+            <.dropdown_menu_content
+              color="gray"
+              variant="soft"
+              high_contrast
+            >
               <.dropdown_menu_item shortcut="⌘ E">Edit</.dropdown_menu_item>
               <.dropdown_menu_item shortcut="⌘ D">Duplicate</.dropdown_menu_item>
               <.dropdown_menu_separator />
@@ -306,7 +380,12 @@ defmodule Storybook.Themes.Components.DropdownMenu do
             <.dropdown_menu_label>Options</.dropdown_menu_label>
             <.dropdown_menu_checkbox_item checked>Show Grid</.dropdown_menu_checkbox_item>
             <.dropdown_menu_checkbox_item>Show Rulers</.dropdown_menu_checkbox_item>
-            <.dropdown_menu_checkbox_item checked disabled>Snap to Grid</.dropdown_menu_checkbox_item>
+            <.dropdown_menu_checkbox_item
+              checked
+              disabled
+            >
+              Snap to Grid
+            </.dropdown_menu_checkbox_item>
             <.dropdown_menu_separator />
             <.dropdown_menu_label>Sorting</.dropdown_menu_label>
             <.dropdown_menu_radio_item checked>Ascending</.dropdown_menu_radio_item>

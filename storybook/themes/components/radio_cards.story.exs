@@ -24,21 +24,33 @@ defmodule Storybook.Themes.Components.RadioCards do
         id: :default,
         description: "Default radio cards",
         template: """
-        <.radio_cards_root default_value="1" columns="3">
+        <.radio_cards_root
+          default_value="1"
+          columns="3"
+        >
           <.radio_cards_item value="1">
-            <.flex direction="column" width="100%">
+            <.flex
+              direction="column"
+              width="100%"
+            >
               <.text weight="bold">A1 Keyboard</.text>
               <.text>US Layout</.text>
             </.flex>
           </.radio_cards_item>
           <.radio_cards_item value="2">
-            <.flex direction="column" width="100%">
+            <.flex
+              direction="column"
+              width="100%"
+            >
               <.text weight="bold">Pro Mouse</.text>
               <.text>Zero-lag wireless</.text>
             </.flex>
           </.radio_cards_item>
           <.radio_cards_item value="3">
-            <.flex direction="column" width="100%">
+            <.flex
+              direction="column"
+              width="100%"
+            >
               <.text weight="bold">Lighting Kit</.text>
               <.text>RGB LED</.text>
             </.flex>
@@ -50,18 +62,33 @@ defmodule Storybook.Themes.Components.RadioCards do
         id: :size,
         description: "Size",
         template: """
-        <.flex direction="column" gap="4">
-          <.radio_cards_root default_value="1" columns="3" size="1">
+        <.flex
+          direction="column"
+          gap="4"
+        >
+          <.radio_cards_root
+            default_value="1"
+            columns="3"
+            size="1"
+          >
             <.radio_cards_item value="1">Option 1</.radio_cards_item>
             <.radio_cards_item value="2">Option 2</.radio_cards_item>
             <.radio_cards_item value="3">Option 3</.radio_cards_item>
           </.radio_cards_root>
-          <.radio_cards_root default_value="1" columns="3" size="2">
+          <.radio_cards_root
+            default_value="1"
+            columns="3"
+            size="2"
+          >
             <.radio_cards_item value="1">Option 1</.radio_cards_item>
             <.radio_cards_item value="2">Option 2</.radio_cards_item>
             <.radio_cards_item value="3">Option 3</.radio_cards_item>
           </.radio_cards_root>
-          <.radio_cards_root default_value="1" columns="3" size="3">
+          <.radio_cards_root
+            default_value="1"
+            columns="3"
+            size="3"
+          >
             <.radio_cards_item value="1">Option 1</.radio_cards_item>
             <.radio_cards_item value="2">Option 2</.radio_cards_item>
             <.radio_cards_item value="3">Option 3</.radio_cards_item>
@@ -73,13 +100,24 @@ defmodule Storybook.Themes.Components.RadioCards do
         id: :variant,
         description: "Variant",
         template: """
-        <.flex direction="column" gap="4">
-          <.radio_cards_root default_value="1" columns="3" variant="surface">
+        <.flex
+          direction="column"
+          gap="4"
+        >
+          <.radio_cards_root
+            default_value="1"
+            columns="3"
+            variant="surface"
+          >
             <.radio_cards_item value="1">Surface</.radio_cards_item>
             <.radio_cards_item value="2">Surface</.radio_cards_item>
             <.radio_cards_item value="3">Surface</.radio_cards_item>
           </.radio_cards_root>
-          <.radio_cards_root default_value="1" columns="3" variant="classic">
+          <.radio_cards_root
+            default_value="1"
+            columns="3"
+            variant="classic"
+          >
             <.radio_cards_item value="1">Classic</.radio_cards_item>
             <.radio_cards_item value="2">Classic</.radio_cards_item>
             <.radio_cards_item value="3">Classic</.radio_cards_item>
@@ -91,23 +129,42 @@ defmodule Storybook.Themes.Components.RadioCards do
         id: :color,
         description: "Color",
         template: """
-        <.flex direction="column" gap="4">
-          <.radio_cards_root default_value="1" columns="3" color="indigo">
+        <.flex
+          direction="column"
+          gap="4"
+        >
+          <.radio_cards_root
+            default_value="1"
+            columns="3"
+            color="indigo"
+          >
             <.radio_cards_item value="1">Indigo</.radio_cards_item>
             <.radio_cards_item value="2">Indigo</.radio_cards_item>
             <.radio_cards_item value="3">Indigo</.radio_cards_item>
           </.radio_cards_root>
-          <.radio_cards_root default_value="1" columns="3" color="cyan">
+          <.radio_cards_root
+            default_value="1"
+            columns="3"
+            color="cyan"
+          >
             <.radio_cards_item value="1">Cyan</.radio_cards_item>
             <.radio_cards_item value="2">Cyan</.radio_cards_item>
             <.radio_cards_item value="3">Cyan</.radio_cards_item>
           </.radio_cards_root>
-          <.radio_cards_root default_value="1" columns="3" color="orange">
+          <.radio_cards_root
+            default_value="1"
+            columns="3"
+            color="orange"
+          >
             <.radio_cards_item value="1">Orange</.radio_cards_item>
             <.radio_cards_item value="2">Orange</.radio_cards_item>
             <.radio_cards_item value="3">Orange</.radio_cards_item>
           </.radio_cards_root>
-          <.radio_cards_root default_value="1" columns="3" color="crimson">
+          <.radio_cards_root
+            default_value="1"
+            columns="3"
+            color="crimson"
+          >
             <.radio_cards_item value="1">Crimson</.radio_cards_item>
             <.radio_cards_item value="2">Crimson</.radio_cards_item>
             <.radio_cards_item value="3">Crimson</.radio_cards_item>
@@ -119,18 +176,36 @@ defmodule Storybook.Themes.Components.RadioCards do
         id: :high_contrast,
         description: "High Contrast",
         template: """
-        <.flex direction="column" gap="4">
-          <.radio_cards_root default_value="1" columns="3" color="indigo" high_contrast>
+        <.flex
+          direction="column"
+          gap="4"
+        >
+          <.radio_cards_root
+            default_value="1"
+            columns="3"
+            color="indigo"
+            high_contrast
+          >
             <.radio_cards_item value="1">Indigo</.radio_cards_item>
             <.radio_cards_item value="2">Indigo</.radio_cards_item>
             <.radio_cards_item value="3">Indigo</.radio_cards_item>
           </.radio_cards_root>
-          <.radio_cards_root default_value="1" columns="3" color="cyan" high_contrast>
+          <.radio_cards_root
+            default_value="1"
+            columns="3"
+            color="cyan"
+            high_contrast
+          >
             <.radio_cards_item value="1">Cyan</.radio_cards_item>
             <.radio_cards_item value="2">Cyan</.radio_cards_item>
             <.radio_cards_item value="3">Cyan</.radio_cards_item>
           </.radio_cards_root>
-          <.radio_cards_root default_value="1" columns="3" color="orange" high_contrast>
+          <.radio_cards_root
+            default_value="1"
+            columns="3"
+            color="orange"
+            high_contrast
+          >
             <.radio_cards_item value="1">Orange</.radio_cards_item>
             <.radio_cards_item value="2">Orange</.radio_cards_item>
             <.radio_cards_item value="3">Orange</.radio_cards_item>
@@ -142,15 +217,44 @@ defmodule Storybook.Themes.Components.RadioCards do
         id: :disabled,
         description: "Disabled",
         template: """
-        <.flex direction="column" gap="4">
-          <.radio_cards_root default_value="1" columns="3">
-            <.radio_cards_item value="1" disabled>Off</.radio_cards_item>
-            <.radio_cards_item value="2" disabled>Off</.radio_cards_item>
-            <.radio_cards_item value="3" disabled>Off</.radio_cards_item>
+        <.flex
+          direction="column"
+          gap="4"
+        >
+          <.radio_cards_root
+            default_value="1"
+            columns="3"
+          >
+            <.radio_cards_item
+              value="1"
+              disabled
+            >
+              Off
+            </.radio_cards_item>
+            <.radio_cards_item
+              value="2"
+              disabled
+            >
+              Off
+            </.radio_cards_item>
+            <.radio_cards_item
+              value="3"
+              disabled
+            >
+              Off
+            </.radio_cards_item>
           </.radio_cards_root>
-          <.radio_cards_root default_value="1" columns="3">
+          <.radio_cards_root
+            default_value="1"
+            columns="3"
+          >
             <.radio_cards_item value="1">On</.radio_cards_item>
-            <.radio_cards_item value="2" disabled>Off</.radio_cards_item>
+            <.radio_cards_item
+              value="2"
+              disabled
+            >
+              Off
+            </.radio_cards_item>
             <.radio_cards_item value="3">On</.radio_cards_item>
           </.radio_cards_root>
         </.flex>

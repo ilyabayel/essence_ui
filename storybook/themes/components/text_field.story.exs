@@ -61,7 +61,10 @@ defmodule Storybook.Themes.Components.TextFieldStory do
         id: :disabled,
         description: "Disabled",
         template: """
-        <.text_field placeholder="Disabled" disabled />
+        <.text_field
+          placeholder="Disabled"
+          disabled
+        />
         """
       },
       %Variation{

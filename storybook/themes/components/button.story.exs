@@ -160,19 +160,77 @@ defmodule Storybook.Themes.Components.ButtonStory do
         id: :high_contrast,
         description: "High contrast",
         template: """
-        <.flex mb="2" gap="2">
-          <.button color="gray" variant="classic">Button</.button>
-          <.button color="gray" variant="solid">Button</.button>
-          <.button color="gray" variant="soft">Button</.button>
-          <.button color="gray" variant="surface">Button</.button>
-          <.button color="gray" variant="outline">Button</.button>
+        <.flex
+          mb="2"
+          gap="2"
+        >
+          <.button
+            color="gray"
+            variant="classic"
+          >
+            Button
+          </.button>
+          <.button
+            color="gray"
+            variant="solid"
+          >
+            Button
+          </.button>
+          <.button
+            color="gray"
+            variant="soft"
+          >
+            Button
+          </.button>
+          <.button
+            color="gray"
+            variant="surface"
+          >
+            Button
+          </.button>
+          <.button
+            color="gray"
+            variant="outline"
+          >
+            Button
+          </.button>
         </.flex>
         <.flex gap="2">
-          <.button color="gray" variant="classic" high_contrast>Button</.button>
-          <.button color="gray" variant="solid" high_contrast>Button</.button>
-          <.button color="gray" variant="soft" high_contrast>Button</.button>
-          <.button color="gray" variant="surface" high_contrast>Button</.button>
-          <.button color="gray" variant="outline" high_contrast>Button</.button>
+          <.button
+            color="gray"
+            variant="classic"
+            high_contrast
+          >
+            Button
+          </.button>
+          <.button
+            color="gray"
+            variant="solid"
+            high_contrast
+          >
+            Button
+          </.button>
+          <.button
+            color="gray"
+            variant="soft"
+            high_contrast
+          >
+            Button
+          </.button>
+          <.button
+            color="gray"
+            variant="surface"
+            high_contrast
+          >
+            Button
+          </.button>
+          <.button
+            color="gray"
+            variant="outline"
+            high_contrast
+          >
+            Button
+          </.button>
         </.flex>
         """
       },
@@ -180,11 +238,36 @@ defmodule Storybook.Themes.Components.ButtonStory do
         id: :disabled,
         description: "Disabled state.",
         template: """
-        <.button variant="classic" disabled>Button</.button>
-        <.button variant="solid" disabled>Button</.button>
-        <.button variant="soft" disabled>Button</.button>
-        <.button variant="surface" disabled>Button</.button>
-        <.button variant="outline" disabled>Button</.button>
+        <.button
+          variant="classic"
+          disabled
+        >
+          Button
+        </.button>
+        <.button
+          variant="solid"
+          disabled
+        >
+          Button
+        </.button>
+        <.button
+          variant="soft"
+          disabled
+        >
+          Button
+        </.button>
+        <.button
+          variant="surface"
+          disabled
+        >
+          Button
+        </.button>
+        <.button
+          variant="outline"
+          disabled
+        >
+          Button
+        </.button>
         """
       }
     ]

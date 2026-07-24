@@ -6,7 +6,8 @@ defmodule Storybook.Primitives.ProgressStory do
 
   def function, do: &Progress.root/1
 
-  def container, do: :div
+  def container, do: {:div, class: "radix-demo", "data-component": "progress"}
+
   def layout, do: :one_column
 
   def variations do
@@ -15,11 +16,17 @@ defmodule Storybook.Primitives.ProgressStory do
         id: :primitive,
         description: "Radix docs progress demo",
         template: """
-        <div class="radix-demo" data-component="progress">
-          <Progress.root class="ProgressRoot" value={66} aria-label="Progress">
-            <Progress.indicator class="ProgressIndicator" value={66} style="transform: translateX(-34%);" />
-          </Progress.root>
-        </div>
+        <Progress.root
+          class="ProgressRoot"
+          value={66}
+          aria-label="Progress"
+        >
+          <Progress.indicator
+            class="ProgressIndicator"
+            value={66}
+            style="transform: translateX(-34%);"
+          />
+        </Progress.root>
         """
       }
     ]

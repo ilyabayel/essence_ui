@@ -7,6 +7,7 @@ defmodule Storybook.Themes.Typography.QuoteStory do
   def function, do: &Quote.es_quote/1
 
   def container, do: {:div, "data-scaling": "100%", style: "display: block;", "data-gray-color": "slate"}
+
   def layout, do: :one_column
 
   def imports, do: [{EssenceUI.Components.Flex, flex: 1}, {EssenceUI.Components.Text, text: 1}]
@@ -33,7 +34,11 @@ defmodule Storybook.Themes.Typography.QuoteStory do
         id: :wrap,
         description: "Wrap variations",
         template: """
-        <.flex direction="column" gap="6" max_width="300px">
+        <.flex
+          direction="column"
+          gap="6"
+          max_width="300px"
+        >
           <.es_quote wrap="wrap">Wrap: The quick brown fox jumps over the lazy dog.</.es_quote>
           <.es_quote wrap="nowrap">No wrap: The quick brown fox jumps over the lazy dog.</.es_quote>
           <.es_quote wrap="pretty">Pretty: The quick brown fox jumps over the lazy dog.</.es_quote>

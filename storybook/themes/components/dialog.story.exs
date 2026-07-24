@@ -28,18 +28,31 @@ defmodule Storybook.Themes.Components.DialogStory do
       %Variation{
         id: :default,
         template: """
-        <.dialog id="dialog" target=".psb-sandbox" default_state="closed">
-          <.heading as="h2" color="indigo">
+        <.dialog
+          id="dialog"
+          target=".psb-sandbox"
+          default_state="closed"
+        >
+          <.heading
+            as="h2"
+            color="indigo"
+          >
             Hello, there!
           </.heading>
           <.text my="4">
             This is a dialog example.
           </.text>
-          <.flex gap="2" mt="2">
+          <.flex
+            gap="2"
+            mt="2"
+          >
             <.button>
               Apply
             </.button>
-            <.button phx-click={JS.dispatch("close", to: "#dialog")} color="red">
+            <.button
+              phx-click={JS.dispatch("close", to: "#dialog")}
+              color="red"
+            >
               Close
             </.button>
           </.flex>

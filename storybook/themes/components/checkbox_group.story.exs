@@ -23,7 +23,10 @@ defmodule Storybook.Themes.Components.CheckboxGroup do
         id: :default,
         description: "Default checkbox group",
         template: """
-        <.checkbox_group default_value={["option2", "option3"]} name="example">
+        <.checkbox_group
+          default_value={["option2", "option3"]}
+          name="example"
+        >
           <:item value="option1">Option 1</:item>
           <:item value="option2">Option 2</:item>
           <:item value="option3">Option 3</:item>
@@ -35,13 +38,25 @@ defmodule Storybook.Themes.Components.CheckboxGroup do
         description: "Size",
         template: """
         <.flex align="center">
-          <.checkbox_group default_value={["size1"]} name="size1" size="1">
+          <.checkbox_group
+            default_value={["size1"]}
+            name="size1"
+            size="1"
+          >
             <:item value="size1"></:item>
           </.checkbox_group>
-          <.checkbox_group default_value={["size2"]} name="size2" size="2">
+          <.checkbox_group
+            default_value={["size2"]}
+            name="size2"
+            size="2"
+          >
             <:item value="size2"></:item>
           </.checkbox_group>
-          <.checkbox_group default_value={["size3"]} name="size3" size="3">
+          <.checkbox_group
+            default_value={["size3"]}
+            name="size3"
+            size="3"
+          >
             <:item value="size3"></:item>
           </.checkbox_group>
         </.flex>

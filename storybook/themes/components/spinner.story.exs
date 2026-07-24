@@ -29,7 +29,11 @@ defmodule Storybook.Themes.Components.Spinner do
         id: :sizes,
         description: "Different sizes",
         template: """
-        <.flex gap="3" align="center" p="4">
+        <.flex
+          gap="3"
+          align="center"
+          p="4"
+        >
           <.box>
             <.text size="1">Size 1</.text>
             <.spinner size="1" />
@@ -49,7 +53,11 @@ defmodule Storybook.Themes.Components.Spinner do
         id: :with_text,
         description: "Spinner with loading text",
         template: """
-        <.flex gap="2" align="center" p="4">
+        <.flex
+          gap="2"
+          align="center"
+          p="4"
+        >
           <.spinner size="2" />
           <.text size="2">Loading...</.text>
         </.flex>
@@ -59,7 +67,11 @@ defmodule Storybook.Themes.Components.Spinner do
         id: :loading_states,
         description: "Loading vs stopped states",
         template: """
-        <.flex gap="4" align="center" p="4">
+        <.flex
+          gap="4"
+          align="center"
+          p="4"
+        >
           <.box>
             <.text size="2">Loading</.text>
             <.spinner loading={true} />

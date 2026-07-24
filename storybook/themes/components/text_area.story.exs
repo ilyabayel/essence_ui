@@ -60,7 +60,10 @@ defmodule Storybook.Themes.Components.TextAreaStory do
         id: :disabled,
         description: "Disabled",
         template: """
-        <.text_area placeholder="Disabled" disabled />
+        <.text_area
+          placeholder="Disabled"
+          disabled
+        />
         """
       }
     ]

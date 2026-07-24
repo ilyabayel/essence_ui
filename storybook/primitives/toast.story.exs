@@ -5,7 +5,8 @@ defmodule Storybook.Primitives.ToastStory do
   alias EssenceUI.Primitives.Toast
 
   def function, do: &Toast.provider/1
-  def container, do: :div
+  def container, do: {:div, class: "radix-demo", "data-component": "toast"}
+
   def layout, do: :one_column
 
   def imports,
@@ -24,39 +25,58 @@ defmodule Storybook.Primitives.ToastStory do
         id: :primitive,
         description: "Headless toast primitive",
         template: """
-        <div class="radix-demo" data-component="toast">
-          <.provider duration={8000} swipe_direction="right" label="Notification">
-            <button
-              type="button"
-              id="toast-show-btn"
-              class="Button large violet"
-              onclick="
-                const toast = document.getElementById('toast-primitive');
-                if (!toast) return;
-                toast.hidden = false;
-                toast.dataset.state = 'open';
-                toast.dispatchEvent(new CustomEvent('essence:toast:open', {bubbles: true}));
-              "
-            >
-              Add to calendar
-            </button>
+        <.provider
+          duration={8000}
+          swipe_direction="right"
+          label="Notification"
+        >
+          <button
+            type="button"
+            id="toast-show-btn"
+            class="Button large violet"
+            onclick="
+              const toast = document.getElementById('toast-primitive');
+              if (!toast) return;
+              toast.hidden = false;
+              toast.dataset.state = 'open';
+              toast.dispatchEvent(new CustomEvent('essence:toast:open', {bubbles: true}));
+            "
+          >
+            Add to calendar
+          </button>
 
-            <.viewport id="toast-viewport" class="ToastViewport">
-              <.root id="toast-primitive" duration={3000} type="foreground" default_open={false} class="ToastRoot">
-                <.title class="ToastTitle">
-                  Scheduled: Catch up
-                </.title>
-                <.description class="ToastDescription">
-                  Friday at 5:30 PM
-                </.description>
-                <.action alt_text="Goto schedule to undo" class="ToastAction Button small green">
-                  Undo
-                </.action>
-                <.close class="ToastClose" aria-label="Close">×</.close>
-              </.root>
-            </.viewport>
-          </.provider>
-        </div>
+          <.viewport
+            id="toast-viewport"
+            class="ToastViewport"
+          >
+            <.root
+              id="toast-primitive"
+              duration={3000}
+              type="foreground"
+              default_open={false}
+              class="ToastRoot"
+            >
+              <.title class="ToastTitle">
+                Scheduled: Catch up
+              </.title>
+              <.description class="ToastDescription">
+                Friday at 5:30 PM
+              </.description>
+              <.action
+                alt_text="Goto schedule to undo"
+                class="ToastAction Button small green"
+              >
+                Undo
+              </.action>
+              <.close
+                class="ToastClose"
+                aria-label="Close"
+              >
+                ×
+              </.close>
+            </.root>
+          </.viewport>
+        </.provider>
         """
       }
     ]

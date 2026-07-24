@@ -36,7 +36,11 @@ defmodule Storybook.Themes.Components.DataList do
           <.data_list_item>
             <:label>Status</:label>
             <:value>
-              <.badge color="jade" variant="soft" radius="full">
+              <.badge
+                color="jade"
+                variant="soft"
+                radius="full"
+              >
                 Active
               </.badge>
             </:value>

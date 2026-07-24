@@ -7,6 +7,7 @@ defmodule Storybook.Themes.Typography.StrongStory do
   def function, do: &Strong.strong/1
 
   def container, do: {:div, "data-scaling": "100%", style: "display: block;", "data-gray-color": "slate"}
+
   def layout, do: :one_column
 
   def imports, do: [{EssenceUI.Components.Flex, flex: 1}, {EssenceUI.Components.Text, text: 1}]

@@ -42,7 +42,10 @@ defmodule Storybook.Themes.Components.Badge do
         description: "Different badge sizes",
         attributes: %{},
         template: """
-        <.flex gap="2" align="center">
+        <.flex
+          gap="2"
+          align="center"
+        >
           <.badge size="1">Size 1</.badge>
           <.badge size="2">Size 2</.badge>
           <.badge size="3">Size 3</.badge>
@@ -54,7 +57,10 @@ defmodule Storybook.Themes.Components.Badge do
         description: "Different badge colors",
         attributes: %{},
         template: """
-        <.flex gap="2" wrap="wrap">
+        <.flex
+          gap="2"
+          wrap="wrap"
+        >
           <.badge color="gray">Gray</.badge>
           <.badge color="gold">Gold</.badge>
           <.badge color="bronze">Bronze</.badge>
@@ -91,7 +97,12 @@ defmodule Storybook.Themes.Components.Badge do
         template: """
         <.flex gap="2">
           <.badge color="blue">Normal</.badge>
-          <.badge color="blue" high_contrast>High Contrast</.badge>
+          <.badge
+            color="blue"
+            high_contrast
+          >
+            High Contrast
+          </.badge>
         </.flex>
         """
       },
@@ -114,7 +125,10 @@ defmodule Storybook.Themes.Components.Badge do
         description: "Margin props demonstration",
         attributes: %{},
         template: """
-        <.flex gap="2" direction="column">
+        <.flex
+          gap="2"
+          direction="column"
+        >
           <div style="border: 1px dashed var(--gray-6)">
             <.badge m="2">Margin all</.badge>
           </div>
@@ -136,11 +150,42 @@ defmodule Storybook.Themes.Components.Badge do
         attributes: %{},
         template: """
         <.flex gap="2">
-          <.badge size="2" variant="solid" color="green">✓ Success</.badge>
-          <.badge size="2" variant="soft" color="yellow">⚠ Warning</.badge>
-          <.badge size="2" variant="outline" color="red">✗ Error</.badge>
-          <.badge size="2" variant="surface" color="blue">ℹ Info</.badge>
-          <.badge size="2" variant="solid" color="purple" radius="full">NEW</.badge>
+          <.badge
+            size="2"
+            variant="solid"
+            color="green"
+          >
+            ✓ Success
+          </.badge>
+          <.badge
+            size="2"
+            variant="soft"
+            color="yellow"
+          >
+            ⚠ Warning
+          </.badge>
+          <.badge
+            size="2"
+            variant="outline"
+            color="red"
+          >
+            ✗ Error
+          </.badge>
+          <.badge
+            size="2"
+            variant="surface"
+            color="blue"
+          >
+            ℹ Info
+          </.badge>
+          <.badge
+            size="2"
+            variant="solid"
+            color="purple"
+            radius="full"
+          >
+            NEW
+          </.badge>
         </.flex>
         """
       }
