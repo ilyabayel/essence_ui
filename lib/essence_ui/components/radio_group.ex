@@ -6,10 +6,12 @@ defmodule EssenceUI.Components.RadioGroup do
 
   alias EssenceUI.Helpers.ExtractProps
   alias EssenceUI.Primitives.RadioGroup, as: RadioGroupPrimitive
+  alias EssenceUI.SharedProps.AsChildProps
   alias EssenceUI.SharedProps.ColorProps
   alias EssenceUI.SharedProps.HighContrastProps
   alias EssenceUI.SharedProps.MarginProps
 
+  require AsChildProps
   require ColorProps
   require HighContrastProps
   require MarginProps
@@ -30,9 +32,9 @@ defmodule EssenceUI.Components.RadioGroup do
   attr :name, :string, default: nil
   attr :required, :boolean, default: false
   attr :orientation, :string, values: ["horizontal", "vertical", "undefined"], default: "vertical"
-  attr :color, :string, default: nil
-  attr :high_contrast, :boolean, default: false
-  attr :as_child, :boolean, default: false
+  ColorProps.attrs()
+  HighContrastProps.attrs()
+  AsChildProps.attrs()
   attr :class, :string, default: nil
   MarginProps.attrs()
   attr :rest, :global
@@ -40,14 +42,14 @@ defmodule EssenceUI.Components.RadioGroup do
 
   def radio_group_root(assigns) do
     prop_defs =
-      Map.merge(
-        %{
-          size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
-          variant: %{type: :enum, class: "rt-variant", values: @variants, default: "surface"},
-          high_contrast: %{type: :boolean, class: "rt-high-contrast"}
-        },
-        MarginProps.prop_defs()
-      )
+      %{
+        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
+        variant: %{type: :enum, class: "rt-variant", values: @variants, default: "surface"}
+      }
+      |> Map.merge(ColorProps.color_prop_def())
+      |> Map.merge(HighContrastProps.prop_defs())
+      |> Map.merge(AsChildProps.prop_defs())
+      |> Map.merge(MarginProps.prop_defs())
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
@@ -89,8 +91,8 @@ defmodule EssenceUI.Components.RadioGroup do
   attr :checked, :boolean, default: false
   attr :size, :string, values: @sizes, default: "2"
   attr :variant, :string, values: @variants, default: "surface"
-  attr :color, :string, default: nil
-  attr :high_contrast, :boolean, default: nil
+  ColorProps.attrs()
+  HighContrastProps.attrs()
   attr :class, :string, default: nil
   MarginProps.attrs()
   attr :rest, :global
@@ -105,14 +107,13 @@ defmodule EssenceUI.Components.RadioGroup do
     high_contrast_class = if assigns[:high_contrast], do: "rt-high-contrast"
 
     prop_defs =
-      Map.merge(
-        %{
-          size: %{type: :enum, class: "rt-r-size", values: @sizes, responsive: true},
-          variant: %{type: :enum, class: "rt-variant", values: @variants, responsive: true},
-          high_contrast: %{type: :boolean, class: "rt-high-contrast"}
-        },
-        MarginProps.prop_defs()
-      )
+      %{
+        size: %{type: :enum, class: "rt-r-size", values: @sizes, responsive: true},
+        variant: %{type: :enum, class: "rt-variant", values: @variants, responsive: true}
+      }
+      |> Map.merge(ColorProps.color_prop_def())
+      |> Map.merge(HighContrastProps.prop_defs())
+      |> Map.merge(MarginProps.prop_defs())
 
     # These are used for responsive logic and style extraction
     extracted = ExtractProps.call(assigns, prop_defs)

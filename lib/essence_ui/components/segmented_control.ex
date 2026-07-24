@@ -64,6 +64,7 @@ defmodule EssenceUI.Components.SegmentedControl do
   ColorProps.attrs()
   HighContrastProps.attrs()
   LayoutProps.attrs()
+  RadiusProps.attrs()
 
   attr :size, :string,
     values: @sizes,
@@ -74,10 +75,6 @@ defmodule EssenceUI.Components.SegmentedControl do
     values: @variants,
     default: "surface",
     doc: "Visual style variant. One of 'surface' or 'classic'."
-
-  attr :radius, :string,
-    values: RadiusProps.radii(),
-    doc: "Border radius utility. Accepts: none, small, medium, large, full. Responsive supported."
 
   attr :value, :string, default: nil, doc: "Controlled selected value."
   attr :default_value, :string, default: nil, doc: "Initial selected value."
@@ -113,6 +110,7 @@ defmodule EssenceUI.Components.SegmentedControl do
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(HighContrastProps.prop_defs())
       |> Map.merge(LayoutProps.prop_defs())
+      |> Map.merge(RadiusProps.prop_defs())
 
     extracted = ExtractProps.call(assigns, prop_defs)
 

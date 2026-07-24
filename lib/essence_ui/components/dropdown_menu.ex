@@ -143,7 +143,7 @@ defmodule EssenceUI.Components.DropdownMenu do
   A standard menu item.
   """
   attr :shortcut, :string, default: nil
-  attr :color, :string, default: nil
+  ColorProps.attrs()
   attr :disabled, :boolean, default: false
   attr :class, :string, default: nil
   attr :style, :string, default: ""

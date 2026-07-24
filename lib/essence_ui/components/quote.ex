@@ -6,15 +6,9 @@ defmodule EssenceUI.Components.Quote do
 
   use Phoenix.Component
 
-  alias EssenceUI.SharedProps.ColorProps
-  alias EssenceUI.SharedProps.HighContrastProps
-  alias EssenceUI.SharedProps.MarginProps
   alias EssenceUI.SharedProps.TextWrapProps
   alias EssenceUI.SharedProps.TruncateProps
 
-  require ColorProps
-  require HighContrastProps
-  require MarginProps
   require TextWrapProps
   require TruncateProps
 
@@ -49,11 +43,8 @@ defmodule EssenceUI.Components.Quote do
 
     class = ["rt-Quote", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
     style = [extracted.style, assigns[:style]] |> Enum.filter(& &1) |> Enum.join("; ")
-    color = assigns[:color] || false
 
-    assigns = assign(assigns, class: class, style: style, color: color)
-
-    dbg(assigns)
+    assigns = assign(assigns, class: class, style: style)
 
     ~H"""
     <q class={@class} style={@style} {@rest} phx-no-format><%= render_slot(@inner_block) %></q>

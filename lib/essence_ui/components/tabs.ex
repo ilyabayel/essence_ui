@@ -58,6 +58,7 @@ defmodule EssenceUI.Components.Tabs do
 
   use Phoenix.Component
 
+  alias EssenceUI.Helpers.ExtractProps
   alias EssenceUI.SharedProps.ColorProps
   alias EssenceUI.SharedProps.HighContrastProps
   alias EssenceUI.SharedProps.MarginProps
@@ -87,6 +88,13 @@ defmodule EssenceUI.Components.Tabs do
   end
 
   def tabs(assigns) do
+    prop_defs =
+      %{}
+      |> Map.merge(ColorProps.color_prop_def())
+      |> Map.merge(MarginProps.prop_defs())
+
+    extracted = ExtractProps.call(assigns, prop_defs)
+
     # Generate unique ID for this tabs instance
     tabs_id = assigns[:id] || "tabs-#{:erlang.unique_integer([:positive])}"
 
@@ -94,7 +102,9 @@ defmodule EssenceUI.Components.Tabs do
       assign(assigns,
         tabs_id: tabs_id,
         color: assigns[:color] || false,
-        high_contrast: assigns[:high_contrast] || false
+        high_contrast: assigns[:high_contrast] || false,
+        class: ["rt-TabsRoot", extracted.class, assigns[:class]] |> Enum.filter(& &1) |> Enum.join(" "),
+        style: extracted.style
       )
 
     ~H"""
@@ -102,7 +112,8 @@ defmodule EssenceUI.Components.Tabs do
       id={@tabs_id}
       dir="ltr"
       data-orientation="horizontal"
-      class="rt-TabsRoot"
+      class={@class}
+      style={@style}
       data-accent-color={@color}
       {@rest}
       phx-hook="Tabs"
@@ -146,7 +157,7 @@ defmodule EssenceUI.Components.Tabs do
     default: "2",
     doc: "Tab size from 1 to 2. Controls overall dimensions."
 
-  attr :high_contrast, :boolean, default: false, doc: "Increase color contrast"
+  HighContrastProps.attrs()
   attr :class, :string, default: nil, doc: "Additional CSS classes"
 
   slot :trigger, required: true, doc: "Tab trigger button" do

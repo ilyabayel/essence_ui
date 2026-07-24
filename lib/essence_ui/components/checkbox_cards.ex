@@ -48,6 +48,7 @@ defmodule EssenceUI.Components.CheckboxCards do
   alias EssenceUI.SharedProps.MarginProps
 
   require ColorProps
+  require GapProps
   require HighContrastProps
   require MarginProps
 
@@ -58,6 +59,7 @@ defmodule EssenceUI.Components.CheckboxCards do
   ColorProps.attrs()
   HighContrastProps.attrs()
   MarginProps.attrs()
+  GapProps.attrs()
 
   attr :size, :string,
     values: @sizes,
@@ -70,10 +72,6 @@ defmodule EssenceUI.Components.CheckboxCards do
     doc: "Visual style variant. One of 'surface' or 'classic'."
 
   attr :columns, :any, doc: "Number of columns: 1-9 or CSS value. Responsive supported."
-
-  attr :gap, :string,
-    default: "4",
-    doc: "Gap between cards. Responsive supported."
 
   attr :default_value, :list,
     default: [],
@@ -92,6 +90,8 @@ defmodule EssenceUI.Components.CheckboxCards do
   Root container for checkbox cards. Renders as a grid with checkbox card items.
   """
   def checkbox_cards_root(assigns) do
+    assigns = assign_new(assigns, :gap, fn -> "4" end)
+
     prop_defs =
       %{
         size: %{

@@ -140,7 +140,7 @@ defmodule EssenceUI.Components.ContextMenu do
   A standard menu item.
   """
   attr :shortcut, :string, default: nil
-  attr :color, :string, default: nil
+  ColorProps.attrs()
   attr :disabled, :boolean, default: false
   attr :text_value, :string, default: nil
   attr :class, :string, default: nil
@@ -234,7 +234,7 @@ defmodule EssenceUI.Components.ContextMenu do
   """
   attr :checked, :boolean, default: false
   attr :shortcut, :string, default: nil
-  attr :color, :string, default: nil
+  ColorProps.attrs()
   attr :disabled, :boolean, default: false
   attr :text_value, :string, default: nil
   attr :class, :string, default: nil
@@ -319,7 +319,7 @@ defmodule EssenceUI.Components.ContextMenu do
   """
   attr :value, :string, required: true
   attr :checked, :boolean, default: false
-  attr :color, :string, default: nil
+  ColorProps.attrs()
   attr :disabled, :boolean, default: false
   attr :text_value, :string, default: nil
   attr :class, :string, default: nil

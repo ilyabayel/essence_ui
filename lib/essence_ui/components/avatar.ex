@@ -16,6 +16,7 @@ defmodule EssenceUI.Components.Avatar do
   require AsChildProps
   require ColorProps
   require HighContrastProps
+  require MarginProps
   require RadiusProps
 
   @doc """
@@ -48,6 +49,7 @@ defmodule EssenceUI.Components.Avatar do
   RadiusProps.attrs()
   ColorProps.attrs()
   HighContrastProps.attrs()
+  MarginProps.attrs()
 
   attr :size, :any,
     default: "3",

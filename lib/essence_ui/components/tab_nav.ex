@@ -35,8 +35,8 @@ defmodule EssenceUI.Components.TabNav do
   attr :size, :string, values: ["1", "2"], default: "2"
   attr :wrap, :string, values: ["nowrap", "wrap", "wrap-reverse"], doc: "Flex wrap. Responsive supported."
   attr :justify, :string, values: ["start", "center", "end"], doc: "Justify content. Responsive supported."
-  attr :color, :string, default: nil
-  attr :high_contrast, :boolean, default: false
+  ColorProps.attrs()
+  HighContrastProps.attrs()
   attr :class, :string, default: nil
   attr :style, :string, default: nil
   MarginProps.attrs()
@@ -70,8 +70,7 @@ defmodule EssenceUI.Components.TabNav do
       assign(assigns,
         extracted_class: extracted.class,
         extracted_style: extracted.style,
-        color: assigns[:color] || false,
-        high_contrast: assigns[:high_contrast] || false
+        color: assigns[:color] || false
       )
 
     ~H"""
@@ -80,7 +79,6 @@ defmodule EssenceUI.Components.TabNav do
         [
           "rt-BaseTabList",
           "rt-TabNavRoot",
-          @high_contrast && "rt-high-contrast",
           @extracted_class,
           @class
         ]

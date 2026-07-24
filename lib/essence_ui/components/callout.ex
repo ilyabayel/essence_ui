@@ -41,11 +41,13 @@ defmodule EssenceUI.Components.Callout do
   alias EssenceUI.SharedProps.ColorProps
   alias EssenceUI.SharedProps.HighContrastProps
   alias EssenceUI.SharedProps.MarginProps
+  alias EssenceUI.SharedProps.RadiusProps
 
   require AsChildProps
   require ColorProps
   require HighContrastProps
   require MarginProps
+  require RadiusProps
 
   @sizes ["1", "2", "3"]
   @variants ["soft", "surface", "outline"]
@@ -54,6 +56,7 @@ defmodule EssenceUI.Components.Callout do
   HighContrastProps.attrs()
   MarginProps.attrs()
   AsChildProps.attrs()
+  RadiusProps.attrs()
   attr(:size, :string, values: @sizes, default: "2", doc: "Callout size")
   attr(:variant, :string, values: @variants, default: "soft", doc: "Callout variant")
   attr(:class, :string, default: nil, doc: "Additional CSS classes")
@@ -72,6 +75,7 @@ defmodule EssenceUI.Components.Callout do
       |> Map.merge(HighContrastProps.prop_defs())
       |> Map.merge(MarginProps.prop_defs())
       |> Map.merge(AsChildProps.prop_defs())
+      |> Map.merge(RadiusProps.prop_defs())
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
@@ -82,11 +86,12 @@ defmodule EssenceUI.Components.Callout do
         class: class,
         style: extracted.style,
         color: assigns[:color] || false,
+        radius: assigns[:radius] || false,
         high_contrast: assigns[:high_contrast] || false
       )
 
     ~H"""
-    <div class={@class} style={@style} data-accent-color={@color} {@rest}>
+    <div class={@class} style={@style} data-accent-color={@color} data-radius={@radius} {@rest}>
       <div
         :if={@icon != []}
         class="rt-CalloutIcon"

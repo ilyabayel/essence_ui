@@ -22,7 +22,6 @@ defmodule EssenceUI.Components.Badge do
 
   @variants ["solid", "soft", "surface", "outline"]
   @sizes ["1", "2", "3"]
-  @radiuses ["none", "small", "medium", "large", "full"]
 
   @doc """
   Renders a badge component.
@@ -47,9 +46,9 @@ defmodule EssenceUI.Components.Badge do
   HighContrastProps.attrs()
   MarginProps.attrs()
   AsChildProps.attrs()
+  RadiusProps.attrs()
   attr :size, :string, values: @sizes, default: "1", doc: "Badge size"
   attr :variant, :string, values: @variants, default: "soft", doc: "Badge variant"
-  attr :radius, :string, default: nil, doc: "Border radius"
   attr :class, :string, default: nil, doc: "Additional CSS classes"
   attr :style, :string, default: nil, doc: "Additional inline styles"
   attr :rest, :global
@@ -60,13 +59,13 @@ defmodule EssenceUI.Components.Badge do
     prop_defs =
       %{
         size: %{type: :enum, values: @sizes, class: "rt-r-size", default: "1"},
-        variant: %{type: :enum, values: @variants, class: "rt-variant", default: "soft"},
-        radius: %{type: :enum, values: @radiuses, class: "rt-r-rd", default: nil}
+        variant: %{type: :enum, values: @variants, class: "rt-variant", default: "soft"}
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(HighContrastProps.prop_defs())
       |> Map.merge(MarginProps.prop_defs())
       |> Map.merge(AsChildProps.prop_defs())
+      |> Map.merge(RadiusProps.prop_defs())
 
     extracted = ExtractProps.call(assigns, prop_defs)
 

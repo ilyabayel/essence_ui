@@ -4,6 +4,10 @@ defmodule EssenceUI.Components.AlertDialog do
 
   import EssenceUI.Components, only: [dialog: 1, heading: 1, text: 1]
 
+  alias EssenceUI.SharedProps.RadiusProps
+
+  require RadiusProps
+
   attr :id, :string, required: true, doc: "Unique identifier for the alert dialog"
   attr :target, :string, required: true, doc: "The target element to attach the dialog to"
 
@@ -15,7 +19,7 @@ defmodule EssenceUI.Components.AlertDialog do
   attr :style, :string, default: ""
   attr :class, :string, default: ""
   attr :scaling, :string, default: "100%"
-  attr :radius, :string, default: "medium"
+  RadiusProps.attrs()
   attr :gray_color, :string, default: "slate"
   attr :accent_color, :string, default: "blue"
 
@@ -24,6 +28,8 @@ defmodule EssenceUI.Components.AlertDialog do
   slot :inner_block
 
   def alert_dialog(assigns) do
+    assigns = assign_new(assigns, :radius, fn -> "medium" end)
+
     ~H"""
     <.dialog
       id={@id}

@@ -25,7 +25,6 @@ defmodule EssenceUI.Components.Button do
 
   @variants ["classic", "solid", "soft", "surface", "outline", "ghost"]
   @sizes ["1", "2", "3", "4"]
-  @radiuses ["none", "small", "medium", "large", "full"]
 
   @doc """
   Renders a button. All props match Radix UI Button.
@@ -55,8 +54,8 @@ defmodule EssenceUI.Components.Button do
   WeightProps.attrs()
   MarginProps.attrs()
   PaddingProps.attrs()
+  RadiusProps.attrs()
   attr :as, :string, default: "button", values: ["button", "a"], doc: "Render as button or a tag."
-  attr :radius, :string, values: @radiuses, default: "medium", doc: "Border radius."
   attr :variant, :string, values: @variants, default: "solid", doc: "Button style variant."
   attr :size, :string, values: @sizes, default: "2", doc: "Button size."
   attr :type, :string, values: ["button", "submit", "reset"], default: "button", doc: "Button type."
@@ -79,6 +78,7 @@ defmodule EssenceUI.Components.Button do
       |> Map.merge(WeightProps.prop_defs())
       |> Map.merge(MarginProps.prop_defs())
       |> Map.merge(PaddingProps.prop_defs())
+      |> Map.merge(RadiusProps.prop_defs())
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
@@ -102,6 +102,7 @@ defmodule EssenceUI.Components.Button do
         class: class,
         style: extracted.style,
         color: assigns[:color] || false,
+        radius: assigns[:radius] || false,
         rest: assigns[:rest],
         props: %{
           disabled: assigns[:disabled] or assigns[:loading]

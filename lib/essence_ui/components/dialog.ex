@@ -11,10 +11,10 @@ defmodule EssenceUI.Components.Dialog do
 
   use Phoenix.Component
 
-  alias EssenceUI.SharedProps.MarginProps
+  alias EssenceUI.SharedProps.RadiusProps
   alias Phoenix.LiveView.JS
 
-  require MarginProps
+  require RadiusProps
 
   attr :target, :string, required: true, doc: "CSS selector for portal target"
   attr :default_state, :string, default: "closed", doc: "open closed"
@@ -22,12 +22,14 @@ defmodule EssenceUI.Components.Dialog do
   attr :style, :string, default: ""
   attr :class, :string, default: ""
   attr :scaling, :string, default: "100%"
-  attr :radius, :string, default: "medium"
+  RadiusProps.attrs()
   attr :gray_color, :string, default: "slate"
   attr :accent_color, :string, default: "blue"
   slot :inner_block, required: true
 
   def dialog(assigns) do
+    assigns = assign_new(assigns, :radius, fn -> "medium" end)
+
     ~H"""
     <.portal target={@target} id={@id <> "portal"}>
       <div

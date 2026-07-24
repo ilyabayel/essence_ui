@@ -18,7 +18,6 @@ defmodule EssenceUI.Components.Progress do
 
   @variants ["classic", "surface", "soft"]
   @sizes ["1", "2", "3"]
-  @radiuses ["none", "small", "medium", "large", "full"]
 
   @doc """
   Renders a progress component.
@@ -42,24 +41,26 @@ defmodule EssenceUI.Components.Progress do
 
   ColorProps.attrs()
   MarginProps.attrs()
+  RadiusProps.attrs()
   attr :value, :integer, required: true, doc: "Current progress value"
   attr :max, :integer, default: 100, doc: "Maximum progress value"
   attr :variant, :string, values: @variants, default: "surface", doc: "Progress variant"
   attr :size, :string, values: @sizes, default: "2", doc: "Progress size"
-  attr :radius, :string, values: @radiuses, default: "full", doc: "Border radius"
   attr :class, :string, default: nil, doc: "Additional CSS classes"
   attr :style, :string, default: nil, doc: "Additional inline styles"
   attr :rest, :global
 
   def progress(assigns) do
+    assigns = assign_new(assigns, :radius, fn -> "full" end)
+
     prop_defs =
       %{
         variant: %{type: :enum, values: @variants, class: "rt-variant", default: "surface"},
-        size: %{type: :enum, values: @sizes, class: "rt-r-size", default: "2"},
-        radius: %{type: :enum, values: @radiuses, class: "rt-r-rd", default: "full"}
+        size: %{type: :enum, values: @sizes, class: "rt-r-size", default: "2"}
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(MarginProps.prop_defs())
+      |> Map.merge(RadiusProps.prop_defs())
 
     extracted = ExtractProps.call(assigns, prop_defs)
 

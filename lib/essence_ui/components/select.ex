@@ -8,11 +8,9 @@ defmodule EssenceUI.Components.Select do
   alias EssenceUI.Primitives.Select, as: SelectPrimitive
   alias EssenceUI.SharedProps.ColorProps
   alias EssenceUI.SharedProps.HighContrastProps
-  alias EssenceUI.SharedProps.MarginProps
 
   require ColorProps
   require HighContrastProps
-  require MarginProps
 
   @sizes ["1", "2", "3"]
   @trigger_variants ["surface", "classic", "soft", "ghost"]
@@ -53,17 +51,19 @@ defmodule EssenceUI.Components.Select do
   attr :variant, :string, values: @trigger_variants, default: "surface"
   attr :size, :string, values: @sizes, default: "2"
   attr :placeholder, :string, default: nil
-  attr :color, :string, default: nil
+  ColorProps.attrs()
   attr :class, :string, default: nil
   attr :value, :string, default: nil, doc: "Initial value for SSR"
   attr :rest, :global
   slot :inner_block, required: false
 
   def select_trigger(assigns) do
-    prop_defs = %{
-      size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
-      variant: %{type: :enum, class: "rt-variant", values: @trigger_variants, default: "surface"}
-    }
+    prop_defs =
+      %{
+        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
+        variant: %{type: :enum, class: "rt-variant", values: @trigger_variants, default: "surface"}
+      }
+      |> Map.merge(ColorProps.color_prop_def())
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
