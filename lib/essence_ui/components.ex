@@ -111,9 +111,12 @@ defmodule EssenceUI.Components do
   defdelegate context_menu_trigger(assigns), to: ContextMenu
   defdelegate context_menu_content(assigns), to: ContextMenu
   defdelegate context_menu_item(assigns), to: ContextMenu
+  defdelegate context_menu_group(assigns), to: ContextMenu
   defdelegate context_menu_separator(assigns), to: ContextMenu
   defdelegate context_menu_label(assigns), to: ContextMenu
   defdelegate context_menu_checkbox_item(assigns), to: ContextMenu
+  defdelegate context_menu_radio_group(assigns), to: ContextMenu
+  defdelegate context_menu_radio_item(assigns), to: ContextMenu
   defdelegate context_menu_sub(assigns), to: ContextMenu
   defdelegate context_menu_sub_trigger(assigns), to: ContextMenu
   defdelegate context_menu_sub_content(assigns), to: ContextMenu
