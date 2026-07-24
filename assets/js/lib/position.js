@@ -11,6 +11,35 @@
  * @param {number} [options.collisionPadding=10]
  * @returns {{ top: number, left: number }}
  */
+/**
+ * Fixed positioning is relative to the viewport unless an ancestor creates a
+ * containing block (transform, perspective, filter, or will-change: transform).
+ * getBoundingClientRect is always viewport-relative, so subtract that offset.
+ * @param {Element} el
+ * @returns {{ top: number, left: number }}
+ */
+function getFixedContainingBlockOffset(el) {
+  let parent = el.parentElement;
+  while (parent && parent !== document.documentElement) {
+    const style = getComputedStyle(parent);
+    const willChange = style.willChange || "";
+    if (
+      style.transform !== "none" ||
+      style.perspective !== "none" ||
+      style.filter !== "none" ||
+      style.contain === "paint" ||
+      willChange.includes("transform") ||
+      willChange.includes("perspective") ||
+      willChange.includes("filter")
+    ) {
+      const rect = parent.getBoundingClientRect();
+      return { top: rect.top, left: rect.left };
+    }
+    parent = parent.parentElement;
+  }
+  return { top: 0, left: 0 };
+}
+
 export function positionFloating({
   trigger,
   content,
@@ -71,9 +100,14 @@ export function positionFloating({
     top = viewportHeight - contentHeight - collisionPadding;
   }
 
+  // Convert viewport coords → containing-block coords when needed.
+  const cb = getFixedContainingBlockOffset(content);
+  top -= cb.top;
+  left -= cb.left;
+
   content.style.position = "fixed";
   content.style.top = `${top}px`;
   content.style.left = `${left}px`;
 
-  return { top, left };
+  return { top, left, containingBlockOffset: cb };
 }

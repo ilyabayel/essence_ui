@@ -10,6 +10,7 @@ import {
   findMenuPart,
   toggleCheckboxItem,
   selectRadioItem,
+  bindMenuPointerHighlight,
 } from "../lib/menu";
 
 export const DropdownMenuRoot = {
@@ -40,6 +41,7 @@ export const DropdownMenuRoot = {
 
   destroyed() {
     this.unbindDismissable();
+    this.unlockScroll();
     if (this.trigger) {
       this.trigger.removeEventListener("click", this.onTriggerClick);
     }
@@ -187,6 +189,8 @@ export const DropdownMenuRoot = {
 
     this.bindSubmenus();
     closeOnItemClick(this.content, () => this.close());
+    bindMenuPointerHighlight(this.content);
+    this.lockScroll();
 
     this.content.removeEventListener("click", this.onItemClick);
     this.content.addEventListener("click", this.onItemClick);
@@ -218,6 +222,7 @@ export const DropdownMenuRoot = {
     this.typeahead.reset();
 
     this.closeAllSubs();
+    this.unlockScroll();
 
     if (this.trigger) {
       this.trigger.setAttribute("aria-expanded", "false");
@@ -322,6 +327,7 @@ export const DropdownMenuRoot = {
 
     this.openSubs.add(sub);
     closeOnItemClick(content, () => this.close());
+    bindMenuPointerHighlight(content);
   },
 
   closeSub(sub) {
@@ -356,6 +362,72 @@ export const DropdownMenuRoot = {
       ?.querySelectorAll("[data-essence-dropdown-menu-sub]")
       .forEach((sub) => this.closeSub(sub));
     this.openSubs.clear();
+  },
+
+  lockScroll() {
+    if (!this.el.hasAttribute("data-modal") || this._scrollLocked) return;
+
+    this._scrollLocked = {
+      bodyOverflow: document.body.style.overflow,
+      htmlOverflow: document.documentElement.style.overflow,
+    };
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    // Storybook (and many apps) scroll an inner container, not body — so also
+    // block wheel/touch outside the open menu layers.
+    this._onScrollBlock = (event) => {
+      const target = event.target;
+      const inMenu =
+        (this.content && this.content.contains(target)) ||
+        [...this.openSubs].some((sub) => sub.contains(target));
+      if (inMenu) return;
+      event.preventDefault();
+    };
+    document.addEventListener("wheel", this._onScrollBlock, {
+      passive: false,
+      capture: true,
+    });
+    document.addEventListener("touchmove", this._onScrollBlock, {
+      passive: false,
+      capture: true,
+    });
+
+    // Full-viewport layer so scroll targets always hit a node we control when
+    // the pointer is outside the menu (pointer-events none would let scroll through).
+    const overlay = document.createElement("div");
+    overlay.setAttribute("data-essence-dropdown-menu-scroll-lock", "");
+    Object.assign(overlay.style, {
+      position: "fixed",
+      inset: "0",
+      zIndex: "49",
+      background: "transparent",
+    });
+    // Clicks on the overlay dismiss via the existing dismissable layer (target
+    // is outside menu layers). Do not stopPropagation so pointerdown reaches it.
+    document.body.appendChild(overlay);
+    this._scrollOverlay = overlay;
+  },
+
+  unlockScroll() {
+    if (!this._scrollLocked) return;
+    document.body.style.overflow = this._scrollLocked.bodyOverflow;
+    document.documentElement.style.overflow = this._scrollLocked.htmlOverflow;
+    this._scrollLocked = null;
+
+    if (this._onScrollBlock) {
+      document.removeEventListener("wheel", this._onScrollBlock, {
+        capture: true,
+      });
+      document.removeEventListener("touchmove", this._onScrollBlock, {
+        capture: true,
+      });
+      this._onScrollBlock = null;
+    }
+    if (this._scrollOverlay) {
+      this._scrollOverlay.remove();
+      this._scrollOverlay = null;
+    }
   },
 
   unbindDismissable() {

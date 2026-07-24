@@ -16,7 +16,9 @@ export function getMenuItems(content) {
     (item) =>
       !item.hasAttribute("data-disabled") &&
       !item.disabled &&
-      item.getAttribute("aria-disabled") !== "true"
+      item.getAttribute("aria-disabled") !== "true" &&
+      // Only items belonging to this menu level (exclude nested submenus).
+      item.closest('[role="menu"]') === content
   );
 }
 
