@@ -2,23 +2,12 @@ defmodule EssenceUI.Components.ScrollArea do
   @moduledoc """
   A component for custom scrollbars.
 
-  Based on Radix UI Themes ScrollArea component.
-
-  ## Examples
-
-      <.scroll_area style="height: 200px">
-        <div style="padding: 20px">
-          <p>Long content here...</p>
-        </div>
-      </.scroll_area>
-
-  ## Props
-
-  - `size` - "1", "2", "3" (default: "1")
-  - `type` - "auto", "always", "scroll", "hover" (default: "hover")
-  - `scroll_hide_delay` - Delay in ms before hiding scrollbars (default: 600)
+  Based on EssenceUI.Primitives.ScrollArea / Radix UI Themes ScrollArea.
   """
   use Phoenix.Component
+
+  import EssenceUI.Primitives.ScrollArea,
+    only: [root: 1, viewport: 1, scrollbar: 1, thumb: 1, corner: 1]
 
   alias EssenceUI.Helpers.ExtractProps
   alias EssenceUI.SharedProps.HeightProps
@@ -35,13 +24,24 @@ defmodule EssenceUI.Components.ScrollArea do
 
   @sizes ["1", "2", "3"]
   @types ["auto", "always", "scroll", "hover"]
+  @scrollbars ["vertical", "horizontal", "both"]
 
   @doc """
   ScrollArea root component.
+
+  ## Props
+
+  - `size` - "1", "2", "3" (default: "1")
+  - `type` - "auto", "always", "scroll", "hover" (default: "hover")
+  - `scroll_hide_delay` - Delay in ms before hiding scrollbars (default: 600)
+  - `scrollbars` - Which scrollbars to show: "vertical", "horizontal", "both" (default: "both")
   """
+  attr :id, :string, default: nil
   attr :size, :string, values: @sizes, default: "1"
   attr :type, :string, values: @types, default: "hover"
   attr :scroll_hide_delay, :integer, default: 600
+  attr :scrollbars, :string, values: @scrollbars, default: "both"
+  attr :radius, :string, default: nil
   attr :class, :string, default: nil
   attr :style, :string, default: nil
   LayoutProps.attrs()
@@ -57,50 +57,66 @@ defmodule EssenceUI.Components.ScrollArea do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
+    id =
+      assigns[:id] ||
+        "scroll-area-#{5 |> :crypto.strong_rand_bytes() |> Base.encode32(padding: false, case: :lower)}"
+
+    class =
+      ["rt-ScrollAreaRoot", extracted.class, assigns[:class]]
+      |> Enum.filter(& &1)
+      |> Enum.join(" ")
+
+    style =
+      [extracted.style, assigns[:style]]
+      |> Enum.filter(& &1)
+      |> Enum.join("; ")
+
+    scrollbar_class =
+      ["rt-ScrollAreaScrollbar", "rt-r-size-#{assigns.size}"]
+      |> Enum.join(" ")
+
     assigns =
       assign(assigns,
-        extracted_class: extracted.class,
-        extracted_style: extracted.style
+        id: id,
+        class: class,
+        style: style,
+        scrollbar_class: scrollbar_class
       )
 
     ~H"""
-    <div
-      class={["rt-ScrollAreaRoot", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
-      style={
-        ["position: relative; overflow: hidden;", @extracted_style, @style]
-        |> Enum.filter(& &1)
-        |> Enum.join("; ")
-      }
-      data-type={@type}
-      data-scroll-hide-delay={@scroll_hide_delay}
-      phx-hook="ScrollArea"
-      id={assigns[:id] || "scroll-area-#{System.unique_integer([:positive])}"}
+    <.root
+      id={@id}
+      type={@type}
+      scroll_hide_delay={@scroll_hide_delay}
+      class={@class}
+      style={@style}
       {@rest}
     >
-      <div
-        class="rt-ScrollAreaViewport"
-        style="overflow: scroll; scrollbar-width: none; -ms-overflow-style: none; width: 100%; height: 100%;"
-      >
+      <.viewport class="rt-ScrollAreaViewport">
         {render_slot(@inner_block)}
-      </div>
+      </.viewport>
       <div class="rt-ScrollAreaViewportFocusRing"></div>
 
-      <div
-        class={["rt-ScrollAreaScrollbar rt-r-size-#{@size}"] |> Enum.join(" ")}
-        data-orientation="vertical"
-        style="position: absolute; top: 0; right: 0; bottom: 0;"
+      <.scrollbar
+        :if={@scrollbars in ["horizontal", "both"]}
+        orientation="horizontal"
+        class={@scrollbar_class}
+        data-radius={@radius}
       >
-        <div class="rt-ScrollAreaThumb"></div>
-      </div>
-      <div
-        class={["rt-ScrollAreaScrollbar rt-r-size-#{@size}"] |> Enum.join(" ")}
-        data-orientation="horizontal"
-        style="position: absolute; left: 0; bottom: 0; right: 0;"
+        <.thumb class="rt-ScrollAreaThumb" />
+      </.scrollbar>
+
+      <.scrollbar
+        :if={@scrollbars in ["vertical", "both"]}
+        orientation="vertical"
+        class={@scrollbar_class}
+        data-radius={@radius}
       >
-        <div class="rt-ScrollAreaThumb"></div>
-      </div>
-      <div class="rt-ScrollAreaCorner" style="position: absolute; bottom: 0; right: 0;"></div>
-    </div>
+        <.thumb class="rt-ScrollAreaThumb" />
+      </.scrollbar>
+
+      <.corner :if={@scrollbars == "both"} class="rt-ScrollAreaCorner" />
+    </.root>
     """
   end
 end

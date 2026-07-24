@@ -225,7 +225,8 @@ defmodule Storybook.Examples.RecruitingCrm do
           </.flex>
         </.scroll_area>
 
-        <.dialog id="candidate-detail" target="body" default_state="closed">
+        <.dialog_root id="candidate-detail">
+          <.dialog_content id="candidate-detail-content" target="body">
           <.flex
             direction="column"
             gap="4"
@@ -247,17 +248,16 @@ defmodule Storybook.Examples.RecruitingCrm do
               <.badge size="3" variant="soft">Sourced</.badge>
             </.flex>
 
-            <.tabs default_value="overview">
-              <:list :let={ctx}>
-                <.tabs_list size="2" tabs_id={ctx.tabs_id} default_value={ctx.default_value}>
-                  <:trigger value="overview">Overview</:trigger>
-                  <:trigger value="evaluation">Evaluation</:trigger>
-                  <:trigger value="notes">Notes</:trigger>
-                  <:trigger value="settings">Settings</:trigger>
+            <.tabs_root id="recruiting-crm-tabs" default_value="overview">
+                <.tabs_list size="2">
+                  <.tabs_trigger value="overview">Overview</.tabs_trigger>
+                  <.tabs_trigger value="evaluation">Evaluation</.tabs_trigger>
+                  <.tabs_trigger value="notes">Notes</.tabs_trigger>
+                  <.tabs_trigger value="settings">Settings</.tabs_trigger>
                 </.tabs_list>
-              </:list>
+              
 
-              <:content value="overview">
+              <.tabs_content value="overview">
                 <.flex direction="column" gap="4" mt="4">
                   <.grid columns="2" gap="4">
                     <.flex direction="column" gap="1">
@@ -280,9 +280,9 @@ defmodule Storybook.Examples.RecruitingCrm do
                     </.select_root>
                   </.flex>
                 </.flex>
-              </:content>
+              </.tabs_content>
 
-              <:content value="evaluation">
+              <.tabs_content value="evaluation">
                 <.flex direction="column" gap="5" mt="4">
                   <.flex direction="column" gap="2">
                     <.text size="2" weight="bold">Technical Skill Score</.text>
@@ -313,16 +313,16 @@ defmodule Storybook.Examples.RecruitingCrm do
                     </.checkbox_group>
                   </.flex>
                 </.flex>
-              </:content>
+              </.tabs_content>
 
-              <:content value="notes">
+              <.tabs_content value="notes">
                 <.flex direction="column" gap="3" mt="4">
                   <.text_area placeholder="Add private feedback notes..." style="height: 150px;" />
                   <.button variant="solid">Save Note</.button>
                 </.flex>
-              </:content>
+              </.tabs_content>
 
-              <:content value="settings">
+              <.tabs_content value="settings">
                 <.flex direction="column" gap="4" mt="4">
                   <.flex justify="space-between" align="center">
                     <.flex direction="column">
@@ -334,10 +334,11 @@ defmodule Storybook.Examples.RecruitingCrm do
                   <.separator size="4" />
                   <.button variant="soft" color="red" style="width: 100%;">Archive Candidate</.button>
                 </.flex>
-              </:content>
-            </.tabs>
+              </.tabs_content>
+            </.tabs_root>
           </.flex>
-        </.dialog>
+          </.dialog_content>
+        </.dialog_root>
       </.flex>
     </div>
     """

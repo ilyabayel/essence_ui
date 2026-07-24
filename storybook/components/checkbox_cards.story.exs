@@ -28,20 +28,20 @@ defmodule Storybook.Components.CheckboxCards do
         id: :default,
         description: "Default checkbox cards with product selection",
         template: """
-        <.checkbox_cards_root default_value={["1"]} columns="3">
-          <.checkbox_cards_item value="1">
+        <.checkbox_cards_root id="checkbox-cards-default" default_value={["1"]} columns="3" :let={ctx}>
+          <.checkbox_cards_item value="1" {ctx}>
             <.flex direction="column" width="100%">
               <.text weight="bold">A1 Keyboard</.text>
               <.text>US Layout</.text>
             </.flex>
           </.checkbox_cards_item>
-          <.checkbox_cards_item value="2">
+          <.checkbox_cards_item value="2" {ctx}>
             <.flex direction="column" width="100%">
               <.text weight="bold">Pro Mouse</.text>
               <.text>Zero-lag wireless</.text>
             </.flex>
           </.checkbox_cards_item>
-          <.checkbox_cards_item value="3">
+          <.checkbox_cards_item value="3" {ctx}>
             <.flex direction="column" width="100%">
               <.text weight="bold">Lightning Mat</.text>
               <.text>Wireless charging</.text>

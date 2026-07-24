@@ -44,6 +44,14 @@ function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {
     updated() {
       this.resolveParts();
       this.bindStaticListeners();
+
+      const shouldBeOpen = this.el.dataset.state === "open";
+      const isOpen = this.content && !this.content.hidden;
+      if (shouldBeOpen && !isOpen) {
+        this.open(true);
+      } else if (!shouldBeOpen && isOpen) {
+        this.close();
+      }
     },
 
     destroyed() {

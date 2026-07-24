@@ -14,8 +14,19 @@ defmodule EssenceUI.Components do
     * `checkbox_cards_root/1` - See `EssenceUI.Components.CheckboxCards`
     * `checkbox_cards_item/1` - See `EssenceUI.Components.CheckboxCards`
     * `checkbox_group/1` - See `EssenceUI.Components.CheckboxGroup`
-    * `dialog/1` - See `EssenceUI.Components.Dialog`
-    * `alert_dialog/1` - See `EssenceUI.Components.AlertDialog`
+    * `dialog_root/1` - See `EssenceUI.Components.Dialog`
+    * `dialog_trigger/1` - See `EssenceUI.Components.Dialog`
+    * `dialog_content/1` - See `EssenceUI.Components.Dialog`
+    * `dialog_title/1` - See `EssenceUI.Components.Dialog`
+    * `dialog_description/1` - See `EssenceUI.Components.Dialog`
+    * `dialog_close/1` - See `EssenceUI.Components.Dialog`
+    * `alert_dialog_root/1` - See `EssenceUI.Components.AlertDialog`
+    * `alert_dialog_trigger/1` - See `EssenceUI.Components.AlertDialog`
+    * `alert_dialog_content/1` - See `EssenceUI.Components.AlertDialog`
+    * `alert_dialog_title/1` - See `EssenceUI.Components.AlertDialog`
+    * `alert_dialog_description/1` - See `EssenceUI.Components.AlertDialog`
+    * `alert_dialog_action/1` - See `EssenceUI.Components.AlertDialog`
+    * `alert_dialog_cancel/1` - See `EssenceUI.Components.AlertDialog`
     * `icon_button/1` - See `EssenceUI.Components.IconButton`
     * `progress/1` - See `EssenceUI.Components.Progress`
     * `radio/1` - See `EssenceUI.Components.Radio`
@@ -24,6 +35,11 @@ defmodule EssenceUI.Components do
     * `radio_cards_root/1` - See `EssenceUI.Components.RadioCards`
     * `radio_group/1` - See `EssenceUI.Components.RadioGroup`
     * `segmented_control/1` - See `EssenceUI.Components.SegmentedControl`
+    * `segmented_control_item/1` - See `EssenceUI.Components.SegmentedControl`
+    * `tabs_root/1` - See `EssenceUI.Components.Tabs`
+    * `tabs_list/1` - See `EssenceUI.Components.Tabs`
+    * `tabs_trigger/1` - See `EssenceUI.Components.Tabs`
+    * `tabs_content/1` - See `EssenceUI.Components.Tabs`
     * `select_root/1` - See `EssenceUI.Components.Select`
     * `select_trigger/1` - See `EssenceUI.Components.Select`
     * `select_content/1` - See `EssenceUI.Components.Select`
@@ -125,15 +141,28 @@ defmodule EssenceUI.Components do
   defdelegate dropdown_menu_trigger_icon(assigns), to: DropdownMenu
   defdelegate dropdown_menu_content(assigns), to: DropdownMenu
   defdelegate dropdown_menu_item(assigns), to: DropdownMenu
+  defdelegate dropdown_menu_group(assigns), to: DropdownMenu
   defdelegate dropdown_menu_separator(assigns), to: DropdownMenu
   defdelegate dropdown_menu_label(assigns), to: DropdownMenu
   defdelegate dropdown_menu_checkbox_item(assigns), to: DropdownMenu
+  defdelegate dropdown_menu_radio_group(assigns), to: DropdownMenu
   defdelegate dropdown_menu_radio_item(assigns), to: DropdownMenu
   defdelegate dropdown_menu_sub(assigns), to: DropdownMenu
   defdelegate dropdown_menu_sub_trigger(assigns), to: DropdownMenu
   defdelegate dropdown_menu_sub_content(assigns), to: DropdownMenu
-  defdelegate dialog(assigns), to: EssenceUI.Components.Dialog
-  defdelegate alert_dialog(assigns), to: EssenceUI.Components.AlertDialog
+  defdelegate dialog_root(assigns), to: EssenceUI.Components.Dialog
+  defdelegate dialog_trigger(assigns), to: EssenceUI.Components.Dialog
+  defdelegate dialog_content(assigns), to: EssenceUI.Components.Dialog
+  defdelegate dialog_title(assigns), to: EssenceUI.Components.Dialog
+  defdelegate dialog_description(assigns), to: EssenceUI.Components.Dialog
+  defdelegate dialog_close(assigns), to: EssenceUI.Components.Dialog
+  defdelegate alert_dialog_root(assigns), to: EssenceUI.Components.AlertDialog
+  defdelegate alert_dialog_trigger(assigns), to: EssenceUI.Components.AlertDialog
+  defdelegate alert_dialog_content(assigns), to: EssenceUI.Components.AlertDialog
+  defdelegate alert_dialog_title(assigns), to: EssenceUI.Components.AlertDialog
+  defdelegate alert_dialog_description(assigns), to: EssenceUI.Components.AlertDialog
+  defdelegate alert_dialog_action(assigns), to: EssenceUI.Components.AlertDialog
+  defdelegate alert_dialog_cancel(assigns), to: EssenceUI.Components.AlertDialog
   defdelegate icon_button(assigns), to: EssenceUI.Components.IconButton
   defdelegate progress(assigns), to: EssenceUI.Components.Progress
   defdelegate radio(assigns), to: EssenceUI.Components.Radio
@@ -142,6 +171,7 @@ defmodule EssenceUI.Components do
   defdelegate radio_group_root(assigns), to: RadioGroup
   defdelegate radio_group_item(assigns), to: RadioGroup
   defdelegate segmented_control(assigns), to: EssenceUI.Components.SegmentedControl
+  defdelegate segmented_control_item(assigns), to: EssenceUI.Components.SegmentedControl
   defdelegate select_root(assigns), to: Select
   defdelegate select_trigger(assigns), to: Select
   defdelegate select_content(assigns), to: Select
@@ -173,6 +203,7 @@ defmodule EssenceUI.Components do
   defdelegate popover_trigger(assigns), to: Popover
   defdelegate popover_content(assigns), to: Popover
   defdelegate popover_close(assigns), to: Popover
+  defdelegate popover_anchor(assigns), to: Popover
   defdelegate tab_nav(assigns), to: TabNav
   defdelegate tab_nav_link(assigns), to: TabNav
   defdelegate tooltip(assigns), to: EssenceUI.Components.Tooltip
@@ -197,6 +228,8 @@ defmodule EssenceUI.Components do
   defdelegate section(assigns), to: EssenceUI.Components.Section
 
   # Overlays
-  defdelegate tabs(assigns), to: Tabs
+  defdelegate tabs_root(assigns), to: Tabs
   defdelegate tabs_list(assigns), to: Tabs
+  defdelegate tabs_trigger(assigns), to: Tabs
+  defdelegate tabs_content(assigns), to: Tabs
 end

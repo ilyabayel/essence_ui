@@ -1,9 +1,9 @@
 defmodule EssenceUI.Components.ContextMenu do
   @moduledoc """
-  Context Menu styled per Radix Themes Context Menu.
+  Context Menu component compatible with Radix UI Themes ContextMenu API.
 
-  Wraps `EssenceUI.Primitives.ContextMenu` with Themes visual props
-  (`size`, `variant`, `color`, `high_contrast`, `shortcut`).
+  Based on EssenceUI.Primitives.ContextMenu.
+  See: https://www.radix-ui.com/themes/docs/components/context-menu
   """
   use Phoenix.Component
 
@@ -18,9 +18,6 @@ defmodule EssenceUI.Components.ContextMenu do
   @sizes ["1", "2"]
   @variants ["solid", "soft"]
 
-  @doc """
-  Root container for the context menu.
-  """
   attr :id, :string, default: nil
   attr :open, :boolean, default: false
   attr :default_open, :boolean, default: false
@@ -33,8 +30,11 @@ defmodule EssenceUI.Components.ContextMenu do
   slot :inner_block, required: true
 
   def context_menu_root(assigns) do
-    assigns =
-      assign_new(assigns, :id, fn -> "context-menu-#{System.unique_integer([:positive])}" end)
+    id =
+      assigns[:id] ||
+        "context-menu-#{5 |> :crypto.strong_rand_bytes() |> Base.encode32(padding: false, case: :lower)}"
+
+    assigns = assign(assigns, id: id)
 
     ~H"""
     <ContextMenuPrimitive.root
@@ -53,13 +53,11 @@ defmodule EssenceUI.Components.ContextMenu do
     """
   end
 
-  @doc """
-  The area that opens the context menu on right-click.
-  """
   attr :id, :string, default: nil
   attr :content_id, :string, default: nil
   attr :disabled, :boolean, default: false
   attr :class, :string, default: nil
+  attr :style, :string, default: ""
   attr :rest, :global
   slot :inner_block, required: true
 
@@ -69,22 +67,23 @@ defmodule EssenceUI.Components.ContextMenu do
       id={@id}
       content_id={@content_id}
       disabled={@disabled}
-      class={["rt-ContextMenuTrigger", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
-      {Map.delete(@rest, :class)}
+      as_child
+      class={["rt-ContextMenuTrigger", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      style={@style}
+      {@rest}
     >
       {render_slot(@inner_block)}
     </ContextMenuPrimitive.trigger>
     """
   end
 
-  @doc """
-  The menu content. Portals into `container` (default `"body"`) like Radix Themes.
-  """
   attr :id, :string, default: nil
+  attr :target, :string, default: "body"
   attr :size, :string, values: @sizes, default: "2"
   attr :variant, :string, values: @variants, default: "solid"
-  attr :container, :string, default: "body"
+  attr :loop, :boolean, default: true
   attr :class, :string, default: nil
+  attr :style, :string, default: ""
   ColorProps.attrs()
   HighContrastProps.attrs()
   attr :rest, :global
@@ -101,32 +100,43 @@ defmodule EssenceUI.Components.ContextMenu do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    assigns =
-      assign_new(assigns, :id, fn -> "context-menu-content-#{System.unique_integer([:positive])}" end)
+    id =
+      assigns[:id] ||
+        "context-menu-content-#{5 |> :crypto.strong_rand_bytes() |> Base.encode32(padding: false, case: :lower)}"
+
+    class =
+      [
+        "rt-PopperContent",
+        "rt-BaseMenuContent",
+        "rt-ContextMenuContent",
+        extracted.class,
+        assigns[:class]
+      ]
+      |> Enum.filter(& &1)
+      |> Enum.join(" ")
+
+    style =
+      [extracted.style, assigns[:style]]
+      |> Enum.filter(&(&1 != "" and &1))
+      |> Enum.join("; ")
 
     assigns =
       assign(assigns,
-        class:
-          [
-            "rt-PopperContent",
-            "rt-BaseMenuContent",
-            "rt-ContextMenuContent",
-            extracted.class,
-            assigns.class
-          ]
-          |> Enum.filter(& &1)
-          |> Enum.join(" "),
-        portal_id: "#{assigns.id}-portal"
+        id: id,
+        portal_id: "#{id}-portal",
+        class: class,
+        style: style
       )
 
     ~H"""
-    <ContextMenuPrimitive.portal id={@portal_id} target={@container}>
+    <ContextMenuPrimitive.portal id={@portal_id} target={@target}>
       <ContextMenuPrimitive.content
         id={@id}
-        class={[@class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
+        loop={@loop}
+        class={@class}
+        style={@style}
         data-accent-color={assigns[:color]}
-        style="display: none; position: fixed; z-index: 9999; min-width: 8rem;"
-        {Map.delete(@rest, :class)}
+        {@rest}
       >
         <div class="rt-BaseMenuViewport">
           {render_slot(@inner_block)}
@@ -136,80 +146,7 @@ defmodule EssenceUI.Components.ContextMenu do
     """
   end
 
-  @doc """
-  A standard menu item.
-  """
-  attr :shortcut, :string, default: nil
-  attr :color, :string, default: nil
-  attr :disabled, :boolean, default: false
-  attr :text_value, :string, default: nil
-  attr :class, :string, default: nil
-  attr :rest, :global, include: ~w(phx-click phx-target value href)
-  slot :inner_block, required: true
-
-  def context_menu_item(assigns) do
-    ~H"""
-    <ContextMenuPrimitive.item
-      disabled={@disabled}
-      text_value={@text_value}
-      class={
-        ["rt-reset", "rt-BaseMenuItem", "rt-ContextMenuItem", @class, @rest[:class]]
-        |> Enum.filter(& &1)
-        |> Enum.join(" ")
-      }
-      data-accent-color={@color}
-      {Map.delete(@rest, :class)}
-    >
-      {render_slot(@inner_block)}
-      <div :if={@shortcut} class="rt-BaseMenuShortcut">{@shortcut}</div>
-    </ContextMenuPrimitive.item>
-    """
-  end
-
-  @doc """
-  Groups multiple items.
-  """
-  attr :class, :string, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
-
-  def context_menu_group(assigns) do
-    ~H"""
-    <ContextMenuPrimitive.group
-      class={
-        ["rt-BaseMenuGroup", "rt-ContextMenuGroup", @class, @rest[:class]]
-        |> Enum.filter(& &1)
-        |> Enum.join(" ")
-      }
-      {Map.delete(@rest, :class)}
-    >
-      {render_slot(@inner_block)}
-    </ContextMenuPrimitive.group>
-    """
-  end
-
-  @doc """
-  Visual separator between items.
-  """
-  attr :class, :string, default: nil
-  attr :rest, :global
-
-  def context_menu_separator(assigns) do
-    ~H"""
-    <ContextMenuPrimitive.separator
-      class={
-        ["rt-BaseMenuSeparator", "rt-ContextMenuSeparator", @class, @rest[:class]]
-        |> Enum.filter(& &1)
-        |> Enum.join(" ")
-      }
-      {Map.delete(@rest, :class)}
-    />
-    """
-  end
-
-  @doc """
-  Non-interactive label.
-  """
+  attr :id, :string, default: nil
   attr :class, :string, default: nil
   attr :rest, :global
   slot :inner_block, required: true
@@ -217,24 +154,70 @@ defmodule EssenceUI.Components.ContextMenu do
   def context_menu_label(assigns) do
     ~H"""
     <ContextMenuPrimitive.label
+      id={@id}
       class={
-        ["rt-BaseMenuLabel", "rt-ContextMenuLabel", @class, @rest[:class]]
-        |> Enum.filter(& &1)
-        |> Enum.join(" ")
+        ["rt-BaseMenuLabel", "rt-ContextMenuLabel", @class] |> Enum.filter(& &1) |> Enum.join(" ")
       }
-      {Map.delete(@rest, :class)}
+      {@rest}
     >
       {render_slot(@inner_block)}
     </ContextMenuPrimitive.label>
     """
   end
 
-  @doc """
-  Menu item with checkbox behavior.
-  """
-  attr :checked, :boolean, default: false
+  attr :id, :string, default: nil
   attr :shortcut, :string, default: nil
   attr :color, :string, default: nil
+  attr :disabled, :boolean, default: false
+  attr :text_value, :string, default: nil
+  attr :class, :string, default: nil
+  attr :style, :string, default: ""
+  attr :rest, :global, include: ~w(phx-click phx-target value href)
+  slot :inner_block, required: true
+
+  def context_menu_item(assigns) do
+    ~H"""
+    <ContextMenuPrimitive.item
+      id={@id}
+      disabled={@disabled}
+      text_value={@text_value}
+      class={
+        ["rt-reset", "rt-BaseMenuItem", "rt-ContextMenuItem", @class]
+        |> Enum.filter(& &1)
+        |> Enum.join(" ")
+      }
+      style={@style}
+      data-accent-color={@color}
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+      <%= if @shortcut do %>
+        <div class="rt-BaseMenuShortcut">{@shortcut}</div>
+      <% end %>
+    </ContextMenuPrimitive.item>
+    """
+  end
+
+  attr :id, :string, default: nil
+  attr :class, :string, default: nil
+  attr :rest, :global
+  slot :inner_block, required: true
+
+  def context_menu_group(assigns) do
+    ~H"""
+    <ContextMenuPrimitive.group
+      id={@id}
+      class={["rt-ContextMenuGroup", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </ContextMenuPrimitive.group>
+    """
+  end
+
+  attr :id, :string, default: nil
+  attr :checked, :boolean, default: false
+  attr :shortcut, :string, default: nil
   attr :disabled, :boolean, default: false
   attr :text_value, :string, default: nil
   attr :class, :string, default: nil
@@ -244,30 +227,18 @@ defmodule EssenceUI.Components.ContextMenu do
   def context_menu_checkbox_item(assigns) do
     ~H"""
     <ContextMenuPrimitive.checkbox_item
+      id={@id}
       checked={@checked}
       disabled={@disabled}
       text_value={@text_value}
       class={
-        [
-          "rt-reset",
-          "rt-BaseMenuItem",
-          "rt-BaseMenuCheckboxItem",
-          "rt-ContextMenuItem",
-          "rt-ContextMenuCheckboxItem",
-          @class,
-          @rest[:class]
-        ]
+        ["rt-reset", "rt-BaseMenuItem", "rt-ContextMenuItem", "rt-BaseMenuCheckboxItem", @class]
         |> Enum.filter(& &1)
         |> Enum.join(" ")
       }
-      data-accent-color={@color}
-      {Map.delete(@rest, :class)}
+      {@rest}
     >
-      {render_slot(@inner_block)}
-      <ContextMenuPrimitive.item_indicator
-        force_mount={@checked}
-        class="rt-BaseMenuItemIndicator rt-ContextMenuItemIndicator"
-      >
+      <ContextMenuPrimitive.item_indicator class="rt-BaseMenuItemIndicator" force_mount={@checked}>
         <svg
           width="15"
           height="15"
@@ -285,14 +256,15 @@ defmodule EssenceUI.Components.ContextMenu do
           </path>
         </svg>
       </ContextMenuPrimitive.item_indicator>
-      <div :if={@shortcut} class="rt-BaseMenuShortcut">{@shortcut}</div>
+      {render_slot(@inner_block)}
+      <%= if @shortcut do %>
+        <div class="rt-BaseMenuShortcut">{@shortcut}</div>
+      <% end %>
     </ContextMenuPrimitive.checkbox_item>
     """
   end
 
-  @doc """
-  Groups radio items.
-  """
+  attr :id, :string, default: nil
   attr :value, :string, default: nil
   attr :class, :string, default: nil
   attr :rest, :global
@@ -301,25 +273,20 @@ defmodule EssenceUI.Components.ContextMenu do
   def context_menu_radio_group(assigns) do
     ~H"""
     <ContextMenuPrimitive.radio_group
+      id={@id}
       value={@value}
-      class={
-        ["rt-BaseMenuRadioGroup", "rt-ContextMenuRadioGroup", @class, @rest[:class]]
-        |> Enum.filter(& &1)
-        |> Enum.join(" ")
-      }
-      {Map.delete(@rest, :class)}
+      class={["rt-ContextMenuRadioGroup", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      {@rest}
     >
       {render_slot(@inner_block)}
     </ContextMenuPrimitive.radio_group>
     """
   end
 
-  @doc """
-  A radio menu item.
-  """
+  attr :id, :string, default: nil
   attr :value, :string, required: true
   attr :checked, :boolean, default: false
-  attr :color, :string, default: nil
+  attr :shortcut, :string, default: nil
   attr :disabled, :boolean, default: false
   attr :text_value, :string, default: nil
   attr :class, :string, default: nil
@@ -329,31 +296,19 @@ defmodule EssenceUI.Components.ContextMenu do
   def context_menu_radio_item(assigns) do
     ~H"""
     <ContextMenuPrimitive.radio_item
+      id={@id}
       value={@value}
       checked={@checked}
       disabled={@disabled}
       text_value={@text_value}
       class={
-        [
-          "rt-reset",
-          "rt-BaseMenuItem",
-          "rt-BaseMenuRadioItem",
-          "rt-ContextMenuItem",
-          "rt-ContextMenuRadioItem",
-          @class,
-          @rest[:class]
-        ]
+        ["rt-reset", "rt-BaseMenuItem", "rt-ContextMenuItem", "rt-BaseMenuRadioItem", @class]
         |> Enum.filter(& &1)
         |> Enum.join(" ")
       }
-      data-accent-color={@color}
-      {Map.delete(@rest, :class)}
+      {@rest}
     >
-      {render_slot(@inner_block)}
-      <ContextMenuPrimitive.item_indicator
-        force_mount={@checked}
-        class="rt-BaseMenuItemIndicator rt-ContextMenuItemIndicator"
-      >
+      <ContextMenuPrimitive.item_indicator class="rt-BaseMenuItemIndicator" force_mount={@checked}>
         <svg
           width="15"
           height="15"
@@ -363,19 +318,39 @@ defmodule EssenceUI.Components.ContextMenu do
           class="rt-BaseMenuItemIndicatorIcon"
         >
           <path
-            d="M9.875 7.5C9.875 8.81168 8.81168 9.875 7.5 9.875C6.18832 9.875 5.125 8.81168 5.125 7.5C5.125 6.18832 6.18832 5.125 7.5 5.125C8.81168 5.125 9.875 6.18832 9.875 7.5Z"
+            d="M7.5 10C8.88071 10 10 8.88071 10 7.5C10 6.11929 8.88071 5 7.5 5C6.11929 5 5 6.11929 5 7.5C5 8.88071 6.11929 10 7.5 10Z"
             fill="currentColor"
           >
           </path>
         </svg>
       </ContextMenuPrimitive.item_indicator>
+      {render_slot(@inner_block)}
+      <%= if @shortcut do %>
+        <div class="rt-BaseMenuShortcut">{@shortcut}</div>
+      <% end %>
     </ContextMenuPrimitive.radio_item>
     """
   end
 
-  @doc """
-  Sub-menu container.
-  """
+  attr :id, :string, default: nil
+  attr :class, :string, default: nil
+  attr :rest, :global
+
+  def context_menu_separator(assigns) do
+    ~H"""
+    <ContextMenuPrimitive.separator
+      id={@id}
+      class={
+        ["rt-BaseMenuSeparator", "rt-ContextMenuSeparator", @class]
+        |> Enum.filter(& &1)
+        |> Enum.join(" ")
+      }
+      {@rest}
+    />
+    """
+  end
+
+  attr :id, :string, default: nil
   attr :open, :boolean, default: false
   attr :class, :string, default: nil
   attr :rest, :global
@@ -384,18 +359,17 @@ defmodule EssenceUI.Components.ContextMenu do
   def context_menu_sub(assigns) do
     ~H"""
     <ContextMenuPrimitive.sub
+      id={@id}
       open={@open}
-      class={["rt-ContextMenuSub", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
-      {Map.delete(@rest, :class)}
+      class={["rt-ContextMenuSub", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      {@rest}
     >
       {render_slot(@inner_block)}
     </ContextMenuPrimitive.sub>
     """
   end
 
-  @doc """
-  Trigger for a sub-menu.
-  """
+  attr :id, :string, default: nil
   attr :disabled, :boolean, default: false
   attr :text_value, :string, default: nil
   attr :class, :string, default: nil
@@ -405,22 +379,15 @@ defmodule EssenceUI.Components.ContextMenu do
   def context_menu_sub_trigger(assigns) do
     ~H"""
     <ContextMenuPrimitive.sub_trigger
+      id={@id}
       disabled={@disabled}
       text_value={@text_value}
       class={
-        [
-          "rt-reset",
-          "rt-BaseMenuItem",
-          "rt-BaseMenuSubTrigger",
-          "rt-ContextMenuItem",
-          "rt-ContextMenuSubTrigger",
-          @class,
-          @rest[:class]
-        ]
+        ["rt-reset", "rt-BaseMenuItem", "rt-ContextMenuSubTrigger", @class]
         |> Enum.filter(& &1)
         |> Enum.join(" ")
       }
-      {Map.delete(@rest, :class)}
+      {@rest}
     >
       {render_slot(@inner_block)}
       <div class="rt-BaseMenuShortcut">
@@ -445,47 +412,22 @@ defmodule EssenceUI.Components.ContextMenu do
     """
   end
 
-  @doc """
-  Content of a sub-menu.
-  """
   attr :id, :string, default: nil
   attr :side, :string, values: ["top", "right", "bottom", "left"], default: "right"
   attr :align, :string, values: ["start", "center", "end"], default: "start"
-  attr :side_offset, :integer, default: 1
-  attr :size, :string, values: @sizes, default: "2"
-  attr :variant, :string, values: @variants, default: "solid"
+  attr :side_offset, :integer, default: 0
   attr :class, :string, default: nil
-  ColorProps.attrs()
-  HighContrastProps.attrs()
+  attr :style, :string, default: ""
   attr :rest, :global
   slot :inner_block, required: true
 
   def context_menu_sub_content(assigns) do
-    prop_defs =
-      %{
-        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
-        variant: %{type: :enum, class: "rt-variant", values: @variants, default: "solid"}
-      }
-      |> Map.merge(ColorProps.color_prop_def())
-      |> Map.merge(HighContrastProps.prop_defs())
+    class =
+      ["rt-PopperContent", "rt-BaseMenuContent", "rt-ContextMenuSubContent", assigns[:class]]
+      |> Enum.filter(& &1)
+      |> Enum.join(" ")
 
-    extracted = ExtractProps.call(assigns, prop_defs)
-
-    assigns =
-      assign(assigns,
-        class:
-          [
-            "rt-PopperContent",
-            "rt-BaseMenuContent",
-            "rt-BaseMenuSubContent",
-            "rt-ContextMenuContent",
-            "rt-ContextMenuSubContent",
-            extracted.class,
-            assigns.class
-          ]
-          |> Enum.filter(& &1)
-          |> Enum.join(" ")
-      )
+    assigns = assign(assigns, class: class)
 
     ~H"""
     <ContextMenuPrimitive.sub_content
@@ -493,10 +435,9 @@ defmodule EssenceUI.Components.ContextMenu do
       side={@side}
       align={@align}
       side_offset={@side_offset}
-      class={[@class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
-      data-accent-color={assigns[:color]}
-      style="display: none; position: fixed; z-index: 10001; min-width: 8rem;"
-      {Map.delete(@rest, :class)}
+      class={@class}
+      style={@style}
+      {@rest}
     >
       <div class="rt-BaseMenuViewport">
         {render_slot(@inner_block)}

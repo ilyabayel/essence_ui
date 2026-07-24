@@ -2,14 +2,21 @@ defmodule Storybook.Components.AlertDialogStory do
   @moduledoc false
   use PhoenixStorybook.Story, :component
 
-  def function, do: &EssenceUI.Components.AlertDialog.alert_dialog/1
+  def function, do: &EssenceUI.Components.AlertDialog.alert_dialog_root/1
 
   def imports,
     do: [
-      {EssenceUI.Components.Button, button: 1},
-      {EssenceUI.Components.Text, text: 1},
-      {EssenceUI.Components.Heading, heading: 1},
-      {EssenceUI.Components.Flex, flex: 1}
+      {EssenceUI.Components,
+       [
+         alert_dialog_trigger: 1,
+         alert_dialog_content: 1,
+         alert_dialog_title: 1,
+         alert_dialog_description: 1,
+         alert_dialog_action: 1,
+         alert_dialog_cancel: 1,
+         button: 1,
+         flex: 1
+       ]}
     ]
 
   def container,
@@ -28,25 +35,25 @@ defmodule Storybook.Components.AlertDialogStory do
       %Variation{
         id: :default,
         template: """
-          <.alert_dialog id="alert-dialog" target=".psb-sandbox" default_state="closed">
-            <:title>
-              Revoke access
-            </:title>
-            <:description>
+        <.alert_dialog_root id="alert-dialog">
+          <.alert_dialog_trigger>
+            <.button color="red">Revoke access</.button>
+          </.alert_dialog_trigger>
+          <.alert_dialog_content id="alert-dialog-content" target=".psb-sandbox">
+            <.alert_dialog_title>Revoke access</.alert_dialog_title>
+            <.alert_dialog_description>
               Are you sure? This application will no longer be accessible and any existing sessions will be expired.
-            </:description>
+            </.alert_dialog_description>
             <.flex gap="3" mt="4" justify="end">
-              <.button color="gray" variant="soft" phx-click={JS.dispatch("close", to: "#alert-dialog")}>
-                Cancel
-              </.button>
-              <.button phx-click={JS.dispatch("close", to: "#alert-dialog")} color="red">
-                Revoke access
-              </.button>
+              <.alert_dialog_cancel>
+                <.button color="gray" variant="soft">Cancel</.button>
+              </.alert_dialog_cancel>
+              <.alert_dialog_action>
+                <.button color="red">Revoke access</.button>
+              </.alert_dialog_action>
             </.flex>
-          </.alert_dialog>
-          <.button phx-click={JS.dispatch("open", to: "#alert-dialog")} color="red">
-            Revoke access
-          </.button>
+          </.alert_dialog_content>
+        </.alert_dialog_root>
         """
       }
     ]

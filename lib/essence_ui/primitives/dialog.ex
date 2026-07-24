@@ -30,12 +30,26 @@ defmodule EssenceUI.Primitives.Dialog do
   end
 
   attr :id, :string, default: nil
+  attr :as_child, :boolean, default: false
   attr :rest, :global
   slot :inner_block, required: true
 
   def trigger(assigns) do
     ~H"""
+    <span
+      :if={@as_child}
+      id={@id}
+      data-essence-dialog-trigger
+      data-state="closed"
+      aria-haspopup="dialog"
+      aria-expanded="false"
+      style="display: contents;"
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </span>
     <button
+      :if={!@as_child}
       id={@id}
       type="button"
       data-essence-dialog-trigger
@@ -125,12 +139,22 @@ defmodule EssenceUI.Primitives.Dialog do
   end
 
   attr :id, :string, default: nil
+  attr :as_child, :boolean, default: false
   attr :rest, :global
   slot :inner_block, required: true
 
   def close(assigns) do
     ~H"""
-    <button id={@id} type="button" data-essence-dialog-close {@rest}>
+    <span
+      :if={@as_child}
+      id={@id}
+      data-essence-dialog-close
+      style="display: contents;"
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </span>
+    <button :if={!@as_child} id={@id} type="button" data-essence-dialog-close {@rest}>
       {render_slot(@inner_block)}
     </button>
     """

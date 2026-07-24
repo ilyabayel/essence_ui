@@ -1,6 +1,7 @@
 import { positionFloating } from "../lib/position";
 import { setOpen, setClosed } from "../lib/presence";
 import { bindDismissableLayer } from "../lib/dismissable_layer";
+import { applyPortalTheme } from "../lib/theme";
 import {
   getMenuItems,
   focusItem,
@@ -168,8 +169,9 @@ export const ContextMenuRoot = {
     if (!this.trigger || !this.content) return;
 
     this.isOpen = true;
+    applyPortalTheme(this.content, this.trigger || this.el);
     setOpen(this.content, [this.trigger, this.el]);
-    
+
     this.positionAtPointer();
 
     this.bindSubmenus();

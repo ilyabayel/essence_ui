@@ -19,6 +19,7 @@ defmodule Storybook.Components.DropdownMenu do
       {DropdownMenu, dropdown_menu_separator: 1},
       {DropdownMenu, dropdown_menu_label: 1},
       {DropdownMenu, dropdown_menu_checkbox_item: 1},
+      {DropdownMenu, dropdown_menu_radio_group: 1},
       {DropdownMenu, dropdown_menu_radio_item: 1},
       {DropdownMenu, dropdown_menu_sub: 1},
       {DropdownMenu, dropdown_menu_sub_trigger: 1},
@@ -309,8 +310,10 @@ defmodule Storybook.Components.DropdownMenu do
             <.dropdown_menu_checkbox_item checked disabled>Snap to Grid</.dropdown_menu_checkbox_item>
             <.dropdown_menu_separator />
             <.dropdown_menu_label>Sorting</.dropdown_menu_label>
-            <.dropdown_menu_radio_item checked>Ascending</.dropdown_menu_radio_item>
-            <.dropdown_menu_radio_item>Descending</.dropdown_menu_radio_item>
+            <.dropdown_menu_radio_group value="asc">
+              <.dropdown_menu_radio_item value="asc" checked>Ascending</.dropdown_menu_radio_item>
+              <.dropdown_menu_radio_item value="desc">Descending</.dropdown_menu_radio_item>
+            </.dropdown_menu_radio_group>
           </.dropdown_menu_content>
         </.dropdown_menu_root>
         """

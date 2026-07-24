@@ -352,14 +352,11 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
           </.flex>
         </.scroll_area>
 
-        <.alert_dialog
-          id="candidate-detail"
-          target="body"
-          default_state="closed"
-          style="--max-width: 600px;"
-        >
-          <.candidate_detail_content candidate={@selected_candidate} stages={@stages} />
-        </.alert_dialog>
+        <.alert_dialog_root id="candidate-detail" open={not is_nil(@selected_candidate)}>
+          <.alert_dialog_content id="candidate-detail-content" style="--max-width: 600px;">
+            <.candidate_detail_content candidate={@selected_candidate} stages={@stages} />
+          </.alert_dialog_content>
+        </.alert_dialog_root>
       </.flex>
     </div>
     """
@@ -413,34 +410,35 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
             </.dropdown_menu_content>
           </.dropdown_menu_root>
 
-          <.icon_button variant="ghost" color="gray" phx-click={close_detail()}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </.icon_button>
+          <.alert_dialog_cancel>
+            <.icon_button variant="ghost" color="gray" phx-click={close_detail()}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </.icon_button>
+          </.alert_dialog_cancel>
         </.flex>
       </.flex>
 
-      <.tabs default_value="overview" mt="4">
-        <:list :let={ctx}>
-          <.tabs_list size="2" {ctx}>
-            <:trigger value="overview">Overview</:trigger>
-            <:trigger value="evaluation">Evaluation</:trigger>
-            <:trigger value="notes">Notes</:trigger>
-            <:trigger value="settings">Settings</:trigger>
+      <.tabs_root id="crm-candidate-tabs" default_value="overview" mt="4">
+          <.tabs_list size="2">
+            <.tabs_trigger value="overview">Overview</.tabs_trigger>
+            <.tabs_trigger value="evaluation">Evaluation</.tabs_trigger>
+            <.tabs_trigger value="notes">Notes</.tabs_trigger>
+            <.tabs_trigger value="settings">Settings</.tabs_trigger>
           </.tabs_list>
-        </:list>
+        
 
-        <:content value="overview">
+        <.tabs_content value="overview">
           <.flex direction="column" gap="4" mt="4">
             <.grid columns="2" gap="4">
               <.flex direction="column" gap="1">
@@ -463,9 +461,9 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
               </.select_root>
             </.flex>
           </.flex>
-        </:content>
+        </.tabs_content>
 
-        <:content value="evaluation">
+        <.tabs_content value="evaluation">
           <.flex direction="column" gap="5" mt="4">
             <.flex direction="column" gap="2">
               <.text size="2" weight="bold">Technical Skill Score</.text>
@@ -492,16 +490,16 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
               </.checkbox_group>
             </.flex>
           </.flex>
-        </:content>
+        </.tabs_content>
 
-        <:content value="notes">
+        <.tabs_content value="notes">
           <.flex direction="column" gap="3" mt="4">
             <.text_area placeholder="Add private feedback notes..." style="height: 150px;" />
             <.button variant="solid">Save Note</.button>
           </.flex>
-        </:content>
+        </.tabs_content>
 
-        <:content value="settings">
+        <.tabs_content value="settings">
           <.flex direction="column" gap="4" mt="4">
             <.flex justify="space-between" align="center">
               <.flex direction="column">
@@ -513,22 +511,18 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
             <.separator size="4" style="width: 100%;" />
             <.button variant="soft" color="red" style="width: 100%;">Archive Candidate</.button>
           </.flex>
-        </:content>
-      </.tabs>
+        </.tabs_content>
+      </.tabs_root>
     </div>
     """
   end
 
   defp open_detail(id) do
-    "select-candidate"
-    |> JS.push(value: %{id: id})
-    |> JS.set_attribute({"data-state", "open"}, to: "#candidate-detail")
+    JS.push("select-candidate", value: %{id: id})
   end
 
   defp close_detail do
-    "close-modal"
-    |> JS.push()
-    |> JS.set_attribute({"data-state", "closed"}, to: "#candidate-detail")
+    JS.push("close-modal")
   end
 
   defp candidate_card(assigns) do
