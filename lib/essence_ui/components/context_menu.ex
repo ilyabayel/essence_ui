@@ -33,8 +33,9 @@ defmodule EssenceUI.Components.ContextMenu do
   slot :inner_block, required: true
 
   def context_menu_root(assigns) do
+    # `attr :id, default: nil` puts `:id` in assigns, so assign_new/2 would not fill it.
     assigns =
-      assign_new(assigns, :id, fn -> "context-menu-#{System.unique_integer([:positive])}" end)
+      assign(assigns, :id, assigns[:id] || "context-menu-#{System.unique_integer([:positive])}")
 
     ~H"""
     <ContextMenuPrimitive.root
@@ -101,11 +102,12 @@ defmodule EssenceUI.Components.ContextMenu do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    assigns =
-      assign_new(assigns, :id, fn -> "context-menu-content-#{System.unique_integer([:positive])}" end)
+    id = assigns[:id] || "context-menu-content-#{System.unique_integer([:positive])}"
 
     assigns =
       assign(assigns,
+        id: id,
+        portal_id: "#{id}-portal",
         class:
           [
             "rt-PopperContent",
@@ -115,8 +117,7 @@ defmodule EssenceUI.Components.ContextMenu do
             assigns.class
           ]
           |> Enum.filter(& &1)
-          |> Enum.join(" "),
-        portal_id: "#{assigns.id}-portal"
+          |> Enum.join(" ")
       )
 
     ~H"""
@@ -125,7 +126,6 @@ defmodule EssenceUI.Components.ContextMenu do
         id={@id}
         class={[@class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
         data-accent-color={assigns[:color]}
-        style="display: none; position: fixed; z-index: 9999; min-width: 8rem;"
         {Map.delete(@rest, :class)}
       >
         <div class="rt-BaseMenuViewport">
@@ -495,7 +495,6 @@ defmodule EssenceUI.Components.ContextMenu do
       side_offset={@side_offset}
       class={[@class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
       data-accent-color={assigns[:color]}
-      style="display: none; position: fixed; z-index: 10001; min-width: 8rem;"
       {Map.delete(@rest, :class)}
     >
       <div class="rt-BaseMenuViewport">
