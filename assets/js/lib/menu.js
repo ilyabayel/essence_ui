@@ -23,6 +23,16 @@ export function getMenuItems(content) {
 }
 
 /**
+ * Items for the menu level that currently has focus (parent or nested sub).
+ * @param {Element} fallbackContent
+ * @returns {Element[]}
+ */
+export function getFocusedMenuItems(fallbackContent) {
+  const menu = document.activeElement?.closest('[role="menu"]');
+  return getMenuItems(menu || fallbackContent);
+}
+
+/**
  * Focuses a menu item and marks it highlighted.
  * @param {Element|null} item
  * @param {Element[]} [items]

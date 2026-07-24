@@ -3,6 +3,7 @@ import { setOpen, setClosed } from "../lib/presence";
 import { bindDismissableLayer } from "../lib/dismissable_layer";
 import {
   getMenuItems,
+  getFocusedMenuItems,
   focusItem,
   handleArrowKeys,
   createTypeahead,
@@ -167,13 +168,7 @@ export const MenubarRoot = {
         return;
       }
       e.preventDefault();
-      const menus = this.getMenus();
-      const idx = menus.indexOf(this.activeMenu);
-      const nextIdx =
-        e.key === nextKey
-          ? (idx + 1) % menus.length
-          : (idx - 1 + menus.length) % menus.length;
-      this.openMenu(menus[nextIdx]);
+      this.openAdjacentMenu(e.key === nextKey ? 1 : -1);
     }
   },
 
@@ -183,6 +178,7 @@ export const MenubarRoot = {
     if (!content) return;
 
     const items = getMenuItems(content);
+    const navItems = getFocusedMenuItems(content);
 
     if (e.key === "Escape") {
       e.preventDefault();
@@ -194,7 +190,7 @@ export const MenubarRoot = {
       return;
     }
 
-    if (handleArrowKeys(e, items)) return;
+    if (handleArrowKeys(e, navItems)) return;
 
     if (e.key === "ArrowRight") {
       const active = document.activeElement;
@@ -207,7 +203,13 @@ export const MenubarRoot = {
           ?.querySelector("[data-essence-menubar-sub-content]");
         const subItems = getMenuItems(sub);
         if (subItems[0]) focusItem(subItems[0], subItems);
+        return;
       }
+
+      // No submenu on focused item → next top-level menubar menu.
+      e.preventDefault();
+      e.stopPropagation();
+      this.openAdjacentMenu(1);
       return;
     }
 
@@ -241,7 +243,7 @@ export const MenubarRoot = {
         if (subItems[0]) focusItem(subItems[0], subItems);
         return;
       }
-      if (active && items.includes(active)) {
+      if (active && navItems.includes(active)) {
         e.preventDefault();
         active.click();
       }
@@ -249,8 +251,17 @@ export const MenubarRoot = {
     }
 
     if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
-      this.typeahead.handle(e.key, items);
+      this.typeahead.handle(e.key, navItems);
     }
+  },
+
+  openAdjacentMenu(delta) {
+    const menus = this.getMenus();
+    if (!menus.length || !this.activeMenu) return;
+    const idx = menus.indexOf(this.activeMenu);
+    if (idx === -1) return;
+    const nextIdx = (idx + delta + menus.length) % menus.length;
+    this.openMenu(menus[nextIdx]);
   },
 
   openMenu(menu) {

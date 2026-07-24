@@ -3,6 +3,7 @@ import { setOpen, setClosed } from "../lib/presence";
 import { bindDismissableLayer } from "../lib/dismissable_layer";
 import {
   getMenuItems,
+  getFocusedMenuItems,
   focusItem,
   handleArrowKeys,
   createTypeahead,
@@ -113,6 +114,7 @@ export const DropdownMenuRoot = {
     if (!this.isOpen || !this.content) return;
 
     const items = getMenuItems(this.content);
+    const navItems = getFocusedMenuItems(this.content);
 
     if (e.key === "Escape") {
       e.preventDefault();
@@ -120,7 +122,7 @@ export const DropdownMenuRoot = {
       return;
     }
 
-    if (handleArrowKeys(e, items)) return;
+    if (handleArrowKeys(e, navItems)) return;
 
     if (e.key === "ArrowRight") {
       const active = document.activeElement;
@@ -165,7 +167,7 @@ export const DropdownMenuRoot = {
         if (subItems[0]) focusItem(subItems[0], subItems);
         return;
       }
-      if (active && items.includes(active)) {
+      if (active && navItems.includes(active)) {
         e.preventDefault();
         active.click();
       }
@@ -173,7 +175,7 @@ export const DropdownMenuRoot = {
     }
 
     if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
-      this.typeahead.handle(e.key, items);
+      this.typeahead.handle(e.key, navItems);
     }
   },
 
