@@ -37,6 +37,7 @@ defmodule EssenceUI.Primitives.PopoverTest do
     assert html =~ ~s[data-align="start"]
     assert html =~ "data-essence-popover-close"
     assert html =~ "data-essence-popover-arrow"
+    assert html =~ "polygon"
     assert html =~ "display: none"
   end
 

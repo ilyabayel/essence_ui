@@ -116,14 +116,26 @@ defmodule EssenceUI.Primitives.Popover do
   end
 
   attr :id, :string, default: nil
+  attr :width, :integer, default: 10
+  attr :height, :integer, default: 5
   attr :rest, :global
   slot :inner_block
 
   def arrow(assigns) do
     ~H"""
-    <span id={@id} data-essence-popover-arrow aria-hidden="true" {@rest}>
+    <svg
+      id={@id}
+      width={@width}
+      height={@height}
+      viewBox="0 0 30 10"
+      preserveAspectRatio="none"
+      data-essence-popover-arrow
+      aria-hidden="true"
+      {@rest}
+    >
+      <polygon :if={@inner_block == []} points="0,0 30,0 15,10" />
       {render_slot(@inner_block)}
-    </span>
+    </svg>
     """
   end
 end

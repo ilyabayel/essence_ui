@@ -1,4 +1,4 @@
-import { positionFloating } from "../lib/position";
+import { positionFloating, positionArrow } from "../lib/position";
 import { setOpen, setClosed } from "../lib/presence";
 import { bindDismissableLayer } from "../lib/dismissable_layer";
 import { focusFirst, trapFocus } from "../lib/focus_scope";
@@ -28,11 +28,13 @@ export const PopoverRoot = {
   mounted() {
     this.isOpen = false;
     this.dismissable = null;
+    this._raf = null;
 
     this.onTriggerClick = this.onTriggerClick.bind(this);
     this.onCloseClick = this.onCloseClick.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
+    this.scheduleUpdate = this.scheduleUpdate.bind(this);
 
     this.resolveParts();
     this.bindTrigger();
@@ -50,6 +52,7 @@ export const PopoverRoot = {
 
   destroyed() {
     this.unbindDismissable();
+    this.unbindPositionUpdates();
     if (this.trigger) {
       this.trigger.removeEventListener("click", this.onTriggerClick);
     }
@@ -102,6 +105,58 @@ export const PopoverRoot = {
     trapFocus(e, this.content);
   },
 
+  updatePosition() {
+    if (!this.isOpen || !this.trigger || !this.content) return;
+
+    const side = this.content.dataset.side || "bottom";
+    const align = this.content.dataset.align || "center";
+    const sideOffset = parseInt(this.content.dataset.sideOffset, 10) || 8;
+    // Radix Popper: offset mainAxis = sideOffset + arrowHeight
+    const arrow = this.content.querySelector("[data-essence-popover-arrow]");
+    const arrowHeight = arrow ? arrow.offsetHeight || 5 : 0;
+
+    positionFloating({
+      trigger: this.anchor || this.trigger,
+      content: this.content,
+      side,
+      align,
+      sideOffset: sideOffset + arrowHeight,
+    });
+
+    positionArrow({
+      content: this.content,
+      arrowSelector: "[data-essence-popover-arrow]",
+      side,
+      align,
+    });
+  },
+
+  scheduleUpdate() {
+    if (this._raf != null) return;
+    this._raf = requestAnimationFrame(() => {
+      this._raf = null;
+      this.updatePosition();
+    });
+  },
+
+  bindPositionUpdates() {
+    if (this._positionBound) return;
+    document.addEventListener("scroll", this.scheduleUpdate, true);
+    window.addEventListener("resize", this.scheduleUpdate);
+    this._positionBound = true;
+  },
+
+  unbindPositionUpdates() {
+    if (this._raf != null) {
+      cancelAnimationFrame(this._raf);
+      this._raf = null;
+    }
+    if (!this._positionBound) return;
+    document.removeEventListener("scroll", this.scheduleUpdate, true);
+    window.removeEventListener("resize", this.scheduleUpdate);
+    this._positionBound = false;
+  },
+
   open(isInitial = false) {
     this.resolveParts();
     if (!this.trigger || !this.content) return;
@@ -110,17 +165,8 @@ export const PopoverRoot = {
     setOpen(this.content, [this.trigger, this.el]);
     this.trigger.setAttribute("aria-expanded", "true");
 
-    const side = this.content.dataset.side || "bottom";
-    const align = this.content.dataset.align || "center";
-    const sideOffset = parseInt(this.content.dataset.sideOffset, 10) || 8;
-
-    positionFloating({
-      trigger: this.anchor || this.trigger,
-      content: this.content,
-      side,
-      align,
-      sideOffset,
-    });
+    this.updatePosition();
+    this.bindPositionUpdates();
 
     this.bindCloseButtons();
     this.unbindDismissable();
@@ -164,6 +210,7 @@ export const PopoverRoot = {
       }
     }, 50);
 
+    this.unbindPositionUpdates();
     this.unbindDismissable();
     if (this.content) {
       this.content.removeEventListener("keydown", this.onKeyDown);

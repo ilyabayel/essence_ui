@@ -52,8 +52,7 @@ export function positionFloating({
     return { top: 0, left: 0 };
   }
 
-  const triggerEl = trigger.firstElementChild || trigger;
-  const triggerRect = triggerEl.getBoundingClientRect();
+  const triggerRect = trigger.getBoundingClientRect();
   const contentWidth = content.offsetWidth;
   const contentHeight = content.offsetHeight;
 
@@ -110,4 +109,66 @@ export function positionFloating({
   content.style.left = `${left}px`;
 
   return { top, left, containingBlockOffset: cb };
+}
+
+/**
+ * Positions a floating arrow on the edge of content facing the trigger.
+ * Matches Radix Popper arrow placement (SVG points down by default).
+ *
+ * @param {object} options
+ * @param {Element} options.content
+ * @param {string} [options.arrowSelector]
+ * @param {"top"|"right"|"bottom"|"left"} [options.side="bottom"]
+ * @param {"start"|"center"|"end"} [options.align="center"]
+ */
+export function positionArrow({
+  content,
+  arrowSelector,
+  side = "bottom",
+  align = "center",
+} = {}) {
+  if (!content || !arrowSelector) return;
+
+  const arrow = content.querySelector(arrowSelector);
+  if (!arrow) return;
+
+  const width = arrow.offsetWidth || 10;
+  const height = arrow.offsetHeight || 5;
+
+  arrow.style.position = "absolute";
+  arrow.style.top = "";
+  arrow.style.right = "";
+  arrow.style.bottom = "";
+  arrow.style.left = "";
+  arrow.style.transform = "";
+
+  if (side === "bottom") {
+    arrow.style.top = "0px";
+    arrow.style.transformOrigin = "center 0";
+    arrow.style.transform = "rotate(180deg)";
+  } else if (side === "top") {
+    arrow.style.bottom = "0px";
+    arrow.style.transformOrigin = "center 0";
+    arrow.style.transform = "rotate(0deg)";
+  } else if (side === "left") {
+    arrow.style.right = "0px";
+    arrow.style.transformOrigin = "center 0";
+    arrow.style.transform = "rotate(-90deg)";
+  } else if (side === "right") {
+    arrow.style.left = "0px";
+    arrow.style.transformOrigin = "center 0";
+    arrow.style.transform = "rotate(90deg)";
+  }
+
+  if (side === "top" || side === "bottom") {
+    if (align === "center") arrow.style.left = `calc(50% - ${width / 2}px)`;
+    else if (align === "start") arrow.style.left = "16px";
+    else arrow.style.right = "16px";
+  } else if (align === "center") {
+    arrow.style.top = `calc(50% - ${height / 2}px)`;
+  } else if (align === "start") {
+    arrow.style.top = "8px";
+  } else {
+    arrow.style.bottom = "8px";
+  }
 }
