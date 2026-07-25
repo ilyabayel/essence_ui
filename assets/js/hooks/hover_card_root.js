@@ -75,14 +75,15 @@ export const HoverCardRoot = {
     this.unbindEvents();
     if (!this.trigger || !this.content) return;
 
-    // Hover intent is mouse-only; on coarse pointers, click toggles open.
-    this.trigger.addEventListener("pointerenter", this.onTriggerEnter);
-    this.trigger.addEventListener("pointerleave", this.onTriggerLeave);
-    this.content.addEventListener("pointerenter", this.onContentEnter);
-    this.content.addEventListener("pointerleave", this.onContentLeave);
+    // Fine pointer: mouse hover. Coarse: click toggle only (no hover race).
     if (this._touchOpen) {
       this.trigger.addEventListener("click", this.onTriggerClick);
       document.addEventListener("pointerdown", this.onDocumentPointerDown, true);
+    } else {
+      this.trigger.addEventListener("pointerenter", this.onTriggerEnter);
+      this.trigger.addEventListener("pointerleave", this.onTriggerLeave);
+      this.content.addEventListener("pointerenter", this.onContentEnter);
+      this.content.addEventListener("pointerleave", this.onContentLeave);
     }
     this._bound = true;
   },

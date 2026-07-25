@@ -22,13 +22,14 @@ export const HoverCard = {
     this.onTriggerClick = this.onTriggerClick.bind(this);
     this.onDocumentPointerDown = this.onDocumentPointerDown.bind(this);
 
-    this.trigger.addEventListener('pointerenter', this.onTriggerEnter);
-    this.trigger.addEventListener('pointerleave', this.onTriggerLeave);
-    this.content.addEventListener('pointerenter', this.onContentEnter);
-    this.content.addEventListener('pointerleave', this.onContentLeave);
     if (this._touchOpen) {
       this.trigger.addEventListener('click', this.onTriggerClick);
       document.addEventListener('pointerdown', this.onDocumentPointerDown, true);
+    } else {
+      this.trigger.addEventListener('pointerenter', this.onTriggerEnter);
+      this.trigger.addEventListener('pointerleave', this.onTriggerLeave);
+      this.content.addEventListener('pointerenter', this.onContentEnter);
+      this.content.addEventListener('pointerleave', this.onContentLeave);
     }
   },
 

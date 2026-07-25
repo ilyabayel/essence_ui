@@ -87,7 +87,9 @@ test.describe("Tooltip Primitive (touch)", () => {
     await trigger.click();
     await expect(content).toBeVisible();
 
-    await page.locator("body").click({ position: { x: 8, y: 8 } });
+    await page
+      .locator('.radix-demo[data-component="tooltip"]')
+      .click({ position: { x: 8, y: 8 }, force: true });
     await expect(content).toBeHidden();
   });
 });

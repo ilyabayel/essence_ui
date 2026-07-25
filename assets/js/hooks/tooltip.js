@@ -1,59 +1,66 @@
-import { autoUpdate, computePosition, flip, offset, shift } from "@floating-ui/dom";
-import { hasFinePointerHover, whenMouse } from "../lib/pointer";
+import { hasFinePointerHover } from "../lib/pointer";
 
-/**
- * Tooltip Hook - Themes version
- *
- * Shows a tooltip when hovering over a trigger element.
- * On devices without fine pointer hover, also toggles on click/tap.
- * Supports multiple placement options and delay configuration.
- */
-const Tooltip = {
+export const Tooltip = {
   mounted() {
-    this.trigger = this.el.querySelector("[data-tooltip-trigger]");
-    this.content = this.el.querySelector("[data-tooltip-content]");
-    this.arrow = this.el.querySelector("[data-tooltip-arrow]");
+    this.openDelay = parseInt(this.el.dataset.openDelay) || 700;
+    this.closeDelay = parseInt(this.el.dataset.closeDelay) || 300;
+    this.tooltipId = this.el.dataset.tooltipId;
 
-    if (!this.trigger || !this.content) return;
-
-    this.openDelay = parseInt(this.el.dataset.openDelay || "700", 10);
-    this.closeDelay = parseInt(this.el.dataset.closeDelay || "300", 10);
-    this.side = this.el.dataset.side || "top";
-    this.align = this.el.dataset.align || "center";
-    this.sideOffset = parseInt(this.el.dataset.sideOffset || "5", 10);
     this.openTimeout = null;
     this.closeTimeout = null;
-    this.cleanup = null;
     this.isOpen = false;
-    this.touchOpen = !hasFinePointerHover();
+    this._touchOpen = !hasFinePointerHover();
 
-    this.onTriggerEnter = whenMouse(() => this.show());
-    this.onTriggerLeave = whenMouse(() => this.hide());
-    this.onContentEnter = whenMouse(() => this.show());
-    this.onContentLeave = whenMouse(() => this.hide());
-    this.onTriggerClick = (e) => {
-      if (!this.touchOpen) return;
-      e.preventDefault();
-      if (this.isOpen) this.hide(true);
-      else this.show(true);
-    };
-    this.onOutsidePointerDown = (e) => {
-      if (!this.touchOpen || !this.isOpen) return;
-      if (this.el.contains(e.target)) return;
+    this.onMouseEnter = this.onMouseEnter.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
+    this.onFocusIn = this.onFocusIn.bind(this);
+    this.onFocusOut = this.onFocusOut.bind(this);
+    this.onTriggerClick = this.onTriggerClick.bind(this);
+    this.onDocumentPointerDown = this.onDocumentPointerDown.bind(this);
+
+    this.el.addEventListener("focusin", this.onFocusIn);
+    this.el.addEventListener("focusout", this.onFocusOut);
+    if (this._touchOpen) {
+      this.el.addEventListener("click", this.onTriggerClick);
+      document.addEventListener("pointerdown", this.onDocumentPointerDown, true);
+    } else {
+      this.el.addEventListener("mouseenter", this.onMouseEnter);
+      this.el.addEventListener("mouseleave", this.onMouseLeave);
+    }
+  },
+
+  getTooltip() {
+    return document.getElementById(this.tooltipId);
+  },
+
+  onMouseEnter() {
+    this.show();
+  },
+  onMouseLeave() {
+    this.hide();
+  },
+  onFocusIn() {
+    this.show();
+  },
+  onFocusOut() {
+    this.hide();
+  },
+
+  onTriggerClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (this.isOpen) {
       this.hide(true);
-    };
+    } else {
+      this.show(true);
+    }
+  },
 
-    this.trigger.addEventListener("mouseenter", this.onTriggerEnter);
-    this.trigger.addEventListener("mouseleave", this.onTriggerLeave);
-    this.trigger.addEventListener("focus", () => this.show());
-    this.trigger.addEventListener("blur", () => this.hide());
-    this.content.addEventListener("mouseenter", this.onContentEnter);
-    this.content.addEventListener("mouseleave", this.onContentLeave);
-    this.trigger.addEventListener("click", this.onTriggerClick);
-    document.addEventListener("pointerdown", this.onOutsidePointerDown);
-
-    this.content.style.display = "none";
-    this.content.setAttribute("data-state", "closed");
+  onDocumentPointerDown(e) {
+    if (!this.isOpen) return;
+    const tooltip = this.getTooltip();
+    if (this.el.contains(e.target) || tooltip?.contains(e.target)) return;
+    this.hide(true);
   },
 
   show(immediate = false) {
@@ -65,22 +72,19 @@ const Tooltip = {
     if (this.isOpen) return;
 
     const open = () => {
-      this.content.style.display = "block";
-      this.content.setAttribute("data-state", "open");
-      this.trigger.setAttribute("data-state", "open");
-      this.isOpen = true;
-      this.openTimeout = null;
-
-      this.updatePosition();
-
-      if (!this.cleanup) {
-        this.cleanup = autoUpdate(this.trigger, this.content, () => {
-          this.updatePosition();
-        });
+      const tooltip = this.getTooltip();
+      if (tooltip) {
+        tooltip.style.display = "block";
+        tooltip.style.width = "max-content";
+        this.positionTooltip(tooltip);
+        tooltip.dataset.state = "delayed-open";
+        this.el.dataset.state = "open";
+        this.isOpen = true;
       }
+      this.openTimeout = null;
     };
 
-    if (immediate || this.openDelay === 0) {
+    if (immediate) {
       if (this.openTimeout) {
         clearTimeout(this.openTimeout);
         this.openTimeout = null;
@@ -89,8 +93,9 @@ const Tooltip = {
       return;
     }
 
-    if (this.openTimeout) return;
-    this.openTimeout = setTimeout(open, this.openDelay);
+    if (!this.openTimeout) {
+      this.openTimeout = setTimeout(open, this.openDelay);
+    }
   },
 
   hide(immediate = false) {
@@ -99,22 +104,18 @@ const Tooltip = {
       this.openTimeout = null;
     }
 
-    if (!this.isOpen) return;
-
     const close = () => {
-      this.content.style.display = "none";
-      this.content.setAttribute("data-state", "closed");
-      this.trigger.setAttribute("data-state", "closed");
+      const tooltip = this.getTooltip();
+      if (tooltip) {
+        tooltip.dataset.state = "closed";
+        tooltip.style.display = "none";
+        this.el.dataset.state = "closed";
+      }
       this.isOpen = false;
       this.closeTimeout = null;
-
-      if (this.cleanup) {
-        this.cleanup();
-        this.cleanup = null;
-      }
     };
 
-    if (immediate || this.closeDelay === 0) {
+    if (immediate) {
       if (this.closeTimeout) {
         clearTimeout(this.closeTimeout);
         this.closeTimeout = null;
@@ -123,70 +124,103 @@ const Tooltip = {
       return;
     }
 
+    if (!this.isOpen) return;
+
     if (!this.closeTimeout) {
       this.closeTimeout = setTimeout(close, this.closeDelay);
     }
   },
 
-  async updatePosition() {
-    if (!this.trigger || !this.content) return;
+  positionTooltip(tooltip) {
+    // Measure the actual button/target, not the full-width block wrapper
+    const targetEl = this.el.firstElementChild || this.el;
+    const triggerRect = targetEl.getBoundingClientRect();
+    const side = tooltip.dataset.side || "top";
+    const align = tooltip.dataset.align || "center";
 
-    const middleware = [offset(this.sideOffset), flip(), shift({ padding: 8 })];
+    let top, left;
+    const offset = 8;
 
-    if (this.arrow) {
-      const { arrow } = await import("@floating-ui/dom");
-      middleware.push(arrow({ element: this.arrow }));
+    if (side === "top" || side === "bottom") {
+      if (side === "top") top = triggerRect.top - tooltip.offsetHeight - offset;
+      if (side === "bottom") top = triggerRect.bottom + offset;
+
+      if (align === "start") {
+        left = triggerRect.left;
+      } else if (align === "end") {
+        left = triggerRect.right - tooltip.offsetWidth;
+      } else {
+        left =
+          triggerRect.left + triggerRect.width / 2 - tooltip.offsetWidth / 2;
+      }
+    } else {
+      if (side === "left") left = triggerRect.left - tooltip.offsetWidth - offset;
+      if (side === "right") left = triggerRect.right + offset;
+
+      if (align === "start") {
+        top = triggerRect.top;
+      } else if (align === "end") {
+        top = triggerRect.bottom - tooltip.offsetHeight;
+      } else {
+        top =
+          triggerRect.top + triggerRect.height / 2 - tooltip.offsetHeight / 2;
+      }
     }
 
-    const { x, y, placement, middlewareData } = await computePosition(this.trigger, this.content, {
-      placement: `${this.side}-${this.align === "center" ? "" : this.align}`.replace(/-$/, ""),
-      middleware
-    });
+    tooltip.style.position = "fixed";
+    tooltip.style.top = top + "px";
+    tooltip.style.left = left + "px";
+    tooltip.style.zIndex = "9999";
+    tooltip.style.pointerEvents = "none";
 
-    Object.assign(this.content.style, {
-      left: `${x}px`,
-      top: `${y}px`
-    });
+    const arrow = tooltip.querySelector(".rt-TooltipArrow");
+    if (arrow) {
+      let aTop = "",
+        aLeft = "",
+        aRight = "",
+        aBottom = "",
+        transform = "";
 
-    this.content.setAttribute("data-side", placement.split("-")[0]);
-    this.content.setAttribute("data-align", placement.split("-")[1] || "center");
+      if (side === "top") {
+        aBottom = "-4px";
+        transform = "rotate(0deg)";
+      } else if (side === "bottom") {
+        aTop = "-4px";
+        transform = "rotate(180deg)";
+      } else if (side === "left") {
+        aRight = "-7.5px";
+        transform = "rotate(-90deg)";
+      } else if (side === "right") {
+        aLeft = "-7.5px";
+        transform = "rotate(90deg)";
+      }
 
-    if (this.arrow && middlewareData.arrow) {
-      const { x: arrowX, y: arrowY } = middlewareData.arrow;
-      const staticSide = {
-        top: "bottom",
-        right: "left",
-        bottom: "top",
-        left: "right"
-      }[placement.split("-")[0]];
+      if (side === "top" || side === "bottom") {
+        if (align === "center") aLeft = "calc(50% - 5px)";
+        if (align === "start") aLeft = "16px";
+        if (align === "end") aRight = "16px";
+      } else {
+        if (align === "center") aTop = "calc(50% - 2.5px)";
+        if (align === "start") aTop = "8px";
+        if (align === "end") aBottom = "8px";
+      }
 
-      Object.assign(this.arrow.style, {
-        left: arrowX != null ? `${arrowX}px` : "",
-        top: arrowY != null ? `${arrowY}px` : "",
-        right: "",
-        bottom: "",
-        [staticSide]: "-4px"
-      });
+      arrow.style.top = aTop;
+      arrow.style.left = aLeft;
+      arrow.style.right = aRight;
+      arrow.style.bottom = aBottom;
+      arrow.style.transform = transform;
     }
   },
 
   destroyed() {
     if (this.openTimeout) clearTimeout(this.openTimeout);
     if (this.closeTimeout) clearTimeout(this.closeTimeout);
-    if (this.cleanup) this.cleanup();
-    if (this.trigger && this.onTriggerEnter) {
-      this.trigger.removeEventListener("mouseenter", this.onTriggerEnter);
-      this.trigger.removeEventListener("mouseleave", this.onTriggerLeave);
-      this.trigger.removeEventListener("click", this.onTriggerClick);
-    }
-    if (this.content && this.onContentEnter) {
-      this.content.removeEventListener("mouseenter", this.onContentEnter);
-      this.content.removeEventListener("mouseleave", this.onContentLeave);
-    }
-    if (this.onOutsidePointerDown) {
-      document.removeEventListener("pointerdown", this.onOutsidePointerDown);
-    }
-  }
+    this.el.removeEventListener("mouseenter", this.onMouseEnter);
+    this.el.removeEventListener("mouseleave", this.onMouseLeave);
+    this.el.removeEventListener("focusin", this.onFocusIn);
+    this.el.removeEventListener("focusout", this.onFocusOut);
+    this.el.removeEventListener("click", this.onTriggerClick);
+    document.removeEventListener("pointerdown", this.onDocumentPointerDown, true);
+  },
 };
-
-export default Tooltip;

@@ -83,15 +83,16 @@ export const TooltipRoot = {
     this.unbindEvents();
     if (!this.trigger) return;
 
-    // Hover is mouse-only; focus opens for keyboard. On coarse pointers, click toggles.
-    this.trigger.addEventListener("pointerenter", this.onTriggerEnter);
-    this.trigger.addEventListener("pointerleave", this.onTriggerLeave);
+    // Focus opens for keyboard. Fine pointer: mouse hover. Coarse: click toggle only.
     this.trigger.addEventListener("focusin", this.onFocusIn);
     this.trigger.addEventListener("focusout", this.onFocusOut);
     this.trigger.addEventListener("keydown", this.onKeyDown);
     if (this._touchOpen) {
       this.trigger.addEventListener("click", this.onTriggerClick);
       document.addEventListener("pointerdown", this.onDocumentPointerDown, true);
+    } else {
+      this.trigger.addEventListener("pointerenter", this.onTriggerEnter);
+      this.trigger.addEventListener("pointerleave", this.onTriggerLeave);
     }
     this._bound = true;
   },

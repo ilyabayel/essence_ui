@@ -93,7 +93,9 @@ test.describe("Hover Card Primitive (touch)", () => {
     await trigger.click();
     await expect(content).toBeVisible();
 
-    await page.locator("body").click({ position: { x: 8, y: 8 } });
+    await page
+      .locator('.radix-demo[data-component="hover-card"]')
+      .click({ position: { x: 8, y: 8 }, force: true });
     await expect(content).toBeHidden();
   });
 });
