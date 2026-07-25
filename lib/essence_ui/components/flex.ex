@@ -23,7 +23,7 @@ defmodule EssenceUI.Components.Flex do
   require PaddingProps
   require WidthProps
 
-  @as_values ["div", "span"]
+  @as_values ["div", "span", "aside", "main", "nav", "article", "section", "header", "footer"]
   @display_values ["none", "inline-flex", "flex"]
   @direction_values ["row", "column", "row-reverse", "column-reverse"]
   @align_values ["start", "center", "end", "baseline", "stretch"]
@@ -56,7 +56,7 @@ defmodule EssenceUI.Components.Flex do
 
   ## Props
 
-    * `as` - The element to render. Defaults to "div". Accepts: "div", "span".
+    * `as` - The element to render. Defaults to "div". Accepts: div, span, aside, main, nav, article, section, header, footer.
     * `display` - CSS display property. Accepts: none, inline-flex, flex. Responsive supported.
     * `direction` - Flex direction. Accepts: row, column, row-reverse, column-reverse. Responsive supported.
     * `align` - Align items. Accepts: start, center, end, baseline, stretch. Responsive supported.

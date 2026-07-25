@@ -18,8 +18,13 @@ defmodule EssenceUI.Components.Link do
 
   @doc """
   Renders a link. All props match Radix UI Link.
+
+  Phoenix LiveView navigation is supported via `navigate` / `patch`
+  (implemented with `Phoenix.Component.link/1`).
   """
   attr :href, :string, default: nil, doc: "The link href. Only for <a> elements."
+  attr :navigate, :string, default: nil, doc: "LiveView navigate path (client-side navigation)."
+  attr :patch, :string, default: nil, doc: "LiveView patch path (same LiveView)."
   attr :target, :string, default: nil, doc: "Target attribute for <a> elements."
   attr :rel, :string, default: nil, doc: "Rel attribute for <a> elements."
   attr :underline, :string, default: "auto", values: @underline_values, doc: "Underline style: auto, always, hover, none."
@@ -61,8 +66,10 @@ defmodule EssenceUI.Components.Link do
       )
 
     ~H"""
-    <a
+    <.link
       href={@href}
+      navigate={@navigate}
+      patch={@patch}
       target={@target}
       rel={@rel}
       class={@class}
@@ -71,7 +78,7 @@ defmodule EssenceUI.Components.Link do
       {@rest}
     >
       {render_slot(@inner_block)}
-    </a>
+    </.link>
     """
   end
 end

@@ -16,8 +16,7 @@ defmodule EssenceUI.Primitives.HoverCardTest do
               @radix
             </HoverCard.trigger>
             <HoverCard.content id="preview-content" side="right" align="start">
-              Preview
-              <HoverCard.arrow />
+              Preview <HoverCard.arrow />
             </HoverCard.content>
           </HoverCard.root>
           """

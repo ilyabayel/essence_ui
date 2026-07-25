@@ -111,7 +111,9 @@ defmodule EssenceUI.Primitives.ToastTest do
         fn assigns ->
           ~H"""
           <Toast.viewport id="vp" hotkey="F8" label="Notifications ({hotkey})">
-            <Toast.root id="toast-in-vp"><Toast.title>Hi</Toast.title></Toast.root>
+            <Toast.root id="toast-in-vp">
+              <Toast.title>Hi</Toast.title>
+            </Toast.root>
           </Toast.viewport>
           """
         end,

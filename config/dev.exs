@@ -46,9 +46,10 @@ config :essence_ui, EssenceUIWeb.Endpoint,
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/essence_ui_web/(?:controllers|live|components|router)/?.*\.(ex|heex)$",
+      ~r"lib/essence_ui_web/(?:controllers|live|components|docs|router)/?.*\.(ex|heex)$",
       ~r"lib/essence_ui/components/?.*\.(ex|heex)$",
-      ~r"storybook/.*(exs)$"
+      ~r"storybook/.*(exs)$",
+      ~r"docs/.*(md|exs)$"
     ]
   ]
 

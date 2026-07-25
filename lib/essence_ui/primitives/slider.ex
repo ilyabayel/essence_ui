@@ -27,7 +27,7 @@ defmodule EssenceUI.Primitives.Slider do
       assigns
       |> assign(:value_attr, encode_values(values))
       |> assign(:values, values)
-      |> assign(:role, if(multi?, do: "group", else: nil))
+      |> assign(:role, if(multi?, do: "group"))
 
     ~H"""
     <span
@@ -97,6 +97,7 @@ defmodule EssenceUI.Primitives.Slider do
   defp normalize_values(nil), do: [0]
   defp normalize_values(value) when is_list(value), do: value
   defp normalize_values(value) when is_number(value), do: [value]
+
   defp normalize_values(value) when is_binary(value) do
     value
     |> String.trim()
