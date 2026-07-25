@@ -200,9 +200,13 @@ export const DropdownMenu = {
       
       const openSub = () => {
         clearTimeout(timeout);
-        // Close sibling subs so only one nested menu is open (click + hover).
-        this.content.querySelectorAll('[data-dropdown-menu-sub]').forEach((sibling) => {
-          if (sibling !== sub && typeof sibling._closeSub === 'function') {
+        // Close true siblings only (same parent); keep ancestors when opening nested.
+        Array.from(sub.parentElement?.children || []).forEach((sibling) => {
+          if (
+            sibling !== sub &&
+            sibling.matches?.("[data-dropdown-menu-sub]") &&
+            typeof sibling._closeSub === "function"
+          ) {
             sibling._closeSub(true);
           }
         });
@@ -237,6 +241,12 @@ export const DropdownMenu = {
 
       const closeSub = (immediate = false) => {
         const hide = () => {
+          // Cascade: close open descendants before hiding this submenu.
+          content.querySelectorAll("[data-dropdown-menu-sub]").forEach((nested) => {
+            if (typeof nested._closeSub === "function") {
+              nested._closeSub(true);
+            }
+          });
           trigger.removeAttribute('data-state');
           trigger.removeAttribute('data-highlighted');
           content.style.display = 'none';
