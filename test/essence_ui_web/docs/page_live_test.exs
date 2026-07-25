@@ -11,6 +11,9 @@ defmodule EssenceUIWeb.Docs.PageLiveTest do
     assert html =~ "Hello from Essence UI"
     assert html =~ "docs-topbar"
     assert html =~ "Menu"
+    assert html =~ "Skip to content"
+    assert html =~ "docs-main-content"
+    assert html =~ ~s(aria-current="page")
     refute html =~ "## 4. Start building"
     assert html =~ "Start building"
     assert html =~ ~s(href="/docs/components/button")
@@ -18,6 +21,9 @@ defmodule EssenceUIWeb.Docs.PageLiveTest do
     html = render_click(element(view, "button[phx-click=toggle_nav]"))
     assert html =~ "is-open"
     assert html =~ "Close"
+
+    html = render_keydown(view, "keydown", %{"key" => "Escape"})
+    refute html =~ "is-open"
   end
 
   test "renders button docs with live demo and props", %{conn: conn} do

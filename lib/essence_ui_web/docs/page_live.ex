@@ -49,6 +49,13 @@ defmodule EssenceUIWeb.Docs.PageLive do
   end
 
   @impl true
+  def handle_event("keydown", %{"key" => "Escape"}, socket) do
+    {:noreply, assign(socket, :nav_open, false)}
+  end
+
+  def handle_event("keydown", _params, socket), do: {:noreply, socket}
+
+  @impl true
   def render(assigns) do
     ~H"""
     <.box
@@ -57,8 +64,21 @@ defmodule EssenceUIWeb.Docs.PageLive do
       data-gray-color="slate"
       data-radius="medium"
       data-scaling="100%"
+      phx-window-keydown="keydown"
     >
-      <.flex class="docs-topbar" align="center" justify="space-between" gap="3" px="3" py="2">
+      <.es_link href="#docs-main-content" class="docs-skip-link" underline="none" high_contrast>
+        Skip to content
+      </.es_link>
+
+      <.flex
+        as="header"
+        class="docs-topbar"
+        align="center"
+        justify="space-between"
+        gap="3"
+        px="3"
+        py="2"
+      >
         <.flex align="center" gap="2" min_width="0">
           <.es_link navigate={~p"/docs"} underline="none" high_contrast>
             <.text size="3" weight="bold" high_contrast>Essence UI</.text>
@@ -74,7 +94,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
           phx-click="toggle_nav"
           aria-expanded={to_string(@nav_open)}
           aria-controls="docs-sidebar"
-          aria-label="Open documentation menu"
+          aria-label={if(@nav_open, do: "Close documentation menu", else: "Open documentation menu")}
         >
           Menu
         </.button>
@@ -88,7 +108,15 @@ defmodule EssenceUIWeb.Docs.PageLive do
       >
       </.box>
 
-      <.box as="aside" id="docs-sidebar" class={["docs-sidebar", @nav_open && "is-open"]} p="4">
+      <.box
+        as="aside"
+        id="docs-sidebar"
+        class={["docs-sidebar", @nav_open && "is-open"]}
+        p="4"
+        phx-hook="DocsSidebar"
+        data-nav-open={to_string(@nav_open)}
+        aria-label="Documentation"
+      >
         <.flex
           class="docs-sidebar__mobile-header"
           align="center"
@@ -97,8 +125,15 @@ defmodule EssenceUIWeb.Docs.PageLive do
           mb="4"
           width="100%"
         >
-          <.text size="3" weight="bold">Menu</.text>
-          <.button type="button" variant="soft" color="gray" size="2" phx-click="close_nav">
+          <.text size="3" weight="bold" id="docs-menu-label">Menu</.text>
+          <.button
+            type="button"
+            variant="soft"
+            color="gray"
+            size="2"
+            phx-click="close_nav"
+            aria-label="Close documentation menu"
+          >
             Close
           </.button>
         </.flex>
@@ -112,7 +147,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
               <.badge size="1" variant="soft" color="gray">Docs</.badge>
             </.flex>
 
-            <.box as="nav" aria-label="Documentation">
+            <.box as="nav" aria-label="Documentation pages">
               <.flex :for={section <- @nav} direction="column" gap="1" mb="4">
                 <.text size="1" weight="bold" color="gray" class="docs-nav-section__title">
                   {section.title}
@@ -124,6 +159,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
                   color={nav_color(@page, item.path)}
                   high_contrast={nav_active?(@page, item.path)}
                   class={["docs-nav-link", nav_active?(@page, item.path) && "is-active"]}
+                  aria-current={if(nav_active?(@page, item.path), do: "page")}
                 >
                   <.text size="2">{item.title}</.text>
                 </.es_link>
@@ -140,7 +176,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
         </.scroll_area>
       </.box>
 
-      <.box as="main" class="docs-main">
+      <.box as="main" id="docs-main-content" class="docs-main" tabindex="-1">
         <.flex :if={@not_found} direction="column" align="center" gap="3" py="9" px="4">
           <.heading as="h1" size="6">Page not found</.heading>
           <.text color="gray">No documentation exists at this path.</.text>

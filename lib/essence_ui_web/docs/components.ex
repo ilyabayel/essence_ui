@@ -80,7 +80,7 @@ defmodule EssenceUIWeb.Docs.Components do
 
     ~H"""
     <.box class="docs-props">
-      <.box class="docs-props__desktop">
+      <.box class="docs-props__desktop" role="region" aria-label="Props table" tabindex="0">
         <.table variant="surface" size="1">
           <.table_header>
             <.table_row>

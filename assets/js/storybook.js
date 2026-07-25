@@ -38,6 +38,7 @@ import { ToolbarRoot } from "./hooks/toolbar_root";
 import { FormRoot } from "./hooks/form_root";
 import { PasswordToggleFieldRoot } from "./hooks/password_toggle_field_root";
 import { OneTimePasswordFieldRoot } from "./hooks/one_time_password_field_root";
+import { DocsSidebar } from "./hooks/docs_sidebar";
 
 let hooks = {
   Dialog,
@@ -77,7 +78,8 @@ let hooks = {
   ToolbarRoot,
   FormRoot,
   PasswordToggleFieldRoot,
-  OneTimePasswordFieldRoot
+  OneTimePasswordFieldRoot,
+  DocsSidebar
 };
 
 // Storybook integration
