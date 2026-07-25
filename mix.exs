@@ -43,6 +43,8 @@ defmodule EssenceUI.MixProject do
       {:hackney, "~> 1.9"},
       {:igniter, "~> 0.6", only: [:dev, :test]},
       {:jason, "~> 1.4"},
+      {:lazy_html, ">= 0.1.0", only: :test},
+      {:mdex, "~> 0.13"},
       {:mix_test_watch, "~> 1.3", only: [:dev, :test], runtime: false},
       {:phoenix, "~> 1.8.1", override: true},
       {:phoenix_html, "~> 4.2.1"},

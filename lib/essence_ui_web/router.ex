@@ -41,6 +41,13 @@ defmodule EssenceUIWeb.Router do
     live "/", CRM.DashboardLive, :index
   end
 
+  scope "/docs", EssenceUIWeb do
+    pipe_through :browser
+
+    live "/", Docs.PageLive, :index
+    live "/*path", Docs.PageLive, :show
+  end
+
   scope "/", EssenceUIWeb do
     pipe_through(:browser)
     live_storybook("/", backend_module: EssenceUIWeb.Storybook)
