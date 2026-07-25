@@ -58,10 +58,10 @@ defmodule EssenceUIWeb.Docs.PageLive do
       data-radius="medium"
       data-scaling="100%"
     >
-      <.flex class="docs-topbar" align="center" justify="between" gap="3" p="3">
-        <.flex align="center" gap="2">
+      <.flex class="docs-topbar" align="center" justify="space-between" gap="3" px="3" py="2">
+        <.flex align="center" gap="2" min_width="0">
           <.es_link navigate={~p"/docs"} underline="none" high_contrast>
-            <.text size="4" weight="bold" high_contrast>Essence UI</.text>
+            <.text size="3" weight="bold" high_contrast>Essence UI</.text>
           </.es_link>
           <.badge size="1" variant="soft" color="gray">Docs</.badge>
         </.flex>
@@ -74,8 +74,9 @@ defmodule EssenceUIWeb.Docs.PageLive do
           phx-click="toggle_nav"
           aria-expanded={to_string(@nav_open)}
           aria-controls="docs-sidebar"
+          aria-label="Open documentation menu"
         >
-          {if @nav_open, do: "Close", else: "Menu"}
+          Menu
         </.button>
       </.flex>
 
@@ -84,14 +85,20 @@ defmodule EssenceUIWeb.Docs.PageLive do
         class="docs-nav-backdrop"
         phx-click="close_nav"
         aria-hidden="true"
-        style="position: fixed; inset: 0; z-index: 35; background: rgb(0 0 0 / 0.4);"
       >
       </.box>
 
       <.box as="aside" id="docs-sidebar" class={["docs-sidebar", @nav_open && "is-open"]} p="4">
-        <.flex class="docs-sidebar__mobile-header" align="center" justify="between" mb="3" style="width: 100%;">
+        <.flex
+          class="docs-sidebar__mobile-header"
+          align="center"
+          justify="space-between"
+          gap="3"
+          mb="4"
+          width="100%"
+        >
           <.text size="3" weight="bold">Menu</.text>
-          <.button type="button" variant="ghost" color="gray" size="1" phx-click="close_nav">
+          <.button type="button" variant="soft" color="gray" size="2" phx-click="close_nav">
             Close
           </.button>
         </.flex>

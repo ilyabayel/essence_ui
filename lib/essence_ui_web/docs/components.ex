@@ -64,7 +64,7 @@ defmodule EssenceUIWeb.Docs.Components do
     assigns = assign(assigns, :formatted, format_source(assigns.code, assigns.language))
 
     ~H"""
-    <.box class="docs-code-block" p="3" data-language={@language}>
+    <.box class="docs-code-block" data-language={@language}>
       <pre><code>{@formatted}</code></pre>
     </.box>
     """
@@ -130,7 +130,7 @@ defmodule EssenceUIWeb.Docs.Components do
     ~H"""
     <.box class="docs-anatomy" mb="5">
       <.heading as="h2" size="4" mb="3">Anatomy</.heading>
-      <.data_list orientation="horizontal" size="2">
+      <.data_list orientation="vertical" size="2" class="docs-anatomy__list">
         <.data_list_item :for={part <- @part}>
           <:label><.code size="2">{part.name}</.code></:label>
           <:value>
@@ -179,11 +179,15 @@ defmodule EssenceUIWeb.Docs.Components do
 
   defp format_source(code, language) when language in ["heex", "html"] do
     code
+    |> String.trim()
+    |> String.replace(~r/\s+/, " ")
     |> String.replace(~r"/>\s*</", "/>\n<")
     |> String.replace(~r"/>(?=<)/", "/>\n")
     |> String.replace(~r">(?=<\.)", ">\n")
     |> String.replace(~r"></", ">\n</")
+    |> String.split("\n")
+    |> Enum.map_join("\n", &String.trim/1)
   end
 
-  defp format_source(code, _), do: code
+  defp format_source(code, _), do: String.trim(code)
 end

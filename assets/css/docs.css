@@ -1,13 +1,25 @@
 /* Docs site — mobile-first layout; chrome dogfoods Essence UI */
 
+/* Full-bleed: Phoenix root body keeps an 8px UA margin otherwise */
+body:has(.docs-shell) {
+  margin: 0;
+}
+
 .docs-shell {
   min-height: 100vh;
+  min-height: 100dvh;
   background: var(--color-background, #fff);
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-areas:
     "topbar"
     "main";
+}
+
+.docs-shell.is-nav-open {
+  overflow: hidden;
+  height: 100vh;
+  height: 100dvh;
 }
 
 /* —— Mobile first (default) —— */
@@ -17,6 +29,7 @@
   position: sticky;
   top: 0;
   z-index: 30;
+  width: 100%;
   border-bottom: 1px solid var(--gray-a5);
   background: var(--color-background, #fff);
 }
@@ -25,7 +38,7 @@
   position: fixed;
   inset: 0;
   z-index: 35;
-  background: rgb(0 0 0 / 0.35);
+  background: rgb(0 0 0 / 0.4);
 }
 
 .docs-sidebar {
@@ -34,8 +47,11 @@
   top: 0;
   left: 0;
   z-index: 40;
-  width: min(20rem, 86vw);
+  display: flex !important;
+  flex-direction: column;
+  width: min(18.5rem, 88vw);
   height: 100vh;
+  height: 100dvh;
   transform: translateX(-105%);
   transition: transform 160ms ease;
   border-right: 1px solid var(--gray-a6);
@@ -51,6 +67,7 @@
 
 .docs-sidebar__mobile-header {
   display: flex;
+  flex-shrink: 0;
 }
 
 .docs-sidebar__brand {
@@ -64,7 +81,9 @@
 }
 
 .docs-sidebar__scroll {
-  height: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto !important;
 }
 
 .docs-sidebar__inner {
@@ -82,7 +101,7 @@
 
 .docs-nav-link {
   display: block;
-  padding: 0.45rem 0.6rem;
+  padding: 0.55rem 0.65rem;
   border-radius: var(--radius-2);
 }
 
@@ -98,7 +117,7 @@
   grid-area: main;
   min-width: 0;
   width: 100%;
-  padding: 1rem 1.15rem 3rem;
+  padding: 1.25rem 1rem 3rem;
 }
 
 .docs-article {
@@ -147,7 +166,7 @@
 
 .docs-article__body pre {
   margin: 0.75rem 0 1.25rem;
-  padding: 0.85rem 1rem;
+  padding: 0.75rem 0.85rem;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   border-radius: var(--radius-3);
@@ -156,6 +175,8 @@
   font-family: var(--default-font-family-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
   font-size: var(--font-size-2, 0.85rem);
   line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .docs-article__body pre code {
@@ -205,8 +226,6 @@
   border-top: 1px solid var(--gray-a5);
   max-width: 100%;
   min-width: 0;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .docs-demo__source .rt-TabsRoot,
@@ -215,28 +234,39 @@
   min-width: 0;
 }
 
+.docs-demo__source .rt-TabsList {
+  padding-inline: 0.75rem;
+}
+
+/* Overflow on the scrollport, padding on the pre — avoids false scrollbars */
 .docs-code-block {
   max-width: 100%;
   min-width: 0;
   background: var(--gray-a2);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  scrollbar-gutter: stable;
   scrollbar-width: thin;
+  border-radius: var(--radius-3);
 }
 
 .docs-code-block pre {
   margin: 0;
+  padding: 0.75rem 0.85rem;
+  width: 100%;
+  box-sizing: border-box;
   overflow: visible;
-  width: max-content;
-  min-width: 100%;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
 }
 
 .docs-code-block code {
   font-family: var(--default-font-family-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
-  font-size: var(--font-size-2, 0.85rem);
-  line-height: 1.5;
-  white-space: pre;
+  font-size: var(--font-size-2, 0.8125rem);
+  line-height: 1.55;
+  /* Mobile-first: wrap long lines instead of forcing horizontal scroll */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .docs-props {
@@ -260,7 +290,12 @@
 
 .docs-anatomy {
   max-width: 100%;
-  overflow-x: auto;
+}
+
+.docs-anatomy__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
 }
 
 /* —— Desktop —— */
@@ -269,6 +304,11 @@
   .docs-shell {
     grid-template-columns: 15rem minmax(0, 1fr);
     grid-template-areas: "sidebar main";
+  }
+
+  .docs-shell.is-nav-open {
+    overflow: visible;
+    height: auto;
   }
 
   .docs-topbar {
@@ -286,6 +326,7 @@
     z-index: 1;
     width: auto;
     height: 100vh;
+    height: 100dvh;
     transform: none;
     transition: none;
     box-shadow: none;
@@ -297,7 +338,9 @@
   }
 
   .docs-sidebar__scroll {
-    height: calc(100vh - 2rem);
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto !important;
   }
 
   .docs-main {
@@ -319,5 +362,28 @@
 
   .docs-props__mobile {
     display: none !important;
+  }
+
+  .docs-anatomy__list {
+    display: block;
+  }
+
+  .docs-code-block {
+    overflow-x: auto;
+  }
+
+  .docs-code-block pre {
+    width: max-content;
+    min-width: 100%;
+  }
+
+  .docs-code-block code {
+    white-space: pre;
+    overflow-wrap: normal;
+  }
+
+  .docs-article__body pre {
+    white-space: pre;
+    overflow-wrap: normal;
   }
 }
