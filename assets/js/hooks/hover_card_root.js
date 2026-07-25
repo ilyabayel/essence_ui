@@ -1,5 +1,6 @@
 import { positionFloating } from "../lib/position";
 import { setOpen, setClosed } from "../lib/presence";
+import { whenMouse } from "../lib/pointer";
 
 function findPart(root, selector, contentId) {
   const local = root.querySelector(selector);
@@ -31,10 +32,10 @@ export const HoverCardRoot = {
     this.isOpen = false;
     this._raf = null;
 
-    this.onTriggerEnter = this.onTriggerEnter.bind(this);
-    this.onTriggerLeave = this.onTriggerLeave.bind(this);
-    this.onContentEnter = this.onContentEnter.bind(this);
-    this.onContentLeave = this.onContentLeave.bind(this);
+    this.onTriggerEnter = whenMouse(this.onTriggerEnter.bind(this));
+    this.onTriggerLeave = whenMouse(this.onTriggerLeave.bind(this));
+    this.onContentEnter = whenMouse(this.onContentEnter.bind(this));
+    this.onContentLeave = whenMouse(this.onContentLeave.bind(this));
     this.scheduleUpdate = this.scheduleUpdate.bind(this);
 
     this.resolveParts();
@@ -71,19 +72,20 @@ export const HoverCardRoot = {
     this.unbindEvents();
     if (!this.trigger || !this.content) return;
 
-    this.trigger.addEventListener("mouseenter", this.onTriggerEnter);
-    this.trigger.addEventListener("mouseleave", this.onTriggerLeave);
-    this.content.addEventListener("mouseenter", this.onContentEnter);
-    this.content.addEventListener("mouseleave", this.onContentLeave);
+    // Radix excludeTouch: hover intent is mouse-only. Use Popover for tap.
+    this.trigger.addEventListener("pointerenter", this.onTriggerEnter);
+    this.trigger.addEventListener("pointerleave", this.onTriggerLeave);
+    this.content.addEventListener("pointerenter", this.onContentEnter);
+    this.content.addEventListener("pointerleave", this.onContentLeave);
     this._bound = true;
   },
 
   unbindEvents() {
     if (!this._bound) return;
-    this.trigger?.removeEventListener("mouseenter", this.onTriggerEnter);
-    this.trigger?.removeEventListener("mouseleave", this.onTriggerLeave);
-    this.content?.removeEventListener("mouseenter", this.onContentEnter);
-    this.content?.removeEventListener("mouseleave", this.onContentLeave);
+    this.trigger?.removeEventListener("pointerenter", this.onTriggerEnter);
+    this.trigger?.removeEventListener("pointerleave", this.onTriggerLeave);
+    this.content?.removeEventListener("pointerenter", this.onContentEnter);
+    this.content?.removeEventListener("pointerleave", this.onContentLeave);
     this._bound = false;
   },
 

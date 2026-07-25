@@ -1,5 +1,6 @@
 import { setOpen, setClosed } from "../lib/presence";
 import { focusFirst, getFocusableElements } from "../lib/focus_scope";
+import { whenMouse } from "../lib/pointer";
 
 export const NavigationMenuRoot = {
   mounted() {
@@ -8,10 +9,10 @@ export const NavigationMenuRoot = {
     this.closeTimer = null;
 
     this.onTriggerClick = this.onTriggerClick.bind(this);
-    this.onTriggerEnter = this.onTriggerEnter.bind(this);
-    this.onTriggerLeave = this.onTriggerLeave.bind(this);
-    this.onContentEnter = this.onContentEnter.bind(this);
-    this.onContentLeave = this.onContentLeave.bind(this);
+    this.onTriggerEnter = whenMouse(this.onTriggerEnter.bind(this));
+    this.onTriggerLeave = whenMouse(this.onTriggerLeave.bind(this));
+    this.onContentEnter = whenMouse(this.onContentEnter.bind(this));
+    this.onContentLeave = whenMouse(this.onContentLeave.bind(this));
     this.onKeyDown = this.onKeyDown.bind(this);
     this.onDocumentClick = this.onDocumentClick.bind(this);
 
@@ -75,14 +76,15 @@ export const NavigationMenuRoot = {
       if (!trigger.hasAttribute("data-nav-bound")) {
         trigger.setAttribute("data-nav-bound", "true");
         trigger.addEventListener("click", this.onTriggerClick);
-        trigger.addEventListener("mouseenter", this.onTriggerEnter);
-        trigger.addEventListener("mouseleave", this.onTriggerLeave);
+        // Radix whenMouse: hover intent is mouse-only; touch uses click.
+        trigger.addEventListener("pointerenter", this.onTriggerEnter);
+        trigger.addEventListener("pointerleave", this.onTriggerLeave);
       }
 
       if (content && !content.hasAttribute("data-nav-bound")) {
         content.setAttribute("data-nav-bound", "true");
-        content.addEventListener("mouseenter", this.onContentEnter);
-        content.addEventListener("mouseleave", this.onContentLeave);
+        content.addEventListener("pointerenter", this.onContentEnter);
+        content.addEventListener("pointerleave", this.onContentLeave);
       }
     });
   },

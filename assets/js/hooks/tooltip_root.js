@@ -1,5 +1,6 @@
 import { positionFloating } from "../lib/position";
 import { setOpen, setClosed } from "../lib/presence";
+import { whenMouse } from "../lib/pointer";
 
 function findPart(root, selector, contentId) {
   const local = root.querySelector(selector);
@@ -40,8 +41,8 @@ export const TooltipRoot = {
     this.closeTimeout = null;
     this.isOpen = false;
 
-    this.onTriggerEnter = this.onTriggerEnter.bind(this);
-    this.onTriggerLeave = this.onTriggerLeave.bind(this);
+    this.onTriggerEnter = whenMouse(this.onTriggerEnter.bind(this));
+    this.onTriggerLeave = whenMouse(this.onTriggerLeave.bind(this));
     this.onFocusIn = this.onFocusIn.bind(this);
     this.onFocusOut = this.onFocusOut.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
@@ -79,8 +80,9 @@ export const TooltipRoot = {
     this.unbindEvents();
     if (!this.trigger) return;
 
-    this.trigger.addEventListener("mouseenter", this.onTriggerEnter);
-    this.trigger.addEventListener("mouseleave", this.onTriggerLeave);
+    // Radix excludeTouch: hover is mouse-only; focus still opens for keyboard/a11y.
+    this.trigger.addEventListener("pointerenter", this.onTriggerEnter);
+    this.trigger.addEventListener("pointerleave", this.onTriggerLeave);
     this.trigger.addEventListener("focusin", this.onFocusIn);
     this.trigger.addEventListener("focusout", this.onFocusOut);
     this.trigger.addEventListener("keydown", this.onKeyDown);
@@ -89,8 +91,8 @@ export const TooltipRoot = {
 
   unbindEvents() {
     if (!this._bound) return;
-    this.trigger?.removeEventListener("mouseenter", this.onTriggerEnter);
-    this.trigger?.removeEventListener("mouseleave", this.onTriggerLeave);
+    this.trigger?.removeEventListener("pointerenter", this.onTriggerEnter);
+    this.trigger?.removeEventListener("pointerleave", this.onTriggerLeave);
     this.trigger?.removeEventListener("focusin", this.onFocusIn);
     this.trigger?.removeEventListener("focusout", this.onFocusOut);
     this.trigger?.removeEventListener("keydown", this.onKeyDown);

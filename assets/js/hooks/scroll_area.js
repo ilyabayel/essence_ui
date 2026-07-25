@@ -1,3 +1,5 @@
+import { hasFinePointerHover, whenMouse } from "../lib/pointer";
+
 export const ScrollArea = {
   mounted() {
     this.viewport = this.el.querySelector('.rt-ScrollAreaViewport');
@@ -6,6 +8,9 @@ export const ScrollArea = {
     this.verticalThumb = this.verticalScrollbar.querySelector('.rt-ScrollAreaThumb');
     this.horizontalThumb = this.horizontalScrollbar.querySelector('.rt-ScrollAreaThumb');
     this.type = this.el.dataset.type || 'hover';
+    if (this.type === 'hover' && !hasFinePointerHover()) {
+      this.type = 'scroll';
+    }
     this.hideDelay = parseInt(this.el.dataset.scrollHideDelay || '600');
 
     this.onScroll = this.onScroll.bind(this);
@@ -19,8 +24,10 @@ export const ScrollArea = {
     this.updateScrollbars();
 
     if (this.type === 'hover') {
-      this.el.addEventListener('mouseenter', this.showScrollbars);
-      this.el.addEventListener('mouseleave', this.hideScrollbars);
+      this._hoverShow = whenMouse(this.showScrollbars);
+      this._hoverHide = whenMouse(this.hideScrollbars);
+      this.el.addEventListener('pointerenter', this._hoverShow);
+      this.el.addEventListener('pointerleave', this._hoverHide);
       this.verticalScrollbar.dataset.state = 'hidden';
       this.horizontalScrollbar.dataset.state = 'hidden';
     } else if (this.type === 'scroll') {

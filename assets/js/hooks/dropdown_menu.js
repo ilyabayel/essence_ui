@@ -3,6 +3,8 @@
  * 
  * Handles click events to toggle the dropdown menu and positions it relative to the trigger.
  */
+import { whenMouse } from "../lib/pointer";
+
 export const DropdownMenu = {
   mounted() {
     this.trigger = this.el.querySelector('[data-dropdown-menu-trigger]');
@@ -106,7 +108,12 @@ export const DropdownMenu = {
   },
 
   onMenuItemClick(e) {
-    if (e.currentTarget.hasAttribute('data-dropdown-menu-sub-trigger')) return;
+    if (e.currentTarget.hasAttribute('data-dropdown-menu-sub-trigger')) {
+      // Touch / click path: open nested submenu (Radix SubTrigger parity).
+      const sub = e.currentTarget.closest('[data-dropdown-menu-sub]');
+      if (sub?._openSub) sub._openSub();
+      return;
+    }
     
     // Toggle checkbox/radio visually for demo purposes if present
     const isCheckbox = e.currentTarget.getAttribute('role') === 'menuitemcheckbox';
@@ -226,10 +233,13 @@ export const DropdownMenu = {
         }, 150);
       };
 
-      trigger.addEventListener('mouseenter', openSub);
-      trigger.addEventListener('mouseleave', closeSub);
-      content.addEventListener('mouseenter', () => clearTimeout(timeout));
-      content.addEventListener('mouseleave', closeSub);
+      sub._openSub = openSub;
+
+      // Mouse-only hover; click opens via onMenuItemClick (touch).
+      trigger.addEventListener('pointerenter', whenMouse(openSub));
+      trigger.addEventListener('pointerleave', whenMouse(closeSub));
+      content.addEventListener('pointerenter', whenMouse(() => clearTimeout(timeout)));
+      content.addEventListener('pointerleave', whenMouse(closeSub));
     });
     
     // Highlighting for all items

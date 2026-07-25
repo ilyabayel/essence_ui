@@ -73,6 +73,27 @@ test.describe("Dropdown Menu Primitive", () => {
     await expect(content).toBeHidden();
   });
 
+  test("opens submenu on sub-trigger click (touch path)", async ({ page }) => {
+    const root = page.locator("#dropdown-primitive");
+    const trigger = root.locator("[data-essence-dropdown-menu-trigger]");
+    const content = page.locator("#dropdown-content");
+    const subTrigger = content.locator(
+      "[data-essence-dropdown-menu-sub-trigger]",
+    );
+    const subContent = page.locator(
+      "[data-essence-dropdown-menu-sub-content]",
+    );
+
+    await trigger.click();
+    await expect(content).toBeVisible();
+    await expect(subContent).toBeHidden();
+
+    await subTrigger.click();
+    await expect(subContent).toBeVisible();
+    await expect(subTrigger).toHaveAttribute("aria-expanded", "true");
+    await expect(subContent).toContainText("Save Page As");
+  });
+
   test("has no accessibility violations when open", async ({ page }) => {
     const root = page.locator("#dropdown-primitive");
     const trigger = root.locator("[data-essence-dropdown-menu-trigger]");
