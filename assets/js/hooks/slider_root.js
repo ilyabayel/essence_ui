@@ -119,14 +119,17 @@ export const SliderRoot = {
       if (disabled) thumb.setAttribute("data-disabled", "");
       else thumb.removeAttribute("data-disabled");
 
+      thumb.style.position = "absolute";
       if (orientation === "horizontal") {
         thumb.style.left = `${pct}%`;
         thumb.style.top = "";
         thumb.style.bottom = "";
+        thumb.style.transform = "translateX(-50%)";
       } else {
         thumb.style.bottom = `${pct}%`;
         thumb.style.left = "";
         thumb.style.top = "";
+        thumb.style.transform = "translateY(50%)";
       }
     });
 
