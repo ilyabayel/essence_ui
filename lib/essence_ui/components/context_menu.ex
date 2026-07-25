@@ -157,7 +157,7 @@ defmodule EssenceUI.Components.ContextMenu do
         |> Enum.filter(& &1)
         |> Enum.join(" ")
       }
-      data-accent-color={@color}
+      data-accent-color={assigns[:color]}
       {Map.delete(@rest, :class)}
     >
       {render_slot(@inner_block)}
@@ -260,7 +260,7 @@ defmodule EssenceUI.Components.ContextMenu do
         |> Enum.filter(& &1)
         |> Enum.join(" ")
       }
-      data-accent-color={@color}
+      data-accent-color={assigns[:color]}
       {Map.delete(@rest, :class)}
     >
       {render_slot(@inner_block)}
@@ -346,7 +346,7 @@ defmodule EssenceUI.Components.ContextMenu do
         |> Enum.filter(& &1)
         |> Enum.join(" ")
       }
-      data-accent-color={@color}
+      data-accent-color={assigns[:color]}
       {Map.delete(@rest, :class)}
     >
       {render_slot(@inner_block)}
