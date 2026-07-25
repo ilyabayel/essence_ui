@@ -6,14 +6,17 @@ defmodule EssenceUI.Primitives.RadioGroupTest do
 
   alias EssenceUI.Primitives.RadioGroup
 
-  test "renders radix-like root and item" do
+  test "renders radix-like root, item, empty indicator, and bubble input" do
     html =
       render_component(
         fn assigns ->
           ~H"""
           <RadioGroup.root id="choice" default_value="a" name="choice" required on_value_change="changed">
-            <RadioGroup.item value="a" checked>
-              <RadioGroup.indicator checked>•</RadioGroup.indicator>
+            <RadioGroup.item value="a" checked name="choice" required>
+              <RadioGroup.indicator checked class="RadioGroupIndicator" />
+            </RadioGroup.item>
+            <RadioGroup.item value="b" name="choice">
+              <RadioGroup.indicator class="RadioGroupIndicator" />
             </RadioGroup.item>
           </RadioGroup.root>
           """
@@ -30,5 +33,12 @@ defmodule EssenceUI.Primitives.RadioGroupTest do
     assert html =~ ~s[value="a"]
     assert html =~ ~s[aria-checked="true"]
     assert html =~ "data-essence-radio-group-indicator"
+    assert html =~ ~s[class="RadioGroupIndicator"]
+    assert html =~ ~s[type="radio"]
+    assert html =~ "data-essence-radio-group-input"
+    assert html =~ ~s[name="choice"]
+
+    # Empty indicator (no nested content) for checked item
+    assert html =~ ~r/data-essence-radio-group-indicator[^>]*>\s*</
   end
 end

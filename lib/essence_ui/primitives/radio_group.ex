@@ -25,7 +25,7 @@ defmodule EssenceUI.Primitives.RadioGroup do
       phx-hook="RadioGroupRoot"
       role="radiogroup"
       aria-orientation={@orientation}
-      aria-required={if @required, do: "true"}
+      aria-required={to_string(@required)}
       data-essence-radio-group-root
       data-value={@value_attr}
       data-name={@name}
@@ -46,6 +46,9 @@ defmodule EssenceUI.Primitives.RadioGroup do
   attr :value, :string, required: true
   attr :disabled, :boolean, default: false
   attr :checked, :boolean, default: false
+  attr :required, :boolean, default: false
+  attr :name, :string, default: nil
+  attr :form, :string, default: nil
   attr :rest, :global
   slot :inner_block, required: false
 
@@ -68,26 +71,63 @@ defmodule EssenceUI.Primitives.RadioGroup do
     >
       {render_slot(@inner_block)}
     </button>
+    <.bubble_input
+      value={@value}
+      checked={@checked}
+      disabled={@disabled}
+      required={@required}
+      name={@name}
+      form={@form}
+    />
     """
   end
 
   attr :checked, :boolean, default: false
   attr :force_mount, :boolean, default: false
   attr :rest, :global
-  slot :inner_block, required: true
+  slot :inner_block, required: false
 
   def indicator(assigns) do
+    present? = assigns.force_mount or assigns.checked
+    assigns = assign(assigns, :present?, present?)
+
     ~H"""
     <span
       data-essence-radio-group-indicator
       data-force-mount={if @force_mount, do: ""}
-      aria-hidden="true"
-      style={if @checked, do: "display: inline-flex;", else: "display: none;"}
+      style={if @present?, do: "display: flex;", else: "display: none;"}
       data-state={if @checked, do: "checked", else: "unchecked"}
       {@rest}
     >
       {render_slot(@inner_block)}
     </span>
+    """
+  end
+
+  attr :value, :string, required: true
+  attr :checked, :boolean, default: false
+  attr :disabled, :boolean, default: false
+  attr :required, :boolean, default: false
+  attr :name, :string, default: nil
+  attr :form, :string, default: nil
+  attr :rest, :global
+
+  def bubble_input(assigns) do
+    ~H"""
+    <input
+      type="radio"
+      checked={@checked}
+      disabled={@disabled}
+      required={@required}
+      name={@name}
+      value={@value}
+      form={@form}
+      data-essence-radio-group-input
+      style="position: absolute; pointer-events: none; opacity: 0; margin: 0; transform: translateX(-100%); width: 25px; height: 25px;"
+      tabindex="-1"
+      aria-hidden="true"
+      {@rest}
+    />
     """
   end
 end
