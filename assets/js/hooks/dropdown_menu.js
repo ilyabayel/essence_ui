@@ -30,7 +30,9 @@ export const DropdownMenu = {
   updated() {
     this.bindHoverEvents();
     if (this.content) {
-      this.items = this.content.querySelectorAll('.rt-DropdownMenuItem:not([data-disabled])');
+      this.items = this.content.querySelectorAll(
+        '.rt-DropdownMenuItem:not([data-disabled]), [data-dropdown-menu-sub-trigger]'
+      );
       this.items.forEach(item => {
         if (!item.hasAttribute('data-has-click')) {
           item.addEventListener('click', this.onMenuItemClick);
@@ -63,8 +65,10 @@ export const DropdownMenu = {
     this.content.style.position = 'fixed';
     this.isOpen = true;
     
-    // Bind click events on items
-    this.items = this.content.querySelectorAll('.rt-DropdownMenuItem:not([data-disabled])');
+    // Bind click events on items + sub-triggers (touch/click path for nested menus)
+    this.items = this.content.querySelectorAll(
+      '.rt-DropdownMenuItem:not([data-disabled]), [data-dropdown-menu-sub-trigger]'
+    );
     this.items.forEach(item => {
       if (!item.hasAttribute('data-has-click')) {
         item.addEventListener('click', this.onMenuItemClick);
@@ -196,6 +200,12 @@ export const DropdownMenu = {
       
       const openSub = () => {
         clearTimeout(timeout);
+        // Close sibling subs so only one nested menu is open (click + hover).
+        this.content.querySelectorAll('[data-dropdown-menu-sub]').forEach((sibling) => {
+          if (sibling !== sub && typeof sibling._closeSub === 'function') {
+            sibling._closeSub(true);
+          }
+        });
         trigger.setAttribute('data-state', 'open');
         trigger.setAttribute('data-highlighted', '');
         content.style.display = 'flex';
@@ -225,21 +235,28 @@ export const DropdownMenu = {
         content.style.top = `${top}px`;
       };
 
-      const closeSub = () => {
-        timeout = setTimeout(() => {
+      const closeSub = (immediate = false) => {
+        const hide = () => {
           trigger.removeAttribute('data-state');
           trigger.removeAttribute('data-highlighted');
           content.style.display = 'none';
-        }, 150);
+        };
+        clearTimeout(timeout);
+        if (immediate) {
+          hide();
+        } else {
+          timeout = setTimeout(hide, 150);
+        }
       };
 
       sub._openSub = openSub;
+      sub._closeSub = closeSub;
 
       // Mouse-only hover; click opens via onMenuItemClick (touch).
       trigger.addEventListener('pointerenter', whenMouse(openSub));
-      trigger.addEventListener('pointerleave', whenMouse(closeSub));
+      trigger.addEventListener('pointerleave', whenMouse(() => closeSub()));
       content.addEventListener('pointerenter', whenMouse(() => clearTimeout(timeout)));
-      content.addEventListener('pointerleave', whenMouse(closeSub));
+      content.addEventListener('pointerleave', whenMouse(() => closeSub()));
     });
     
     // Highlighting for all items

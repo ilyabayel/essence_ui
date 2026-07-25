@@ -79,6 +79,36 @@ defmodule Storybook.Themes.Components.DropdownMenu do
         """
       },
       %Variation{
+        id: :sibling_subs,
+        description: "Sibling submenus (legacy touch/click)",
+        template: """
+        <.dropdown_menu_root id="dropdown-sibling-subs">
+          <.dropdown_menu_trigger>
+            <.button variant="soft">
+              Options
+              <.dropdown_menu_trigger_icon />
+            </.button>
+          </.dropdown_menu_trigger>
+          <.dropdown_menu_content>
+            <.dropdown_menu_sub>
+              <.dropdown_menu_sub_trigger>More</.dropdown_menu_sub_trigger>
+              <.dropdown_menu_sub_content>
+                <.dropdown_menu_item>Move to project…</.dropdown_menu_item>
+                <.dropdown_menu_item>Move to folder…</.dropdown_menu_item>
+              </.dropdown_menu_sub_content>
+            </.dropdown_menu_sub>
+            <.dropdown_menu_sub>
+              <.dropdown_menu_sub_trigger>Share</.dropdown_menu_sub_trigger>
+              <.dropdown_menu_sub_content>
+                <.dropdown_menu_item>Copy link</.dropdown_menu_item>
+                <.dropdown_menu_item>Invite…</.dropdown_menu_item>
+              </.dropdown_menu_sub_content>
+            </.dropdown_menu_sub>
+          </.dropdown_menu_content>
+        </.dropdown_menu_root>
+        """
+      },
+      %Variation{
         id: :size,
         description: "Size",
         template: """

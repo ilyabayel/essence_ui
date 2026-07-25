@@ -104,3 +104,43 @@ test.describe("Dropdown Menu Primitive", () => {
     });
   });
 });
+
+test.describe("Dropdown Menu Themes (legacy hook)", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(
+      "/themes/components/dropdown_menu?variation_id=sibling_subs",
+    );
+    await page.waitForLoadState("domcontentloaded");
+    await page.waitForFunction(() => {
+      const el = document.getElementById("dropdown-sibling-subs");
+      return el && el.hasAttribute("data-phx-id");
+    });
+    await expect(page.locator("#dropdown-sibling-subs")).toBeVisible();
+  });
+
+  test("closes sibling submenu when opening another via click", async ({
+    page,
+  }) => {
+    const root = page.locator("#dropdown-sibling-subs");
+    const trigger = root.locator("[data-dropdown-menu-trigger] button");
+    const content = root.locator("[data-dropdown-menu-content]");
+    const moreSub = content.locator("[data-dropdown-menu-sub]").nth(0);
+    const shareSub = content.locator("[data-dropdown-menu-sub]").nth(1);
+    const moreTrigger = moreSub.locator("[data-dropdown-menu-sub-trigger]");
+    const shareTrigger = shareSub.locator("[data-dropdown-menu-sub-trigger]");
+    const moreContent = moreSub.locator("[data-dropdown-menu-sub-content]");
+    const shareContent = shareSub.locator("[data-dropdown-menu-sub-content]");
+
+    await trigger.click();
+    await expect(content).toBeVisible();
+
+    await moreTrigger.click();
+    await expect(moreContent).toBeVisible();
+    await expect(shareContent).toBeHidden();
+
+    await shareTrigger.click();
+    await expect(shareContent).toBeVisible();
+    await expect(moreContent).toBeHidden();
+    await expect(moreTrigger).not.toHaveAttribute("data-state", "open");
+  });
+});
