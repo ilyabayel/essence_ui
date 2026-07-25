@@ -1,3 +1,5 @@
+import { hasFinePointerHover, whenMouse } from "../lib/pointer";
+
 export const ScrollAreaRoot = {
   mounted() {
     this.viewport = this.el.querySelector("[data-essence-scroll-area-viewport]");
@@ -13,6 +15,10 @@ export const ScrollAreaRoot = {
     );
     this.corner = this.el.querySelector("[data-essence-scroll-area-corner]");
     this.type = this.el.dataset.type || "hover";
+    // On touch / coarse pointers, hover affordance never appears — use scroll.
+    if (this.type === "hover" && !hasFinePointerHover()) {
+      this.type = "scroll";
+    }
     this.hideDelay = parseInt(this.el.dataset.scrollHideDelay || "600", 10);
     this.isDragging = false;
 
@@ -29,8 +35,10 @@ export const ScrollAreaRoot = {
     this.updateScrollbars();
 
     if (this.type === "hover") {
-      this.el.addEventListener("mouseenter", this.showScrollbars);
-      this.el.addEventListener("mouseleave", this.hideScrollbars);
+      this._hoverShow = whenMouse(this.showScrollbars);
+      this._hoverHide = whenMouse(this.hideScrollbars);
+      this.el.addEventListener("pointerenter", this._hoverShow);
+      this.el.addEventListener("pointerleave", this._hoverHide);
       this.setScrollbarState("hidden");
     } else if (this.type === "scroll") {
       this.setScrollbarState("hidden");
@@ -126,8 +134,10 @@ export const ScrollAreaRoot = {
   destroyed() {
     this.viewport?.removeEventListener("scroll", this.onScroll);
     window.removeEventListener("resize", this.updateScrollbars);
-    this.el.removeEventListener("mouseenter", this.showScrollbars);
-    this.el.removeEventListener("mouseleave", this.hideScrollbars);
+    if (this._hoverShow) {
+      this.el.removeEventListener("pointerenter", this._hoverShow);
+      this.el.removeEventListener("pointerleave", this._hoverHide);
+    }
     this.observer?.disconnect();
     clearTimeout(this.hideTimeout);
   },

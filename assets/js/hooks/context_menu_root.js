@@ -14,6 +14,7 @@ import {
   toggleCheckboxItem,
   selectRadioItem,
 } from "../lib/menu";
+import { whenMouse } from "../lib/pointer";
 
 export const ContextMenuRoot = {
   mounted() {
@@ -303,10 +304,14 @@ export const ContextMenuRoot = {
         };
 
         // Open on pointer hover only — not on focus (keyboard uses ArrowRight/Enter/Space).
-        trigger.addEventListener("mouseenter", open);
-        trigger.addEventListener("mouseleave", scheduleClose);
-        content.addEventListener("mouseenter", () => clearTimeout(closeTimer));
-        content.addEventListener("mouseleave", scheduleClose);
+        // Hover open is mouse-only (Radix); click/keyboard open via onItemClick / arrows.
+        trigger.addEventListener("pointerenter", whenMouse(open));
+        trigger.addEventListener("pointerleave", whenMouse(scheduleClose));
+        content.addEventListener(
+          "pointerenter",
+          whenMouse(() => clearTimeout(closeTimer))
+        );
+        content.addEventListener("pointerleave", whenMouse(scheduleClose));
       });
   },
 

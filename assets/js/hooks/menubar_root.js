@@ -12,6 +12,7 @@ import {
   toggleCheckboxItem,
   selectRadioItem,
 } from "../lib/menu";
+import { whenMouse } from "../lib/pointer";
 
 export const MenubarRoot = {
   mounted() {
@@ -20,7 +21,7 @@ export const MenubarRoot = {
     this.typeahead = createTypeahead();
 
     this.onTriggerClick = this.onTriggerClick.bind(this);
-    this.onTriggerMouseEnter = this.onTriggerMouseEnter.bind(this);
+    this.onTriggerMouseEnter = whenMouse(this.onTriggerMouseEnter.bind(this));
     this.onKeyDown = this.onKeyDown.bind(this);
     this.onRootKeyDown = this.onRootKeyDown.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
@@ -40,7 +41,7 @@ export const MenubarRoot = {
     this.el.removeEventListener("keydown", this.onRootKeyDown);
     this.el.querySelectorAll("[data-essence-menubar-trigger]").forEach((t) => {
       t.removeEventListener("click", this.onTriggerClick);
-      t.removeEventListener("mouseenter", this.onTriggerMouseEnter);
+      t.removeEventListener("pointerenter", this.onTriggerMouseEnter);
     });
   },
 
@@ -68,7 +69,7 @@ export const MenubarRoot = {
       if (trigger.hasAttribute("data-menubar-bound")) return;
       trigger.setAttribute("data-menubar-bound", "true");
       trigger.addEventListener("click", this.onTriggerClick);
-      trigger.addEventListener("mouseenter", this.onTriggerMouseEnter);
+      trigger.addEventListener("pointerenter", this.onTriggerMouseEnter);
     });
   },
 
@@ -355,18 +356,30 @@ export const MenubarRoot = {
       if (!trigger || !subContent) return;
 
       let closeTimer;
-      trigger.addEventListener("mouseenter", () => {
-        clearTimeout(closeTimer);
-        this.openSub(trigger);
-      });
-      // Open on pointer hover only — not on focus (keyboard uses ArrowRight/Enter/Space).
-      trigger.addEventListener("mouseleave", () => {
-        closeTimer = setTimeout(() => this.closeSub(sub), 150);
-      });
-      subContent.addEventListener("mouseenter", () => clearTimeout(closeTimer));
-      subContent.addEventListener("mouseleave", () => {
-        closeTimer = setTimeout(() => this.closeSub(sub), 150);
-      });
+      trigger.addEventListener(
+        "pointerenter",
+        whenMouse(() => {
+          clearTimeout(closeTimer);
+          this.openSub(trigger);
+        })
+      );
+      // Hover open is mouse-only (Radix); click/keyboard open via onItemClick / arrows.
+      trigger.addEventListener(
+        "pointerleave",
+        whenMouse(() => {
+          closeTimer = setTimeout(() => this.closeSub(sub), 150);
+        })
+      );
+      subContent.addEventListener(
+        "pointerenter",
+        whenMouse(() => clearTimeout(closeTimer))
+      );
+      subContent.addEventListener(
+        "pointerleave",
+        whenMouse(() => {
+          closeTimer = setTimeout(() => this.closeSub(sub), 150);
+        })
+      );
     });
   },
 

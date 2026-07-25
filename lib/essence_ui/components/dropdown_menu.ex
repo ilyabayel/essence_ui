@@ -161,7 +161,7 @@ defmodule EssenceUI.Components.DropdownMenu do
       }
       style={@style}
       data-disabled={if @disabled, do: "", else: nil}
-      data-accent-color={@color}
+      data-accent-color={assigns[:color]}
       tabindex="-1"
       {@rest}
     >

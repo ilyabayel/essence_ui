@@ -54,3 +54,48 @@ test.describe("Hover Card Primitive", () => {
     });
   });
 });
+
+test.describe("Hover Card Primitive (touch)", () => {
+  test.use({
+    hasTouch: true,
+    isMobile: true,
+    viewport: { width: 390, height: 844 },
+  });
+
+  test.beforeEach(async ({ page }) => {
+    await gotoPrimitive(page, "hover_card");
+    await expect(
+      page.locator("#hover-card-primitive[data-hydrated]"),
+    ).toBeVisible();
+  });
+
+  test("opens on tap and closes on second tap", async ({ page }) => {
+    const root = page.locator("#hover-card-primitive");
+    const trigger = root.locator("[data-essence-hover-card-trigger]");
+    const content = page.locator("#hover-card-content");
+
+    await expect(content).toBeHidden();
+
+    await trigger.click();
+    await expect(content).toBeVisible();
+    await expect(trigger).toHaveAttribute("data-state", "open");
+
+    await trigger.click();
+    await expect(content).toBeHidden();
+    await expect(trigger).toHaveAttribute("data-state", "closed");
+  });
+
+  test("closes when tapping outside", async ({ page }) => {
+    const root = page.locator("#hover-card-primitive");
+    const trigger = root.locator("[data-essence-hover-card-trigger]");
+    const content = page.locator("#hover-card-content");
+
+    await trigger.click();
+    await expect(content).toBeVisible();
+
+    await page
+      .locator('.radix-demo[data-component="hover-card"]')
+      .click({ position: { x: 8, y: 8 }, force: true });
+    await expect(content).toBeHidden();
+  });
+});

@@ -1,5 +1,6 @@
 import { positionFloating } from "../lib/position";
 import { setOpen, setClosed } from "../lib/presence";
+import { hasFinePointerHover, whenMouse } from "../lib/pointer";
 
 function findPart(root, selector, contentId) {
   const local = root.querySelector(selector);
@@ -39,12 +40,15 @@ export const TooltipRoot = {
     this.openTimeout = null;
     this.closeTimeout = null;
     this.isOpen = false;
+    this._touchOpen = !hasFinePointerHover();
 
-    this.onTriggerEnter = this.onTriggerEnter.bind(this);
-    this.onTriggerLeave = this.onTriggerLeave.bind(this);
+    this.onTriggerEnter = whenMouse(this.onTriggerEnter.bind(this));
+    this.onTriggerLeave = whenMouse(this.onTriggerLeave.bind(this));
     this.onFocusIn = this.onFocusIn.bind(this);
     this.onFocusOut = this.onFocusOut.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.onTriggerClick = this.onTriggerClick.bind(this);
+    this.onDocumentPointerDown = this.onDocumentPointerDown.bind(this);
 
     this.resolveParts();
     this.bindEvents();
@@ -79,21 +83,29 @@ export const TooltipRoot = {
     this.unbindEvents();
     if (!this.trigger) return;
 
-    this.trigger.addEventListener("mouseenter", this.onTriggerEnter);
-    this.trigger.addEventListener("mouseleave", this.onTriggerLeave);
+    // Focus opens for keyboard. Fine pointer: mouse hover. Coarse: click toggle only.
     this.trigger.addEventListener("focusin", this.onFocusIn);
     this.trigger.addEventListener("focusout", this.onFocusOut);
     this.trigger.addEventListener("keydown", this.onKeyDown);
+    if (this._touchOpen) {
+      this.trigger.addEventListener("click", this.onTriggerClick);
+      document.addEventListener("pointerdown", this.onDocumentPointerDown, true);
+    } else {
+      this.trigger.addEventListener("pointerenter", this.onTriggerEnter);
+      this.trigger.addEventListener("pointerleave", this.onTriggerLeave);
+    }
     this._bound = true;
   },
 
   unbindEvents() {
     if (!this._bound) return;
-    this.trigger?.removeEventListener("mouseenter", this.onTriggerEnter);
-    this.trigger?.removeEventListener("mouseleave", this.onTriggerLeave);
+    this.trigger?.removeEventListener("pointerenter", this.onTriggerEnter);
+    this.trigger?.removeEventListener("pointerleave", this.onTriggerLeave);
     this.trigger?.removeEventListener("focusin", this.onFocusIn);
     this.trigger?.removeEventListener("focusout", this.onFocusOut);
     this.trigger?.removeEventListener("keydown", this.onKeyDown);
+    this.trigger?.removeEventListener("click", this.onTriggerClick);
+    document.removeEventListener("pointerdown", this.onDocumentPointerDown, true);
     this._bound = false;
   },
 
@@ -113,6 +125,24 @@ export const TooltipRoot = {
     this.hide();
   },
 
+  onTriggerClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (this.isOpen) {
+      this.hide(true);
+    } else {
+      this.show(true);
+    }
+  },
+
+  onDocumentPointerDown(e) {
+    if (!this.isOpen) return;
+    if (this.trigger?.contains(e.target) || this.content?.contains(e.target)) {
+      return;
+    }
+    this.hide(true);
+  },
+
   onKeyDown(e) {
     if (e.key === "Escape" && this.isOpen) {
       this.hide(true);
@@ -125,7 +155,7 @@ export const TooltipRoot = {
       this.closeTimeout = null;
     }
 
-    if (this.isOpen || this.openTimeout) return;
+    if (this.isOpen) return;
 
     const open = () => {
       this.resolveParts();
@@ -154,10 +184,15 @@ export const TooltipRoot = {
     };
 
     if (immediate) {
+      if (this.openTimeout) {
+        clearTimeout(this.openTimeout);
+        this.openTimeout = null;
+      }
       open();
       return;
     }
 
+    if (this.openTimeout) return;
     this.openTimeout = setTimeout(open, this.openDelay);
   },
 

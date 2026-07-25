@@ -3,6 +3,8 @@
  * 
  * Handles click events to toggle the dropdown menu and positions it relative to the trigger.
  */
+import { whenMouse } from "../lib/pointer";
+
 export const DropdownMenu = {
   mounted() {
     this.trigger = this.el.querySelector('[data-dropdown-menu-trigger]');
@@ -28,7 +30,9 @@ export const DropdownMenu = {
   updated() {
     this.bindHoverEvents();
     if (this.content) {
-      this.items = this.content.querySelectorAll('.rt-DropdownMenuItem:not([data-disabled])');
+      this.items = this.content.querySelectorAll(
+        '.rt-DropdownMenuItem:not([data-disabled]), [data-dropdown-menu-sub-trigger]'
+      );
       this.items.forEach(item => {
         if (!item.hasAttribute('data-has-click')) {
           item.addEventListener('click', this.onMenuItemClick);
@@ -61,8 +65,10 @@ export const DropdownMenu = {
     this.content.style.position = 'fixed';
     this.isOpen = true;
     
-    // Bind click events on items
-    this.items = this.content.querySelectorAll('.rt-DropdownMenuItem:not([data-disabled])');
+    // Bind click events on items + sub-triggers (touch/click path for nested menus)
+    this.items = this.content.querySelectorAll(
+      '.rt-DropdownMenuItem:not([data-disabled]), [data-dropdown-menu-sub-trigger]'
+    );
     this.items.forEach(item => {
       if (!item.hasAttribute('data-has-click')) {
         item.addEventListener('click', this.onMenuItemClick);
@@ -106,7 +112,12 @@ export const DropdownMenu = {
   },
 
   onMenuItemClick(e) {
-    if (e.currentTarget.hasAttribute('data-dropdown-menu-sub-trigger')) return;
+    if (e.currentTarget.hasAttribute('data-dropdown-menu-sub-trigger')) {
+      // Touch / click path: open nested submenu (Radix SubTrigger parity).
+      const sub = e.currentTarget.closest('[data-dropdown-menu-sub]');
+      if (sub?._openSub) sub._openSub();
+      return;
+    }
     
     // Toggle checkbox/radio visually for demo purposes if present
     const isCheckbox = e.currentTarget.getAttribute('role') === 'menuitemcheckbox';
@@ -189,6 +200,16 @@ export const DropdownMenu = {
       
       const openSub = () => {
         clearTimeout(timeout);
+        // Close true siblings only (same parent); keep ancestors when opening nested.
+        Array.from(sub.parentElement?.children || []).forEach((sibling) => {
+          if (
+            sibling !== sub &&
+            sibling.matches?.("[data-dropdown-menu-sub]") &&
+            typeof sibling._closeSub === "function"
+          ) {
+            sibling._closeSub(true);
+          }
+        });
         trigger.setAttribute('data-state', 'open');
         trigger.setAttribute('data-highlighted', '');
         content.style.display = 'flex';
@@ -218,18 +239,34 @@ export const DropdownMenu = {
         content.style.top = `${top}px`;
       };
 
-      const closeSub = () => {
-        timeout = setTimeout(() => {
+      const closeSub = (immediate = false) => {
+        const hide = () => {
+          // Cascade: close open descendants before hiding this submenu.
+          content.querySelectorAll("[data-dropdown-menu-sub]").forEach((nested) => {
+            if (typeof nested._closeSub === "function") {
+              nested._closeSub(true);
+            }
+          });
           trigger.removeAttribute('data-state');
           trigger.removeAttribute('data-highlighted');
           content.style.display = 'none';
-        }, 150);
+        };
+        clearTimeout(timeout);
+        if (immediate) {
+          hide();
+        } else {
+          timeout = setTimeout(hide, 150);
+        }
       };
 
-      trigger.addEventListener('mouseenter', openSub);
-      trigger.addEventListener('mouseleave', closeSub);
-      content.addEventListener('mouseenter', () => clearTimeout(timeout));
-      content.addEventListener('mouseleave', closeSub);
+      sub._openSub = openSub;
+      sub._closeSub = closeSub;
+
+      // Mouse-only hover; click opens via onMenuItemClick (touch).
+      trigger.addEventListener('pointerenter', whenMouse(openSub));
+      trigger.addEventListener('pointerleave', whenMouse(() => closeSub()));
+      content.addEventListener('pointerenter', whenMouse(() => clearTimeout(timeout)));
+      content.addEventListener('pointerleave', whenMouse(() => closeSub()));
     });
     
     // Highlighting for all items

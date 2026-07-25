@@ -1,5 +1,6 @@
 import { positionFloating } from "../lib/position";
 import { setOpen, setClosed } from "../lib/presence";
+import { hasFinePointerHover, whenMouse } from "../lib/pointer";
 
 function findPart(root, selector, contentId) {
   const local = root.querySelector(selector);
@@ -30,11 +31,14 @@ export const HoverCardRoot = {
     this.closeTimeout = null;
     this.isOpen = false;
     this._raf = null;
+    this._touchOpen = !hasFinePointerHover();
 
-    this.onTriggerEnter = this.onTriggerEnter.bind(this);
-    this.onTriggerLeave = this.onTriggerLeave.bind(this);
-    this.onContentEnter = this.onContentEnter.bind(this);
-    this.onContentLeave = this.onContentLeave.bind(this);
+    this.onTriggerEnter = whenMouse(this.onTriggerEnter.bind(this));
+    this.onTriggerLeave = whenMouse(this.onTriggerLeave.bind(this));
+    this.onContentEnter = whenMouse(this.onContentEnter.bind(this));
+    this.onContentLeave = whenMouse(this.onContentLeave.bind(this));
+    this.onTriggerClick = this.onTriggerClick.bind(this);
+    this.onDocumentPointerDown = this.onDocumentPointerDown.bind(this);
     this.scheduleUpdate = this.scheduleUpdate.bind(this);
 
     this.resolveParts();
@@ -71,20 +75,46 @@ export const HoverCardRoot = {
     this.unbindEvents();
     if (!this.trigger || !this.content) return;
 
-    this.trigger.addEventListener("mouseenter", this.onTriggerEnter);
-    this.trigger.addEventListener("mouseleave", this.onTriggerLeave);
-    this.content.addEventListener("mouseenter", this.onContentEnter);
-    this.content.addEventListener("mouseleave", this.onContentLeave);
+    // Fine pointer: mouse hover. Coarse: click toggle only (no hover race).
+    if (this._touchOpen) {
+      this.trigger.addEventListener("click", this.onTriggerClick);
+      document.addEventListener("pointerdown", this.onDocumentPointerDown, true);
+    } else {
+      this.trigger.addEventListener("pointerenter", this.onTriggerEnter);
+      this.trigger.addEventListener("pointerleave", this.onTriggerLeave);
+      this.content.addEventListener("pointerenter", this.onContentEnter);
+      this.content.addEventListener("pointerleave", this.onContentLeave);
+    }
     this._bound = true;
   },
 
   unbindEvents() {
     if (!this._bound) return;
-    this.trigger?.removeEventListener("mouseenter", this.onTriggerEnter);
-    this.trigger?.removeEventListener("mouseleave", this.onTriggerLeave);
-    this.content?.removeEventListener("mouseenter", this.onContentEnter);
-    this.content?.removeEventListener("mouseleave", this.onContentLeave);
+    this.trigger?.removeEventListener("pointerenter", this.onTriggerEnter);
+    this.trigger?.removeEventListener("pointerleave", this.onTriggerLeave);
+    this.content?.removeEventListener("pointerenter", this.onContentEnter);
+    this.content?.removeEventListener("pointerleave", this.onContentLeave);
+    this.trigger?.removeEventListener("click", this.onTriggerClick);
+    document.removeEventListener("pointerdown", this.onDocumentPointerDown, true);
     this._bound = false;
+  },
+
+  onTriggerClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (this.isOpen) {
+      this.closeNow();
+    } else {
+      this.show(true);
+    }
+  },
+
+  onDocumentPointerDown(e) {
+    if (!this.isOpen) return;
+    if (this.trigger?.contains(e.target) || this.content?.contains(e.target)) {
+      return;
+    }
+    this.closeNow();
   },
 
   updatePosition() {
@@ -154,7 +184,7 @@ export const HoverCardRoot = {
       this.closeTimeout = null;
     }
 
-    if (this.isOpen || this.openTimeout) return;
+    if (this.isOpen) return;
 
     const open = () => {
       this.resolveParts();
@@ -171,10 +201,15 @@ export const HoverCardRoot = {
     };
 
     if (immediate) {
+      if (this.openTimeout) {
+        clearTimeout(this.openTimeout);
+        this.openTimeout = null;
+      }
       open();
       return;
     }
 
+    if (this.openTimeout) return;
     this.openTimeout = setTimeout(open, this.openDelay);
   },
 
@@ -187,16 +222,21 @@ export const HoverCardRoot = {
     if (!this.isOpen || this.closeTimeout) return;
 
     this.closeTimeout = setTimeout(() => {
-      this.isOpen = false;
-      this.unbindPositionUpdates();
-      setClosed(this.content, {
-        extras: [this.trigger, this.el],
-        waitForAnimation: false,
-        shouldHide: () => !this.isOpen,
-      });
-      this.closeTimeout = null;
-      this.pushOpenChange(false);
+      this.closeNow();
     }, this.closeDelay);
+  },
+
+  closeNow() {
+    this.clearTimers();
+    if (!this.isOpen) return;
+    this.isOpen = false;
+    this.unbindPositionUpdates();
+    setClosed(this.content, {
+      extras: [this.trigger, this.el],
+      waitForAnimation: false,
+      shouldHide: () => !this.isOpen,
+    });
+    this.pushOpenChange(false);
   },
 
   clearTimers() {
