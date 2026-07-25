@@ -75,14 +75,14 @@ export const NavigationMenuRoot = {
       if (!trigger.hasAttribute("data-nav-bound")) {
         trigger.setAttribute("data-nav-bound", "true");
         trigger.addEventListener("click", this.onTriggerClick);
-        trigger.addEventListener("pointerenter", this.onTriggerEnter);
-        trigger.addEventListener("pointerleave", this.onTriggerLeave);
+        trigger.addEventListener("mouseenter", this.onTriggerEnter);
+        trigger.addEventListener("mouseleave", this.onTriggerLeave);
       }
 
       if (content && !content.hasAttribute("data-nav-bound")) {
         content.setAttribute("data-nav-bound", "true");
-        content.addEventListener("pointerenter", this.onContentEnter);
-        content.addEventListener("pointerleave", this.onContentLeave);
+        content.addEventListener("mouseenter", this.onContentEnter);
+        content.addEventListener("mouseleave", this.onContentLeave);
       }
     });
   },
@@ -137,6 +137,8 @@ export const NavigationMenuRoot = {
   onTriggerClick(e) {
     const trigger = e.currentTarget;
     if (trigger.hasAttribute("data-disabled")) return;
+    clearTimeout(this.openTimer);
+    clearTimeout(this.closeTimer);
     const item = trigger.closest("[data-essence-navigation-menu-item]");
     if (this.activeItem === item) {
       this.close();
