@@ -120,6 +120,14 @@ defmodule EssenceUI.Helpers.ExtractProps do
 
   defp normalize_class(nil), do: ""
   defp normalize_class(class) when is_binary(class), do: String.trim(class)
+
+  defp normalize_class(classes) when is_list(classes) do
+    classes
+    |> Enum.map(&normalize_class/1)
+    |> Enum.reject(&(&1 == ""))
+    |> Enum.join(" ")
+  end
+
   defp normalize_class(_), do: ""
 
   defp merge_styles(existing, new) do

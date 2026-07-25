@@ -113,7 +113,21 @@ Port `storybook/examples/*` and decide CRM: keep `/crm` LiveView, link from Exam
 3. Retarget Playwright helpers (`gotoPrimitive` → `/docs/primitives/...`)
 4. Remove `phoenix_storybook` dep + `storybook/` tree when parity is done
 
-## Authoring rules
+## Dogfooding
+
+The docs site is built with Essence UI components (`Flex`, `Box`, `Text`, `Heading`,
+`Badge`, `Card`, `Tabs`, `Table`, `DataList`, `Code`, `ScrollArea`, `Separator`,
+`es_link`). Custom CSS is limited to layout/prose glue.
+
+Pitfalls found and fixed while building the chrome:
+
+| Issue | Fix |
+|-------|-----|
+| `es_link` had no LiveView `navigate`/`patch` | Delegate to `Phoenix.Component.link/1` |
+| `Box`/`Flex` `as` only allowed `div`/`span` | Allow semantic tags (`aside`, `main`, `nav`, …) |
+| `ExtractProps` dropped list `class` values | Normalize class lists |
+| `Text` has no margin props | Prefer `Flex`/`Box` spacing (or inline style) |
+
 
 1. One job per page; lead with a short description, then demos, then API
 2. Prefer `<.demo heex={...}>` so source and preview stay in sync visually (small duplication is OK)

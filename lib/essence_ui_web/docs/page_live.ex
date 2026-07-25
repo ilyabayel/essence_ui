@@ -39,53 +39,93 @@ defmodule EssenceUIWeb.Docs.PageLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <div class="docs-shell essence-ui" data-accent-color="gray" data-gray-color="slate" data-radius="medium" data-scaling="100%">
-      <aside class="docs-sidebar">
-        <div class="docs-sidebar__brand">
-          <.link navigate={~p"/docs"} class="docs-sidebar__logo">Essence UI</.link>
-          <span class="docs-sidebar__muted">Docs</span>
-        </div>
+    <.flex
+      class="essence-ui docs-shell"
+      data-accent-color="gray"
+      data-gray-color="slate"
+      data-radius="medium"
+      data-scaling="100%"
+      style="min-height: 100vh;"
+    >
+      <.box
+        as="aside"
+        class="docs-sidebar"
+        p="4"
+        style="width: 240px; flex-shrink: 0; position: sticky; top: 0; align-self: start; height: 100vh; border-right: 1px solid var(--gray-a5); background: var(--gray-a2);"
+      >
+        <.scroll_area type="hover" style="height: calc(100vh - 2rem);">
+          <.flex direction="column" gap="5" style="min-height: 100%;">
+            <.flex align="baseline" gap="2" mb="1">
+              <.es_link navigate={~p"/docs"} underline="none" high_contrast>
+                <.text size="5" weight="bold" high_contrast>Essence UI</.text>
+              </.es_link>
+              <.badge size="1" variant="soft" color="gray">Docs</.badge>
+            </.flex>
 
-        <nav class="docs-sidebar__nav" aria-label="Documentation">
-          <div :for={section <- @nav} class="docs-nav-section">
-            <p class="docs-nav-section__title">{section.title}</p>
-            <ul>
-              <li :for={item <- section.items}>
-                <.link
-                  navigate={docs_path(item.path)}
-                  class={["docs-nav-link", @page && @page.path == item.path && "is-active"]}
+            <.box as="nav" aria-label="Documentation">
+              <.flex :for={section <- @nav} direction="column" gap="1" mb="4">
+                <.text
+                  size="1"
+                  weight="bold"
+                  color="gray"
+                  style="display: block; margin-bottom: 0.25rem; text-transform: uppercase; letter-spacing: 0.04em;"
                 >
-                  {item.title}
-                </.link>
-              </li>
-            </ul>
-          </div>
-        </nav>
+                  {section.title}
+                </.text>
+                <.es_link
+                  :for={item <- section.items}
+                  navigate={docs_path(item.path)}
+                  underline="none"
+                  color={nav_color(@page, item.path)}
+                  high_contrast={nav_active?(@page, item.path)}
+                  class={["docs-nav-link", nav_active?(@page, item.path) && "is-active"]}
+                  style="display: block; padding: 0.35rem 0.5rem; border-radius: var(--radius-2);"
+                >
+                  <.text size="2">{item.title}</.text>
+                </.es_link>
+              </.flex>
+            </.box>
 
-        <p class="docs-sidebar__footer">
-          <.link href="/getting_started" class="docs-nav-link">Storybook</.link>
-        </p>
-      </aside>
+            <.box mt="auto" pt="4">
+              <.separator size="1" mb="3" />
+              <.es_link href="/getting_started" underline="hover" color="gray">
+                <.text size="1" color="gray">Storybook</.text>
+              </.es_link>
+            </.box>
+          </.flex>
+        </.scroll_area>
+      </.box>
 
-      <main class="docs-main">
-        <div :if={@not_found} class="docs-missing">
-          <h1>Page not found</h1>
-          <p>No documentation exists at this path.</p>
-          <.link navigate={~p"/docs"}>Back to docs</.link>
-        </div>
+      <.box as="main" p="6" style="flex: 1; min-width: 0;">
+        <.flex :if={@not_found} direction="column" align="center" gap="3" py="9">
+          <.heading as="h1" size="6">Page not found</.heading>
+          <.text color="gray">No documentation exists at this path.</.text>
+          <.es_link navigate={~p"/docs"}>Back to docs</.es_link>
+        </.flex>
 
-        <article :if={@page} class="docs-article">
-          <header class="docs-article__header">
-            <h1>{@page.title}</h1>
-            <p :if={@page.description} class="docs-article__description">{@page.description}</p>
-          </header>
+        <.box
+          :if={@page}
+          as="article"
+          class="docs-article"
+          style="max-width: 48rem; margin: 0 auto;"
+        >
+          <.flex
+            direction="column"
+            gap="2"
+            mb="5"
+            pb="4"
+            style="border-bottom: 1px solid var(--gray-a5);"
+          >
+            <.heading as="h1" size="8">{@page.title}</.heading>
+            <.text :if={@page.description} size="4" color="gray">{@page.description}</.text>
+          </.flex>
 
-          <div class="docs-article__body">
+          <.box class="docs-article__body">
             {render_markdown(assigns)}
-          </div>
-        </article>
-      </main>
-    </div>
+          </.box>
+        </.box>
+      </.box>
+    </.flex>
     """
   end
 
@@ -98,4 +138,9 @@ defmodule EssenceUIWeb.Docs.PageLive do
   defp path_from_params(_), do: Catalog.home_path()
 
   defp docs_path(path) when is_binary(path), do: "/docs/#{path}"
+
+  defp nav_active?(%{path: path}, path), do: true
+  defp nav_active?(_, _), do: false
+
+  defp nav_color(page, path), do: if(nav_active?(page, path), do: nil, else: "gray")
 end

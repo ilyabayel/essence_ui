@@ -2,6 +2,8 @@ defmodule EssenceUIWeb.Docs.Components do
   @moduledoc false
   use Phoenix.Component
 
+  import EssenceUI.Components
+
   @doc """
   Live preview with optional HEEx / CSS source tabs.
   """
@@ -18,11 +20,13 @@ defmodule EssenceUIWeb.Docs.Components do
       |> assign_new(:tab_id, fn -> "demo-#{System.unique_integer([:positive])}" end)
       |> assign(:has_css, is_binary(assigns.css) and assigns.css != "")
       |> assign(:has_heex, is_binary(assigns.heex) and assigns.heex != "")
+      |> assign(:default_tab, default_tab(assigns))
 
     ~H"""
-    <div class={["docs-demo", @class]}>
-      <div
+    <.card variant="surface" class={["docs-demo", @class]} style="overflow: hidden;">
+      <.box
         class={preview_class(@variant)}
+        p="5"
         data-component={@component}
         data-accent-color={theme_attr(@variant, "indigo")}
         data-gray-color={theme_attr(@variant, "slate")}
@@ -30,39 +34,25 @@ defmodule EssenceUIWeb.Docs.Components do
         data-scaling={theme_attr(@variant, "100%")}
       >
         {render_slot(@inner_block)}
-      </div>
+      </.box>
 
-      <div :if={@has_heex or @has_css} class="docs-demo__source">
-        <div class="docs-code-tabs">
-          <input
-            :if={@has_heex}
-            type="radio"
-            name={@tab_id}
-            id={"#{@tab_id}-heex"}
-            class="docs-code-tabs__input"
-            checked
-          />
-          <label :if={@has_heex} for={"#{@tab_id}-heex"} class="docs-code-tabs__label">HEEx</label>
-
-          <input
-            :if={@has_css}
-            type="radio"
-            name={@tab_id}
-            id={"#{@tab_id}-css"}
-            class="docs-code-tabs__input"
-            checked={!@has_heex}
-          />
-          <label :if={@has_css} for={"#{@tab_id}-css"} class="docs-code-tabs__label">CSS</label>
-
-          <div :if={@has_heex} class="docs-code-tabs__panel docs-code-tabs__panel--heex">
+      <.box :if={@has_heex or @has_css} style="border-top: 1px solid var(--gray-a5);">
+        <.tabs id={@tab_id} default_value={@default_tab}>
+          <:list>
+            <.tabs_list size="1">
+              <:trigger :if={@has_heex} value="heex">HEEx</:trigger>
+              <:trigger :if={@has_css} value="css">CSS</:trigger>
+            </.tabs_list>
+          </:list>
+          <:content :if={@has_heex} value="heex">
             <.code_block language="heex" code={@heex} />
-          </div>
-          <div :if={@has_css} class="docs-code-tabs__panel docs-code-tabs__panel--css">
+          </:content>
+          <:content :if={@has_css} value="css">
             <.code_block language="css" code={@css} />
-          </div>
-        </div>
-      </div>
-    </div>
+          </:content>
+        </.tabs>
+      </.box>
+    </.card>
     """
   end
 
@@ -72,9 +62,9 @@ defmodule EssenceUIWeb.Docs.Components do
 
   def code_block(assigns) do
     ~H"""
-    <div class="docs-code-block" data-language={@language}>
-      <pre><code>{@code}</code></pre>
-    </div>
+    <.box class="docs-code-block" p="3" data-language={@language} style="background: var(--gray-a2); overflow: auto;">
+      <pre style="margin: 0;"><.code variant="ghost" high_contrast>{@code}</.code></pre>
+    </.box>
     """
   end
 
@@ -87,26 +77,24 @@ defmodule EssenceUIWeb.Docs.Components do
     assigns = assign(assigns, :attrs, meta.attrs)
 
     ~H"""
-    <div class="docs-props">
-      <table>
-        <thead>
-          <tr>
-            <th>Prop</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr :for={attr <- @attrs}>
-            <td><code>{attr.name}</code></td>
-            <td><code>{format_type(attr)}</code></td>
-            <td><code>{format_default(attr)}</code></td>
-            <td>{attr[:doc] || ""}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <.table variant="surface" size="1" class="docs-props">
+      <.table_header>
+        <.table_row>
+          <.table_column_header_cell>Prop</.table_column_header_cell>
+          <.table_column_header_cell>Type</.table_column_header_cell>
+          <.table_column_header_cell>Default</.table_column_header_cell>
+          <.table_column_header_cell>Description</.table_column_header_cell>
+        </.table_row>
+      </.table_header>
+      <.table_body>
+        <.table_row :for={attr <- @attrs}>
+          <.table_row_header_cell><.code size="1">{attr.name}</.code></.table_row_header_cell>
+          <.table_cell><.code size="1" variant="ghost" color="gray">{format_type(attr)}</.code></.table_cell>
+          <.table_cell><.code size="1" variant="ghost" color="gray">{format_default(attr)}</.code></.table_cell>
+          <.table_cell><.text size="1" color="gray">{attr[:doc] || ""}</.text></.table_cell>
+        </.table_row>
+      </.table_body>
+    </.table>
     """
   end
 
@@ -115,16 +103,23 @@ defmodule EssenceUIWeb.Docs.Components do
 
   def anatomy(assigns) do
     ~H"""
-    <div class="docs-anatomy">
-      <h2 class="docs-anatomy__title">Anatomy</h2>
-      <ul>
-        <li :for={part <- @parts}>
-          <code>{part.name}</code>
-          <span :if={part[:description]}>{part.description}</span>
-        </li>
-      </ul>
-    </div>
+    <.box class="docs-anatomy" mb="5">
+      <.heading as="h2" size="4" mb="3">Anatomy</.heading>
+      <.data_list orientation="horizontal" size="2">
+        <.data_list_item :for={part <- @parts}>
+          <:label><.code size="2">{part.name}</.code></:label>
+          <:value>
+            <.text :if={part[:description]} size="2" color="gray">{part.description}</.text>
+          </:value>
+        </.data_list_item>
+      </.data_list>
+    </.box>
     """
+  end
+
+  defp default_tab(assigns) do
+    heex? = is_binary(assigns[:heex]) and assigns[:heex] != ""
+    if heex?, do: "heex", else: "css"
   end
 
   defp preview_class("primitive"), do: "docs-demo__preview radix-demo"

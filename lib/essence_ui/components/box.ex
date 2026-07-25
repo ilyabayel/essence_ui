@@ -37,7 +37,7 @@ defmodule EssenceUI.Components.Box do
 
   ## Props
 
-    * `as` - The element to render. Defaults to "div". Accepts: "div", "span".
+    * `as` - The element to render. Defaults to "div". Accepts: div, span, aside, main, nav, article, section, header, footer.
     * `display` - CSS display property. Accepts: none, inline, inline-block, block, contents. Responsive supported.
     * `class` - Additional CSS classes to add to the element.
     * `style` - Additional inline styles.
@@ -55,7 +55,12 @@ defmodule EssenceUI.Components.Box do
   """
   LayoutProps.attrs()
   MarginProps.attrs()
-  attr :as, :string, default: "div", values: ["div", "span"]
+
+  attr :as, :string,
+    default: "div",
+    values: ["div", "span", "aside", "main", "nav", "article", "section", "header", "footer"],
+    doc: "The element to render."
+
   attr :class, :string, default: "", doc: "Additional CSS classes to add to the element."
   attr :display, :string, default: "block", values: @display_values
   attr :style, :string, default: ""
