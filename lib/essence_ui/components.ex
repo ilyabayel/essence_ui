@@ -77,6 +77,16 @@ defmodule EssenceUI.Components do
     * `flex/1` - See `EssenceUI.Components.Flex`
     * `grid/1` - See `EssenceUI.Components.Grid`
     * `section/1` - See `EssenceUI.Components.Section`
+
+  ### Theme
+    * `theme/1` - See `EssenceUI.Components.Theme`
+    * `theme_panel/1` - See `EssenceUI.Components.ThemePanel`
+
+  ### Utilities
+    * `accessible_icon/1` - See `EssenceUI.Utilities.AccessibleIcon`
+    * `inset/1` - See `EssenceUI.Utilities.Inset`
+    * `reset/1` - See `EssenceUI.Utilities.Reset`
+    * `visually_hidden/1` - See `EssenceUI.Utilities.VisuallyHidden`
   """
   alias EssenceUI.Components.Accordion
   alias EssenceUI.Components.CheckboxCards
@@ -92,6 +102,12 @@ defmodule EssenceUI.Components do
   alias EssenceUI.Components.Table
   alias EssenceUI.Components.TabNav
   alias EssenceUI.Components.Tabs
+  alias EssenceUI.Components.Theme
+  alias EssenceUI.Components.ThemePanel
+  alias EssenceUI.Utilities.AccessibleIcon
+  alias EssenceUI.Utilities.Inset
+  alias EssenceUI.Utilities.Reset
+  alias EssenceUI.Utilities.VisuallyHidden
 
   # Components
   defdelegate accordion(assigns), to: Accordion
@@ -199,4 +215,14 @@ defmodule EssenceUI.Components do
   # Overlays
   defdelegate tabs(assigns), to: Tabs
   defdelegate tabs_list(assigns), to: Tabs
+
+  # Theme
+  defdelegate theme(assigns), to: Theme
+  defdelegate theme_panel(assigns), to: ThemePanel
+
+  # Utilities
+  defdelegate accessible_icon(assigns), to: AccessibleIcon
+  defdelegate inset(assigns), to: Inset
+  defdelegate reset(assigns), to: Reset
+  defdelegate visually_hidden(assigns), to: VisuallyHidden
 end

@@ -33,6 +33,17 @@ Buttons allow users to take actions with a single click.
   </.flex>
 </.demo>
 
+## Colors
+
+<.demo heex={~s[<.flex gap="3" wrap="wrap"><.button color="indigo">Indigo</.button><.button color="cyan">Cyan</.button><.button color="crimson">Crimson</.button><.button color="gray">Gray</.button></.flex>]}>
+  <.flex gap="3" wrap="wrap">
+    <.button color="indigo">Indigo</.button>
+    <.button color="cyan">Cyan</.button>
+    <.button color="crimson">Crimson</.button>
+    <.button color="gray">Gray</.button>
+  </.flex>
+</.demo>
+
 ## API Reference
 
 <.props_table module={EssenceUI.Components.Button} function={:button} />

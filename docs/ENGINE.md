@@ -77,10 +77,15 @@ Frontmatter is simple `key: value` lines (no nested YAML). Body is Markdown with
 
 | URL | Behavior |
 |-----|----------|
-| `/docs` | Redirect → first nav page |
-| `/docs/*path` | Render matching `docs/content/{path}.md` |
-| `/` (Storybook) | Unchanged until cutover |
-| `/crm` | Unchanged |
+| `/` | Themes marketing home |
+| `/themes/docs/*path` | Themes docs pages |
+| `/primitives` · `/primitives/docs/*` | Primitives marketing + docs |
+| `/colors` · `/colors/docs/*` | Colors explorer + docs |
+| `/themes/playground` | ThemePanel playground |
+| `/storybook` | Storybook (internal until catalog parity) |
+| `/crm` | Recruiting CRM example |
+
+Content lives under `docs/content/{themes,primitives,colors}/` with nav in `docs/nav/*.exs`.
 
 ## Migration plan
 

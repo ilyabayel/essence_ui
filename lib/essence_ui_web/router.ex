@@ -16,13 +16,7 @@ defmodule EssenceUIWeb.Router do
     plug :accepts, ["json"]
   end
 
-  # Enable LiveDashboard in development
   if Application.compile_env(:essence_ui, :dev_routes) do
-    # If you want to use the LiveDashboard in production, you should put
-    # it behind authentication and allow only admins to access it.
-    # If your application does not have an admins-only section yet,
-    # you can use Plug.BasicAuth to set up some basic authentication
-    # as long as you are also using SSL (which you should anyway).
     import Phoenix.LiveDashboard.Router
 
     scope "/dev" do
@@ -49,12 +43,21 @@ defmodule EssenceUIWeb.Router do
   scope "/", EssenceUIWeb do
     pipe_through :browser
 
-    live "/", Docs.PageLive, :index
-    live "/*path", Docs.PageLive, :show
-  end
+    live "/", Marketing.ThemesHomeLive, :index
+    get "/themes", RedirectController, :themes
 
-  # Other scopes may use custom stacks.
-  # scope "/api", EssenceUIWeb do
-  #   pipe_through :api
-  # end
+    live "/themes/playground", PlaygroundLive, :index
+
+    live "/primitives", Marketing.PrimitivesHomeLive, :index
+    live "/colors", Marketing.ColorsHomeLive, :index
+
+    live "/themes/docs", Docs.PageLive, :index
+    live "/themes/docs/*path", Docs.PageLive, :show
+
+    live "/primitives/docs", Docs.PageLive, :index
+    live "/primitives/docs/*path", Docs.PageLive, :show
+
+    live "/colors/docs", Docs.PageLive, :index
+    live "/colors/docs/*path", Docs.PageLive, :show
+  end
 end

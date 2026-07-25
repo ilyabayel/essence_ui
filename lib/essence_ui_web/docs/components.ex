@@ -61,11 +61,48 @@ defmodule EssenceUIWeb.Docs.Components do
   attr :language, :string, default: "text"
 
   def code_block(assigns) do
-    assigns = assign(assigns, :formatted, format_source(assigns.code, assigns.language))
+    assigns =
+      assigns
+      |> assign(:formatted, format_source(assigns.code, assigns.language))
+      |> assign_new(:copy_id, fn -> "copy-#{System.unique_integer([:positive])}" end)
 
     ~H"""
-    <.box class="docs-code-block" data-language={@language}>
+    <.box class="docs-code-block" data-language={@language} id={@copy_id} phx-hook="CopyCode">
+      <button type="button" class="docs-code-block__copy" data-copy aria-label="Copy code">
+        Copy
+      </button>
       <pre><code>{@formatted}</code></pre>
+    </.box>
+    """
+  end
+
+  @doc "Keyboard shortcut table for primitives a11y sections."
+  slot :row, required: true do
+    attr :keys, :string, required: true
+  end
+
+  def keyboard_table(assigns) do
+    ~H"""
+    <.box class="docs-keyboard">
+      <.heading as="h3" size="3">Keyboard Interactions</.heading>
+      <.table variant="surface" size="1">
+        <.table_header>
+          <.table_row>
+            <.table_column_header_cell>Key</.table_column_header_cell>
+            <.table_column_header_cell>Description</.table_column_header_cell>
+          </.table_row>
+        </.table_header>
+        <.table_body>
+          <.table_row :for={row <- @row}>
+            <.table_row_header_cell>
+              <.code size="1">{row.keys}</.code>
+            </.table_row_header_cell>
+            <.table_cell>
+              <.text size="2">{render_slot(row)}</.text>
+            </.table_cell>
+          </.table_row>
+        </.table_body>
+      </.table>
     </.box>
     """
   end

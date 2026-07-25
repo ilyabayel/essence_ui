@@ -16,6 +16,23 @@ body:has(.docs-shell) {
     "main";
 }
 
+/* Site chrome: header + topbar + main + footer. Sidebar is position:fixed on
+   mobile (drawer) so it must not participate in auto-placement — assign it a
+   zero-size area outside the named template via the fixed positioning rules. */
+.docs-shell.site-shell {
+  grid-template-areas:
+    "header"
+    "topbar"
+    "main"
+    "footer";
+}
+
+.docs-shell.site-shell > .docs-skip-link {
+  /* Keep skip link out of auto-flow tracks */
+  position: absolute;
+  grid-area: header;
+}
+
 .docs-shell.is-nav-open {
   overflow: hidden;
   height: 100vh;
@@ -60,10 +77,13 @@ body:has(.docs-shell) {
   inset: 0;
   z-index: 35;
   background: rgb(0 0 0 / 0.4);
+  /* Avoid auto-placed grid track when the drawer is open */
+  grid-area: main;
 }
 
 .docs-sidebar {
-  grid-area: sidebar;
+  /* Share an existing cell so fixed drawer does not auto-place a new row */
+  grid-area: main;
   position: fixed;
   top: 0;
   left: 0;
@@ -116,6 +136,14 @@ body:has(.docs-shell) {
 .docs-sidebar__inner {
   min-height: 100%;
   padding-bottom: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.docs-sidebar__inner > nav,
+.docs-sidebar__inner > nav > .rt-Flex {
+  width: 100%;
+  align-self: stretch;
 }
 
 .docs-nav-section__title {
@@ -127,7 +155,11 @@ body:has(.docs-shell) {
 }
 
 .docs-nav-link {
-  display: block;
+  display: flex !important;
+  align-items: center;
+  align-self: stretch;
+  width: 100%;
+  box-sizing: border-box;
   padding: 0.55rem 0.65rem;
   border-radius: var(--radius-2);
   min-height: 2.25rem;
@@ -376,6 +408,14 @@ body:has(.docs-shell) {
     grid-template-areas: "sidebar main";
   }
 
+  .docs-shell.site-shell {
+    grid-template-columns: 15rem minmax(0, 1fr);
+    grid-template-areas:
+      "header header"
+      "sidebar main"
+      "footer footer";
+  }
+
   .docs-shell.is-nav-open {
     overflow: visible;
     height: auto;
@@ -390,13 +430,14 @@ body:has(.docs-shell) {
   }
 
   .docs-sidebar {
+    grid-area: sidebar;
     position: sticky;
-    top: 0;
+    top: 48px;
     left: auto;
     z-index: 1;
     width: auto;
-    height: 100vh;
-    height: 100dvh;
+    height: calc(100vh - 48px);
+    height: calc(100dvh - 48px);
     transform: none;
     transition: none;
     box-shadow: none;
@@ -414,6 +455,7 @@ body:has(.docs-shell) {
   }
 
   .docs-main {
+    grid-area: main;
     padding: 2rem 1.75rem 4rem;
   }
 
@@ -448,7 +490,8 @@ body:has(.docs-shell) {
 
 /* Comfortable reading width on larger laptops */
 @media (min-width: 1100px) {
-  .docs-shell {
+  .docs-shell,
+  .docs-shell.site-shell {
     grid-template-columns: 16rem minmax(0, 1fr);
   }
 
@@ -462,7 +505,8 @@ body:has(.docs-shell) {
 }
 
 @media (min-width: 1440px) {
-  .docs-shell {
+  .docs-shell,
+  .docs-shell.site-shell {
     grid-template-columns: 17rem minmax(0, 1fr);
   }
 

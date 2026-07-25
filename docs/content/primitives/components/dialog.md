@@ -42,3 +42,12 @@ Headless dialog primitive. Pair with your own styles (or Themes `Dialog`) for th
 ### Root
 
 <.props_table module={EssenceUI.Primitives.Dialog} function={:root} />
+
+## Keyboard Interactions
+
+<.keyboard_table>
+  <:row keys="Space">Opens/closes the dialog.</:row>
+  <:row keys="Enter">Opens/closes the dialog.</:row>
+  <:row keys="Tab">Moves focus inside the dialog.</:row>
+  <:row keys="Escape">Closes the dialog.</:row>
+</.keyboard_table>
