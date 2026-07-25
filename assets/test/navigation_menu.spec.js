@@ -1,4 +1,4 @@
-import { test, expect, devices } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import { gotoPrimitive } from "./helpers/story.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
@@ -37,14 +37,18 @@ test.describe("Navigation Menu Primitive", () => {
 });
 
 test.describe("Navigation Menu Primitive (touch)", () => {
-  test.use({ ...devices["iPhone 12"] });
+  test.use({
+    hasTouch: true,
+    isMobile: true,
+    viewport: { width: 390, height: 844 },
+  });
 
   test.beforeEach(async ({ page }) => {
     await gotoPrimitive(page, "navigation_menu");
     await expect(page.locator("#nav-primitive[data-hydrated]")).toBeVisible();
   });
 
-  test("tap opens Learn and keeps it open past hover delay", async ({
+  test("touch pointer race does not blink Learn open then closed", async ({
     page,
   }) => {
     const root = page.locator("#nav-primitive");
@@ -52,7 +56,13 @@ test.describe("Navigation Menu Primitive (touch)", () => {
     const content = page.locator("#learn-content");
 
     await expect(content).toBeHidden();
-    await trigger.tap();
+
+    // Reproduce the touch sequence that used to blink: enter → leave → click.
+    // Hover is mouse-only now; leftover leave timers must not close after click.
+    await trigger.dispatchEvent("pointerenter", { pointerType: "touch" });
+    await trigger.dispatchEvent("pointerleave", { pointerType: "touch" });
+    await trigger.click();
+
     await expect(content).toBeVisible();
     await expect(trigger).toHaveAttribute("aria-expanded", "true");
 
@@ -62,29 +72,29 @@ test.describe("Navigation Menu Primitive (touch)", () => {
     await expect(trigger).toHaveAttribute("aria-expanded", "true");
   });
 
-  test("second tap closes Learn", async ({ page }) => {
+  test("second activation closes Learn", async ({ page }) => {
     const root = page.locator("#nav-primitive");
     const trigger = root.locator("#learn-trigger");
     const content = page.locator("#learn-content");
 
-    await trigger.tap();
+    await trigger.click();
     await expect(content).toBeVisible();
 
-    await trigger.tap();
+    await trigger.click();
     await expect(content).toBeHidden();
     await expect(trigger).toHaveAttribute("aria-expanded", "false");
   });
 
-  test("outside tap closes Overview", async ({ page }) => {
+  test("outside pointerdown closes Overview", async ({ page }) => {
     const root = page.locator("#nav-primitive");
     const trigger = root.locator("#overview-trigger");
     const content = page.locator("#overview-content");
 
-    await trigger.tap();
+    await trigger.click();
     await expect(content).toBeVisible();
     await expect(trigger).toHaveAttribute("aria-expanded", "true");
 
-    await page.locator("body").tap({ position: { x: 10, y: 10 } });
+    await page.locator("h2").filter({ hasText: "Navigation Menu" }).click();
     await expect(content).toBeHidden();
     await expect(trigger).toHaveAttribute("aria-expanded", "false");
   });
