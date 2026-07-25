@@ -92,10 +92,18 @@ defmodule EssenceUIWeb.Docs.Components do
           </.table_header>
           <.table_body>
             <.table_row :for={attr <- @attrs}>
-              <.table_row_header_cell><.code size="1">{attr.name}</.code></.table_row_header_cell>
-              <.table_cell><.code size="1" variant="ghost" color="gray">{format_type(attr)}</.code></.table_cell>
-              <.table_cell><.code size="1" variant="ghost" color="gray">{format_default(attr)}</.code></.table_cell>
-              <.table_cell><.text size="1" color="gray">{attr[:doc] || ""}</.text></.table_cell>
+              <.table_row_header_cell>
+                <.code size="1">{attr.name}</.code>
+              </.table_row_header_cell>
+              <.table_cell>
+                <.code size="1" variant="ghost" color="gray">{format_type(attr)}</.code>
+              </.table_cell>
+              <.table_cell>
+                <.code size="1" variant="ghost" color="gray">{format_default(attr)}</.code>
+              </.table_cell>
+              <.table_cell>
+                <.text size="1" color="gray">{attr[:doc] || ""}</.text>
+              </.table_cell>
             </.table_row>
           </.table_body>
         </.table>
@@ -108,10 +116,12 @@ defmodule EssenceUIWeb.Docs.Components do
             <.text size="1" color="gray">{attr[:doc] || ""}</.text>
             <.flex gap="3" wrap="wrap">
               <.text size="1" color="gray">
-                Type <.code size="1" variant="ghost">{format_type(attr)}</.code>
+                Type
+                <.code size="1" variant="ghost">{format_type(attr)}</.code>
               </.text>
               <.text size="1" color="gray">
-                Default <.code size="1" variant="ghost">{format_default(attr)}</.code>
+                Default
+                <.code size="1" variant="ghost">{format_default(attr)}</.code>
               </.text>
             </.flex>
           </.flex>
@@ -132,7 +142,9 @@ defmodule EssenceUIWeb.Docs.Components do
       <.heading as="h2" size="4" mb="3">Anatomy</.heading>
       <.data_list orientation="vertical" size="2" class="docs-anatomy__list">
         <.data_list_item :for={part <- @part}>
-          <:label><.code size="2">{part.name}</.code></:label>
+          <:label>
+            <.code size="2">{part.name}</.code>
+          </:label>
           <:value>
             <.text size="2" color="gray">{render_slot(part)}</.text>
           </:value>
@@ -163,8 +175,7 @@ defmodule EssenceUIWeb.Docs.Components do
     end
   end
 
-  defp format_type(%{type: :string, values: values}) when is_list(values),
-    do: Enum.map_join(values, " | ", &inspect/1)
+  defp format_type(%{type: :string, values: values}) when is_list(values), do: Enum.map_join(values, " | ", &inspect/1)
 
   defp format_type(%{type: type}), do: to_string(type)
 

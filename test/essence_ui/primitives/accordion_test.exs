@@ -14,7 +14,9 @@ defmodule EssenceUI.Primitives.AccordionTest do
           <Accordion.root id="faq" type="single" value="item-1" disabled orientation="horizontal" dir="rtl">
             <Accordion.item id="item-1-root" value="item-1">
               <Accordion.header>
-                <Accordion.trigger id="item-1-content" trigger_id="item-1-trigger">Question</Accordion.trigger>
+                <Accordion.trigger id="item-1-content" trigger_id="item-1-trigger">
+                  Question
+                </Accordion.trigger>
               </Accordion.header>
               <Accordion.content id="item-1-content" trigger_id="item-1-trigger">Answer</Accordion.content>
             </Accordion.item>

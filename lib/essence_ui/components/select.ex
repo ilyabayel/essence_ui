@@ -59,11 +59,13 @@ defmodule EssenceUI.Components.Select do
 
   def select_trigger(assigns) do
     prop_defs =
-      %{
-        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
-        variant: %{type: :enum, class: "rt-variant", values: @trigger_variants, default: "surface"}
-      }
-      |> Map.merge(ColorProps.color_prop_def())
+      Map.merge(
+        %{
+          size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
+          variant: %{type: :enum, class: "rt-variant", values: @trigger_variants, default: "surface"}
+        },
+        ColorProps.color_prop_def()
+      )
 
     extracted = ExtractProps.call(assigns, prop_defs)
 

@@ -4,12 +4,13 @@ defmodule EssenceUIWeb.Docs.ComponentsTest do
   import Phoenix.Component
   import Phoenix.LiveViewTest
 
+  alias EssenceUI.Components.Button
   alias EssenceUIWeb.Docs.Components
 
   test "props_table reflects button attrs" do
     html =
       render_component(&Components.props_table/1, %{
-        module: EssenceUI.Components.Button,
+        module: Button,
         function: :button
       })
 
@@ -22,8 +23,8 @@ defmodule EssenceUIWeb.Docs.ComponentsTest do
     html =
       render_component(
         fn assigns ->
+          import Components
           import EssenceUI.Components
-          import EssenceUIWeb.Docs.Components
 
           ~H"""
           <.demo heex={~s[<.button>Hi</.button>]}>
@@ -43,7 +44,7 @@ defmodule EssenceUIWeb.Docs.ComponentsTest do
   test "props_table uses Essence table and mobile cards" do
     html =
       render_component(&Components.props_table/1, %{
-        module: EssenceUI.Components.Button,
+        module: Button,
         function: :button
       })
 

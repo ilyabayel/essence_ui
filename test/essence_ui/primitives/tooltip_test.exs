@@ -15,8 +15,7 @@ defmodule EssenceUI.Primitives.TooltipTest do
             <Tooltip.root id="tip" open_delay={100} close_delay={0} default_open>
               <Tooltip.trigger id="tip-trigger" content_id="tip-content">Hover</Tooltip.trigger>
               <Tooltip.content id="tip-content" side="bottom" align="start">
-                Add to library
-                <Tooltip.arrow />
+                Add to library <Tooltip.arrow />
               </Tooltip.content>
             </Tooltip.root>
           </Tooltip.provider>

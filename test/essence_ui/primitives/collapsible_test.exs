@@ -12,7 +12,9 @@ defmodule EssenceUI.Primitives.CollapsibleTest do
         fn assigns ->
           ~H"""
           <Collapsible.root id="details" default_open disabled on_open_change="changed">
-            <Collapsible.trigger id="details-trigger" content_id="details-content">Toggle</Collapsible.trigger>
+            <Collapsible.trigger id="details-trigger" content_id="details-content">
+              Toggle
+            </Collapsible.trigger>
             <Collapsible.content id="details-content">Content</Collapsible.content>
           </Collapsible.root>
           """
