@@ -51,3 +51,43 @@ test.describe("Tooltip Primitive", () => {
     });
   });
 });
+
+test.describe("Tooltip Primitive (touch)", () => {
+  test.use({
+    hasTouch: true,
+    isMobile: true,
+    viewport: { width: 390, height: 844 },
+  });
+
+  test.beforeEach(async ({ page }) => {
+    await gotoPrimitive(page, "tooltip");
+    await expect(page.locator("#tooltip-primitive[data-hydrated]")).toBeVisible();
+  });
+
+  test("opens on tap and closes on second tap", async ({ page }) => {
+    const root = page.locator("#tooltip-primitive");
+    const trigger = root.locator("[data-essence-tooltip-trigger]");
+    const content = page.locator("#tooltip-content");
+
+    await expect(content).toBeHidden();
+
+    await trigger.click();
+    await expect(content).toBeVisible();
+    await expect(content).toContainText("Add to library");
+
+    await trigger.click();
+    await expect(content).toBeHidden();
+  });
+
+  test("closes when tapping outside", async ({ page }) => {
+    const root = page.locator("#tooltip-primitive");
+    const trigger = root.locator("[data-essence-tooltip-trigger]");
+    const content = page.locator("#tooltip-content");
+
+    await trigger.click();
+    await expect(content).toBeVisible();
+
+    await page.locator("body").click({ position: { x: 8, y: 8 } });
+    await expect(content).toBeHidden();
+  });
+});

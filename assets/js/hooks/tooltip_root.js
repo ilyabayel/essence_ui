@@ -1,6 +1,6 @@
 import { positionFloating } from "../lib/position";
 import { setOpen, setClosed } from "../lib/presence";
-import { whenMouse } from "../lib/pointer";
+import { hasFinePointerHover, whenMouse } from "../lib/pointer";
 
 function findPart(root, selector, contentId) {
   const local = root.querySelector(selector);
@@ -40,12 +40,15 @@ export const TooltipRoot = {
     this.openTimeout = null;
     this.closeTimeout = null;
     this.isOpen = false;
+    this._touchOpen = !hasFinePointerHover();
 
     this.onTriggerEnter = whenMouse(this.onTriggerEnter.bind(this));
     this.onTriggerLeave = whenMouse(this.onTriggerLeave.bind(this));
     this.onFocusIn = this.onFocusIn.bind(this);
     this.onFocusOut = this.onFocusOut.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.onTriggerClick = this.onTriggerClick.bind(this);
+    this.onDocumentPointerDown = this.onDocumentPointerDown.bind(this);
 
     this.resolveParts();
     this.bindEvents();
@@ -80,12 +83,16 @@ export const TooltipRoot = {
     this.unbindEvents();
     if (!this.trigger) return;
 
-    // Radix excludeTouch: hover is mouse-only; focus still opens for keyboard/a11y.
+    // Hover is mouse-only; focus opens for keyboard. On coarse pointers, click toggles.
     this.trigger.addEventListener("pointerenter", this.onTriggerEnter);
     this.trigger.addEventListener("pointerleave", this.onTriggerLeave);
     this.trigger.addEventListener("focusin", this.onFocusIn);
     this.trigger.addEventListener("focusout", this.onFocusOut);
     this.trigger.addEventListener("keydown", this.onKeyDown);
+    if (this._touchOpen) {
+      this.trigger.addEventListener("click", this.onTriggerClick);
+      document.addEventListener("pointerdown", this.onDocumentPointerDown, true);
+    }
     this._bound = true;
   },
 
@@ -96,6 +103,8 @@ export const TooltipRoot = {
     this.trigger?.removeEventListener("focusin", this.onFocusIn);
     this.trigger?.removeEventListener("focusout", this.onFocusOut);
     this.trigger?.removeEventListener("keydown", this.onKeyDown);
+    this.trigger?.removeEventListener("click", this.onTriggerClick);
+    document.removeEventListener("pointerdown", this.onDocumentPointerDown, true);
     this._bound = false;
   },
 
@@ -115,6 +124,24 @@ export const TooltipRoot = {
     this.hide();
   },
 
+  onTriggerClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (this.isOpen) {
+      this.hide(true);
+    } else {
+      this.show(true);
+    }
+  },
+
+  onDocumentPointerDown(e) {
+    if (!this.isOpen) return;
+    if (this.trigger?.contains(e.target) || this.content?.contains(e.target)) {
+      return;
+    }
+    this.hide(true);
+  },
+
   onKeyDown(e) {
     if (e.key === "Escape" && this.isOpen) {
       this.hide(true);
@@ -127,7 +154,7 @@ export const TooltipRoot = {
       this.closeTimeout = null;
     }
 
-    if (this.isOpen || this.openTimeout) return;
+    if (this.isOpen) return;
 
     const open = () => {
       this.resolveParts();
@@ -156,10 +183,15 @@ export const TooltipRoot = {
     };
 
     if (immediate) {
+      if (this.openTimeout) {
+        clearTimeout(this.openTimeout);
+        this.openTimeout = null;
+      }
       open();
       return;
     }
 
+    if (this.openTimeout) return;
     this.openTimeout = setTimeout(open, this.openDelay);
   },
 
