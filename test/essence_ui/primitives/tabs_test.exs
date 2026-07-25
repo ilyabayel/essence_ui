@@ -29,8 +29,10 @@ defmodule EssenceUI.Primitives.TabsTest do
     assert html =~ ~s[data-orientation="horizontal"]
     assert html =~ ~s[data-on-value-change="changed"]
     assert html =~ ~s[role="tablist"]
+    assert html =~ ~s[aria-orientation="horizontal"]
     assert html =~ ~s[role="tab"]
     assert html =~ ~s[data-essence-tabs-trigger]
+    assert html =~ ~s[data-radix-collection-item]
     assert html =~ ~s[data-value="a"]
     assert html =~ ~s[role="tabpanel"]
     assert html =~ "data-essence-tabs-content"

@@ -19,7 +19,7 @@ defmodule Storybook.Primitives.TabsStory do
         <Tabs.root
           id="tabs-primitive"
           class="TabsRoot"
-          default_value="account"
+          default_value="tab1"
         >
           <Tabs.list
             class="TabsList"
@@ -27,28 +27,24 @@ defmodule Storybook.Primitives.TabsStory do
           >
             <Tabs.trigger
               class="TabsTrigger"
-              value="account"
+              value="tab1"
             >
               Account
             </Tabs.trigger>
             <Tabs.trigger
               class="TabsTrigger"
-              value="documents"
+              value="tab2"
             >
-              Documents
-            </Tabs.trigger>
-            <Tabs.trigger
-              class="TabsTrigger"
-              value="settings"
-            >
-              Settings
+              Password
             </Tabs.trigger>
           </Tabs.list>
           <Tabs.content
             class="TabsContent"
-            value="account"
+            value="tab1"
           >
-            <p class="Text">Make changes to your account here. Click save when you are done.</p>
+            <p class="Text">
+              Make changes to your account here. Click save when you're done.
+            </p>
             <fieldset class="Fieldset">
               <label
                 class="Label"
@@ -76,46 +72,16 @@ defmodule Storybook.Primitives.TabsStory do
               />
             </fieldset>
             <div style="display: flex; margin-top: 20px; justify-content: flex-end;">
-              <button
-                class="Button green"
-                type="button"
-              >
-                Save changes
-              </button>
+              <button class="Button green">Save changes</button>
             </div>
           </Tabs.content>
           <Tabs.content
             class="TabsContent"
-            value="documents"
+            value="tab2"
           >
-            <p class="Text">Access and update your documents here.</p>
-            <fieldset class="Fieldset">
-              <label
-                class="Label"
-                for="doc-title"
-              >
-                Title
-              </label>
-              <input
-                class="Input"
-                id="doc-title"
-                value="Project brief"
-              />
-            </fieldset>
-            <div style="display: flex; margin-top: 20px; justify-content: flex-end;">
-              <button
-                class="Button green"
-                type="button"
-              >
-                Save documents
-              </button>
-            </div>
-          </Tabs.content>
-          <Tabs.content
-            class="TabsContent"
-            value="settings"
-          >
-            <p class="Text">Edit your settings or preferences.</p>
+            <p class="Text">
+              Change your password here. After saving, you'll be logged out.
+            </p>
             <fieldset class="Fieldset">
               <label
                 class="Label"
@@ -142,13 +108,21 @@ defmodule Storybook.Primitives.TabsStory do
                 type="password"
               />
             </fieldset>
-            <div style="display: flex; margin-top: 20px; justify-content: flex-end;">
-              <button
-                class="Button green"
-                type="button"
+            <fieldset class="Fieldset">
+              <label
+                class="Label"
+                for="confirmPassword"
               >
-                Change password
-              </button>
+                Confirm password
+              </label>
+              <input
+                class="Input"
+                id="confirmPassword"
+                type="password"
+              />
+            </fieldset>
+            <div style="display: flex; margin-top: 20px; justify-content: flex-end;">
+              <button class="Button green">Change password</button>
             </div>
           </Tabs.content>
         </Tabs.root>

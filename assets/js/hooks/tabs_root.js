@@ -4,10 +4,12 @@ export const TabsRoot = {
     this.onKeyDown = this.onKeyDown.bind(this);
     this.el.addEventListener("click", this.onClick);
     this.list()?.addEventListener("keydown", this.onKeyDown);
+    this.wireAria();
     this.sync(this.el.dataset.value);
   },
 
   updated() {
+    this.wireAria();
     this.sync(this.el.dataset.value);
   },
 
@@ -30,6 +32,37 @@ export const TabsRoot = {
 
   enabledTriggers() {
     return this.triggers().filter((t) => !t.disabled && !t.hasAttribute("data-disabled"));
+  },
+
+  /** Wire Radix-compatible ids / aria-controls / aria-labelledby / orientation. */
+  wireAria() {
+    const rootId = this.el.id;
+    const orientation = this.el.dataset.orientation || "horizontal";
+    const list = this.list();
+
+    if (list) {
+      list.setAttribute("aria-orientation", orientation);
+      list.dataset.orientation = orientation;
+    }
+
+    this.triggers().forEach((trigger) => {
+      const value = trigger.dataset.value;
+      if (!value) return;
+      if (!trigger.id && rootId) trigger.id = `${rootId}-trigger-${value}`;
+      if (rootId) trigger.setAttribute("aria-controls", `${rootId}-content-${value}`);
+      trigger.dataset.orientation = orientation;
+      if (!trigger.hasAttribute("data-radix-collection-item")) {
+        trigger.setAttribute("data-radix-collection-item", "");
+      }
+    });
+
+    this.contents().forEach((content) => {
+      const value = content.dataset.value;
+      if (!value) return;
+      if (!content.id && rootId) content.id = `${rootId}-content-${value}`;
+      if (rootId) content.setAttribute("aria-labelledby", `${rootId}-trigger-${value}`);
+      content.dataset.orientation = orientation;
+    });
   },
 
   onClick(event) {

@@ -34,6 +34,7 @@ defmodule EssenceUI.Primitives.Tabs do
   end
 
   attr :loop, :boolean, default: true
+  attr :orientation, :string, values: ["horizontal", "vertical"], default: "horizontal"
   attr :rest, :global
   slot :inner_block, required: true
 
@@ -41,7 +42,9 @@ defmodule EssenceUI.Primitives.Tabs do
     ~H"""
     <div
       role="tablist"
+      aria-orientation={@orientation}
       data-essence-tabs-list
+      data-orientation={@orientation}
       data-loop={to_string(@loop)}
       {@rest}
     >
@@ -53,6 +56,7 @@ defmodule EssenceUI.Primitives.Tabs do
   attr :id, :string, default: nil
   attr :value, :string, required: true
   attr :disabled, :boolean, default: false
+  attr :orientation, :string, values: ["horizontal", "vertical"], default: "horizontal"
   attr :rest, :global
   slot :inner_block, required: true
 
@@ -65,7 +69,9 @@ defmodule EssenceUI.Primitives.Tabs do
       data-essence-tabs-trigger
       data-value={@value}
       data-state="inactive"
+      data-orientation={@orientation}
       data-disabled={if @disabled, do: ""}
+      data-radix-collection-item=""
       aria-selected="false"
       tabindex="-1"
       disabled={@disabled}
@@ -79,6 +85,7 @@ defmodule EssenceUI.Primitives.Tabs do
   attr :id, :string, default: nil
   attr :value, :string, required: true
   attr :force_mount, :boolean, default: false
+  attr :orientation, :string, values: ["horizontal", "vertical"], default: "horizontal"
   attr :rest, :global
   slot :inner_block, required: true
 
@@ -90,6 +97,7 @@ defmodule EssenceUI.Primitives.Tabs do
       data-essence-tabs-content
       data-value={@value}
       data-state="inactive"
+      data-orientation={@orientation}
       data-force-mount={if @force_mount, do: ""}
       tabindex="0"
       hidden
