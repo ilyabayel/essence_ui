@@ -21,7 +21,7 @@ async function mobilePass() {
   });
   const page = await context.newPage();
 
-  await page.goto(`${base}/docs`, { waitUntil: "networkidle" });
+  await page.goto(`${base}/`, { waitUntil: "networkidle" });
   await page.waitForTimeout(300);
   await shot(page, "getting-started-mobile-fold");
   await shot(page, "getting-started-mobile", true);
@@ -32,7 +32,7 @@ async function mobilePass() {
   await page.locator(".docs-sidebar__mobile-header button").click();
   await page.waitForTimeout(200);
 
-  await page.goto(`${base}/docs/components/button`, { waitUntil: "networkidle" });
+  await page.goto(`${base}/components/button`, { waitUntil: "networkidle" });
   await page.waitForTimeout(300);
   await shot(page, "button-mobile-fold");
   await shot(page, "button-mobile", true);
@@ -53,7 +53,7 @@ async function mobilePass() {
   await page.waitForTimeout(200);
   await shot(page, "button-mobile-props");
 
-  await page.goto(`${base}/docs/primitives/dialog`, { waitUntil: "networkidle" });
+  await page.goto(`${base}/primitives/dialog`, { waitUntil: "networkidle" });
   await page.waitForTimeout(300);
   await shot(page, "dialog-mobile-fold");
   await shot(page, "dialog-mobile", true);
@@ -73,7 +73,7 @@ async function narrowPass() {
     deviceScaleFactor: 2,
   });
   const page = await context.newPage();
-  await page.goto(`${base}/docs/components/button`, { waitUntil: "networkidle" });
+  await page.goto(`${base}/components/button`, { waitUntil: "networkidle" });
   await page.waitForTimeout(300);
   await shot(page, "button-narrow-fold");
   await page.getByRole("button", { name: "Menu" }).click();
@@ -89,9 +89,9 @@ async function sizedPass(name, width, height, dpr = 1) {
   });
   const page = await context.newPage();
   for (const [label, path_] of [
-    [`getting-started-${name}`, "/docs"],
-    [`button-${name}`, "/docs/components/button"],
-    [`dialog-${name}`, "/docs/primitives/dialog"],
+    [`getting-started-${name}`, "/"],
+    [`button-${name}`, "/components/button"],
+    [`dialog-${name}`, "/primitives/dialog"],
   ]) {
     await page.goto(`${base}${path_}`, { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
@@ -112,7 +112,7 @@ const context = await browser.newContext({
   deviceScaleFactor: 2,
 });
 const page = await context.newPage();
-await page.goto(`${base}/docs`, { waitUntil: "networkidle" });
+await page.goto(`${base}/`, { waitUntil: "networkidle" });
 const metrics = await page.evaluate(() => {
   const topbar = document.querySelector(".docs-topbar");
   const menu = [...topbar.querySelectorAll("button")].find((b) => /menu/i.test(b.textContent));

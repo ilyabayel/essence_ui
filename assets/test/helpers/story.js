@@ -5,7 +5,7 @@
  * @param {string} [variation="primitive"]
  */
 export async function gotoPrimitive(page, name, variation = "primitive") {
-  const path = `/primitives/${name}?variation_id=${variation}`;
+  const path = `/storybook/primitives/${name}?variation_id=${variation}`;
   await page.goto(path);
   await page.waitForLoadState("domcontentloaded");
   await waitForStoryHooks(page);
@@ -19,7 +19,7 @@ export async function gotoPrimitive(page, name, variation = "primitive") {
  */
 export async function gotoComponent(page, name, variation) {
   const qs = variation ? `?variation_id=${variation}` : "";
-  await page.goto(`/components/${name}${qs}`);
+  await page.goto(`/storybook/components/${name}${qs}`);
   await page.waitForLoadState("domcontentloaded");
   await waitForStoryHooks(page);
 }

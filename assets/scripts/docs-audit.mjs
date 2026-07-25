@@ -8,9 +8,9 @@ const base = "http://127.0.0.1:4000";
 fs.mkdirSync(outDir, { recursive: true });
 
 const pages = [
-  { name: "getting-started", path: "/docs" },
-  { name: "button", path: "/docs/components/button" },
-  { name: "dialog", path: "/docs/primitives/dialog" },
+  { name: "getting-started", path: "/" },
+  { name: "button", path: "/components/button" },
+  { name: "dialog", path: "/primitives/dialog" },
 ];
 
 const viewports = [
@@ -110,7 +110,7 @@ for (const vp of viewports) {
 {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
   const page = await context.newPage();
-  await page.goto(`${base}/docs`, { waitUntil: "networkidle" });
+  await page.goto(`${base}/`, { waitUntil: "networkidle" });
   await page.getByRole("button", { name: /menu/i }).click();
   await page.waitForTimeout(300);
   await page.screenshot({ path: path.join(outDir, "getting-started-phone-nav-open.png"), fullPage: false });

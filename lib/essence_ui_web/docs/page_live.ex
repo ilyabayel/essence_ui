@@ -80,7 +80,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
         py="2"
       >
         <.flex align="center" gap="2" min_width="0">
-          <.es_link navigate={~p"/docs"} underline="none" high_contrast>
+          <.es_link navigate={~p"/"} underline="none" high_contrast>
             <.text size="3" weight="bold" high_contrast>Essence UI</.text>
           </.es_link>
           <.badge size="1" variant="soft" color="gray">Docs</.badge>
@@ -141,7 +141,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
         <.scroll_area type="hover" class="docs-sidebar__scroll">
           <.flex direction="column" gap="5" class="docs-sidebar__inner">
             <.flex align="baseline" gap="2" class="docs-sidebar__brand">
-              <.es_link navigate={~p"/docs"} underline="none" high_contrast>
+              <.es_link navigate={~p"/"} underline="none" high_contrast>
                 <.text size="5" weight="bold" high_contrast>Essence UI</.text>
               </.es_link>
               <.badge size="1" variant="soft" color="gray">Docs</.badge>
@@ -168,7 +168,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
 
             <.box mt="auto" pt="4">
               <.separator size="1" mb="3" />
-              <.es_link href="/getting_started" underline="hover" color="gray">
+              <.es_link href="/storybook" underline="hover" color="gray">
                 <.text size="1" color="gray">Storybook</.text>
               </.es_link>
             </.box>
@@ -180,7 +180,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
         <.flex :if={@not_found} direction="column" align="center" gap="3" py="9" px="4">
           <.heading as="h1" size="6">Page not found</.heading>
           <.text color="gray">No documentation exists at this path.</.text>
-          <.es_link navigate={~p"/docs"}>Back to docs</.es_link>
+          <.es_link navigate={~p"/"}>Back to docs</.es_link>
         </.flex>
 
         <.box :if={@page} as="article" class="docs-article">
@@ -206,7 +206,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
   defp path_from_params(%{"path" => path}) when is_binary(path), do: path
   defp path_from_params(_), do: Catalog.home_path()
 
-  defp docs_path(path) when is_binary(path), do: "/docs/#{path}"
+  defp docs_path(path) when is_binary(path), do: "/#{path}"
 
   defp nav_active?(%{path: path}, path), do: true
   defp nav_active?(_, _), do: false

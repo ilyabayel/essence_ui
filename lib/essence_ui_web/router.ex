@@ -36,21 +36,21 @@ defmodule EssenceUIWeb.Router do
     storybook_assets()
   end
 
+  scope "/" do
+    pipe_through(:browser)
+    live_storybook("/storybook", backend_module: EssenceUIWeb.Storybook)
+  end
+
   scope "/crm", EssenceUIWeb do
     pipe_through :browser
     live "/", CRM.DashboardLive, :index
   end
 
-  scope "/docs", EssenceUIWeb do
+  scope "/", EssenceUIWeb do
     pipe_through :browser
 
     live "/", Docs.PageLive, :index
     live "/*path", Docs.PageLive, :show
-  end
-
-  scope "/", EssenceUIWeb do
-    pipe_through(:browser)
-    live_storybook("/", backend_module: EssenceUIWeb.Storybook)
   end
 
   # Other scopes may use custom stacks.

@@ -48,4 +48,4 @@ Import components and compose:
   </.flex>
 </.demo>
 
-Next: browse [Button](/docs/components/button) or the headless [Dialog](/docs/primitives/dialog) primitive.
+Next: browse [Button](/components/button) or the headless [Dialog](/primitives/dialog) primitive.
