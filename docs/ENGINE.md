@@ -127,18 +127,35 @@ Pitfalls found and fixed while building the chrome:
 | `Box`/`Flex` `as` only allowed `div`/`span` | Allow semantic tags (`aside`, `main`, `nav`, …) |
 | `ExtractProps` dropped list `class` values | Normalize class lists |
 | `Text` has no margin props | Prefer `Flex`/`Box` spacing (or inline style) |
+| `~S"""` inside HEEx attrs in Markdown | MDEx swallows the rest of the page — use `~S\|...\|` / `~s[...]` |
+| Desktop-first stacked sidebar on mobile | Mobile-first topbar + drawer; sidebar from `min-width: 901px` |
+| `Box` required `inner_block` | Slot optional (empty backdrop/spacer boxes) |
+| Multiline HEEx attrs / raw HTML in string attrs | Prefer Markdown fences; keep HEEx attrs single-line; use slots for anatomy |
 
+### Authoring gotcha
+
+MDEx `phoenix_heex` can swallow the rest of a page when:
+
+- HEEx attributes span multiple lines with complex values (`parts={[...]}`)
+- Attribute strings contain raw HTML tags (`<main>`, `<div>`) across lines
+- Elixir `"""` heredocs appear inside attributes
+
+Prefer Markdown fenced code for static snippets, single-line `heex={~s[...]}` for demo source, and slots for structured data.
+
+## Authoring rules
 
 1. One job per page; lead with a short description, then demos, then API
 2. Prefer `<.demo heex={...}>` so source and preview stay in sync visually (small duplication is OK)
 3. Put CSS in `css={...}` only when teaching styles (primitives demos, overrides)
 4. Import nothing in Markdown — `PageLive` imports docs helpers + `EssenceUI.Components` + primitives aliases
 5. Keep nav in `docs/nav.exs` in sync when adding pages
+6. Avoid `"""` sigils in Markdown HEEx attributes (use `~S|...|`)
 
 ## Success criteria
 
 - [x] `/docs` renders Markdown with live Essence UI components
 - [x] Demo shows HEEx (and optional CSS) beside preview
 - [x] Props table generated from `attr`
+- [x] Mobile-first layout (topbar + drawer; desktop sidebar)
 - [ ] All Storybook stories have docs equivalents
 - [ ] Storybook removed; E2E green against `/docs`

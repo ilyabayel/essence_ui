@@ -40,13 +40,14 @@ defmodule EssenceUIWeb.Docs.ComponentsTest do
     assert html =~ "&lt;.button&gt;Hi&lt;/.button&gt;" or html =~ "<.button>Hi</.button>"
   end
 
-  test "props_table uses Essence table primitives" do
+  test "props_table uses Essence table and mobile cards" do
     html =
       render_component(&Components.props_table/1, %{
         module: EssenceUI.Components.Button,
         function: :button
       })
 
+    assert html =~ "docs-props__card"
     assert html =~ "rt-Table"
     assert html =~ "variant"
   end

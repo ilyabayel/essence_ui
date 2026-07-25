@@ -23,7 +23,7 @@ defmodule EssenceUIWeb.Docs.Components do
       |> assign(:default_tab, default_tab(assigns))
 
     ~H"""
-    <.card variant="surface" class={["docs-demo", @class]} style="overflow: hidden;">
+    <.card variant="surface" class={["docs-demo", @class]}>
       <.box
         class={preview_class(@variant)}
         p="5"
@@ -36,7 +36,7 @@ defmodule EssenceUIWeb.Docs.Components do
         {render_slot(@inner_block)}
       </.box>
 
-      <.box :if={@has_heex or @has_css} style="border-top: 1px solid var(--gray-a5);">
+      <.box :if={@has_heex or @has_css} class="docs-demo__source">
         <.tabs id={@tab_id} default_value={@default_tab}>
           <:list>
             <.tabs_list size="1">
@@ -61,9 +61,11 @@ defmodule EssenceUIWeb.Docs.Components do
   attr :language, :string, default: "text"
 
   def code_block(assigns) do
+    assigns = assign(assigns, :formatted, format_source(assigns.code, assigns.language))
+
     ~H"""
-    <.box class="docs-code-block" p="3" data-language={@language} style="background: var(--gray-a2); overflow: auto;">
-      <pre style="margin: 0;"><.code variant="ghost" high_contrast>{@code}</.code></pre>
+    <.box class="docs-code-block" p="3" data-language={@language}>
+      <pre><code>{@formatted}</code></pre>
     </.box>
     """
   end
@@ -77,39 +79,62 @@ defmodule EssenceUIWeb.Docs.Components do
     assigns = assign(assigns, :attrs, meta.attrs)
 
     ~H"""
-    <.table variant="surface" size="1" class="docs-props">
-      <.table_header>
-        <.table_row>
-          <.table_column_header_cell>Prop</.table_column_header_cell>
-          <.table_column_header_cell>Type</.table_column_header_cell>
-          <.table_column_header_cell>Default</.table_column_header_cell>
-          <.table_column_header_cell>Description</.table_column_header_cell>
-        </.table_row>
-      </.table_header>
-      <.table_body>
-        <.table_row :for={attr <- @attrs}>
-          <.table_row_header_cell><.code size="1">{attr.name}</.code></.table_row_header_cell>
-          <.table_cell><.code size="1" variant="ghost" color="gray">{format_type(attr)}</.code></.table_cell>
-          <.table_cell><.code size="1" variant="ghost" color="gray">{format_default(attr)}</.code></.table_cell>
-          <.table_cell><.text size="1" color="gray">{attr[:doc] || ""}</.text></.table_cell>
-        </.table_row>
-      </.table_body>
-    </.table>
+    <.box class="docs-props">
+      <.box class="docs-props__desktop">
+        <.table variant="surface" size="1">
+          <.table_header>
+            <.table_row>
+              <.table_column_header_cell>Prop</.table_column_header_cell>
+              <.table_column_header_cell>Type</.table_column_header_cell>
+              <.table_column_header_cell>Default</.table_column_header_cell>
+              <.table_column_header_cell>Description</.table_column_header_cell>
+            </.table_row>
+          </.table_header>
+          <.table_body>
+            <.table_row :for={attr <- @attrs}>
+              <.table_row_header_cell><.code size="1">{attr.name}</.code></.table_row_header_cell>
+              <.table_cell><.code size="1" variant="ghost" color="gray">{format_type(attr)}</.code></.table_cell>
+              <.table_cell><.code size="1" variant="ghost" color="gray">{format_default(attr)}</.code></.table_cell>
+              <.table_cell><.text size="1" color="gray">{attr[:doc] || ""}</.text></.table_cell>
+            </.table_row>
+          </.table_body>
+        </.table>
+      </.box>
+
+      <.flex direction="column" gap="3" class="docs-props__mobile">
+        <.box :for={attr <- @attrs} class="docs-props__card" p="3">
+          <.flex direction="column" gap="2">
+            <.code size="2">{attr.name}</.code>
+            <.text size="1" color="gray">{attr[:doc] || ""}</.text>
+            <.flex gap="3" wrap="wrap">
+              <.text size="1" color="gray">
+                Type <.code size="1" variant="ghost">{format_type(attr)}</.code>
+              </.text>
+              <.text size="1" color="gray">
+                Default <.code size="1" variant="ghost">{format_default(attr)}</.code>
+              </.text>
+            </.flex>
+          </.flex>
+        </.box>
+      </.flex>
+    </.box>
     """
   end
 
   @doc "Anatomy list for compound components."
-  attr :parts, :list, required: true
+  slot :part, required: true do
+    attr :name, :string, required: true
+  end
 
   def anatomy(assigns) do
     ~H"""
     <.box class="docs-anatomy" mb="5">
       <.heading as="h2" size="4" mb="3">Anatomy</.heading>
       <.data_list orientation="horizontal" size="2">
-        <.data_list_item :for={part <- @parts}>
+        <.data_list_item :for={part <- @part}>
           <:label><.code size="2">{part.name}</.code></:label>
           <:value>
-            <.text :if={part[:description]} size="2" color="gray">{part.description}</.text>
+            <.text size="2" color="gray">{render_slot(part)}</.text>
           </:value>
         </.data_list_item>
       </.data_list>
@@ -151,4 +176,14 @@ defmodule EssenceUIWeb.Docs.Components do
   end
 
   defp format_default(_), do: "—"
+
+  defp format_source(code, language) when language in ["heex", "html"] do
+    code
+    |> String.replace(~r"/>\s*</", "/>\n<")
+    |> String.replace(~r"/>(?=<)/", "/>\n")
+    |> String.replace(~r">(?=<\.)", ">\n")
+    |> String.replace(~r"></", ">\n</")
+  end
+
+  defp format_source(code, _), do: code
 end

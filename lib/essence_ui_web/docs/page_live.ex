@@ -12,7 +12,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, nav: Catalog.nav(), page: nil, not_found: false)}
+    {:ok, assign(socket, nav: Catalog.nav(), page: nil, not_found: false, nav_open: false)}
   end
 
   @impl true
@@ -25,6 +25,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
          socket
          |> assign(:page, page)
          |> assign(:not_found, false)
+         |> assign(:nav_open, false)
          |> assign(:page_title, page.title)}
 
       :error ->
@@ -32,30 +33,72 @@ defmodule EssenceUIWeb.Docs.PageLive do
          socket
          |> assign(:page, nil)
          |> assign(:not_found, true)
+         |> assign(:nav_open, false)
          |> assign(:page_title, "Not found")}
     end
   end
 
   @impl true
+  def handle_event("toggle_nav", _params, socket) do
+    {:noreply, update(socket, :nav_open, &(!&1))}
+  end
+
+  @impl true
+  def handle_event("close_nav", _params, socket) do
+    {:noreply, assign(socket, :nav_open, false)}
+  end
+
+  @impl true
   def render(assigns) do
     ~H"""
-    <.flex
-      class="essence-ui docs-shell"
+    <.box
+      class={["essence-ui", "docs-shell", @nav_open && "is-nav-open"]}
       data-accent-color="gray"
       data-gray-color="slate"
       data-radius="medium"
       data-scaling="100%"
-      style="min-height: 100vh;"
     >
+      <.flex class="docs-topbar" align="center" justify="between" gap="3" p="3">
+        <.flex align="center" gap="2">
+          <.es_link navigate={~p"/docs"} underline="none" high_contrast>
+            <.text size="4" weight="bold" high_contrast>Essence UI</.text>
+          </.es_link>
+          <.badge size="1" variant="soft" color="gray">Docs</.badge>
+        </.flex>
+
+        <.button
+          type="button"
+          variant="soft"
+          color="gray"
+          size="2"
+          phx-click="toggle_nav"
+          aria-expanded={to_string(@nav_open)}
+          aria-controls="docs-sidebar"
+        >
+          {if @nav_open, do: "Close", else: "Menu"}
+        </.button>
+      </.flex>
+
       <.box
-        as="aside"
-        class="docs-sidebar"
-        p="4"
-        style="width: 240px; flex-shrink: 0; position: sticky; top: 0; align-self: start; height: 100vh; border-right: 1px solid var(--gray-a5); background: var(--gray-a2);"
+        :if={@nav_open}
+        class="docs-nav-backdrop"
+        phx-click="close_nav"
+        aria-hidden="true"
+        style="position: fixed; inset: 0; z-index: 35; background: rgb(0 0 0 / 0.4);"
       >
-        <.scroll_area type="hover" style="height: calc(100vh - 2rem);">
-          <.flex direction="column" gap="5" style="min-height: 100%;">
-            <.flex align="baseline" gap="2" mb="1">
+      </.box>
+
+      <.box as="aside" id="docs-sidebar" class={["docs-sidebar", @nav_open && "is-open"]} p="4">
+        <.flex class="docs-sidebar__mobile-header" align="center" justify="between" mb="3" style="width: 100%;">
+          <.text size="3" weight="bold">Menu</.text>
+          <.button type="button" variant="ghost" color="gray" size="1" phx-click="close_nav">
+            Close
+          </.button>
+        </.flex>
+
+        <.scroll_area type="hover" class="docs-sidebar__scroll">
+          <.flex direction="column" gap="5" class="docs-sidebar__inner">
+            <.flex align="baseline" gap="2" class="docs-sidebar__brand">
               <.es_link navigate={~p"/docs"} underline="none" high_contrast>
                 <.text size="5" weight="bold" high_contrast>Essence UI</.text>
               </.es_link>
@@ -64,12 +107,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
 
             <.box as="nav" aria-label="Documentation">
               <.flex :for={section <- @nav} direction="column" gap="1" mb="4">
-                <.text
-                  size="1"
-                  weight="bold"
-                  color="gray"
-                  style="display: block; margin-bottom: 0.25rem; text-transform: uppercase; letter-spacing: 0.04em;"
-                >
+                <.text size="1" weight="bold" color="gray" class="docs-nav-section__title">
                   {section.title}
                 </.text>
                 <.es_link
@@ -79,7 +117,6 @@ defmodule EssenceUIWeb.Docs.PageLive do
                   color={nav_color(@page, item.path)}
                   high_contrast={nav_active?(@page, item.path)}
                   class={["docs-nav-link", nav_active?(@page, item.path) && "is-active"]}
-                  style="display: block; padding: 0.35rem 0.5rem; border-radius: var(--radius-2);"
                 >
                   <.text size="2">{item.title}</.text>
                 </.es_link>
@@ -96,28 +133,17 @@ defmodule EssenceUIWeb.Docs.PageLive do
         </.scroll_area>
       </.box>
 
-      <.box as="main" p="6" style="flex: 1; min-width: 0;">
-        <.flex :if={@not_found} direction="column" align="center" gap="3" py="9">
+      <.box as="main" class="docs-main">
+        <.flex :if={@not_found} direction="column" align="center" gap="3" py="9" px="4">
           <.heading as="h1" size="6">Page not found</.heading>
           <.text color="gray">No documentation exists at this path.</.text>
           <.es_link navigate={~p"/docs"}>Back to docs</.es_link>
         </.flex>
 
-        <.box
-          :if={@page}
-          as="article"
-          class="docs-article"
-          style="max-width: 48rem; margin: 0 auto;"
-        >
-          <.flex
-            direction="column"
-            gap="2"
-            mb="5"
-            pb="4"
-            style="border-bottom: 1px solid var(--gray-a5);"
-          >
-            <.heading as="h1" size="8">{@page.title}</.heading>
-            <.text :if={@page.description} size="4" color="gray">{@page.description}</.text>
+        <.box :if={@page} as="article" class="docs-article">
+          <.flex direction="column" gap="2" class="docs-article__header">
+            <.heading as="h1" size="7" class="docs-article__title">{@page.title}</.heading>
+            <.text :if={@page.description} size="3" color="gray">{@page.description}</.text>
           </.flex>
 
           <.box class="docs-article__body">
@@ -125,7 +151,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
           </.box>
         </.box>
       </.box>
-    </.flex>
+    </.box>
     """
   end
 

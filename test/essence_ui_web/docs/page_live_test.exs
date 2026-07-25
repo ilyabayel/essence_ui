@@ -4,11 +4,20 @@ defmodule EssenceUIWeb.Docs.PageLiveTest do
   import Phoenix.LiveViewTest
 
   test "renders getting started at /docs", %{conn: conn} do
-    {:ok, _view, html} = live(conn, ~p"/docs")
+    {:ok, view, html} = live(conn, ~p"/docs")
 
     assert html =~ "Getting started"
     assert html =~ "Essence UI"
     assert html =~ "Hello from Essence UI"
+    assert html =~ "docs-topbar"
+    assert html =~ "Menu"
+    refute html =~ "## 4. Start building"
+    assert html =~ "Start building"
+    assert html =~ ~s(href="/docs/components/button")
+
+    html = render_click(element(view, "button[phx-click=toggle_nav]"))
+    assert html =~ "is-open"
+    assert html =~ "Close"
   end
 
   test "renders button docs with live demo and props", %{conn: conn} do

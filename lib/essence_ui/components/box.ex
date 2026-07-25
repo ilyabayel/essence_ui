@@ -65,7 +65,7 @@ defmodule EssenceUI.Components.Box do
   attr :display, :string, default: "block", values: @display_values
   attr :style, :string, default: ""
   attr :rest, :global
-  slot :inner_block, required: true
+  slot :inner_block
 
   def box(assigns) do
     box_prop_defs = %{
