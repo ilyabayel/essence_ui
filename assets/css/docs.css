@@ -347,6 +347,97 @@ body:has(.docs-shell) {
   line-height: 1.55;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+  color: var(--gray-12);
+}
+
+/* Makeup token colors — theme-aware via Radix scales */
+.docs-code-block .c,
+.docs-code-block .c1,
+.docs-code-block .cm,
+.docs-code-block .cp,
+.docs-code-block .cs {
+  color: var(--gray-9);
+  font-style: italic;
+}
+
+.docs-code-block .k,
+.docs-code-block .kc,
+.docs-code-block .kd,
+.docs-code-block .kn,
+.docs-code-block .kp,
+.docs-code-block .kr,
+.docs-code-block .kt {
+  color: var(--crimson-11);
+}
+
+.docs-code-block .n,
+.docs-code-block .na,
+.docs-code-block .bp,
+.docs-code-block .nc,
+.docs-code-block .nd,
+.docs-code-block .ni,
+.docs-code-block .ne,
+.docs-code-block .nf,
+.docs-code-block .fm,
+.docs-code-block .nl,
+.docs-code-block .nn,
+.docs-code-block .nx,
+.docs-code-block .py,
+.docs-code-block .nt,
+.docs-code-block .nv,
+.docs-code-block .vc,
+.docs-code-block .vg,
+.docs-code-block .vi,
+.docs-code-block .vm {
+  color: var(--blue-11);
+}
+
+/* Syntect CSS: properties vs keyword values */
+.docs-code-block .nb {
+  color: var(--crimson-11);
+}
+
+.docs-code-block .no {
+  color: var(--orange-11);
+}
+
+.docs-code-block .o,
+.docs-code-block .ow,
+.docs-code-block .p {
+  color: var(--gray-11);
+}
+
+.docs-code-block .s,
+.docs-code-block .sa,
+.docs-code-block .sb,
+.docs-code-block .sc,
+.docs-code-block .dl,
+.docs-code-block .sd,
+.docs-code-block .s2,
+.docs-code-block .se,
+.docs-code-block .sh,
+.docs-code-block .si,
+.docs-code-block .sx,
+.docs-code-block .sr,
+.docs-code-block .s1,
+.docs-code-block .ss {
+  color: var(--teal-11);
+}
+
+.docs-code-block .m,
+.docs-code-block .mb,
+.docs-code-block .mf,
+.docs-code-block .mh,
+.docs-code-block .mi,
+.docs-code-block .il,
+.docs-code-block .mo,
+.docs-code-block .l,
+.docs-code-block .ld {
+  color: var(--orange-11);
+}
+
+.docs-code-block .err {
+  color: var(--red-11);
 }
 
 .docs-props {

@@ -4,6 +4,12 @@ defmodule EssenceUIWeb.Docs.Components do
 
   import EssenceUI.Components
 
+  alias Makeup.Formatters.HTML.HTMLFormatter
+  alias Makeup.Lexers.HEExLexer
+  alias Makeup.Lexers.HTMLLexer
+  alias Makeup.Registry
+  alias MakeupSyntect.Lexer, as: SyntectLexer
+
   @doc """
   Live preview with HEEx / CSS source tabs.
 
@@ -87,14 +93,14 @@ defmodule EssenceUIWeb.Docs.Components do
     end
   end
 
-  @doc "Standalone fenced-style code block."
+  @doc "Standalone fenced-style code block with Makeup highlighting for HEEx/HTML/CSS."
   attr :code, :string, required: true
   attr :language, :string, default: "text"
 
   def code_block(assigns) do
     assigns =
       assigns
-      |> assign(:formatted, format_source(assigns.code, assigns.language))
+      |> assign(:highlighted, highlight_source(assigns.code, assigns.language))
       |> assign_new(:copy_id, fn -> "copy-#{System.unique_integer([:positive])}" end)
 
     ~H"""
@@ -102,7 +108,7 @@ defmodule EssenceUIWeb.Docs.Components do
       <button type="button" class="docs-code-block__copy" data-copy aria-label="Copy code">
         Copy
       </button>
-      <pre><code>{@formatted}</code></pre>
+      <pre><code class={"language-#{@language}"}>{Phoenix.HTML.raw(@highlighted)}</code></pre>
     </.box>
     """
   end
@@ -340,6 +346,12 @@ defmodule EssenceUIWeb.Docs.Components do
 
   defp format_default(_), do: "—"
 
+  defp highlight_source(code, language) when is_binary(code) do
+    code
+    |> format_source(language)
+    |> highlight_formatted(language)
+  end
+
   defp format_source(code, language) when language in ["heex", "html"] do
     code
     |> Phoenix.LiveView.HTMLFormatter.format([])
@@ -347,4 +359,51 @@ defmodule EssenceUIWeb.Docs.Components do
   end
 
   defp format_source(code, _), do: String.trim(code)
+
+  defp highlight_formatted(code, "heex") do
+    ensure_html_lexer_registered()
+    code |> HEExLexer.lex() |> HTMLFormatter.format_inner_as_binary([])
+  rescue
+    _ -> escape_code(code)
+  end
+
+  defp highlight_formatted(code, "html") do
+    ensure_html_lexer_registered()
+    code |> HTMLLexer.lex() |> HTMLFormatter.format_inner_as_binary([])
+  rescue
+    _ -> escape_code(code)
+  end
+
+  defp highlight_formatted(code, "css") do
+    ensure_syntect_css_lexer()
+    {lexer, opts} = Registry.fetch_lexer_by_name!("css")
+    code |> lexer.lex(opts) |> HTMLFormatter.format_inner_as_binary([])
+  rescue
+    _ -> escape_code(code)
+  end
+
+  defp highlight_formatted(code, _), do: escape_code(code)
+
+  defp escape_code(code) do
+    code |> Phoenix.HTML.html_escape() |> Phoenix.HTML.safe_to_string()
+  end
+
+  defp ensure_html_lexer_registered do
+    if is_nil(Registry.get_lexer_by_name("html")) and
+         is_nil(Registry.get_lexer_by_extension("html")) do
+      Registry.register_lexer(HTMLLexer, options: [], names: ["html"], extensions: ["html"])
+    end
+  end
+
+  defp ensure_syntect_css_lexer do
+    {:ok, _} = Application.ensure_all_started(:makeup_syntect)
+
+    if is_nil(Registry.get_lexer_by_name("css")) do
+      Registry.register_lexer(SyntectLexer,
+        options: [language: "CSS"],
+        names: ["css", "CSS"],
+        extensions: ["css"]
+      )
+    end
+  end
 end

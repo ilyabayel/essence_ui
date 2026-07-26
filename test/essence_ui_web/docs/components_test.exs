@@ -64,6 +64,30 @@ defmodule EssenceUIWeb.Docs.ComponentsTest do
     assert html =~ "AccordionRoot"
     assert html =~ "CSS"
     refute html =~ "@import"
+    assert html =~ "class=\"na\"" or html =~ "class=\"nb\""
+  end
+
+  test "code_block highlights heex and css" do
+    heex =
+      render_component(&Components.code_block/1, %{
+        code: ~s[<.button variant="solid">Hi</.button>],
+        language: "heex"
+      })
+
+    assert heex =~ "class=\"nf\""
+    assert heex =~ "class=\"na\""
+    assert heex =~ "language-heex"
+
+    css =
+      render_component(&Components.code_block/1, %{
+        code: ".Root { color: red; box-sizing: border-box; }",
+        language: "css"
+      })
+
+    # Syntect CSS: selectors → na, properties → nb, keywords → no
+    assert css =~ "class=\"na\""
+    assert css =~ "box-sizing"
+    assert css =~ "language-css"
   end
 
   test "primitive_css loads canvas and component styles" do
