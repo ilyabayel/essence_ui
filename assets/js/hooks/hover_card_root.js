@@ -1,5 +1,6 @@
 import { positionFloating } from "../lib/position";
 import { setOpen, setClosed } from "../lib/presence";
+import { applyPortalTheme } from "../lib/theme";
 import { hasFinePointerHover, whenMouse } from "../lib/pointer";
 
 function findPart(root, selector, contentId) {
@@ -190,6 +191,7 @@ export const HoverCardRoot = {
       this.resolveParts();
       if (!this.trigger || !this.content) return;
 
+      applyPortalTheme(this.content, this.trigger || this.el);
       setOpen(this.content, [this.trigger, this.el]);
       this.content.style.display = "block";
 
