@@ -131,70 +131,136 @@ A set of layered sections of content—known as tab panels—that are displayed 
 
 ## Anatomy
 
+Import all parts and piece them together.
+
 ```heex
 <Tabs.root>
-  <Tabs.list />
-  <Tabs.trigger />
+  <Tabs.list>
+    <Tabs.trigger />
+  </Tabs.list>
   <Tabs.content />
 </Tabs.root>
 ```
 
 <.anatomy>
-  <:part name="Root">The `root` part.</:part>
-  <:part name="List">The `list` part.</:part>
-  <:part name="Trigger">The `trigger` part.</:part>
-  <:part name="Content">The `content` part.</:part>
+  <:part name="Root">Contains all the tabs component parts.</:part>
+  <:part name="List">Contains the triggers that are aligned along the edge of the active content.</:part>
+  <:part name="Trigger">The button that activates its associated content.</:part>
+  <:part name="Content">Contains the content associated with each trigger.</:part>
 </.anatomy>
 
 ## API Reference
 
 ### Root
 
-<.props_table module={EssenceUI.Primitives.Tabs} function={:root} />
+Contains all the tabs component parts.
 
-### List
-
-<.props_table module={EssenceUI.Primitives.Tabs} function={:list} />
-
-### Trigger
-
-<.props_table module={EssenceUI.Primitives.Tabs} function={:trigger} />
-
-### Content
-
-<.props_table module={EssenceUI.Primitives.Tabs} function={:content} />
-
-## Examples
-
-### Default value
+Use `value` with `on_value_change` for controlled tab state in LiveView:
 
 ```heex
-<Tabs.root id="account-tabs" default_value="tab1" class="TabsRoot">
+<Tabs.root id="account-tabs" value={@tab} on_value_change="tabs_value_change">
   …
 </Tabs.root>
 ```
 
-### Vertical orientation
+```elixir
+def handle_event("tabs_value_change", %{"value" => value}, socket) do
+  {:noreply, assign(socket, :tab, value)}
+end
+```
 
-Pass orientation via attrs/classes when supported by your styles (`data-orientation` / layout CSS).
+<.props_table module={EssenceUI.Primitives.Tabs} function={:root} />
 
-### Animate content
+<.data_attributes_table>
+  <:row name="[data-orientation]" values={"vertical | horizontal"}>The orientation of the component.</:row>
+</.data_attributes_table>
+
+### List
+
+Contains the triggers that are aligned along the edge of the active content.
+
+<.props_table module={EssenceUI.Primitives.Tabs} function={:list} />
+
+<.data_attributes_table>
+  <:row name="[data-orientation]" values={"vertical | horizontal"}>The orientation of the component.</:row>
+</.data_attributes_table>
+
+### Trigger
+
+The button that activates its associated content.
+
+<.props_table module={EssenceUI.Primitives.Tabs} function={:trigger} />
+
+<.data_attributes_table>
+  <:row name="[data-state]" values={"active | inactive"}>Reflects whether the tab is active.</:row>
+  <:row name="[data-disabled]" values="Present when disabled">Present when the tab is disabled.</:row>
+  <:row name="[data-orientation]" values={"vertical | horizontal"}>The orientation of the component.</:row>
+</.data_attributes_table>
+
+### Content
+
+Contains the content associated with each trigger.
+
+<.props_table module={EssenceUI.Primitives.Tabs} function={:content} />
+
+<.data_attributes_table>
+  <:row name="[data-state]" values={"active | inactive"}>Reflects whether the tab is active.</:row>
+  <:row name="[data-orientation]" values={"vertical | horizontal"}>The orientation of the component.</:row>
+</.data_attributes_table>
+
+## Examples
+
+### Vertical
+
+You can create vertical tabs by using the `orientation` prop.
+
+```heex
+<Tabs.root id="tabs-vertical" default_value="tab1" orientation="vertical" class="TabsRoot TabsRootVertical">
+  <Tabs.list aria-label="Tabs example" class="TabsList TabsListVertical">
+    <Tabs.trigger value="tab1" class="TabsTrigger">One</Tabs.trigger>
+    <Tabs.trigger value="tab2" class="TabsTrigger">Two</Tabs.trigger>
+    <Tabs.trigger value="tab3" class="TabsTrigger">Three</Tabs.trigger>
+  </Tabs.list>
+  <Tabs.content value="tab1" class="TabsContent">Tab one content</Tabs.content>
+  <Tabs.content value="tab2" class="TabsContent">Tab two content</Tabs.content>
+  <Tabs.content value="tab3" class="TabsContent">Tab three content</Tabs.content>
+</Tabs.root>
+```
 
 ```css
-.TabsContent[data-state="active"] {
-  animation: fadeIn 150ms ease;
+.TabsRootVertical {
+  flex-direction: row;
+}
+.TabsListVertical {
+  flex-direction: column;
+  border-bottom: none;
+  border-right: 1px solid var(--mauve-6);
+}
+.TabsRootVertical .TabsTrigger:first-child {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 0;
+}
+.TabsRootVertical .TabsTrigger:last-child {
+  border-top-right-radius: 0;
+}
+.TabsRootVertical .TabsContent {
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 6px;
 }
 ```
 
-See `storybook/primitives/tabs.story.exs` for the account/password demo.
-
 ## Accessibility
 
-Adheres to the [WAI-ARIA pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs).
+Adheres to the [Tabs WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs).
+
+### Keyboard Interactions
 
 <.keyboard_table>
-  <:row keys="Tab">Moves focus among focusable elements.</:row>
-  <:row keys="Space">Activates the focused control when applicable.</:row>
-  <:row keys="Enter">Activates the focused control when applicable.</:row>
-  <:row keys="Escape">Dismisses overlays when applicable.</:row>
+  <:row keys="Tab">When focus moves onto the tabs, focuses the active trigger. When a trigger is focused, moves focus to the active content.</:row>
+  <:row keys="ArrowDown">Moves focus to the next trigger depending on `orientation` and activates its associated content.</:row>
+  <:row keys="ArrowRight">Moves focus to the next trigger depending on `orientation` and activates its associated content.</:row>
+  <:row keys="ArrowUp">Moves focus to the previous trigger depending on `orientation` and activates its associated content.</:row>
+  <:row keys="ArrowLeft">Moves focus to the previous trigger depending on `orientation` and activates its associated content.</:row>
+  <:row keys="Home">Moves focus to the first trigger and activates its associated content.</:row>
+  <:row keys="End">Moves focus to the last trigger and activates its associated content.</:row>
 </.keyboard_table>

@@ -164,160 +164,413 @@ Displays a list of options for the user to pick from—triggered by a button.
   <:item>Focus is fully managed.</:item>
   <:item>Full keyboard navigation.</:item>
   <:item>Supports custom placeholder.</:item>
+  <:item>Typeahead support.</:item>
+  <:item>Supports Right to Left direction.</:item>
 </.highlights>
 
 ## Anatomy
 
+Import all parts and piece them together.
+
 ```heex
-<Select.root>
-  <Select.trigger />
-  <Select.value />
-  <Select.icon />
-  <Select.portal />
-  <Select.content />
-  <Select.viewport />
-  <Select.item />
-  <Select.item_text />
-  <Select.item_indicator />
-  <Select.group />
-  <Select.label />
-  <Select.separator />
-  <Select.scroll_up_button />
-  <Select.scroll_down_button />
-  <Select.arrow />
+<Select.root id="…">
+  <Select.trigger>
+    <Select.value />
+    <Select.icon />
+  </Select.trigger>
+  <Select.portal id="…">
+    <Select.content>
+      <Select.scroll_up_button />
+      <Select.viewport>
+        <Select.item>
+          <Select.item_text />
+          <Select.item_indicator />
+        </Select.item>
+        <Select.group>
+          <Select.label />
+          <Select.item>…</Select.item>
+        </Select.group>
+        <Select.separator />
+      </Select.viewport>
+      <Select.scroll_down_button />
+      <Select.arrow />
+    </Select.content>
+  </Select.portal>
 </Select.root>
 ```
 
 <.anatomy>
-  <:part name="Root">The `root` part.</:part>
-  <:part name="Trigger">The `trigger` part.</:part>
-  <:part name="Value">The `value` part.</:part>
-  <:part name="Icon">The `icon` part.</:part>
-  <:part name="Portal">The `portal` part.</:part>
-  <:part name="Content">The `content` part.</:part>
-  <:part name="Viewport">The `viewport` part.</:part>
-  <:part name="Item">The `item` part.</:part>
-  <:part name="Item Text">The `item_text` part.</:part>
-  <:part name="Item Indicator">The `item_indicator` part.</:part>
-  <:part name="Group">The `group` part.</:part>
-  <:part name="Label">The `label` part.</:part>
-  <:part name="Separator">The `separator` part.</:part>
-  <:part name="Scroll Up Button">The `scroll_up_button` part.</:part>
-  <:part name="Scroll Down Button">The `scroll_down_button` part.</:part>
-  <:part name="Arrow">The `arrow` part.</:part>
+  <:part name="Root">Contains all the parts of a select. Renders a hidden input when `name` is set.</:part>
+  <:part name="Trigger">The button that toggles the select. `Select.content` positions against the trigger.</:part>
+  <:part name="Value">Reflects the selected value, or shows a `placeholder` when empty.</:part>
+  <:part name="Icon">A decorative affordance beside the value (often a chevron).</:part>
+  <:part name="Portal">Portals content into the target (default `body`).</:part>
+  <:part name="Content">The listbox that opens when the select is open.</:part>
+  <:part name="Viewport">The scrolling viewport that contains all items.</:part>
+  <:part name="Item">A selectable option. Requires a unique `value`.</:part>
+  <:part name="Item Text">Text shown in the trigger when this item is selected.</:part>
+  <:part name="Item Indicator">Renders when the item is selected.</:part>
+  <:part name="Group">Groups multiple items; pair with `Select.label`.</:part>
+  <:part name="Label">A label for a group (not focusable via arrow keys).</:part>
+  <:part name="Separator">Visually separates items or groups.</:part>
+  <:part name="Scroll Up Button">Optional affordance to scroll the viewport up.</:part>
+  <:part name="Scroll Down Button">Optional affordance to scroll the viewport down.</:part>
+  <:part name="Arrow">Optional arrow rendered inside `Select.content`.</:part>
 </.anatomy>
 
 ## API Reference
 
 ### Root
 
+Contains all the parts of a select.
+
+Use `value` with `on_change` for controlled state in LiveView:
+
+```heex
+<Select.root id="food-select" value={@food} on_change="food_change">
+  …
+</Select.root>
+```
+
+```elixir
+def handle_event("food_change", %{"value" => value}, socket) do
+  {:noreply, assign(socket, :food, value)}
+end
+```
+
+Set `name` to include a hidden input for form submission.
+
 <.props_table module={EssenceUI.Primitives.Select} function={:root} />
+
+<.data_attributes_table>
+  <:row name="[data-disabled]" values="Present when disabled">Present when the select is disabled.</:row>
+</.data_attributes_table>
 
 ### Trigger
 
+The button that toggles the select. `Select.content` positions itself against the trigger.
+
 <.props_table module={EssenceUI.Primitives.Select} function={:trigger} />
 
+<.data_attributes_table>
+  <:row name="[data-state]" values={"open | closed"}>Reflects whether the select is open.</:row>
+  <:row name="[data-disabled]" values="Present when disabled">Present when the select is disabled.</:row>
+  <:row name="[data-placeholder]" values="Present when has placeholder">Present when no value is selected and a placeholder is shown.</:row>
+</.data_attributes_table>
+
 ### Value
+
+The part that reflects the selected value. By default the selected item's `item_text` is rendered. Pass slot content for more control. Do not style this part heavily—it affects positioning. Use `placeholder` when the select has no value.
 
 <.props_table module={EssenceUI.Primitives.Select} function={:value} />
 
 ### Icon
 
+A small icon often displayed next to the value as a visual affordance that the select can open.
+
 <.props_table module={EssenceUI.Primitives.Select} function={:icon} />
 
 ### Portal
+
+When used, portals the content part into the target (default `body`).
 
 <.props_table module={EssenceUI.Primitives.Select} function={:portal} />
 
 ### Content
 
+The component that pops out when the select is open. Set `data-position="popper"` for popper-style positioning (similar to `Popover`); omit it for the default item-aligned mode.
+
 <.props_table module={EssenceUI.Primitives.Select} function={:content} />
 
+<.data_attributes_table>
+  <:row name="[data-state]" values={"open | closed"}>Reflects whether the select is open.</:row>
+  <:row name="[data-position]" values={"item-aligned | popper"}>Positioning mode. Defaults to item-aligned.</:row>
+</.data_attributes_table>
+
 ### Viewport
+
+The scrolling viewport that contains all of the items.
 
 <.props_table module={EssenceUI.Primitives.Select} function={:viewport} />
 
 ### Item
 
+The component that contains the select items.
+
 <.props_table module={EssenceUI.Primitives.Select} function={:item} />
 
+<.data_attributes_table>
+  <:row name="[data-state]" values={"checked | unchecked"}>Reflects whether the item is selected.</:row>
+  <:row name="[data-highlighted]" values="Present when highlighted">Present when the item is highlighted.</:row>
+  <:row name="[data-disabled]" values="Present when disabled">Present when the item is disabled.</:row>
+</.data_attributes_table>
+
 ### Item Text
+
+The textual part of the item. It should only contain the text you want in the trigger when that item is selected. Do not style this part heavily—it affects positioning.
 
 <.props_table module={EssenceUI.Primitives.Select} function={:item_text} />
 
 ### Item Indicator
 
+Renders when the item is selected. Style this element directly, or use it as a wrapper for an icon.
+
 <.props_table module={EssenceUI.Primitives.Select} function={:item_indicator} />
 
-### Group
-
-<.props_table module={EssenceUI.Primitives.Select} function={:group} />
-
-### Label
-
-<.props_table module={EssenceUI.Primitives.Select} function={:label} />
-
-### Separator
-
-<.props_table module={EssenceUI.Primitives.Select} function={:separator} />
-
 ### Scroll Up Button
+
+An optional button used as an affordance to show viewport overflow and to scroll upwards.
 
 <.props_table module={EssenceUI.Primitives.Select} function={:scroll_up_button} />
 
 ### Scroll Down Button
 
+An optional button used as an affordance to show viewport overflow and to scroll downwards.
+
 <.props_table module={EssenceUI.Primitives.Select} function={:scroll_down_button} />
 
+### Group
+
+Used to group multiple items. Use with `Select.label` for accessible labelling.
+
+<.props_table module={EssenceUI.Primitives.Select} function={:group} />
+
+### Label
+
+Used to render the label of a group. It won't be focusable using arrow keys.
+
+<.props_table module={EssenceUI.Primitives.Select} function={:label} />
+
+### Separator
+
+Used to visually separate items in the select.
+
+<.props_table module={EssenceUI.Primitives.Select} function={:separator} />
+
 ### Arrow
+
+An optional arrow element rendered inside `Select.content` to visually link the trigger with the content.
 
 <.props_table module={EssenceUI.Primitives.Select} function={:arrow} />
 
 ## Examples
 
-### Placeholder
+### Change the positioning mode
+
+By default, `Select` positions content relative to the active item (item-aligned). For popper-style positioning similar to `Popover`, set `data-position="popper"` on `Select.content`:
 
 ```heex
-<Select.value placeholder="Select a fruit…" />
+<Select.root id="popper-select">
+  <Select.trigger class="SelectTrigger">
+    <Select.value placeholder="Select a fruit…" />
+    <Select.icon class="SelectIcon">…</Select.icon>
+  </Select.trigger>
+  <Select.portal id="popper-select-portal">
+    <Select.content id="popper-select-content" class="SelectContent" data-position="popper">
+      <Select.viewport>…</Select.viewport>
+    </Select.content>
+  </Select.portal>
+</Select.root>
 ```
 
-### Grouped items
+### With disabled items
 
-Use `Select.group` + `Select.label` to organize long lists.
-
-### With scroll buttons
-
-`scroll_up_button` / `scroll_down_button` appear when the list overflows the viewport.
-
-### Custom item indicator
+Style disabled items via the `data-disabled` attribute:
 
 ```heex
-<Select.item_indicator class="SelectItemIndicator">✓</Select.item_indicator>
+<Select.item class="SelectItem" value="carrot" disabled>
+  <Select.item_text>Carrot</Select.item_text>
+  <Select.item_indicator class="SelectItemIndicator">…</Select.item_indicator>
+</Select.item>
 ```
 
-See `storybook/primitives/select.story.exs` for a full fruit list demo.
+```css
+.SelectItem[data-disabled] {
+  color: var(--mauve-8);
+  pointer-events: none;
+}
+```
+
+### With a placeholder
+
+Use the `placeholder` prop on `Select.value` when the select has no value. The trigger gets `data-placeholder` for styling:
+
+```heex
+<Select.trigger class="SelectTrigger" aria-label="Food">
+  <Select.value placeholder="Pick an option" />
+  <Select.icon class="SelectIcon">…</Select.icon>
+</Select.trigger>
+```
+
+```css
+.SelectTrigger[data-placeholder] {
+  color: var(--mauve-9);
+}
+```
+
+### With separators
+
+Use `Select.separator` to add a separator between items:
+
+```heex
+<Select.viewport>
+  <Select.item value="apple">…</Select.item>
+  <Select.item value="banana">…</Select.item>
+  <Select.separator class="SelectSeparator" />
+  <Select.item value="blueberry">…</Select.item>
+</Select.viewport>
+```
+
+### With grouped items
+
+Use `Select.group` and `Select.label` to group items in a section:
+
+```heex
+<Select.viewport>
+  <Select.group>
+    <Select.label class="SelectLabel">Fruits</Select.label>
+    <Select.item value="apple">…</Select.item>
+    <Select.item value="banana">…</Select.item>
+  </Select.group>
+</Select.viewport>
+```
+
+### With complex items
+
+Custom content inside items is supported. Use `text_value` on `Select.item` when typeahead should match something other than visible text:
+
+```heex
+<Select.item value="adolfo" text_value="Adolfo Hess">
+  <Select.item_text>
+    <img src="/avatars/adolfo.png" alt="" width="20" height="20" />
+    Adolfo Hess
+  </Select.item_text>
+  <Select.item_indicator class="SelectItemIndicator">…</Select.item_indicator>
+</Select.item>
+```
+
+### Controlling the value displayed in the trigger
+
+By default the trigger shows the selected item's `item_text`. For more control, use controlled `value`/`on_change` and pass slot content to `Select.value`:
+
+```heex
+<Select.root id="country-select" value={@country} on_change="country_change">
+  <Select.trigger class="SelectTrigger" aria-label="Country">
+    <Select.value aria-label={@country}>
+      {Map.get(@country_flags, @country)}
+    </Select.value>
+    <Select.icon class="SelectIcon">…</Select.icon>
+  </Select.trigger>
+  <Select.portal id="country-select-portal">
+    <Select.content id="country-select-content" class="SelectContent">
+      <Select.viewport>
+        <Select.item value="france">
+          <Select.item_text>France</Select.item_text>
+          <Select.item_indicator class="SelectItemIndicator">…</Select.item_indicator>
+        </Select.item>
+        <Select.item value="united-kingdom">
+          <Select.item_text>United Kingdom</Select.item_text>
+          <Select.item_indicator class="SelectItemIndicator">…</Select.item_indicator>
+        </Select.item>
+      </Select.viewport>
+    </Select.content>
+  </Select.portal>
+</Select.root>
+```
+
+```elixir
+def handle_event("country_change", %{"value" => value}, socket) do
+  {:noreply, assign(socket, :country, value)}
+end
+```
 
 ## Accessibility
 
-Adheres to the [WAI-ARIA pattern](https://www.w3.org/WAI/ARIA/apg/patterns/listbox).
+Adheres to the [ListBox WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/listbox).
+
+See the W3C [Select-Only Combobox](https://www.w3.org/TR/wai-aria-practices/examples/combobox/combobox-select-only.html) example for more information.
+
+### Labelling
+
+Use the [Label](/primitives/docs/components/label) primitive to offer a visual and accessible label for the select:
+
+```heex
+<Label>
+  Country
+  <Select.root id="labelled-select">…</Select.root>
+</Label>
+
+<%!-- or --%>
+
+<Label for="labelled-select-trigger">Country</Label>
+<Select.root id="labelled-select">
+  <Select.trigger id="labelled-select-trigger" class="SelectTrigger">…</Select.trigger>
+  …
+</Select.root>
+```
+
+### Keyboard Interactions
 
 <.keyboard_table>
-  <:row keys="Tab">Moves focus among focusable elements.</:row>
-  <:row keys="Space">Activates the focused control when applicable.</:row>
-  <:row keys="Enter">Activates the focused control when applicable.</:row>
-  <:row keys="Escape">Dismisses overlays when applicable.</:row>
+  <:row keys="Space">When focus is on `Select.trigger`, opens the select and focuses the selected item. When focus is on an item, selects the focused item.</:row>
+  <:row keys="Enter">When focus is on `Select.trigger`, opens the select and focuses the first item. When focus is on an item, selects the focused item.</:row>
+  <:row keys="ArrowDown">When focus is on `Select.trigger`, opens the select. When focus is on an item, moves focus to the next item.</:row>
+  <:row keys="ArrowUp">When focus is on `Select.trigger`, opens the select. When focus is on an item, moves focus to the previous item.</:row>
+  <:row keys="Escape">Closes the select and moves focus to `Select.trigger`.</:row>
 </.keyboard_table>
 
 ## Custom APIs
 
-Wrap the primitive parts into a friendlier abstraction for your design system.
+Create your own API by abstracting the primitive parts into your own component.
 
-### Usage
+### Abstract down to `Select` and `SelectItem`
+
+This example abstracts most of the parts.
+
+#### Usage
 
 ```heex
-<.my_select … />
+<.select id="my-select" value={@value} on_change="select_change">
+  <:item value="1">Item 1</:item>
+  <:item value="2">Item 2</:item>
+  <:item value="3">Item 3</:item>
+</.select>
 ```
 
-### Implementation
+#### Implementation
 
-Compose `Select` parts inside your own function component, encoding classes and defaults once.
+```elixir
+attr :id, :string, required: true
+attr :value, :string, default: nil
+attr :on_change, :string, default: nil
+attr :placeholder, :string, default: "Select…"
+attr :class, :string, default: nil
+slot :item, required: true do
+  attr :value, :string, required: true
+end
+
+def select(assigns) do
+  ~H"""
+  <Select.root id={@id} value={@value} on_change={@on_change}>
+    <Select.trigger class={@class || "SelectTrigger"}>
+      <Select.value placeholder={@placeholder} />
+      <Select.icon class="SelectIcon">
+        <svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true">…</svg>
+      </Select.icon>
+    </Select.trigger>
+    <Select.portal id={"#{@id}-portal"}>
+      <Select.content id={"#{@id}-content"} class="SelectContent">
+        <Select.scroll_up_button class="SelectScrollButton">…</Select.scroll_up_button>
+        <Select.viewport>
+          <Select.item :for={item <- @item} class="SelectItem" value={item.value}>
+            <Select.item_text>{render_slot(item)}</Select.item_text>
+            <Select.item_indicator class="SelectItemIndicator">…</Select.item_indicator>
+          </Select.item>
+        </Select.viewport>
+        <Select.scroll_down_button class="SelectScrollButton">…</Select.scroll_down_button>
+      </Select.content>
+    </Select.portal>
+  </Select.root>
+  """
+end
+```

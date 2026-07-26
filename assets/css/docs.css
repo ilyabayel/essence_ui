@@ -5,6 +5,13 @@ body:has(.docs-shell) {
   margin: 0;
 }
 
+.radix-demo[data-component="form"] input,
+.radix-demo[data-component="form"] textarea,
+.radix-demo[data-component="form"] button {
+  box-sizing: border-box;
+  all: unset;
+}
+
 .docs-shell {
   min-height: 100vh;
   min-height: 100dvh;

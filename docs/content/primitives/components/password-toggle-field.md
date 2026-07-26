@@ -25,47 +25,95 @@ A password input field with an integrated button to toggle the value's visibilit
 </.demo>
 
 <.highlights>
-  <:item>Returns focus to the input when toggling with a pointer</:item>
-  <:item>Maintains button focus when toggling with keyboard or virtual navigation</:item>
-  <:item>Resets visibility to hidden after form submission to prevent accidental storage</:item>
-  <:item>Implicit accessible labeling for icon-based toggle buttons</:item>
+  <:item>Returns focus to the input when toggling with a pointer.</:item>
+  <:item>Maintains button focus when toggling with keyboard or virtual navigation.</:item>
+  <:item>Resets visibility to hidden after form submission to prevent accidental storage.</:item>
+  <:item>Implicit accessible labeling for icon-based toggle buttons.</:item>
 </.highlights>
 
 ## Anatomy
 
+Import all parts and piece them together.
+
 ```heex
 <PasswordToggleField.root>
   <PasswordToggleField.input />
-  <PasswordToggleField.toggle />
-  <PasswordToggleField.icon />
+  <PasswordToggleField.toggle>
+    <PasswordToggleField.icon visible />
+    <PasswordToggleField.icon hidden />
+  </PasswordToggleField.toggle>
 </PasswordToggleField.root>
 ```
 
 <.anatomy>
-  <:part name="Root">The `root` part.</:part>
-  <:part name="Input">The `input` part.</:part>
-  <:part name="Toggle">The `toggle` part.</:part>
-  <:part name="Icon">The `icon` part.</:part>
+  <:part name="Root">Contains all the parts of a password toggle field.</:part>
+  <:part name="Input">Renders the input containing the password value.</:part>
+  <:part name="Toggle">The button that toggles password visibility.</:part>
+  <:part name="Icon">Renders icon content for the visible or hidden state. Use one `icon` with the `visible` flag and one with the `hidden` flag inside `toggle`.</:part>
 </.anatomy>
 
 ## API Reference
 
 ### Root
 
+Contains all the parts of a password toggle field.
+
+Use `visible` with `on_visibility_change` for controlled visibility in LiveView:
+
+```heex
+<PasswordToggleField.root
+  id="password-field"
+  visible={@visible}
+  on_visibility_change="password_visibility_change"
+>
+  …
+</PasswordToggleField.root>
+```
+
+```elixir
+def handle_event("password_visibility_change", %{"visible" => visible}, socket) do
+  {:noreply, assign(socket, :visible, visible)}
+end
+```
+
 <.props_table module={EssenceUI.Primitives.PasswordToggleField} function={:root} />
 
+<.data_attributes_table>
+  <:row name="[data-visible]" values={"true | false"}>Reflects whether the password is visible.</:row>
+</.data_attributes_table>
+
 ### Input
+
+Renders the input containing the password value.
 
 <.props_table module={EssenceUI.Primitives.PasswordToggleField} function={:input} />
 
 ### Toggle
 
+The button that toggles password visibility.
+
 <.props_table module={EssenceUI.Primitives.PasswordToggleField} function={:toggle} />
 
 ### Icon
+
+Renders icon content for the visible or hidden state. Mark one icon with `visible` and one with `hidden`; the hook shows the matching icon based on visibility.
 
 <.props_table module={EssenceUI.Primitives.PasswordToggleField} function={:icon} />
 
 ## Examples
 
-See the live demo above and `storybook/primitives/password_toggle_field.story.exs` for complete markup. Style with classes and `data-state` as described in the [styling](/primitives/docs/guides/styling) guide.
+### Basic usage
+
+```heex
+<PasswordToggleField.root id="password-field">
+  <PasswordToggleField.input name="password" aria-label="Password" />
+  <PasswordToggleField.toggle>
+    <PasswordToggleField.icon visible>
+      <svg aria-hidden="true" …>…</svg>
+    </PasswordToggleField.icon>
+    <PasswordToggleField.icon hidden>
+      <svg aria-hidden="true" …>…</svg>
+    </PasswordToggleField.icon>
+  </PasswordToggleField.toggle>
+</PasswordToggleField.root>
+```

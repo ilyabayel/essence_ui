@@ -110,6 +110,20 @@ Import all parts and piece them together.
 
 Contains all the parts of a dialog.
 
+Use `open` with `on_open_change` for controlled open state in LiveView:
+
+```heex
+<Dialog.root id="profile-dialog" open={@open} on_open_change="dialog_open_change">
+  …
+</Dialog.root>
+```
+
+```elixir
+def handle_event("dialog_open_change", %{"open" => open}, socket) do
+  {:noreply, assign(socket, :open, open)}
+end
+```
+
 <.props_table module={EssenceUI.Primitives.Dialog} function={:root} />
 
 <.data_attributes_table>
@@ -231,7 +245,11 @@ Adheres to the [Dialog WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/
 
 Create your own API by wrapping the primitive parts into a friendlier abstraction for your design system.
 
-### Usage
+### Abstract the overlay and the close button
+
+This example abstracts `Dialog.overlay` and `Dialog.close` into a reusable confirm dialog.
+
+#### Usage
 
 ```heex
 <.confirm_dialog id="delete-confirm" title="Are you sure?">
@@ -239,7 +257,7 @@ Create your own API by wrapping the primitive parts into a friendlier abstractio
 </.confirm_dialog>
 ```
 
-### Implementation
+#### Implementation
 
 ```elixir
 def confirm_dialog(assigns) do

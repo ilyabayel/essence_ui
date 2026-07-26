@@ -7,55 +7,32 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/disclosure
 An interactive component which expands/collapses a panel.
 
 <.demo variant="primitive" component="collapsible" css={primitive_css("collapsible")}>
-
   <:heex>
-    <Collapsible.root
-              id="collapsible-primitive"
-              class="CollapsibleRoot"
-            >
-              <div style="display: flex; align-items: center; justify-content: space-between;">
-                <span
-                  class="Text"
-                  style="color: white;"
-                >
-                  @peduarte starred 3 repositories
-                </span>
-                <Collapsible.trigger
-                  id="collapsible-trigger"
-                  content_id="collapsible-content"
-                  class="IconButton"
-                  aria-label="Toggle"
-                >
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 15 15"
-                    fill="none"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M3.5 5.5h8M3.5 9.5h8"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                    />
-                  </svg>
-                </Collapsible.trigger>
-              </div>
+    <Collapsible.root id="collapsible-primitive" class="DemoCollapsibleRoot">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <span class="DemoCollapsibleText">
+          @peduarte starred 3 repositories
+        </span>
+        <Collapsible.trigger id="collapsible-trigger" content_id="collapsible-content" class="DemoCollapsibleIconButton" aria-label="Toggle">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+            <path d="M3.5 5.5h8M3.5 9.5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </Collapsible.trigger>
+      </div>
 
-              <div class="Repository">
-                <span class="Text">@radix-ui/primitives</span>
-              </div>
+      <div class="DemoCollapsibleRepository">
+        <span class="DemoCollapsibleText">@radix-ui/primitives</span>
+      </div>
 
-              <Collapsible.content id="collapsible-content">
-                <div class="Repository">
-                  <span class="Text">@radix-ui/colors</span>
-                </div>
-                <div class="Repository">
-                  <span class="Text">@radix-ui/themes</span>
-                </div>
-              </Collapsible.content>
-            </Collapsible.root>
+      <Collapsible.content id="collapsible-content">
+        <div class="DemoCollapsibleRepository">
+          <span class="DemoCollapsibleText">@radix-ui/colors</span>
+        </div>
+        <div class="DemoCollapsibleRepository">
+          <span class="DemoCollapsibleText">@radix-ui/themes</span>
+        </div>
+      </Collapsible.content>
+    </Collapsible.root>
   </:heex>
 </.demo>
 
@@ -66,44 +43,118 @@ An interactive component which expands/collapses a panel.
 
 ## Anatomy
 
+Import the components and piece the parts together.
+
 ```heex
-<Collapsible.root>
-  <Collapsible.trigger />
-  <Collapsible.content />
+<Collapsible.root id="…">
+  <Collapsible.trigger content_id="…" />
+  <Collapsible.content id="…" />
 </Collapsible.root>
 ```
 
 <.anatomy>
-  <:part name="Root">The `root` part.</:part>
-  <:part name="Trigger">The `trigger` part.</:part>
-  <:part name="Content">The `content` part.</:part>
+  <:part name="Root">Contains all the parts of a collapsible.</:part>
+  <:part name="Trigger">The button that toggles the collapsible.</:part>
+  <:part name="Content">The component that contains the collapsible content.</:part>
 </.anatomy>
 
 ## API Reference
 
 ### Root
 
+Contains all the parts of a collapsible.
+
+Use `open` with `on_open_change` for controlled open state in LiveView:
+
+```heex
+<Collapsible.root id="repos" open={@open} on_open_change="collapsible_open_change">
+  …
+</Collapsible.root>
+```
+
+```elixir
+def handle_event("collapsible_open_change", %{"open" => open}, socket) do
+  {:noreply, assign(socket, :open, open == "true" or open == true)}
+end
+```
+
 <.props_table module={EssenceUI.Primitives.Collapsible} function={:root} />
+
+<.data_attributes_table>
+  <:row name="[data-state]" values={"open | closed"}>Reflects whether the collapsible is open.</:row>
+  <:row name="[data-disabled]" values="Present when disabled">Present when the collapsible is disabled.</:row>
+</.data_attributes_table>
 
 ### Trigger
 
+The button that toggles the collapsible. Pass `content_id` matching the `id` on `Collapsible.content`.
+
 <.props_table module={EssenceUI.Primitives.Collapsible} function={:trigger} />
+
+<.data_attributes_table>
+  <:row name="[data-state]" values={"open | closed"}>Reflects whether the collapsible is open.</:row>
+  <:row name="[data-disabled]" values="Present when disabled">Present when the collapsible is disabled.</:row>
+</.data_attributes_table>
 
 ### Content
 
+The component that contains the collapsible content.
+
 <.props_table module={EssenceUI.Primitives.Collapsible} function={:content} />
+
+<.data_attributes_table>
+  <:row name="[data-state]" values={"open | closed"}>Reflects whether the collapsible is open.</:row>
+  <:row name="[data-disabled]" values="Present when disabled">Present when the collapsible is disabled.</:row>
+</.data_attributes_table>
+
+Essence exposes Radix-compatible CSS variables on content for size animations:
+
+| CSS variable | Description |
+| --- | --- |
+| `--radix-collapsible-content-width` | The width of the content when it opens/closes |
+| `--radix-collapsible-content-height` | The height of the content when it opens/closes |
 
 ## Examples
 
-See the live demo above and `storybook/primitives/collapsible.story.exs` for complete markup. Style with classes and `data-state` as described in the [styling](/primitives/docs/guides/styling) guide.
+### Animating content size
+
+Use the `--radix-collapsible-content-width` and/or `--radix-collapsible-content-height` CSS variables to animate the size of the content when it opens/closes:
+
+```heex
+<Collapsible.content id="collapsible-animated-content" class="DemoCollapsibleContent">
+  …
+</Collapsible.content>
+```
+
+```css
+.DemoCollapsibleContent {
+  overflow: hidden;
+}
+.DemoCollapsibleContent[data-state="open"] {
+  animation: demoCollapsibleSlideDown 300ms ease-out;
+}
+.DemoCollapsibleContent[data-state="closed"] {
+  animation: demoCollapsibleSlideUp 300ms ease-out;
+}
+
+@keyframes demoCollapsibleSlideDown {
+  from { height: 0; }
+  to { height: var(--radix-collapsible-content-height); }
+}
+
+@keyframes demoCollapsibleSlideUp {
+  from { height: var(--radix-collapsible-content-height); }
+  to { height: 0; }
+}
+```
 
 ## Accessibility
 
-Adheres to the [WAI-ARIA pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure).
+Adheres to the [Disclosure WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure).
+
+### Keyboard Interactions
 
 <.keyboard_table>
-  <:row keys="Tab">Moves focus among focusable elements.</:row>
-  <:row keys="Space">Activates the focused control when applicable.</:row>
-  <:row keys="Enter">Activates the focused control when applicable.</:row>
-  <:row keys="Escape">Dismisses overlays when applicable.</:row>
+  <:row keys="Space">Opens/closes the collapsible.</:row>
+  <:row keys="Enter">Opens/closes the collapsible.</:row>
 </.keyboard_table>

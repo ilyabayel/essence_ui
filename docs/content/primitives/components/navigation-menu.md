@@ -177,84 +177,375 @@ A collection of links for navigating websites.
   <:item>Optional active item indicator.</:item>
   <:item>Full keyboard navigation.</:item>
   <:item>Exposes CSS variables for advanced animation.</:item>
+  <:item>Supports custom timings.</:item>
 </.highlights>
 
 ## Anatomy
 
+Import all parts and piece them together.
+
 ```heex
-<NavigationMenu.root>
-  <NavigationMenu.list />
-  <NavigationMenu.item />
-  <NavigationMenu.trigger />
-  <NavigationMenu.content />
-  <NavigationMenu.link />
-  <NavigationMenu.indicator />
+<NavigationMenu.root id="…">
+  <NavigationMenu.list>
+    <NavigationMenu.item>
+      <NavigationMenu.trigger content_id="…" />
+      <NavigationMenu.content id="…">
+        <NavigationMenu.link />
+      </NavigationMenu.content>
+    </NavigationMenu.item>
+
+    <NavigationMenu.item>
+      <NavigationMenu.link />
+    </NavigationMenu.item>
+
+    <NavigationMenu.item>
+      <NavigationMenu.trigger content_id="…" />
+      <NavigationMenu.content id="…">
+        <NavigationMenu.sub>
+          <NavigationMenu.list />
+          <NavigationMenu.viewport />
+        </NavigationMenu.sub>
+      </NavigationMenu.content>
+    </NavigationMenu.item>
+
+    <NavigationMenu.indicator />
+  </NavigationMenu.list>
+
   <NavigationMenu.viewport />
-  <NavigationMenu.sub />
 </NavigationMenu.root>
 ```
 
 <.anatomy>
-  <:part name="Root">The `root` part.</:part>
-  <:part name="List">The `list` part.</:part>
-  <:part name="Item">The `item` part.</:part>
-  <:part name="Trigger">The `trigger` part.</:part>
-  <:part name="Content">The `content` part.</:part>
-  <:part name="Link">The `link` part.</:part>
-  <:part name="Indicator">The `indicator` part.</:part>
-  <:part name="Viewport">The `viewport` part.</:part>
-  <:part name="Sub">The `sub` part.</:part>
+  <:part name="Root">Contains all the parts of a navigation menu.</:part>
+  <:part name="List">Contains the top level menu items.</:part>
+  <:part name="Item">A top level menu item containing a link or trigger/content pair.</:part>
+  <:part name="Trigger">The button that toggles the content. Set `content_id` to the content element's `id`.</:part>
+  <:part name="Content">Contains the content associated with each trigger.</:part>
+  <:part name="Link">A navigational link. Use for all links inside the menu, including within content panels.</:part>
+  <:part name="Indicator">Optional element that highlights the active trigger.</:part>
+  <:part name="Viewport">Optional viewport that renders active content outside the list.</:part>
+  <:part name="Sub">Signifies a submenu. Use in place of `root` when nested inside content.</:part>
 </.anatomy>
 
 ## API Reference
 
 ### Root
 
+Contains all the parts of a navigation menu.
+
 <.props_table module={EssenceUI.Primitives.NavigationMenu} function={:root} />
+
+<.data_attributes_table>
+  <:row name="[data-orientation]" values={"vertical | horizontal"}>The orientation of the menu.</:row>
+</.data_attributes_table>
+
+### Sub
+
+Signifies a submenu. Use in place of the root part when nested to create a submenu.
+
+<.props_table module={EssenceUI.Primitives.NavigationMenu} function={:sub} />
 
 ### List
 
+Contains the top level menu items.
+
 <.props_table module={EssenceUI.Primitives.NavigationMenu} function={:list} />
 
+<.data_attributes_table>
+  <:row name="[data-orientation]" values={"vertical | horizontal"}>The orientation of the menu.</:row>
+</.data_attributes_table>
+
 ### Item
+
+A top level menu item, contains a link or trigger with content combination.
 
 <.props_table module={EssenceUI.Primitives.NavigationMenu} function={:item} />
 
 ### Trigger
 
+The button that toggles the content.
+
 <.props_table module={EssenceUI.Primitives.NavigationMenu} function={:trigger} />
+
+<.data_attributes_table>
+  <:row name="[data-state]" values={"open | closed"}>Reflects whether the content is open.</:row>
+  <:row name="[data-disabled]" values="Present when disabled">Present when the trigger is disabled.</:row>
+</.data_attributes_table>
 
 ### Content
 
+Contains the content associated with each trigger.
+
 <.props_table module={EssenceUI.Primitives.NavigationMenu} function={:content} />
+
+<.data_attributes_table>
+  <:row name="[data-state]" values={"open | closed"}>Reflects whether the content is open.</:row>
+  <:row name="[data-motion]" values={"to-start | to-end | from-start | from-end"}>Enter/exit direction when animating between items.</:row>
+  <:row name="[data-orientation]" values={"vertical | horizontal"}>The orientation of the menu.</:row>
+</.data_attributes_table>
 
 ### Link
 
+A navigational link.
+
 <.props_table module={EssenceUI.Primitives.NavigationMenu} function={:link} />
+
+<.data_attributes_table>
+  <:row name="[data-active]" values="Present when active">Present when the link is the active page.</:row>
+</.data_attributes_table>
 
 ### Indicator
 
+An optional indicator element that renders below the list and highlights the currently active trigger.
+
 <.props_table module={EssenceUI.Primitives.NavigationMenu} function={:indicator} />
+
+<.data_attributes_table>
+  <:row name="[data-state]" values={"visible | hidden"}>Reflects whether the indicator is visible.</:row>
+  <:row name="[data-orientation]" values={"vertical | horizontal"}>The orientation of the menu.</:row>
+</.data_attributes_table>
 
 ### Viewport
 
+An optional viewport element used to render active content outside of the list.
+
 <.props_table module={EssenceUI.Primitives.NavigationMenu} function={:viewport} />
 
-### Sub
-
-<.props_table module={EssenceUI.Primitives.NavigationMenu} function={:sub} />
+<.data_attributes_table>
+  <:row name="[data-state]" values={"open | closed"}>Reflects whether the viewport is open.</:row>
+  <:row name="[data-orientation]" values={"vertical | horizontal"}>The orientation of the menu.</:row>
+</.data_attributes_table>
 
 ## Examples
 
-See the live demo above and `storybook/primitives/navigation_menu.story.exs` for complete markup. Style with classes and `data-state` as described in the [styling](/primitives/docs/guides/styling) guide.
+### Vertical
+
+You can create a vertical menu by using the `orientation` prop:
+
+```heex
+<NavigationMenu.root id="nav-vertical" orientation="vertical" class="NavigationMenuRoot">
+  <NavigationMenu.list class="NavigationMenuList">
+    <NavigationMenu.item value="one">
+      <NavigationMenu.trigger id="nav-v-one-trigger" content_id="nav-v-one-content" class="NavigationMenuTrigger">
+        Item one
+      </NavigationMenu.trigger>
+      <NavigationMenu.content id="nav-v-one-content" class="NavigationMenuContent">
+        Item one content
+      </NavigationMenu.content>
+    </NavigationMenu.item>
+    <NavigationMenu.item value="two">
+      <NavigationMenu.trigger id="nav-v-two-trigger" content_id="nav-v-two-content" class="NavigationMenuTrigger">
+        Item two
+      </NavigationMenu.trigger>
+      <NavigationMenu.content id="nav-v-two-content" class="NavigationMenuContent">
+        Item two content
+      </NavigationMenu.content>
+    </NavigationMenu.item>
+  </NavigationMenu.list>
+</NavigationMenu.root>
+```
+
+### Flexible layouts
+
+Use the `viewport` part when you need extra control over where `content` is rendered. Tab focus is maintained automatically.
+
+```heex
+<NavigationMenu.root id="nav-viewport" class="NavigationMenuRoot">
+  <NavigationMenu.list class="NavigationMenuList">
+    <NavigationMenu.item value="one">
+      <NavigationMenu.trigger id="nav-one-trigger" content_id="nav-one-content" class="NavigationMenuTrigger">
+        Item one
+      </NavigationMenu.trigger>
+      <NavigationMenu.content id="nav-one-content" class="NavigationMenuContent">
+        Item one content
+      </NavigationMenu.content>
+    </NavigationMenu.item>
+    <NavigationMenu.item value="two">
+      <NavigationMenu.trigger id="nav-two-trigger" content_id="nav-two-content" class="NavigationMenuTrigger">
+        Item two
+      </NavigationMenu.trigger>
+      <NavigationMenu.content id="nav-two-content" class="NavigationMenuContent">
+        Item two content
+      </NavigationMenu.content>
+    </NavigationMenu.item>
+  </NavigationMenu.list>
+
+  <%!-- NavigationMenu.content is rendered here when active --%>
+  <NavigationMenu.viewport class="NavigationMenuViewport" />
+</NavigationMenu.root>
+```
+
+### With indicator
+
+Use the optional `indicator` part to highlight the active trigger:
+
+```heex
+<NavigationMenu.list class="NavigationMenuList">
+  …
+  <NavigationMenu.indicator class="NavigationMenuIndicator">
+    <div class="Arrow"></div>
+  </NavigationMenu.indicator>
+</NavigationMenu.list>
+<NavigationMenu.viewport class="NavigationMenuViewport" />
+```
+
+```css
+.NavigationMenuIndicator {
+  background-color: var(--violet-9);
+}
+.NavigationMenuIndicator[data-orientation="horizontal"] {
+  height: 3px;
+  transition: width, transform, 250ms ease;
+}
+```
+
+### With submenus
+
+Create a submenu by nesting `NavigationMenu.sub` inside `content`:
+
+```heex
+<NavigationMenu.item value="two">
+  <NavigationMenu.trigger id="nav-sub-trigger" content_id="nav-sub-content" class="NavigationMenuTrigger">
+    Item two
+  </NavigationMenu.trigger>
+  <NavigationMenu.content id="nav-sub-content" class="NavigationMenuContent">
+    <NavigationMenu.sub>
+      <NavigationMenu.list class="NavigationMenuList">
+        <NavigationMenu.item value="sub1">
+          <NavigationMenu.trigger id="nav-sub1-trigger" content_id="nav-sub1-content" class="NavigationMenuTrigger">
+            Sub item one
+          </NavigationMenu.trigger>
+          <NavigationMenu.content id="nav-sub1-content" class="NavigationMenuContent">
+            Sub item one content
+          </NavigationMenu.content>
+        </NavigationMenu.item>
+        <NavigationMenu.item value="sub2">
+          <NavigationMenu.trigger id="nav-sub2-trigger" content_id="nav-sub2-content" class="NavigationMenuTrigger">
+            Sub item two
+          </NavigationMenu.trigger>
+          <NavigationMenu.content id="nav-sub2-content" class="NavigationMenuContent">
+            Sub item two content
+          </NavigationMenu.content>
+        </NavigationMenu.item>
+      </NavigationMenu.list>
+    </NavigationMenu.sub>
+  </NavigationMenu.content>
+</NavigationMenu.item>
+```
+
+### With LiveView routing
+
+Use `NavigationMenu.link` with the `active` prop to mark the current page:
+
+```heex
+<NavigationMenu.root id="nav-routes" class="NavigationMenuRoot">
+  <NavigationMenu.list class="NavigationMenuList">
+    <NavigationMenu.item value="home">
+      <NavigationMenu.link href="/" class="NavigationMenuLink" active={@current_path == "/"}>
+        Home
+      </NavigationMenu.link>
+    </NavigationMenu.item>
+    <NavigationMenu.item value="about">
+      <NavigationMenu.link href="/about" class="NavigationMenuLink" active={@current_path == "/about"}>
+        About
+      </NavigationMenu.link>
+    </NavigationMenu.item>
+  </NavigationMenu.list>
+</NavigationMenu.root>
+```
+
+```css
+.NavigationMenuLink {
+  text-decoration: none;
+}
+.NavigationMenuLink[data-active] {
+  text-decoration: underline;
+}
+```
+
+### Advanced animation
+
+Essence exposes `--radix-navigation-menu-viewport-width`, `--radix-navigation-menu-viewport-height`, and `data-motion` on content to animate viewport size and content position based on enter/exit direction:
+
+```heex
+<NavigationMenu.content id="nav-anim-content" class="NavigationMenuContent">
+  Item one content
+</NavigationMenu.content>
+…
+<NavigationMenu.viewport class="NavigationMenuViewport" />
+```
+
+```css
+.NavigationMenuContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation-duration: 250ms;
+  animation-timing-function: ease;
+}
+.NavigationMenuContent[data-motion="from-start"] {
+  animation-name: enterFromLeft;
+}
+.NavigationMenuContent[data-motion="from-end"] {
+  animation-name: enterFromRight;
+}
+.NavigationMenuContent[data-motion="to-start"] {
+  animation-name: exitToLeft;
+}
+.NavigationMenuContent[data-motion="to-end"] {
+  animation-name: exitToRight;
+}
+
+.NavigationMenuViewport {
+  position: relative;
+  width: var(--radix-navigation-menu-viewport-width);
+  height: var(--radix-navigation-menu-viewport-height);
+  transition: width, height, 250ms ease;
+}
+
+@keyframes enterFromRight {
+  from { opacity: 0; transform: translateX(200px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes enterFromLeft {
+  from { opacity: 0; transform: translateX(-200px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes exitToRight {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(200px); }
+}
+
+@keyframes exitToLeft {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-200px); }
+}
+```
 
 ## Accessibility
 
-Adheres to the [WAI-ARIA pattern](https://www.w3.org/TR/wai-aria/#navigation).
+Adheres to the [`navigation` role requirements](https://www.w3.org/TR/wai-aria-1.2/#navigation).
+
+### Differences to menubar
+
+`NavigationMenu` should not be confused with `menubar`. Although this primitive shares the colloquial name "menu", it does not use the WAI-ARIA `menu` role. Native application menus use complex focus management that is often [unnecessary for website navigation](https://github.com/w3c/aria-practices/issues/353).
+
+See the W3C [Disclosure Navigation Menu](https://w3c.github.io/aria-practices/examples/disclosure/disclosure-navigation.html) example for more information.
+
+### Link usage and aria-current
+
+Use `NavigationMenu.link` for all navigational links within a menu—including links inside `NavigationMenu.content`. This ensures consistent keyboard interactions and gives access to the `active` prop for `aria-current` and active styles. See [With LiveView routing](#with-liveview-routing) above.
+
+### Keyboard Interactions
 
 <.keyboard_table>
-  <:row keys="Tab">Moves focus among focusable elements.</:row>
-  <:row keys="Space">Activates the focused control when applicable.</:row>
-  <:row keys="Enter">Activates the focused control when applicable.</:row>
-  <:row keys="Escape">Dismisses overlays when applicable.</:row>
+  <:row keys="Space, Enter">When focus is on `NavigationMenu.trigger`, opens the content.</:row>
+  <:row keys="Tab">Moves focus to the next focusable element.</:row>
+  <:row keys="ArrowDown">When horizontal and focus is on an open `NavigationMenu.trigger`, moves focus into `NavigationMenu.content`. Moves focus to the next `NavigationMenu.trigger` or `NavigationMenu.link`.</:row>
+  <:row keys="ArrowUp">Moves focus to the previous `NavigationMenu.trigger` or `NavigationMenu.link`.</:row>
+  <:row keys="ArrowRight, ArrowLeft">When vertical and focus is on an open `NavigationMenu.trigger`, moves focus into its `NavigationMenu.content`. Moves focus to the next/previous `NavigationMenu.trigger` or `NavigationMenu.link`.</:row>
+  <:row keys="Home, End">Moves focus to the first/last `NavigationMenu.trigger` or `NavigationMenu.link`.</:row>
+  <:row keys="Escape">Closes open `NavigationMenu.content` and moves focus to its `NavigationMenu.trigger`.</:row>
 </.keyboard_table>

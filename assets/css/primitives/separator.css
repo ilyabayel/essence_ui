@@ -1,0 +1,19 @@
+@import "@radix-ui/colors/violet.css";
+
+.DemoSeparatorRoot {
+	background-color: var(--violet-6);
+}
+.DemoSeparatorRoot[data-orientation="horizontal"] {
+	height: 1px;
+	width: 100%;
+}
+.DemoSeparatorRoot[data-orientation="vertical"] {
+	height: 100%;
+	width: 1px;
+}
+
+.DemoSeparatorText {
+	color: white;
+	font-size: 15px;
+	line-height: 20px;
+}

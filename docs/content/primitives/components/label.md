@@ -6,23 +6,13 @@ description: Renders an accessible label associated with controls.
 Renders an accessible label associated with controls.
 
 <.demo variant="primitive" component="label" css={primitive_css("label")}>
-
   <:heex>
     <div style="display: flex; padding: 0 20px; flex-wrap: wrap; gap: 15px; align-items: center;">
-              <Label.label
-                id="label-first-name"
-                class="LabelRoot"
-                for="firstName"
-              >
-                First Name
-              </Label.label>
-              <input
-                class="Input"
-                type="text"
-                id="firstName"
-                value="Pedro Duarte"
-              />
-            </div>
+      <Label.label class="LabelRoot" for="firstName">
+        First Name
+      </Label.label>
+      <input class="Input" type="text" id="firstName" value="Pedro Duarte" />
+    </div>
   </:heex>
 </.demo>
 
@@ -33,21 +23,24 @@ Renders an accessible label associated with controls.
 
 ## Anatomy
 
+Import the component.
+
 ```heex
-<Label.label>
-</Label.label>
+<Label.label />
 ```
 
 <.anatomy>
-  <:part name="Label">The `label` part.</:part>
+  <:part name="Label">Contains the content for the label.</:part>
 </.anatomy>
 
 ## API Reference
 
 ### Label
 
+Contains the content for the label. Use `for` to associate with a control (Radix `htmlFor`).
+
 <.props_table module={EssenceUI.Primitives.Label} function={:label} />
 
-## Examples
+## Accessibility
 
-See the live demo above and `storybook/primitives/label.story.exs` for complete markup. Style with classes and `data-state` as described in the [styling](/primitives/docs/guides/styling) guide.
+This component is based on the native `label` element. It applies the correct labelling when wrapping controls or using the `for` attribute. For custom controls to work correctly, ensure they use native elements such as `button` or `input` as a base.

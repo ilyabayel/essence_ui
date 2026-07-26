@@ -58,6 +58,8 @@ A popup that displays information related to an element when the element receive
 
 ## Anatomy
 
+Import all parts and piece them together.
+
 ```heex
 <Tooltip.provider>
   <Tooltip.root>
@@ -90,6 +92,20 @@ Wraps your app to provide global functionality to your tooltips.
 
 Contains all the parts of a tooltip.
 
+Use `open` with `on_open_change` for controlled open state in LiveView:
+
+```heex
+<Tooltip.root id="info-tooltip" open={@open} on_open_change="tooltip_open_change">
+  …
+</Tooltip.root>
+```
+
+```elixir
+def handle_event("tooltip_open_change", %{"open" => open}, socket) do
+  {:noreply, assign(socket, :open, open)}
+end
+```
+
 <.props_table module={EssenceUI.Primitives.Tooltip} function={:root} />
 
 <.data_attributes_table>
@@ -98,7 +114,7 @@ Contains all the parts of a tooltip.
 
 ### Trigger
 
-The button that toggles the tooltip. Content positions against the trigger.
+The button that toggles the tooltip. By default, the `Tooltip.content` will position itself against the trigger.
 
 <.props_table module={EssenceUI.Primitives.Tooltip} function={:trigger} />
 
@@ -119,14 +135,14 @@ The component that pops out when the tooltip is open.
 <.props_table module={EssenceUI.Primitives.Tooltip} function={:content} />
 
 <.data_attributes_table>
-  <:row name="[data-state]" values={"open | closed"}>Reflects whether the tooltip is open.</:row>
+  <:row name="[data-state]" values={"closed | delayed-open"}>Reflects whether the tooltip is open. Content uses `delayed-open` when visible.</:row>
   <:row name="[data-side]" values={"top | right | bottom | left"}>Preferred side relative to the trigger.</:row>
   <:row name="[data-align]" values={"start | center | end"}>Alignment along the side.</:row>
 </.data_attributes_table>
 
 ### Arrow
 
-An optional arrow element to render alongside the content.
+An optional arrow element to render alongside the tooltip. This can be used to help visually link the trigger with the `Tooltip.content`. Must be rendered inside `Tooltip.content`.
 
 <.props_table module={EssenceUI.Primitives.Tooltip} function={:arrow} />
 
@@ -134,25 +150,35 @@ An optional arrow element to render alongside the content.
 
 ### Configure globally
 
-Use `Provider` once near the root of your LiveView or layout:
+Use the `Provider` to control `delay_duration` and `skip_delay_duration` globally.
 
 ```heex
-<Tooltip.provider delay_duration={200} skip_delay_duration={100}>
-  {@inner_content}
+<Tooltip.provider delay_duration={800} skip_delay_duration={500}>
+  <Tooltip.root id="tooltip-a">
+    <Tooltip.trigger id="tooltip-a-trigger" content_id="tooltip-a-content">…</Tooltip.trigger>
+    <Tooltip.content id="tooltip-a-content">…</Tooltip.content>
+  </Tooltip.root>
+  <Tooltip.root id="tooltip-b">
+    <Tooltip.trigger id="tooltip-b-trigger" content_id="tooltip-b-content">…</Tooltip.trigger>
+    <Tooltip.content id="tooltip-b-content">…</Tooltip.content>
+  </Tooltip.root>
 </Tooltip.provider>
 ```
 
-### Instant open
+### Show instantly
 
-Override delay on a single tooltip:
+Use the `open_delay` prop to control the time it takes for the tooltip to open.
 
 ```heex
-<Tooltip.root id="instant" open_delay={0}>
-  …
+<Tooltip.root id="instant-tooltip" open_delay={0}>
+  <Tooltip.trigger id="instant-tooltip-trigger" content_id="instant-tooltip-content">…</Tooltip.trigger>
+  <Tooltip.content id="instant-tooltip-content">…</Tooltip.content>
 </Tooltip.root>
 ```
 
-### Constrain size
+### Constrain the content size
+
+You may want to constrain the width of the content. Use standard CSS on the content element:
 
 ```css
 .TooltipContent {
@@ -160,13 +186,36 @@ Override delay on a single tooltip:
 }
 ```
 
-### Animations
+### Collision-aware animations
 
-Animate with CSS against `data-state` (see the [animation](/primitives/docs/guides/animation) guide):
+Essence exposes `data-side` and `data-align` attributes on content. Their values reflect placement at runtime. Use them to create direction-aware animations:
+
+```heex
+<Tooltip.content id="animated-tooltip-content" class="TooltipContent" side_offset={5}>
+  …
+</Tooltip.content>
+```
 
 ```css
-.TooltipContent[data-state="open"] {
-  animation: fadeIn 150ms ease-out;
+.TooltipContent {
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+.TooltipContent[data-side="top"] {
+  animation-name: slideUp;
+}
+.TooltipContent[data-side="bottom"] {
+  animation-name: slideDown;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 ```
 
@@ -174,16 +223,18 @@ Animate with CSS against `data-state` (see the [animation](/primitives/docs/guid
 
 Adheres to the [Tooltip WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip).
 
+### Keyboard Interactions
+
 <.keyboard_table>
-  <:row keys="Tab">Opens/closes the tooltip when focus moves to/from the trigger.</:row>
-  <:row keys="Space">If open, closes the tooltip when activating the trigger.</:row>
-  <:row keys="Enter">If open, closes the tooltip when activating the trigger.</:row>
-  <:row keys="Escape">Closes the tooltip and returns focus if needed.</:row>
+  <:row keys="Tab">Opens/closes the tooltip without delay.</:row>
+  <:row keys="Space">If open, closes the tooltip without delay.</:row>
+  <:row keys="Enter">If open, closes the tooltip without delay.</:row>
+  <:row keys="Escape">If open, closes the tooltip without delay.</:row>
 </.keyboard_table>
 
 ## Custom APIs
 
-Wrap Provider + Root + Trigger + Content into a single component for your design system.
+Create your own API by abstracting the primitive parts into your own component.
 
 ### Usage
 
@@ -199,7 +250,7 @@ Wrap Provider + Root + Trigger + Content into a single component for your design
 def info_tooltip(assigns) do
   ~H"""
   <Tooltip.root id={@id} open_delay={@open_delay}>
-    <Tooltip.trigger id={"#{@id}-trigger"} content_id={"#{@id}-content"}>
+    <Tooltip.trigger id={"#{@id}-trigger"} content_id={"#{@id}-content"} as="div">
       {render_slot(@inner_block)}
     </Tooltip.trigger>
     <Tooltip.content id={"#{@id}-content"} class="TooltipContent" side_offset={5}>

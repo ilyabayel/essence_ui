@@ -7,19 +7,14 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/meter
 Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
 
 <.demo variant="primitive" component="progress" css={primitive_css("progress")}>
-
   <:heex>
-    <Progress.root
-              class="ProgressRoot"
-              value={66}
-              aria-label="Progress"
-            >
-              <Progress.indicator
-                class="ProgressIndicator"
-                value={66}
-                style="transform: translateX(-34%);"
-              />
-            </Progress.root>
+    <Progress.root class="ProgressRoot" value={66} aria-label="Progress">
+      <Progress.indicator
+        class="ProgressIndicator"
+        value={66}
+        style="transform: translateX(-34%);"
+      />
+    </Progress.root>
   </:heex>
 </.demo>
 
@@ -29,6 +24,8 @@ Displays an indicator showing the completion progress of a task, typically displ
 
 ## Anatomy
 
+Import all parts and piece them together.
+
 ```heex
 <Progress.root>
   <Progress.indicator />
@@ -36,31 +33,36 @@ Displays an indicator showing the completion progress of a task, typically displ
 ```
 
 <.anatomy>
-  <:part name="Root">The `root` part.</:part>
-  <:part name="Indicator">The `indicator` part.</:part>
+  <:part name="Root">Contains all of the progress parts.</:part>
+  <:part name="Indicator">Shows progress visually and exposes it to assistive technologies.</:part>
 </.anatomy>
 
 ## API Reference
 
 ### Root
 
+Contains all of the progress parts.
+
 <.props_table module={EssenceUI.Primitives.Progress} function={:root} />
+
+<.data_attributes_table>
+  <:row name="[data-state]" values={"complete | indeterminate | loading"}>Reflects progress state.</:row>
+  <:row name="[data-value]" values="The current value">Present when a value is set.</:row>
+  <:row name="[data-max]" values="The max value">Present when max is set.</:row>
+</.data_attributes_table>
 
 ### Indicator
 
+Used to show the progress visually. It also makes progress accessible to assistive technologies.
+
 <.props_table module={EssenceUI.Primitives.Progress} function={:indicator} />
 
-## Examples
-
-See the live demo above and `storybook/primitives/progress.story.exs` for complete markup. Style with classes and `data-state` as described in the [styling](/primitives/docs/guides/styling) guide.
+<.data_attributes_table>
+  <:row name="[data-state]" values={"complete | indeterminate | loading"}>Reflects progress state.</:row>
+  <:row name="[data-value]" values="The current value">Present when a value is set.</:row>
+  <:row name="[data-max]" values="The max value">Present when max is set.</:row>
+</.data_attributes_table>
 
 ## Accessibility
 
-Adheres to the [WAI-ARIA pattern](https://www.w3.org/WAI/ARIA/apg/patterns/meter).
-
-<.keyboard_table>
-  <:row keys="Tab">Moves focus among focusable elements.</:row>
-  <:row keys="Space">Activates the focused control when applicable.</:row>
-  <:row keys="Enter">Activates the focused control when applicable.</:row>
-  <:row keys="Escape">Dismisses overlays when applicable.</:row>
-</.keyboard_table>
+Adheres to the [`progressbar` role requirements](https://www.w3.org/WAI/ARIA/apg/patterns/meter).

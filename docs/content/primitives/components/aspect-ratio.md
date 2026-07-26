@@ -6,7 +6,6 @@ description: Displays content within a desired ratio.
 Displays content within a desired ratio.
 
 <.demo variant="primitive" component="aspect-ratio" css={primitive_css("aspect-ratio")}>
-
   <:heex>
     <div class="DemoAspectRatioContainer">
       <AspectRatio.aspect_ratio ratio={16 / 9}>
@@ -26,21 +25,20 @@ Displays content within a desired ratio.
 
 ## Anatomy
 
+Import the component.
+
 ```heex
-<AspectRatio.aspect_ratio>
-</AspectRatio.aspect_ratio>
+<AspectRatio.aspect_ratio />
 ```
 
 <.anatomy>
-  <:part name="Aspect Ratio">The `aspect_ratio` part.</:part>
+  <:part name="Aspect Ratio">Contains the content you want to constrain to a given ratio.</:part>
 </.anatomy>
 
 ## API Reference
 
 ### Aspect Ratio
 
+Contains the content you want to constrain to a given ratio.
+
 <.props_table module={EssenceUI.Primitives.AspectRatio} function={:aspect_ratio} />
-
-## Examples
-
-See the live demo above and `storybook/primitives/aspect_ratio.story.exs` for complete markup. Style with classes and `data-state` as described in the [styling](/primitives/docs/guides/styling) guide.

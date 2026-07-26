@@ -6,7 +6,6 @@ description: An image element with a fallback for representing the user.
 An image element with a fallback for representing the user.
 
 <.demo variant="primitive" component="avatar" css={primitive_css("avatar")}>
-
   <:heex>
     <div style="display: flex; gap: 20px;">
       <Avatar.root
@@ -59,33 +58,74 @@ An image element with a fallback for representing the user.
 
 ## Anatomy
 
+Import all parts and piece them together.
+
 ```heex
-<Avatar.root>
-  <Avatar.image />
-  <Avatar.fallback />
+<Avatar.root id="…">
+  <Avatar.image src="…" alt="…" />
+  <Avatar.fallback>…</Avatar.fallback>
 </Avatar.root>
 ```
 
 <.anatomy>
-  <:part name="Root">The `root` part.</:part>
-  <:part name="Image">The `image` part.</:part>
-  <:part name="Fallback">The `fallback` part.</:part>
+  <:part name="Root">Contains all the parts of an avatar.</:part>
+  <:part name="Image">The image to render when it has loaded.</:part>
+  <:part name="Fallback">Placeholder shown while loading or on error.</:part>
 </.anatomy>
 
 ## API Reference
 
 ### Root
 
+Contains all the parts of an avatar.
+
 <.props_table module={EssenceUI.Primitives.Avatar} function={:root} />
 
+<.data_attributes_table>
+  <:row name="[data-status]" values={"idle | loading | loaded | error"}>Reflects the loading status of the avatar image.</:row>
+</.data_attributes_table>
+
 ### Image
+
+The image to render. By default it will only render when it has loaded. You can use the `on_loading_status_change` event if you need more control.
 
 <.props_table module={EssenceUI.Primitives.Avatar} function={:image} />
 
 ### Fallback
 
+An element that renders when the image hasn't loaded. This means whilst it's loading, or if there was an error. If you notice a flash during loading, you can provide a `delay_ms` attribute to delay its rendering so it only renders for those with slower connections. For more control, use the `on_loading_status_change` event on `Avatar.image`.
+
 <.props_table module={EssenceUI.Primitives.Avatar} function={:fallback} />
 
 ## Examples
 
-See the live demo above and `storybook/primitives/avatar.story.exs` for complete markup. Style with classes and `data-state` as described in the [styling](/primitives/docs/guides/styling) guide.
+### Clickable Avatar with tooltip
+
+You can compose the Avatar with a [Tooltip](/primitives/docs/components/tooltip) to display extra information.
+
+```heex
+<Tooltip.provider>
+  <Tooltip.root id="avatar-tooltip">
+    <Tooltip.trigger
+      id="avatar-tooltip-trigger"
+      content_id="avatar-tooltip-content"
+      as="div"
+    >
+      <Avatar.root id="avatar-tooltip-avatar" class="DemoAvatarRoot">
+        <Avatar.image
+          class="DemoAvatarImage"
+          src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
+          alt="Colm Tuite"
+        />
+        <Avatar.fallback class="DemoAvatarFallback" delay_ms={600}>
+          CT
+        </Avatar.fallback>
+      </Avatar.root>
+    </Tooltip.trigger>
+    <Tooltip.content id="avatar-tooltip-content" side="top">
+      Colm Tuite
+      <Tooltip.arrow />
+    </Tooltip.content>
+  </Tooltip.root>
+</Tooltip.provider>
+```
