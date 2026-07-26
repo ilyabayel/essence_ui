@@ -31,14 +31,26 @@ defmodule EssenceUI.Primitives.Popover do
 
   attr :id, :string, default: nil
   attr :content_id, :string, default: nil
+  # Themes Trigger wraps `<.button>`; a native <button> parent would be invalid HTML
+  # and browsers hoist the child out of the trigger (empty trigger, dead Comment click).
+  attr :as, :string, default: "button", values: ["button", "div"]
   attr :rest, :global
   slot :inner_block, required: true
 
   def trigger(assigns) do
+    rest =
+      if assigns.as == "button" do
+        Map.put(assigns.rest, :type, "button")
+      else
+        assigns.rest
+      end
+
+    assigns = assign(assigns, :rest, rest)
+
     ~H"""
-    <button
+    <.dynamic_tag
+      tag_name={@as}
       id={@id}
-      type="button"
       data-essence-popover-trigger
       aria-haspopup="dialog"
       aria-expanded="false"
@@ -47,7 +59,7 @@ defmodule EssenceUI.Primitives.Popover do
       {@rest}
     >
       {render_slot(@inner_block)}
-    </button>
+    </.dynamic_tag>
     """
   end
 
@@ -104,14 +116,25 @@ defmodule EssenceUI.Primitives.Popover do
   end
 
   attr :id, :string, default: nil
+  # Themes Close wraps `<.button>`; same nested-button hoist as Trigger.
+  attr :as, :string, default: "button", values: ["button", "div"]
   attr :rest, :global
   slot :inner_block, required: true
 
   def close(assigns) do
+    rest =
+      if assigns.as == "button" do
+        Map.put(assigns.rest, :type, "button")
+      else
+        assigns.rest
+      end
+
+    assigns = assign(assigns, :rest, rest)
+
     ~H"""
-    <button id={@id} type="button" data-essence-popover-close {@rest}>
+    <.dynamic_tag tag_name={@as} id={@id} data-essence-popover-close {@rest}>
       {render_slot(@inner_block)}
-    </button>
+    </.dynamic_tag>
     """
   end
 

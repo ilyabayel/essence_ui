@@ -24,6 +24,35 @@ function findPart(root, selector, contentId) {
   return null;
 }
 
+/** Portals escape `.essence-ui`; re-apply theme tokens (Radix Themes Portal + Theme). */
+function syncPortalTheme(root, content) {
+  if (!content) return;
+
+  const source =
+    root.closest("[data-accent-color]") ||
+    root.closest(".essence-ui") ||
+    document.querySelector(".essence-ui");
+
+  content.classList.add("essence-ui");
+  if (!source) return;
+
+  for (const attr of [
+    "data-accent-color",
+    "data-gray-color",
+    "data-radius",
+    "data-scaling",
+  ]) {
+    const value = source.getAttribute(attr);
+    if (value != null && value !== "") {
+      content.setAttribute(attr, value);
+    }
+  }
+
+  for (const cls of ["light", "light-theme", "dark", "dark-theme"]) {
+    if (source.classList.contains(cls)) content.classList.add(cls);
+  }
+}
+
 export const PopoverRoot = {
   mounted() {
     this.isOpen = false;
@@ -73,6 +102,7 @@ export const PopoverRoot = {
       "[data-essence-popover-content]",
       contentId
     );
+    syncPortalTheme(this.el, this.content);
   },
 
   bindTrigger() {
