@@ -18,7 +18,7 @@
  * @param {Element} el
  * @returns {{ top: number, left: number }}
  */
-function getFixedContainingBlockOffset(el) {
+export function getFixedContainingBlockOffset(el) {
   let parent = el.parentElement;
   while (parent && parent !== document.documentElement) {
     const style = getComputedStyle(parent);

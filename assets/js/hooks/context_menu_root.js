@@ -1,4 +1,4 @@
-import { positionFloating } from "../lib/position";
+import { positionFloating, getFixedContainingBlockOffset } from "../lib/position";
 import { setOpen, setClosed } from "../lib/presence";
 import { bindDismissableLayer } from "../lib/dismissable_layer";
 import { applyPortalTheme } from "../lib/theme";
@@ -235,6 +235,12 @@ export const ContextMenuRoot = {
     }
     if (x < padding) x = padding;
     if (y < padding) y = padding;
+
+    // Convert viewport coords → containing-block coords when needed
+    // (e.g. ancestor with contain:paint / transform).
+    const cb = getFixedContainingBlockOffset(this.content);
+    x -= cb.left;
+    y -= cb.top;
 
     this.content.style.left = `${x}px`;
     this.content.style.top = `${y}px`;

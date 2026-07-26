@@ -7,6 +7,7 @@
 .radix-demo[data-component="form"] textarea,
 .radix-demo[data-component="form"] button {
 	box-sizing: border-box;
+	all: unset;
 }
 
 .radix-demo[data-component="form"] .FormRoot {
@@ -46,12 +47,12 @@
 
 .radix-demo[data-component="form"] .Input:hover,
 .radix-demo[data-component="form"] .Textarea:hover {
-	box-shadow: 0 0 0 1px black;
+	box-shadow: 0 0 0 1px white;
 }
 
 .radix-demo[data-component="form"] .Input:focus,
 .radix-demo[data-component="form"] .Textarea:focus {
-	box-shadow: 0 0 0 2px black;
+	box-shadow: 0 0 0 2px white;
 }
 
 .radix-demo[data-component="form"] .Input::selection,
