@@ -23,6 +23,15 @@
     width: 100%;
     height: 100%;
 
+    /* Hide native scrollbars — custom thumb is the affordance (Radix ScrollAreaViewportStyle). */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
     &:where(:focus-visible)+ :where(.est-ScrollAreaViewportFocusRing) {
         position: absolute;
         inset: 0;
@@ -30,14 +39,14 @@
         outline: 2px solid var(--focus-8);
         outline-offset: -2px;
     }
-
-    /* Stop Chrome back/forward two-finger swipe when there is a horizontal scrollbar */
-    &:where(:has(.est-ScrollAreaScrollbar[data-orientation="horizontal"])) {
-        overscroll-behavior-x: contain;
-    }
 }
 
-.est-ScrollAreaViewport>* {
+.est-ScrollAreaRoot:has(.est-ScrollAreaScrollbar[data-orientation="horizontal"]) .est-ScrollAreaViewport {
+    /* Stop Chrome back/forward two-finger swipe when there is a horizontal scrollbar */
+    overscroll-behavior-x: contain;
+}
+
+.est-ScrollAreaViewport > [data-essence-scroll-area-content] {
     display: block !important;
     width: fit-content;
     flex-grow: 1;
@@ -119,10 +128,14 @@
     animation-timing-function: ease-out;
 
     &:where([data-state="visible"]) {
+        opacity: 1;
         animation-name: est-fade-in;
     }
 
+    /* Keep opacity:0 after fade-out — without this, animation ends and the bar snaps back visible. */
     &:where([data-state="hidden"]) {
+        opacity: 0;
+        pointer-events: none;
         animation-name: est-fade-out;
     }
 

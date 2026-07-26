@@ -51,7 +51,7 @@ test.describe("Scroll Area Primitive", () => {
 
     await expect
       .poll(async () => thumb.evaluate((el) => el.style.transform))
-      .toMatch(/translateY\(/);
+      .toMatch(/translate3d\(/);
   });
 
   test("has no accessibility violations", async ({ page }) => {

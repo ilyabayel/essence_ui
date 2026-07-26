@@ -33,7 +33,7 @@ defmodule Storybook.Themes.Components.ScrollArea do
         id: :vertical,
         description: "Vertical scroll area",
         template: """
-        <.scroll_area style="height: 180px">
+        <.scroll_area type="always" scrollbars="vertical" style="height: 180px">
           <.box
             p="4"
             pr="8"
@@ -87,7 +87,7 @@ defmodule Storybook.Themes.Components.ScrollArea do
         id: :horizontal,
         description: "Horizontal scroll area",
         template: """
-        <.scroll_area style="width: 300px">
+        <.scroll_area type="always" scrollbars="horizontal" style="width: 300px; height: 120px">
           <.flex
             gap="4"
             p="4"
@@ -114,7 +114,7 @@ defmodule Storybook.Themes.Components.ScrollArea do
         <.box
           style="width: 400px; border: 1px solid var(--gray-5); border-radius: var(--radius-4); overflow: hidden;"
         >
-          <.scroll_area style="height: 300px">
+          <.scroll_area type="hover" scrollbars="vertical" style="height: 300px">
             <.box p="4">
               <.heading
                 size="3"

@@ -23,7 +23,6 @@ import { HoverCard } from "./hooks/hover_card";
 import { HoverCardRoot } from "./hooks/hover_card_root";
 import { Popover } from "./hooks/popover";
 import { PopoverRoot } from "./hooks/popover_root";
-import { ScrollArea } from "./hooks/scroll_area";
 import { ScrollAreaRoot } from "./hooks/scroll_area_root";
 import { SelectRoot } from "./hooks/select_root";
 import { RadioGroupRoot } from "./hooks/radio_group_root";
@@ -72,7 +71,6 @@ let hooks = {
   HoverCardRoot,
   Popover,
   PopoverRoot,
-  ScrollArea,
   ScrollAreaRoot,
   SelectRoot,
   RadioGroupRoot,

@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.ScrollAreaTest do
 
   alias EssenceUI.Primitives.ScrollArea
 
-  test "renders radix-like root, viewport, scrollbar, thumb, and corner" do
+  test "renders radix-like root, viewport, content, scrollbar, thumb, and corner" do
     html =
       render_component(
         fn assigns ->
@@ -30,10 +30,12 @@ defmodule EssenceUI.Primitives.ScrollAreaTest do
     assert html =~ ~s[data-type="hover"]
     assert html =~ ~s[data-scroll-hide-delay="600"]
     assert html =~ "data-essence-scroll-area-viewport"
+    assert html =~ "data-essence-scroll-area-content"
     assert html =~ "data-essence-scroll-area-scrollbar"
     assert html =~ ~s[data-orientation="vertical"]
     assert html =~ ~s[data-orientation="horizontal"]
     assert html =~ "data-essence-scroll-area-thumb"
     assert html =~ "data-essence-scroll-area-corner"
+    assert html =~ "Content"
   end
 end

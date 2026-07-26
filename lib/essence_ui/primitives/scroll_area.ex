@@ -13,7 +13,7 @@ defmodule EssenceUI.Primitives.ScrollArea do
 
   def root(assigns) do
     style =
-      ["position: relative; overflow: hidden;", assigns.style]
+      ["position: relative;", assigns.style]
       |> Enum.reject(&(is_nil(&1) or &1 == ""))
       |> Enum.join(" ")
 
@@ -40,13 +40,10 @@ defmodule EssenceUI.Primitives.ScrollArea do
 
   def viewport(assigns) do
     ~H"""
-    <div
-      data-essence-scroll-area-viewport
-      tabindex="0"
-      style="overflow: auto; width: 100%; height: 100%;"
-      {@rest}
-    >
-      {render_slot(@inner_block)}
+    <div data-essence-scroll-area-viewport tabindex="0" {@rest}>
+      <div data-essence-scroll-area-content style="min-width: 100%; display: table;">
+        {render_slot(@inner_block)}
+      </div>
     </div>
     """
   end

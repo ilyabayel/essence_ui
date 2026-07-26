@@ -16,6 +16,23 @@
 	width: 100%;
 	height: 100%;
 	border-radius: inherit;
+	/* Hide native scrollbars (Radix ScrollAreaViewportStyle). */
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	-webkit-overflow-scrolling: touch;
+}
+.radix-demo[data-component="scroll-area"] .ScrollAreaViewport::-webkit-scrollbar {
+	display: none;
+}
+
+/* Also hide for headless primitive usage outside the radix-demo story. */
+[data-essence-scroll-area-viewport] {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	-webkit-overflow-scrolling: touch;
+}
+[data-essence-scroll-area-viewport]::-webkit-scrollbar {
+	display: none;
 }
 
 .radix-demo[data-component="scroll-area"] .ScrollAreaScrollbar {
