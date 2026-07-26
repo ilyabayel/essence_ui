@@ -7,7 +7,12 @@ defmodule Storybook.Themes.Components.AspectRatio do
   def function, do: &AspectRatio.aspect_ratio/1
 
   def container,
-    do: {:div, "data-scaling": "100%", "data-radius": "medium", style: "display: block;", "data-gray-color": "slate"}
+    do:
+      {:div,
+       "data-scaling": "100%",
+       "data-radius": "medium",
+       style: "display: block; max-width: 300px;",
+       "data-gray-color": "slate"}
 
   def layout, do: :one_column
 

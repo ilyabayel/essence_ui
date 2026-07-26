@@ -3,8 +3,7 @@ defmodule EssenceUI.Components.Slider do
   A Slider component for selecting values from a range.
 
   Based on Radix UI Themes Slider component with support for various sizes, variants,
-  colors, and both single and range sliders. The slider provides visual feedback
-  for value selection and can be used in forms, settings, and interactive controls.
+  colors, and both single and range sliders. Wraps `EssenceUI.Primitives.Slider`.
 
   ## Examples
 
@@ -38,6 +37,8 @@ defmodule EssenceUI.Components.Slider do
 
   use Phoenix.Component
 
+  import EssenceUI.Primitives.Slider, only: [root: 1, track: 1, range: 1, thumb: 1]
+
   alias EssenceUI.Helpers.ExtractProps
   alias EssenceUI.SharedProps.ColorProps
   alias EssenceUI.SharedProps.HighContrastProps
@@ -57,6 +58,8 @@ defmodule EssenceUI.Components.Slider do
   HighContrastProps.attrs()
   MarginProps.attrs()
   RadiusProps.attrs()
+
+  attr :id, :string, default: nil
 
   attr :size, :string,
     values: @sizes,
@@ -81,28 +84,17 @@ defmodule EssenceUI.Components.Slider do
     default: [50],
     doc: "Initial value array. Can be [value] for single or [min, max] for range."
 
-  attr :min, :integer,
-    default: 0,
-    doc: "Minimum value."
-
-  attr :max, :integer,
-    default: 100,
-    doc: "Maximum value."
-
-  attr :step, :integer,
-    default: 1,
-    doc: "Step increment."
-
-  attr :disabled, :boolean,
-    default: false,
-    doc: "Whether the slider is disabled."
-
+  attr :min, :integer, default: 0, doc: "Minimum value."
+  attr :max, :integer, default: 100, doc: "Maximum value."
+  attr :step, :integer, default: 1, doc: "Step increment."
+  attr :disabled, :boolean, default: false, doc: "Whether the slider is disabled."
   attr :name, :string, default: nil, doc: "Form name attribute."
+  attr :on_value_change, :string, default: nil, doc: "LiveView event when value changes."
   attr :class, :string, default: nil, doc: "Additional CSS classes to add to the element."
   attr :style, :string, default: ""
 
   attr :rest, :global,
-    include: ~w(id form aria-label aria-labelledby aria-describedby),
+    include: ~w(form aria-label aria-labelledby aria-describedby),
     doc: "Global attributes and event handlers."
 
   def slider(assigns) do
@@ -129,102 +121,58 @@ defmodule EssenceUI.Components.Slider do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    # Determine current values
     current_values = assigns[:value] || assigns[:default_value] || [50]
-    is_range = length(current_values) > 1
+    id = assigns[:id] || "slider-#{System.unique_integer([:positive])}"
 
-    # Calculate percentages for positioning
-    value_range = assigns[:max] - assigns[:min]
-
-    percentages =
-      Enum.map(current_values, fn value ->
-        Float.round((value - assigns[:min]) / value_range * 100, 2)
-      end)
-
-    # For range sliders, calculate the range positioning
-    {range_left, range_right} =
-      if is_range and length(percentages) >= 2 do
-        start = Enum.min(percentages)
-        end_pos = Enum.max(percentages)
-        {start, 100 - end_pos}
-      else
-        # For single slider, range goes from 0 to the value
-        value_percent = List.first(percentages, 50)
-        {0, 100 - value_percent}
-      end
-
-    # Build CSS classes
     class =
-      [
-        "est-reset",
-        "est-SliderRoot",
-        extracted.class
-      ]
+      ["est-reset", "est-SliderRoot", extracted.class]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 
+    style =
+      [extracted.style, assigns[:style], "--radix-slider-thumb-transform: translateX(-50%);"]
+      |> Enum.reject(&(is_nil(&1) or &1 == ""))
+      |> Enum.join(" ")
+
+    thumb_indexes = 0..(length(current_values) - 1) |> Enum.to_list()
+
     assigns =
       assign(assigns,
+        id: id,
         class: class,
-        style: extracted.style,
+        style: style,
         color: assigns[:color] || false,
         current_values: current_values,
-        percentages: percentages,
-        is_range: is_range,
-        range_left: range_left,
-        range_right: range_right
+        thumb_indexes: thumb_indexes
       )
 
     ~H"""
-    <span
+    <.root
+      id={@id}
+      value={@value}
+      default_value={@default_value}
+      min={@min}
+      max={@max}
+      step={@step}
+      orientation={@orientation}
+      disabled={@disabled}
+      name={@name}
+      on_value_change={@on_value_change}
       class={@class}
-      style={[@style, "--radix-slider-thumb-transform: translateX(-50%);"] |> Enum.join(" ")}
-      data-orientation={@orientation}
+      style={@style}
       data-accent-color={@color}
-      aria-disabled={@disabled}
-      dir="ltr"
       {@rest}
     >
-      <span class="est-SliderTrack" data-orientation={@orientation}>
-        <span
-          class="est-SliderRange"
-          data-orientation={@orientation}
-          style={
-            if @orientation == "horizontal" do
-              "left: #{@range_left}%; right: #{@range_right}%;"
-            else
-              "bottom: #{@range_left}%; top: #{@range_right}%;"
-            end
-          }
-        />
-      </span>
-
-      <%= for {value, percentage} <- Enum.zip(@current_values, @percentages) do %>
-        <span style={
-          if @orientation == "horizontal" do
-            "transform: var(--radix-slider-thumb-transform); position: absolute; left: #{percentage}%;"
-          else
-            "transform: translateY(50%); position: absolute; bottom: #{percentage}%;"
-          end
-        }>
-          <span
-            class="est-SliderThumb"
-            tabindex={if @disabled, do: -1, else: 0}
-            role="slider"
-            aria-valuemin={@min}
-            aria-valuemax={@max}
-            aria-valuenow={value}
-            aria-orientation={@orientation}
-            data-orientation={@orientation}
-            data-radix-collection-item=""
-          >
-            <%= if @name do %>
-              <input type="hidden" name={@name <> if(@is_range, do: "[]", else: "")} value={value} />
-            <% end %>
-          </span>
-        </span>
-      <% end %>
-    </span>
+      <.track class="est-SliderTrack" data-orientation={@orientation}>
+        <.range class="est-SliderRange" data-orientation={@orientation} />
+      </.track>
+      <.thumb
+        :for={index <- @thumb_indexes}
+        index={index}
+        class="est-SliderThumb"
+        data-orientation={@orientation}
+      />
+    </.root>
     """
   end
 end

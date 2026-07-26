@@ -1,18 +1,15 @@
 defmodule EssenceUI.Components.Dialog do
   @moduledoc """
-  Dialog primitive component compatible with Radix UI Dialog API.
+  Dialog component compatible with Radix UI Themes Dialog visuals.
 
-  A window overlaid on either the primary window or another dialog window,
-  rendering the content underneath inert.
-
-  Based on Radix UI Dialog primitive.
-  See: https://www.radix-ui.com/primitives/docs/components/dialog
+  Themes façade: `dialog/1` and `dialog_content/1` with `target` and `default_state`.
+  Internally wraps `EssenceUI.Primitives.Dialog` (root / portal / overlay / content).
   """
 
   use Phoenix.Component
 
+  alias EssenceUI.Primitives.Dialog, as: DialogPrimitive
   alias EssenceUI.SharedProps.RadiusProps
-  alias Phoenix.LiveView.JS
 
   require RadiusProps
 
@@ -28,30 +25,37 @@ defmodule EssenceUI.Components.Dialog do
   slot :inner_block, required: true
 
   def dialog(assigns) do
-    assigns = assign_new(assigns, :radius, fn -> "medium" end)
+    id = assigns[:id] || "dialog-#{System.unique_integer([:positive])}"
+    default_open = assigns.default_state == "open"
+
+    assigns =
+      assigns
+      |> assign(:id, id)
+      |> assign(:default_open, default_open)
+      |> assign_new(:radius, fn -> "medium" end)
 
     ~H"""
-    <.portal target={@target} id={@id <> "portal"}>
-      <div
-        class="essence-ui es-DialogRoot"
-        data-scaling={@scaling}
-        data-radius={@radius}
-        data-gray-color={@gray_color}
-        data-accent-color={@accent_color}
-      >
+    <DialogPrimitive.root id={@id} default_open={@default_open}>
+      <DialogPrimitive.portal id={"#{@id}-portal"} target={@target}>
         <div
-          id={@id}
-          data-default-state={@default_state}
-          class="est-BaseDialogOverlay"
-          style="inset: 0"
-          phx-hook="Dialog"
+          class="essence-ui es-DialogRoot"
+          data-scaling={@scaling}
+          data-radius={@radius}
+          data-gray-color={@gray_color}
+          data-accent-color={@accent_color}
         >
-          <.dialog_content dialog_id={@id} style={@style} class={@class}>
-            {render_slot(@inner_block)}
-          </.dialog_content>
+          <DialogPrimitive.overlay class="est-BaseDialogOverlay est-DialogOverlay">
+            <div class="est-BaseDialogScroll est-DialogScroll">
+              <div class="est-BaseDialogScrollPadding est-DialogScrollPadding est-r-align-center">
+                <.dialog_content dialog_id={@id} style={@style} class={@class}>
+                  {render_slot(@inner_block)}
+                </.dialog_content>
+              </div>
+            </div>
+          </DialogPrimitive.overlay>
         </div>
-      </div>
-    </.portal>
+      </DialogPrimitive.portal>
+    </DialogPrimitive.root>
     """
   end
 
@@ -62,28 +66,21 @@ defmodule EssenceUI.Components.Dialog do
 
   def dialog_content(assigns) do
     ~H"""
-    <div class="est-BaseDialogScroll">
-      <div class="est-BaseDialogScrollPadding est-r-align-center">
-        <div
-          role="alertdialog"
-          id={"#{@dialog_id}-content"}
-          class={
-            ["est-BaseDialogContent est-AlertDialogContent est-r-size-3 est-r-max-w", @class]
-            |> Enum.filter(&(&1 != ""))
-            |> Enum.join(" ")
-          }
-          tabindex="-1"
-          style={
-            ["--max-width: 450px; pointer-events: auto;", @style]
-            |> Enum.filter(&(&1 != ""))
-            |> Enum.join("; ")
-          }
-          phx-click-away={JS.dispatch("close", to: "##{@dialog_id}")}
-        >
-          {render_slot(@inner_block)}
-        </div>
-      </div>
-    </div>
+    <DialogPrimitive.content
+      id={"#{@dialog_id}-content"}
+      class={
+        ["est-BaseDialogContent", "est-DialogContent", "est-r-size-3", "est-r-max-w", @class]
+        |> Enum.filter(&(&1 != ""))
+        |> Enum.join(" ")
+      }
+      style={
+        ["--max-width: 450px; pointer-events: auto;", @style]
+        |> Enum.filter(&(&1 != ""))
+        |> Enum.join("; ")
+      }
+    >
+      {render_slot(@inner_block)}
+    </DialogPrimitive.content>
     """
   end
 end

@@ -2,10 +2,12 @@ defmodule EssenceUI.Components.Avatar do
   @moduledoc """
   The Avatar component displays a user profile picture, initials, or fallback icon.
 
-  Based on Radix UI Themes Avatar component.
+  Based on Radix UI Themes Avatar component. Wraps `EssenceUI.Primitives.Avatar`.
   """
 
   use Phoenix.Component
+
+  import EssenceUI.Primitives.Avatar, only: [root: 1, image: 1, fallback: 1]
 
   alias EssenceUI.SharedProps.AsChildProps
   alias EssenceUI.SharedProps.ColorProps
@@ -36,7 +38,7 @@ defmodule EssenceUI.Components.Avatar do
     * `alt` - The alternative text for the image.
     * `size` - Avatar size from `1` to `9`. Controls the avatar dimensions. Can be a string or a responsive map.
     * `variant` - Visual variant: `"solid"` or `"soft"`. Defaults to `"soft"`.
-    * `color` - The accent color. One of: `gray`, `gold`, `bronze`, `brown`, `yellow`, `amber`, `orange`, `tomato`, `red`, `ruby`, `crimson`, `pink`, `plum`, `purple`, `violet`, `iris`, `indigo`, `blue`, `cyan`, `teal`, `jade`, `green`, `grass`, `lime`, `mint`, `sky`.
+    * `color` - The accent color.
     * `high_contrast` - Whether to increase color contrast with the background.
     * `radius` - Border radius: one of `"none"`, `"small"`, `"medium"`, `"large"`, or `"full"`.
     * `as_child` - Composes the component into its immediate child instead of rendering its own HTML element.
@@ -50,6 +52,8 @@ defmodule EssenceUI.Components.Avatar do
   ColorProps.attrs()
   HighContrastProps.attrs()
   MarginProps.attrs()
+
+  attr :id, :string, default: nil
 
   attr :size, :any,
     default: "3",
@@ -95,55 +99,49 @@ defmodule EssenceUI.Components.Avatar do
 
     class = ["est-reset", "est-AvatarRoot", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
 
+    id = assigns[:id] || "avatar-#{System.unique_integer([:positive])}"
+
     assigns =
       assigns
+      |> assign(id: id)
       |> assign(class: class)
       |> assign(color: assigns[:color] || false)
       |> assign(radius: assigns[:radius] || false)
       |> assign(high_contrast: assigns[:high_contrast] || false)
-      |> assign(has_image: !is_nil(assigns[:src]))
+      |> assign(has_image: !is_nil(assigns[:src]) and assigns[:src] != "")
       |> assign(fallback: assigns[:fallback] || nil)
-
-    dbg(assigns[:fallback_slot])
+      |> assign(fallback_classes: fallback_classes(assigns[:fallback]))
 
     ~H"""
-    <span class={@class} style={@style} data-accent-color={@color} data-radius={@radius} {@rest}>
-      <.avatar_image :if={@has_image} src={@src} alt={@alt} />
-      <.avatar_fallback :if={!@has_image and @fallback} fallback={@fallback} />
-      <span :if={!@has_image and !@fallback} class="est-AvatarFallback">
-        {render_slot(@fallback_slot)}
-      </span>
-    </span>
+    <.root
+      id={@id}
+      class={@class}
+      style={@style}
+      data-accent-color={@color}
+      data-radius={@radius}
+      {@rest}
+    >
+      <.image :if={@has_image} src={@src} alt={@alt} class="est-AvatarImage" />
+      <.fallback :if={@has_image or @fallback || @fallback_slot != []} class={@fallback_classes} delay_ms={0}>
+        <%= if @fallback do %>
+          {render_fallback(@fallback)}
+        <% else %>
+          {render_slot(@fallback_slot)}
+        <% end %>
+      </.fallback>
+    </.root>
     """
   end
 
-  # Avatar Image sub-component
-  defp avatar_image(assigns) do
-    ~H"""
-    <img class="est-AvatarImage" src={@src} alt={@alt} />
-    """
+  defp fallback_classes(fallback) do
+    [
+      "est-AvatarFallback",
+      fallback_size_class(fallback)
+    ]
+    |> Enum.filter(& &1)
+    |> Enum.join(" ")
   end
 
-  # Avatar Fallback sub-component
-  defp avatar_fallback(assigns) do
-    fallback_classes =
-      [
-        "est-AvatarFallback",
-        fallback_size_class(assigns.fallback)
-      ]
-      |> Enum.filter(& &1)
-      |> Enum.join(" ")
-
-    assigns = assign(assigns, fallback_classes: fallback_classes)
-
-    ~H"""
-    <span class={@fallback_classes}>
-      {render_fallback(@fallback)}
-    </span>
-    """
-  end
-
-  # Determine fallback size class based on content
   defp fallback_size_class(fallback) when is_binary(fallback) do
     case String.length(fallback) do
       1 -> "est-one-letter"
@@ -154,7 +152,6 @@ defmodule EssenceUI.Components.Avatar do
 
   defp fallback_size_class(_), do: nil
 
-  # Render different types of fallback content
   defp render_fallback(fallback) when is_binary(fallback), do: String.upcase(fallback)
   defp render_fallback(fallback), do: fallback
 end

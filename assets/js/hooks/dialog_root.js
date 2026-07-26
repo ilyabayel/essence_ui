@@ -29,9 +29,13 @@ function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {
       this.onCloseClick = this.onCloseClick.bind(this);
       this.onOverlayClick = this.onOverlayClick.bind(this);
       this.onDocumentKeyDown = this.onDocumentKeyDown.bind(this);
+      this.onOpenEvent = () => this.open();
+      this.onCloseEvent = () => this.close();
 
       this.resolveParts();
       this.bindStaticListeners();
+      this.el.addEventListener("open", this.onOpenEvent);
+      this.el.addEventListener("close", this.onCloseEvent);
 
       if (this.el.dataset.state === "open") {
         this.open(true);
@@ -48,6 +52,8 @@ function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {
 
     destroyed() {
       this.unbindOpenListeners();
+      this.el.removeEventListener("open", this.onOpenEvent);
+      this.el.removeEventListener("close", this.onCloseEvent);
       this.trigger?.removeEventListener("click", this.onTriggerClick);
       this.overlay?.removeEventListener("click", this.onOverlayClick);
       this.closeButtons?.forEach((btn) => {

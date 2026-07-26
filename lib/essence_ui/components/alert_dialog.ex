@@ -1,9 +1,13 @@
 defmodule EssenceUI.Components.AlertDialog do
-  @moduledoc false
+  @moduledoc """
+  Alert Dialog styled per Radix Themes Alert Dialog.
+
+  Themes façade keeps `alert_dialog/1` with `target`, `default_state`, and
+  title/description slots. Internally wraps `EssenceUI.Primitives.AlertDialog`.
+  """
   use Phoenix.Component
 
-  import EssenceUI.Components, only: [dialog: 1, heading: 1, text: 1]
-
+  alias EssenceUI.Primitives.AlertDialog, as: AlertDialogPrimitive
   alias EssenceUI.SharedProps.RadiusProps
 
   require RadiusProps
@@ -28,30 +32,67 @@ defmodule EssenceUI.Components.AlertDialog do
   slot :inner_block
 
   def alert_dialog(assigns) do
-    assigns = assign_new(assigns, :radius, fn -> "medium" end)
+    default_open = assigns.default_state == "open"
+
+    assigns =
+      assigns
+      |> assign(:default_open, default_open)
+      |> assign_new(:radius, fn -> "medium" end)
 
     ~H"""
-    <.dialog
-      id={@id}
-      target={@target}
-      default_state={@default_state}
-      style={@style}
-      class={@class}
-      scaling={@scaling}
-      radius={@radius}
-      gray_color={@gray_color}
-      accent_color={@accent_color}
-    >
-      <div class="est-AlertDialogContent">
-        <.heading :if={@title != []} as="h1" size="5" mb="3">
-          {render_slot(@title)}
-        </.heading>
-        <.text :if={@description != []} as="p" size="2" mb="4">
-          {render_slot(@description)}
-        </.text>
-        {render_slot(@inner_block)}
-      </div>
-    </.dialog>
+    <AlertDialogPrimitive.root id={@id} default_open={@default_open}>
+      <AlertDialogPrimitive.portal id={"#{@id}-portal"} target={@target}>
+        <div
+          class="essence-ui es-DialogRoot"
+          data-scaling={@scaling}
+          data-radius={@radius}
+          data-gray-color={@gray_color}
+          data-accent-color={@accent_color}
+        >
+          <AlertDialogPrimitive.overlay class="est-BaseDialogOverlay est-AlertDialogOverlay">
+            <div class="est-BaseDialogScroll est-AlertDialogScroll">
+              <div class="est-BaseDialogScrollPadding est-AlertDialogScrollPadding est-r-align-center">
+                <AlertDialogPrimitive.content
+                  id={"#{@id}-content"}
+                  class={
+                    [
+                      "est-BaseDialogContent",
+                      "est-AlertDialogContent",
+                      "est-r-size-3",
+                      "est-r-max-w",
+                      @class
+                    ]
+                    |> Enum.filter(&(&1 != ""))
+                    |> Enum.join(" ")
+                  }
+                  style={
+                    ["--max-width: 450px; pointer-events: auto;", @style]
+                    |> Enum.filter(&(&1 != ""))
+                    |> Enum.join("; ")
+                  }
+                >
+                  <AlertDialogPrimitive.title
+                    :if={@title != []}
+                    class="est-Heading est-r-size-5"
+                    style="margin-bottom: var(--space-3)"
+                  >
+                    {render_slot(@title)}
+                  </AlertDialogPrimitive.title>
+                  <AlertDialogPrimitive.description
+                    :if={@description != []}
+                    class="est-Text est-r-size-2"
+                    style="margin-bottom: var(--space-4)"
+                  >
+                    {render_slot(@description)}
+                  </AlertDialogPrimitive.description>
+                  {render_slot(@inner_block)}
+                </AlertDialogPrimitive.content>
+              </div>
+            </div>
+          </AlertDialogPrimitive.overlay>
+        </div>
+      </AlertDialogPrimitive.portal>
+    </AlertDialogPrimitive.root>
     """
   end
 end

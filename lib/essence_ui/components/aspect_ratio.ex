@@ -1,6 +1,8 @@
 defmodule EssenceUI.Components.AspectRatio do
   @moduledoc """
-  AspectRatio component 100% compatible with Radix UI Themes AspectRatio API.
+  AspectRatio component compatible with Radix UI Themes AspectRatio API.
+  Wraps `EssenceUI.Primitives.AspectRatio`.
+
   See: https://www.radix-ui.com/primitives/docs/components/aspect-ratio
 
   ## Examples
@@ -20,6 +22,8 @@ defmodule EssenceUI.Components.AspectRatio do
 
   use Phoenix.Component
 
+  alias EssenceUI.Primitives.AspectRatio, as: AspectRatioPrimitive
+
   attr :ratio, :any, required: true, doc: "Aspect ratio as float (e.g. 16/9) or string (e.g. \"16:9\")"
   attr :class, :string, default: nil, doc: "Additional CSS classes"
   attr :style, :string, default: nil, doc: "Additional inline styles"
@@ -27,42 +31,35 @@ defmodule EssenceUI.Components.AspectRatio do
   slot :inner_block, required: true
 
   def aspect_ratio(assigns) do
-    ratio =
-      cond do
-        is_float(assigns[:ratio]) ->
-          assigns[:ratio]
+    ratio = normalize_ratio(assigns[:ratio])
 
-        is_integer(assigns[:ratio]) ->
-          assigns[:ratio] * 1.0
-
-        is_binary(assigns[:ratio]) && String.contains?(assigns[:ratio], ":") ->
-          [w, h] = assigns[:ratio] |> String.split(":") |> Enum.map(&String.to_float/1)
-          w / h
-
-        is_binary(assigns[:ratio]) ->
-          String.to_float(assigns[:ratio])
-
-        true ->
-          1.0
-      end
-
-    style =
-      [
-        "position: relative; width: 100%; padding-bottom: #{100 / ratio}%;",
-        assigns[:style]
-      ]
-      |> Enum.filter(& &1)
-      |> Enum.join(" ")
-
-    assigns =
-      assign(assigns, style: style)
+    assigns = assign(assigns, ratio: ratio)
 
     ~H"""
-    <div class={["est-AspectRatio", @class]} style={@style} {@rest}>
-      <div class="est-AspectRatioInner" style="position: absolute; inset: 0;">
-        {render_slot(@inner_block)}
-      </div>
-    </div>
+    <AspectRatioPrimitive.aspect_ratio ratio={@ratio} class={["est-AspectRatio", @class]} style={@style} {@rest}>
+      {render_slot(@inner_block)}
+    </AspectRatioPrimitive.aspect_ratio>
     """
+  end
+
+  defp normalize_ratio(ratio) when is_float(ratio), do: ratio
+  defp normalize_ratio(ratio) when is_integer(ratio), do: ratio * 1.0
+
+  defp normalize_ratio(ratio) when is_binary(ratio) do
+    if String.contains?(ratio, ":") do
+      [w, h] = ratio |> String.split(":") |> Enum.map(&parse_number/1)
+      w / h
+    else
+      parse_number(ratio)
+    end
+  end
+
+  defp normalize_ratio(_), do: 1.0
+
+  defp parse_number(str) do
+    case Float.parse(str) do
+      {num, _} -> num
+      :error -> 1.0
+    end
   end
 end

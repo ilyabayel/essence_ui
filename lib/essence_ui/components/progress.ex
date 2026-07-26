@@ -2,10 +2,12 @@ defmodule EssenceUI.Components.Progress do
   @moduledoc """
   A Progress component that displays the completion progress of a task.
 
-  Based on Radix UI Progress component with support for various sizes,
-  colors, and styling options.
+  Based on Radix UI Themes Progress component with support for various sizes,
+  colors, and styling options. Wraps `EssenceUI.Primitives.Progress`.
   """
   use Phoenix.Component
+
+  import EssenceUI.Primitives.Progress, only: [root: 1, indicator: 1]
 
   alias EssenceUI.Helpers.ExtractProps
   alias EssenceUI.SharedProps.ColorProps
@@ -66,43 +68,28 @@ defmodule EssenceUI.Components.Progress do
 
     class = ["est-reset", "est-ProgressRoot", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
 
-    # Calculate percentage and ensure it's within bounds
-    percentage =
-      case {assigns.value, assigns.max} do
-        {value, max} when is_number(value) and is_number(max) and max > 0 ->
-          min(100, max(0, value / max * 100))
-
-        _ ->
-          0
-      end
+    style =
+      ["--progress-value: #{assigns.value};", "--progress-max: #{assigns.max};", extracted.style]
+      |> Enum.filter(& &1)
+      |> Enum.join(" ")
 
     assigns =
       assigns
-      |> assign(class: class, style: extracted.style)
+      |> assign(class: class, style: style)
       |> assign(color: assigns[:color] || false)
-      |> assign(percentage: percentage)
 
     ~H"""
-    <div
+    <.root
+      value={@value}
+      max={@max}
       class={@class}
-      style={
-        ["--progress-value: #{@value};", "--progress-max: #{@max};", @style]
-        |> Enum.filter(& &1)
-        |> Enum.join(" ")
-      }
-      role="progressbar"
-      aria-valuemin="0"
-      aria-valuemax={@max}
-      aria-valuenow={@value}
-      data-state={if @value == @max, do: "complete", else: "loading"}
-      data-value={@value}
-      data-max={@max}
+      style={@style}
       data-accent-color={@color}
       data-radius={@radius}
       {@rest}
     >
-      <div class="est-ProgressIndicator"></div>
-    </div>
+      <.indicator value={@value} max={@max} class="est-ProgressIndicator" />
+    </.root>
     """
   end
 end

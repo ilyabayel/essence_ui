@@ -1,0 +1,58 @@
+defmodule EssenceUI.Components.DialogTest do
+  use EssenceUIWeb.ConnCase, async: true
+
+  import Phoenix.Component
+  import Phoenix.LiveViewTest
+
+  alias EssenceUI.Components.Dialog
+
+  test "renders themes dialog over dialog primitive" do
+    html =
+      render_component(
+        fn assigns ->
+          ~H"""
+          <Dialog.dialog id="dlg" target="body" default_state="closed" class="extra">
+            <p>Dialog body</p>
+          </Dialog.dialog>
+          """
+        end,
+        %{}
+      )
+
+    assert html =~ ~s[phx-hook="DialogRoot"]
+    assert html =~ ~s[id="dlg"]
+    assert html =~ ~s[data-phx-portal="body"]
+    assert html =~ ~s[id="dlg-portal"]
+    assert html =~ "data-essence-dialog-overlay"
+    assert html =~ "data-essence-dialog-content"
+    assert html =~ ~s[role="dialog"]
+    refute html =~ ~s[role="alertdialog"]
+    refute html =~ ~s[phx-hook="Dialog"]
+
+    assert html =~ "es-DialogRoot"
+    assert html =~ "est-BaseDialogOverlay"
+    assert html =~ "est-BaseDialogScroll"
+    assert html =~ "est-BaseDialogContent"
+    assert html =~ "est-DialogContent"
+    assert html =~ "est-r-size-3"
+    assert html =~ "extra"
+    assert html =~ "Dialog body"
+  end
+
+  test "maps default_state open to data-state open" do
+    html =
+      render_component(
+        fn assigns ->
+          ~H"""
+          <Dialog.dialog id="open-dlg" target="body" default_state="open">
+            Opened
+          </Dialog.dialog>
+          """
+        end,
+        %{}
+      )
+
+    assert html =~ ~s[data-state="open"]
+    assert html =~ "Opened"
+  end
+end

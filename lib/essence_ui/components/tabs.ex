@@ -3,8 +3,7 @@ defmodule EssenceUI.Components.Tabs do
   A set of content sections to be displayed one at a time.
 
   Based on Radix UI Themes Tabs component with support for various sizes and colors.
-  The Tabs component uses client-side JavaScript to handle tab switching for smooth
-  interactions without server round-trips.
+  Wraps `EssenceUI.Primitives.Tabs`.
 
   ## Examples
 
@@ -13,7 +12,6 @@ defmodule EssenceUI.Components.Tabs do
           <.tabs_list size="2">
             <:trigger value="account">Account</:trigger>
             <:trigger value="documents">Documents</:trigger>
-            <:trigger value="settings">Settings</:trigger>
           </.tabs_list>
         </:list>
         <:content value="account">
@@ -21,24 +19,6 @@ defmodule EssenceUI.Components.Tabs do
         </:content>
         <:content value="documents">
           <.text>Access and update your documents.</.text>
-        </:content>
-        <:content value="settings">
-          <.text>Manage your account settings.</.text>
-        </:content>
-      </.tabs>
-
-      <.tabs default_value="overview" color="blue">
-        <:list>
-          <.tabs_list size="1">
-            <:trigger value="overview">Overview</:trigger>
-            <:trigger value="details">Details</:trigger>
-          </.tabs_list>
-        </:list>
-        <:content value="overview">
-          Overview content
-        </:content>
-        <:content value="details">
-          Details content
         </:content>
       </.tabs>
 
@@ -48,15 +28,11 @@ defmodule EssenceUI.Components.Tabs do
   - `color` - Color theme from accent color palette (default: none)
   - `high_contrast` - Increase color contrast (default: false)
   - Plus margin props (m, mx, my, mt, mr, mb, ml) for spacing control
-
-  ## Accessibility
-
-  - Uses proper ARIA roles and attributes
-  - Keyboard navigation with arrow keys
-  - Focus management
   """
 
   use Phoenix.Component
+
+  import EssenceUI.Primitives.Tabs, only: [root: 1, list: 1, trigger: 1, content: 1]
 
   alias EssenceUI.Helpers.ExtractProps
   alias EssenceUI.SharedProps.ColorProps
@@ -71,14 +47,12 @@ defmodule EssenceUI.Components.Tabs do
   HighContrastProps.attrs()
   MarginProps.attrs()
 
-  attr :default_value, :string,
-    required: true,
-    doc: "Initial active tab value."
-
+  attr :id, :string, default: nil, doc: "Unique identifier for the tabs root."
+  attr :default_value, :string, required: true, doc: "Initial active tab value."
   attr :class, :string, default: nil, doc: "Additional CSS classes to add to the root element."
 
   attr :rest, :global,
-    include: ~w(id aria-label aria-labelledby aria-describedby),
+    include: ~w(aria-label aria-labelledby aria-describedby),
     doc: "Global attributes and event handlers."
 
   slot :list, required: true, doc: "Tab list container"
@@ -95,7 +69,6 @@ defmodule EssenceUI.Components.Tabs do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    # Generate unique ID for this tabs instance
     tabs_id = assigns[:id] || "tabs-#{:erlang.unique_integer([:positive])}"
 
     assigns =
@@ -108,15 +81,13 @@ defmodule EssenceUI.Components.Tabs do
       )
 
     ~H"""
-    <div
+    <.root
       id={@tabs_id}
-      dir="ltr"
-      data-orientation="horizontal"
+      default_value={@default_value}
       class={@class}
       style={@style}
       data-accent-color={@color}
       {@rest}
-      phx-hook="Tabs"
     >
       {render_slot(@list, %{
         tabs_id: @tabs_id,
@@ -124,21 +95,10 @@ defmodule EssenceUI.Components.Tabs do
         high_contrast: @high_contrast
       })}
 
-      <%= for content <- @content do %>
-        <div
-          data-state={if(content.value == @default_value, do: "active", else: "inactive")}
-          data-orientation="horizontal"
-          role="tabpanel"
-          aria-labelledby={"#{@tabs_id}-trigger-#{content.value}"}
-          id={"#{@tabs_id}-content-#{content.value}"}
-          tabindex="0"
-          class="est-TabsContent"
-          hidden={content.value != @default_value}
-        >
-          {render_slot(content)}
-        </div>
-      <% end %>
-    </div>
+      <.content :for={panel <- @content} value={panel.value} class="est-TabsContent">
+        {render_slot(panel)}
+      </.content>
+    </.root>
     """
   end
 
@@ -159,6 +119,8 @@ defmodule EssenceUI.Components.Tabs do
 
   HighContrastProps.attrs()
   attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :tabs_id, :string, default: nil
+  attr :default_value, :string, default: nil
 
   slot :trigger, required: true, doc: "Tab trigger button" do
     attr :value, :string, required: true, doc: "Tab value to match with content"
@@ -166,12 +128,8 @@ defmodule EssenceUI.Components.Tabs do
   end
 
   def tabs_list(assigns) do
-    # Get context from parent slot
-    tabs_id = assigns[:tabs_id]
-    default_value = assigns[:default_value]
     high_contrast = assigns[:high_contrast] || false
 
-    # Build CSS classes for list
     list_class =
       [
         "est-BaseTabList",
@@ -183,50 +141,24 @@ defmodule EssenceUI.Components.Tabs do
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 
-    assigns =
-      assign(assigns,
-        list_class: list_class,
-        tabs_id: tabs_id,
-        default_value: default_value
-      )
+    assigns = assign(assigns, list_class: list_class)
 
     ~H"""
-    <div
-      class={@list_class}
-      role="tablist"
-      aria-orientation="horizontal"
-      data-orientation="horizontal"
-      data-default-value={@default_value}
-      data-tabs-id={@tabs_id}
-      tabindex="0"
-    >
-      <%= for trigger <- @trigger do %>
-        <button
-          type="button"
-          role="tab"
-          class="est-reset est-BaseTabListTrigger est-TabsTrigger"
-          data-value={trigger.value}
-          data-state={if(trigger.value == @default_value, do: "active", else: "inactive")}
-          aria-selected={if(trigger.value == @default_value, do: "true", else: "false")}
-          aria-controls={"#{@tabs_id}-content-#{trigger.value}"}
-          id={"#{@tabs_id}-trigger-#{trigger.value}"}
-          tabindex={if(trigger.value == @default_value, do: "0", else: "-1")}
-          data-orientation="horizontal"
-          data-radix-collection-item=""
-          disabled={trigger[:disabled]}
-        >
-          <span class="est-BaseTabListTriggerInner est-TabsTriggerInner">
-            {render_slot(trigger)}
-          </span>
-          <span
-            class="est-BaseTabListTriggerInnerHidden est-TabsTriggerInnerHidden"
-            aria-hidden="true"
-          >
-            {render_slot(trigger)}
-          </span>
-        </button>
-      <% end %>
-    </div>
+    <.list class={@list_class}>
+      <.trigger
+        :for={trig <- @trigger}
+        value={trig.value}
+        disabled={trig[:disabled] || false}
+        class="est-reset est-BaseTabListTrigger est-TabsTrigger"
+      >
+        <span class="est-BaseTabListTriggerInner est-TabsTriggerInner">
+          {render_slot(trig)}
+        </span>
+        <span class="est-BaseTabListTriggerInnerHidden est-TabsTriggerInnerHidden" aria-hidden="true">
+          {render_slot(trig)}
+        </span>
+      </.trigger>
+    </.list>
     """
   end
 end
