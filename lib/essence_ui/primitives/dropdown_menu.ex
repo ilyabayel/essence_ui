@@ -35,25 +35,38 @@ defmodule EssenceUI.Primitives.DropdownMenu do
   attr :id, :string, default: nil
   attr :content_id, :string, default: nil
   attr :disabled, :boolean, default: false
+  # Themes Trigger wraps `<.button>`; a native <button> parent would be invalid HTML
+  # and browsers hoist the child out of the trigger (empty trigger, dead Options click).
+  attr :as, :string, default: "button", values: ["button", "div"]
   attr :rest, :global
   slot :inner_block, required: true
 
   def trigger(assigns) do
+    rest =
+      if assigns.as == "button" do
+        Map.merge(assigns.rest, %{type: "button", disabled: assigns.disabled})
+      else
+        assigns.rest
+      end
+
+    assigns = assign(assigns, :rest, rest)
+
     ~H"""
-    <button
+    <.dynamic_tag
+      tag_name={@as}
       id={@id}
-      type="button"
+      role={if(@as == "div", do: "button")}
+      tabindex={if(@as == "div" and not @disabled, do: "0")}
       data-essence-dropdown-menu-trigger
       aria-haspopup="menu"
       aria-expanded="false"
       aria-controls={@content_id}
       data-state="closed"
-      disabled={@disabled}
       data-disabled={if @disabled, do: ""}
       {@rest}
     >
       {render_slot(@inner_block)}
-    </button>
+    </.dynamic_tag>
     """
   end
 

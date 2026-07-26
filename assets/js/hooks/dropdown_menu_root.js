@@ -1,6 +1,7 @@
 import { positionFloating } from "../lib/position";
 import { setOpen, setClosed } from "../lib/presence";
 import { bindDismissableLayer } from "../lib/dismissable_layer";
+import { applyPortalTheme } from "../lib/theme";
 import {
   getMenuItems,
   getFocusedMenuItems,
@@ -30,6 +31,10 @@ export const DropdownMenuRoot = {
     this.resolveParts();
     this.bindTrigger();
 
+    // #region agent log
+    fetch('http://127.0.0.1:7338/ingest/b9a83dee-42d1-4fea-ba3f-fb8b9735aa7c',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d30a91'},body:JSON.stringify({sessionId:'d30a91',runId:'post-fix',hypothesisId:'B',location:'dropdown_menu_root.js:mounted',message:'DropdownMenuRoot mounted',data:{rootId:this.el?.id,hasTrigger:!!this.trigger,hasContent:!!this.content,triggerTag:this.trigger?.tagName,triggerAriaControls:this.trigger?.getAttribute('aria-controls'),nestedButtonCount:this.trigger?.querySelectorAll('button')?.length||0,optionsInsideTrigger:!!this.trigger?.querySelector('.est-Button'),siblingButtonOutside:!![...this.el.children].find(c=>c.classList?.contains('est-Button')&&!this.trigger?.contains(c)),portalTemplateCount:this.el?.querySelectorAll('template[data-phx-portal]')?.length||0,display:this.el?getComputedStyle(this.el).display:null},timestamp:Date.now()})}).catch(()=>{});
+    // #endregion
+
     if (this.el.dataset.state === "open") {
       this.open(true);
     }
@@ -46,6 +51,7 @@ export const DropdownMenuRoot = {
     this.unlockScroll();
     if (this.trigger) {
       this.trigger.removeEventListener("click", this.onTriggerClick);
+      this.trigger.removeEventListener("keydown", this.onTriggerKeyDown);
     }
     if (this.content) {
       this.content.removeEventListener("keydown", this.onKeyDown);
@@ -69,14 +75,27 @@ export const DropdownMenuRoot = {
     if (!this.trigger || this._triggerBound === this.trigger) return;
     if (this._triggerBound) {
       this._triggerBound.removeEventListener("click", this.onTriggerClick);
+      this._triggerBound.removeEventListener("keydown", this.onTriggerKeyDown);
     }
+    this.onTriggerKeyDown = this.onTriggerKeyDown.bind(this);
     this.trigger.addEventListener("click", this.onTriggerClick);
+    this.trigger.addEventListener("keydown", this.onTriggerKeyDown);
     this._triggerBound = this.trigger;
+  },
+
+  onTriggerKeyDown(e) {
+    if (this.trigger?.tagName === "BUTTON") return;
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    this.onTriggerClick(e);
   },
 
   onTriggerClick(e) {
     e.stopPropagation();
     e.preventDefault();
+    // #region agent log
+    fetch('http://127.0.0.1:7338/ingest/b9a83dee-42d1-4fea-ba3f-fb8b9735aa7c',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d30a91'},body:JSON.stringify({sessionId:'d30a91',runId:'post-fix',hypothesisId:'B',location:'dropdown_menu_root.js:onTriggerClick',message:'Trigger clicked',data:{isOpen:this.isOpen,disabled:this.trigger?.hasAttribute('data-disabled'),targetTag:e.target?.tagName,currentTargetTag:e.currentTarget?.tagName,triggerTag:this.trigger?.tagName,nestedButtons:this.trigger?.querySelectorAll('button')?.length||0,optionsInsideTrigger:!!this.trigger?.querySelector('.est-Button')},timestamp:Date.now()})}).catch(()=>{});
+    // #endregion
     if (this.trigger?.hasAttribute("data-disabled")) return;
     if (this.isOpen) {
       this.close();
@@ -182,9 +201,18 @@ export const DropdownMenuRoot = {
 
   open(isInitial = false) {
     this.resolveParts();
+    // #region agent log
+    const _portalTpls = this.el?.querySelectorAll("template[data-phx-portal]") || [];
+    const _teleported = [..._portalTpls].map((p) => ({portalId:p.id,teleportedExists:!!document.querySelector(`[data-phx-teleported-src="${p.id}"]`)}));
+    fetch('http://127.0.0.1:7338/ingest/b9a83dee-42d1-4fea-ba3f-fb8b9735aa7c',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d30a91'},body:JSON.stringify({sessionId:'d30a91',runId:'pre-fix',hypothesisId:'A',location:'dropdown_menu_root.js:open',message:'open() after resolveParts',data:{isInitial,hasTrigger:!!this.trigger,hasContent:!!this.content,contentId:this.content?.id||null,ariaControls:this.trigger?.getAttribute('aria-controls'),contentState:this.content?.dataset?.state,contentDisplay:this.content?this.content.style.display:null,contentHidden:this.content?.hidden??null,teleported:_teleported,willEarlyReturn:!this.trigger||!this.content},timestamp:Date.now()})}).catch(()=>{});
+    // #endregion
     if (!this.trigger || !this.content) return;
 
     this.isOpen = true;
+    applyPortalTheme(this.content, this.trigger || this.el);
+    // #region agent log
+    fetch('http://127.0.0.1:7338/ingest/b9a83dee-42d1-4fea-ba3f-fb8b9735aa7c',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d30a91'},body:JSON.stringify({sessionId:'d30a91',runId:'post-fix-styles',hypothesisId:'F',location:'dropdown_menu_root.js:open:theme',message:'after applyPortalTheme',data:{hasEssenceUi:this.content.classList.contains('essence-ui'),dataAccent:this.content.getAttribute('data-accent-color'),dataGray:this.content.getAttribute('data-gray-color'),dataScaling:this.content.getAttribute('data-scaling'),dataRadius:this.content.getAttribute('data-radius'),space2:getComputedStyle(this.content).getPropertyValue('--space-2').trim(),itemH:getComputedStyle(this.content).getPropertyValue('--base-menu-item-height').trim(),pad:getComputedStyle(this.content).getPropertyValue('--base-menu-content-padding').trim(),radius:getComputedStyle(this.content).borderRadius},timestamp:Date.now()})}).catch(()=>{});
+    // #endregion
     setOpen(this.content, [this.trigger, this.el]);
     this.trigger.setAttribute("aria-expanded", "true");
 
@@ -199,6 +227,10 @@ export const DropdownMenuRoot = {
       align,
       sideOffset,
     });
+
+    // #region agent log
+    fetch('http://127.0.0.1:7338/ingest/b9a83dee-42d1-4fea-ba3f-fb8b9735aa7c',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d30a91'},body:JSON.stringify({sessionId:'d30a91',runId:'pre-fix',hypothesisId:'D',location:'dropdown_menu_root.js:open:afterPosition',message:'open() after setOpen+position',data:{contentState:this.content.dataset.state,contentDisplay:this.content.style.display,contentHidden:this.content.hidden,contentRect:(()=>{const r=this.content.getBoundingClientRect();return{top:r.top,left:r.left,w:r.width,h:r.height};})(),ariaExpanded:this.trigger.getAttribute('aria-expanded')},timestamp:Date.now()})}).catch(()=>{});
+    // #endregion
 
     this.bindSubmenus();
     closeOnItemClick(this.content, () => this.close());
