@@ -260,8 +260,8 @@ defmodule Storybook.Themes.Components.Callout do
               href="#"
               class="underline"
             >
-              View pricing options</a>.
-              View pricing options</a>.
+              View pricing options
+            </a>.
           </:text>
         </.callout>
         """
