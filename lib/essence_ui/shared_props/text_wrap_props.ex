@@ -7,7 +7,7 @@ defmodule EssenceUI.SharedProps.TextWrapProps do
 
   def prop_defs do
     %{
-      wrap: %{type: [:enum, :string], values: @wrap_values, responsive: true, class: "rt-r-tw"}
+      wrap: %{type: [:enum, :string], values: @wrap_values, responsive: true, class: "est-r-tw"}
     }
   end
 

@@ -58,15 +58,15 @@ defmodule EssenceUI.Components.DataList do
     prop_defs =
       Map.merge(
         %{
-          size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
+          size: %{type: :enum, class: "est-r-size", values: @sizes, default: "2", responsive: true},
           orientation: %{
             type: :enum,
-            class: "rt-r-orientation",
+            class: "est-r-orientation",
             values: @orientations,
             default: "horizontal",
             responsive: true
           },
-          trim: %{type: :enum, class: "rt-r-trim", values: @trims, responsive: true}
+          trim: %{type: :enum, class: "est-r-trim", values: @trims, responsive: true}
         },
         MarginProps.prop_defs()
       )
@@ -81,7 +81,7 @@ defmodule EssenceUI.Components.DataList do
 
     ~H"""
     <dl
-      class={["rt-DataListRoot", @extracted_class, @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["est-DataListRoot", @extracted_class, @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={[@extracted_style, @style] |> Enum.filter(& &1) |> Enum.join("; ")}
       {@rest}
     >
@@ -102,7 +102,7 @@ defmodule EssenceUI.Components.DataList do
 
   def data_list_item(assigns) do
     prop_defs = %{
-      align: %{type: :enum, class: "rt-r-ai", values: @aligns, default: "baseline", responsive: true}
+      align: %{type: :enum, class: "est-r-ai", values: @aligns, default: "baseline", responsive: true}
     }
 
     extracted = ExtractProps.call(assigns, prop_defs)
@@ -115,14 +115,14 @@ defmodule EssenceUI.Components.DataList do
 
     ~H"""
     <div
-      class={["rt-DataListItem", @extracted_class, @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["est-DataListItem", @extracted_class, @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={[@extracted_style, @style] |> Enum.filter(& &1) |> Enum.join("; ")}
       {@rest}
     >
-      <dt class="rt-DataListLabel">
+      <dt class="est-DataListLabel">
         {render_slot(@label)}
       </dt>
-      <dd class="rt-DataListValue">
+      <dd class="est-DataListValue">
         {render_slot(@value)}
       </dd>
     </div>

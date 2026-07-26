@@ -9,14 +9,14 @@ export const CheckboxCards = {
         this.handleCardClick = this.handleCardClick.bind(this);
 
         // Add click handlers to all card items
-        this.el.querySelectorAll('.rt-CheckboxCardsItem').forEach(card => {
+        this.el.querySelectorAll('.est-CheckboxCardsItem').forEach(card => {
             card.addEventListener('click', this.handleCardClick);
         });
     },
 
     handleCardClick(event) {
         const card = event.currentTarget;
-        const checkbox = card.querySelector('.rt-CheckboxCardCheckbox');
+        const checkbox = card.querySelector('.est-CheckboxCardCheckbox');
 
         if (!checkbox || checkbox.disabled) {
             return;
@@ -39,7 +39,7 @@ export const CheckboxCards = {
           fill="currentcolor"
           xmlns="http://www.w3.org/2000/svg"
           data-state="checked"
-          class="rt-BaseCheckboxIndicator"
+          class="est-BaseCheckboxIndicator"
           style="pointer-events: none;"
         >
           <path
@@ -56,7 +56,7 @@ export const CheckboxCards = {
 
     destroyed() {
         // Cleanup event listeners
-        this.el.querySelectorAll('.rt-CheckboxCardsItem').forEach(card => {
+        this.el.querySelectorAll('.est-CheckboxCardsItem').forEach(card => {
             card.removeEventListener('click', this.handleCardClick);
         });
     }

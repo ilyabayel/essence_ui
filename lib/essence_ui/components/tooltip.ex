@@ -71,9 +71,9 @@ defmodule EssenceUI.Components.Tooltip do
       |> assign(extracted_class: extracted.class)
 
     ~H"""
-    <div class="rt-TooltipRoot" data-state="closed">
+    <div class="est-TooltipRoot" data-state="closed">
       <div
-        class="rt-TooltipTrigger"
+        class="est-TooltipTrigger"
         data-state="closed"
         phx-hook="Tooltip"
         id={"#{@tooltip_id}-trigger"}
@@ -86,8 +86,8 @@ defmodule EssenceUI.Components.Tooltip do
       <div
         class={
           [
-            "rt-TooltipContent",
-            "rt-reset",
+            "est-TooltipContent",
+            "est-reset",
             @extracted_class
           ]
           |> Enum.filter(& &1)
@@ -103,7 +103,7 @@ defmodule EssenceUI.Components.Tooltip do
         {@rest}
       >
         <span
-          class="rt-Text rt-TooltipText rt-r-size-1"
+          class="est-Text est-TooltipText est-r-size-1"
           style="display: block; font-size: var(--font-size-1); line-height: var(--line-height-1);"
         >
           {@content}
@@ -113,7 +113,7 @@ defmodule EssenceUI.Components.Tooltip do
           height="5"
           viewBox="0 0 30 10"
           preserveAspectRatio="none"
-          class="rt-TooltipArrow"
+          class="est-TooltipArrow"
           style="position: absolute; top: 100%;"
         >
           <polygon points="0,0 30,0 15,10" />

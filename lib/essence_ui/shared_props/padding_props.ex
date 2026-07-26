@@ -10,49 +10,49 @@ defmodule EssenceUI.SharedProps.PaddingProps do
         type: [:enum, :string],
         values: padding_values(),
         responsive: true,
-        class: "rt-r-p",
+        class: "est-r-p",
         custom_properties: ["--p"]
       },
       px: %{
         type: [:enum, :string],
         values: padding_values(),
         responsive: true,
-        class: "rt-r-px",
+        class: "est-r-px",
         custom_properties: ["--pl", "--pr"]
       },
       py: %{
         type: [:enum, :string],
         values: padding_values(),
         responsive: true,
-        class: "rt-r-py",
+        class: "est-r-py",
         custom_properties: ["--pt", "--pb"]
       },
       pt: %{
         type: [:enum, :string],
         values: padding_values(),
         responsive: true,
-        class: "rt-r-pt",
+        class: "est-r-pt",
         custom_properties: ["--pt"]
       },
       pr: %{
         type: [:enum, :string],
         values: padding_values(),
         responsive: true,
-        class: "rt-r-pr",
+        class: "est-r-pr",
         custom_properties: ["--pr"]
       },
       pb: %{
         type: [:enum, :string],
         values: padding_values(),
         responsive: true,
-        class: "rt-r-pb",
+        class: "est-r-pb",
         custom_properties: ["--pb"]
       },
       pl: %{
         type: [:enum, :string],
         values: padding_values(),
         responsive: true,
-        class: "rt-r-pl",
+        class: "est-r-pl",
         custom_properties: ["--pl"]
       }
     }

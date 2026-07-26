@@ -173,7 +173,7 @@ export const Tooltip = {
     tooltip.style.zIndex = "9999";
     tooltip.style.pointerEvents = "none";
 
-    const arrow = tooltip.querySelector(".rt-TooltipArrow");
+    const arrow = tooltip.querySelector(".est-TooltipArrow");
     if (arrow) {
       let aTop = "",
         aLeft = "",

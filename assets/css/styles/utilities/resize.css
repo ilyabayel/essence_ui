@@ -1,14 +1,17 @@
 @breakpoints {
-  .rt-r-resize-none {
+  .est-r-resize-none {
     resize: none;
   }
-  .rt-r-resize-vertical {
+
+  .est-r-resize-vertical {
     resize: vertical;
   }
-  .rt-r-resize-horizontal {
+
+  .est-r-resize-horizontal {
     resize: horizontal;
   }
-  .rt-r-resize-both {
+
+  .est-r-resize-both {
     resize: both;
   }
 }

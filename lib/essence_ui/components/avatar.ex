@@ -77,13 +77,13 @@ defmodule EssenceUI.Components.Avatar do
           type: :enum,
           values: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
           default: "3",
-          class: "rt-r-size"
+          class: "est-r-size"
         },
         variant: %{
           type: :enum,
           values: ["solid", "soft"],
           default: "soft",
-          class: "rt-variant"
+          class: "est-variant"
         }
       }
       |> Map.merge(AsChildProps.prop_defs())
@@ -93,7 +93,7 @@ defmodule EssenceUI.Components.Avatar do
 
     extracted = EssenceUI.Helpers.ExtractProps.call(assigns, prop_defs)
 
-    class = ["rt-reset", "rt-AvatarRoot", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["est-reset", "est-AvatarRoot", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
 
     assigns =
       assigns
@@ -110,7 +110,7 @@ defmodule EssenceUI.Components.Avatar do
     <span class={@class} style={@style} data-accent-color={@color} data-radius={@radius} {@rest}>
       <.avatar_image :if={@has_image} src={@src} alt={@alt} />
       <.avatar_fallback :if={!@has_image and @fallback} fallback={@fallback} />
-      <span :if={!@has_image and !@fallback} class="rt-AvatarFallback">
+      <span :if={!@has_image and !@fallback} class="est-AvatarFallback">
         {render_slot(@fallback_slot)}
       </span>
     </span>
@@ -120,7 +120,7 @@ defmodule EssenceUI.Components.Avatar do
   # Avatar Image sub-component
   defp avatar_image(assigns) do
     ~H"""
-    <img class="rt-AvatarImage" src={@src} alt={@alt} />
+    <img class="est-AvatarImage" src={@src} alt={@alt} />
     """
   end
 
@@ -128,7 +128,7 @@ defmodule EssenceUI.Components.Avatar do
   defp avatar_fallback(assigns) do
     fallback_classes =
       [
-        "rt-AvatarFallback",
+        "est-AvatarFallback",
         fallback_size_class(assigns.fallback)
       ]
       |> Enum.filter(& &1)
@@ -146,8 +146,8 @@ defmodule EssenceUI.Components.Avatar do
   # Determine fallback size class based on content
   defp fallback_size_class(fallback) when is_binary(fallback) do
     case String.length(fallback) do
-      1 -> "rt-one-letter"
-      2 -> "rt-two-letters"
+      1 -> "est-one-letter"
+      2 -> "est-two-letters"
       _ -> nil
     end
   end

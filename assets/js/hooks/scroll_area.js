@@ -2,11 +2,11 @@ import { hasFinePointerHover, whenMouse } from "../lib/pointer";
 
 export const ScrollArea = {
   mounted() {
-    this.viewport = this.el.querySelector('.rt-ScrollAreaViewport');
-    this.verticalScrollbar = this.el.querySelector('.rt-ScrollAreaScrollbar[data-orientation="vertical"]');
-    this.horizontalScrollbar = this.el.querySelector('.rt-ScrollAreaScrollbar[data-orientation="horizontal"]');
-    this.verticalThumb = this.verticalScrollbar.querySelector('.rt-ScrollAreaThumb');
-    this.horizontalThumb = this.horizontalScrollbar.querySelector('.rt-ScrollAreaThumb');
+    this.viewport = this.el.querySelector('.est-ScrollAreaViewport');
+    this.verticalScrollbar = this.el.querySelector('.est-ScrollAreaScrollbar[data-orientation="vertical"]');
+    this.horizontalScrollbar = this.el.querySelector('.est-ScrollAreaScrollbar[data-orientation="horizontal"]');
+    this.verticalThumb = this.verticalScrollbar.querySelector('.est-ScrollAreaThumb');
+    this.horizontalThumb = this.horizontalScrollbar.querySelector('.est-ScrollAreaThumb');
     this.type = this.el.dataset.type || 'hover';
     if (this.type === 'hover' && !hasFinePointerHover()) {
       this.type = 'scroll';

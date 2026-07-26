@@ -1,4 +1,4 @@
-.rt-SelectTrigger {
+.est-SelectTrigger {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
@@ -18,31 +18,25 @@
     }
 }
 
-.rt-SelectTriggerInner {
+.est-SelectTriggerInner {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.rt-SelectIcon {
+.est-SelectIcon {
     flex-shrink: 0;
 
-    :where(.rt-SelectTrigger:not(.rt-variant-ghost)) & {
+    :where(.est-SelectTrigger:not(.est-variant-ghost)) & {
         opacity: 0.9;
     }
 }
 
-.rt-SelectContent {
+.est-SelectContent {
     --scrollarea-scrollbar-vertical-margin-top: var(--select-content-padding);
-    --scrollarea-scrollbar-vertical-margin-bottom: var(
-        --select-content-padding
-    );
-    --scrollarea-scrollbar-horizontal-margin-left: var(
-        --select-content-padding
-    );
-    --scrollarea-scrollbar-horizontal-margin-right: var(
-        --select-content-padding
-    );
+    --scrollarea-scrollbar-vertical-margin-bottom: var(--select-content-padding);
+    --scrollarea-scrollbar-horizontal-margin-left: var(--select-content-padding);
+    --scrollarea-scrollbar-horizontal-margin-right: var(--select-content-padding);
 
     overflow: hidden;
     background-color: var(--color-panel-solid);
@@ -54,21 +48,16 @@
     }
 }
 
-.rt-SelectViewport {
+.est-SelectViewport {
     box-sizing: border-box;
     padding: var(--select-content-padding);
 
-    :where(
-            .rt-SelectContent:has(
-                    .rt-ScrollAreaScrollbar[data-orientation="vertical"]
-                )
-        )
-        & {
+    :where(.est-SelectContent:has(.est-ScrollAreaScrollbar[data-orientation="vertical"])) & {
         padding-right: var(--space-3);
     }
 }
 
-.rt-SelectItem {
+.est-SelectItem {
     display: flex;
     align-items: center;
     height: var(--select-item-height);
@@ -84,12 +73,13 @@
 
     /* Cursors */
     cursor: var(--cursor-menu-item);
+
     &:where([data-disabled]) {
         cursor: default;
     }
 }
 
-.rt-SelectItemIndicator {
+.est-SelectItemIndicator {
     position: absolute;
     left: 0;
     width: var(--select-item-indicator-width);
@@ -98,7 +88,7 @@
     justify-content: center;
 }
 
-.rt-SelectSeparator {
+.est-SelectSeparator {
     height: 1px;
     margin-top: var(--space-2);
     margin-bottom: var(--space-2);
@@ -106,7 +96,7 @@
     margin-right: var(--select-separator-margin-right);
 }
 
-.rt-SelectLabel {
+.est-SelectLabel {
     display: flex;
     align-items: center;
     height: var(--select-item-height);
@@ -116,7 +106,7 @@
     user-select: none;
     cursor: default;
 
-    :where(.rt-SelectItem) + & {
+    :where(.est-SelectItem)+& {
         margin-top: var(--space-2);
     }
 }
@@ -127,18 +117,18 @@
  *                                                                                                 *
  ***************************************************************************************************/
 
-.rt-SelectTrigger {
+.est-SelectTrigger {
     color: var(--gray-12);
 
-    &:where(:not(.rt-variant-ghost)) {
+    &:where(:not(.est-variant-ghost)) {
         box-sizing: border-box;
         height: var(--select-trigger-height);
     }
-    &:where(.rt-variant-ghost) {
+
+    &:where(.est-variant-ghost) {
         box-sizing: content-box;
         height: fit-content;
-        padding: var(--select-trigger-ghost-padding-y)
-            var(--select-trigger-ghost-padding-x);
+        padding: var(--select-trigger-ghost-padding-y) var(--select-trigger-ghost-padding-x);
 
         /* We reset the defined margin variables to avoid inheriting them from a higher component */
         /* If a margin IS defined on the component itself, the utility class will win and reset it */
@@ -148,35 +138,26 @@
         --margin-left: 0px;
 
         /* Define the overrides to incorporate the negative margins */
-        --margin-top-override: calc(
-            var(--margin-top) - var(--select-trigger-ghost-padding-y)
-        );
-        --margin-right-override: calc(
-            var(--margin-right) - var(--select-trigger-ghost-padding-x)
-        );
-        --margin-bottom-override: calc(
-            var(--margin-bottom) - var(--select-trigger-ghost-padding-y)
-        );
-        --margin-left-override: calc(
-            var(--margin-left) - var(--select-trigger-ghost-padding-x)
-        );
+        --margin-top-override: calc(var(--margin-top) - var(--select-trigger-ghost-padding-y));
+        --margin-right-override: calc(var(--margin-right) - var(--select-trigger-ghost-padding-x));
+        --margin-bottom-override: calc(var(--margin-bottom) - var(--select-trigger-ghost-padding-y));
+        --margin-left-override: calc(var(--margin-left) - var(--select-trigger-ghost-padding-x));
 
         /* Reset the overrides on direct children */
-        :where(&) > * {
+        :where(&)>* {
             --margin-top-override: initial;
             --margin-right-override: initial;
             --margin-bottom-override: initial;
             --margin-left-override: initial;
         }
 
-        margin: var(--margin-top-override) var(--margin-right-override)
-            var(--margin-bottom-override) var(--margin-left-override);
+        margin: var(--margin-top-override) var(--margin-right-override) var(--margin-bottom-override) var(--margin-left-override);
     }
 }
 
 @breakpoints {
-    .rt-SelectTrigger {
-        &:where(.rt-r-size-1) {
+    .est-SelectTrigger {
+        &:where(.est-r-size-1) {
             --select-trigger-height: var(--space-5);
             gap: var(--space-1);
             font-size: var(--font-size-1);
@@ -184,16 +165,18 @@
             letter-spacing: var(--letter-spacing-1);
             border-radius: max(var(--radius-1), var(--radius-full));
 
-            &:where(:not(.rt-variant-ghost)) {
+            &:where(:not(.est-variant-ghost)) {
                 padding-left: var(--space-2);
                 padding-right: var(--space-2);
             }
-            &:where(.rt-variant-ghost) {
+
+            &:where(.est-variant-ghost) {
                 --select-trigger-ghost-padding-x: var(--space-2);
                 --select-trigger-ghost-padding-y: var(--space-1);
             }
         }
-        &:where(.rt-r-size-2) {
+
+        &:where(.est-r-size-2) {
             --select-trigger-height: var(--space-6);
             gap: calc(var(--space-1) * 1.5);
             font-size: var(--font-size-2);
@@ -201,16 +184,18 @@
             letter-spacing: var(--letter-spacing-2);
             border-radius: max(var(--radius-2), var(--radius-full));
 
-            &:where(:not(.rt-variant-ghost)) {
+            &:where(:not(.est-variant-ghost)) {
                 padding-left: var(--space-3);
                 padding-right: var(--space-3);
             }
-            &:where(.rt-variant-ghost) {
+
+            &:where(.est-variant-ghost) {
                 --select-trigger-ghost-padding-x: var(--space-2);
                 --select-trigger-ghost-padding-y: var(--space-1);
             }
         }
-        &:where(.rt-r-size-3) {
+
+        &:where(.est-r-size-3) {
             --select-trigger-height: var(--space-7);
             gap: var(--space-2);
             font-size: var(--font-size-3);
@@ -218,15 +203,17 @@
             letter-spacing: var(--letter-spacing-3);
             border-radius: max(var(--radius-3), var(--radius-full));
 
-            &:where(:not(.rt-variant-ghost)) {
+            &:where(:not(.est-variant-ghost)) {
                 padding-left: var(--space-4);
                 padding-right: var(--space-4);
             }
-            &:where(.rt-variant-ghost) {
+
+            &:where(.est-variant-ghost) {
                 --select-trigger-ghost-padding-x: var(--space-3);
                 --select-trigger-ghost-padding-y: calc(var(--space-1) * 1.5);
             }
-            & :where(.rt-SelectIcon) {
+
+            & :where(.est-SelectIcon) {
                 width: 11px;
                 height: 11px;
             }
@@ -241,63 +228,71 @@
  ***************************************************************************************************/
 
 @breakpoints {
-    .rt-SelectContent {
-        &:where(.rt-r-size-1) {
+    .est-SelectContent {
+        &:where(.est-r-size-1) {
             --select-content-padding: var(--space-1);
             --select-item-height: var(--space-5);
             --select-item-indicator-width: calc(var(--space-5) / 1.2);
             --select-separator-margin-right: var(--space-2);
             border-radius: var(--radius-3);
 
-            & :where(.rt-SelectLabel) {
+            & :where(.est-SelectLabel) {
                 font-size: var(--font-size-1);
                 letter-spacing: var(--letter-spacing-1);
                 line-height: var(--line-height-1);
             }
-            & :where(.rt-SelectItem) {
+
+            & :where(.est-SelectItem) {
                 font-size: var(--font-size-1);
                 line-height: var(--line-height-1);
                 letter-spacing: var(--letter-spacing-1);
                 border-radius: var(--radius-1);
             }
-            & :where(.rt-SelectItemIndicatorIcon) {
+
+            & :where(.est-SelectItemIndicatorIcon) {
                 width: calc(8px * var(--scaling));
                 height: calc(8px * var(--scaling));
             }
         }
-        &:where(.rt-r-size-2, .rt-r-size-3) {
+
+        &:where(.est-r-size-2, .est-r-size-3) {
             --select-content-padding: var(--space-2);
             --select-item-height: var(--space-6);
             --select-item-indicator-width: var(--space-5);
             --select-separator-margin-right: var(--space-3);
             border-radius: var(--radius-4);
 
-            & :where(.rt-SelectLabel) {
+            & :where(.est-SelectLabel) {
                 font-size: var(--font-size-2);
                 letter-spacing: var(--letter-spacing-2);
                 line-height: var(--line-height-2);
             }
-            & :where(.rt-SelectItem) {
+
+            & :where(.est-SelectItem) {
                 line-height: var(--line-height-2);
                 border-radius: var(--radius-2);
             }
         }
-        &:where(.rt-r-size-2) {
-            & :where(.rt-SelectItem) {
+
+        &:where(.est-r-size-2) {
+            & :where(.est-SelectItem) {
                 font-size: var(--font-size-2);
                 letter-spacing: var(--letter-spacing-2);
             }
-            & :where(.rt-SelectItemIndicatorIcon) {
+
+            & :where(.est-SelectItemIndicatorIcon) {
                 width: calc(10px * var(--scaling));
                 height: calc(10px * var(--scaling));
             }
         }
-        &:where(.rt-r-size-3) {
-            & :where(.rt-SelectItem) {
+
+        &:where(.est-r-size-3) {
+            & :where(.est-SelectItem) {
                 font-size: var(--font-size-3);
                 letter-spacing: var(--letter-spacing-3);
             }
-            & :where(.rt-SelectItemIndicatorIcon) {
+
+            & :where(.est-SelectItemIndicatorIcon) {
                 width: calc(10px * var(--scaling));
                 height: calc(10px * var(--scaling));
             }
@@ -313,7 +308,7 @@
 
 /* surface */
 
-.rt-SelectTrigger:where(.rt-variant-surface) {
+.est-SelectTrigger:where(.est-variant-surface) {
     color: var(--gray-12);
     background-color: var(--color-surface);
     box-shadow: inset 0 0 0 1px var(--gray-a7);
@@ -323,16 +318,19 @@
             box-shadow: inset 0 0 0 1px var(--gray-a8);
         }
     }
+
     &:where([data-state="open"]) {
         box-shadow: inset 0 0 0 1px var(--gray-a8);
     }
+
     &:where(:disabled) {
         color: var(--gray-a11);
         background-color: var(--gray-a2);
         box-shadow: inset 0 0 0 1px var(--gray-a6);
     }
+
     &:where([data-placeholder]) {
-        & :where(.rt-SelectTriggerInner) {
+        & :where(.est-SelectTriggerInner) {
             color: var(--gray-a10);
         }
     }
@@ -342,24 +340,22 @@
 
 /* prettier-ignore */
 :where(.essence-ui) {
-  --select-trigger-classic-box-shadow:
-		inset 0 0 0 1px var(--gray-a5),
-		inset 0 2px 1px var(--white-a11),
-		inset 0 -2px 1px var(--gray-a4)
-	;
+    --select-trigger-classic-box-shadow:
+        inset 0 0 0 1px var(--gray-a5),
+        inset 0 2px 1px var(--white-a11),
+        inset 0 -2px 1px var(--gray-a4);
 }
 
 /* prettier-ignore */
 :is(.dark, .dark-theme),
 :is(.dark, .dark-theme) :where(.essence-ui:not(.light, .light-theme)) {
-  --select-trigger-classic-box-shadow:
-    inset 0 0 0 1px var(--white-a4),
-    inset 0 1px 1px var(--white-a4),
-    inset 0 -1px 1px var(--black-a9)
-	;
+    --select-trigger-classic-box-shadow:
+        inset 0 0 0 1px var(--white-a4),
+        inset 0 1px 1px var(--white-a4),
+        inset 0 -1px 1px var(--black-a9);
 }
 
-.rt-SelectTrigger:where(.rt-variant-classic) {
+.est-SelectTrigger:where(.est-variant-classic) {
     color: var(--gray-12);
     background-image: linear-gradient(var(--gray-2), var(--gray-1));
     box-shadow: var(--select-trigger-classic-box-shadow);
@@ -376,11 +372,9 @@
         border-radius: inherit;
         pointer-events: none;
         background-image:
-            linear-gradient(
-                var(--black-a1) -20%,
+            linear-gradient(var(--black-a1) -20%,
                 transparent,
-                var(--white-a1) 130%
-            ),
+                var(--white-a1) 130%),
             linear-gradient(var(--color-surface), transparent);
     }
 
@@ -392,15 +386,14 @@
 
             &::before {
                 background-image:
-                    linear-gradient(
-                        var(--black-a1) -15%,
+                    linear-gradient(var(--black-a1) -15%,
                         transparent,
-                        var(--white-a1) 120%
-                    ),
+                        var(--white-a1) 120%),
                     linear-gradient(var(--gray-2), var(--gray-1));
             }
         }
     }
+
     &:where([data-state="open"]) {
         box-shadow:
             inset 0 0 0 1px var(--gray-a3),
@@ -408,31 +401,30 @@
 
         &::before {
             background-image:
-                linear-gradient(
-                    var(--black-a1) -15%,
+                linear-gradient(var(--black-a1) -15%,
                     transparent,
-                    var(--white-a1) 120%
-                ),
+                    var(--white-a1) 120%),
                 linear-gradient(var(--gray-2), var(--gray-1));
         }
     }
+
     &:where(:disabled) {
         color: var(--gray-a11);
         background-color: var(--gray-2);
         background-image: none;
         /* Use disabled button style for the shadow */
         box-shadow: var(--base-button-classic-disabled-box-shadow);
+
         &::before {
             background-color: var(--gray-a2);
-            background-image: linear-gradient(
-                var(--black-a1) -20%,
-                transparent,
-                var(--white-a1)
-            );
+            background-image: linear-gradient(var(--black-a1) -20%,
+                    transparent,
+                    var(--white-a1));
         }
     }
+
     &:where([data-placeholder]) {
-        & :where(.rt-SelectTriggerInner) {
+        & :where(.est-SelectTriggerInner) {
             color: var(--gray-a10);
         }
     }
@@ -440,19 +432,19 @@
 
 /* soft / ghost */
 
-.rt-SelectTrigger:where(.rt-variant-soft),
-.rt-SelectTrigger:where(.rt-variant-ghost) {
+.est-SelectTrigger:where(.est-variant-soft),
+.est-SelectTrigger:where(.est-variant-ghost) {
     color: var(--accent-12);
 
     &:where([data-placeholder]) {
-        & :where(.rt-SelectTriggerInner) {
+        & :where(.est-SelectTriggerInner) {
             color: var(--accent-12);
             opacity: 0.6;
         }
     }
 }
 
-.rt-SelectTrigger:where(.rt-variant-soft) {
+.est-SelectTrigger:where(.est-variant-soft) {
     background-color: var(--accent-a3);
 
     @media (hover: hover) {
@@ -460,28 +452,33 @@
             background-color: var(--accent-a4);
         }
     }
+
     &:where([data-state="open"]) {
         background-color: var(--accent-a4);
     }
+
     &:where(:focus-visible) {
         /* Use gray outline when component color is gray */
         outline-color: var(--accent-8);
     }
+
     &:where(:disabled) {
         color: var(--gray-a11);
         background-color: var(--gray-a3);
     }
 }
 
-.rt-SelectTrigger:where(.rt-variant-ghost) {
+.est-SelectTrigger:where(.est-variant-ghost) {
     @media (hover: hover) {
         &:where(:hover) {
             background-color: var(--accent-a3);
         }
     }
+
     &:where([data-state="open"]) {
         background-color: var(--accent-a3);
     }
+
     &:where(:disabled) {
         color: var(--gray-a11);
         background-color: transparent;
@@ -489,9 +486,9 @@
 }
 
 /* all disabled */
-.rt-SelectTrigger {
+.est-SelectTrigger {
     &:where(:disabled) {
-        & :where(.rt-SelectIcon) {
+        & :where(.est-SelectIcon) {
             color: var(--gray-a9);
         }
     }
@@ -503,26 +500,27 @@
  *                                                                                                 *
  ***************************************************************************************************/
 
-.rt-SelectContent {
+.est-SelectContent {
     box-shadow: var(--shadow-5);
 }
 
-.rt-SelectItem:where([data-disabled]) {
+.est-SelectItem:where([data-disabled]) {
     color: var(--gray-a8);
 }
 
-.rt-SelectSeparator {
+.est-SelectSeparator {
     background-color: var(--gray-a6);
 }
 
 /* solid */
 
-.rt-SelectContent:where(.rt-variant-solid) {
-    & :where(.rt-SelectItem[data-highlighted]) {
+.est-SelectContent:where(.est-variant-solid) {
+    & :where(.est-SelectItem[data-highlighted]) {
         background-color: var(--accent-9);
         color: var(--accent-contrast);
     }
-    &:where(.rt-high-contrast) :where(.rt-SelectItem[data-highlighted]) {
+
+    &:where(.est-high-contrast) :where(.est-SelectItem[data-highlighted]) {
         background-color: var(--accent-12);
         color: var(--accent-1);
     }
@@ -530,8 +528,8 @@
 
 /* soft */
 
-.rt-SelectContent:where(.rt-variant-soft) {
-    & :where(.rt-SelectItem[data-highlighted]) {
+.est-SelectContent:where(.est-variant-soft) {
+    & :where(.est-SelectItem[data-highlighted]) {
         background-color: var(--accent-a4);
     }
 }

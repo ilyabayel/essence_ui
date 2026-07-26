@@ -20,13 +20,13 @@ defmodule EssenceUI.Components.Kbd do
   def kbd(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, values: @size_values, class: "rt-r-size", responsive: true}
+        size: %{type: :enum, values: @size_values, class: "est-r-size", responsive: true}
       }
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
     class =
-      ["rt-Kbd", extracted.class]
+      ["est-Kbd", extracted.class]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 

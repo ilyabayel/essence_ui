@@ -41,7 +41,7 @@ defmodule EssenceUI.Components.Quote do
 
     extracted = EssenceUI.Helpers.ExtractProps.call(assigns, prop_defs)
 
-    class = ["rt-Quote", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["est-Quote", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
     style = [extracted.style, assigns[:style]] |> Enum.filter(& &1) |> Enum.join("; ")
 
     assigns = assign(assigns, class: class, style: style)

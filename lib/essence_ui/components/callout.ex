@@ -68,8 +68,8 @@ defmodule EssenceUI.Components.Callout do
   def callout(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, values: @sizes, class: "rt-r-size", default: "2"},
-        variant: %{type: :enum, values: @variants, class: "rt-variant", default: "soft"}
+        size: %{type: :enum, values: @sizes, class: "est-r-size", default: "2"},
+        variant: %{type: :enum, values: @variants, class: "est-variant", default: "soft"}
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(HighContrastProps.prop_defs())
@@ -79,7 +79,7 @@ defmodule EssenceUI.Components.Callout do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    class = ["rt-CalloutRoot", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["est-CalloutRoot", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
 
     assigns =
       assign(assigns,
@@ -94,12 +94,12 @@ defmodule EssenceUI.Components.Callout do
     <div class={@class} style={@style} data-accent-color={@color} data-radius={@radius} {@rest}>
       <div
         :if={@icon != []}
-        class="rt-CalloutIcon"
+        class="est-CalloutIcon"
         style="display: flex; align-items: center; justify-content: center; height: 100%;"
       >
         {render_slot(@icon)}
       </div>
-      <Text.text class="rt-CalloutText" size={@size}>
+      <Text.text class="est-CalloutText" size={@size}>
         {render_slot(@text)}
       </Text.text>
     </div>

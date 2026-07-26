@@ -49,7 +49,7 @@ defmodule EssenceUI.SharedProps.ColorProps do
         type: [:enum, :string],
         values: @accent_colors,
         responsive: false,
-        class: "rt-r-color"
+        class: "est-r-color"
       }
     }
   end
@@ -60,7 +60,7 @@ defmodule EssenceUI.SharedProps.ColorProps do
         type: [:enum, :string],
         values: @accent_colors,
         responsive: false,
-        class: "rt-r-accent-color"
+        class: "est-r-accent-color"
       }
     }
   end

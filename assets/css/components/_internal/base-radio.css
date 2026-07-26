@@ -1,4 +1,4 @@
-.rt-BaseRadioRoot {
+.est-BaseRadioRoot {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -56,14 +56,16 @@
  ***************************************************************************************************/
 
 @breakpoints {
-  .rt-BaseRadioRoot {
-    &:where(.rt-r-size-1) {
+  .est-BaseRadioRoot {
+    &:where(.est-r-size-1) {
       --radio-size: calc(var(--space-4) * 0.875);
     }
-    &:where(.rt-r-size-2) {
+
+    &:where(.est-r-size-2) {
       --radio-size: var(--space-4);
     }
-    &:where(.rt-r-size-3) {
+
+    &:where(.est-r-size-3) {
       --radio-size: calc(var(--space-4) * 1.25);
     }
   }
@@ -77,22 +79,25 @@
 
 /* surface */
 
-.rt-BaseRadioRoot:where(.rt-variant-surface) {
+.est-BaseRadioRoot:where(.est-variant-surface) {
   &:where(:not(:checked), [data-state='unchecked'])::before {
     background-color: var(--color-surface);
     box-shadow: inset 0 0 0 1px var(--gray-a7);
   }
+
   &:where(:checked, [data-state='checked'])::before {
     background-color: var(--accent-indicator);
   }
+
   &::after {
     background-color: var(--accent-contrast);
   }
 
-  &:where(.rt-high-contrast) {
+  &:where(.est-high-contrast) {
     &:where(:checked, [data-state='checked'])::before {
       background-color: var(--accent-12);
     }
+
     &::after {
       background-color: var(--accent-1);
     }
@@ -102,6 +107,7 @@
     box-shadow: inset 0 0 0 1px var(--gray-a6);
     background-color: var(--gray-a3);
   }
+
   &:where(:disabled, [data-disabled])::after {
     background-color: var(--gray-a8);
   }
@@ -109,24 +115,27 @@
 
 /* classic */
 
-.rt-BaseRadioRoot:where(.rt-variant-classic) {
+.est-BaseRadioRoot:where(.est-variant-classic) {
   &:where(:not(:checked), [data-state='unchecked'])::before {
     background-color: var(--color-surface);
     box-shadow: inset 0 0 0 1px var(--gray-7), var(--shadow-1);
   }
+
   &:where(:checked, [data-state='checked'])::before {
     background-color: var(--accent-indicator);
     background-image: linear-gradient(to bottom, var(--white-a3), transparent, var(--black-a3));
     box-shadow: inset 0 0.5px 0.5px var(--white-a4), inset 0 -0.5px 0.5px var(--black-a4);
   }
+
   &::after {
     background-color: var(--accent-contrast);
   }
 
-  &:where(.rt-high-contrast) {
+  &:where(.est-high-contrast) {
     &:where(:checked, [data-state='checked'])::before {
       background-color: var(--accent-12);
     }
+
     &::after {
       background-color: var(--accent-1);
     }
@@ -137,6 +146,7 @@
     background-color: var(--gray-a3);
     background-image: none;
   }
+
   &:where(:disabled, [data-disabled])::after {
     background-color: var(--gray-a8);
   }
@@ -144,15 +154,16 @@
 
 /* soft */
 
-.rt-BaseRadioRoot:where(.rt-variant-soft) {
+.est-BaseRadioRoot:where(.est-variant-soft) {
   &::before {
     background-color: var(--accent-a4);
   }
+
   &::after {
     background-color: var(--accent-a11);
   }
 
-  &:where(.rt-high-contrast) {
+  &:where(.est-high-contrast) {
     &::after {
       background-color: var(--accent-12);
     }
@@ -166,6 +177,7 @@
   &:where(:disabled, [data-disabled])::before {
     background-color: var(--gray-a3);
   }
+
   &:where(:disabled, [data-disabled])::after {
     background-color: var(--gray-a8);
   }

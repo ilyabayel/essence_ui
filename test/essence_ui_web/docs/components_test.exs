@@ -37,7 +37,7 @@ defmodule EssenceUIWeb.Docs.ComponentsTest do
 
     assert html =~ "docs-demo__preview"
     assert html =~ "HEEx"
-    assert html =~ "rt-Card" or html =~ "docs-demo"
+    assert html =~ "est-Card" or html =~ "docs-demo"
     assert html =~ "&lt;.button&gt;Hi&lt;/.button&gt;" or html =~ "<.button>Hi</.button>"
   end
 
@@ -49,7 +49,7 @@ defmodule EssenceUIWeb.Docs.ComponentsTest do
       })
 
     assert html =~ "docs-props__card"
-    assert html =~ "rt-Table"
+    assert html =~ "est-Table"
     assert html =~ "variant"
   end
 end

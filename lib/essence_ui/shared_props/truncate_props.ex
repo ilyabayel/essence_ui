@@ -5,7 +5,7 @@ defmodule EssenceUI.SharedProps.TruncateProps do
 
   def prop_defs do
     %{
-      truncate: %{type: :boolean, class: "rt-truncate"}
+      truncate: %{type: :boolean, class: "est-truncate"}
     }
   end
 

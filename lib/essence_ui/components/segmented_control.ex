@@ -95,14 +95,14 @@ defmodule EssenceUI.Components.SegmentedControl do
       %{
         size: %{
           type: :enum,
-          class: "rt-r-size",
+          class: "est-r-size",
           values: @sizes,
           default: "2",
           responsive: true
         },
         variant: %{
           type: :enum,
-          class: "rt-variant",
+          class: "est-variant",
           values: @variants,
           default: "surface"
         }
@@ -119,8 +119,8 @@ defmodule EssenceUI.Components.SegmentedControl do
     # Build CSS classes
     class =
       [
-        "rt-reset",
-        "rt-SegmentedControlRoot",
+        "est-reset",
+        "est-SegmentedControlRoot",
         extracted.class
       ]
       |> Enum.filter(& &1)
@@ -154,7 +154,7 @@ defmodule EssenceUI.Components.SegmentedControl do
           {render_slot(entry)}
         </.segmented_control_item>
       <% end %>
-      <div class="rt-SegmentedControlIndicator"></div>
+      <div class="est-SegmentedControlIndicator"></div>
     </div>
     """
   end
@@ -191,8 +191,8 @@ defmodule EssenceUI.Components.SegmentedControl do
     # Build CSS classes
     class =
       [
-        "rt-reset",
-        "rt-SegmentedControlItem",
+        "est-reset",
+        "est-SegmentedControlItem",
         assigns.class
       ]
       |> Enum.filter(& &1)
@@ -216,12 +216,12 @@ defmodule EssenceUI.Components.SegmentedControl do
       phx-click={if @parent_on_change && !@disabled, do: @parent_on_change.(@value)}
       {@rest}
     >
-      <div class="rt-SegmentedControlItemSeparator"></div>
-      <div class="rt-SegmentedControlItemLabel">
-        <span class="rt-SegmentedControlItemLabelInactive" aria-hidden={"#{@selected}"}>
+      <div class="est-SegmentedControlItemSeparator"></div>
+      <div class="est-SegmentedControlItemLabel">
+        <span class="est-SegmentedControlItemLabelInactive" aria-hidden={"#{@selected}"}>
           {render_slot(@inner_block)}
         </span>
-        <span class="rt-SegmentedControlItemLabelActive" aria-hidden={"#{!@selected}"}>
+        <span class="est-SegmentedControlItemLabelActive" aria-hidden={"#{!@selected}"}>
           {render_slot(@inner_block)}
         </span>
       </div>

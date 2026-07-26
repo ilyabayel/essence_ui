@@ -77,11 +77,11 @@ defmodule EssenceUI.Components.Flex do
   """
   def flex(assigns) do
     flex_prop_defs = %{
-      display: %{type: :enum, values: @display_values, class: "rt-r-display", responsive: true},
-      direction: %{type: :enum, values: @direction_values, class: "rt-r-fd", responsive: true},
-      align: %{type: :enum, values: @align_values, class: "rt-r-ai", responsive: true},
-      justify: %{type: :enum, values: @justify_values, class: "rt-r-jc", responsive: true},
-      wrap: %{type: :enum, values: @wrap_values, class: "rt-r-fw", responsive: true}
+      display: %{type: :enum, values: @display_values, class: "est-r-display", responsive: true},
+      direction: %{type: :enum, values: @direction_values, class: "est-r-fd", responsive: true},
+      align: %{type: :enum, values: @align_values, class: "est-r-ai", responsive: true},
+      justify: %{type: :enum, values: @justify_values, class: "est-r-jc", responsive: true},
+      wrap: %{type: :enum, values: @wrap_values, class: "est-r-fw", responsive: true}
     }
 
     prop_defs =
@@ -93,7 +93,7 @@ defmodule EssenceUI.Components.Flex do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    class = ["rt-Flex", extracted[:class]] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["est-Flex", extracted[:class]] |> Enum.filter(& &1) |> Enum.join(" ")
     assigns = assign(assigns, class: class, style: extracted[:style])
 
     ~H"""

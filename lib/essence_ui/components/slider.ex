@@ -110,14 +110,14 @@ defmodule EssenceUI.Components.Slider do
       %{
         size: %{
           type: :enum,
-          class: "rt-r-size",
+          class: "est-r-size",
           values: @sizes,
           default: "2",
           responsive: true
         },
         variant: %{
           type: :enum,
-          class: "rt-variant",
+          class: "est-variant",
           values: @variants,
           default: "surface"
         }
@@ -156,8 +156,8 @@ defmodule EssenceUI.Components.Slider do
     # Build CSS classes
     class =
       [
-        "rt-reset",
-        "rt-SliderRoot",
+        "est-reset",
+        "est-SliderRoot",
         extracted.class
       ]
       |> Enum.filter(& &1)
@@ -185,9 +185,9 @@ defmodule EssenceUI.Components.Slider do
       dir="ltr"
       {@rest}
     >
-      <span class="rt-SliderTrack" data-orientation={@orientation}>
+      <span class="est-SliderTrack" data-orientation={@orientation}>
         <span
-          class="rt-SliderRange"
+          class="est-SliderRange"
           data-orientation={@orientation}
           style={
             if @orientation == "horizontal" do
@@ -208,7 +208,7 @@ defmodule EssenceUI.Components.Slider do
           end
         }>
           <span
-            class="rt-SliderThumb"
+            class="est-SliderThumb"
             tabindex={if @disabled, do: -1, else: 0}
             role="slider"
             aria-valuemin={@min}

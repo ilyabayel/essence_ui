@@ -1,28 +1,33 @@
-.rt-r-fb {
+.est-r-fb {
   flex-basis: var(--flex-basis);
 }
+
 @media (--xs) {
-  .xs\:rt-r-fb {
+  .xs\:est-r-fb {
     flex-basis: var(--flex-basis-xs);
   }
 }
+
 @media (--sm) {
-  .sm\:rt-r-fb {
+  .sm\:est-r-fb {
     flex-basis: var(--flex-basis-sm);
   }
 }
+
 @media (--md) {
-  .md\:rt-r-fb {
+  .md\:est-r-fb {
     flex-basis: var(--flex-basis-md);
   }
 }
+
 @media (--lg) {
-  .lg\:rt-r-fb {
+  .lg\:est-r-fb {
     flex-basis: var(--flex-basis-lg);
   }
 }
+
 @media (--xl) {
-  .xl\:rt-r-fb {
+  .xl\:est-r-fb {
     flex-basis: var(--flex-basis-xl);
   }
 }

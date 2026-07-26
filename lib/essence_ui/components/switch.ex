@@ -93,14 +93,14 @@ defmodule EssenceUI.Components.Switch do
       %{
         size: %{
           type: :enum,
-          class: "rt-r-size",
+          class: "est-r-size",
           values: @sizes,
           default: "2",
           responsive: true
         },
         variant: %{
           type: :enum,
-          class: "rt-variant",
+          class: "est-variant",
           values: @variants,
           default: "surface"
         }
@@ -117,8 +117,8 @@ defmodule EssenceUI.Components.Switch do
     # Build CSS classes
     class =
       [
-        "rt-reset",
-        "rt-SwitchRoot",
+        "est-reset",
+        "est-SwitchRoot",
         extracted.class
       ]
       |> Enum.filter(& &1)
@@ -148,7 +148,7 @@ defmodule EssenceUI.Components.Switch do
       data-accent-color={@color}
       {@rest}
     >
-      <.thumb class="rt-SwitchThumb" />
+      <.thumb class="est-SwitchThumb" />
     </.root>
     """
   end

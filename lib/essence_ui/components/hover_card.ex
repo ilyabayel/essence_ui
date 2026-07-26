@@ -40,7 +40,7 @@ defmodule EssenceUI.Components.HoverCard do
     ~H"""
     <div
       id={@id}
-      class={["rt-HoverCardRoot", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["est-HoverCardRoot", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={
         ["display: inline-block; position: relative;", @style]
         |> Enum.filter(&(&1 != ""))
@@ -67,7 +67,7 @@ defmodule EssenceUI.Components.HoverCard do
   def hover_card_trigger(assigns) do
     ~H"""
     <div
-      class={["rt-HoverCardTrigger", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["est-HoverCardTrigger", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={["display: inline-flex;", @style] |> Enum.filter(&(&1 != "")) |> Enum.join("; ")}
       data-hover-card-trigger
       {@rest}
@@ -103,7 +103,7 @@ defmodule EssenceUI.Components.HoverCard do
   def hover_card_content(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true}
+        size: %{type: :enum, class: "est-r-size", values: @sizes, default: "2", responsive: true}
       }
       |> Map.merge(WidthProps.prop_defs())
       |> Map.merge(HeightProps.prop_defs())
@@ -119,7 +119,7 @@ defmodule EssenceUI.Components.HoverCard do
     ~H"""
     <div
       class={
-        ["rt-PopperContent", "rt-HoverCardContent", @extracted_class, @class]
+        ["est-PopperContent", "est-HoverCardContent", @extracted_class, @class]
         |> Enum.filter(& &1)
         |> Enum.join(" ")
       }

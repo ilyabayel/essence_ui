@@ -96,21 +96,21 @@ defmodule EssenceUI.Components.CheckboxCards do
       %{
         size: %{
           type: :enum,
-          class: "rt-r-size",
+          class: "est-r-size",
           values: @sizes,
           default: "2",
           responsive: true
         },
         variant: %{
           type: :enum,
-          class: "rt-variant",
+          class: "est-variant",
           values: @variants,
           default: "surface"
         },
         columns: %{
           type: [:enum, :string],
           values: @columns_values,
-          class: "rt-r-gtc",
+          class: "est-r-gtc",
           custom_properties: ["--grid-template-columns"],
           responsive: true
         }
@@ -126,8 +126,8 @@ defmodule EssenceUI.Components.CheckboxCards do
 
     class =
       [
-        "rt-Grid",
-        "rt-CheckboxCardsRoot",
+        "est-Grid",
+        "est-CheckboxCardsRoot",
         extracted.class
       ]
       |> Enum.filter(& &1)
@@ -191,7 +191,7 @@ defmodule EssenceUI.Components.CheckboxCards do
 
     ~H"""
     <label
-      class={["rt-BaseCard", "rt-CheckboxCardsItem", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["est-BaseCard", "est-CheckboxCardsItem", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={@style}
     >
       {render_slot(@inner_block)}
@@ -202,7 +202,7 @@ defmodule EssenceUI.Components.CheckboxCards do
         aria-required="false"
         data-state={@checked_state}
         value={@value}
-        class="rt-reset rt-BaseCheckboxRoot rt-CheckboxCardCheckbox rt-r-size-2 rt-variant-surface"
+        class="est-reset est-BaseCheckboxRoot est-CheckboxCardCheckbox est-r-size-2 est-variant-surface"
         tabindex="-1"
         disabled={@disabled}
         data-radix-collection-item
@@ -216,7 +216,7 @@ defmodule EssenceUI.Components.CheckboxCards do
             fill="currentcolor"
             xmlns="http://www.w3.org/2000/svg"
             data-state="checked"
-            class="rt-BaseCheckboxIndicator"
+            class="est-BaseCheckboxIndicator"
             style="pointer-events: none;"
           >
             <path

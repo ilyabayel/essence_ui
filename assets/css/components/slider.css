@@ -1,4 +1,4 @@
-.rt-SliderRoot {
+.est-SliderRoot {
     --slider-thumb-size: calc(var(--slider-track-size) + var(--space-1));
 
     position: relative;
@@ -6,10 +6,8 @@
     align-items: center;
     flex-grow: 1;
 
-    border-radius: max(
-        calc(var(--radius-factor) * var(--slider-track-size) / 3),
-        calc(var(--radius-factor) * var(--radius-thumb))
-    );
+    border-radius: max(calc(var(--radius-factor) * var(--slider-track-size) / 3),
+            calc(var(--radius-factor) * var(--radius-thumb)));
 
     /* ensures no selection */
     user-select: none;
@@ -20,6 +18,7 @@
         width: stretch;
         height: var(--slider-track-size);
     }
+
     &:where([data-orientation="vertical"]) {
         height: stretch;
         flex-direction: column;
@@ -27,7 +26,7 @@
     }
 }
 
-.rt-SliderTrack {
+.est-SliderTrack {
     overflow: hidden;
     position: relative;
     flex-grow: 1;
@@ -37,12 +36,13 @@
     &:where([data-orientation="horizontal"]) {
         height: var(--slider-track-size);
     }
+
     &:where([data-orientation="vertical"]) {
         width: var(--slider-track-size);
     }
 }
 
-.rt-SliderRange {
+.est-SliderRange {
     position: absolute;
     border-radius: inherit;
 
@@ -55,7 +55,7 @@
     }
 }
 
-.rt-SliderThumb {
+.est-SliderThumb {
     display: block;
     width: var(--slider-thumb-size);
     height: var(--slider-thumb-size);
@@ -104,14 +104,16 @@
  ***************************************************************************************************/
 
 @breakpoints {
-    .rt-SliderRoot {
-        &:where(.rt-r-size-1) {
+    .est-SliderRoot {
+        &:where(.est-r-size-1) {
             --slider-track-size: calc(var(--space-2) * 0.75);
         }
-        &:where(.rt-r-size-2) {
+
+        &:where(.est-r-size-2) {
             --slider-track-size: var(--space-2);
         }
-        &:where(.rt-r-size-3) {
+
+        &:where(.est-r-size-3) {
             --slider-track-size: calc(var(--space-2) * 1.25);
         }
     }
@@ -125,8 +127,8 @@
 
 /* surface */
 
-.rt-SliderRoot:where(.rt-variant-surface) {
-    & :where(.rt-SliderTrack) {
+.est-SliderRoot:where(.est-variant-surface) {
+    & :where(.est-SliderTrack) {
         background-color: var(--gray-a3);
         box-shadow: inset 0 0 0 1px var(--gray-a5);
 
@@ -135,13 +137,13 @@
         }
     }
 
-    & :where(.rt-SliderRange) {
+    & :where(.est-SliderRange) {
         background-color: var(--accent-track);
         background-image: var(--slider-range-high-contrast-background-image);
         box-shadow: inset 0 0 0 1px var(--gray-a5);
     }
 
-    & :where(.rt-SliderThumb) {
+    & :where(.est-SliderThumb) {
         --slider-thumb-box-shadow: 0 0 0 1px var(--black-a4);
 
         &:where([data-disabled])::after {
@@ -153,8 +155,8 @@
 
 /* classic */
 
-.rt-SliderRoot:where(.rt-variant-classic) {
-    & :where(.rt-SliderTrack) {
+.est-SliderRoot:where(.est-variant-classic) {
+    & :where(.est-SliderTrack) {
         background-color: var(--gray-a3);
         position: relative;
 
@@ -165,12 +167,13 @@
             border-radius: inherit;
             box-shadow: var(--shadow-1);
         }
+
         &:where([data-disabled])::before {
             opacity: 0.5;
         }
     }
 
-    & :where(.rt-SliderRange) {
+    & :where(.est-SliderRange) {
         background-color: var(--accent-track);
         background-image: var(--slider-range-high-contrast-background-image);
         box-shadow:
@@ -179,7 +182,7 @@
             inset 0 0 0 1px var(--black-a1),
             inset 0 1.5px 2px 0 var(--black-a2);
 
-        &:where(.rt-high-contrast) {
+        &:where(.est-high-contrast) {
             box-shadow:
                 inset 0 0 0 1px var(--gray-a3),
                 inset 0 0 0 1px var(--black-a2),
@@ -187,12 +190,12 @@
         }
     }
 
-    & :where(.rt-SliderThumb) {
+    & :where(.est-SliderThumb) {
         /* prettier-ignore */
         --slider-thumb-box-shadow:
-      0 0 0 1px var(--black-a3),
-      0 1px 3px var(--black-a1),
-      0 2px 4px -1px var(--black-a1);
+            0 0 0 1px var(--black-a3),
+            0 1px 3px var(--black-a1),
+            0 2px 4px -1px var(--black-a1);
 
         &:where([data-disabled])::after {
             background-color: var(--gray-1);
@@ -203,8 +206,8 @@
 
 /* soft */
 
-.rt-SliderRoot:where(.rt-variant-soft) {
-    & :where(.rt-SliderTrack) {
+.est-SliderRoot:where(.est-variant-soft) {
+    & :where(.est-SliderTrack) {
         background-color: var(--gray-a4);
         /* Blend with white to increase contrast in dark mode */
         background-image: linear-gradient(var(--white-a1), var(--white-a1));
@@ -215,14 +218,14 @@
         }
     }
 
-    & :where(.rt-SliderRange) {
+    & :where(.est-SliderRange) {
         background-image:
             linear-gradient(var(--accent-a5), var(--accent-a5)),
             var(--slider-range-high-contrast-background-image);
         background-color: var(--accent-6);
     }
 
-    & :where(.rt-SliderThumb) {
+    & :where(.est-SliderThumb) {
         --slider-thumb-box-shadow:
             0 0 0 1px var(--black-a3), 0 0 0 1px var(--gray-a2),
             0 0 0 1px var(--accent-a2), 0 1px 2px var(--gray-a4),
@@ -238,22 +241,23 @@
 /* all high-contrast */
 
 :where(.essence-ui) {
-    --slider-range-high-contrast-background-image: linear-gradient(
-        var(--black-a8),
-        var(--black-a8)
-    );
+    --slider-range-high-contrast-background-image: linear-gradient(var(--black-a8),
+            var(--black-a8));
 }
+
 :is(.dark, .dark-theme),
 :is(.dark, .dark-theme) :where(.essence-ui:not(.light, .light-theme)) {
     --slider-range-high-contrast-background-image: none;
 }
-.rt-SliderRoot:where(:not(.rt-high-contrast)) {
+
+.est-SliderRoot:where(:not(.est-high-contrast)) {
     --slider-range-high-contrast-background-image: none;
 }
 
 :where(.essence-ui) {
     --slider-disabled-blend-mode: multiply;
 }
+
 :is(.dark, .dark-theme),
 :is(.dark, .dark-theme) :where(.essence-ui:not(.light, .light-theme)) {
     --slider-disabled-blend-mode: screen;
@@ -262,17 +266,19 @@
 /* all disabled Sliders */
 
 [data-disabled] {
-    .rt-SliderRoot:where(&) {
+    .est-SliderRoot:where(&) {
         cursor: var(--cursor-disabled);
         mix-blend-mode: var(--slider-disabled-blend-mode);
     }
-    .rt-SliderRange:where(&) {
+
+    .est-SliderRange:where(&) {
         background-color: transparent;
         background-image: none;
         box-shadow: none;
     }
-    .rt-SliderThumb:where(&),
-    .rt-SliderThumb:where(&)::after {
+
+    .est-SliderThumb:where(&),
+    .est-SliderThumb:where(&)::after {
         cursor: var(--cursor-disabled);
     }
 }

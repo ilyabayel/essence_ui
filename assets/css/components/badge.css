@@ -1,4 +1,4 @@
-.rt-Badge {
+.est-Badge {
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
@@ -19,8 +19,8 @@
  ***************************************************************************************************/
 
 @breakpoints {
-  .rt-Badge {
-    &:where(.rt-r-size-1) {
+  .est-Badge {
+    &:where(.est-r-size-1) {
       font-size: var(--font-size-1);
       line-height: var(--line-height-1);
       letter-spacing: var(--letter-spacing-1);
@@ -28,7 +28,8 @@
       gap: calc(var(--space-1) * 1.5);
       border-radius: max(var(--radius-1), var(--radius-full));
     }
-    &:where(.rt-r-size-2) {
+
+    &:where(.est-r-size-2) {
       font-size: var(--font-size-1);
       line-height: var(--line-height-1);
       letter-spacing: var(--letter-spacing-1);
@@ -36,7 +37,8 @@
       gap: calc(var(--space-1) * 1.5);
       border-radius: max(var(--radius-2), var(--radius-full));
     }
-    &:where(.rt-r-size-3) {
+
+    &:where(.est-r-size-3) {
       font-size: var(--font-size-2);
       line-height: var(--line-height-2);
       letter-spacing: var(--letter-spacing-2);
@@ -55,7 +57,7 @@
 
 /* solid */
 
-.rt-Badge:where(.rt-variant-solid) {
+.est-Badge:where(.est-variant-solid) {
   background-color: var(--accent-9);
   color: var(--accent-contrast);
 
@@ -64,7 +66,7 @@
     color: var(--accent-12);
   }
 
-  &:where(.rt-high-contrast) {
+  &:where(.est-high-contrast) {
     background-color: var(--accent-12);
     color: var(--accent-1);
 
@@ -77,32 +79,34 @@
 
 /* surface */
 
-.rt-Badge:where(.rt-variant-surface) {
+.est-Badge:where(.est-variant-surface) {
   background-color: var(--accent-surface);
   box-shadow: inset 0 0 0 1px var(--accent-a6);
   color: var(--accent-a11);
 
-  &:where(.rt-high-contrast) {
+  &:where(.est-high-contrast) {
     color: var(--accent-12);
   }
 }
 
 /* soft */
 
-.rt-Badge:where(.rt-variant-soft) {
+.est-Badge:where(.est-variant-soft) {
   background-color: var(--accent-a3);
   color: var(--accent-a11);
-  &:where(.rt-high-contrast) {
+
+  &:where(.est-high-contrast) {
     color: var(--accent-12);
   }
 }
 
 /* outline */
 
-.rt-Badge:where(.rt-variant-outline) {
+.est-Badge:where(.est-variant-outline) {
   box-shadow: inset 0 0 0 1px var(--accent-a8);
   color: var(--accent-a11);
-  &:where(.rt-high-contrast) {
+
+  &:where(.est-high-contrast) {
     box-shadow: inset 0 0 0 1px var(--accent-a7), inset 0 0 0 1px var(--gray-a11);
     color: var(--accent-12);
   }

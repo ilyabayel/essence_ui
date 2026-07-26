@@ -76,7 +76,7 @@ defmodule EssenceUI.Components.Text do
   def text(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, class: "rt-r-size", values: ["1", "2", "3", "4", "5", "6", "7", "8", "9"], responsive: true}
+        size: %{type: :enum, class: "est-r-size", values: ["1", "2", "3", "4", "5", "6", "7", "8", "9"], responsive: true}
       }
       |> Map.merge(AsChildProps.prop_defs())
       |> Map.merge(WeightProps.prop_defs())
@@ -88,7 +88,7 @@ defmodule EssenceUI.Components.Text do
 
     extracted = EssenceUI.Helpers.ExtractProps.call(assigns, prop_defs)
 
-    class = ["rt-Text", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["est-Text", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
 
     assigns = assign(assigns, class: class, color: assigns[:color] || false)
 

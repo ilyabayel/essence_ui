@@ -7,7 +7,7 @@ defmodule EssenceUI.SharedProps.TextAlignProps do
 
   def prop_defs do
     %{
-      align: %{type: [:enum, :string], values: @alignments, responsive: true, class: "rt-r-ta"}
+      align: %{type: [:enum, :string], values: @alignments, responsive: true, class: "est-r-ta"}
     }
   end
 

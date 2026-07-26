@@ -46,14 +46,14 @@ defmodule EssenceUI.Utilities.Inset do
         %{
           side: %{
             type: :enum,
-            class: "rt-r-side",
+            class: "est-r-side",
             values: @sides,
             default: "all",
             responsive: true
           },
           clip: %{
             type: :enum,
-            class: "rt-r-clip",
+            class: "est-r-clip",
             values: @clips,
             default: "border-box",
             responsive: true
@@ -72,7 +72,7 @@ defmodule EssenceUI.Utilities.Inset do
 
     ~H"""
     <div
-      class={["rt-Inset", @extracted_class, @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["est-Inset", @extracted_class, @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={[@extracted_style, @style] |> Enum.filter(& &1) |> Enum.join("; ")}
       {@rest}
     >

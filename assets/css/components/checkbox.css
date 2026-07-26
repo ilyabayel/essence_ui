@@ -1,6 +1,6 @@
 @import "./_internal/base-checkbox.css";
 
-.rt-CheckboxRoot {
+.est-CheckboxRoot {
     &:where(:focus-visible) {
         &::before {
             outline: 2px solid var(--focus-8);
@@ -17,20 +17,19 @@
     }
 }
 
-.rt-CheckboxIndicator {
+.est-CheckboxIndicator {
     display: grid;
     place-content: center;
 }
 
-.rt-CheckboxIndicator :where(svg) {
+.est-CheckboxIndicator :where(svg) {
     display: none;
 }
 
-.rt-CheckboxIndicator[data-state="checked"] :where(svg[data-state="checked"]) {
+.est-CheckboxIndicator[data-state="checked"] :where(svg[data-state="checked"]) {
     display: block;
 }
 
-.rt-CheckboxIndicator[data-state="indeterminate"]
-    :where(svg[data-state="indeterminate"]) {
+.est-CheckboxIndicator[data-state="indeterminate"] :where(svg[data-state="indeterminate"]) {
     display: block;
 }

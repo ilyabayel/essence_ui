@@ -55,7 +55,7 @@ defmodule EssenceUI.Components.Em do
 
     class =
       [
-        "rt-Em",
+        "est-Em",
         extracted.class
       ]
       |> Enum.filter(& &1)

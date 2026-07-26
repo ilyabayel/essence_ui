@@ -42,7 +42,7 @@ defmodule EssenceUI.Components.Dialog do
         <div
           id={@id}
           data-default-state={@default_state}
-          class="rt-BaseDialogOverlay"
+          class="est-BaseDialogOverlay"
           style="inset: 0"
           phx-hook="Dialog"
         >
@@ -62,13 +62,13 @@ defmodule EssenceUI.Components.Dialog do
 
   def dialog_content(assigns) do
     ~H"""
-    <div class="rt-BaseDialogScroll">
-      <div class="rt-BaseDialogScrollPadding rt-r-align-center">
+    <div class="est-BaseDialogScroll">
+      <div class="est-BaseDialogScrollPadding est-r-align-center">
         <div
           role="alertdialog"
           id={"#{@dialog_id}-content"}
           class={
-            ["rt-BaseDialogContent rt-AlertDialogContent rt-r-size-3 rt-r-max-w", @class]
+            ["est-BaseDialogContent est-AlertDialogContent est-r-size-3 est-r-max-w", @class]
             |> Enum.filter(&(&1 != ""))
             |> Enum.join(" ")
           }

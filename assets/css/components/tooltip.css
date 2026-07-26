@@ -1,4 +1,4 @@
-.rt-TooltipContent {
+.est-TooltipContent {
   box-sizing: border-box;
   padding: var(--space-1) var(--space-2);
   background-color: var(--gray-12);
@@ -12,27 +12,30 @@
   @media (prefers-reduced-motion: no-preference) {
     &:where([data-state='delayed-open']) {
       &:where([data-side='top']) {
-        animation-name: rt-slide-from-top, rt-fade-in;
+        animation-name: est-slide-from-top, est-fade-in;
       }
+
       &:where([data-side='bottom']) {
-        animation-name: rt-slide-from-bottom, rt-fade-in;
+        animation-name: est-slide-from-bottom, est-fade-in;
       }
+
       &:where([data-side='left']) {
-        animation-name: rt-slide-from-left, rt-fade-in;
+        animation-name: est-slide-from-left, est-fade-in;
       }
+
       &:where([data-side='right']) {
-        animation-name: rt-slide-from-right, rt-fade-in;
+        animation-name: est-slide-from-right, est-fade-in;
       }
     }
   }
 }
 
-.rt-TooltipText {
+.est-TooltipText {
   color: var(--gray-1);
   user-select: none;
   cursor: default;
 }
 
-.rt-TooltipArrow {
+.est-TooltipArrow {
   fill: var(--gray-12);
 }

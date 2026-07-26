@@ -96,21 +96,21 @@ defmodule EssenceUI.Components.RadioCards do
       %{
         size: %{
           type: :enum,
-          class: "rt-r-size",
+          class: "est-r-size",
           values: @sizes,
           default: "2",
           responsive: true
         },
         variant: %{
           type: :enum,
-          class: "rt-variant",
+          class: "est-variant",
           values: @variants,
           default: "surface"
         },
         columns: %{
           type: [:enum, :string],
           values: @columns_values,
-          class: "rt-r-gtc",
+          class: "est-r-gtc",
           custom_properties: ["--grid-template-columns"],
           responsive: true
         }
@@ -124,8 +124,8 @@ defmodule EssenceUI.Components.RadioCards do
 
     class =
       [
-        "rt-Grid",
-        "rt-RadioCardsRoot",
+        "est-Grid",
+        "est-RadioCardsRoot",
         extracted.class
       ]
       |> Enum.filter(& &1)
@@ -184,7 +184,7 @@ defmodule EssenceUI.Components.RadioCards do
       data-state={@checked_state}
       value={@value}
       class={
-        ["rt-reset", "rt-BaseCard", "rt-RadioCardsItem", @class]
+        ["est-reset", "est-BaseCard", "est-RadioCardsItem", @class]
         |> Enum.filter(& &1)
         |> Enum.join(" ")
       }

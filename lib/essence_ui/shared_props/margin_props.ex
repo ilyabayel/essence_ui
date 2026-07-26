@@ -10,49 +10,49 @@ defmodule EssenceUI.SharedProps.MarginProps do
         type: [:enum, :string],
         values: margin_values(),
         responsive: true,
-        class: "rt-r-m",
+        class: "est-r-m",
         custom_properties: ["--m"]
       },
       mx: %{
         type: [:enum, :string],
         values: margin_values(),
         responsive: true,
-        class: "rt-r-mx",
+        class: "est-r-mx",
         custom_properties: ["--ml", "--mr"]
       },
       my: %{
         type: [:enum, :string],
         values: margin_values(),
         responsive: true,
-        class: "rt-r-my",
+        class: "est-r-my",
         custom_properties: ["--mt", "--mb"]
       },
       mt: %{
         type: [:enum, :string],
         values: margin_values(),
         responsive: true,
-        class: "rt-r-mt",
+        class: "est-r-mt",
         custom_properties: ["--mt"]
       },
       mr: %{
         type: [:enum, :string],
         values: margin_values(),
         responsive: true,
-        class: "rt-r-mr",
+        class: "est-r-mr",
         custom_properties: ["--mr"]
       },
       mb: %{
         type: [:enum, :string],
         values: margin_values(),
         responsive: true,
-        class: "rt-r-mb",
+        class: "est-r-mb",
         custom_properties: ["--mb"]
       },
       ml: %{
         type: [:enum, :string],
         values: margin_values(),
         responsive: true,
-        class: "rt-r-ml",
+        class: "est-r-ml",
         custom_properties: ["--ml"]
       }
     }

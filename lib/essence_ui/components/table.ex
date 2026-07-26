@@ -72,9 +72,9 @@ defmodule EssenceUI.Components.Table do
     prop_defs =
       Map.merge(
         %{
-          size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
-          variant: %{type: :enum, class: "rt-variant", values: @variants, default: "surface"},
-          layout: %{type: :enum, class: "rt-r-layout", values: @layouts, default: "auto"}
+          size: %{type: :enum, class: "est-r-size", values: @sizes, default: "2", responsive: true},
+          variant: %{type: :enum, class: "est-variant", values: @variants, default: "surface"},
+          layout: %{type: :enum, class: "est-r-layout", values: @layouts, default: "auto"}
         },
         MarginProps.prop_defs()
       )
@@ -84,7 +84,7 @@ defmodule EssenceUI.Components.Table do
     # Build CSS classes for the wrapper div
     wrapper_class =
       [
-        "rt-TableRoot",
+        "est-TableRoot",
         extracted.class,
         assigns[:class]
       ]
@@ -102,7 +102,7 @@ defmodule EssenceUI.Components.Table do
       class={@wrapper_class}
       style={@style}
     >
-      <table class="rt-TableRootTable" {@rest}>
+      <table class="est-TableRootTable" {@rest}>
         {render_slot(@inner_block)}
       </table>
     </div>
@@ -113,7 +113,7 @@ defmodule EssenceUI.Components.Table do
 
   def table_header(assigns) do
     ~H"""
-    <thead class="rt-TableHeader">
+    <thead class="est-TableHeader">
       {render_slot(@inner_block)}
     </thead>
     """
@@ -123,7 +123,7 @@ defmodule EssenceUI.Components.Table do
 
   def table_body(assigns) do
     ~H"""
-    <tbody class="rt-TableBody">
+    <tbody class="est-TableBody">
       {render_slot(@inner_block)}
     </tbody>
     """
@@ -141,7 +141,7 @@ defmodule EssenceUI.Components.Table do
 
   def table_row(assigns) do
     class =
-      ["rt-TableRow", assigns[:class]]
+      ["est-TableRow", assigns[:class]]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 
@@ -166,7 +166,7 @@ defmodule EssenceUI.Components.Table do
 
   def table_cell(assigns) do
     class =
-      ["rt-TableCell", assigns[:class]]
+      ["est-TableCell", assigns[:class]]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 
@@ -191,7 +191,7 @@ defmodule EssenceUI.Components.Table do
 
   def table_column_header_cell(assigns) do
     class =
-      ["rt-TableCell rt-TableColumnHeaderCell", assigns[:class]]
+      ["est-TableCell est-TableColumnHeaderCell", assigns[:class]]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 
@@ -216,7 +216,7 @@ defmodule EssenceUI.Components.Table do
 
   def table_row_header_cell(assigns) do
     class =
-      ["rt-TableCell rt-TableRowHeaderCell", assigns[:class]]
+      ["est-TableCell est-TableRowHeaderCell", assigns[:class]]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 

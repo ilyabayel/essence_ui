@@ -6,9 +6,9 @@ defmodule EssenceUI.SharedProps.WidthProps do
 
   def prop_defs do
     %{
-      width: %{type: :string, class: "rt-r-w", custom_properties: ["--width"], responsive: true},
-      max_width: %{type: :string, class: "rt-r-max-w", custom_properties: ["--max-width"], responsive: true},
-      min_width: %{type: :string, class: "rt-r-min-w", custom_properties: ["--min-width"], responsive: true}
+      width: %{type: :string, class: "est-r-w", custom_properties: ["--width"], responsive: true},
+      max_width: %{type: :string, class: "est-r-max-w", custom_properties: ["--max-width"], responsive: true},
+      min_width: %{type: :string, class: "est-r-min-w", custom_properties: ["--min-width"], responsive: true}
     }
   end
 

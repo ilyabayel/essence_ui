@@ -1,10 +1,10 @@
-.rt-CheckboxGroupRoot {
+.est-CheckboxGroupRoot {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
 }
 
-.rt-CheckboxGroupItem {
+.est-CheckboxGroupItem {
   display: flex;
   gap: 0.5em;
 
@@ -12,7 +12,7 @@
   width: fit-content;
 }
 
-.rt-CheckboxGroupItemCheckbox {
+.est-CheckboxGroupItemCheckbox {
   &:where(:focus-visible) {
     &::before {
       outline: 2px solid var(--focus-8);
@@ -29,7 +29,7 @@
   }
 }
 
-.rt-CheckboxGroupItemInner {
+.est-CheckboxGroupItemInner {
   /* Make layouts with text truncation possible */
   min-width: 0;
 }

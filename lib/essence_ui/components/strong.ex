@@ -40,7 +40,7 @@ defmodule EssenceUI.Components.Strong do
 
     extracted = EssenceUI.Helpers.ExtractProps.call(assigns, prop_defs)
 
-    class = ["rt-Strong", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["est-Strong", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
     style = [extracted.style, assigns[:style]] |> Enum.filter(& &1) |> Enum.join("; ")
     color = assigns[:color] || false
 

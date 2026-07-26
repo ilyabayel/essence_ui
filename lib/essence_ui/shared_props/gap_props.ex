@@ -42,7 +42,7 @@ defmodule EssenceUI.SharedProps.GapProps do
         type: [:enum, :string],
         values: @gap_values,
         responsive: true,
-        class: "rt-r-gap",
+        class: "est-r-gap",
         custom_properties: ["--gap"]
       },
       # Sets the CSS **row-gap** property.
@@ -59,7 +59,7 @@ defmodule EssenceUI.SharedProps.GapProps do
         type: [:enum, :string],
         values: @gap_values,
         responsive: true,
-        class: "rt-r-cg",
+        class: "est-r-cg",
         custom_properties: ["--column-gap"]
       },
       # Sets the CSS **column-gap** property.
@@ -76,7 +76,7 @@ defmodule EssenceUI.SharedProps.GapProps do
         type: [:enum, :string],
         values: @gap_values,
         responsive: true,
-        class: "rt-r-rg",
+        class: "est-r-rg",
         custom_properties: ["--row-gap"]
       }
     }

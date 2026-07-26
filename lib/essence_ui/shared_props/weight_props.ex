@@ -7,7 +7,7 @@ defmodule EssenceUI.SharedProps.WeightProps do
 
   def prop_defs do
     %{
-      weight: %{type: [:enum, :string], values: @weights, responsive: true, class: "rt-r-weight"}
+      weight: %{type: [:enum, :string], values: @weights, responsive: true, class: "est-r-weight"}
     }
   end
 

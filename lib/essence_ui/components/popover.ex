@@ -41,7 +41,7 @@ defmodule EssenceUI.Components.Popover do
     ~H"""
     <div
       id={@id}
-      class={["rt-PopoverRoot", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["est-PopoverRoot", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={
         ["display: inline-block; position: relative;", @style]
         |> Enum.filter(&(&1 != ""))
@@ -66,7 +66,7 @@ defmodule EssenceUI.Components.Popover do
   def popover_trigger(assigns) do
     ~H"""
     <div
-      class={["rt-PopoverTrigger", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["est-PopoverTrigger", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={["display: inline-flex;", @style] |> Enum.filter(&(&1 != "")) |> Enum.join("; ")}
       data-popover-trigger
       {@rest}
@@ -101,7 +101,7 @@ defmodule EssenceUI.Components.Popover do
   def popover_content(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true}
+        size: %{type: :enum, class: "est-r-size", values: @sizes, default: "2", responsive: true}
       }
       |> Map.merge(WidthProps.prop_defs())
       |> Map.merge(HeightProps.prop_defs())
@@ -117,7 +117,7 @@ defmodule EssenceUI.Components.Popover do
     ~H"""
     <div
       class={
-        ["rt-PopperContent", "rt-PopoverContent", @extracted_class, @class]
+        ["est-PopperContent", "est-PopoverContent", @extracted_class, @class]
         |> Enum.filter(& &1)
         |> Enum.join(" ")
       }
@@ -147,7 +147,7 @@ defmodule EssenceUI.Components.Popover do
   def popover_close(assigns) do
     ~H"""
     <div
-      class={["rt-PopoverClose", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["est-PopoverClose", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style="display: inline-flex;"
       data-popover-close
       {@rest}

@@ -1,32 +1,27 @@
 @breakpoints {
-  .rt-r-lt-normal::before,
-  .rt-r-lt-end::before,
-  .rt-r-lt-normal::after,
-  .rt-r-lt-start::after {
+
+  .est-r-lt-normal::before,
+  .est-r-lt-end::before,
+  .est-r-lt-normal::after,
+  .est-r-lt-start::after {
     content: none;
   }
 
-  .rt-r-lt-start::before,
-  .rt-r-lt-both::before,
-  .rt-r-lt-end::after,
-  .rt-r-lt-both::after {
+  .est-r-lt-start::before,
+  .est-r-lt-both::before,
+  .est-r-lt-end::after,
+  .est-r-lt-both::after {
     content: '';
     display: table;
   }
 
-  .rt-r-lt-start::before,
-  .rt-r-lt-both::before {
-    margin-bottom: calc(
-      var(--leading-trim-start, var(--default-leading-trim-start)) -
-        var(--line-height, calc(1em * var(--default-line-height))) / 2
-    );
+  .est-r-lt-start::before,
+  .est-r-lt-both::before {
+    margin-bottom: calc(var(--leading-trim-start, var(--default-leading-trim-start)) - var(--line-height, calc(1em * var(--default-line-height))) / 2);
   }
 
-  .rt-r-lt-end::after,
-  .rt-r-lt-both::after {
-    margin-top: calc(
-      var(--leading-trim-end, var(--default-leading-trim-end)) -
-        var(--line-height, calc(1em * var(--default-line-height))) / 2
-    );
+  .est-r-lt-end::after,
+  .est-r-lt-both::after {
+    margin-top: calc(var(--leading-trim-end, var(--default-leading-trim-end)) - var(--line-height, calc(1em * var(--default-line-height))) / 2);
   }
 }

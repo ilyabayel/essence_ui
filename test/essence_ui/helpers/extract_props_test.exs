@@ -32,12 +32,12 @@ defmodule EssenceUI.Helpers.ExtractPropsTest do
       }
 
       prop_defs = %{
-        visible: %{type: :boolean, class: "rt-r-visible"}
+        visible: %{type: :boolean, class: "est-r-visible"}
       }
 
       %{class: class} = ExtractProps.call(assigns, prop_defs)
 
-      assert class == "rt-r-visible"
+      assert class == "est-r-visible"
     end
 
     test "should build class for falsy boolean prop" do
@@ -46,7 +46,7 @@ defmodule EssenceUI.Helpers.ExtractPropsTest do
       }
 
       prop_defs = %{
-        visible: %{type: :boolean, class: "rt-r-visible"}
+        visible: %{type: :boolean, class: "est-r-visible"}
       }
 
       %{class: class} = ExtractProps.call(assigns, prop_defs)
@@ -60,13 +60,13 @@ defmodule EssenceUI.Helpers.ExtractPropsTest do
       }
 
       prop_defs = %{
-        width: %{type: :string, class: "rt-r-width", custom_properties: ["--width"]}
+        width: %{type: :string, class: "est-r-width", custom_properties: ["--width"]}
       }
 
       extracted_props = ExtractProps.call(assigns, prop_defs)
 
       assert extracted_props == %{
-               class: "rt-r-width",
+               class: "est-r-width",
                style: "--width: 100px"
              }
     end
@@ -75,7 +75,7 @@ defmodule EssenceUI.Helpers.ExtractPropsTest do
       assigns = %{}
 
       prop_defs = %{
-        visible: %{type: :string, class: "rt-r-width", custom_properties: ["--width"]}
+        visible: %{type: :string, class: "est-r-width", custom_properties: ["--width"]}
       }
 
       extracted_props = ExtractProps.call(assigns, prop_defs)
@@ -96,7 +96,7 @@ defmodule EssenceUI.Helpers.ExtractPropsTest do
           type: :enum,
           values: @values,
           responsive: true,
-          class: "rt-r-gap",
+          class: "est-r-gap",
           custom_properties: ["--gap"]
         }
       }
@@ -104,7 +104,7 @@ defmodule EssenceUI.Helpers.ExtractPropsTest do
       extracted_props = ExtractProps.call(assigns, prop_defs)
 
       assert extracted_props == %{
-               class: "rt-r-gap-1",
+               class: "est-r-gap-1",
                style: ""
              }
     end
@@ -117,7 +117,7 @@ defmodule EssenceUI.Helpers.ExtractPropsTest do
           type: :enum,
           values: @values,
           responsive: true,
-          class: "rt-r-gap",
+          class: "est-r-gap",
           custom_properties: ["--gap"]
         }
       }
@@ -140,7 +140,7 @@ defmodule EssenceUI.Helpers.ExtractPropsTest do
           type: [:enum, :string],
           values: @values,
           responsive: true,
-          class: "rt-r-gap",
+          class: "est-r-gap",
           custom_properties: ["--gap"]
         }
       }
@@ -148,7 +148,7 @@ defmodule EssenceUI.Helpers.ExtractPropsTest do
       extracted_props = ExtractProps.call(assigns, prop_defs)
 
       assert extracted_props == %{
-               class: "rt-r-gap-1",
+               class: "est-r-gap-1",
                style: ""
              }
     end
@@ -163,7 +163,7 @@ defmodule EssenceUI.Helpers.ExtractPropsTest do
           type: [:enum, :string],
           values: @values,
           responsive: true,
-          class: "rt-r-gap",
+          class: "est-r-gap",
           custom_properties: ["--gap"]
         }
       }
@@ -171,7 +171,7 @@ defmodule EssenceUI.Helpers.ExtractPropsTest do
       extracted_props = ExtractProps.call(assigns, prop_defs)
 
       assert extracted_props == %{
-               class: "rt-r-gap",
+               class: "est-r-gap",
                style: "--gap: 1px"
              }
     end
@@ -193,7 +193,7 @@ defmodule EssenceUI.Helpers.ExtractPropsTest do
           type: [:enum, :string],
           values: @values,
           responsive: true,
-          class: "rt-r-gap",
+          class: "est-r-gap",
           custom_properties: ["--gap"]
         }
       }
@@ -201,7 +201,7 @@ defmodule EssenceUI.Helpers.ExtractPropsTest do
       extracted_props = ExtractProps.call(assigns, prop_defs)
 
       assert extracted_props == %{
-               class: "rt-r-gap-1 xs:rt-r-gap-2 sm:rt-r-gap-3 md:rt-r-gap-4 lg:rt-r-gap-5 xl:rt-r-gap-6",
+               class: "est-r-gap-1 xs:est-r-gap-2 sm:est-r-gap-3 md:est-r-gap-4 lg:est-r-gap-5 xl:est-r-gap-6",
                style: ""
              }
     end
@@ -223,7 +223,7 @@ defmodule EssenceUI.Helpers.ExtractPropsTest do
           type: [:enum, :string],
           values: @values,
           responsive: true,
-          class: "rt-r-gap",
+          class: "est-r-gap",
           custom_properties: ["--gap"]
         }
       }
@@ -231,7 +231,7 @@ defmodule EssenceUI.Helpers.ExtractPropsTest do
       extracted_props = ExtractProps.call(assigns, prop_defs)
 
       assert extracted_props == %{
-               class: "rt-r-gap xs:rt-r-gap sm:rt-r-gap md:rt-r-gap lg:rt-r-gap xl:rt-r-gap",
+               class: "est-r-gap xs:est-r-gap sm:est-r-gap md:est-r-gap lg:est-r-gap xl:est-r-gap",
                style: "--gap: 1px; --gap-xs: 2px; --gap-sm: 3px; --gap-md: 4px; --gap-lg: 5px; --gap-xl: 6px"
              }
     end

@@ -48,7 +48,7 @@ defmodule EssenceUI.Components.Blockquote do
   def blockquote(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, values: Enum.map(1..9, &Integer.to_string/1), class: "rt-r-size", responsive: true}
+        size: %{type: :enum, values: Enum.map(1..9, &Integer.to_string/1), class: "est-r-size", responsive: true}
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(HighContrastProps.prop_defs())
@@ -58,7 +58,7 @@ defmodule EssenceUI.Components.Blockquote do
     extracted = ExtractProps.call(assigns, prop_defs)
 
     class =
-      ["rt-Text", "rt-Blockquote", extracted.class]
+      ["est-Text", "est-Blockquote", extracted.class]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 

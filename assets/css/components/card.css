@@ -4,7 +4,7 @@
 /* Disable selector-max-type rule to target `button` and `a` tags. */
 /* Make sure these tags are wrapped in `:where()` for 0 specificity. */
 
-.rt-Card {
+.est-Card {
   --base-card-padding-top: var(--card-padding);
   --base-card-padding-right: var(--card-padding);
   --base-card-padding-bottom: var(--card-padding);
@@ -19,6 +19,7 @@
     &::after {
       outline: inherit;
     }
+
     &:where(:active:not([data-state='open'])) {
       &::before {
         background-image: linear-gradient(var(--focus-a2), var(--focus-a2));
@@ -34,24 +35,28 @@
 /* * * * * * * * * * * * * * * * * * * */
 
 @breakpoints {
-  .rt-Card {
-    &:where(.rt-r-size-1) {
+  .est-Card {
+    &:where(.est-r-size-1) {
       --card-padding: var(--space-3);
       --card-border-radius: var(--radius-4);
     }
-    &:where(.rt-r-size-2) {
+
+    &:where(.est-r-size-2) {
       --card-padding: var(--space-4);
       --card-border-radius: var(--radius-4);
     }
-    &:where(.rt-r-size-3) {
+
+    &:where(.est-r-size-3) {
       --card-padding: var(--space-5);
       --card-border-radius: var(--radius-5);
     }
-    &:where(.rt-r-size-4) {
+
+    &:where(.est-r-size-4) {
       --card-padding: var(--space-6);
       --card-border-radius: var(--radius-5);
     }
-    &:where(.rt-r-size-5) {
+
+    &:where(.est-r-size-5) {
       --card-padding: var(--space-8);
       --card-border-radius: var(--radius-6);
     }
@@ -64,7 +69,7 @@
 /*                                     */
 /* * * * * * * * * * * * * * * * * * * */
 
-.rt-Card:where(.rt-variant-surface) {
+.est-Card:where(.est-variant-surface) {
   --card-border-width: 1px;
   --card-background-color: var(--color-panel);
 
@@ -72,9 +77,11 @@
     background-color: var(--card-background-color);
     backdrop-filter: var(--backdrop-filter-panel);
   }
+
   &::after {
     box-shadow: var(--base-card-surface-box-shadow);
   }
+
   &:where(:any-link, button, label) {
     @media (hover: hover) {
       &:where(:hover) {
@@ -83,11 +90,13 @@
         }
       }
     }
+
     &:where([data-state='open']) {
       &::after {
         box-shadow: var(--base-card-surface-hover-box-shadow);
       }
     }
+
     &:where(:active:not([data-state='open'])) {
       &::after {
         box-shadow: var(--base-card-surface-active-box-shadow);
@@ -102,7 +111,7 @@
 /*                                     */
 /* * * * * * * * * * * * * * * * * * * */
 
-.rt-Card:where(.rt-variant-classic) {
+.est-Card:where(.est-variant-classic) {
   --card-border-width: 1px;
   --card-background-color: var(--color-panel);
 
@@ -113,29 +122,36 @@
     background-color: var(--card-background-color);
     backdrop-filter: var(--backdrop-filter-panel);
   }
+
   &::after {
     box-shadow: var(--base-card-classic-box-shadow-inner);
   }
+
   &:where(:any-link, button, label) {
     @media (hover: hover) {
       &:where(:hover) {
         transition-duration: 40ms;
         box-shadow: var(--base-card-classic-hover-box-shadow-outer);
+
         &::after {
           box-shadow: var(--base-card-classic-hover-box-shadow-inner);
         }
       }
     }
+
     &:where([data-state='open']) {
       transition-duration: 40ms;
       box-shadow: var(--base-card-classic-hover-box-shadow-outer);
+
       &::after {
         box-shadow: var(--base-card-classic-hover-box-shadow-inner);
       }
     }
+
     &:where(:active:not([data-state='open'])) {
       transition-duration: 40ms;
       box-shadow: var(--base-card-classic-active-box-shadow-outer);
+
       &::after {
         box-shadow: var(--base-card-classic-active-box-shadow-inner);
       }
@@ -149,7 +165,7 @@
 /*                                     */
 /* * * * * * * * * * * * * * * * * * * */
 
-.rt-Card:where(.rt-variant-ghost) {
+.est-Card:where(.est-variant-ghost) {
   --card-border-width: 0px;
 
   /* We reset the defined margin variables to avoid inheriting them from a higher component */
@@ -171,29 +187,35 @@
   margin-left: var(--margin-left-override);
 
   /* Reset the overrides on direct children */
-  :where(&) > * {
+  :where(&)>* {
     --margin-top-override: initial;
     --margin-right-override: initial;
     --margin-bottom-override: initial;
     --margin-left-override: initial;
   }
+
   &:where(:any-link, button, label) {
     @media (hover: hover) {
       &:where(:hover) {
         background-color: var(--gray-a3);
+
         &:where(:focus-visible) {
           background-color: var(--focus-a2);
         }
       }
     }
+
     &:where([data-state='open']) {
       background-color: var(--gray-a3);
+
       &:where(:focus-visible) {
         background-color: var(--focus-a2);
       }
     }
+
     &:where(:active:not([data-state='open'])) {
       background-color: var(--gray-a4);
+
       &:where(:focus-visible) {
         background-color: var(--focus-a2);
       }
@@ -202,7 +224,7 @@
 }
 
 /* Better -webkit-tap-highlight-color */
-.rt-Card:where(:any-link, button, label) {
+.est-Card:where(:any-link, button, label) {
   @media (pointer: coarse) {
     &:where(:active:not(:focus-visible, [data-state='open'])) {
       &::before {

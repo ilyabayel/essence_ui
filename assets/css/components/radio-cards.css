@@ -1,12 +1,12 @@
 @import './_internal/base-card.css';
 
-.rt-RadioCardsRoot {
+.est-RadioCardsRoot {
   line-height: var(--line-height);
   letter-spacing: var(--letter-spacing);
   cursor: default;
 }
 
-.rt-RadioCardsItem {
+.est-RadioCardsItem {
   --base-card-padding-top: var(--radio-cards-item-padding-y);
   --base-card-padding-right: var(--radio-cards-item-padding-x);
   --base-card-padding-bottom: var(--radio-cards-item-padding-y);
@@ -19,15 +19,17 @@
   justify-content: center;
   gap: var(--space-2);
 
-  & > * {
+  &>* {
     /* Avoid unintentional drag interactions (e.g. on images) */
     pointer-events: none;
   }
+
   /* stylelint-disable-next-line selector-max-type */
-  & > :where(svg) {
+  &> :where(svg) {
     /* Don’t squish icons */
     flex-shrink: 0;
   }
+
   &::after {
     outline-offset: -1px;
   }
@@ -40,9 +42,10 @@
 /* * * * * * * * * * * * * * * * * * * */
 
 @breakpoints {
-  .rt-RadioCardsRoot {
+  .est-RadioCardsRoot {
+
     /* 40px height for the card with one line of text */
-    &:where(.rt-r-size-1) {
+    &:where(.est-r-size-1) {
       font-size: var(--font-size-2);
       --line-height: var(--line-height-2);
       --letter-spacing: var(--letter-spacing-2);
@@ -50,8 +53,9 @@
       --radio-cards-item-padding-y: calc(var(--space-3) / 1.2);
       --radio-cards-item-border-radius: var(--radius-3);
     }
+
     /* 48px height for the card with one line of text */
-    &:where(.rt-r-size-2) {
+    &:where(.est-r-size-2) {
       font-size: var(--font-size-2);
       --line-height: var(--line-height-2);
       --letter-spacing: var(--letter-spacing-2);
@@ -59,8 +63,9 @@
       --radio-cards-item-padding-y: calc(var(--space-4) * 0.875);
       --radio-cards-item-border-radius: var(--radius-3);
     }
+
     /* 64px height for the card with one line of text */
-    &:where(.rt-r-size-3) {
+    &:where(.est-r-size-3) {
       font-size: var(--font-size-3);
       --line-height: var(--line-height-3);
       --letter-spacing: var(--letter-spacing-3);
@@ -77,17 +82,19 @@
 /*                                     */
 /* * * * * * * * * * * * * * * * * * * */
 
-:where(.rt-RadioCardsRoot.rt-variant-surface) {
-  .rt-RadioCardsItem {
+:where(.est-RadioCardsRoot.est-variant-surface) {
+  .est-RadioCardsItem {
     --radio-cards-item-border-width: 1px;
     --radio-cards-item-background-color: var(--color-surface);
 
     &::before {
       background-color: var(--radio-cards-item-background-color);
     }
+
     &::after {
       box-shadow: var(--base-card-surface-box-shadow);
     }
+
     @media (hover: hover) {
       &:where(:not(:disabled):not([data-state='checked']):hover) {
         &::after {
@@ -104,8 +111,8 @@
 /*                                     */
 /* * * * * * * * * * * * * * * * * * * */
 
-:where(.rt-RadioCardsRoot.rt-variant-classic) {
-  .rt-RadioCardsItem {
+:where(.est-RadioCardsRoot.est-variant-classic) {
+  .est-RadioCardsItem {
     --radio-cards-item-border-width: 1px;
     --radio-cards-item-background-color: var(--color-surface);
 
@@ -115,13 +122,16 @@
     &::before {
       background-color: var(--radio-cards-item-background-color);
     }
+
     &::after {
       box-shadow: var(--base-card-classic-box-shadow-inner);
     }
+
     @media (hover: hover) {
       &:where(:not(:disabled):not([data-state='checked']):hover) {
         transition-duration: 40ms;
         box-shadow: var(--base-card-classic-hover-box-shadow-outer);
+
         &::after {
           box-shadow: var(--base-card-classic-hover-box-shadow-inner);
         }
@@ -136,11 +146,12 @@
 /*                                     */
 /* * * * * * * * * * * * * * * * * * * */
 
-.rt-RadioCardsItem:where([data-state='checked']) {
+.est-RadioCardsItem:where([data-state='checked']) {
   &::after {
     outline: 2px solid var(--accent-indicator);
   }
-  :where(.rt-RadioCardsRoot.rt-high-contrast) & {
+
+  :where(.est-RadioCardsRoot.est-high-contrast) & {
     &::after {
       outline-color: var(--accent-12);
     }
@@ -153,14 +164,16 @@
 /*                                     */
 /* * * * * * * * * * * * * * * * * * * */
 
-.rt-RadioCardsItem:where(:focus-visible) {
+.est-RadioCardsItem:where(:focus-visible) {
   &::after {
     outline: 2px solid var(--focus-8);
   }
+
   &:where([data-state='checked']) {
     &::before {
       background-image: linear-gradient(var(--focus-a3), var(--focus-a3));
     }
+
     &::after {
       outline-color: var(--focus-10);
     }
@@ -173,16 +186,18 @@
 /*                                     */
 /* * * * * * * * * * * * * * * * * * * */
 
-.rt-RadioCardsItem:where(:disabled) {
+.est-RadioCardsItem:where(:disabled) {
   cursor: var(--cursor-disabled);
   color: var(--gray-a9);
 
   &::selection {
     background-color: var(--gray-a5);
   }
+
   &::before {
     background-image: linear-gradient(var(--gray-a2), var(--gray-a2));
   }
+
   &::after {
     outline-color: var(--gray-8);
   }

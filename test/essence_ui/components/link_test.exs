@@ -19,7 +19,7 @@ defmodule EssenceUI.Components.LinkTest do
 
     assert html =~ ~s(data-phx-link="redirect")
     assert html =~ ~s(href="/docs/components/button")
-    assert html =~ "rt-Link"
+    assert html =~ "est-Link"
     assert html =~ "Button"
   end
 

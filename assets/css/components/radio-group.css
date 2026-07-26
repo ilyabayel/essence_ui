@@ -1,10 +1,10 @@
-.rt-RadioGroupRoot {
+.est-RadioGroupRoot {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
 }
 
-.rt-RadioGroupItem {
+.est-RadioGroupItem {
   display: flex;
   gap: 0.5em;
 
@@ -12,7 +12,7 @@
   width: fit-content;
 }
 
-.rt-RadioGroupItemInner {
+.est-RadioGroupItemInner {
   /* Make layouts with text truncation possible */
   min-width: 0;
 }

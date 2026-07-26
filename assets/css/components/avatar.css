@@ -1,4 +1,4 @@
-.rt-AvatarRoot {
+.est-AvatarRoot {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -9,14 +9,14 @@
   flex-shrink: 0;
 }
 
-.rt-AvatarImage {
+.est-AvatarImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: inherit;
 }
 
-.rt-AvatarFallback {
+.est-AvatarFallback {
   font-family: var(--default-font-family);
   font-weight: var(--font-weight-medium);
   font-style: normal;
@@ -36,73 +36,82 @@
  *                                                                                                 *
  ***************************************************************************************************/
 
-.rt-AvatarFallback {
+.est-AvatarFallback {
   text-transform: uppercase;
 
-  &:where(.rt-one-letter) {
+  &:where(.est-one-letter) {
     font-size: var(--avatar-fallback-one-letter-font-size);
   }
-  &:where(.rt-two-letters) {
+
+  &:where(.est-two-letters) {
     /* prettier-ignore */
     font-size: var(--avatar-fallback-two-letters-font-size, var(--avatar-fallback-one-letter-font-size));
   }
 }
 
 @breakpoints {
-  .rt-AvatarRoot {
-    &:where(.rt-r-size-1) {
+  .est-AvatarRoot {
+    &:where(.est-r-size-1) {
       --avatar-size: var(--space-5);
       --avatar-fallback-one-letter-font-size: var(--font-size-2);
       --avatar-fallback-two-letters-font-size: var(--font-size-1);
       border-radius: max(var(--radius-2), var(--radius-full));
       letter-spacing: var(--letter-spacing-1);
     }
-    &:where(.rt-r-size-2) {
+
+    &:where(.est-r-size-2) {
       --avatar-size: var(--space-6);
       --avatar-fallback-one-letter-font-size: var(--font-size-3);
       --avatar-fallback-two-letters-font-size: var(--font-size-2);
       border-radius: max(var(--radius-2), var(--radius-full));
       letter-spacing: var(--letter-spacing-2);
     }
-    &:where(.rt-r-size-3) {
+
+    &:where(.est-r-size-3) {
       --avatar-size: var(--space-7);
       --avatar-fallback-one-letter-font-size: var(--font-size-4);
       --avatar-fallback-two-letters-font-size: var(--font-size-3);
       border-radius: max(var(--radius-3), var(--radius-full));
       letter-spacing: var(--letter-spacing-3);
     }
-    &:where(.rt-r-size-4) {
+
+    &:where(.est-r-size-4) {
       --avatar-size: var(--space-8);
       --avatar-fallback-one-letter-font-size: var(--font-size-5);
       --avatar-fallback-two-letters-font-size: var(--font-size-4);
       border-radius: max(var(--radius-3), var(--radius-full));
       letter-spacing: var(--letter-spacing-4);
     }
-    &:where(.rt-r-size-5) {
+
+    &:where(.est-r-size-5) {
       --avatar-size: var(--space-9);
       --avatar-fallback-one-letter-font-size: var(--font-size-6);
       border-radius: max(var(--radius-4), var(--radius-full));
       letter-spacing: var(--letter-spacing-6);
     }
-    &:where(.rt-r-size-6) {
+
+    &:where(.est-r-size-6) {
       --avatar-size: 80px;
       --avatar-fallback-one-letter-font-size: var(--font-size-7);
       border-radius: max(var(--radius-5), var(--radius-full));
       letter-spacing: var(--letter-spacing-7);
     }
-    &:where(.rt-r-size-7) {
+
+    &:where(.est-r-size-7) {
       --avatar-size: 96px;
       --avatar-fallback-one-letter-font-size: var(--font-size-7);
       border-radius: max(var(--radius-5), var(--radius-full));
       letter-spacing: var(--letter-spacing-7);
     }
-    &:where(.rt-r-size-8) {
+
+    &:where(.est-r-size-8) {
       --avatar-size: 128px;
       --avatar-fallback-one-letter-font-size: var(--font-size-8);
       border-radius: max(var(--radius-6), var(--radius-full));
       letter-spacing: var(--letter-spacing-8);
     }
-    &:where(.rt-r-size-9) {
+
+    &:where(.est-r-size-9) {
       --avatar-size: 160px;
       --avatar-fallback-one-letter-font-size: var(--font-size-9);
       border-radius: max(var(--radius-6), var(--radius-full));
@@ -119,12 +128,13 @@
 
 /* solid */
 
-.rt-AvatarRoot:where(.rt-variant-solid) {
-  & :where(.rt-AvatarFallback) {
+.est-AvatarRoot:where(.est-variant-solid) {
+  & :where(.est-AvatarFallback) {
     background-color: var(--accent-9);
     color: var(--accent-contrast);
   }
-  &:where(.rt-high-contrast) :where(.rt-AvatarFallback) {
+
+  &:where(.est-high-contrast) :where(.est-AvatarFallback) {
     background-color: var(--accent-12);
     color: var(--accent-1);
   }
@@ -132,12 +142,13 @@
 
 /* soft */
 
-.rt-AvatarRoot:where(.rt-variant-soft) {
-  & :where(.rt-AvatarFallback) {
+.est-AvatarRoot:where(.est-variant-soft) {
+  & :where(.est-AvatarFallback) {
     background-color: var(--accent-a3);
     color: var(--accent-a11);
   }
-  &:where(.rt-high-contrast) :where(.rt-AvatarFallback) {
+
+  &:where(.est-high-contrast) :where(.est-AvatarFallback) {
     color: var(--accent-12);
   }
 }

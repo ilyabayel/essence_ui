@@ -1,4 +1,4 @@
-.rt-Separator {
+.est-Separator {
   display: block;
   background-color: var(--accent-a6);
 }
@@ -10,12 +10,13 @@
  ***************************************************************************************************/
 
 @breakpoints {
-  .rt-Separator {
-    &:where(.rt-r-orientation-horizontal) {
+  .est-Separator {
+    &:where(.est-r-orientation-horizontal) {
       width: var(--separator-size);
       height: 1px;
     }
-    &:where(.rt-r-orientation-vertical) {
+
+    &:where(.est-r-orientation-vertical) {
       width: 1px;
       height: var(--separator-size);
     }
@@ -29,17 +30,20 @@
  ***************************************************************************************************/
 
 @breakpoints {
-  .rt-Separator {
-    &:where(.rt-r-size-1) {
+  .est-Separator {
+    &:where(.est-r-size-1) {
       --separator-size: var(--space-4);
     }
-    &:where(.rt-r-size-2) {
+
+    &:where(.est-r-size-2) {
       --separator-size: var(--space-6);
     }
-    &:where(.rt-r-size-3) {
+
+    &:where(.est-r-size-3) {
       --separator-size: var(--space-9);
     }
-    &:where(.rt-r-size-4) {
+
+    &:where(.est-r-size-4) {
       --separator-size: 100%;
     }
   }

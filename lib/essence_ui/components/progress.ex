@@ -55,8 +55,8 @@ defmodule EssenceUI.Components.Progress do
 
     prop_defs =
       %{
-        variant: %{type: :enum, values: @variants, class: "rt-variant", default: "surface"},
-        size: %{type: :enum, values: @sizes, class: "rt-r-size", default: "2"}
+        variant: %{type: :enum, values: @variants, class: "est-variant", default: "surface"},
+        size: %{type: :enum, values: @sizes, class: "est-r-size", default: "2"}
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(MarginProps.prop_defs())
@@ -64,7 +64,7 @@ defmodule EssenceUI.Components.Progress do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    class = ["rt-reset", "rt-ProgressRoot", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["est-reset", "est-ProgressRoot", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
 
     # Calculate percentage and ensure it's within bounds
     percentage =
@@ -101,7 +101,7 @@ defmodule EssenceUI.Components.Progress do
       data-radius={@radius}
       {@rest}
     >
-      <div class="rt-ProgressIndicator"></div>
+      <div class="est-ProgressIndicator"></div>
     </div>
     """
   end

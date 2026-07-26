@@ -58,8 +58,8 @@ defmodule EssenceUI.Components.AspectRatio do
       assign(assigns, style: style)
 
     ~H"""
-    <div class={["rt-AspectRatio", @class]} style={@style} {@rest}>
-      <div class="rt-AspectRatioInner" style="position: absolute; inset: 0;">
+    <div class={["est-AspectRatio", @class]} style={@style} {@rest}>
+      <div class="est-AspectRatioInner" style="position: absolute; inset: 0;">
         {render_slot(@inner_block)}
       </div>
     </div>

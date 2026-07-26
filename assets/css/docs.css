@@ -27,7 +27,7 @@ body:has(.docs-shell) {
     "footer";
 }
 
-.docs-shell.site-shell > .docs-skip-link {
+.docs-shell.site-shell>.docs-skip-link {
   /* Keep skip link out of auto-flow tracks */
   position: absolute;
   grid-area: header;
@@ -140,8 +140,8 @@ body:has(.docs-shell) {
   box-sizing: border-box;
 }
 
-.docs-sidebar__inner > nav,
-.docs-sidebar__inner > nav > .rt-Flex {
+.docs-sidebar__inner>nav,
+.docs-sidebar__inner>nav>.est-Flex {
   width: 100%;
   align-self: stretch;
 }
@@ -221,20 +221,20 @@ body:has(.docs-shell) {
   word-break: normal;
 }
 
-.docs-article__body > h2 {
+.docs-article__body>h2 {
   margin: 1.75rem 0 0.65rem;
   font-size: var(--font-size-5, 1.25rem);
   font-weight: 650;
   letter-spacing: -0.02em;
 }
 
-.docs-article__body > h3 {
+.docs-article__body>h3 {
   margin: 1.25rem 0 0.5rem;
   font-size: var(--font-size-4, 1.05rem);
   font-weight: 600;
 }
 
-.docs-article__body > p {
+.docs-article__body>p {
   margin: 0 0 1rem;
 }
 
@@ -264,11 +264,11 @@ body:has(.docs-shell) {
   padding: 0;
 }
 
-.docs-article__body > .docs-code-block,
-.docs-article__body > .rt-Card,
-.docs-article__body > .docs-demo,
-.docs-article__body > .docs-props,
-.docs-article__body > .docs-anatomy {
+.docs-article__body>.docs-code-block,
+.docs-article__body>.est-Card,
+.docs-article__body>.docs-demo,
+.docs-article__body>.docs-props,
+.docs-article__body>.docs-anatomy {
   margin: 0.75rem 0 1.25rem;
   max-width: 100%;
 }
@@ -279,7 +279,7 @@ body:has(.docs-shell) {
   overflow: visible;
 }
 
-.docs-demo.rt-Card {
+.docs-demo.est-Card {
   overflow: visible !important;
 }
 
@@ -306,13 +306,13 @@ body:has(.docs-shell) {
   min-width: 0;
 }
 
-.docs-demo__source .rt-TabsRoot,
-.docs-demo__source .rt-TabsContent {
+.docs-demo__source .est-TabsRoot,
+.docs-demo__source .est-TabsContent {
   max-width: 100%;
   min-width: 0;
 }
 
-.docs-demo__source .rt-TabsList {
+.docs-demo__source .est-TabsList {
   padding-inline: 0.75rem;
 }
 
@@ -463,7 +463,7 @@ body:has(.docs-shell) {
     font-size: var(--font-size-8, 2rem) !important;
   }
 
-  .docs-article__body > h2 {
+  .docs-article__body>h2 {
     margin-top: 2rem;
   }
 
@@ -490,6 +490,7 @@ body:has(.docs-shell) {
 
 /* Comfortable reading width on larger laptops */
 @media (min-width: 1100px) {
+
   .docs-shell,
   .docs-shell.site-shell {
     grid-template-columns: 16rem minmax(0, 1fr);
@@ -505,6 +506,7 @@ body:has(.docs-shell) {
 }
 
 @media (min-width: 1440px) {
+
   .docs-shell,
   .docs-shell.site-shell {
     grid-template-columns: 17rem minmax(0, 1fr);

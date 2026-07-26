@@ -16,7 +16,7 @@ defmodule EssenceUI.Components.FlexTest do
       </Flex.flex>
       """)
 
-    assert html =~ "rt-Flex"
+    assert html =~ "est-Flex"
     assert html =~ "flex"
     assert html =~ "<div>Item</div>"
   end
@@ -32,10 +32,10 @@ defmodule EssenceUI.Components.FlexTest do
       </Flex.flex>
       """)
 
-    assert html =~ "rt-r-fd-row-reverse"
-    assert html =~ "rt-r-ai-center"
-    assert html =~ "rt-r-jc-space-between"
-    assert html =~ "rt-r-fw-wrap"
+    assert html =~ "est-r-fd-row-reverse"
+    assert html =~ "est-r-ai-center"
+    assert html =~ "est-r-jc-space-between"
+    assert html =~ "est-r-fw-wrap"
   end
 
   test "renders with custom class and style" do
@@ -61,7 +61,7 @@ defmodule EssenceUI.Components.FlexTest do
       """)
 
     assert html =~ "<span"
-    assert html =~ "rt-Flex"
+    assert html =~ "est-Flex"
     assert html =~ "<span>Span</span>"
   end
 end

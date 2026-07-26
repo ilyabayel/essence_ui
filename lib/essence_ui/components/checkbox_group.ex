@@ -91,14 +91,14 @@ defmodule EssenceUI.Components.CheckboxGroup do
       %{
         size: %{
           type: :enum,
-          class: "rt-r-size",
+          class: "est-r-size",
           values: @sizes,
           default: "2",
           responsive: true
         },
         variant: %{
           type: :enum,
-          class: "rt-variant",
+          class: "est-variant",
           values: @variants,
           default: "surface"
         }
@@ -116,7 +116,7 @@ defmodule EssenceUI.Components.CheckboxGroup do
     # Build CSS classes
     class =
       [
-        "rt-CheckboxGroupRoot",
+        "est-CheckboxGroupRoot",
         extracted.class
       ]
       |> Enum.filter(& &1)
@@ -141,7 +141,7 @@ defmodule EssenceUI.Components.CheckboxGroup do
       {@rest}
     >
       <%= for item <- @item do %>
-        <.text as="label" class="rt-CheckboxGroupItem" style="align-items: center;" size={@size}>
+        <.text as="label" class="est-CheckboxGroupItem" style="align-items: center;" size={@size}>
           <.checkbox
             name={@name}
             value={item[:value]}
@@ -152,7 +152,7 @@ defmodule EssenceUI.Components.CheckboxGroup do
             color={assigns[:color]}
             high_contrast={assigns[:high_contrast]}
           />
-          <span class="rt-CheckboxGroupItemInner">
+          <span class="est-CheckboxGroupItemInner">
             {render_slot(item)}
           </span>
         </.text>

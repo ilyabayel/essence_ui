@@ -166,7 +166,7 @@ defmodule Storybook.Themes.Typography.Heading do
         id: :trim,
         description: "Trim leading space",
         template: """
-        <div class="rt-Flex rt-r-fd-column rt-r-gap-3">
+        <div class="est-Flex est-r-fd-column est-r-gap-3">
           <.heading
             trim="normal"
             style="background: var(--gray-a2); border-top: 1px dashed var(--gray-a7); border-bottom: 1px dashed var(--gray-a7);"

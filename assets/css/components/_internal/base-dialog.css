@@ -1,4 +1,4 @@
-.rt-BaseDialogOverlay {
+.est-BaseDialogOverlay {
   position: fixed;
   inset: 0;
 
@@ -10,14 +10,14 @@
   }
 }
 
-.rt-BaseDialogScroll {
+.est-BaseDialogScroll {
   display: flex;
   overflow: auto;
   position: absolute;
   inset: 0;
 }
 
-.rt-BaseDialogScrollPadding {
+.est-BaseDialogScrollPadding {
   flex-grow: 1;
   margin: auto;
   padding-top: var(--space-6);
@@ -27,15 +27,16 @@
 }
 
 @breakpoints {
-  .rt-BaseDialogScrollPadding:where(.rt-r-align-start) {
+  .est-BaseDialogScrollPadding:where(.est-r-align-start) {
     margin-top: 0;
   }
-  .rt-BaseDialogScrollPadding:where(.rt-r-align-center) {
+
+  .est-BaseDialogScrollPadding:where(.est-r-align-center) {
     margin-top: auto;
   }
 }
 
-.rt-BaseDialogContent {
+.est-BaseDialogContent {
   margin: auto;
   width: 100%;
   z-index: 1;
@@ -62,20 +63,23 @@
  ***************************************************************************************************/
 
 @breakpoints {
-  .rt-BaseDialogContent {
-    &:where(.rt-r-size-1) {
+  .est-BaseDialogContent {
+    &:where(.est-r-size-1) {
       --dialog-content-padding: var(--space-3);
       border-radius: var(--radius-4);
     }
-    &:where(.rt-r-size-2) {
+
+    &:where(.est-r-size-2) {
       --dialog-content-padding: var(--space-4);
       border-radius: var(--radius-4);
     }
-    &:where(.rt-r-size-3) {
+
+    &:where(.est-r-size-3) {
       --dialog-content-padding: var(--space-5);
       border-radius: var(--radius-5);
     }
-    &:where(.rt-r-size-4) {
+
+    &:where(.est-r-size-4) {
       --dialog-content-padding: var(--space-6);
       border-radius: var(--radius-5);
     }
@@ -83,58 +87,65 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  @keyframes rt-dialog-overlay-no-op {
+  @keyframes est-dialog-overlay-no-op {
     from {
       opacity: 1;
     }
+
     to {
       opacity: 1;
     }
   }
 
-  @keyframes rt-dialog-content-show {
+  @keyframes est-dialog-content-show {
     from {
       opacity: 0;
       transform: translateY(5px) scale(0.97);
     }
+
     to {
       opacity: 1;
       transform: translateY(0px) scale(1);
     }
   }
 
-  @keyframes rt-dialog-content-hide {
+  @keyframes est-dialog-content-hide {
     from {
       opacity: 1;
       transform: translateY(0px) scale(1);
     }
+
     to {
       opacity: 0;
       transform: translateY(5px) scale(0.99);
     }
   }
 
-  .rt-BaseDialogOverlay {
+  .est-BaseDialogOverlay {
+
     /* Keep the overlay mounted until the children have animated */
     &:where([data-state='closed']) {
-      animation: rt-dialog-overlay-no-op 160ms cubic-bezier(0.16, 1, 0.3, 1);
+      animation: est-dialog-overlay-no-op 160ms cubic-bezier(0.16, 1, 0.3, 1);
     }
+
     &:where([data-state='open'])::before {
-      animation: rt-fade-in 200ms cubic-bezier(0.16, 1, 0.3, 1);
+      animation: est-fade-in 200ms cubic-bezier(0.16, 1, 0.3, 1);
     }
+
     &:where([data-state='closed'])::before {
       opacity: 0;
-      animation: rt-fade-out 160ms cubic-bezier(0.16, 1, 0.3, 1);
+      animation: est-fade-out 160ms cubic-bezier(0.16, 1, 0.3, 1);
     }
   }
 
-  .rt-BaseDialogContent {
+  .est-BaseDialogContent {
     &:where([data-state='open']) {
-      animation: rt-dialog-content-show 200ms cubic-bezier(0.16, 1, 0.3, 1);
+      animation: est-dialog-content-show 200ms cubic-bezier(0.16, 1, 0.3, 1);
     }
+
     &:where([data-state='closed']) {
       opacity: 0;
-      animation: rt-dialog-content-hide 100ms cubic-bezier(0.16, 1, 0.3, 1);
+      animation: est-dialog-content-hide 100ms cubic-bezier(0.16, 1, 0.3, 1);
     }
   }
 }

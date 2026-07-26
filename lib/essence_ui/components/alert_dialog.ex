@@ -42,7 +42,7 @@ defmodule EssenceUI.Components.AlertDialog do
       gray_color={@gray_color}
       accent_color={@accent_color}
     >
-      <div class="rt-AlertDialogContent">
+      <div class="est-AlertDialogContent">
         <.heading :if={@title != []} as="h1" size="5" mb="3">
           {render_slot(@title)}
         </.heading>

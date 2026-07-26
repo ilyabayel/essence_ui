@@ -1,4 +1,4 @@
-.rt-BaseMenuContent {
+.est-BaseMenuContent {
   --scrollarea-scrollbar-vertical-margin-top: var(--base-menu-content-padding);
   --scrollarea-scrollbar-vertical-margin-bottom: var(--base-menu-content-padding);
   --scrollarea-scrollbar-horizontal-margin-left: var(--base-menu-content-padding);
@@ -11,7 +11,7 @@
   background-color: var(--base-menu-bg);
 }
 
-.rt-BaseMenuViewport {
+.est-BaseMenuViewport {
   flex: 1 1 0%;
   display: flex;
   flex-direction: column;
@@ -19,12 +19,12 @@
   padding: var(--base-menu-content-padding);
   box-sizing: border-box;
 
-  :where(.rt-BaseMenuContent:has(.rt-ScrollAreaScrollbar[data-orientation='vertical'])) & {
+  :where(.est-BaseMenuContent:has(.est-ScrollAreaScrollbar[data-orientation='vertical'])) & {
     padding-right: var(--space-3);
   }
 }
 
-.rt-BaseMenuItem {
+.est-BaseMenuItem {
   display: flex;
   align-items: center;
   gap: var(--space-2);
@@ -41,24 +41,25 @@
 
   /* Cursors */
   cursor: var(--cursor-menu-item);
+
   &:where([data-disabled]) {
     cursor: default;
   }
 }
 
-.rt-BaseMenuShortcut {
+.est-BaseMenuShortcut {
   display: flex;
   align-items: center;
   margin-left: auto;
   padding-left: var(--space-4);
 }
 
-.rt-BaseMenuSubTriggerIcon {
+.est-BaseMenuSubTriggerIcon {
   color: var(--gray-12);
   margin-right: calc(-2px * var(--scaling));
 }
 
-.rt-BaseMenuItemIndicator {
+.est-BaseMenuItemIndicator {
   position: absolute;
   left: 0;
   width: var(--base-menu-item-padding-left);
@@ -67,7 +68,7 @@
   justify-content: center;
 }
 
-.rt-BaseMenuSeparator {
+.est-BaseMenuSeparator {
   height: 1px;
   margin-top: var(--space-2);
   margin-bottom: var(--space-2);
@@ -75,7 +76,7 @@
   margin-right: var(--base-menu-item-padding-right);
 }
 
-.rt-BaseMenuLabel {
+.est-BaseMenuLabel {
   display: flex;
   align-items: center;
   height: var(--base-menu-item-height);
@@ -86,12 +87,12 @@
   user-select: none;
   cursor: default;
 
-  :where(.rt-BaseMenuItem) + & {
+  :where(.est-BaseMenuItem)+& {
     margin-top: var(--space-2);
   }
 }
 
-.rt-BaseMenuArrow {
+.est-BaseMenuArrow {
   fill: var(--base-menu-bg);
 }
 
@@ -102,71 +103,73 @@
  ***************************************************************************************************/
 
 @breakpoints {
-  .rt-BaseMenuContent {
-    &:where(.rt-r-size-1) {
+  .est-BaseMenuContent {
+    &:where(.est-r-size-1) {
       --base-menu-content-padding: var(--space-1);
       --base-menu-item-padding-left: calc(var(--space-5) / 1.2);
       --base-menu-item-padding-right: var(--space-2);
       --base-menu-item-height: var(--space-5);
       border-radius: var(--radius-3);
 
-      & :where(.rt-BaseMenuItem) {
+      & :where(.est-BaseMenuItem) {
         font-size: var(--font-size-1);
         line-height: var(--line-height-1);
         letter-spacing: var(--letter-spacing-1);
         border-radius: var(--radius-1);
       }
 
-      & :where(.rt-BaseMenuLabel) {
+      & :where(.est-BaseMenuLabel) {
         font-size: var(--font-size-1);
         line-height: var(--line-height-1);
         letter-spacing: var(--letter-spacing-1);
       }
 
-      & :where(.rt-BaseMenuItemIndicatorIcon, .rt-BaseMenuSubTriggerIcon) {
+      & :where(.est-BaseMenuItemIndicatorIcon, .est-BaseMenuSubTriggerIcon) {
         width: calc(8px * var(--scaling));
         height: calc(8px * var(--scaling));
       }
 
       /* reset with :not:has so we still support browsers without :has */
-      &:where(:not(:has(.rt-BaseMenuCheckboxItem, .rt-BaseMenuRadioItem))) {
+      &:where(:not(:has(.est-BaseMenuCheckboxItem, .est-BaseMenuRadioItem))) {
         --base-menu-item-padding-left: var(--space-2);
       }
-      &:where(:has(.rt-BaseMenuCheckboxItem, .rt-BaseMenuRadioItem)) {
+
+      &:where(:has(.est-BaseMenuCheckboxItem, .est-BaseMenuRadioItem)) {
         --base-menu-item-padding-left: calc(var(--space-5) / 1.2);
       }
     }
 
-    &:where(.rt-r-size-2) {
+    &:where(.est-r-size-2) {
       --base-menu-content-padding: var(--space-2);
       --base-menu-item-padding-left: var(--space-3);
       --base-menu-item-padding-right: var(--space-3);
       --base-menu-item-height: var(--space-6);
       border-radius: var(--radius-4);
 
-      & :where(.rt-BaseMenuItem) {
+      & :where(.est-BaseMenuItem) {
         font-size: var(--font-size-2);
         line-height: var(--line-height-2);
         letter-spacing: var(--letter-spacing-2);
         border-radius: var(--radius-2);
       }
 
-      & :where(.rt-BaseMenuLabel) {
+      & :where(.est-BaseMenuLabel) {
         font-size: var(--font-size-2);
         line-height: var(--line-height-2);
         letter-spacing: var(--letter-spacing-2);
       }
 
-      & :where(.rt-BaseMenuItemIndicatorIcon, .rt-BaseMenuSubTriggerIcon) {
+      & :where(.est-BaseMenuItemIndicatorIcon, .est-BaseMenuSubTriggerIcon) {
         width: calc(10px * var(--scaling));
         height: calc(10px * var(--scaling));
       }
 
       /* reset with :not:has so we still support browsers without :has */
-      &:where(:not(:has(.rt-BaseMenuCheckboxItem, .rt-BaseMenuRadioItem))) {
+      &:where(:not(:has(.est-BaseMenuCheckboxItem, .est-BaseMenuRadioItem))) {
         --base-menu-item-padding-left: var(--space-3);
       }
-      &:where(:has(.rt-BaseMenuCheckboxItem, .rt-BaseMenuRadioItem)) {
+
+      &:where(:has(.est-BaseMenuCheckboxItem, .est-BaseMenuRadioItem)) {
         --base-menu-item-padding-left: var(--space-5);
       }
     }
@@ -179,49 +182,56 @@
  *                                                                                                 *
  ***************************************************************************************************/
 
-.rt-BaseMenuContent {
+.est-BaseMenuContent {
   --base-menu-bg: var(--color-panel-solid);
   box-shadow: var(--shadow-5);
 }
-.rt-BaseMenuItem:where([data-accent-color]) {
+
+.est-BaseMenuItem:where([data-accent-color]) {
   color: var(--accent-a11);
 }
-.rt-BaseMenuItem:where([data-disabled]) {
+
+.est-BaseMenuItem:where([data-disabled]) {
   color: var(--gray-a8);
 }
-.rt-BaseMenuShortcut {
+
+.est-BaseMenuShortcut {
   color: var(--gray-a11);
 }
-.rt-BaseMenuItem:where([data-disabled], [data-highlighted]),
-.rt-BaseMenuSubTrigger:where([data-state='open']) {
-  & :where(.rt-BaseMenuShortcut) {
+
+.est-BaseMenuItem:where([data-disabled], [data-highlighted]),
+.est-BaseMenuSubTrigger:where([data-state='open']) {
+  & :where(.est-BaseMenuShortcut) {
     color: inherit;
   }
 }
-.rt-BaseMenuSeparator {
+
+.est-BaseMenuSeparator {
   background-color: var(--gray-a6);
 }
 
 /* solid */
 
-.rt-BaseMenuContent:where(.rt-variant-solid) {
-  & :where(.rt-BaseMenuSubTrigger[data-state='open']) {
+.est-BaseMenuContent:where(.est-variant-solid) {
+  & :where(.est-BaseMenuSubTrigger[data-state='open']) {
     background-color: var(--gray-a3);
   }
-  & :where(.rt-BaseMenuItem[data-highlighted]) {
+
+  & :where(.est-BaseMenuItem[data-highlighted]) {
     background-color: var(--accent-9);
     color: var(--accent-contrast);
 
-    & :where(.rt-BaseMenuSubTriggerIcon) {
+    & :where(.est-BaseMenuSubTriggerIcon) {
       color: var(--accent-contrast);
     }
   }
-  &:where(.rt-high-contrast) {
-    & :where(.rt-BaseMenuItem[data-highlighted]) {
+
+  &:where(.est-high-contrast) {
+    & :where(.est-BaseMenuItem[data-highlighted]) {
       background-color: var(--accent-12);
       color: var(--accent-1);
 
-      & :where(.rt-BaseMenuSubTriggerIcon) {
+      & :where(.est-BaseMenuSubTriggerIcon) {
         color: var(--accent-1);
       }
 
@@ -235,11 +245,12 @@
 
 /* soft */
 
-.rt-BaseMenuContent:where(.rt-variant-soft) {
-  & :where(.rt-BaseMenuSubTrigger[data-state='open']) {
+.est-BaseMenuContent:where(.est-variant-soft) {
+  & :where(.est-BaseMenuSubTrigger[data-state='open']) {
     background-color: var(--accent-a3);
   }
-  & :where(.rt-BaseMenuItem[data-highlighted]) {
+
+  & :where(.est-BaseMenuItem[data-highlighted]) {
     background-color: var(--accent-a4);
   }
 }
