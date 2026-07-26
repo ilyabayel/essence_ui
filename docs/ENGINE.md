@@ -53,8 +53,10 @@ description: Triggers an action or event.
 
 Buttons allow users to take actions.
 
-<.demo heex={~s[<.button>Button</.button>]}>
-  <.button>Button</.button>
+<.demo>
+  <:heex code={~S|<.button>Button</.button>|}>
+    <.button>Button</.button>
+  </:heex>
 </.demo>
 
 ## API Reference
@@ -68,10 +70,16 @@ Frontmatter is simple `key: value` lines (no nested YAML). Body is Markdown with
 
 | Component | Role |
 |-----------|------|
-| `<.demo>` | Live preview + HEEx/CSS code tabs |
+| `<.demo>` | Live preview + HEEx/CSS code tabs via `<:heex>` slot and `css={…}` attr |
+| `primitive_css/1` | Helper for Markdown: load primitives demo CSS for `css={primitive_css("dialog")}` |
 | `<.props_table>` | Reflects `module.__components__()[fun].attrs` |
 | `<.anatomy>` | Named parts list for compound APIs |
+| `<.highlights>` | Feature bullet list (Radix Highlights) |
+| `<.data_attributes_table>` | `data-*` attribute reference |
+| `<.keyboard_table>` | Accessibility keyboard interactions |
 | `<.code_block>` | Standalone highlighted snippet |
+
+Primitives demos set `variant="primitive"`, `component="…"`, and `css={primitive_css("…")}`. The demo injects that CSS into a `<style>` tag (not the global stylesheet) and shows it in the CSS tab. Pass `code` on `<:heex>` to override the HEEx tab; otherwise HEEx falls back to the storybook template.
 
 ### Routing
 
@@ -106,6 +114,8 @@ For each `storybook/themes/**/*.story.exs` → `docs/content/{section}/{name}.md
 ### Phase 3 — Primitives catalog
 
 Same for `storybook/primitives/*.story.exs`, using `variant="primitive"` demos (`.radix-demo` canvas).
+
+**Done:** Overview (Introduction, Getting started, Accessibility), Guides (Styling, Animation, Composition, SSR), all component pages, Utilities (Accessible Icon, Direction Provider, Slot, Visually Hidden). Component pages follow Radix section order: hero demo → highlights → anatomy → API (all parts) → examples → accessibility → custom APIs where applicable. Skip Releases changelog and Portal utility (no standalone module).
 
 ### Phase 4 — Examples
 
@@ -150,11 +160,13 @@ Prefer Markdown fenced code for static snippets, single-line `heex={~s[...]}` fo
 ## Authoring rules
 
 1. One job per page; lead with a short description, then demos, then API
-2. Prefer `<.demo heex={...}>` so source and preview stay in sync visually (small duplication is OK)
-3. Put CSS in `css={...}` only when teaching styles (primitives demos, overrides)
-4. Import nothing in Markdown — `PageLive` imports docs helpers + `EssenceUI.Components` + primitives aliases
-5. Keep nav in `docs/nav.exs` in sync when adding pages
-6. Avoid `"""` sigils in Markdown HEEx attributes (use `~S|...|`)
+2. Use `<.demo>` with `<:heex>` (live markup); pass `code` on the slot when the HEEx tab source should differ from the storybook fallback
+3. Primitives: `variant="primitive" component="…" css={primitive_css("…")}` — CSS is an argument (not a slot), injected into `<style>` + shown in the CSS tab
+4. Import nothing in Markdown — `PageLive` imports docs helpers + `EssenceUI.Components` + **all** `EssenceUI.Primitives.*` aliases
+5. Keep nav in `docs/nav/primitives.exs` (and siblings) in sync when adding pages
+6. Avoid `"""` sigils in Markdown HEEx attributes (use `~s[...]` / `~S|...|`)
+7. Primitives pages: include highlights, anatomy, props for every public part, keyboard when relevant
+8. Document Essence attrs honestly (LiveView event names, not React callbacks); add `doc:` on `attr` when filling API tables
 
 ## Success criteria
 
@@ -162,5 +174,5 @@ Prefer Markdown fenced code for static snippets, single-line `heex={~s[...]}` fo
 - [x] Demo shows HEEx (and optional CSS) beside preview
 - [x] Props table generated from `attr`
 - [x] Mobile-first layout (topbar + drawer; desktop sidebar)
-- [ ] All Storybook stories have docs equivalents
+- [x] All Storybook primitive stories have docs equivalents (Overview + Guides + Components + Utilities)
 - [ ] Storybook removed; E2E green against `/docs`

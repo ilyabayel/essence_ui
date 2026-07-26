@@ -44,6 +44,7 @@ defmodule EssenceUI.MixProject do
       {:igniter, "~> 0.6", only: [:dev, :test]},
       {:jason, "~> 1.4"},
       {:lazy_html, ">= 0.1.0", only: :test},
+      {:live_debugger, "~> 1.0.0", only: :dev},
       {:mdex, "~> 0.13"},
       {:mix_test_watch, "~> 1.3", only: [:dev, :test], runtime: false},
       {:phoenix, "~> 1.8.1", override: true},

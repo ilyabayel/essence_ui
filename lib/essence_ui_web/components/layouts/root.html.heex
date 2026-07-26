@@ -10,8 +10,11 @@
     <link phx-track-static rel="stylesheet" href="/assets/storybook.css" />
     <script defer phx-track-static type="text/javascript" src="/assets/js/storybook.js">
     </script>
+    <%= if Mix.env() == :dev do %>
+      <%= Application.get_env(:live_debugger, :live_debugger_tags) %>
+    <% end %>
   </head>
   <body class="bg-white antialiased">
     {@inner_content}
-  </body>
+  </body>  
 </html>

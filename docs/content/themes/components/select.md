@@ -5,15 +5,17 @@ description: Displays a list of options for the user to pick from.
 
 Themes Select wraps the headless Select primitive with size and variant styling.
 
-<.demo heex={~s[<.select_root id="docs-select" value="apple"><.select_trigger placeholder="Choose a fruit…" /><.select_content><.select_item value="apple">Apple</.select_item><.select_item value="orange">Orange</.select_item></.select_content></.select_root>]}>
-  <.select_root id="docs-select" value="apple">
-    <.select_trigger placeholder="Choose a fruit…" />
-    <.select_content>
-      <.select_item value="apple">Apple</.select_item>
-      <.select_item value="orange">Orange</.select_item>
-      <.select_item value="grape">Grape</.select_item>
-    </.select_content>
-  </.select_root>
+<.demo>
+  <:heex code={~S|<.select_root id="docs-select" value="apple"><.select_trigger placeholder="Choose a fruit…" /><.select_content><.select_item value="apple">Apple</.select_item><.select_item value="orange">Orange</.select_item></.select_content></.select_root>|}>
+      <.select_root id="docs-select" value="apple">
+        <.select_trigger placeholder="Choose a fruit…" />
+        <.select_content>
+          <.select_item value="apple">Apple</.select_item>
+          <.select_item value="orange">Orange</.select_item>
+          <.select_item value="grape">Grape</.select_item>
+        </.select_content>
+      </.select_root>
+  </:heex>
 </.demo>
 
 ## Anatomy

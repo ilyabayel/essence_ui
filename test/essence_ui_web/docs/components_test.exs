@@ -27,8 +27,10 @@ defmodule EssenceUIWeb.Docs.ComponentsTest do
           import EssenceUI.Components
 
           ~H"""
-          <.demo heex={~s[<.button>Hi</.button>]}>
-            <.button>Hi</.button>
+          <.demo>
+            <:heex code={~s[<.button>Hi</.button>]}>
+              <.button>Hi</.button>
+            </:heex>
           </.demo>
           """
         end,
@@ -39,6 +41,36 @@ defmodule EssenceUIWeb.Docs.ComponentsTest do
     assert html =~ "HEEx"
     assert html =~ "est-Card" or html =~ "docs-demo"
     assert html =~ "&lt;.button&gt;Hi&lt;/.button&gt;" or html =~ "<.button>Hi</.button>"
+  end
+
+  test "primitive demo injects component css into style tag" do
+    html =
+      render_component(
+        fn assigns ->
+          import Components
+
+          ~H"""
+          <.demo variant="primitive" component="accordion" css={primitive_css("accordion")}>
+            <:heex>
+              <div class="AccordionRoot">demo</div>
+            </:heex>
+          </.demo>
+          """
+        end,
+        %{}
+      )
+
+    assert html =~ "<style>"
+    assert html =~ "AccordionRoot"
+    assert html =~ "CSS"
+    refute html =~ "@import"
+  end
+
+  test "primitive_css loads canvas and component styles" do
+    css = Components.primitive_css("dialog")
+    assert css =~ "radix-demo"
+    assert css =~ "DialogContent"
+    refute css =~ "@import"
   end
 
   test "props_table uses Essence table and mobile cards" do

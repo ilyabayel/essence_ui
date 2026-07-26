@@ -34,7 +34,7 @@ defmodule EssenceUIWeb.Marketing.PrimitivesHomeLive do
             <.text size="4" color="gray">
               Unstyled, accessible Phoenix LiveView primitives for high-quality apps and design systems.
             </.text>
-            <.button as="a" href="/primitives/docs/components/dialog" size="3">
+            <.button as="a" href="/primitives/docs/overview/getting-started" size="3">
               View docs →
             </.button>
           </.flex>

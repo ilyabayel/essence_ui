@@ -9,11 +9,13 @@ Themes Dialog portals content and applies Themes tokens. Prefer the headless [Pr
 
 Open a dialog by targeting a portal mount point. The Themes wrapper currently requires a `target` selector and renders content through a portal — see API friction notes if this feels awkward compared to Radix Themes.
 
-<.demo heex={~s[<.button phx-click={Phoenix.LiveView.JS.dispatch("open", to: "#themes-docs-dialog")}>Open</.button>]}>
-  <.flex gap="3" align="center">
-    <.text size="2" color="gray">Use Primitives Dialog for the full part API, or CRM for a Themes AlertDialog example.</.text>
-    <.button as="a" href="/crm" variant="soft">Open CRM demo</.button>
-  </.flex>
+<.demo>
+  <:heex code={~S|<.button phx-click={Phoenix.LiveView.JS.dispatch("open", to: "#themes-docs-dialog")}>Open</.button>|}>
+      <.flex gap="3" align="center">
+        <.text size="2" color="gray">Use Primitives Dialog for the full part API, or CRM for a Themes AlertDialog example.</.text>
+        <.button as="a" href="/crm" variant="soft">Open CRM demo</.button>
+      </.flex>
+  </:heex>
 </.demo>
 
 ## Related

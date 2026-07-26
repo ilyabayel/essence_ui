@@ -1,0 +1,3 @@
+/* Storybook iframe: shared app styles + primitives demo CSS */
+@import "./storybook.css";
+@import "./primitives/index.css";

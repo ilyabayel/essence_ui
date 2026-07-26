@@ -8,8 +8,40 @@ defmodule EssenceUIWeb.Docs.PageLive do
   import EssenceUIWeb.Components.SiteHeader
   import EssenceUIWeb.Components.SiteFooter
 
+  alias EssenceUI.Primitives.AccessibleIcon, warn: false
+  alias EssenceUI.Primitives.Accordion, warn: false
+  alias EssenceUI.Primitives.AlertDialog, warn: false
+  alias EssenceUI.Primitives.AspectRatio, warn: false
+  alias EssenceUI.Primitives.Avatar, warn: false
+  alias EssenceUI.Primitives.Checkbox, warn: false
+  alias EssenceUI.Primitives.Collapsible, warn: false
+  alias EssenceUI.Primitives.ContextMenu, warn: false
   alias EssenceUI.Primitives.Dialog, warn: false
+  alias EssenceUI.Primitives.DirectionProvider, warn: false
+  alias EssenceUI.Primitives.DropdownMenu, warn: false
+  alias EssenceUI.Primitives.Form, warn: false
+  alias EssenceUI.Primitives.HoverCard, warn: false
+  alias EssenceUI.Primitives.Label, warn: false
+  alias EssenceUI.Primitives.Menubar, warn: false
+  alias EssenceUI.Primitives.NavigationMenu, warn: false
+  alias EssenceUI.Primitives.OneTimePasswordField, warn: false
+  alias EssenceUI.Primitives.PasswordToggleField, warn: false
+  alias EssenceUI.Primitives.Popover, warn: false
+  alias EssenceUI.Primitives.Progress, warn: false
+  alias EssenceUI.Primitives.RadioGroup, warn: false
+  alias EssenceUI.Primitives.ScrollArea, warn: false
+  alias EssenceUI.Primitives.Select, warn: false
+  alias EssenceUI.Primitives.Separator, warn: false
+  alias EssenceUI.Primitives.Slider, warn: false
+  alias EssenceUI.Primitives.Slot, warn: false
+  alias EssenceUI.Primitives.Switch, warn: false
+  alias EssenceUI.Primitives.Tabs, warn: false
+  alias EssenceUI.Primitives.Toast, warn: false
+  alias EssenceUI.Primitives.Toggle, warn: false
+  alias EssenceUI.Primitives.ToggleGroup, warn: false
+  alias EssenceUI.Primitives.Toolbar, warn: false
   alias EssenceUI.Primitives.Tooltip, warn: false
+  alias EssenceUI.Primitives.VisuallyHidden, warn: false
   alias EssenceUIWeb.Docs.Catalog
 
   @impl true

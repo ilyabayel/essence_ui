@@ -35,13 +35,15 @@ Wrap your layout with the Theme component:
 
 Import components and compose:
 
-<.demo heex={~s[<.theme accent_color="indigo"><.flex gap="3" align="center"><.text size="3">Hello from Essence UI</.text><.button>Get started</.button></.flex></.theme>]}>
-  <.theme accent_color="indigo" is_root={false} has_background={false}>
-    <.flex gap="3" align="center">
-      <.text size="3">Hello from Essence UI</.text>
-      <.button>Get started</.button>
-    </.flex>
-  </.theme>
+<.demo>
+  <:heex code={~S|<.theme accent_color="indigo"><.flex gap="3" align="center"><.text size="3">Hello from Essence UI</.text><.button>Get started</.button></.flex></.theme>|}>
+      <.theme accent_color="indigo" is_root={false} has_background={false}>
+        <.flex gap="3" align="center">
+          <.text size="3">Hello from Essence UI</.text>
+          <.button>Get started</.button>
+        </.flex>
+      </.theme>
+  </:heex>
 </.demo>
 
 Next: browse [Button](/themes/docs/components/button), open the [Playground](/themes/playground), or try the [Recruiting CRM](/crm) example.

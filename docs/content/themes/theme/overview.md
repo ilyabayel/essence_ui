@@ -7,10 +7,12 @@ The Theme component is the root of Essence UI styling. It sets CSS custom proper
 
 ## Theme component
 
-<.demo heex={~s[<.theme accent_color="crimson" gray_color="mauve" radius="full" is_root={false} has_background={false}><.button>Crimson</.button></.theme>]}>
-  <.theme accent_color="crimson" gray_color="mauve" radius="full" is_root={false} has_background={false}>
-    <.button>Crimson</.button>
-  </.theme>
+<.demo>
+  <:heex code={~S|<.theme accent_color="crimson" gray_color="mauve" radius="full" is_root={false} has_background={false}><.button>Crimson</.button></.theme>|}>
+      <.theme accent_color="crimson" gray_color="mauve" radius="full" is_root={false} has_background={false}>
+        <.button>Crimson</.button>
+      </.theme>
+  </:heex>
 </.demo>
 
 ## Appearance

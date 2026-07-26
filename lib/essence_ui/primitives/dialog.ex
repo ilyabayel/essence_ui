@@ -3,11 +3,11 @@ defmodule EssenceUI.Primitives.Dialog do
 
   use EssenceUI.Primitives
 
-  attr :id, :string, required: true
-  attr :open, :boolean, default: false
-  attr :default_open, :boolean, default: false
-  attr :modal, :boolean, default: true
-  attr :on_open_change, :string, default: nil
+  attr :id, :string, required: true, doc: "Unique id for the dialog root."
+  attr :open, :boolean, default: false, doc: "Controlled open state."
+  attr :default_open, :boolean, default: false, doc: "Initial open state when uncontrolled."
+  attr :modal, :boolean, default: true, doc: "When true, outside interaction is disabled and focus is trapped."
+  attr :on_open_change, :string, default: nil, doc: "LiveView event name pushed when open state changes."
   attr :rest, :global
   slot :inner_block, required: true
 
@@ -29,7 +29,7 @@ defmodule EssenceUI.Primitives.Dialog do
     """
   end
 
-  attr :id, :string, default: nil
+  attr :id, :string, default: nil, doc: "Optional id for the trigger button."
   attr :rest, :global
   slot :inner_block, required: true
 
@@ -49,8 +49,8 @@ defmodule EssenceUI.Primitives.Dialog do
     """
   end
 
-  attr :id, :string, required: true
-  attr :target, :string, default: "body"
+  attr :id, :string, required: true, doc: "Portal id required by Phoenix.Component.portal."
+  attr :target, :string, default: "body", doc: "CSS selector for the portal target (default body)."
   slot :inner_block, required: true
 
   def portal(assigns) do

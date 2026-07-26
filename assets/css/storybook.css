@@ -1,8 +1,5 @@
 @import "./styles/index.css";
 
-/* Official Radix Primitives docs demo styles for Storybook primitives */
-@import "./primitives/index.css";
-
 /* Custom docs site chrome */
 @import "./docs.css";
 @import "./site.css";
