@@ -43,7 +43,7 @@ defmodule EssenceUIWeb.Docs.ComponentsTest do
     assert html =~ "&lt;.button&gt;Hi&lt;/.button&gt;" or html =~ "<.button>Hi</.button>"
   end
 
-  test "primitive demo injects component css into style tag" do
+  test "primitive demo wires DocsDemoFrame with component css" do
     html =
       render_component(
         fn assigns ->
@@ -52,7 +52,7 @@ defmodule EssenceUIWeb.Docs.ComponentsTest do
           ~H"""
           <.demo variant="primitive" component="accordion" css={primitive_css("accordion")}>
             <:heex>
-              <div class="AccordionRoot">demo</div>
+              <div class="DemoAccordionRoot">demo</div>
             </:heex>
           </.demo>
           """
@@ -60,10 +60,12 @@ defmodule EssenceUIWeb.Docs.ComponentsTest do
         %{}
       )
 
-    assert html =~ "<style>"
-    assert html =~ "AccordionRoot"
+    assert html =~ "phx-hook=\"DocsDemoFrame\""
+    assert html =~ "data-demo-css="
+    assert html =~ "DemoAccordionRoot"
     assert html =~ "CSS"
     refute html =~ "@import"
+    refute html =~ "radix-demo {"
     assert html =~ "class=\"na\"" or html =~ "class=\"nb\""
   end
 
@@ -90,9 +92,9 @@ defmodule EssenceUIWeb.Docs.ComponentsTest do
     assert css =~ "language-css"
   end
 
-  test "primitive_css loads canvas and component styles" do
+  test "primitive_css loads component styles without canvas" do
     css = Components.primitive_css("dialog")
-    assert css =~ "radix-demo"
+    refute css =~ "radix-demo"
     assert css =~ "DialogContent"
     refute css =~ "@import"
   end

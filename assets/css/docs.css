@@ -226,12 +226,30 @@ body:has(.docs-shell) {
   font-size: var(--font-size-5, 1.25rem);
   font-weight: 650;
   letter-spacing: -0.02em;
+  scroll-margin-top: 4.5rem;
 }
 
 .docs-article__body>h3 {
   margin: 1.25rem 0 0.5rem;
   font-size: var(--font-size-4, 1.05rem);
   font-weight: 600;
+  scroll-margin-top: 4.5rem;
+}
+
+/* MDEx heading permalink anchors (from header_id_prefix) */
+.docs-article__body :is(h2, h3) > a.anchor {
+  margin-left: 0.35em;
+  text-decoration: none;
+  opacity: 0;
+}
+
+.docs-article__body :is(h2, h3):hover > a.anchor,
+.docs-article__body :is(h2, h3) > a.anchor:focus-visible {
+  opacity: 0.55;
+}
+
+.docs-article__body :is(h2, h3) > a.anchor::before {
+  content: "#";
 }
 
 .docs-article__body>p {

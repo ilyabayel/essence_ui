@@ -275,7 +275,11 @@ defmodule EssenceUIWeb.Docs.PageLive do
   end
 
   defp render_markdown(assigns) do
-    MDEx.to_heex!(assigns.page.body, assigns: assigns)
+    # Empty prefix → id="slug" matching TOC href="#slug" (MDEx default is no heading ids).
+    MDEx.to_heex!(assigns.page.body,
+      assigns: assigns,
+      extension: [header_id_prefix: ""]
+    )
   end
 
   defp section_from_uri(uri) do

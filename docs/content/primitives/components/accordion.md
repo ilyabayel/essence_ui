@@ -13,22 +13,22 @@ A vertically stacked set of interactive headings that each reveal an associated 
       type="single"
       default_value="item-1"
       collapsible={true}
-      class="AccordionRoot"
+      class="DemoAccordionRoot"
     >
       <Accordion.item
         id="accordion-primitive-1-root"
         value="item-1"
-        class="AccordionItem"
+        class="DemoAccordionItem"
       >
-        <Accordion.header class="AccordionHeader">
+        <Accordion.header class="DemoAccordionHeader">
           <Accordion.trigger
             id="accordion-primitive-1-content"
             trigger_id="accordion-primitive-1-trigger"
-            class="AccordionTrigger"
+            class="DemoAccordionTrigger"
           >
             Is it accessible?
             <svg
-              class="AccordionChevron"
+              class="DemoAccordionChevron"
               width="15"
               height="15"
               viewBox="0 0 15 15"
@@ -42,25 +42,25 @@ A vertically stacked set of interactive headings that each reveal an associated 
         <Accordion.content
           id="accordion-primitive-1-content"
           trigger_id="accordion-primitive-1-trigger"
-          class="AccordionContent"
+          class="DemoAccordionContent"
         >
-          <div class="AccordionContentText">Yes. It adheres to the WAI-ARIA design pattern.</div>
+          <div class="DemoAccordionContentText">Yes. It adheres to the WAI-ARIA design pattern.</div>
         </Accordion.content>
       </Accordion.item>
       <Accordion.item
         id="accordion-primitive-2-root"
         value="item-2"
-        class="AccordionItem"
+        class="DemoAccordionItem"
       >
-        <Accordion.header class="AccordionHeader">
+        <Accordion.header class="DemoAccordionHeader">
           <Accordion.trigger
             id="accordion-primitive-2-content"
             trigger_id="accordion-primitive-2-trigger"
-            class="AccordionTrigger"
+            class="DemoAccordionTrigger"
           >
             Is it unstyled?
             <svg
-              class="AccordionChevron"
+              class="DemoAccordionChevron"
               width="15"
               height="15"
               viewBox="0 0 15 15"
@@ -74,25 +74,25 @@ A vertically stacked set of interactive headings that each reveal an associated 
         <Accordion.content
           id="accordion-primitive-2-content"
           trigger_id="accordion-primitive-2-trigger"
-          class="AccordionContent"
+          class="DemoAccordionContent"
         >
-          <div class="AccordionContentText">Yes. It's unstyled by default, giving you freedom over the look and feel.</div>
+          <div class="DemoAccordionContentText">Yes. It's unstyled by default, giving you freedom over the look and feel.</div>
         </Accordion.content>
       </Accordion.item>
       <Accordion.item
         id="accordion-primitive-3-root"
         value="item-3"
-        class="AccordionItem"
+        class="DemoAccordionItem"
       >
-        <Accordion.header class="AccordionHeader">
+        <Accordion.header class="DemoAccordionHeader">
           <Accordion.trigger
             id="accordion-primitive-3-content"
             trigger_id="accordion-primitive-3-trigger"
-            class="AccordionTrigger"
+            class="DemoAccordionTrigger"
           >
             Can it be animated?
             <svg
-              class="AccordionChevron"
+              class="DemoAccordionChevron"
               width="15"
               height="15"
               viewBox="0 0 15 15"
@@ -106,9 +106,9 @@ A vertically stacked set of interactive headings that each reveal an associated 
         <Accordion.content
           id="accordion-primitive-3-content"
           trigger_id="accordion-primitive-3-trigger"
-          class="AccordionContent"
+          class="DemoAccordionContent"
         >
-          <div class="AccordionContentText">Yes! You can animate the Accordion with CSS or JavaScript.</div>
+          <div class="DemoAccordionContentText">Yes! You can animate the Accordion with CSS or JavaScript.</div>
         </Accordion.content>
       </Accordion.item>
     </Accordion.root>
