@@ -38,6 +38,27 @@ defmodule EssenceUI.Primitives.TooltipTest do
     assert html =~ "display: none"
   end
 
+  test "trigger as=div keeps nested button intact" do
+    html =
+      render_component(
+        fn assigns ->
+          ~H"""
+          <Tooltip.root id="wrap-tip">
+            <Tooltip.trigger as="div" content_id="wrap-content">
+              <button type="button">Hover</button>
+            </Tooltip.trigger>
+            <Tooltip.content id="wrap-content">Hint</Tooltip.content>
+          </Tooltip.root>
+          """
+        end,
+        %{}
+      )
+
+    assert html =~ ~r/<div[^>]*data-essence-tooltip-trigger/
+    assert html =~ ~s[<button type="button">Hover</button>]
+    refute html =~ ~r/<button[^>]*data-essence-tooltip-trigger/
+  end
+
   test "portal thin-wraps Phoenix portal" do
     html =
       render_component(

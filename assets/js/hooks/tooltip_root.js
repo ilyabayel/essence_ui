@@ -1,6 +1,7 @@
-import { positionFloating } from "../lib/position";
+import { positionFloating, positionArrow } from "../lib/position";
 import { setOpen, setClosed } from "../lib/presence";
 import { hasFinePointerHover, whenMouse } from "../lib/pointer";
+import { applyPortalTheme } from "../lib/theme";
 
 function findPart(root, selector, contentId) {
   const local = root.querySelector(selector);
@@ -161,6 +162,7 @@ export const TooltipRoot = {
       this.resolveParts();
       if (!this.trigger || !this.content) return;
 
+      applyPortalTheme(this.content, this.trigger);
       setOpen(this.content, [this.trigger, this.el]);
       this.content.style.display = "block";
       this.content.style.width = "max-content";
@@ -169,13 +171,23 @@ export const TooltipRoot = {
       const side = this.content.dataset.side || "top";
       const align = this.content.dataset.align || "center";
       const sideOffset = parseInt(this.content.dataset.sideOffset, 10) || 4;
+      // Radix Popper: offset mainAxis = sideOffset + arrowHeight
+      const arrow = this.content.querySelector("[data-essence-tooltip-arrow]");
+      const arrowHeight = arrow ? arrow.offsetHeight || 5 : 0;
 
       positionFloating({
         trigger: this.trigger,
         content: this.content,
         side,
         align,
-        sideOffset,
+        sideOffset: sideOffset + arrowHeight,
+      });
+
+      positionArrow({
+        content: this.content,
+        arrowSelector: "[data-essence-tooltip-arrow]",
+        side,
+        align,
       });
 
       this.isOpen = true;

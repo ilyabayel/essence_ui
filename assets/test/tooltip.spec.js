@@ -52,6 +52,43 @@ test.describe("Tooltip Primitive", () => {
   });
 });
 
+test.describe("Tooltip Themes", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/storybook/themes/components/tooltip?variation_id=default");
+    await page.waitForLoadState("domcontentloaded");
+    await page.waitForFunction(() => {
+      const hooks = Array.from(document.querySelectorAll("[phx-hook]")).filter(
+        (el) => !el.id?.startsWith("psb-"),
+      );
+      if (hooks.length === 0) return true;
+      return hooks.every((el) => el.hasAttribute("data-phx-id"));
+    });
+    await expect(
+      page.locator(".est-TooltipRoot[data-hydrated]").first(),
+    ).toBeVisible();
+  });
+
+  test("opens when hovering nested button trigger", async ({ page }) => {
+    const root = page.locator(".est-TooltipRoot").first();
+    const trigger = root.locator("[data-essence-tooltip-trigger]");
+    const button = trigger.locator("button");
+    const contentId = await trigger.getAttribute("aria-describedby");
+    const content = page.locator(`#${contentId}`);
+
+    await expect(button).toBeVisible();
+    await expect(trigger.locator("button")).toHaveCount(1);
+    await expect(content).toBeHidden();
+
+    await button.hover();
+    await expect(content).toBeVisible({ timeout: 2000 });
+    await expect(content).toHaveAttribute("data-state", "delayed-open");
+    await expect(content).toContainText("This is a tooltip");
+
+    await page.mouse.move(0, 0);
+    await expect(content).toBeHidden();
+  });
+});
+
 test.describe("Tooltip Primitive (touch)", () => {
   test.use({
     hasTouch: true,

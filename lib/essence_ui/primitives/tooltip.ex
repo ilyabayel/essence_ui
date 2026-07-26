@@ -53,21 +53,33 @@ defmodule EssenceUI.Primitives.Tooltip do
 
   attr :id, :string, default: nil
   attr :content_id, :string, default: nil
+  # Themes Tooltip wraps `<.button>`; a native <button> parent would be invalid HTML
+  # and browsers hoist the child out of the trigger (empty trigger, dead hover target).
+  attr :as, :string, default: "button", values: ["button", "div"]
   attr :rest, :global
   slot :inner_block, required: true
 
   def trigger(assigns) do
+    rest =
+      if assigns.as == "button" do
+        Map.put(assigns.rest, :type, "button")
+      else
+        assigns.rest
+      end
+
+    assigns = assign(assigns, :rest, rest)
+
     ~H"""
-    <button
+    <.dynamic_tag
+      tag_name={@as}
       id={@id}
-      type="button"
       data-essence-tooltip-trigger
       aria-describedby={@content_id}
       data-state="closed"
       {@rest}
     >
       {render_slot(@inner_block)}
-    </button>
+    </.dynamic_tag>
     """
   end
 
@@ -89,10 +101,21 @@ defmodule EssenceUI.Primitives.Tooltip do
   attr :side, :string, values: ["top", "right", "bottom", "left"], default: "top"
   attr :align, :string, values: ["start", "center", "end"], default: "center"
   attr :side_offset, :integer, default: 4
+  attr :style, :string, default: nil
   attr :rest, :global
   slot :inner_block, required: true
 
   def content(assigns) do
+    style =
+      [
+        "display: none; position: fixed; z-index: 50; pointer-events: none;",
+        assigns.style
+      ]
+      |> Enum.reject(&(&1 in [nil, ""]))
+      |> Enum.join(" ")
+
+    assigns = assign(assigns, :style, style)
+
     ~H"""
     <div
       id={@id}
@@ -102,7 +125,7 @@ defmodule EssenceUI.Primitives.Tooltip do
       data-side={@side}
       data-align={@align}
       data-side-offset={@side_offset}
-      style="display: none; position: fixed; z-index: 50; pointer-events: none;"
+      style={@style}
       {@rest}
     >
       {render_slot(@inner_block)}
@@ -111,14 +134,26 @@ defmodule EssenceUI.Primitives.Tooltip do
   end
 
   attr :id, :string, default: nil
+  attr :width, :integer, default: 10
+  attr :height, :integer, default: 5
   attr :rest, :global
   slot :inner_block
 
   def arrow(assigns) do
     ~H"""
-    <span id={@id} data-essence-tooltip-arrow aria-hidden="true" {@rest}>
+    <svg
+      id={@id}
+      width={@width}
+      height={@height}
+      viewBox="0 0 30 10"
+      preserveAspectRatio="none"
+      data-essence-tooltip-arrow
+      aria-hidden="true"
+      {@rest}
+    >
+      <polygon :if={@inner_block == []} points="0,0 30,0 15,10" />
       {render_slot(@inner_block)}
-    </span>
+    </svg>
     """
   end
 end

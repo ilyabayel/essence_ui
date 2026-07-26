@@ -17,7 +17,6 @@ import { DropdownMenu } from "./hooks/dropdown_menu";
 import { DropdownMenuRoot } from "./hooks/dropdown_menu_root";
 import { MenubarRoot } from "./hooks/menubar_root";
 import { NavigationMenuRoot } from "./hooks/navigation_menu_root";
-import { Tooltip } from "./hooks/tooltip";
 import { TooltipRoot } from "./hooks/tooltip_root";
 import { HoverCard } from "./hooks/hover_card";
 import { HoverCardRoot } from "./hooks/hover_card_root";
@@ -65,7 +64,6 @@ let hooks = {
   DropdownMenuRoot,
   MenubarRoot,
   NavigationMenuRoot,
-  Tooltip,
   TooltipRoot,
   HoverCard,
   HoverCardRoot,

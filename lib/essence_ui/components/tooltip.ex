@@ -2,12 +2,13 @@ defmodule EssenceUI.Components.Tooltip do
   @moduledoc """
   A Tooltip component that displays contextual information when hovering or focusing on an element.
 
-  Based on Radix UI Tooltip component with support for various placements,
-  delays, and styling options.
+  Wraps `EssenceUI.Primitives.Tooltip` with Themes visual props (`color`, margin).
+  Based on Radix UI Themes Tooltip — single `<.tooltip content={…}>` API.
   """
   use Phoenix.Component
 
   alias EssenceUI.Helpers.ExtractProps
+  alias EssenceUI.Primitives.Tooltip, as: TooltipPrimitive
   alias EssenceUI.SharedProps.ColorProps
   alias EssenceUI.SharedProps.MarginProps
 
@@ -43,6 +44,7 @@ defmodule EssenceUI.Components.Tooltip do
 
   ColorProps.attrs()
   MarginProps.attrs()
+  attr :id, :string, default: nil
   attr :content, :string, required: true, doc: "Tooltip content"
   attr :side, :string, values: @sides, default: "top", doc: "Tooltip placement"
   attr :align, :string, values: @alignments, default: "center", doc: "Tooltip alignment"
@@ -61,65 +63,58 @@ defmodule EssenceUI.Components.Tooltip do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    tooltip_id = "tooltip-#{System.unique_integer([:positive])}"
+    id = assigns[:id] || "tooltip-#{System.unique_integer([:positive])}"
+    content_id = "#{id}-content"
 
     assigns =
-      assigns
-      |> assign(tooltip_id: tooltip_id)
-      |> assign(color: assigns[:color] || false)
-      |> assign(extracted_style: extracted.style)
-      |> assign(extracted_class: extracted.class)
+      assign(assigns,
+        id: id,
+        content_id: content_id,
+        portal_id: "#{id}-portal",
+        color: assigns[:color] || false,
+        content_class:
+          ["essence-ui", "est-TooltipContent", "est-reset", extracted.class, assigns.class]
+          |> Enum.filter(& &1)
+          |> Enum.join(" "),
+        content_style: [extracted.style, assigns.style] |> Enum.filter(& &1) |> Enum.join("; ")
+      )
 
     ~H"""
-    <div class="est-TooltipRoot" data-state="closed">
-      <div
+    <TooltipPrimitive.root
+      id={@id}
+      open_delay={@open_delay}
+      close_delay={@close_delay}
+      class="est-TooltipRoot"
+    >
+      <TooltipPrimitive.trigger
+        id={"#{@id}-trigger"}
+        content_id={@content_id}
+        as="div"
         class="est-TooltipTrigger"
-        data-state="closed"
-        phx-hook="Tooltip"
-        id={"#{@tooltip_id}-trigger"}
-        data-tooltip-id={@tooltip_id}
-        data-open-delay={@open_delay}
-        data-close-delay={@close_delay}
+        style="display: inline-flex;"
       >
         {render_slot(@inner_block)}
-      </div>
-      <div
-        class={
-          [
-            "est-TooltipContent",
-            "est-reset",
-            @extracted_class
-          ]
-          |> Enum.filter(& &1)
-          |> Enum.join(" ")
-        }
-        style={"display: none; #{@extracted_style}"}
-        role="tooltip"
-        id={@tooltip_id}
-        data-side={@side}
-        data-align={@align}
-        data-accent-color={@color}
-        data-state="closed"
-        {@rest}
-      >
-        <span
-          class="est-Text est-TooltipText est-r-size-1"
-          style="display: block; font-size: var(--font-size-1); line-height: var(--line-height-1);"
+      </TooltipPrimitive.trigger>
+      <TooltipPrimitive.portal id={@portal_id} target="body">
+        <TooltipPrimitive.content
+          id={@content_id}
+          side={@side}
+          align={@align}
+          class={@content_class}
+          style={@content_style}
+          data-accent-color={@color}
+          {@rest}
         >
-          {@content}
-        </span>
-        <svg
-          width="10"
-          height="5"
-          viewBox="0 0 30 10"
-          preserveAspectRatio="none"
-          class="est-TooltipArrow"
-          style="position: absolute; top: 100%;"
-        >
-          <polygon points="0,0 30,0 15,10" />
-        </svg>
-      </div>
-    </div>
+          <span
+            class="est-Text est-TooltipText est-r-size-1"
+            style="display: block; font-size: var(--font-size-1); line-height: var(--line-height-1);"
+          >
+            {@content}
+          </span>
+          <TooltipPrimitive.arrow class="est-TooltipArrow" />
+        </TooltipPrimitive.content>
+      </TooltipPrimitive.portal>
+    </TooltipPrimitive.root>
     """
   end
 end

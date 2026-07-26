@@ -136,12 +136,16 @@ export function positionArrow({
   const height = arrow.offsetHeight || 5;
 
   arrow.style.position = "absolute";
+  arrow.style.display = "block";
   arrow.style.top = "";
   arrow.style.right = "";
   arrow.style.bottom = "";
   arrow.style.left = "";
   arrow.style.transform = "";
+  arrow.style.transformOrigin = "";
 
+  // Radix PopperArrow: [oppositeSide]=0 + side-specific origin/transform.
+  // SVG points down by default (polygon tip at bottom).
   if (side === "bottom") {
     arrow.style.top = "0px";
     arrow.style.transformOrigin = "center 0";
@@ -149,15 +153,15 @@ export function positionArrow({
   } else if (side === "top") {
     arrow.style.bottom = "0px";
     arrow.style.transformOrigin = "center 0";
-    arrow.style.transform = "rotate(0deg)";
+    arrow.style.transform = "translateY(100%)";
   } else if (side === "left") {
     arrow.style.right = "0px";
-    arrow.style.transformOrigin = "center 0";
-    arrow.style.transform = "rotate(-90deg)";
+    arrow.style.transformOrigin = "100% 0";
+    arrow.style.transform = "translateY(50%) rotate(-90deg) translateX(50%)";
   } else if (side === "right") {
     arrow.style.left = "0px";
-    arrow.style.transformOrigin = "center 0";
-    arrow.style.transform = "rotate(90deg)";
+    arrow.style.transformOrigin = "0 0";
+    arrow.style.transform = "translateY(50%) rotate(90deg) translateX(-50%)";
   }
 
   if (side === "top" || side === "bottom") {
@@ -165,7 +169,9 @@ export function positionArrow({
     else if (align === "start") arrow.style.left = "16px";
     else arrow.style.right = "16px";
   } else if (align === "center") {
-    arrow.style.top = `calc(50% - ${height / 2}px)`;
+    // Floating-UI centers via arrowY; approximate with mid-line.
+    // translateY(50%) is relative to origin at the top edge (Radix).
+    arrow.style.top = "50%";
   } else if (align === "start") {
     arrow.style.top = "8px";
   } else {
