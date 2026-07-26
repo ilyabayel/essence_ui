@@ -1,11 +1,6 @@
 @import "@radix-ui/colors/black-alpha.css";
 @import "@radix-ui/colors/violet.css";
 
-/* reset */
-.radix-demo[data-component="checkbox"] button {
-	all: unset;
-}
-
 .radix-demo[data-component="checkbox"] .CheckboxRoot {
 	background-color: white;
 	width: 25px;

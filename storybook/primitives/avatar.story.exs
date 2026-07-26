@@ -19,15 +19,15 @@ defmodule Storybook.Primitives.AvatarStory do
         <div style="display: flex; gap: 20px;">
           <Avatar.root
             id="avatar-1"
-            class="AvatarRoot"
+            class="DemoAvatarRoot"
           >
             <Avatar.image
-              class="AvatarImage"
+              class="DemoAvatarImage"
               src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
               alt="Colm Tuite"
             />
             <Avatar.fallback
-              class="AvatarFallback"
+              class="DemoAvatarFallback"
               delay_ms={600}
             >
               CT
@@ -35,15 +35,15 @@ defmodule Storybook.Primitives.AvatarStory do
           </Avatar.root>
           <Avatar.root
             id="avatar-2"
-            class="AvatarRoot"
+            class="DemoAvatarRoot"
           >
             <Avatar.image
-              class="AvatarImage"
+              class="DemoAvatarImage"
               src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
               alt="Pedro Duarte"
             />
             <Avatar.fallback
-              class="AvatarFallback"
+              class="DemoAvatarFallback"
               delay_ms={600}
             >
               JD
@@ -51,9 +51,9 @@ defmodule Storybook.Primitives.AvatarStory do
           </Avatar.root>
           <Avatar.root
             id="avatar-3"
-            class="AvatarRoot"
+            class="DemoAvatarRoot"
           >
-            <Avatar.fallback class="AvatarFallback">PD</Avatar.fallback>
+            <Avatar.fallback class="DemoAvatarFallback">PD</Avatar.fallback>
           </Avatar.root>
         </div>
         """

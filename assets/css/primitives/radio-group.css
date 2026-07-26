@@ -1,11 +1,6 @@
 @import "@radix-ui/colors/black-alpha.css";
 @import "@radix-ui/colors/violet.css";
 
-/* reset */
-.radix-demo[data-component="radio-group"] button {
-	all: unset;
-}
-
 .radix-demo[data-component="radio-group"] .RadioGroupRoot {
 	display: flex;
 	flex-direction: column;

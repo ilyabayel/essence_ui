@@ -1,7 +1,7 @@
 @import "@radix-ui/colors/black-alpha.css";
 @import "@radix-ui/colors/violet.css";
 
-.radix-demo[data-component="avatar"] .AvatarRoot {
+.DemoAvatarRoot {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -14,14 +14,14 @@
 	background-color: var(--black-a3);
 }
 
-.radix-demo[data-component="avatar"] .AvatarImage {
+.DemoAvatarImage {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	border-radius: inherit;
 }
 
-.radix-demo[data-component="avatar"] .AvatarFallback {
+.DemoAvatarFallback {
 	width: 100%;
 	height: 100%;
 	display: flex;

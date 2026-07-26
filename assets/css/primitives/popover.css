@@ -2,13 +2,6 @@
 @import "@radix-ui/colors/mauve.css";
 @import "@radix-ui/colors/violet.css";
 
-/* reset */
-.radix-demo[data-component="popover"] button,
-.radix-demo[data-component="popover"] fieldset,
-.radix-demo[data-component="popover"] input {
-	all: unset;
-}
-
 .radix-demo[data-component="popover"] .PopoverContent {
 	border-radius: 4px;
 	padding: 20px;

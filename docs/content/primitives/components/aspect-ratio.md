@@ -8,13 +8,15 @@ Displays content within a desired ratio.
 <.demo variant="primitive" component="aspect-ratio" css={primitive_css("aspect-ratio")}>
 
   <:heex>
-    <AspectRatio.aspect_ratio ratio={16 / 9}>
-      <img
-        class="Image"
-        src="https://images.unsplash.com/photo-1535025183041-0991a977e25b?w=300&dpr=2&q=80"
-        alt="Landscape photograph by Tobias Tullius"
-      />
-    </AspectRatio.aspect_ratio>
+    <div class="DemoAspectRatioContainer">
+      <AspectRatio.aspect_ratio ratio={16 / 9}>
+        <img
+          class="DemoAspectRatioImage"
+          src="https://images.unsplash.com/photo-1535025183041-0991a977e25b?w=300&dpr=2&q=80"
+          alt="Landscape photograph by Tobias Tullius"
+        />
+      </AspectRatio.aspect_ratio>
+    </div>
   </:heex>
 </.demo>
 

@@ -43,7 +43,7 @@ defmodule EssenceUIWeb.Docs.ComponentsTest do
     assert html =~ "&lt;.button&gt;Hi&lt;/.button&gt;" or html =~ "<.button>Hi</.button>"
   end
 
-  test "primitive demo wires DocsDemoFrame with component css" do
+  test "primitive demo injects component css into style tag" do
     html =
       render_component(
         fn assigns ->
@@ -60,12 +60,13 @@ defmodule EssenceUIWeb.Docs.ComponentsTest do
         %{}
       )
 
-    assert html =~ "phx-hook=\"DocsDemoFrame\""
-    assert html =~ "data-demo-css="
+    assert html =~ "<style>"
     assert html =~ "DemoAccordionRoot"
     assert html =~ "CSS"
     refute html =~ "@import"
-    refute html =~ "radix-demo {"
+    refute html =~ "phx-hook=\"DocsDemoFrame\""
+    # CSS tab is component-only; canvas may appear in a separate preview <style>
+    assert html =~ "language-css"
     assert html =~ "class=\"na\"" or html =~ "class=\"nb\""
   end
 
@@ -97,6 +98,12 @@ defmodule EssenceUIWeb.Docs.ComponentsTest do
     refute css =~ "radix-demo"
     assert css =~ "DialogContent"
     refute css =~ "@import"
+
+    alert = Components.primitive_css("alert-dialog")
+    refute alert =~ "radix-demo"
+    assert alert =~ "DemoAlertDialogContent"
+    assert alert =~ "DemoButton"
+    refute alert =~ "@import"
   end
 
   test "props_table uses Essence table and mobile cards" do

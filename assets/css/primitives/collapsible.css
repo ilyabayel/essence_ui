@@ -1,11 +1,6 @@
 @import "@radix-ui/colors/black-alpha.css";
 @import "@radix-ui/colors/violet.css";
 
-/* reset */
-.radix-demo[data-component="collapsible"] button {
-	all: unset;
-}
-
 .radix-demo[data-component="collapsible"] .CollapsibleRoot {
 	width: 300px;
 }

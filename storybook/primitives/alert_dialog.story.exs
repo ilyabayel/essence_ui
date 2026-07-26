@@ -19,23 +19,23 @@ defmodule Storybook.Primitives.AlertDialogStory do
         <AlertDialog.root id="alert-dialog-primitive">
           <AlertDialog.trigger
             id="alert-dialog-trigger"
-            class="Button violet"
+            class="DemoButton violet"
           >
             Delete account
           </AlertDialog.trigger>
           <AlertDialog.portal id="alert-dialog-portal">
-            <AlertDialog.overlay class="AlertDialogOverlay" />
+            <AlertDialog.overlay class="DemoAlertDialogOverlay" />
             <AlertDialog.content
               id="alert-dialog-content"
-              class="AlertDialogContent"
+              class="DemoAlertDialogContent"
             >
-              <AlertDialog.title class="AlertDialogTitle">Are you absolutely sure?</AlertDialog.title>
-              <AlertDialog.description class="AlertDialogDescription">
+              <AlertDialog.title class="DemoAlertDialogTitle">Are you absolutely sure?</AlertDialog.title>
+              <AlertDialog.description class="DemoAlertDialogDescription">
                 This action cannot be undone. This will permanently delete your account and remove your data from our servers.
               </AlertDialog.description>
               <div style="display: flex; gap: 25px; justify-content: flex-end;">
-                <AlertDialog.cancel class="Button mauve">Cancel</AlertDialog.cancel>
-                <AlertDialog.action class="Button red">Yes, delete account</AlertDialog.action>
+                <AlertDialog.cancel class="DemoButton mauve">Cancel</AlertDialog.cancel>
+                <AlertDialog.action class="DemoButton red">Yes, delete account</AlertDialog.action>
               </div>
             </AlertDialog.content>
           </AlertDialog.portal>

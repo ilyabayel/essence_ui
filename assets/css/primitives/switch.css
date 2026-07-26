@@ -1,10 +1,5 @@
 @import "@radix-ui/colors/black-alpha.css";
 
-/* reset */
-.radix-demo[data-component="switch"] button {
-	all: unset;
-}
-
 .radix-demo[data-component="switch"] .SwitchRoot {
 	width: 42px;
 	height: 25px;

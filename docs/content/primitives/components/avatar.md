@@ -9,45 +9,45 @@ An image element with a fallback for representing the user.
 
   <:heex>
     <div style="display: flex; gap: 20px;">
-              <Avatar.root
-                id="avatar-1"
-                class="AvatarRoot"
-              >
-                <Avatar.image
-                  class="AvatarImage"
-                  src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
-                  alt="Colm Tuite"
-                />
-                <Avatar.fallback
-                  class="AvatarFallback"
-                  delay_ms={600}
-                >
-                  CT
-                </Avatar.fallback>
-              </Avatar.root>
-              <Avatar.root
-                id="avatar-2"
-                class="AvatarRoot"
-              >
-                <Avatar.image
-                  class="AvatarImage"
-                  src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
-                  alt="Pedro Duarte"
-                />
-                <Avatar.fallback
-                  class="AvatarFallback"
-                  delay_ms={600}
-                >
-                  JD
-                </Avatar.fallback>
-              </Avatar.root>
-              <Avatar.root
-                id="avatar-3"
-                class="AvatarRoot"
-              >
-                <Avatar.fallback class="AvatarFallback">PD</Avatar.fallback>
-              </Avatar.root>
-            </div>
+      <Avatar.root
+        id="avatar-1"
+        class="DemoAvatarRoot"
+      >
+        <Avatar.image
+          class="DemoAvatarImage"
+          src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
+          alt="Colm Tuite"
+        />
+        <Avatar.fallback
+          class="DemoAvatarFallback"
+          delay_ms={600}
+        >
+          CT
+        </Avatar.fallback>
+      </Avatar.root>
+      <Avatar.root
+        id="avatar-2"
+        class="DemoAvatarRoot"
+      >
+        <Avatar.image
+          class="DemoAvatarImage"
+          src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
+          alt="Pedro Duarte"
+        />
+        <Avatar.fallback
+          class="DemoAvatarFallback"
+          delay_ms={600}
+        >
+          JD
+        </Avatar.fallback>
+      </Avatar.root>
+      <Avatar.root
+        id="avatar-3"
+        class="DemoAvatarRoot"
+      >
+        <Avatar.fallback class="DemoAvatarFallback">PD</Avatar.fallback>
+      </Avatar.root>
+    </div>
   </:heex>
 </.demo>
 

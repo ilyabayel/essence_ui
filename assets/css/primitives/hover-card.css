@@ -1,10 +1,5 @@
 @import "@radix-ui/colors/mauve.css";
 
-/* reset */
-.radix-demo[data-component="hover-card"] a {
-	all: unset;
-}
-
 .radix-demo[data-component="hover-card"] .HoverCardContent {
 	border-radius: 6px;
 	padding: 20px;

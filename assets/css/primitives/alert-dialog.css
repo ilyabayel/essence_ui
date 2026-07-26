@@ -3,21 +3,16 @@
 @import "@radix-ui/colors/red.css";
 @import "@radix-ui/colors/violet.css";
 
-/* reset */
-.radix-demo[data-component="alert-dialog"] button {
-	all: unset;
-}
-
-.radix-demo[data-component="alert-dialog"] .AlertDialogOverlay,
-[data-essence-alert-dialog-overlay].AlertDialogOverlay {
+.DemoAlertDialogOverlay,
+[data-essence-alert-dialog-overlay].DemoAlertDialogOverlay {
 	background-color: var(--black-a9);
 	position: fixed;
 	inset: 0;
 	animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.radix-demo[data-component="alert-dialog"] .AlertDialogContent,
-[data-essence-alert-dialog-content].AlertDialogContent {
+.DemoAlertDialogContent,
+[data-essence-alert-dialog-content].DemoAlertDialogContent {
 	background-color: var(--gray-1);
 	border-radius: 6px;
 	box-shadow: var(--shadow-6);
@@ -31,26 +26,27 @@
 	padding: 25px;
 	animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-.radix-demo[data-component="alert-dialog"] .AlertDialogContent:focus,
-[data-essence-alert-dialog-content].AlertDialogContent:focus {
+
+.DemoAlertDialogContent:focus,
+[data-essence-alert-dialog-content].DemoAlertDialogContent:focus {
 	outline: none;
 }
 
-.radix-demo[data-component="alert-dialog"] .AlertDialogTitle {
+.DemoAlertDialogTitle {
 	margin: 0;
 	color: var(--mauve-12);
 	font-size: 17px;
 	font-weight: 500;
 }
 
-.radix-demo[data-component="alert-dialog"] .AlertDialogDescription {
+.DemoAlertDialogDescription {
 	margin-bottom: 20px;
 	color: var(--mauve-11);
 	font-size: 15px;
 	line-height: 1.5;
 }
 
-.radix-demo[data-component="alert-dialog"] .Button {
+.DemoButton {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -62,35 +58,43 @@
 	height: 35px;
 	user-select: none;
 }
-.radix-demo[data-component="alert-dialog"] .Button:focus:not(:focus-visible) {
+
+.DemoButton:focus:not(:focus-visible) {
 	outline: 0;
 }
-.radix-demo[data-component="alert-dialog"] .Button:focus-visible {
+
+.DemoButton:focus-visible {
 	outline: 2px solid var(--violet-6);
 	outline-offset: 1px;
 }
-.radix-demo[data-component="alert-dialog"] .Button.violet {
+
+.DemoButton.violet {
 	background-color: var(--violet-4);
 	color: var(--violet-12);
 	outline-color: var(--violet-6);
 }
-.radix-demo[data-component="alert-dialog"] .Button.violet:hover {
+
+.DemoButton.violet:hover {
 	background-color: var(--mauve-3);
 }
-.radix-demo[data-component="alert-dialog"] .Button.red {
+
+.DemoButton.red {
 	background-color: var(--red-4);
 	color: var(--red-11);
 	outline-color: var(--red-7);
 }
-.radix-demo[data-component="alert-dialog"] .Button.red:hover {
+
+.DemoButton.red:hover {
 	background-color: var(--red-5);
 }
-.radix-demo[data-component="alert-dialog"] .Button.mauve {
+
+.DemoButton.mauve {
 	background-color: var(--mauve-4);
 	color: var(--mauve-11);
 	outline-color: var(--mauve-7);
 }
-.radix-demo[data-component="alert-dialog"] .Button.mauve:hover {
+
+.DemoButton.mauve:hover {
 	background-color: var(--mauve-5);
 }
 

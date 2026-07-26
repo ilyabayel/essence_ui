@@ -29,15 +29,15 @@ defmodule EssenceUIWeb.Docs.Components do
     heex_code = slot_code(assigns.heex) || fallback_heex_code(assigns.variant, assigns.component)
     css_code = assigns.css
     primitive? = assigns.variant == "primitive"
-    canvas_css = if primitive?, do: demo_canvas_css_for_shadow(), else: nil
+    canvas_css = if primitive?, do: demo_canvas_css(), else: nil
 
     assigns =
       assigns
       |> assign_new(:tab_id, fn -> "demo-#{System.unique_integer([:positive])}" end)
       |> assign(:heex_code, heex_code)
       |> assign(:css_code, css_code)
-      |> assign(:primitive?, primitive?)
       |> assign(:canvas_css, canvas_css)
+      |> assign(:has_canvas_css, is_binary(canvas_css) and canvas_css != "")
       |> assign(:has_heex_code, is_binary(heex_code) and heex_code != "")
       |> assign(:has_css_code, is_binary(css_code) and css_code != "")
       |> assign(:default_tab, if(is_binary(heex_code) and heex_code != "", do: "heex", else: "css"))
@@ -45,20 +45,6 @@ defmodule EssenceUIWeb.Docs.Components do
     ~H"""
     <.card variant="surface" class={["docs-demo", @class]}>
       <.box
-        :if={@primitive?}
-        id={"#{@tab_id}-preview"}
-        class={preview_class(@variant)}
-        p="5"
-        phx-hook="DocsDemoFrame"
-        phx-update="ignore"
-        data-component={@component}
-        data-demo-css={@css_code}
-        data-canvas-css={@canvas_css}
-      >
-        {render_slot(@heex)}
-      </.box>
-      <.box
-        :if={not @primitive?}
         class={preview_class(@variant)}
         p="5"
         data-component={@component}
@@ -67,6 +53,9 @@ defmodule EssenceUIWeb.Docs.Components do
         data-radius={theme_attr(@variant, "medium")}
         data-scaling={theme_attr(@variant, "100%")}
       >
+        <style :if={@has_canvas_css}>
+          <%= Phoenix.HTML.raw(@canvas_css) %>
+        </style>
         <style :if={@has_css_code}>
           <%= Phoenix.HTML.raw(@css_code) %>
         </style>
@@ -98,12 +87,10 @@ defmodule EssenceUIWeb.Docs.Components do
 
   Returns the component stylesheet only (no demo canvas). Strips `@import`
   lines and `.radix-demo[data-component]` selector prefixes so the CSS tab
-  shows copy-pasteable rules that match the Shadow DOM preview.
+  shows copy-pasteable `Demo*` rules.
   """
   def primitive_css(component) when is_binary(component) do
-    snake = String.replace(component, "-", "_")
-
-    case read_primitive_css("#{snake}.css") do
+    case read_primitive_css("#{component}.css") do
       nil -> ""
       css -> css |> strip_css_imports() |> unwrap_radix_demo_selectors()
     end
@@ -325,11 +312,11 @@ defmodule EssenceUIWeb.Docs.Components do
     end
   end
 
-  # Canvas layout for Shadow DOM preview only (not shown in the CSS tab).
-  defp demo_canvas_css_for_shadow do
+  # Canvas layout for the preview only (not shown in the CSS tab).
+  defp demo_canvas_css do
     case read_primitive_css("demo-canvas.css") do
       nil -> ""
-      css -> css |> strip_css_imports() |> canvas_selectors_for_shadow()
+      css -> strip_css_imports(css)
     end
   end
 
@@ -341,23 +328,10 @@ defmodule EssenceUIWeb.Docs.Components do
     |> String.trim()
   end
 
-  # Drop `.radix-demo[data-component="…"]` so tab/shadow CSS is component-local.
+  # Drop `.radix-demo[data-component="…"]` so the CSS tab shows component-local rules.
   defp unwrap_radix_demo_selectors(css) when is_binary(css) do
     css
     |> String.replace(~r/\.radix-demo\[data-component="[^"]+"\]\s*/m, "")
-    |> String.trim()
-  end
-
-  # Rewrite canvas rules so they apply to the shadow host.
-  # Keep data-component scoping as :host([...]) — rewriting those to bare :host
-  # would make utility `button { all: unset }` beat component class rules.
-  defp canvas_selectors_for_shadow(css) when is_binary(css) do
-    css
-    |> String.replace(
-      ~r/\.radix-demo\[data-component="([^"]+)"\]/m,
-      ":host([data-component=\"\\1\"])"
-    )
-    |> String.replace(~r/\.radix-demo\b/m, ":host")
     |> String.trim()
   end
 

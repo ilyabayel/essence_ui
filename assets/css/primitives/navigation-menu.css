@@ -4,12 +4,6 @@
 @import "@radix-ui/colors/purple.css";
 @import "@radix-ui/colors/violet.css";
 
-/* reset */
-.radix-demo[data-component="navigation-menu"] button,
-.radix-demo[data-component="navigation-menu"] p {
-	all: unset;
-}
-
 .radix-demo[data-component="navigation-menu"] .NavigationMenuRoot {
 	position: relative;
 	display: flex;

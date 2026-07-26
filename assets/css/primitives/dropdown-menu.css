@@ -2,11 +2,6 @@
 @import "@radix-ui/colors/mauve.css";
 @import "@radix-ui/colors/violet.css";
 
-/* reset */
-.radix-demo[data-component="dropdown-menu"] button {
-	all: unset;
-}
-
 .radix-demo[data-component="dropdown-menu"] .DropdownMenuContent,
 .radix-demo[data-component="dropdown-menu"] .DropdownMenuSubContent {
 	min-width: 220px;

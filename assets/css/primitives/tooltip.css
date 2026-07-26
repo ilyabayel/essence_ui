@@ -1,11 +1,6 @@
 @import "@radix-ui/colors/black-alpha.css";
 @import "@radix-ui/colors/violet.css";
 
-/* reset */
-.radix-demo[data-component="tooltip"] button {
-	all: unset;
-}
-
 .radix-demo[data-component="tooltip"] .TooltipContent {
 	border-radius: 4px;
 	padding: 10px 15px;

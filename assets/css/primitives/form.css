@@ -6,7 +6,6 @@
 .radix-demo[data-component="form"] input,
 .radix-demo[data-component="form"] textarea,
 .radix-demo[data-component="form"] button {
-	all: unset;
 	box-sizing: border-box;
 }
 
