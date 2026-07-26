@@ -121,6 +121,26 @@ export const ScrollAreaRoot = {
     }
   },
 
+  updated() {
+    // LiveView morphdom clears JS-applied inline styles on patch; restore overflow.
+    this.applyViewportOverflow();
+    this.positionScrollbars();
+    this.updateScrollbars();
+
+    // Server HTML resets data-state="hidden"; restore if pointer is still over us.
+    if (this.type === "hover") {
+      if (this.el.matches(":hover")) {
+        this.showScrollbars();
+      } else {
+        this.setScrollbarState("hidden");
+      }
+    } else if (this.type === "scroll") {
+      this.setScrollbarState("hidden");
+    } else if (this.type === "always") {
+      this.setScrollbarState("visible");
+    }
+  },
+
   applyViewportOverflow() {
     if (!this.viewport) return;
     // Match Radix: enable scroll only on axes that have a scrollbar part.

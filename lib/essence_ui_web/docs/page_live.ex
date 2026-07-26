@@ -183,7 +183,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
           </.button>
         </.flex>
 
-        <.scroll_area type="hover" class="docs-sidebar__scroll">
+        <.scroll_area id="docs-sidebar-scroll" type="hover" class="docs-sidebar__scroll">
           <.flex direction="column" gap="5" class="docs-sidebar__inner">
             <.box as="nav" aria-label="Documentation pages">
               <.flex :for={section <- @nav} direction="column" gap="1" mb="4">
@@ -192,7 +192,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
                 </.text>
                 <.es_link
                   :for={item <- section.items}
-                  navigate={docs_path(@section, item.path)}
+                  patch={docs_path(@section, item.path)}
                   underline="none"
                   color={nav_color(@page, item.path)}
                   high_contrast={nav_active?(@page, item.path)}
@@ -211,7 +211,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
         <.flex :if={@not_found} direction="column" align="center" gap="3" py="9" px="4">
           <.heading as="h1" size="6">Page not found</.heading>
           <.text color="gray">No documentation exists at this path.</.text>
-          <.es_link navigate={docs_path(@section, Catalog.home_path(@section))}>Back to docs</.es_link>
+          <.es_link patch={docs_path(@section, Catalog.home_path(@section))}>Back to docs</.es_link>
         </.flex>
 
         <.flex :if={@page} class="docs-article-wrap" gap="6">
@@ -236,7 +236,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
             >
               <.es_link
                 :if={@prev_page}
-                navigate={docs_path(@section, @prev_page.path)}
+                patch={docs_path(@section, @prev_page.path)}
                 underline="hover"
               >
                 <.text size="2">← {@prev_page.title}</.text>
@@ -244,7 +244,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
               <.box :if={!@prev_page}></.box>
               <.es_link
                 :if={@next_page}
-                navigate={docs_path(@section, @next_page.path)}
+                patch={docs_path(@section, @next_page.path)}
                 underline="hover"
               >
                 <.text size="2">{@next_page.title} →</.text>
