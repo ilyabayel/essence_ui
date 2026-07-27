@@ -33,7 +33,7 @@ defmodule Storybook.Primitives.ToastStory do
           <button
             type="button"
             id="toast-show-btn"
-            class="Button large violet"
+            class="DemoButton large violet"
             onclick="
               const toast = document.getElementById('toast-primitive');
               if (!toast) return;
@@ -47,29 +47,29 @@ defmodule Storybook.Primitives.ToastStory do
 
           <.viewport
             id="toast-viewport"
-            class="ToastViewport"
+            class="DemoToastViewport"
           >
             <.root
               id="toast-primitive"
               duration={3000}
               type="foreground"
               default_open={false}
-              class="ToastRoot"
+              class="DemoToastRoot"
             >
-              <.title class="ToastTitle">
+              <.title class="DemoToastTitle">
                 Scheduled: Catch up
               </.title>
-              <.description class="ToastDescription">
+              <.description class="DemoToastDescription">
                 Friday at 5:30 PM
               </.description>
               <.action
                 alt_text="Goto schedule to undo"
-                class="ToastAction Button small green"
+                class="DemoToastAction DemoButton small green"
               >
                 Undo
               </.action>
               <.close
-                class="ToastClose"
+                class="DemoToastClose"
                 aria-label="Close"
               >
                 ×

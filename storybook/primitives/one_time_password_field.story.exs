@@ -18,32 +18,32 @@ defmodule Storybook.Primitives.OneTimePasswordFieldStory do
         template: """
         <OneTimePasswordField.root
           id="otp-primitive"
-          class="OTPRoot"
+          class="DemoOTPRoot"
           length={6}
           name="otp"
         >
           <OneTimePasswordField.input
-            class="OTPInput"
+            class="DemoOTPInput"
             index={0}
           />
           <OneTimePasswordField.input
-            class="OTPInput"
+            class="DemoOTPInput"
             index={1}
           />
           <OneTimePasswordField.input
-            class="OTPInput"
+            class="DemoOTPInput"
             index={2}
           />
           <OneTimePasswordField.input
-            class="OTPInput"
+            class="DemoOTPInput"
             index={3}
           />
           <OneTimePasswordField.input
-            class="OTPInput"
+            class="DemoOTPInput"
             index={4}
           />
           <OneTimePasswordField.input
-            class="OTPInput"
+            class="DemoOTPInput"
             index={5}
           />
         </OneTimePasswordField.root>

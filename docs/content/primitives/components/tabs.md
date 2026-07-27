@@ -11,111 +11,111 @@ A set of layered sections of content—known as tab panels—that are displayed 
   <:heex>
     <Tabs.root
               id="tabs-primitive"
-              class="TabsRoot"
+              class="DemoTabsRoot"
               default_value="tab1"
             >
               <Tabs.list
-                class="TabsList"
+                class="DemoTabsList"
                 aria-label="Manage your account"
               >
                 <Tabs.trigger
-                  class="TabsTrigger"
+                  class="DemoTabsTrigger"
                   value="tab1"
                 >
                   Account
                 </Tabs.trigger>
                 <Tabs.trigger
-                  class="TabsTrigger"
+                  class="DemoTabsTrigger"
                   value="tab2"
                 >
                   Password
                 </Tabs.trigger>
               </Tabs.list>
               <Tabs.content
-                class="TabsContent"
+                class="DemoTabsContent"
                 value="tab1"
               >
-                <p class="Text">
+                <p class="DemoText">
                   Make changes to your account here. Click save when you're done.
                 </p>
-                <fieldset class="Fieldset">
+                <fieldset class="DemoFieldset">
                   <label
-                    class="Label"
+                    class="DemoLabel"
                     for="name"
                   >
                     Name
                   </label>
                   <input
-                    class="Input"
+                    class="DemoInput"
                     id="name"
                     value="Pedro Duarte"
                   />
                 </fieldset>
-                <fieldset class="Fieldset">
+                <fieldset class="DemoFieldset">
                   <label
-                    class="Label"
+                    class="DemoLabel"
                     for="username"
                   >
                     Username
                   </label>
                   <input
-                    class="Input"
+                    class="DemoInput"
                     id="username"
                     value="@peduarte"
                   />
                 </fieldset>
                 <div style="display: flex; margin-top: 20px; justify-content: flex-end;">
-                  <button class="Button green">Save changes</button>
+                  <button class="DemoButton green">Save changes</button>
                 </div>
               </Tabs.content>
               <Tabs.content
-                class="TabsContent"
+                class="DemoTabsContent"
                 value="tab2"
               >
-                <p class="Text">
+                <p class="DemoText">
                   Change your password here. After saving, you'll be logged out.
                 </p>
-                <fieldset class="Fieldset">
+                <fieldset class="DemoFieldset">
                   <label
-                    class="Label"
+                    class="DemoLabel"
                     for="currentPassword"
                   >
                     Current password
                   </label>
                   <input
-                    class="Input"
+                    class="DemoInput"
                     id="currentPassword"
                     type="password"
                   />
                 </fieldset>
-                <fieldset class="Fieldset">
+                <fieldset class="DemoFieldset">
                   <label
-                    class="Label"
+                    class="DemoLabel"
                     for="newPassword"
                   >
                     New password
                   </label>
                   <input
-                    class="Input"
+                    class="DemoInput"
                     id="newPassword"
                     type="password"
                   />
                 </fieldset>
-                <fieldset class="Fieldset">
+                <fieldset class="DemoFieldset">
                   <label
-                    class="Label"
+                    class="DemoLabel"
                     for="confirmPassword"
                   >
                     Confirm password
                   </label>
                   <input
-                    class="Input"
+                    class="DemoInput"
                     id="confirmPassword"
                     type="password"
                   />
                 </fieldset>
                 <div style="display: flex; margin-top: 20px; justify-content: flex-end;">
-                  <button class="Button green">Change password</button>
+                  <button class="DemoButton green">Change password</button>
                 </div>
               </Tabs.content>
             </Tabs.root>
@@ -215,35 +215,35 @@ Contains the content associated with each trigger.
 You can create vertical tabs by using the `orientation` prop.
 
 ```heex
-<Tabs.root id="tabs-vertical" default_value="tab1" orientation="vertical" class="TabsRoot TabsRootVertical">
-  <Tabs.list aria-label="Tabs example" class="TabsList TabsListVertical">
-    <Tabs.trigger value="tab1" class="TabsTrigger">One</Tabs.trigger>
-    <Tabs.trigger value="tab2" class="TabsTrigger">Two</Tabs.trigger>
-    <Tabs.trigger value="tab3" class="TabsTrigger">Three</Tabs.trigger>
+<Tabs.root id="tabs-vertical" default_value="tab1" orientation="vertical" class="DemoTabsRoot DemoTabsRootVertical">
+  <Tabs.list aria-label="Tabs example" class="DemoTabsList DemoTabsListVertical">
+    <Tabs.trigger value="tab1" class="DemoTabsTrigger">One</Tabs.trigger>
+    <Tabs.trigger value="tab2" class="DemoTabsTrigger">Two</Tabs.trigger>
+    <Tabs.trigger value="tab3" class="DemoTabsTrigger">Three</Tabs.trigger>
   </Tabs.list>
-  <Tabs.content value="tab1" class="TabsContent">Tab one content</Tabs.content>
-  <Tabs.content value="tab2" class="TabsContent">Tab two content</Tabs.content>
-  <Tabs.content value="tab3" class="TabsContent">Tab three content</Tabs.content>
+  <Tabs.content value="tab1" class="DemoTabsContent">Tab one content</Tabs.content>
+  <Tabs.content value="tab2" class="DemoTabsContent">Tab two content</Tabs.content>
+  <Tabs.content value="tab3" class="DemoTabsContent">Tab three content</Tabs.content>
 </Tabs.root>
 ```
 
 ```css
-.TabsRootVertical {
+.DemoTabsRootVertical {
   flex-direction: row;
 }
-.TabsListVertical {
+.DemoTabsListVertical {
   flex-direction: column;
   border-bottom: none;
   border-right: 1px solid var(--mauve-6);
 }
-.TabsRootVertical .TabsTrigger:first-child {
+.DemoTabsRootVertical .DemoTabsTrigger:first-child {
   border-top-left-radius: 6px;
   border-top-right-radius: 0;
 }
-.TabsRootVertical .TabsTrigger:last-child {
+.DemoTabsRootVertical .DemoTabsTrigger:last-child {
   border-top-right-radius: 0;
 }
-.TabsRootVertical .TabsContent {
+.DemoTabsRootVertical .DemoTabsContent {
   border-bottom-left-radius: 0;
   border-top-right-radius: 6px;
 }

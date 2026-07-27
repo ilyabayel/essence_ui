@@ -1,6 +1,11 @@
 @import "@radix-ui/colors/black-alpha.css";
 @import "@radix-ui/colors/violet.css";
 
+/* reset */
+button {
+	all: unset;
+}
+
 .DemoRadioGroupRoot {
 	display: flex;
 	flex-direction: column;
@@ -38,7 +43,7 @@
 	background-color: var(--violet-11);
 }
 
-.DemoRadioGroupLabel {
+.DemoLabel {
 	color: white;
 	font-size: 15px;
 	line-height: 1;

@@ -9,7 +9,7 @@ test.describe("Accessible Icon Primitive", () => {
 
   test("hides decorative icon and exposes label", async ({ page }) => {
     const demo = page.locator('.essence-demo[data-component="accessible-icon"]');
-    const btn = demo.locator("button.IconButton");
+    const btn = demo.locator("button.DemoIconButton");
     const iconWrap = btn.locator('span[aria-hidden="true"]');
     const sr = btn.locator("span").filter({ hasText: "Close" });
 

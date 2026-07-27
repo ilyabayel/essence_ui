@@ -18,43 +18,43 @@ For sighted users to preview content available behind a link.
                 content_id="hover-card-content"
               >
                 <a
-                  class="ImageTrigger"
+                  class="DemoImageTrigger"
                   href="https://github.com/"
                   target="_blank"
                   rel="noreferrer noopener"
                 >
-                  <div class="Image normal" style="display: flex; align-items: center; justify-content: center; background: var(--gray-3); color: var(--gray-11); font-weight: 600; font-size: 14px;" aria-hidden="true">E</div>
+                  <div class="DemoImage normal" style="display: flex; align-items: center; justify-content: center; background: var(--gray-3); color: var(--gray-11); font-weight: 600; font-size: 14px;" aria-hidden="true">E</div>
                 </a>
               </HoverCard.trigger>
               <HoverCard.portal id="hover-card-portal">
                 <HoverCard.content
                   id="hover-card-content"
-                  class="HoverCardContent"
+                  class="DemoHoverCardContent"
                   side_offset={5}
                 >
                   <div style="display: flex; flex-direction: column; gap: 7px;">
-                    <div class="Image large" style="display: flex; align-items: center; justify-content: center; background: var(--gray-3); color: var(--gray-11); font-weight: 600; font-size: 24px;" aria-hidden="true">E</div>
+                    <div class="DemoImage large" style="display: flex; align-items: center; justify-content: center; background: var(--gray-3); color: var(--gray-11); font-weight: 600; font-size: 24px;" aria-hidden="true">E</div>
                     <div style="display: flex; flex-direction: column; gap: 15px;">
                       <div>
-                        <div class="Text bold">Essence</div>
-                        <div class="Text faded">@essence_ui</div>
+                        <div class="DemoText bold">Essence</div>
+                        <div class="DemoText faded">@essence_ui</div>
                       </div>
-                      <div class="Text">
+                      <div class="DemoText">
                         Unstyled, accessible UI components for Phoenix LiveView. Primitives, colors, and themes for building high-quality interfaces.
                       </div>
                       <div style="display: flex; gap: 15px;">
                         <div style="display: flex; gap: 5px;">
-                          <div class="Text bold">0</div>
-                          <div class="Text faded">Following</div>
+                          <div class="DemoText bold">0</div>
+                          <div class="DemoText faded">Following</div>
                         </div>
                         <div style="display: flex; gap: 5px;">
-                          <div class="Text bold">2,900</div>
-                          <div class="Text faded">Followers</div>
+                          <div class="DemoText bold">2,900</div>
+                          <div class="DemoText faded">Followers</div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <HoverCard.arrow class="HoverCardArrow" />
+                  <HoverCard.arrow class="DemoHoverCardArrow" />
                 </HoverCard.content>
               </HoverCard.portal>
             </HoverCard.root>
@@ -164,7 +164,7 @@ Use `open_delay` and `close_delay` to control the time it takes for the hover ca
     …
   </HoverCard.trigger>
   <HoverCard.portal id="instant-hover-card-portal">
-    <HoverCard.content id="instant-hover-card-content" class="HoverCardContent">
+    <HoverCard.content id="instant-hover-card-content" class="DemoHoverCardContent">
       …
     </HoverCard.content>
   </HoverCard.portal>

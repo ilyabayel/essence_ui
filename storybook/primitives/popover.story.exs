@@ -20,7 +20,7 @@ defmodule Storybook.Primitives.PopoverStory do
           <Popover.trigger
             id="popover-trigger"
             content_id="popover-content"
-            class="IconButton"
+            class="DemoIconButton"
             aria-label="Update dimensions"
           >
             <svg
@@ -40,76 +40,76 @@ defmodule Storybook.Primitives.PopoverStory do
           </Popover.trigger>
           <Popover.content
             id="popover-content"
-            class="PopoverContent"
+            class="DemoPopoverContent"
             side_offset={5}
           >
             <div style="display: flex; flex-direction: column; gap: 10px;">
               <p
-                class="Text"
+                class="DemoText"
                 style="margin-bottom: 10px;"
               >
                 Dimensions
               </p>
-              <fieldset class="Fieldset">
+              <fieldset class="DemoFieldset">
                 <label
-                  class="Label"
+                  class="DemoLabel"
                   for="popover-width"
                 >
                   Width
                 </label>
                 <input
-                  class="Input"
+                  class="DemoInput"
                   id="popover-width"
                   value="100%"
                 />
               </fieldset>
-              <fieldset class="Fieldset">
+              <fieldset class="DemoFieldset">
                 <label
-                  class="Label"
+                  class="DemoLabel"
                   for="popover-maxWidth"
                 >
                   Max. width
                 </label>
                 <input
-                  class="Input"
+                  class="DemoInput"
                   id="popover-maxWidth"
                   value="300px"
                 />
               </fieldset>
-              <fieldset class="Fieldset">
+              <fieldset class="DemoFieldset">
                 <label
-                  class="Label"
+                  class="DemoLabel"
                   for="popover-height"
                 >
                   Height
                 </label>
                 <input
-                  class="Input"
+                  class="DemoInput"
                   id="popover-height"
                   value="25px"
                 />
               </fieldset>
-              <fieldset class="Fieldset">
+              <fieldset class="DemoFieldset">
                 <label
-                  class="Label"
+                  class="DemoLabel"
                   for="popover-maxHeight"
                 >
                   Max. height
                 </label>
                 <input
-                  class="Input"
+                  class="DemoInput"
                   id="popover-maxHeight"
                   value="none"
                 />
               </fieldset>
             </div>
             <Popover.close
-              class="PopoverClose"
+              class="DemoPopoverClose"
               aria-label="Close"
             >
               ×
             </Popover.close>
-            <Popover.arrow class="PopoverArrow" />
+            <Popover.arrow class="DemoPopoverArrow" />
           </Popover.content>
         </Popover.root>
         """

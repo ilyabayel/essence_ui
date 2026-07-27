@@ -18,7 +18,7 @@ defmodule Storybook.Primitives.SlotStory do
         template: """
         <Slot.slot
           as="button"
-          class="Button violet"
+          class="DemoButton violet"
         >
           Composed Button
         </Slot.slot>

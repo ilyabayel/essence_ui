@@ -25,7 +25,7 @@ defmodule Storybook.Primitives.TooltipStory do
             <Tooltip.trigger
               id="tooltip-trigger"
               content_id="tooltip-content"
-              class="IconButton"
+              class="DemoIconButton"
               aria-label="Add to library"
             >
               <svg
@@ -45,11 +45,11 @@ defmodule Storybook.Primitives.TooltipStory do
             </Tooltip.trigger>
             <Tooltip.content
               id="tooltip-content"
-              class="TooltipContent"
+              class="DemoTooltipContent"
               side_offset={5}
             >
               Add to library
-              <Tooltip.arrow class="TooltipArrow" />
+              <Tooltip.arrow class="DemoTooltipArrow" />
             </Tooltip.content>
           </Tooltip.root>
         </Tooltip.provider>

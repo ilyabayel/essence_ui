@@ -10,26 +10,26 @@ An interactive component which expands/collapses a panel.
   <:heex>
     <Collapsible.root id="collapsible-primitive" class="DemoCollapsibleRoot">
       <div style="display: flex; align-items: center; justify-content: space-between;">
-        <span class="DemoCollapsibleText">
+        <span class="DemoText" style="color: white;">
           @peduarte starred 3 repositories
         </span>
-        <Collapsible.trigger id="collapsible-trigger" content_id="collapsible-content" class="DemoCollapsibleIconButton" aria-label="Toggle">
+        <Collapsible.trigger id="collapsible-trigger" content_id="collapsible-content" class="DemoIconButton" aria-label="Toggle">
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
             <path d="M3.5 5.5h8M3.5 9.5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </Collapsible.trigger>
       </div>
 
-      <div class="DemoCollapsibleRepository">
-        <span class="DemoCollapsibleText">@radix-themes/primitives</span>
+      <div class="DemoRepository">
+        <span class="DemoText">@radix-themes/primitives</span>
       </div>
 
       <Collapsible.content id="collapsible-content">
-        <div class="DemoCollapsibleRepository">
-          <span class="DemoCollapsibleText">@radix-themes/colors</span>
+        <div class="DemoRepository">
+          <span class="DemoText">@radix-themes/colors</span>
         </div>
-        <div class="DemoCollapsibleRepository">
-          <span class="DemoCollapsibleText">@radix-themes/themes</span>
+        <div class="DemoRepository">
+          <span class="DemoText">@radix-themes/themes</span>
         </div>
       </Collapsible.content>
     </Collapsible.root>

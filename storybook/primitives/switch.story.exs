@@ -21,17 +21,17 @@ defmodule Storybook.Primitives.SwitchStory do
             <label
               id="airplane-mode-label"
               for="airplane-mode"
-              class="Label"
+              class="DemoLabel"
               style="padding-right: 15px;"
             >
               Airplane mode
             </label>
             <Switch.root
               id="airplane-mode"
-              class="SwitchRoot"
+              class="DemoSwitchRoot"
               aria-labelledby="airplane-mode-label"
             >
-              <Switch.thumb class="SwitchThumb" />
+              <Switch.thumb class="DemoSwitchThumb" />
             </Switch.root>
           </div>
         </form>

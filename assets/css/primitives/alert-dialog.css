@@ -29,7 +29,6 @@ button {
 	padding: 25px;
 	animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-
 .DemoAlertDialogContent:focus {
 	outline: none;
 }
@@ -60,42 +59,34 @@ button {
 	height: 35px;
 	user-select: none;
 }
-
 .DemoButton:focus:not(:focus-visible) {
 	outline: 0;
 }
-
 .DemoButton:focus-visible {
 	outline: 2px solid var(--violet-6);
 	outline-offset: 1px;
 }
-
 .DemoButton.violet {
 	background-color: var(--violet-4);
 	color: var(--violet-12);
 	outline-color: var(--violet-6);
 }
-
 .DemoButton.violet:hover {
 	background-color: var(--mauve-3);
 }
-
 .DemoButton.red {
 	background-color: var(--red-4);
 	color: var(--red-11);
 	outline-color: var(--red-7);
 }
-
 .DemoButton.red:hover {
 	background-color: var(--red-5);
 }
-
 .DemoButton.mauve {
 	background-color: var(--mauve-4);
 	color: var(--mauve-11);
 	outline-color: var(--mauve-7);
 }
-
 .DemoButton.mauve:hover {
 	background-color: var(--mauve-5);
 }
@@ -104,7 +95,6 @@ button {
 	from {
 		opacity: 0;
 	}
-
 	to {
 		opacity: 1;
 	}
@@ -115,7 +105,6 @@ button {
 		opacity: 0;
 		transform: translate(-50%, -48%) scale(0.96);
 	}
-
 	to {
 		opacity: 1;
 		transform: translate(-50%, -50%) scale(1);

@@ -2,7 +2,12 @@
 @import "@radix-ui/colors/mauve.css";
 @import "@radix-ui/colors/violet.css";
 
-.essence-demo[data-component="toggle"] .Toggle {
+/* reset */
+button {
+	all: unset;
+}
+
+.DemoToggle {
 	background-color: white;
 	color: var(--mauve-11);
 	height: 35px;
@@ -15,13 +20,13 @@
 	justify-content: center;
 	box-shadow: 0 2px 10px var(--black-a7);
 }
-.essence-demo[data-component="toggle"] .Toggle:hover {
+.DemoToggle:hover {
 	background-color: var(--violet-3);
 }
-.essence-demo[data-component="toggle"] .Toggle[data-state="on"] {
+.DemoToggle[data-state="on"] {
 	background-color: var(--violet-6);
 	color: var(--violet-12);
 }
-.essence-demo[data-component="toggle"] .Toggle:focus {
+.DemoToggle:focus {
 	box-shadow: 0 0 0 2px black;
 }

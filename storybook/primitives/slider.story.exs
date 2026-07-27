@@ -19,16 +19,16 @@ defmodule Storybook.Primitives.SliderStory do
         <form>
           <Slider.root
             id="slider-primitive"
-            class="SliderRoot"
+            class="DemoSliderRoot"
             default_value={[50]}
             max={100}
             step={1}
           >
-            <Slider.track class="SliderTrack">
-              <Slider.range class="SliderRange" />
+            <Slider.track class="DemoSliderTrack">
+              <Slider.range class="DemoSliderRange" />
             </Slider.track>
             <Slider.thumb
-              class="SliderThumb"
+              class="DemoSliderThumb"
               index={0}
               aria-label="Volume"
             />
@@ -42,21 +42,21 @@ defmodule Storybook.Primitives.SliderStory do
         template: """
         <Slider.root
           id="slider-range"
-          class="SliderRoot"
+          class="DemoSliderRoot"
           default_value={[25, 75]}
           max={100}
           step={1}
         >
-          <Slider.track class="SliderTrack">
-            <Slider.range class="SliderRange" />
+          <Slider.track class="DemoSliderTrack">
+            <Slider.range class="DemoSliderRange" />
           </Slider.track>
           <Slider.thumb
-            class="SliderThumb"
+            class="DemoSliderThumb"
             index={0}
             aria-label="Minimum"
           />
           <Slider.thumb
-            class="SliderThumb"
+            class="DemoSliderThumb"
             index={1}
             aria-label="Maximum"
           />

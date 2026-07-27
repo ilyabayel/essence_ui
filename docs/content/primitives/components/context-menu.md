@@ -13,66 +13,66 @@ Displays a menu located at the pointer, triggered by a right click or a long pre
               <ContextMenu.trigger
                 id="context-trigger"
                 content_id="context-content"
-                class="ContextMenuTrigger"
+                class="DemoContextMenuTrigger"
               >
                 Right-click here.
               </ContextMenu.trigger>
               <ContextMenu.content
                 id="context-content"
-                class="ContextMenuContent"
+                class="DemoContextMenuContent"
               >
                 <ContextMenu.item
-                  class="ContextMenuItem"
+                  class="DemoContextMenuItem"
                   text_value="Back"
                 >
-                  Back <div class="RightSlot">⌘+[</div>
+                  Back <div class="DemoRightSlot">⌘+[</div>
                 </ContextMenu.item>
                 <ContextMenu.item
-                  class="ContextMenuItem"
+                  class="DemoContextMenuItem"
                   disabled
                   text_value="Forward"
                 >
-                  Forward <div class="RightSlot">⌘+]</div>
+                  Forward <div class="DemoRightSlot">⌘+]</div>
                 </ContextMenu.item>
                 <ContextMenu.item
-                  class="ContextMenuItem"
+                  class="DemoContextMenuItem"
                   text_value="Reload"
                 >
-                  Reload <div class="RightSlot">⌘+R</div>
+                  Reload <div class="DemoRightSlot">⌘+R</div>
                 </ContextMenu.item>
                 <ContextMenu.sub>
                   <ContextMenu.sub_trigger
-                    class="ContextMenuSubTrigger"
+                    class="DemoContextMenuSubTrigger"
                     text_value="More Tools"
                   >
                     More Tools
-                    <div class="RightSlot"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.61514 7.15788C10.7954 7.3502 10.7954 7.64949 10.61514 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg></div>
+                    <div class="DemoRightSlot"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.61514 7.15788C10.7954 7.3502 10.7954 7.64949 10.61514 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg></div>
                   </ContextMenu.sub_trigger>
                   <ContextMenu.sub_content
-                    class="ContextMenuSubContent"
+                    class="DemoContextMenuSubContent"
                     side_offset={2}
                   >
                     <ContextMenu.item
-                      class="ContextMenuItem"
+                      class="DemoContextMenuItem"
                       text_value="Save Page As"
                     >
-                      Save Page As… <div class="RightSlot">⌘+S</div>
+                      Save Page As… <div class="DemoRightSlot">⌘+S</div>
                     </ContextMenu.item>
                     <ContextMenu.item
-                      class="ContextMenuItem"
+                      class="DemoContextMenuItem"
                       text_value="Create Shortcut"
                     >
                       Create Shortcut…
                     </ContextMenu.item>
                     <ContextMenu.item
-                      class="ContextMenuItem"
+                      class="DemoContextMenuItem"
                       text_value="Name Window"
                     >
                       Name Window…
                     </ContextMenu.item>
-                    <ContextMenu.separator class="ContextMenuSeparator" />
+                    <ContextMenu.separator class="DemoContextMenuSeparator" />
                     <ContextMenu.item
-                      class="ContextMenuItem"
+                      class="DemoContextMenuItem"
                       text_value="Developer Tools"
                     >
                       Developer Tools
@@ -80,40 +80,40 @@ Displays a menu located at the pointer, triggered by a right click or a long pre
                   </ContextMenu.sub_content>
                 </ContextMenu.sub>
 
-                <ContextMenu.separator class="ContextMenuSeparator" />
+                <ContextMenu.separator class="DemoContextMenuSeparator" />
 
                 <ContextMenu.checkbox_item
-                  class="ContextMenuCheckboxItem"
+                  class="DemoContextMenuCheckboxItem"
                   checked
                   text_value="Show Bookmarks"
                 >
                   <ContextMenu.item_indicator
-                    class="ContextMenuItemIndicator"
+                    class="DemoContextMenuItemIndicator"
                     force_mount
                   >
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
                   </ContextMenu.item_indicator>
-                  Show Bookmarks <div class="RightSlot">⌘+B</div>
+                  Show Bookmarks <div class="DemoRightSlot">⌘+B</div>
                 </ContextMenu.checkbox_item>
                 <ContextMenu.checkbox_item
-                  class="ContextMenuCheckboxItem"
+                  class="DemoContextMenuCheckboxItem"
                   text_value="Show Full URLs"
                 >
-                  <ContextMenu.item_indicator class="ContextMenuItemIndicator"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg></ContextMenu.item_indicator>
+                  <ContextMenu.item_indicator class="DemoContextMenuItemIndicator"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg></ContextMenu.item_indicator>
                   Show Full URLs
                 </ContextMenu.checkbox_item>
 
-                <ContextMenu.separator class="ContextMenuSeparator" />
+                <ContextMenu.separator class="DemoContextMenuSeparator" />
 
-                <ContextMenu.label class="ContextMenuLabel">People</ContextMenu.label>
+                <ContextMenu.label class="DemoContextMenuLabel">People</ContextMenu.label>
                 <ContextMenu.radio_group value="pedro">
                   <ContextMenu.radio_item
-                    class="ContextMenuRadioItem"
+                    class="DemoContextMenuRadioItem"
                     value="pedro"
                     checked
                   >
                     <ContextMenu.item_indicator
-                      class="ContextMenuItemIndicator"
+                      class="DemoContextMenuItemIndicator"
                       force_mount
                     >
                       <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9.875 7.5C9.875 8.81168 8.81168 9.875 7.5 9.875C6.18832 9.875 5.125 8.81168 5.125 7.5C5.125 6.18832 6.18832 5.125 7.5 5.125C8.81168 5.125 9.875 6.18832 9.875 7.5Z" fill="currentColor"></path></svg>
@@ -121,10 +121,10 @@ Displays a menu located at the pointer, triggered by a right click or a long pre
                     Pedro Duarte
                   </ContextMenu.radio_item>
                   <ContextMenu.radio_item
-                    class="ContextMenuRadioItem"
+                    class="DemoContextMenuRadioItem"
                     value="colm"
                   >
-                    <ContextMenu.item_indicator class="ContextMenuItemIndicator"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9.875 7.5C9.875 8.81168 8.81168 9.875 7.5 9.875C6.18832 9.875 5.125 8.81168 5.125 7.5C5.125 6.18832 6.18832 5.125 7.5 5.125C8.81168 5.125 9.875 6.18832 9.875 7.5Z" fill="currentColor"></path></svg></ContextMenu.item_indicator>
+                    <ContextMenu.item_indicator class="DemoContextMenuItemIndicator"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9.875 7.5C9.875 8.81168 8.81168 9.875 7.5 9.875C6.18832 9.875 5.125 8.81168 5.125 7.5C5.125 6.18832 6.18832 5.125 7.5 5.125C8.81168 5.125 9.875 6.18832 9.875 7.5Z" fill="currentColor"></path></svg></ContextMenu.item_indicator>
                     Colm Tuite
                   </ContextMenu.radio_item>
                 </ContextMenu.radio_group>
@@ -356,19 +356,19 @@ You can create submenus by using `ContextMenu.sub` in combination with its parts
 <ContextMenu.root id="context-sub">
   <ContextMenu.trigger id="context-sub-trigger" content_id="context-sub-content">…</ContextMenu.trigger>
   <ContextMenu.content id="context-sub-content">
-    <ContextMenu.item class="ContextMenuItem">…</ContextMenu.item>
-    <ContextMenu.item class="ContextMenuItem">…</ContextMenu.item>
-    <ContextMenu.separator class="ContextMenuSeparator" />
+    <ContextMenu.item class="DemoContextMenuItem">…</ContextMenu.item>
+    <ContextMenu.item class="DemoContextMenuItem">…</ContextMenu.item>
+    <ContextMenu.separator class="DemoContextMenuSeparator" />
     <ContextMenu.sub>
-      <ContextMenu.sub_trigger class="ContextMenuSubTrigger">Sub menu →</ContextMenu.sub_trigger>
-      <ContextMenu.sub_content class="ContextMenuSubContent">
-        <ContextMenu.item class="ContextMenuItem">Sub menu item</ContextMenu.item>
-        <ContextMenu.item class="ContextMenuItem">Sub menu item</ContextMenu.item>
-        <ContextMenu.arrow class="ContextMenuArrow" />
+      <ContextMenu.sub_trigger class="DemoContextMenuSubTrigger">Sub menu →</ContextMenu.sub_trigger>
+      <ContextMenu.sub_content class="DemoContextMenuSubContent">
+        <ContextMenu.item class="DemoContextMenuItem">Sub menu item</ContextMenu.item>
+        <ContextMenu.item class="DemoContextMenuItem">Sub menu item</ContextMenu.item>
+        <ContextMenu.arrow class="DemoContextMenuArrow" />
       </ContextMenu.sub_content>
     </ContextMenu.sub>
-    <ContextMenu.separator class="ContextMenuSeparator" />
-    <ContextMenu.item class="ContextMenuItem">…</ContextMenu.item>
+    <ContextMenu.separator class="DemoContextMenuSeparator" />
+    <ContextMenu.item class="DemoContextMenuItem">…</ContextMenu.item>
   </ContextMenu.content>
 </ContextMenu.root>
 ```
@@ -381,14 +381,14 @@ You can add special styles to disabled items via the `data-disabled` attribute.
 <ContextMenu.root id="context-disabled">
   <ContextMenu.trigger id="context-disabled-trigger" content_id="context-disabled-content">…</ContextMenu.trigger>
   <ContextMenu.content id="context-disabled-content">
-    <ContextMenu.item class="ContextMenuItem" disabled>…</ContextMenu.item>
-    <ContextMenu.item class="ContextMenuItem">…</ContextMenu.item>
+    <ContextMenu.item class="DemoContextMenuItem" disabled>…</ContextMenu.item>
+    <ContextMenu.item class="DemoContextMenuItem">…</ContextMenu.item>
   </ContextMenu.content>
 </ContextMenu.root>
 ```
 
 ```css
-.ContextMenuItem[data-disabled] {
+.DemoContextMenuItem[data-disabled] {
   color: gainsboro;
 }
 ```
@@ -401,11 +401,11 @@ Use the `separator` part to add a separator between items.
 <ContextMenu.root id="context-separators">
   <ContextMenu.trigger id="context-separators-trigger" content_id="context-separators-content">…</ContextMenu.trigger>
   <ContextMenu.content id="context-separators-content">
-    <ContextMenu.item class="ContextMenuItem">…</ContextMenu.item>
-    <ContextMenu.separator class="ContextMenuSeparator" />
-    <ContextMenu.item class="ContextMenuItem">…</ContextMenu.item>
-    <ContextMenu.separator class="ContextMenuSeparator" />
-    <ContextMenu.item class="ContextMenuItem">…</ContextMenu.item>
+    <ContextMenu.item class="DemoContextMenuItem">…</ContextMenu.item>
+    <ContextMenu.separator class="DemoContextMenuSeparator" />
+    <ContextMenu.item class="DemoContextMenuItem">…</ContextMenu.item>
+    <ContextMenu.separator class="DemoContextMenuSeparator" />
+    <ContextMenu.item class="DemoContextMenuItem">…</ContextMenu.item>
   </ContextMenu.content>
 </ContextMenu.root>
 ```
@@ -418,10 +418,10 @@ Use the `label` part to help label a section.
 <ContextMenu.root id="context-labels">
   <ContextMenu.trigger id="context-labels-trigger" content_id="context-labels-content">…</ContextMenu.trigger>
   <ContextMenu.content id="context-labels-content">
-    <ContextMenu.label class="ContextMenuLabel">Label</ContextMenu.label>
-    <ContextMenu.item class="ContextMenuItem">…</ContextMenu.item>
-    <ContextMenu.item class="ContextMenuItem">…</ContextMenu.item>
-    <ContextMenu.item class="ContextMenuItem">…</ContextMenu.item>
+    <ContextMenu.label class="DemoContextMenuLabel">Label</ContextMenu.label>
+    <ContextMenu.item class="DemoContextMenuItem">…</ContextMenu.item>
+    <ContextMenu.item class="DemoContextMenuItem">…</ContextMenu.item>
+    <ContextMenu.item class="DemoContextMenuItem">…</ContextMenu.item>
   </ContextMenu.content>
 </ContextMenu.root>
 ```
@@ -434,11 +434,11 @@ Use the `checkbox_item` part to add an item that can be checked. Pass `checked` 
 <ContextMenu.root id="context-checkbox">
   <ContextMenu.trigger id="context-checkbox-trigger" content_id="context-checkbox-content">…</ContextMenu.trigger>
   <ContextMenu.content id="context-checkbox-content">
-    <ContextMenu.item class="ContextMenuItem">…</ContextMenu.item>
-    <ContextMenu.item class="ContextMenuItem">…</ContextMenu.item>
-    <ContextMenu.separator class="ContextMenuSeparator" />
-    <ContextMenu.checkbox_item checked={@checked} class="ContextMenuCheckboxItem" text_value="Checkbox item">
-      <ContextMenu.item_indicator class="ContextMenuItemIndicator">✓</ContextMenu.item_indicator>
+    <ContextMenu.item class="DemoContextMenuItem">…</ContextMenu.item>
+    <ContextMenu.item class="DemoContextMenuItem">…</ContextMenu.item>
+    <ContextMenu.separator class="DemoContextMenuSeparator" />
+    <ContextMenu.checkbox_item checked={@checked} class="DemoContextMenuCheckboxItem" text_value="Checkbox item">
+      <ContextMenu.item_indicator class="DemoContextMenuItemIndicator">✓</ContextMenu.item_indicator>
       Checkbox item
     </ContextMenu.checkbox_item>
   </ContextMenu.content>
@@ -454,16 +454,16 @@ Use the `radio_group` and `radio_item` parts to add an item that can be checked 
   <ContextMenu.trigger id="context-radio-trigger" content_id="context-radio-content">…</ContextMenu.trigger>
   <ContextMenu.content id="context-radio-content">
     <ContextMenu.radio_group value={@color}>
-      <ContextMenu.radio_item value="red" checked={@color == "red"} class="ContextMenuRadioItem">
-        <ContextMenu.item_indicator class="ContextMenuItemIndicator">●</ContextMenu.item_indicator>
+      <ContextMenu.radio_item value="red" checked={@color == "red"} class="DemoContextMenuRadioItem">
+        <ContextMenu.item_indicator class="DemoContextMenuItemIndicator">●</ContextMenu.item_indicator>
         Red
       </ContextMenu.radio_item>
-      <ContextMenu.radio_item value="blue" checked={@color == "blue"} class="ContextMenuRadioItem">
-        <ContextMenu.item_indicator class="ContextMenuItemIndicator">●</ContextMenu.item_indicator>
+      <ContextMenu.radio_item value="blue" checked={@color == "blue"} class="DemoContextMenuRadioItem">
+        <ContextMenu.item_indicator class="DemoContextMenuItemIndicator">●</ContextMenu.item_indicator>
         Blue
       </ContextMenu.radio_item>
-      <ContextMenu.radio_item value="green" checked={@color == "green"} class="ContextMenuRadioItem">
-        <ContextMenu.item_indicator class="ContextMenuItemIndicator">●</ContextMenu.item_indicator>
+      <ContextMenu.radio_item value="green" checked={@color == "green"} class="DemoContextMenuRadioItem">
+        <ContextMenu.item_indicator class="DemoContextMenuItemIndicator">●</ContextMenu.item_indicator>
         Green
       </ContextMenu.radio_item>
     </ContextMenu.radio_group>
@@ -479,11 +479,11 @@ You can add extra decorative elements in the `item` parts, such as images.
 <ContextMenu.root id="context-complex">
   <ContextMenu.trigger id="context-complex-trigger" content_id="context-complex-content">…</ContextMenu.trigger>
   <ContextMenu.content id="context-complex-content">
-    <ContextMenu.item class="ContextMenuItem">
+    <ContextMenu.item class="DemoContextMenuItem">
       <img src="…" alt="" />
       Adolfo Hess
     </ContextMenu.item>
-    <ContextMenu.item class="ContextMenuItem">
+    <ContextMenu.item class="DemoContextMenuItem">
       <img src="…" alt="" />
       Miyah Myles
     </ContextMenu.item>
@@ -500,14 +500,14 @@ We expose several CSS custom properties such as `--radix-context-menu-trigger-wi
 ```heex
 <ContextMenu.root id="context-constrain">
   <ContextMenu.trigger id="context-constrain-trigger" content_id="context-constrain-content">…</ContextMenu.trigger>
-  <ContextMenu.content id="context-constrain-content" class="ContextMenuContent">
+  <ContextMenu.content id="context-constrain-content" class="DemoContextMenuContent">
     …
   </ContextMenu.content>
 </ContextMenu.root>
 ```
 
 ```css
-.ContextMenuContent {
+.DemoContextMenuContent {
   width: var(--radix-context-menu-trigger-width);
   max-height: var(--radix-context-menu-content-available-height);
 }
@@ -520,14 +520,14 @@ We expose a CSS custom property `--radix-context-menu-content-transform-origin`.
 ```heex
 <ContextMenu.root id="context-origin">
   <ContextMenu.trigger id="context-origin-trigger" content_id="context-origin-content">…</ContextMenu.trigger>
-  <ContextMenu.content id="context-origin-content" class="ContextMenuContent">
+  <ContextMenu.content id="context-origin-content" class="DemoContextMenuContent">
     …
   </ContextMenu.content>
 </ContextMenu.root>
 ```
 
 ```css
-.ContextMenuContent {
+.DemoContextMenuContent {
   transform-origin: var(--radix-context-menu-content-transform-origin);
   animation: scaleIn 0.5s ease-out;
 }
@@ -551,21 +551,21 @@ We expose `data-side` and `data-align` attributes. Their values change at runtim
 ```heex
 <ContextMenu.root id="context-collision">
   <ContextMenu.trigger id="context-collision-trigger" content_id="context-collision-content">…</ContextMenu.trigger>
-  <ContextMenu.content id="context-collision-content" class="ContextMenuContent">
+  <ContextMenu.content id="context-collision-content" class="DemoContextMenuContent">
     …
   </ContextMenu.content>
 </ContextMenu.root>
 ```
 
 ```css
-.ContextMenuContent {
+.DemoContextMenuContent {
   animation-duration: 0.6s;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
-.ContextMenuContent[data-side="top"] {
+.DemoContextMenuContent[data-side="top"] {
   animation-name: slideUp;
 }
-.ContextMenuContent[data-side="bottom"] {
+.DemoContextMenuContent[data-side="bottom"] {
   animation-name: slideDown;
 }
 

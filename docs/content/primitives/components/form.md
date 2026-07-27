@@ -20,7 +20,7 @@ Collect information from your users using validation rules.
                   </Form.message>
                 </div>
                 <Form.control>
-                  <input class="DemoFormInput" type="email" name="email" required />
+                  <input class="DemoInput" type="email" name="email" required />
                 </Form.control>
               </Form.field>
               <Form.field class="DemoFormField" name="question">
@@ -31,10 +31,10 @@ Collect information from your users using validation rules.
                   </Form.message>
                 </div>
                 <Form.control>
-                  <textarea class="DemoFormTextarea" name="question" required></textarea>
+                  <textarea class="DemoTextarea" name="question" required></textarea>
                 </Form.control>
               </Form.field>
-              <Form.submit class="DemoFormButton" style="margin-top: 10px;">
+              <Form.submit class="DemoButton" style="margin-top: 10px;">
                 Post question
               </Form.submit>
             </Form.root>
@@ -201,7 +201,7 @@ The hook sets `data-invalid` on the field and native control. Use it to style pa
   <Form.field name="email">
     <Form.label class="DemoFormLabel">Email</Form.label>
     <Form.control>
-      <input class="DemoFormInput" type="email" name="email" />
+      <input class="DemoInput" type="email" name="email" />
     </Form.control>
   </Form.field>
 </Form.root>
@@ -228,18 +228,18 @@ Wrap markup in `Form.validity_state` and read mirrored `data-*` attributes on th
   <Form.label>Full name</Form.label>
   <Form.validity_state>
     <Form.control>
-      <input type="text" name="name" class="DemoFormInput" />
+      <input type="text" name="name" class="DemoInput" />
     </Form.control>
-    <span class="ValidityIcon" aria-hidden="true"></span>
+    <span class="DemoValidityIcon" aria-hidden="true"></span>
   </Form.validity_state>
 </Form.field>
 ```
 
 ```css
-[data-radix-form-validity-state][data-valid="false"] .ValidityIcon {
+[data-radix-form-validity-state][data-valid="false"] .DemoValidityIcon {
   color: red;
 }
-[data-radix-form-validity-state][data-valid="true"] .ValidityIcon {
+[data-radix-form-validity-state][data-valid="true"] .DemoValidityIcon {
   color: green;
 }
 ```

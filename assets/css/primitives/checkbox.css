@@ -1,6 +1,11 @@
 @import "@radix-ui/colors/black-alpha.css";
 @import "@radix-ui/colors/violet.css";
 
+/* reset */
+button {
+	all: unset;
+}
+
 .DemoCheckboxRoot {
 	background-color: white;
 	width: 25px;
@@ -22,7 +27,7 @@
 	color: var(--violet-11);
 }
 
-.DemoCheckboxLabel {
+.DemoLabel {
 	color: white;
 	padding-left: 15px;
 	font-size: 15px;

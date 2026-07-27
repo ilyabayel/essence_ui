@@ -45,8 +45,8 @@
 	all: unset;
 }
 
-.essence-demo[data-component="accessible-icon"] .IconButton,
-.essence-demo[data-component="visually-hidden"] .IconButton {
+.essence-demo[data-component="accessible-icon"] .DemoIconButton,
+.essence-demo[data-component="visually-hidden"] .DemoIconButton {
 	font-family: inherit;
 	border-radius: 100%;
 	height: 35px;
@@ -60,13 +60,13 @@
 	cursor: pointer;
 }
 
-.essence-demo[data-component="accessible-icon"] .IconButton:hover,
-.essence-demo[data-component="visually-hidden"] .IconButton:hover {
+.essence-demo[data-component="accessible-icon"] .DemoIconButton:hover,
+.essence-demo[data-component="visually-hidden"] .DemoIconButton:hover {
 	background-color: var(--violet-3);
 }
 
-.essence-demo[data-component="visually-hidden"] .Button,
-.essence-demo[data-component="slot"] .Button {
+.essence-demo[data-component="visually-hidden"] .DemoButton,
+.essence-demo[data-component="slot"] .DemoButton {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -80,14 +80,14 @@
 	cursor: pointer;
 }
 
-.essence-demo[data-component="visually-hidden"] .Button.violet,
-.essence-demo[data-component="slot"] .Button.violet {
+.essence-demo[data-component="visually-hidden"] .DemoButton.violet,
+.essence-demo[data-component="slot"] .DemoButton.violet {
 	background-color: white;
 	color: var(--violet-11);
 	box-shadow: 0 2px 10px var(--black-a7);
 }
 
-.essence-demo[data-component="visually-hidden"] .Button.violet:hover,
-.essence-demo[data-component="slot"] .Button.violet:hover {
+.essence-demo[data-component="visually-hidden"] .DemoButton.violet:hover,
+.essence-demo[data-component="slot"] .DemoButton.violet:hover {
 	background-color: var(--mauve-3);
 }

@@ -4,7 +4,13 @@
 @import "@radix-ui/colors/purple.css";
 @import "@radix-ui/colors/violet.css";
 
-.essence-demo[data-component="navigation-menu"] .NavigationMenuRoot {
+/* reset */
+button,
+p {
+	all: unset;
+}
+
+.DemoNavigationMenuRoot {
 	position: relative;
 	display: flex;
 	justify-content: center;
@@ -12,7 +18,7 @@
 	z-index: 1;
 }
 
-.essence-demo[data-component="navigation-menu"] .NavigationMenuList {
+.DemoNavigationMenuList {
 	display: flex;
 	justify-content: center;
 	background-color: white;
@@ -23,8 +29,8 @@
 	margin: 0;
 }
 
-.essence-demo[data-component="navigation-menu"] .NavigationMenuTrigger,
-.essence-demo[data-component="navigation-menu"] .NavigationMenuLink {
+.DemoNavigationMenuTrigger,
+.DemoNavigationMenuLink {
 	padding: 8px 12px;
 	outline: none;
 	user-select: none;
@@ -34,30 +40,30 @@
 	font-size: 15px;
 	color: var(--violet-11);
 }
-.essence-demo[data-component="navigation-menu"] .NavigationMenuTrigger:focus,
-.essence-demo[data-component="navigation-menu"] .NavigationMenuLink:focus {
+.DemoNavigationMenuTrigger:focus,
+.DemoNavigationMenuLink:focus {
 	box-shadow: 0 0 0 2px var(--violet-7);
 }
-.essence-demo[data-component="navigation-menu"] .NavigationMenuTrigger:hover,
-.essence-demo[data-component="navigation-menu"] .NavigationMenuLink:hover {
+.DemoNavigationMenuTrigger:hover,
+.DemoNavigationMenuLink:hover {
 	background-color: var(--violet-3);
 }
 
-.essence-demo[data-component="navigation-menu"] .NavigationMenuTrigger {
+.DemoNavigationMenuTrigger {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	gap: 2px;
 }
 
-.essence-demo[data-component="navigation-menu"] .NavigationMenuLink {
+.DemoNavigationMenuLink {
 	display: block;
 	text-decoration: none;
 	font-size: 15px;
 	line-height: 1;
 }
 
-.essence-demo[data-component="navigation-menu"] .NavigationMenuContent {
+.DemoNavigationMenuContent {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -65,25 +71,25 @@
 	animation-duration: 250ms;
 	animation-timing-function: ease;
 }
-.essence-demo[data-component="navigation-menu"] .NavigationMenuContent[data-motion="from-start"] {
+.DemoNavigationMenuContent[data-motion="from-start"] {
 	animation-name: enterFromLeft;
 }
-.essence-demo[data-component="navigation-menu"] .NavigationMenuContent[data-motion="from-end"] {
+.DemoNavigationMenuContent[data-motion="from-end"] {
 	animation-name: enterFromRight;
 }
-.essence-demo[data-component="navigation-menu"] .NavigationMenuContent[data-motion="to-start"] {
+.DemoNavigationMenuContent[data-motion="to-start"] {
 	animation-name: exitToLeft;
 }
-.essence-demo[data-component="navigation-menu"] .NavigationMenuContent[data-motion="to-end"] {
+.DemoNavigationMenuContent[data-motion="to-end"] {
 	animation-name: exitToRight;
 }
 @media only screen and (min-width: 600px) {
-	.essence-demo[data-component="navigation-menu"] .NavigationMenuContent {
+	.DemoNavigationMenuContent {
 		width: auto;
 	}
 }
 
-.essence-demo[data-component="navigation-menu"] .NavigationMenuIndicator {
+.DemoNavigationMenuIndicator {
 	display: flex;
 	align-items: flex-end;
 	justify-content: center;
@@ -95,14 +101,14 @@
 		width,
 		transform 250ms ease;
 }
-.essence-demo[data-component="navigation-menu"] .NavigationMenuIndicator[data-state="visible"] {
+.DemoNavigationMenuIndicator[data-state="visible"] {
 	animation: fadeIn 200ms ease;
 }
-.essence-demo[data-component="navigation-menu"] .NavigationMenuIndicator[data-state="hidden"] {
+.DemoNavigationMenuIndicator[data-state="hidden"] {
 	animation: fadeOut 200ms ease;
 }
 
-.essence-demo[data-component="navigation-menu"] .NavigationMenuViewport {
+.DemoNavigationMenuViewport {
 	position: relative;
 	transform-origin: top center;
 	margin-top: 10px;
@@ -119,19 +125,19 @@
 		height,
 		300ms ease;
 }
-.essence-demo[data-component="navigation-menu"] .NavigationMenuViewport[data-state="open"] {
+.DemoNavigationMenuViewport[data-state="open"] {
 	animation: scaleIn 200ms ease;
 }
-.essence-demo[data-component="navigation-menu"] .NavigationMenuViewport[data-state="closed"] {
+.DemoNavigationMenuViewport[data-state="closed"] {
 	animation: scaleOut 200ms ease;
 }
 @media only screen and (min-width: 600px) {
-	.essence-demo[data-component="navigation-menu"] .NavigationMenuViewport {
+	.DemoNavigationMenuViewport {
 		width: var(--radix-navigation-menu-viewport-width);
 	}
 }
 
-.essence-demo[data-component="navigation-menu"] .List {
+.DemoList {
 	display: grid;
 	padding: 22px;
 	margin: 0;
@@ -139,18 +145,18 @@
 	list-style: none;
 }
 @media only screen and (min-width: 600px) {
-	.essence-demo[data-component="navigation-menu"] .List.one {
+	.DemoList.one {
 		width: 500px;
 		grid-template-columns: 0.75fr 1fr;
 	}
-	.essence-demo[data-component="navigation-menu"] .List.two {
+	.DemoList.two {
 		width: 600px;
 		grid-auto-flow: column;
 		grid-template-rows: repeat(3, 1fr);
 	}
 }
 
-.essence-demo[data-component="navigation-menu"] .ListItemLink {
+.DemoListItemLink {
 	display: block;
 	outline: none;
 	text-decoration: none;
@@ -160,27 +166,27 @@
 	font-size: 15px;
 	line-height: 1;
 }
-.essence-demo[data-component="navigation-menu"] .ListItemLink:focus {
+.DemoListItemLink:focus {
 	box-shadow: 0 0 0 2px var(--violet-7);
 }
-.essence-demo[data-component="navigation-menu"] .ListItemLink:hover {
+.DemoListItemLink:hover {
 	background-color: var(--mauve-3);
 }
 
-.essence-demo[data-component="navigation-menu"] .ListItemHeading {
+.DemoListItemHeading {
 	font-weight: 500;
 	line-height: 1.2;
 	margin-bottom: 5px;
 	color: var(--violet-12);
 }
 
-.essence-demo[data-component="navigation-menu"] .ListItemText {
+.DemoListItemText {
 	color: var(--mauve-11);
 	line-height: 1.4;
 	font-weight: initial;
 }
 
-.essence-demo[data-component="navigation-menu"] .Callout {
+.DemoCallout {
 	display: flex;
 	justify-content: flex-end;
 	flex-direction: column;
@@ -193,11 +199,11 @@
 	outline: none;
 	user-select: none;
 }
-.essence-demo[data-component="navigation-menu"] .Callout:focus {
+.DemoCallout:focus {
 	box-shadow: 0 0 0 2px var(--violet-7);
 }
 
-.essence-demo[data-component="navigation-menu"] .CalloutHeading {
+.DemoCalloutHeading {
 	color: white;
 	font-size: 18px;
 	font-weight: 500;
@@ -206,13 +212,13 @@
 	margin-bottom: 7px;
 }
 
-.essence-demo[data-component="navigation-menu"] .CalloutText {
+.DemoCalloutText {
 	color: var(--mauve-4);
 	font-size: 14px;
 	line-height: 1.3;
 }
 
-.essence-demo[data-component="navigation-menu"] .ViewportPosition {
+.DemoViewportPosition {
 	position: absolute;
 	display: flex;
 	justify-content: center;
@@ -222,17 +228,17 @@
 	perspective: 2000px;
 }
 
-.essence-demo[data-component="navigation-menu"] .CaretDown {
+.DemoCaretDown {
 	position: relative;
 	color: var(--violet-10);
 	top: 1px;
 	transition: transform 250ms ease;
 }
-.essence-demo[data-component="navigation-menu"] [data-state="open"] > .CaretDown {
+[data-state="open"] > .DemoCaretDown {
 	transform: rotate(-180deg);
 }
 
-.essence-demo[data-component="navigation-menu"] .Arrow {
+.DemoArrow {
 	position: relative;
 	top: 70%;
 	background-color: white;

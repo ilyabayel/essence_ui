@@ -7,7 +7,7 @@ Makes icons accessible by adding a label.
 
 <.demo theme="light" variant="primitive" component="accessible-icon" css={primitive_css("accessible-icon")}>
   <:heex>
-    <button class="IconButton" type="button">
+    <button class="DemoIconButton" type="button">
       <AccessibleIcon.accessible_icon label="Close">
         <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
           <path

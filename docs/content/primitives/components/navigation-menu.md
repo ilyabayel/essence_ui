@@ -11,26 +11,26 @@ A collection of links for navigating websites.
   <:heex>
     <NavigationMenu.root
               id="nav-primitive"
-              class="NavigationMenuRoot"
+              class="DemoNavigationMenuRoot"
             >
-              <NavigationMenu.list class="NavigationMenuList">
+              <NavigationMenu.list class="DemoNavigationMenuList">
                 <NavigationMenu.item value="learn">
                   <NavigationMenu.trigger
                     id="learn-trigger"
                     content_id="learn-content"
-                    class="NavigationMenuTrigger"
+                    class="DemoNavigationMenuTrigger"
                   >
-                    Learn <svg class="CaretDown" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.18179 6.18181C4.35753 6.00608 4.64245 6.00608 4.81819 6.18181L7.49999 8.86362L10.1818 6.18181C10.3575 6.00608 10.6424 6.00608 10.8182 6.18181C10.9939 6.35755 10.9939 6.64247 10.8182 6.81821L7.81819 9.81821C7.73379 9.9026 7.61933 9.95001 7.49999 9.95001C7.38064 9.95001 7.26618 9.9026 7.18179 9.81821L4.18179 6.81821C4.00605 6.64247 4.00605 6.35755 4.18179 6.18181Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                    Learn <svg class="DemoCaretDown" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.18179 6.18181C4.35753 6.00608 4.64245 6.00608 4.81819 6.18181L7.49999 8.86362L10.1818 6.18181C10.3575 6.00608 10.6424 6.00608 10.8182 6.18181C10.9939 6.35755 10.9939 6.64247 10.8182 6.81821L7.81819 9.81821C7.73379 9.9026 7.61933 9.95001 7.49999 9.95001C7.38064 9.95001 7.26618 9.9026 7.18179 9.81821L4.18179 6.81821C4.00605 6.64247 4.00605 6.35755 4.18179 6.18181Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
                   </NavigationMenu.trigger>
                   <NavigationMenu.content
                     id="learn-content"
-                    class="NavigationMenuContent"
+                    class="DemoNavigationMenuContent"
                   >
-                    <ul class="List one">
+                    <ul class="DemoList one">
                       <li style="grid-row: span 3;">
                         <NavigationMenu.link
                           href="#"
-                          class="Callout"
+                          class="DemoCallout"
                         >
                           <svg
                             aria-hidden="true"
@@ -55,35 +55,35 @@ A collection of links for navigating websites.
                             <path d="M22 2 q1 1 0 2"/>
                           </svg>
                      
-                          <div class="CalloutHeading">Essence UI</div>
-                          <p class="CalloutText">Unstyled, accessible components for Phoenix LiveView.</p>
+                          <div class="DemoCalloutHeading">Essence UI</div>
+                          <p class="DemoCalloutText">Unstyled, accessible components for Phoenix LiveView.</p>
                         </NavigationMenu.link>
                       </li>
                       <li>
                         <NavigationMenu.link
                           href="https://stitches.dev/"
-                          class="ListItemLink"
+                          class="DemoListItemLink"
                         >
-                          <div class="ListItemHeading">Stitches</div>
-                          <p class="ListItemText">CSS-in-JS with best-in-class developer experience.</p>
+                          <div class="DemoListItemHeading">Stitches</div>
+                          <p class="DemoListItemText">CSS-in-JS with best-in-class developer experience.</p>
                         </NavigationMenu.link>
                       </li>
                       <li>
                         <NavigationMenu.link
                           href="/colors"
-                          class="ListItemLink"
+                          class="DemoListItemLink"
                         >
-                          <div class="ListItemHeading">Colors</div>
-                          <p class="ListItemText">Beautiful, thought-out palettes with auto dark mode.</p>
+                          <div class="DemoListItemHeading">Colors</div>
+                          <p class="DemoListItemText">Beautiful, thought-out palettes with auto dark mode.</p>
                         </NavigationMenu.link>
                       </li>
                       <li>
                         <NavigationMenu.link
                           href="/primitives/docs/overview/introduction"
-                          class="ListItemLink"
+                          class="DemoListItemLink"
                         >
-                          <div class="ListItemHeading">Icons</div>
-                          <p class="ListItemText">A crisp set of 15x15 icons, balanced and consistent.</p>
+                          <div class="DemoListItemHeading">Icons</div>
+                          <p class="DemoListItemText">A crisp set of 15x15 icons, balanced and consistent.</p>
                         </NavigationMenu.link>
                       </li>
                     </ul>
@@ -94,67 +94,67 @@ A collection of links for navigating websites.
                   <NavigationMenu.trigger
                     id="overview-trigger"
                     content_id="overview-content"
-                    class="NavigationMenuTrigger"
+                    class="DemoNavigationMenuTrigger"
                   >
-                    Overview <svg class="CaretDown" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.18179 6.18181C4.35753 6.00608 4.64245 6.00608 4.81819 6.18181L7.49999 8.86362L10.1818 6.18181C10.3575 6.00608 10.6424 6.00608 10.8182 6.18181C10.9939 6.35755 10.9939 6.64247 10.8182 6.81821L7.81819 9.81821C7.73379 9.9026 7.61933 9.95001 7.49999 9.95001C7.38064 9.95001 7.26618 9.9026 7.18179 9.81821L4.18179 6.81821C4.00605 6.64247 4.00605 6.35755 4.18179 6.18181Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                    Overview <svg class="DemoCaretDown" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.18179 6.18181C4.35753 6.00608 4.64245 6.00608 4.81819 6.18181L7.49999 8.86362L10.1818 6.18181C10.3575 6.00608 10.6424 6.00608 10.8182 6.18181C10.9939 6.35755 10.9939 6.64247 10.8182 6.81821L7.81819 9.81821C7.73379 9.9026 7.61933 9.95001 7.49999 9.95001C7.38064 9.95001 7.26618 9.9026 7.18179 9.81821L4.18179 6.81821C4.00605 6.64247 4.00605 6.35755 4.18179 6.18181Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
                   </NavigationMenu.trigger>
                   <NavigationMenu.content
                     id="overview-content"
-                    class="NavigationMenuContent"
+                    class="DemoNavigationMenuContent"
                   >
-                    <ul class="List two">
+                    <ul class="DemoList two">
                       <li>
                         <NavigationMenu.link
                           href="/primitives/docs/overview/introduction"
-                          class="ListItemLink"
+                          class="DemoListItemLink"
                         >
-                          <div class="ListItemHeading">Introduction</div>
-                          <p class="ListItemText">Build high-quality, accessible design systems and web apps.</p>
+                          <div class="DemoListItemHeading">Introduction</div>
+                          <p class="DemoListItemText">Build high-quality, accessible design systems and web apps.</p>
                         </NavigationMenu.link>
                       </li>
                       <li>
                         <NavigationMenu.link
                           href="/primitives/docs/overview/getting-started"
-                          class="ListItemLink"
+                          class="DemoListItemLink"
                         >
-                          <div class="ListItemHeading">Getting started</div>
-                          <p class="ListItemText">A quick tutorial to get you up and running with Essence UI Primitives.</p>
+                          <div class="DemoListItemHeading">Getting started</div>
+                          <p class="DemoListItemText">A quick tutorial to get you up and running with Essence UI Primitives.</p>
                         </NavigationMenu.link>
                       </li>
                       <li>
                         <NavigationMenu.link
                           href="/primitives/docs/guides/styling"
-                          class="ListItemLink"
+                          class="DemoListItemLink"
                         >
-                          <div class="ListItemHeading">Styling</div>
-                          <p class="ListItemText">Unstyled and compatible with any styling solution.</p>
+                          <div class="DemoListItemHeading">Styling</div>
+                          <p class="DemoListItemText">Unstyled and compatible with any styling solution.</p>
                         </NavigationMenu.link>
                       </li>
                       <li>
                         <NavigationMenu.link
                           href="/primitives/docs/guides/animation"
-                          class="ListItemLink"
+                          class="DemoListItemLink"
                         >
-                          <div class="ListItemHeading">Animation</div>
-                          <p class="ListItemText">Use CSS keyframes or any animation library of your choice.</p>
+                          <div class="DemoListItemHeading">Animation</div>
+                          <p class="DemoListItemText">Use CSS keyframes or any animation library of your choice.</p>
                         </NavigationMenu.link>
                       </li>
                       <li>
                         <NavigationMenu.link
                           href="/primitives/docs/overview/accessibility"
-                          class="ListItemLink"
+                          class="DemoListItemLink"
                         >
-                          <div class="ListItemHeading">Accessibility</div>
-                          <p class="ListItemText">Tested in a range of browsers and assistive technologies.</p>
+                          <div class="DemoListItemHeading">Accessibility</div>
+                          <p class="DemoListItemText">Tested in a range of browsers and assistive technologies.</p>
                         </NavigationMenu.link>
                       </li>
                       <li>
                         <NavigationMenu.link
                           href="/primitives/docs/overview/releases"
-                          class="ListItemLink"
+                          class="DemoListItemLink"
                         >
-                          <div class="ListItemHeading">Releases</div>
-                          <p class="ListItemText">Essence UI Primitives releases and their changelogs.</p>
+                          <div class="DemoListItemHeading">Releases</div>
+                          <p class="DemoListItemText">Essence UI Primitives releases and their changelogs.</p>
                         </NavigationMenu.link>
                       </li>
                     </ul>
@@ -163,20 +163,20 @@ A collection of links for navigating websites.
 
                 <NavigationMenu.item value="github">
                   <NavigationMenu.link
-                    class="NavigationMenuLink"
+                    class="DemoNavigationMenuLink"
                     href="https://github.com/"
                   >
                     Github
                   </NavigationMenu.link>
                 </NavigationMenu.item>
 
-                <NavigationMenu.indicator class="NavigationMenuIndicator">
-                  <div class="Arrow"></div>
+                <NavigationMenu.indicator class="DemoNavigationMenuIndicator">
+                  <div class="DemoArrow"></div>
                 </NavigationMenu.indicator>
               </NavigationMenu.list>
 
-              <div class="ViewportPosition">
-                <NavigationMenu.viewport class="NavigationMenuViewport" />
+              <div class="DemoViewportPosition">
+                <NavigationMenu.viewport class="DemoNavigationMenuViewport" />
               </div>
             </NavigationMenu.root>
   </:heex>
@@ -335,21 +335,21 @@ An optional viewport element used to render active content outside of the list.
 You can create a vertical menu by using the `orientation` prop:
 
 ```heex
-<NavigationMenu.root id="nav-vertical" orientation="vertical" class="NavigationMenuRoot">
-  <NavigationMenu.list class="NavigationMenuList">
+<NavigationMenu.root id="nav-vertical" orientation="vertical" class="DemoNavigationMenuRoot">
+  <NavigationMenu.list class="DemoNavigationMenuList">
     <NavigationMenu.item value="one">
-      <NavigationMenu.trigger id="nav-v-one-trigger" content_id="nav-v-one-content" class="NavigationMenuTrigger">
+      <NavigationMenu.trigger id="nav-v-one-trigger" content_id="nav-v-one-content" class="DemoNavigationMenuTrigger">
         Item one
       </NavigationMenu.trigger>
-      <NavigationMenu.content id="nav-v-one-content" class="NavigationMenuContent">
+      <NavigationMenu.content id="nav-v-one-content" class="DemoNavigationMenuContent">
         Item one content
       </NavigationMenu.content>
     </NavigationMenu.item>
     <NavigationMenu.item value="two">
-      <NavigationMenu.trigger id="nav-v-two-trigger" content_id="nav-v-two-content" class="NavigationMenuTrigger">
+      <NavigationMenu.trigger id="nav-v-two-trigger" content_id="nav-v-two-content" class="DemoNavigationMenuTrigger">
         Item two
       </NavigationMenu.trigger>
-      <NavigationMenu.content id="nav-v-two-content" class="NavigationMenuContent">
+      <NavigationMenu.content id="nav-v-two-content" class="DemoNavigationMenuContent">
         Item two content
       </NavigationMenu.content>
     </NavigationMenu.item>
@@ -362,28 +362,28 @@ You can create a vertical menu by using the `orientation` prop:
 Use the `viewport` part when you need extra control over where `content` is rendered. Tab focus is maintained automatically.
 
 ```heex
-<NavigationMenu.root id="nav-viewport" class="NavigationMenuRoot">
-  <NavigationMenu.list class="NavigationMenuList">
+<NavigationMenu.root id="nav-viewport" class="DemoNavigationMenuRoot">
+  <NavigationMenu.list class="DemoNavigationMenuList">
     <NavigationMenu.item value="one">
-      <NavigationMenu.trigger id="nav-one-trigger" content_id="nav-one-content" class="NavigationMenuTrigger">
+      <NavigationMenu.trigger id="nav-one-trigger" content_id="nav-one-content" class="DemoNavigationMenuTrigger">
         Item one
       </NavigationMenu.trigger>
-      <NavigationMenu.content id="nav-one-content" class="NavigationMenuContent">
+      <NavigationMenu.content id="nav-one-content" class="DemoNavigationMenuContent">
         Item one content
       </NavigationMenu.content>
     </NavigationMenu.item>
     <NavigationMenu.item value="two">
-      <NavigationMenu.trigger id="nav-two-trigger" content_id="nav-two-content" class="NavigationMenuTrigger">
+      <NavigationMenu.trigger id="nav-two-trigger" content_id="nav-two-content" class="DemoNavigationMenuTrigger">
         Item two
       </NavigationMenu.trigger>
-      <NavigationMenu.content id="nav-two-content" class="NavigationMenuContent">
+      <NavigationMenu.content id="nav-two-content" class="DemoNavigationMenuContent">
         Item two content
       </NavigationMenu.content>
     </NavigationMenu.item>
   </NavigationMenu.list>
 
   <%!-- NavigationMenu.content is rendered here when active --%>
-  <NavigationMenu.viewport class="NavigationMenuViewport" />
+  <NavigationMenu.viewport class="DemoNavigationMenuViewport" />
 </NavigationMenu.root>
 ```
 
@@ -392,20 +392,20 @@ Use the `viewport` part when you need extra control over where `content` is rend
 Use the optional `indicator` part to highlight the active trigger:
 
 ```heex
-<NavigationMenu.list class="NavigationMenuList">
+<NavigationMenu.list class="DemoNavigationMenuList">
   …
-  <NavigationMenu.indicator class="NavigationMenuIndicator">
-    <div class="Arrow"></div>
+  <NavigationMenu.indicator class="DemoNavigationMenuIndicator">
+    <div class="DemoArrow"></div>
   </NavigationMenu.indicator>
 </NavigationMenu.list>
-<NavigationMenu.viewport class="NavigationMenuViewport" />
+<NavigationMenu.viewport class="DemoNavigationMenuViewport" />
 ```
 
 ```css
-.NavigationMenuIndicator {
+.DemoNavigationMenuIndicator {
   background-color: var(--violet-9);
 }
-.NavigationMenuIndicator[data-orientation="horizontal"] {
+.DemoNavigationMenuIndicator[data-orientation="horizontal"] {
   height: 3px;
   transition: width, transform, 250ms ease;
 }
@@ -417,25 +417,25 @@ Create a submenu by nesting `NavigationMenu.sub` inside `content`:
 
 ```heex
 <NavigationMenu.item value="two">
-  <NavigationMenu.trigger id="nav-sub-trigger" content_id="nav-sub-content" class="NavigationMenuTrigger">
+  <NavigationMenu.trigger id="nav-sub-trigger" content_id="nav-sub-content" class="DemoNavigationMenuTrigger">
     Item two
   </NavigationMenu.trigger>
-  <NavigationMenu.content id="nav-sub-content" class="NavigationMenuContent">
+  <NavigationMenu.content id="nav-sub-content" class="DemoNavigationMenuContent">
     <NavigationMenu.sub>
-      <NavigationMenu.list class="NavigationMenuList">
+      <NavigationMenu.list class="DemoNavigationMenuList">
         <NavigationMenu.item value="sub1">
-          <NavigationMenu.trigger id="nav-sub1-trigger" content_id="nav-sub1-content" class="NavigationMenuTrigger">
+          <NavigationMenu.trigger id="nav-sub1-trigger" content_id="nav-sub1-content" class="DemoNavigationMenuTrigger">
             Sub item one
           </NavigationMenu.trigger>
-          <NavigationMenu.content id="nav-sub1-content" class="NavigationMenuContent">
+          <NavigationMenu.content id="nav-sub1-content" class="DemoNavigationMenuContent">
             Sub item one content
           </NavigationMenu.content>
         </NavigationMenu.item>
         <NavigationMenu.item value="sub2">
-          <NavigationMenu.trigger id="nav-sub2-trigger" content_id="nav-sub2-content" class="NavigationMenuTrigger">
+          <NavigationMenu.trigger id="nav-sub2-trigger" content_id="nav-sub2-content" class="DemoNavigationMenuTrigger">
             Sub item two
           </NavigationMenu.trigger>
-          <NavigationMenu.content id="nav-sub2-content" class="NavigationMenuContent">
+          <NavigationMenu.content id="nav-sub2-content" class="DemoNavigationMenuContent">
             Sub item two content
           </NavigationMenu.content>
         </NavigationMenu.item>
@@ -450,15 +450,15 @@ Create a submenu by nesting `NavigationMenu.sub` inside `content`:
 Use `NavigationMenu.link` with the `active` prop to mark the current page:
 
 ```heex
-<NavigationMenu.root id="nav-routes" class="NavigationMenuRoot">
-  <NavigationMenu.list class="NavigationMenuList">
+<NavigationMenu.root id="nav-routes" class="DemoNavigationMenuRoot">
+  <NavigationMenu.list class="DemoNavigationMenuList">
     <NavigationMenu.item value="home">
-      <NavigationMenu.link href="/" class="NavigationMenuLink" active={@current_path == "/"}>
+      <NavigationMenu.link href="/" class="DemoNavigationMenuLink" active={@current_path == "/"}>
         Home
       </NavigationMenu.link>
     </NavigationMenu.item>
     <NavigationMenu.item value="about">
-      <NavigationMenu.link href="/about" class="NavigationMenuLink" active={@current_path == "/about"}>
+      <NavigationMenu.link href="/about" class="DemoNavigationMenuLink" active={@current_path == "/about"}>
         About
       </NavigationMenu.link>
     </NavigationMenu.item>
@@ -467,10 +467,10 @@ Use `NavigationMenu.link` with the `active` prop to mark the current page:
 ```
 
 ```css
-.NavigationMenuLink {
+.DemoNavigationMenuLink {
   text-decoration: none;
 }
-.NavigationMenuLink[data-active] {
+.DemoNavigationMenuLink[data-active] {
   text-decoration: underline;
 }
 ```
@@ -480,35 +480,35 @@ Use `NavigationMenu.link` with the `active` prop to mark the current page:
 Essence exposes `--radix-navigation-menu-viewport-width`, `--radix-navigation-menu-viewport-height`, and `data-motion` on content to animate viewport size and content position based on enter/exit direction:
 
 ```heex
-<NavigationMenu.content id="nav-anim-content" class="NavigationMenuContent">
+<NavigationMenu.content id="nav-anim-content" class="DemoNavigationMenuContent">
   Item one content
 </NavigationMenu.content>
 …
-<NavigationMenu.viewport class="NavigationMenuViewport" />
+<NavigationMenu.viewport class="DemoNavigationMenuViewport" />
 ```
 
 ```css
-.NavigationMenuContent {
+.DemoNavigationMenuContent {
   position: absolute;
   top: 0;
   left: 0;
   animation-duration: 250ms;
   animation-timing-function: ease;
 }
-.NavigationMenuContent[data-motion="from-start"] {
+.DemoNavigationMenuContent[data-motion="from-start"] {
   animation-name: enterFromLeft;
 }
-.NavigationMenuContent[data-motion="from-end"] {
+.DemoNavigationMenuContent[data-motion="from-end"] {
   animation-name: enterFromRight;
 }
-.NavigationMenuContent[data-motion="to-start"] {
+.DemoNavigationMenuContent[data-motion="to-start"] {
   animation-name: exitToLeft;
 }
-.NavigationMenuContent[data-motion="to-end"] {
+.DemoNavigationMenuContent[data-motion="to-end"] {
   animation-name: exitToRight;
 }
 
-.NavigationMenuViewport {
+.DemoNavigationMenuViewport {
   position: relative;
   width: var(--radix-navigation-menu-viewport-width);
   height: var(--radix-navigation-menu-viewport-height);

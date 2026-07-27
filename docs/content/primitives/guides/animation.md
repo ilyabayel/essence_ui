@@ -20,13 +20,13 @@ The simplest way to animate primitives is with CSS. Stateful parts expose `data-
   to { opacity: 0; }
 }
 
-.DialogOverlay[data-state="open"],
-.DialogContent[data-state="open"] {
+.DemoDialogOverlay[data-state="open"],
+.DemoDialogContent[data-state="open"] {
   animation: fadeIn 300ms ease-out;
 }
 
-.DialogOverlay[data-state="closed"],
-.DialogContent[data-state="closed"] {
+.DemoDialogOverlay[data-state="closed"],
+.DemoDialogContent[data-state="closed"] {
   animation: fadeOut 300ms ease-in;
 }
 ```
@@ -34,7 +34,7 @@ The simplest way to animate primitives is with CSS. Stateful parts expose `data-
 You can also use transitions:
 
 ```css
-.CollapsibleContent {
+.DemoCollapsibleContent {
   overflow: hidden;
   transition: height 300ms ease;
 }

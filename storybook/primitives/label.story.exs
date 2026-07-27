@@ -19,13 +19,13 @@ defmodule Storybook.Primitives.LabelStory do
         <div style="display: flex; padding: 0 20px; flex-wrap: wrap; gap: 15px; align-items: center;">
           <Label.label
             id="label-first-name"
-            class="LabelRoot"
+            class="DemoLabelRoot"
             for="firstName"
           >
             First Name
           </Label.label>
           <input
-            class="Input"
+            class="DemoInput"
             type="text"
             id="firstName"
             value="Pedro Duarte"

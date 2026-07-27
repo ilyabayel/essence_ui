@@ -9,15 +9,15 @@ Visually or semantically separates content.
 <.demo theme="light" variant="primitive" component="separator" css={primitive_css("separator")}>
   <:heex>
     <div style="width: 100%; max-width: 300px; margin: 0 15px;">
-      <div class="DemoSeparatorText" style="font-weight: 500;">Essence UI</div>
-      <div class="DemoSeparatorText">An open-source UI component library.</div>
+      <div class="DemoText" style="font-weight: 500;">Essence UI</div>
+      <div class="DemoText">An open-source UI component library.</div>
       <Separator.separator class="DemoSeparatorRoot" style="margin: 15px 0;" />
       <div style="display: flex; height: 20px; align-items: center;">
-        <div class="DemoSeparatorText">Blog</div>
+        <div class="DemoText">Blog</div>
         <Separator.separator class="DemoSeparatorRoot" decorative orientation="vertical" style="margin: 0 15px;" />
-        <div class="DemoSeparatorText">Docs</div>
+        <div class="DemoText">Docs</div>
         <Separator.separator class="DemoSeparatorRoot" decorative orientation="vertical" style="margin: 0 15px;" />
-        <div class="DemoSeparatorText">Source</div>
+        <div class="DemoText">Source</div>
       </div>
     </div>
   </:heex>

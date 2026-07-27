@@ -19,28 +19,28 @@ defmodule Storybook.Primitives.CheckboxGroupStory do
         <form>
           <CheckboxGroup.root
             id="checkbox-group-primitive"
-            class="CheckboxGroupRoot"
+            class="DemoCheckboxGroupRoot"
             default_value={["fun"]}
             name="traits"
             aria-label="Personality traits"
           >
             <div style="display: flex; align-items: center;">
-              <CheckboxGroup.item class="CheckboxGroupItem" value="fun" id="cg1" checked>
-                <CheckboxGroup.indicator class="CheckboxGroupIndicator" checked>✓</CheckboxGroup.indicator>
+              <CheckboxGroup.item class="DemoCheckboxGroupItem" value="fun" id="cg1" checked>
+                <CheckboxGroup.indicator class="DemoCheckboxGroupIndicator" checked>✓</CheckboxGroup.indicator>
               </CheckboxGroup.item>
-              <label class="Label" for="cg1">Fun</label>
+              <label class="DemoLabel" for="cg1">Fun</label>
             </div>
             <div style="display: flex; align-items: center;">
-              <CheckboxGroup.item class="CheckboxGroupItem" value="serious" id="cg2">
-                <CheckboxGroup.indicator class="CheckboxGroupIndicator" />
+              <CheckboxGroup.item class="DemoCheckboxGroupItem" value="serious" id="cg2">
+                <CheckboxGroup.indicator class="DemoCheckboxGroupIndicator" />
               </CheckboxGroup.item>
-              <label class="Label" for="cg2">Serious</label>
+              <label class="DemoLabel" for="cg2">Serious</label>
             </div>
             <div style="display: flex; align-items: center;">
-              <CheckboxGroup.item class="CheckboxGroupItem" value="smart" id="cg3">
-                <CheckboxGroup.indicator class="CheckboxGroupIndicator" />
+              <CheckboxGroup.item class="DemoCheckboxGroupItem" value="smart" id="cg3">
+                <CheckboxGroup.indicator class="DemoCheckboxGroupIndicator" />
               </CheckboxGroup.item>
-              <label class="Label" for="cg3">Smart</label>
+              <label class="DemoLabel" for="cg3">Smart</label>
             </div>
           </CheckboxGroup.root>
         </form>

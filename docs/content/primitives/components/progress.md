@@ -8,9 +8,9 @@ Displays an indicator showing the completion progress of a task, typically displ
 
 <.demo theme="light" variant="primitive" component="progress" css={primitive_css("progress")}>
   <:heex>
-    <Progress.root class="ProgressRoot" value={66} aria-label="Progress">
+    <Progress.root class="DemoProgressRoot" value={66} aria-label="Progress">
       <Progress.indicator
-        class="ProgressIndicator"
+        class="DemoProgressIndicator"
         value={66}
         style="transform: translateX(-34%);"
       />

@@ -19,27 +19,27 @@ defmodule Storybook.Primitives.RadioGroupStory do
         <form>
           <RadioGroup.root
             id="radio-group-primitive"
-            class="RadioGroupRoot"
+            class="DemoRadioGroupRoot"
             default_value="default"
             aria-label="View density"
           >
             <div style="display: flex; align-items: center;">
-              <RadioGroup.item class="RadioGroupItem" value="default" id="r1">
-                <RadioGroup.indicator class="RadioGroupIndicator" />
+              <RadioGroup.item class="DemoRadioGroupItem" value="default" id="r1">
+                <RadioGroup.indicator class="DemoRadioGroupIndicator" />
               </RadioGroup.item>
-              <label class="Label" for="r1">Default</label>
+              <label class="DemoLabel" for="r1">Default</label>
             </div>
             <div style="display: flex; align-items: center;">
-              <RadioGroup.item class="RadioGroupItem" value="comfortable" id="r2">
-                <RadioGroup.indicator class="RadioGroupIndicator" />
+              <RadioGroup.item class="DemoRadioGroupItem" value="comfortable" id="r2">
+                <RadioGroup.indicator class="DemoRadioGroupIndicator" />
               </RadioGroup.item>
-              <label class="Label" for="r2">Comfortable</label>
+              <label class="DemoLabel" for="r2">Comfortable</label>
             </div>
             <div style="display: flex; align-items: center;">
-              <RadioGroup.item class="RadioGroupItem" value="compact" id="r3">
-                <RadioGroup.indicator class="RadioGroupIndicator" />
+              <RadioGroup.item class="DemoRadioGroupItem" value="compact" id="r3">
+                <RadioGroup.indicator class="DemoRadioGroupIndicator" />
               </RadioGroup.item>
-              <label class="Label" for="r3">Compact</label>
+              <label class="DemoLabel" for="r3">Compact</label>
             </div>
           </RadioGroup.root>
         </form>

@@ -7,7 +7,7 @@ Merges its props onto its immediate child.
 
 <.demo theme="light" variant="primitive" component="slot" css={primitive_css("slot")}>
   <:heex>
-    <Slot.slot as="button" class="Button violet" type="button">
+    <Slot.slot as="button" class="DemoButton violet" type="button">
       Composed Button
     </Slot.slot>
   </:heex>
@@ -46,7 +46,7 @@ Use to create polymorphic components that can render as different HTML elements.
 When your component should render as a specific tag, pass `as` and any shared attributes:
 
 ```heex
-<Slot.slot as="button" class="Button violet" type="button">
+<Slot.slot as="button" class="DemoButton violet" type="button">
   Click me
 </Slot.slot>
 ```
@@ -54,7 +54,7 @@ When your component should render as a specific tag, pass `as` and any shared at
 Use additional HTML attributes through global assigns (for example `type`, `href`, or `phx-click`):
 
 ```heex
-<Slot.slot as="a" class="Button violet" href="/contact">
+<Slot.slot as="a" class="DemoButton violet" href="/contact">
   Contact
 </Slot.slot>
 ```

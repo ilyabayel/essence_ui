@@ -21,7 +21,7 @@ Essence does not support `asChild` on primitive parts; use wrapping or Themes `a
 Encode your design-system button once, then use it as the dialog trigger content (or wrap `Dialog.trigger` in a styled function component):
 
 ```heex
-<Dialog.trigger id="edit-trigger" class="Button violet">
+<Dialog.trigger id="edit-trigger" class="DemoButton violet">
   Edit profile
 </Dialog.trigger>
 ```

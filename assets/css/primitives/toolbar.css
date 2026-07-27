@@ -2,6 +2,12 @@
 @import "@radix-ui/colors/mauve.css";
 @import "@radix-ui/colors/violet.css";
 
+/* reset */
+a,
+button {
+	all: unset;
+}
+
 .DemoToolbarRoot {
 	display: flex;
 	padding: 10px;
@@ -25,36 +31,27 @@
 	line-height: 1;
 	align-items: center;
 	justify-content: center;
-	border: none;
-	background: transparent;
-	cursor: pointer;
-	text-decoration: none;
 }
-
 .DemoToolbarToggleItem:hover,
 .DemoToolbarLink:hover,
 .DemoToolbarButton:hover {
 	background-color: var(--violet-3);
 	color: var(--violet-11);
 }
-
 .DemoToolbarToggleItem:focus,
 .DemoToolbarLink:focus,
 .DemoToolbarButton:focus {
 	position: relative;
 	box-shadow: 0 0 0 2px var(--violet-7);
-	outline: none;
 }
 
 .DemoToolbarToggleItem {
 	background-color: white;
 	margin-left: 2px;
 }
-
 .DemoToolbarToggleItem:first-child {
 	margin-left: 0;
 }
-
 .DemoToolbarToggleItem[data-state="on"] {
 	background-color: var(--violet-5);
 	color: var(--violet-11);
@@ -67,17 +64,16 @@
 }
 
 .DemoToolbarLink {
+	background-color: transparent;
 	color: var(--mauve-11);
 	display: none;
 	justify-content: center;
 	align-items: center;
 }
-
 .DemoToolbarLink:hover {
 	background-color: transparent;
 	cursor: pointer;
 }
-
 @media (min-width: 520px) {
 	.DemoToolbarLink {
 		display: inline-flex;
@@ -90,7 +86,6 @@
 	color: white;
 	background-color: var(--violet-9);
 }
-
 .DemoToolbarButton:hover {
 	background-color: var(--violet-10);
 	color: white;

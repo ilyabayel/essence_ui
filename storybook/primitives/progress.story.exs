@@ -17,12 +17,12 @@ defmodule Storybook.Primitives.ProgressStory do
         description: "Essence UI progress demo",
         template: """
         <Progress.root
-          class="ProgressRoot"
+          class="DemoProgressRoot"
           value={66}
           aria-label="Progress"
         >
           <Progress.indicator
-            class="ProgressIndicator"
+            class="DemoProgressIndicator"
             value={66}
             style="transform: translateX(-34%);"
           />

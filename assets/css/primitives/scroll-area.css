@@ -2,7 +2,7 @@
 @import "@radix-ui/colors/mauve.css";
 @import "@radix-ui/colors/violet.css";
 
-.essence-demo[data-component="scroll-area"] .DemoScrollAreaRoot {
+.DemoScrollAreaRoot {
 	width: 200px;
 	height: 225px;
 	border-radius: 4px;
@@ -12,30 +12,13 @@
 	--scrollbar-size: 10px;
 }
 
-.essence-demo[data-component="scroll-area"] .DemoScrollAreaViewport {
+.DemoScrollAreaViewport {
 	width: 100%;
 	height: 100%;
 	border-radius: inherit;
-	/* Hide native scrollbars (Radix ScrollAreaViewportStyle). */
-	scrollbar-width: none;
-	-ms-overflow-style: none;
-	-webkit-overflow-scrolling: touch;
-}
-.essence-demo[data-component="scroll-area"] .DemoScrollAreaViewport::-webkit-scrollbar {
-	display: none;
 }
 
-/* Also hide for headless primitive usage outside the essence-demo story. */
-[data-radix-scroll-area-viewport] {
-	scrollbar-width: none;
-	-ms-overflow-style: none;
-	-webkit-overflow-scrolling: touch;
-}
-[data-radix-scroll-area-viewport]::-webkit-scrollbar {
-	display: none;
-}
-
-.essence-demo[data-component="scroll-area"] .DemoScrollAreaScrollbar {
+.DemoScrollAreaScrollbar {
 	display: flex;
 	/* ensures no selection */
 	user-select: none;
@@ -45,25 +28,25 @@
 	background: var(--black-a3);
 	transition: background 160ms ease-out;
 }
-.essence-demo[data-component="scroll-area"] .DemoScrollAreaScrollbar:hover {
+.DemoScrollAreaScrollbar:hover {
 	background: var(--black-a5);
 }
-.essence-demo[data-component="scroll-area"] .DemoScrollAreaScrollbar[data-orientation="vertical"] {
+.DemoScrollAreaScrollbar[data-orientation="vertical"] {
 	width: var(--scrollbar-size);
 }
-.essence-demo[data-component="scroll-area"] .DemoScrollAreaScrollbar[data-orientation="horizontal"] {
+.DemoScrollAreaScrollbar[data-orientation="horizontal"] {
 	flex-direction: column;
 	height: var(--scrollbar-size);
 }
 
-.essence-demo[data-component="scroll-area"] .DemoScrollAreaThumb {
+.DemoScrollAreaThumb {
 	flex: 1;
 	background: var(--mauve-10);
 	border-radius: var(--scrollbar-size);
 	position: relative;
 }
 /* increase target size for touch devices https://www.w3.org/WAI/WCAG21/Understanding/target-size.html */
-.essence-demo[data-component="scroll-area"] .DemoScrollAreaThumb::before {
+.DemoScrollAreaThumb::before {
 	content: "";
 	position: absolute;
 	top: 50%;
@@ -75,18 +58,18 @@
 	min-height: 44px;
 }
 
-.essence-demo[data-component="scroll-area"] .DemoScrollAreaCorner {
+.DemoScrollAreaCorner {
 	background: var(--black-a5);
 }
 
-.essence-demo[data-component="scroll-area"] .DemoScrollAreaText {
+.DemoText {
 	color: var(--violet-11);
 	font-size: 15px;
 	line-height: 18px;
 	font-weight: 500;
 }
 
-.essence-demo[data-component="scroll-area"] .DemoScrollAreaTag {
+.DemoTag {
 	color: var(--mauve-12);
 	font-size: 13px;
 	line-height: 18px;

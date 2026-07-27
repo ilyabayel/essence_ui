@@ -2,7 +2,12 @@
 @import "@radix-ui/colors/mauve.css";
 @import "@radix-ui/colors/violet.css";
 
-.essence-demo[data-component="select"] .SelectTrigger {
+/* reset */
+button {
+	all: unset;
+}
+
+.DemoSelectTrigger {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -16,21 +21,21 @@
 	color: var(--violet-11);
 	box-shadow: 0 2px 10px var(--black-a7);
 }
-.essence-demo[data-component="select"] .SelectTrigger:hover {
+.DemoSelectTrigger:hover {
 	background-color: var(--mauve-3);
 }
-.essence-demo[data-component="select"] .SelectTrigger:focus {
+.DemoSelectTrigger:focus {
 	box-shadow: 0 0 0 2px black;
 }
-.essence-demo[data-component="select"] .SelectTrigger[data-placeholder] {
+.DemoSelectTrigger[data-placeholder] {
 	color: var(--violet-9);
 }
 
-.essence-demo[data-component="select"] .SelectIcon {
+.DemoSelectIcon {
 	color: Var(--violet-11);
 }
 
-.essence-demo[data-component="select"] .SelectContent {
+.DemoSelectContent {
 	overflow: hidden;
 	background-color: white;
 	border-radius: 6px;
@@ -39,11 +44,11 @@
 		0px 10px 20px -15px rgba(22, 23, 24, 0.2);
 }
 
-.essence-demo[data-component="select"] .SelectViewport {
+.DemoSelectViewport {
 	padding: 5px;
 }
 
-.essence-demo[data-component="select"] .SelectItem {
+.DemoSelectItem {
 	font-size: 13px;
 	line-height: 1;
 	color: var(--violet-11);
@@ -55,30 +60,30 @@
 	position: relative;
 	user-select: none;
 }
-.essence-demo[data-component="select"] .SelectItem[data-disabled] {
+.DemoSelectItem[data-disabled] {
 	color: var(--mauve-8);
 	pointer-events: none;
 }
-.essence-demo[data-component="select"] .SelectItem[data-highlighted] {
+.DemoSelectItem[data-highlighted] {
 	outline: none;
 	background-color: var(--violet-9);
 	color: var(--violet-1);
 }
 
-.essence-demo[data-component="select"] .SelectLabel {
+.DemoSelectLabel {
 	padding: 0 25px;
 	font-size: 12px;
 	line-height: 25px;
 	color: var(--mauve-11);
 }
 
-.essence-demo[data-component="select"] .SelectSeparator {
+.DemoSelectSeparator {
 	height: 1px;
 	background-color: var(--violet-6);
 	margin: 5px;
 }
 
-.essence-demo[data-component="select"] .SelectItemIndicator {
+.DemoSelectItemIndicator {
 	position: absolute;
 	left: 0;
 	width: 25px;
@@ -87,7 +92,7 @@
 	justify-content: center;
 }
 
-.essence-demo[data-component="select"] .SelectScrollButton {
+.DemoSelectScrollButton {
 	display: flex;
 	align-items: center;
 	justify-content: center;

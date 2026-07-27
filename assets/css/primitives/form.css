@@ -2,6 +2,14 @@
 @import "@radix-ui/colors/violet.css";
 @import "@radix-ui/colors/mauve.css";
 
+/* reset */
+input,
+textarea,
+button {
+	all: unset;
+	box-sizing: border-box;
+}
+
 .DemoFormRoot {
 	width: 260px;
 }
@@ -21,11 +29,11 @@
 .DemoFormMessage {
 	font-size: 13px;
 	color: white;
-	opacity: 0.9;
+	opacity: 0.8;
 }
 
-.DemoFormInput,
-.DemoFormTextarea {
+.DemoInput,
+.DemoTextarea {
 	width: 100%;
 	display: inline-flex;
 	align-items: center;
@@ -33,38 +41,38 @@
 	border-radius: 4px;
 	font-size: 15px;
 	color: white;
-	background-color: var(--white-a2);
-	box-shadow: 0 0 0 1px var(--white-a6);
+	background-color: var(--black-a2);
+	box-shadow: 0 0 0 1px var(--black-a6);
 }
 
-.DemoFormInput:hover,
-.DemoFormTextarea:hover {
-	box-shadow: 0 0 0 1px white;
+.DemoInput:hover,
+.DemoTextarea:hover {
+	box-shadow: 0 0 0 1px black;
 }
 
-.DemoFormInput:focus,
-.DemoFormTextarea:focus {
-	box-shadow: 0 0 0 2px white;
+.DemoInput:focus,
+.DemoTextarea:focus {
+	box-shadow: 0 0 0 2px black;
 }
 
-.DemoFormInput::selection,
-.DemoFormTextarea::selection {
+.DemoInput::selection,
+.DemoTextarea::selection {
 	background-color: var(--black-a6);
 	color: white;
 }
 
-.DemoFormInput {
+.DemoInput {
 	padding: 0 10px;
 	height: 35px;
 	line-height: 1;
 }
 
-.DemoFormTextarea {
+.DemoTextarea {
 	resize: none;
 	padding: 10px;
 }
 
-.DemoFormButton {
+.DemoButton {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -80,10 +88,10 @@
 	box-shadow: 0 2px 10px var(--black-a4);
 }
 
-.DemoFormButton:hover {
+.DemoButton:hover {
 	background-color: var(--mauve-3);
 }
 
-.DemoFormButton:focus {
+.DemoButton:focus {
 	box-shadow: 0 0 0 2px black;
 }

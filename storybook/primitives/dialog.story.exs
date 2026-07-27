@@ -19,51 +19,51 @@ defmodule Storybook.Primitives.DialogStory do
         <Dialog.root id="dialog-primitive">
           <Dialog.trigger
             id="dialog-trigger"
-            class="Button violet"
+            class="DemoButton violet"
           >
             Edit profile
           </Dialog.trigger>
           <Dialog.portal id="dialog-portal">
-            <Dialog.overlay class="DialogOverlay" />
+            <Dialog.overlay class="DemoDialogOverlay" />
             <Dialog.content
               id="dialog-content"
-              class="DialogContent"
+              class="DemoDialogContent"
             >
-              <Dialog.title class="DialogTitle">Edit profile</Dialog.title>
-              <Dialog.description class="DialogDescription">
+              <Dialog.title class="DemoDialogTitle">Edit profile</Dialog.title>
+              <Dialog.description class="DemoDialogDescription">
                 Make changes to your profile here. Click save when you're done.
               </Dialog.description>
-              <fieldset class="Fieldset">
+              <fieldset class="DemoFieldset">
                 <label
-                  class="Label"
+                  class="DemoLabel"
                   for="dialog-name"
                 >
                   Name
                 </label>
                 <input
-                  class="Input"
+                  class="DemoInput"
                   id="dialog-name"
                   value="Pedro Duarte"
                 />
               </fieldset>
-              <fieldset class="Fieldset">
+              <fieldset class="DemoFieldset">
                 <label
-                  class="Label"
+                  class="DemoLabel"
                   for="dialog-username"
                 >
                   Username
                 </label>
                 <input
-                  class="Input"
+                  class="DemoInput"
                   id="dialog-username"
                   value="@peduarte"
                 />
               </fieldset>
               <div style="display: flex; margin-top: 25px; justify-content: flex-end;">
-                <Dialog.close class="Button green">Save changes</Dialog.close>
+                <Dialog.close class="DemoButton green">Save changes</Dialog.close>
               </div>
               <Dialog.close
-                class="IconButton"
+                class="DemoIconButton"
                 aria-label="Close"
               >
                 ×

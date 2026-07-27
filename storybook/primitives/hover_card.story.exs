@@ -26,13 +26,13 @@ defmodule Storybook.Primitives.HoverCardStory do
             content_id="hover-card-content"
           >
             <a
-              class="ImageTrigger"
+              class="DemoImageTrigger"
               href="https://github.com/ilyabayel/essence_ui"
               target="_blank"
               rel="noreferrer noopener"
             >
               <img
-                class="Image normal"
+                class="DemoImage normal"
                 src="https://github.com/ilyabayel.png"
                 alt="Essence UI"
               />
@@ -40,36 +40,36 @@ defmodule Storybook.Primitives.HoverCardStory do
           </HoverCard.trigger>
           <HoverCard.content
             id="hover-card-content"
-            class="HoverCardContent"
+            class="DemoHoverCardContent"
             side_offset={5}
           >
             <div style="display: flex; flex-direction: column; gap: 7px;">
               <img
-                class="Image large"
+                class="DemoImage large"
                 src="https://github.com/ilyabayel.png"
                 alt="Essence UI"
               />
               <div style="display: flex; flex-direction: column; gap: 15px;">
                 <div>
-                  <div class="Text bold">Essence UI</div>
-                  <div class="Text faded">@essence_ui</div>
+                  <div class="DemoText bold">Essence UI</div>
+                  <div class="DemoText faded">@essence_ui</div>
                 </div>
-                <div class="Text">
+                <div class="DemoText">
                   Accessible, themeable Phoenix LiveView components. Free and open-source.
                 </div>
                 <div style="display: flex; gap: 15px;">
                   <div style="display: flex; gap: 5px;">
-                    <div class="Text bold">0</div>
-                    <div class="Text faded">Following</div>
+                    <div class="DemoText bold">0</div>
+                    <div class="DemoText faded">Following</div>
                   </div>
                   <div style="display: flex; gap: 5px;">
-                    <div class="Text bold">2,900</div>
-                    <div class="Text faded">Followers</div>
+                    <div class="DemoText bold">2,900</div>
+                    <div class="DemoText faded">Followers</div>
                   </div>
                 </div>
               </div>
             </div>
-            <HoverCard.arrow class="HoverCardArrow" />
+            <HoverCard.arrow class="DemoHoverCardArrow" />
           </HoverCard.content>
         </HoverCard.root>
         """

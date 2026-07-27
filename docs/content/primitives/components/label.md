@@ -8,10 +8,10 @@ Renders an accessible label associated with controls.
 <.demo theme="light" variant="primitive" component="label" css={primitive_css("label")}>
   <:heex>
     <div style="display: flex; padding: 0 20px; flex-wrap: wrap; gap: 15px; align-items: center;">
-      <Label.label class="LabelRoot" for="firstName">
+      <Label.label class="DemoLabelRoot" for="firstName">
         First Name
       </Label.label>
-      <input class="Input" type="text" id="firstName" value="Pedro Duarte" />
+      <input class="DemoInput" type="text" id="firstName" value="Pedro Duarte" />
     </div>
   </:heex>
 </.demo>

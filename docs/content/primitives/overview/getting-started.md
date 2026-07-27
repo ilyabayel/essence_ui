@@ -41,13 +41,13 @@ Primitives are unstyled. Pass `class` (and write CSS) for presentation. Demo sty
 
   <:heex>
     <Popover.root id="docs-gs-popover">
-      <Popover.trigger id="docs-gs-popover-trigger" content_id="docs-gs-popover-content" class="IconButton" aria-label="Update dimensions">
+      <Popover.trigger id="docs-gs-popover-trigger" content_id="docs-gs-popover-content" class="DemoIconButton" aria-label="Update dimensions">
         +
       </Popover.trigger>
-      <Popover.content id="docs-gs-popover-content" class="PopoverContent" side_offset={5}>
-        <p class="Text" style="margin-bottom: 10px;">Dimensions</p>
-        <Popover.close class="PopoverClose" aria-label="Close">×</Popover.close>
-        <Popover.arrow class="PopoverArrow" />
+      <Popover.content id="docs-gs-popover-content" class="DemoPopoverContent" side_offset={5}>
+        <p class="DemoText" style="margin-bottom: 10px;">Dimensions</p>
+        <Popover.close class="DemoPopoverClose" aria-label="Close">×</Popover.close>
+        <Popover.arrow class="DemoPopoverArrow" />
       </Popover.content>
     </Popover.root>
   </:heex>

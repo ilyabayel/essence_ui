@@ -1,5 +1,10 @@
 @import "@radix-ui/colors/black-alpha.css";
 
+/* reset */
+button {
+	all: unset;
+}
+
 .DemoSwitchRoot {
 	width: 42px;
 	height: 25px;
@@ -31,7 +36,7 @@
 	}
 }
 
-.DemoSwitchLabel {
+.DemoLabel {
 	color: white;
 	font-size: 15px;
 	line-height: 1;

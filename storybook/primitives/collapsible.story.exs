@@ -18,11 +18,11 @@ defmodule Storybook.Primitives.CollapsibleStory do
         template: """
         <Collapsible.root
           id="collapsible-primitive"
-          class="CollapsibleRoot"
+          class="DemoCollapsibleRoot"
         >
           <div style="display: flex; align-items: center; justify-content: space-between;">
             <span
-              class="Text"
+              class="DemoText"
               style="color: white;"
             >
               @peduarte starred 3 repositories
@@ -30,7 +30,7 @@ defmodule Storybook.Primitives.CollapsibleStory do
             <Collapsible.trigger
               id="collapsible-trigger"
               content_id="collapsible-content"
-              class="IconButton"
+              class="DemoIconButton"
               aria-label="Toggle"
             >
               <svg
@@ -50,16 +50,16 @@ defmodule Storybook.Primitives.CollapsibleStory do
             </Collapsible.trigger>
           </div>
 
-          <div class="Repository">
-            <span class="Text">@radix-themes/primitives</span>
+          <div class="DemoRepository">
+            <span class="DemoText">@radix-themes/primitives</span>
           </div>
 
           <Collapsible.content id="collapsible-content">
-            <div class="Repository">
-              <span class="Text">@radix-themes/colors</span>
+            <div class="DemoRepository">
+              <span class="DemoText">@radix-themes/colors</span>
             </div>
-            <div class="Repository">
-              <span class="Text">@radix-themes/themes</span>
+            <div class="DemoRepository">
+              <span class="DemoText">@radix-themes/themes</span>
             </div>
           </Collapsible.content>
         </Collapsible.root>

@@ -13,7 +13,7 @@ Displays rich content in a portal, triggered by a button.
               <Popover.trigger
                 id="popover-trigger"
                 content_id="popover-content"
-                class="IconButton"
+                class="DemoIconButton"
                 aria-label="Update dimensions"
               >
                 <svg
@@ -33,76 +33,76 @@ Displays rich content in a portal, triggered by a button.
               </Popover.trigger>
               <Popover.content
                 id="popover-content"
-                class="PopoverContent"
+                class="DemoPopoverContent"
                 side_offset={5}
               >
                 <div style="display: flex; flex-direction: column; gap: 10px;">
                   <p
-                    class="Text"
+                    class="DemoText"
                     style="margin-bottom: 10px;"
                   >
                     Dimensions
                   </p>
-                  <fieldset class="Fieldset">
+                  <fieldset class="DemoFieldset">
                     <label
-                      class="Label"
+                      class="DemoLabel"
                       for="popover-width"
                     >
                       Width
                     </label>
                     <input
-                      class="Input"
+                      class="DemoInput"
                       id="popover-width"
                       value="100%"
                     />
                   </fieldset>
-                  <fieldset class="Fieldset">
+                  <fieldset class="DemoFieldset">
                     <label
-                      class="Label"
+                      class="DemoLabel"
                       for="popover-maxWidth"
                     >
                       Max. width
                     </label>
                     <input
-                      class="Input"
+                      class="DemoInput"
                       id="popover-maxWidth"
                       value="300px"
                     />
                   </fieldset>
-                  <fieldset class="Fieldset">
+                  <fieldset class="DemoFieldset">
                     <label
-                      class="Label"
+                      class="DemoLabel"
                       for="popover-height"
                     >
                       Height
                     </label>
                     <input
-                      class="Input"
+                      class="DemoInput"
                       id="popover-height"
                       value="25px"
                     />
                   </fieldset>
-                  <fieldset class="Fieldset">
+                  <fieldset class="DemoFieldset">
                     <label
-                      class="Label"
+                      class="DemoLabel"
                       for="popover-maxHeight"
                     >
                       Max. height
                     </label>
                     <input
-                      class="Input"
+                      class="DemoInput"
                       id="popover-maxHeight"
                       value="none"
                     />
                   </fieldset>
                 </div>
                 <Popover.close
-                  class="PopoverClose"
+                  class="DemoPopoverClose"
                   aria-label="Close"
                 >
                   ×
                 </Popover.close>
-                <Popover.arrow class="PopoverArrow" />
+                <Popover.arrow class="DemoPopoverArrow" />
               </Popover.content>
             </Popover.root>
   </:heex>
@@ -224,13 +224,13 @@ The button that closes an open popover.
 You may want to constrain the width or height of the content so it does not exceed the viewport:
 
 ```heex
-<Popover.content id="popover-content" class="PopoverContent" side_offset={5}>
+<Popover.content id="popover-content" class="DemoPopoverContent" side_offset={5}>
   …
 </Popover.content>
 ```
 
 ```css
-.PopoverContent {
+.DemoPopoverContent {
   width: 260px;
   max-width: calc(100vw - 16px);
   max-height: calc(100vh - 16px);
@@ -243,11 +243,11 @@ You may want to constrain the width or height of the content so it does not exce
 Animate with CSS against `data-state` — see the [animation](/primitives/docs/guides/animation) guide:
 
 ```css
-.PopoverContent {
+.DemoPopoverContent {
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
 }
-.PopoverContent[data-state="open"] {
+.DemoPopoverContent[data-state="open"] {
   animation-name: scaleIn;
 }
 
@@ -262,20 +262,20 @@ Animate with CSS against `data-state` — see the [animation](/primitives/docs/g
 `Popover.content` exposes `data-side` and `data-align` for direction-aware animations based on the configured placement:
 
 ```heex
-<Popover.content id="popover-content" class="PopoverContent" side="bottom" align="center">
+<Popover.content id="popover-content" class="DemoPopoverContent" side="bottom" align="center">
   …
 </Popover.content>
 ```
 
 ```css
-.PopoverContent {
+.DemoPopoverContent {
   animation-duration: 0.6s;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
-.PopoverContent[data-side="top"] {
+.DemoPopoverContent[data-side="top"] {
   animation-name: slideUp;
 }
-.PopoverContent[data-side="bottom"] {
+.DemoPopoverContent[data-side="bottom"] {
   animation-name: slideDown;
 }
 
@@ -296,20 +296,20 @@ Anchor content to another element when the trigger should not be the positioning
 
 ```heex
 <Popover.root id="anchor-popover">
-  <Popover.anchor class="PopoverRow">
+  <Popover.anchor class="DemoPopoverRow">
     Row as anchor
-    <Popover.trigger id="anchor-popover-trigger" content_id="anchor-popover-content" class="Button">
+    <Popover.trigger id="anchor-popover-trigger" content_id="anchor-popover-content" class="DemoButton">
       Trigger
     </Popover.trigger>
   </Popover.anchor>
-  <Popover.content id="anchor-popover-content" class="PopoverContent">
+  <Popover.content id="anchor-popover-content" class="DemoPopoverContent">
     …
   </Popover.content>
 </Popover.root>
 ```
 
 ```css
-.PopoverRow {
+.DemoPopoverRow {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -360,12 +360,12 @@ attr :id, :string, required: true
 def popover(assigns) do
   ~H"""
   <Popover.root id={@id}>
-    <Popover.trigger id={"#{@id}-trigger"} content_id={"#{@id}-content"} class="Button">
+    <Popover.trigger id={"#{@id}-trigger"} content_id={"#{@id}-content"} class="DemoButton">
       {render_slot(@trigger)}
     </Popover.trigger>
-    <Popover.content id={"#{@id}-content"} class="PopoverContent" side_offset={5}>
+    <Popover.content id={"#{@id}-content"} class="DemoPopoverContent" side_offset={5}>
       {render_slot(@content)}
-      <Popover.arrow class="PopoverArrow" />
+      <Popover.arrow class="DemoPopoverArrow" />
     </Popover.content>
   </Popover.root>
   """

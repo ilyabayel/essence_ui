@@ -17,7 +17,7 @@ defmodule Storybook.Primitives.AccessibleIconStory do
         description: "Accessible icon with visually hidden label",
         template: """
         <button
-          class="IconButton"
+          class="DemoIconButton"
           type="button"
         >
           <AccessibleIcon.accessible_icon label="Close">

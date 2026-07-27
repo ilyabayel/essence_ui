@@ -17,7 +17,7 @@ defmodule Storybook.Primitives.VisuallyHiddenStory do
         description: "Visually hidden but available to screen readers",
         template: """
         <button
-          class="Button violet"
+          class="DemoButton violet"
           type="button"
         >
           Save

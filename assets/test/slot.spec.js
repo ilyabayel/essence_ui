@@ -9,7 +9,7 @@ test.describe("Slot Primitive", () => {
 
   test("renders composed button with slot props", async ({ page }) => {
     const demo = page.locator('.essence-demo[data-component="slot"]');
-    const button = demo.locator("button.Button.violet");
+    const button = demo.locator("button.DemoButton.violet");
 
     await expect(button).toBeVisible();
     await expect(button).toHaveText("Composed Button");
@@ -24,7 +24,7 @@ test.describe("Slot Primitive", () => {
 
   test("is activatable with keyboard", async ({ page }) => {
     const button = page.locator(
-      '.essence-demo[data-component="slot"] button.Button',
+      '.essence-demo[data-component="slot"] button.DemoButton',
     );
 
     await button.focus();

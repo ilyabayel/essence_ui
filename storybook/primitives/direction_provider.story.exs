@@ -22,7 +22,7 @@ defmodule Storybook.Primitives.DirectionProviderStory do
         >
           <p style="margin: 0 0 10px; font-weight: 500;">من اليمين إلى اليسار</p>
           <div
-            class="SeparatorRoot"
+            class="DemoSeparatorRoot"
             style="background: var(--violet-6); height: 1px; margin: 12px 0;"
           >
           </div>

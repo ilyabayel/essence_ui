@@ -5,13 +5,6 @@ body:has(.docs-shell) {
   margin: 0;
 }
 
-.essence-demo[data-component="form"] input,
-.essence-demo[data-component="form"] textarea,
-.essence-demo[data-component="form"] button {
-  box-sizing: border-box;
-  all: unset;
-}
-
 .docs-shell {
   min-height: 100vh;
   min-height: 100dvh;
@@ -319,11 +312,11 @@ body:has(.docs-shell) {
 
 /* Layout roots need full preview width; otherwise flex shrink-to-fit
    collapses Box/Container/Section demos to a hairline. */
-.docs-demo__preview > .rt-Box,
-.docs-demo__preview > .rt-Flex,
-.docs-demo__preview > .rt-Grid,
-.docs-demo__preview > .rt-Container,
-.docs-demo__preview > .rt-Section {
+.docs-demo__preview>.rt-Box,
+.docs-demo__preview>.rt-Flex,
+.docs-demo__preview>.rt-Grid,
+.docs-demo__preview>.rt-Container,
+.docs-demo__preview>.rt-Section {
   width: 100%;
   min-width: 0;
 }

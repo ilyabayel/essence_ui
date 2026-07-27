@@ -7,7 +7,7 @@ Hides content from the screen in an accessible way.
 
 <.demo theme="light" variant="primitive" component="visually-hidden" css={primitive_css("visually-hidden")}>
   <:heex>
-    <button class="Button violet" type="button">
+    <button class="DemoButton violet" type="button">
       Save
       <VisuallyHidden.visually_hidden> the document</VisuallyHidden.visually_hidden>
     </button>

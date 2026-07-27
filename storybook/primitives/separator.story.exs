@@ -21,32 +21,32 @@ defmodule Storybook.Primitives.SeparatorStory do
         >
           <div style="width: 100%; max-width: 300px; margin: 0 15px;">
             <div
-              class="Text"
+              class="DemoText"
               style="font-weight: 500;"
             >
               Essence UI
             </div>
-            <div class="Text">An open-source UI component library.</div>
+            <div class="DemoText">An open-source UI component library.</div>
             <Separator.separator
-              class="SeparatorRoot"
+              class="DemoSeparatorRoot"
               style="margin: 15px 0;"
             />
             <div style="display: flex; height: 20px; align-items: center;">
-              <div class="Text">Blog</div>
+              <div class="DemoText">Blog</div>
               <Separator.separator
-                class="SeparatorRoot"
+                class="DemoSeparatorRoot"
                 decorative
                 orientation="vertical"
                 style="margin: 0 15px;"
               />
-              <div class="Text">Docs</div>
+              <div class="DemoText">Docs</div>
               <Separator.separator
-                class="SeparatorRoot"
+                class="DemoSeparatorRoot"
                 decorative
                 orientation="vertical"
                 style="margin: 0 15px;"
               />
-              <div class="Text">Source</div>
+              <div class="DemoText">Source</div>
             </div>
           </div>
           <style>

@@ -2,7 +2,12 @@
 @import "@radix-ui/colors/mauve.css";
 @import "@radix-ui/colors/violet.css";
 
-.DemoToggleGroupRoot {
+/* reset */
+button {
+	all: unset;
+}
+
+.DemoToggleGroup {
 	display: inline-flex;
 	background-color: var(--mauve-6);
 	border-radius: 4px;

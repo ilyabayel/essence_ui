@@ -14,19 +14,19 @@ A set of checkable buttons—known as radio buttons—where no more than one of 
           <RadioGroup.item class="DemoRadioGroupItem" value="default" id="radio-group-r1">
             <RadioGroup.indicator class="DemoRadioGroupIndicator" />
           </RadioGroup.item>
-          <label class="DemoRadioGroupLabel" for="radio-group-r1">Default</label>
+          <label class="DemoLabel" for="radio-group-r1">Default</label>
         </div>
         <div style="display: flex; align-items: center;">
           <RadioGroup.item class="DemoRadioGroupItem" value="comfortable" id="radio-group-r2">
             <RadioGroup.indicator class="DemoRadioGroupIndicator" />
           </RadioGroup.item>
-          <label class="DemoRadioGroupLabel" for="radio-group-r2">Comfortable</label>
+          <label class="DemoLabel" for="radio-group-r2">Comfortable</label>
         </div>
         <div style="display: flex; align-items: center;">
           <RadioGroup.item class="DemoRadioGroupItem" value="compact" id="radio-group-r3">
             <RadioGroup.indicator class="DemoRadioGroupIndicator" />
           </RadioGroup.item>
-          <label class="DemoRadioGroupLabel" for="radio-group-r3">Compact</label>
+          <label class="DemoLabel" for="radio-group-r3">Compact</label>
         </div>
       </RadioGroup.root>
     </form>

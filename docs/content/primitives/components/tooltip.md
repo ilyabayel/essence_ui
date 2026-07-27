@@ -18,7 +18,7 @@ A popup that displays information related to an element when the element receive
                 <Tooltip.trigger
                   id="tooltip-trigger"
                   content_id="tooltip-content"
-                  class="IconButton"
+                  class="DemoIconButton"
                   aria-label="Add to library"
                 >
                   <svg
@@ -38,11 +38,11 @@ A popup that displays information related to an element when the element receive
                 </Tooltip.trigger>
                 <Tooltip.content
                   id="tooltip-content"
-                  class="TooltipContent"
+                  class="DemoTooltipContent"
                   side_offset={5}
                 >
                   Add to library
-                  <Tooltip.arrow class="TooltipArrow" />
+                  <Tooltip.arrow class="DemoTooltipArrow" />
                 </Tooltip.content>
               </Tooltip.root>
             </Tooltip.provider>
@@ -181,7 +181,7 @@ Use the `open_delay` prop to control the time it takes for the tooltip to open.
 You may want to constrain the width of the content. Use standard CSS on the content element:
 
 ```css
-.TooltipContent {
+.DemoTooltipContent {
   max-width: 20ch;
 }
 ```
@@ -191,20 +191,20 @@ You may want to constrain the width of the content. Use standard CSS on the cont
 Essence exposes `data-side` and `data-align` attributes on content. Their values reflect placement at runtime. Use them to create direction-aware animations:
 
 ```heex
-<Tooltip.content id="animated-tooltip-content" class="TooltipContent" side_offset={5}>
+<Tooltip.content id="animated-tooltip-content" class="DemoTooltipContent" side_offset={5}>
   …
 </Tooltip.content>
 ```
 
 ```css
-.TooltipContent {
+.DemoTooltipContent {
   animation-duration: 0.6s;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
-.TooltipContent[data-side="top"] {
+.DemoTooltipContent[data-side="top"] {
   animation-name: slideUp;
 }
-.TooltipContent[data-side="bottom"] {
+.DemoTooltipContent[data-side="bottom"] {
   animation-name: slideDown;
 }
 
@@ -253,9 +253,9 @@ def info_tooltip(assigns) do
     <Tooltip.trigger id={"#{@id}-trigger"} content_id={"#{@id}-content"} as="div">
       {render_slot(@inner_block)}
     </Tooltip.trigger>
-    <Tooltip.content id={"#{@id}-content"} class="TooltipContent" side_offset={5}>
+    <Tooltip.content id={"#{@id}-content"} class="DemoTooltipContent" side_offset={5}>
       {@label}
-      <Tooltip.arrow class="TooltipArrow" />
+      <Tooltip.arrow class="DemoTooltipArrow" />
     </Tooltip.content>
   </Tooltip.root>
   """

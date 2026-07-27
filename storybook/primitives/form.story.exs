@@ -18,22 +18,22 @@ defmodule Storybook.Primitives.FormStory do
         template: """
         <Form.root
           id="form-primitive"
-          class="FormRoot"
+          class="DemoFormRoot"
         >
           <Form.field
-            class="FormField"
+            class="DemoFormField"
             name="email"
           >
             <div style="display: flex; align-items: baseline; justify-content: space-between;">
-              <Form.label class="FormLabel">Email</Form.label>
+              <Form.label class="DemoFormLabel">Email</Form.label>
               <Form.message
-                class="FormMessage"
+                class="DemoFormMessage"
                 match="valueMissing"
               >
                 Please enter your email
               </Form.message>
               <Form.message
-                class="FormMessage"
+                class="DemoFormMessage"
                 match="typeMismatch"
               >
                 Please provide a valid email
@@ -41,7 +41,7 @@ defmodule Storybook.Primitives.FormStory do
             </div>
             <Form.control>
               <input
-                class="Input"
+                class="DemoInput"
                 type="email"
                 name="email"
                 required
@@ -49,13 +49,13 @@ defmodule Storybook.Primitives.FormStory do
             </Form.control>
           </Form.field>
           <Form.field
-            class="FormField"
+            class="DemoFormField"
             name="question"
           >
             <div style="display: flex; align-items: baseline; justify-content: space-between;">
-              <Form.label class="FormLabel">Question</Form.label>
+              <Form.label class="DemoFormLabel">Question</Form.label>
               <Form.message
-                class="FormMessage"
+                class="DemoFormMessage"
                 match="valueMissing"
               >
                 Please enter a question
@@ -63,7 +63,7 @@ defmodule Storybook.Primitives.FormStory do
             </div>
             <Form.control>
               <textarea
-                class="Textarea"
+                class="DemoTextarea"
                 name="question"
                 required
               >
@@ -71,7 +71,7 @@ defmodule Storybook.Primitives.FormStory do
             </Form.control>
           </Form.field>
           <Form.submit
-            class="Button"
+            class="DemoButton"
             style="margin-top: 10px;"
           >
             Post question

@@ -26,13 +26,13 @@ When components are stateful, their state is exposed in a `data-state` attribute
 Style a component part by targeting the `class` you provide.
 
 ```heex
-<Accordion.item class="AccordionItem" value="item-1">
+<Accordion.item class="DemoAccordionItem" value="item-1">
   …
 </Accordion.item>
 ```
 
 ```css
-.AccordionItem {
+.DemoAccordionItem {
   border-bottom: 1px solid var(--border);
 }
 ```
@@ -42,11 +42,11 @@ Style a component part by targeting the `class` you provide.
 Style a component state by targeting its `data-state` attribute.
 
 ```css
-.AccordionItem[data-state="open"] {
+.DemoAccordionItem[data-state="open"] {
   background: var(--accent-subtle);
 }
 
-.AccordionItem[data-state="closed"] {
+.DemoAccordionItem[data-state="closed"] {
   background: transparent;
 }
 ```

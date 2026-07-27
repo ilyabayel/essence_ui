@@ -10,7 +10,7 @@ A control that allows the user to toggle between checked and not checked.
   <:heex>
     <form>
       <div style="display: flex; align-items: center;">
-        <label id="switch-airplane-label" for="switch-airplane-mode" class="DemoSwitchLabel" style="padding-right: 15px;">
+        <label id="switch-airplane-label" for="switch-airplane-mode" class="DemoLabel" style="padding-right: 15px;">
           Airplane mode
         </label>
         <Switch.root id="switch-airplane-mode" class="DemoSwitchRoot" aria-labelledby="switch-airplane-label">
