@@ -299,12 +299,50 @@ defmodule EssenceUIWeb.Docs.Components do
 
   defp slot_code(_), do: nil
 
-  defp read_primitive_css(filename) do
-    path = Path.expand("../../../assets/css/primitives/#{filename}", __DIR__)
+  # Embed at compile time — releases do not ship assets/css on disk.
+  @primitives_css_dir Path.expand("../../../assets/css/primitives", __DIR__)
 
-    if File.exists?(path) do
-      File.read!(path)
+  for path <- Path.wildcard(Path.join(@primitives_css_dir, "*.css")) do
+    @external_resource path
+  end
+
+  @primitive_css_files (
+                         @primitives_css_dir
+                         |> Path.join("*.css")
+                         |> Path.wildcard()
+                         |> Map.new(fn path -> {Path.basename(path), File.read!(path)} end)
+                       )
+
+  defp read_primitive_css(filename) do
+    css = Map.get(@primitive_css_files, filename)
+
+    # #region agent log
+    try do
+      File.write!(
+        "/tmp/debug-ff6686.log",
+        Jason.encode!(%{
+          sessionId: "ff6686",
+          runId: "css-post-fix",
+          hypothesisId: "H1",
+          location: "components.ex:read_primitive_css",
+          message: "primitive css lookup",
+          data: %{
+            filename: filename,
+            found: is_binary(css),
+            bytes: if(is_binary(css), do: byte_size(css), else: 0),
+            embedded_count: map_size(@primitive_css_files)
+          },
+          timestamp: System.system_time(:millisecond)
+        }) <> "\n",
+        [:append]
+      )
+    rescue
+      _ -> :ok
     end
+
+    # #endregion
+
+    css
   end
 
   # Canvas layout for the preview only (not shown in the CSS tab).
