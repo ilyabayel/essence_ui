@@ -9,8 +9,8 @@ test.describe("Context Menu Primitive", () => {
   });
 
   test("opens on right click and closes on escape", async ({ page }) => {
-    const trigger = page.locator("[data-essence-context-menu-trigger]");
-    const content = page.locator("[data-essence-context-menu-content]");
+    const trigger = page.locator("[data-radix-context-menu-trigger]");
+    const content = page.locator("[data-radix-context-menu-content]");
 
     await expect(content).toBeHidden();
 
@@ -29,8 +29,8 @@ test.describe("Context Menu Primitive", () => {
   });
 
   test("navigates with keyboard and closes on item click", async ({ page }) => {
-    const trigger = page.locator("[data-essence-context-menu-trigger]");
-    const content = page.locator("[data-essence-context-menu-content]");
+    const trigger = page.locator("[data-radix-context-menu-trigger]");
+    const content = page.locator("[data-radix-context-menu-content]");
     const back = content.getByRole("menuitem", { name: /Back/ });
     const reload = content.getByRole("menuitem", { name: /Reload/ });
 
@@ -46,8 +46,8 @@ test.describe("Context Menu Primitive", () => {
   });
 
   test("closes on outside click", async ({ page }) => {
-    const trigger = page.locator("[data-essence-context-menu-trigger]");
-    const content = page.locator("[data-essence-context-menu-content]");
+    const trigger = page.locator("[data-radix-context-menu-trigger]");
+    const content = page.locator("[data-radix-context-menu-content]");
 
     await trigger.click({ button: "right" });
     await expect(content).toBeVisible();
@@ -57,8 +57,8 @@ test.describe("Context Menu Primitive", () => {
   });
 
   test("highlights item under pointer on hover", async ({ page }) => {
-    const trigger = page.locator("[data-essence-context-menu-trigger]");
-    const content = page.locator("[data-essence-context-menu-content]");
+    const trigger = page.locator("[data-radix-context-menu-trigger]");
+    const content = page.locator("[data-radix-context-menu-content]");
     const back = content.getByRole("menuitem", { name: /Back/ });
     const reload = content.getByRole("menuitem", { name: /Reload/ });
 
@@ -72,8 +72,8 @@ test.describe("Context Menu Primitive", () => {
   });
 
   test("closes after selecting checkbox and radio items", async ({ page }) => {
-    const trigger = page.locator("[data-essence-context-menu-trigger]");
-    const content = page.locator("[data-essence-context-menu-content]");
+    const trigger = page.locator("[data-radix-context-menu-trigger]");
+    const content = page.locator("[data-radix-context-menu-content]");
 
     await trigger.click({ button: "right" });
     await expect(content).toBeVisible();
@@ -89,9 +89,9 @@ test.describe("Context Menu Primitive", () => {
   });
 
   test("has no accessibility violations when open", async ({ page }) => {
-    const trigger = page.locator("[data-essence-context-menu-trigger]");
+    const trigger = page.locator("[data-radix-context-menu-trigger]");
     await trigger.click({ button: "right" });
-    await expect(page.locator("[data-essence-context-menu-content]")).toBeVisible();
+    await expect(page.locator("[data-radix-context-menu-content]")).toBeVisible();
     await expectNoA11yViolations(page, {
       include: '.essence-demo[data-component="context-menu"]',
     });

@@ -13,7 +13,7 @@ defmodule Storybook.Examples.DashboardStory do
       style="display: block; min-height: 100vh;"
       data-gray-color="slate"
       data-accent-color="blue"
-      class="essence-ui"
+      class="radix-themes"
     >
       <.flex
         direction="column"

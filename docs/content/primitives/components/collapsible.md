@@ -21,15 +21,15 @@ An interactive component which expands/collapses a panel.
       </div>
 
       <div class="DemoCollapsibleRepository">
-        <span class="DemoCollapsibleText">@essence-ui/primitives</span>
+        <span class="DemoCollapsibleText">@radix-themes/primitives</span>
       </div>
 
       <Collapsible.content id="collapsible-content">
         <div class="DemoCollapsibleRepository">
-          <span class="DemoCollapsibleText">@essence-ui/colors</span>
+          <span class="DemoCollapsibleText">@radix-themes/colors</span>
         </div>
         <div class="DemoCollapsibleRepository">
-          <span class="DemoCollapsibleText">@essence-ui/themes</span>
+          <span class="DemoCollapsibleText">@radix-themes/themes</span>
         </div>
       </Collapsible.content>
     </Collapsible.root>
@@ -111,14 +111,14 @@ Essence exposes CSS variables on content for size animations:
 
 | CSS variable | Description |
 | --- | --- |
-| `--essence-collapsible-content-width` | The width of the content when it opens/closes |
-| `--essence-collapsible-content-height` | The height of the content when it opens/closes |
+| `--radix-collapsible-content-width` | The width of the content when it opens/closes |
+| `--radix-collapsible-content-height` | The height of the content when it opens/closes |
 
 ## Examples
 
 ### Animating content size
 
-Use the `--essence-collapsible-content-width` and/or `--essence-collapsible-content-height` CSS variables to animate the size of the content when it opens/closes:
+Use the `--radix-collapsible-content-width` and/or `--radix-collapsible-content-height` CSS variables to animate the size of the content when it opens/closes:
 
 ```heex
 <Collapsible.content id="collapsible-animated-content" class="DemoCollapsibleContent">
@@ -139,11 +139,11 @@ Use the `--essence-collapsible-content-width` and/or `--essence-collapsible-cont
 
 @keyframes demoCollapsibleSlideDown {
   from { height: 0; }
-  to { height: var(--essence-collapsible-content-height); }
+  to { height: var(--radix-collapsible-content-height); }
 }
 
 @keyframes demoCollapsibleSlideUp {
-  from { height: var(--essence-collapsible-content-height); }
+  from { height: var(--radix-collapsible-content-height); }
   to { height: 0; }
 }
 ```

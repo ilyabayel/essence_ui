@@ -116,23 +116,23 @@ The visually hidden native radio input that `RadioGroup.item` renders by default
 
 ### Decoupling the hidden input
 
-By default, `RadioGroup.item` renders a visually hidden `input` for form submission. To recompose, move, or exclude that input, build each item from a button with `data-essence-radio-group-item` and a separate `RadioGroup.bubble_input`.
+By default, `RadioGroup.item` renders a visually hidden `input` for form submission. To recompose, move, or exclude that input, build each item from a button with `data-radix-radio-group-item` and a separate `RadioGroup.bubble_input`.
 
 Place each `bubble_input` immediately after its button so the hook can sync checked state. Set `name` on the root; the hook propagates it to inputs.
 
 ```heex
 <RadioGroup.root id="options" name="option" default_value="one">
-  <button type="button" role="radio" id="option-one" data-essence-radio-group-item data-value="one" class="DemoRadioGroupItem">
+  <button type="button" role="radio" id="option-one" data-radix-radio-group-item data-value="one" class="DemoRadioGroupItem">
     <RadioGroup.indicator class="DemoRadioGroupIndicator" />
   </button>
   <RadioGroup.bubble_input value="one" name="option" />
 
-  <button type="button" role="radio" id="option-two" data-essence-radio-group-item data-value="two" class="DemoRadioGroupItem">
+  <button type="button" role="radio" id="option-two" data-radix-radio-group-item data-value="two" class="DemoRadioGroupItem">
     <RadioGroup.indicator class="DemoRadioGroupIndicator" />
   </button>
   <RadioGroup.bubble_input value="two" name="option" />
 
-  <button type="button" role="radio" id="option-three" data-essence-radio-group-item data-value="three" class="DemoRadioGroupItem">
+  <button type="button" role="radio" id="option-three" data-radix-radio-group-item data-value="three" class="DemoRadioGroupItem">
     <RadioGroup.indicator class="DemoRadioGroupIndicator" />
   </button>
   <RadioGroup.bubble_input value="three" name="option" />

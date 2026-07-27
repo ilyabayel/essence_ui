@@ -17,10 +17,10 @@ defmodule EssenceUI.Components.CheckboxCardsTest do
         inner_block: [%{inner_block: fn _, _ -> "" end}]
       })
 
-    assert html =~ "est-Grid"
-    assert html =~ "est-CheckboxCardsRoot"
-    assert html =~ "est-r-size-3"
-    assert html =~ "est-variant-classic"
+    assert html =~ "rt-Grid"
+    assert html =~ "rt-CheckboxCardsRoot"
+    assert html =~ "rt-r-size-3"
+    assert html =~ "rt-variant-classic"
     assert html =~ ~s(phx-hook="CheckboxGroupRoot")
     assert html =~ ~s(data-accent-color="cyan")
     assert html =~ ~s(role="group")
@@ -36,12 +36,12 @@ defmodule EssenceUI.Components.CheckboxCardsTest do
         inner_block: [%{inner_block: fn _, _ -> "Keyboard" end}]
       })
 
-    assert html =~ "est-BaseCard"
-    assert html =~ "est-CheckboxCardsItem"
-    assert html =~ "est-CheckboxCardCheckbox"
-    assert html =~ "est-BaseCheckboxRoot"
-    assert html =~ "est-BaseCheckboxIndicator"
-    assert html =~ "est-variant-surface"
+    assert html =~ "rt-BaseCard"
+    assert html =~ "rt-CheckboxCardsItem"
+    assert html =~ "rt-CheckboxCardCheckbox"
+    assert html =~ "rt-BaseCheckboxRoot"
+    assert html =~ "rt-BaseCheckboxIndicator"
+    assert html =~ "rt-variant-surface"
     assert html =~ ~s(role="checkbox")
     assert html =~ ~s(value="1")
     assert html =~ "Keyboard"

@@ -5,7 +5,7 @@ defmodule EssenceUI.SharedProps.HighContrastProps do
 
   def prop_defs do
     %{
-      high_contrast: %{type: :boolean, class: "est-high-contrast"}
+      high_contrast: %{type: :boolean, class: "rt-high-contrast"}
     }
   end
 

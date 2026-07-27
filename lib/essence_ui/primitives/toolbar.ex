@@ -16,7 +16,7 @@ defmodule EssenceUI.Primitives.Toolbar do
       id={@id}
       phx-hook="ToolbarRoot"
       role="toolbar"
-      data-essence-toolbar-root
+      data-radix-toolbar-root
       data-orientation={@orientation}
       data-loop={to_string(@loop)}
       aria-orientation={@orientation}
@@ -38,8 +38,8 @@ defmodule EssenceUI.Primitives.Toolbar do
     <button
       id={@id}
       type="button"
-      data-essence-toolbar-item
-      data-essence-toolbar-button
+      data-radix-toolbar-item
+      data-radix-toolbar-button
       data-disabled={if @disabled, do: ""}
       disabled={@disabled}
       {@rest}
@@ -55,7 +55,7 @@ defmodule EssenceUI.Primitives.Toolbar do
 
   def link(assigns) do
     ~H"""
-    <a href={@href} data-essence-toolbar-item data-essence-toolbar-link {@rest}>
+    <a href={@href} data-radix-toolbar-item data-radix-toolbar-link {@rest}>
       {render_slot(@inner_block)}
     </a>
     """
@@ -69,7 +69,7 @@ defmodule EssenceUI.Primitives.Toolbar do
     ~H"""
     <div
       role={if @decorative, do: "none", else: "separator"}
-      data-essence-toolbar-separator
+      data-radix-toolbar-separator
       data-orientation={@orientation}
       aria-orientation={if @decorative, do: nil, else: @orientation}
       {@rest}
@@ -92,7 +92,7 @@ defmodule EssenceUI.Primitives.Toolbar do
     <div
       id={@id}
       role={if @type == "single", do: "group", else: "group"}
-      data-essence-toolbar-toggle-group
+      data-radix-toolbar-toggle-group
       data-type={@type}
       data-value={@value_attr}
       data-disabled={if @disabled, do: ""}
@@ -115,8 +115,8 @@ defmodule EssenceUI.Primitives.Toolbar do
     <button
       id={@id}
       type="button"
-      data-essence-toolbar-item
-      data-essence-toolbar-toggle-item
+      data-radix-toolbar-item
+      data-radix-toolbar-toggle-item
       data-value={@value}
       data-state="off"
       data-disabled={if @disabled, do: ""}

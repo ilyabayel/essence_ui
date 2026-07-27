@@ -82,14 +82,14 @@ defmodule EssenceUI.Components.SegmentedControl do
       %{
         size: %{
           type: :enum,
-          class: "est-r-size",
+          class: "rt-r-size",
           values: @sizes,
           default: "2",
           responsive: true
         },
         variant: %{
           type: :enum,
-          class: "est-variant",
+          class: "rt-variant",
           values: @variants,
           default: "surface"
         }
@@ -108,7 +108,7 @@ defmodule EssenceUI.Components.SegmentedControl do
       assign(assigns,
         id: id,
         class:
-          ["est-reset", "est-SegmentedControlRoot", extracted.class]
+          ["rt-reset", "rt-SegmentedControlRoot", extracted.class]
           |> Enum.filter(& &1)
           |> Enum.join(" "),
         style: extracted.style,
@@ -132,7 +132,7 @@ defmodule EssenceUI.Components.SegmentedControl do
       {@rest}
     >
       {render_slot(@inner_block)}
-      <div class="est-SegmentedControlIndicator"></div>
+      <div class="rt-SegmentedControlIndicator"></div>
     </ToggleGroupPrimitive.root>
     """
   end
@@ -153,7 +153,7 @@ defmodule EssenceUI.Components.SegmentedControl do
 
   def segmented_control_item(assigns) do
     class =
-      ["est-reset", "est-SegmentedControlItem", assigns.class]
+      ["rt-reset", "rt-SegmentedControlItem", assigns.class]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 
@@ -168,10 +168,10 @@ defmodule EssenceUI.Components.SegmentedControl do
       style={@style}
       {@rest}
     >
-      <span class="est-SegmentedControlItemSeparator"></span>
-      <span class="est-SegmentedControlItemLabel">
-        <span class="est-SegmentedControlItemLabelActive">{render_slot(@inner_block)}</span>
-        <span class="est-SegmentedControlItemLabelInactive" aria-hidden>
+      <span class="rt-SegmentedControlItemSeparator"></span>
+      <span class="rt-SegmentedControlItemLabel">
+        <span class="rt-SegmentedControlItemLabelActive">{render_slot(@inner_block)}</span>
+        <span class="rt-SegmentedControlItemLabelInactive" aria-hidden>
           {render_slot(@inner_block)}
         </span>
       </span>

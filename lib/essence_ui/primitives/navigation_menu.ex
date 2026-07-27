@@ -15,7 +15,7 @@ defmodule EssenceUI.Primitives.NavigationMenu do
     <nav
       id={@id}
       phx-hook="NavigationMenuRoot"
-      data-essence-navigation-menu-root
+      data-radix-navigation-menu-root
       data-orientation={@orientation}
       data-delay-duration={@delay_duration}
       dir={@dir}
@@ -32,7 +32,7 @@ defmodule EssenceUI.Primitives.NavigationMenu do
 
   def list(assigns) do
     ~H"""
-    <ul id={@id} data-essence-navigation-menu-list {@rest}>
+    <ul id={@id} data-radix-navigation-menu-list {@rest}>
       {render_slot(@inner_block)}
     </ul>
     """
@@ -45,7 +45,7 @@ defmodule EssenceUI.Primitives.NavigationMenu do
 
   def item(assigns) do
     ~H"""
-    <li id={@id} data-essence-navigation-menu-item data-value={@value} {@rest}>
+    <li id={@id} data-radix-navigation-menu-item data-value={@value} {@rest}>
       {render_slot(@inner_block)}
     </li>
     """
@@ -62,7 +62,7 @@ defmodule EssenceUI.Primitives.NavigationMenu do
     <button
       id={@id}
       type="button"
-      data-essence-navigation-menu-trigger
+      data-radix-navigation-menu-trigger
       aria-expanded="false"
       aria-controls={@content_id}
       data-state="closed"
@@ -84,7 +84,7 @@ defmodule EssenceUI.Primitives.NavigationMenu do
     ~H"""
     <div
       id={@id}
-      data-essence-navigation-menu-content
+      data-radix-navigation-menu-content
       data-state="closed"
       data-force-mount={if @force_mount, do: ""}
       style="display: none;"
@@ -106,7 +106,7 @@ defmodule EssenceUI.Primitives.NavigationMenu do
     <a
       id={@id}
       href={@href}
-      data-essence-navigation-menu-link
+      data-radix-navigation-menu-link
       data-active={if @active, do: ""}
       aria-current={if @active, do: "page"}
       {@rest}
@@ -122,7 +122,7 @@ defmodule EssenceUI.Primitives.NavigationMenu do
 
   def sub(assigns) do
     ~H"""
-    <div id={@id} data-essence-navigation-menu-sub {@rest}>
+    <div id={@id} data-radix-navigation-menu-sub {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -134,7 +134,7 @@ defmodule EssenceUI.Primitives.NavigationMenu do
 
   def viewport(assigns) do
     ~H"""
-    <div id={@id} data-essence-navigation-menu-viewport data-state="closed" {@rest}>
+    <div id={@id} data-radix-navigation-menu-viewport data-state="closed" {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -148,7 +148,7 @@ defmodule EssenceUI.Primitives.NavigationMenu do
     ~H"""
     <li
       id={@id}
-      data-essence-navigation-menu-indicator
+      data-radix-navigation-menu-indicator
       data-state="hidden"
       aria-hidden="true"
       {@rest}

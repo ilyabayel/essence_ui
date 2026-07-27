@@ -24,16 +24,16 @@ function findPart(root, selector, contentId) {
   return null;
 }
 
-/** Portals escape `.essence-ui`; re-apply theme tokens (Radix Themes Portal + Theme). */
+/** Portals escape `.radix-themes`; re-apply theme tokens (Radix Themes Portal + Theme). */
 function syncPortalTheme(root, content) {
   if (!content) return;
 
   const source =
     root.closest("[data-accent-color]") ||
-    root.closest(".essence-ui") ||
-    document.querySelector(".essence-ui");
+    root.closest(".radix-themes") ||
+    document.querySelector(".radix-themes");
 
-  content.classList.add("essence-ui");
+  content.classList.add("radix-themes");
   if (!source) return;
 
   for (const attr of [
@@ -88,18 +88,18 @@ export const PopoverRoot = {
     if (this.content) {
       this.content.removeEventListener("keydown", this.onKeyDown);
       this.content
-        .querySelectorAll("[data-essence-popover-close]")
+        .querySelectorAll("[data-radix-popover-close]")
         .forEach((btn) => btn.removeEventListener("click", this.onCloseClick));
     }
   },
 
   resolveParts() {
-    this.trigger = this.el.querySelector("[data-essence-popover-trigger]");
-    this.anchor = this.el.querySelector("[data-essence-popover-anchor]");
+    this.trigger = this.el.querySelector("[data-radix-popover-trigger]");
+    this.anchor = this.el.querySelector("[data-radix-popover-anchor]");
     const contentId = this.trigger?.getAttribute("aria-controls");
     this.content = findPart(
       this.el,
-      "[data-essence-popover-content]",
+      "[data-radix-popover-content]",
       contentId
     );
     syncPortalTheme(this.el, this.content);
@@ -142,7 +142,7 @@ export const PopoverRoot = {
     const align = this.content.dataset.align || "center";
     const sideOffset = parseInt(this.content.dataset.sideOffset, 10) || 8;
     // Popper: offset mainAxis = sideOffset + arrowHeight
-    const arrow = this.content.querySelector("[data-essence-popover-arrow]");
+    const arrow = this.content.querySelector("[data-radix-popover-arrow]");
     const arrowHeight = arrow ? arrow.offsetHeight || 5 : 0;
 
     positionFloating({
@@ -155,7 +155,7 @@ export const PopoverRoot = {
 
     positionArrow({
       content: this.content,
-      arrowSelector: "[data-essence-popover-arrow]",
+      arrowSelector: "[data-radix-popover-arrow]",
       side,
       align,
     });
@@ -253,7 +253,7 @@ export const PopoverRoot = {
   bindCloseButtons() {
     if (!this.content) return;
     this.content
-      .querySelectorAll("[data-essence-popover-close]")
+      .querySelectorAll("[data-radix-popover-close]")
       .forEach((btn) => {
         btn.removeEventListener("click", this.onCloseClick);
         btn.addEventListener("click", this.onCloseClick);

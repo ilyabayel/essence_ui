@@ -29,7 +29,7 @@ defmodule EssenceUI.Utilities.Reset do
   def reset(assigns) do
     ~H"""
     <div
-      class={["est-reset", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["rt-reset", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={@style}
       {@rest}
     >

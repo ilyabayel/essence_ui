@@ -37,7 +37,7 @@ defmodule EssenceUI.Components.Section do
       |> Map.merge(AsChildProps.prop_defs())
 
     extracted = ExtractProps.call(assigns, prop_defs)
-    class = ["est-Section", extracted.class, assigns[:class]] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["rt-Section", extracted.class, assigns[:class]] |> Enum.filter(& &1) |> Enum.join(" ")
     style = [extracted.style, assigns[:style]] |> Enum.filter(& &1) |> Enum.join("; ")
 
     assigns = assign(assigns, class: class, style: style, as_child: Map.get(assigns, :as_child, false))

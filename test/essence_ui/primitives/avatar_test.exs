@@ -22,10 +22,10 @@ defmodule EssenceUI.Primitives.AvatarTest do
 
     assert html =~ ~s[id="avatar"]
     assert html =~ ~s[phx-hook="AvatarRoot"]
-    assert html =~ "data-essence-avatar-root"
-    assert html =~ "data-essence-avatar-image"
+    assert html =~ "data-radix-avatar-root"
+    assert html =~ "data-radix-avatar-image"
     assert html =~ ~s[data-on-loading-status-change="avatar_status"]
-    assert html =~ "data-essence-avatar-fallback"
+    assert html =~ "data-radix-avatar-fallback"
     assert html =~ ~s[data-delay-ms="300"]
   end
 end

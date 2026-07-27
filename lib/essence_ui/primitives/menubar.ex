@@ -16,7 +16,7 @@ defmodule EssenceUI.Primitives.Menubar do
       id={@id}
       phx-hook="MenubarRoot"
       role="menubar"
-      data-essence-menubar-root
+      data-radix-menubar-root
       data-orientation={@orientation}
       data-loop={to_string(@loop)}
       dir={@dir}
@@ -34,7 +34,7 @@ defmodule EssenceUI.Primitives.Menubar do
 
   def menu(assigns) do
     ~H"""
-    <div id={@id} data-essence-menubar-menu data-value={@value} {@rest}>
+    <div id={@id} data-radix-menubar-menu data-value={@value} {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -55,7 +55,7 @@ defmodule EssenceUI.Primitives.Menubar do
       aria-haspopup="menu"
       aria-expanded="false"
       aria-controls={@content_id}
-      data-essence-menubar-trigger
+      data-radix-menubar-trigger
       data-state="closed"
       disabled={@disabled}
       data-disabled={if @disabled, do: ""}
@@ -91,7 +91,8 @@ defmodule EssenceUI.Primitives.Menubar do
     ~H"""
     <div
       id={@id}
-      data-essence-menubar-content
+      data-radix-menubar-content
+      data-radix-menu-content
       data-state="closed"
       data-side={@side}
       data-align={@align}
@@ -112,7 +113,7 @@ defmodule EssenceUI.Primitives.Menubar do
 
   def label(assigns) do
     ~H"""
-    <div id={@id} data-essence-menubar-label {@rest}>
+    <div id={@id} data-radix-menubar-label {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -130,7 +131,7 @@ defmodule EssenceUI.Primitives.Menubar do
       id={@id}
       role="menuitem"
       tabindex={if @disabled, do: "-1", else: "0"}
-      data-essence-menubar-item
+      data-radix-menubar-item
       data-disabled={if @disabled, do: ""}
       data-text-value={@text_value}
       aria-disabled={if @disabled, do: "true"}
@@ -147,7 +148,7 @@ defmodule EssenceUI.Primitives.Menubar do
 
   def group(assigns) do
     ~H"""
-    <div id={@id} role="group" data-essence-menubar-group {@rest}>
+    <div id={@id} role="group" data-radix-menubar-group {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -169,7 +170,7 @@ defmodule EssenceUI.Primitives.Menubar do
       id={@id}
       role="menuitemcheckbox"
       tabindex={if @disabled, do: "-1", else: "0"}
-      data-essence-menubar-checkbox-item
+      data-radix-menubar-checkbox-item
       data-state={@state}
       data-disabled={if @disabled, do: ""}
       data-text-value={@text_value}
@@ -189,7 +190,7 @@ defmodule EssenceUI.Primitives.Menubar do
 
   def radio_group(assigns) do
     ~H"""
-    <div id={@id} role="group" data-essence-menubar-radio-group data-value={@value} {@rest}>
+    <div id={@id} role="group" data-radix-menubar-radio-group data-value={@value} {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -212,7 +213,7 @@ defmodule EssenceUI.Primitives.Menubar do
       id={@id}
       role="menuitemradio"
       tabindex={if @disabled, do: "-1", else: "0"}
-      data-essence-menubar-radio-item
+      data-radix-menubar-radio-item
       data-state={@state}
       data-value={@value}
       data-disabled={if @disabled, do: ""}
@@ -235,7 +236,7 @@ defmodule EssenceUI.Primitives.Menubar do
     ~H"""
     <span
       id={@id}
-      data-essence-menubar-item-indicator
+      data-radix-menubar-item-indicator
       data-force-mount={if @force_mount, do: ""}
       style={unless @force_mount, do: "display: none;"}
       {@rest}
@@ -254,7 +255,7 @@ defmodule EssenceUI.Primitives.Menubar do
       id={@id}
       role="separator"
       aria-orientation="horizontal"
-      data-essence-menubar-separator
+      data-radix-menubar-separator
       {@rest}
     >
     </div>
@@ -271,7 +272,7 @@ defmodule EssenceUI.Primitives.Menubar do
     assigns = assign(assigns, :state, state)
 
     ~H"""
-    <div id={@id} data-essence-menubar-sub data-state={@state} {@rest}>
+    <div id={@id} data-radix-menubar-sub data-state={@state} {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -291,7 +292,7 @@ defmodule EssenceUI.Primitives.Menubar do
       tabindex={if @disabled, do: "-1", else: "0"}
       aria-haspopup="menu"
       aria-expanded="false"
-      data-essence-menubar-sub-trigger
+      data-radix-menubar-subtrigger
       data-state="closed"
       data-disabled={if @disabled, do: ""}
       data-text-value={@text_value}
@@ -314,7 +315,7 @@ defmodule EssenceUI.Primitives.Menubar do
     ~H"""
     <div
       id={@id}
-      data-essence-menubar-sub-content
+      data-radix-menubar-sub-content
       data-state="closed"
       data-side={@side}
       data-align={@align}

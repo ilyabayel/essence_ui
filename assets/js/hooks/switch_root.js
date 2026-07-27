@@ -1,12 +1,12 @@
 export const SwitchRoot = {
   mounted() {
     this.trigger = this.el; // The hook is on the button itself
-    this.thumb = this.el.querySelector('[data-essence-switch-thumb]');
+    this.thumb = this.el.querySelector('[data-radix-switch-thumb]');
     
     // Find input as sibling or via parent
-    this.input = this.el.nextElementSibling?.hasAttribute('data-essence-switch-input') 
+    this.input = this.el.nextElementSibling?.hasAttribute('data-radix-switch-input') 
       ? this.el.nextElementSibling 
-      : this.el.parentElement?.querySelector('[data-essence-switch-input]');
+      : this.el.parentElement?.querySelector('[data-radix-switch-input]');
     
     this._initialState = this.el.dataset.state;
     this._updateState();

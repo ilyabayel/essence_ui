@@ -24,15 +24,15 @@ defmodule EssenceUI.Primitives.PasswordToggleFieldTest do
       )
 
     assert html =~ ~s[phx-hook="PasswordToggleFieldRoot"]
-    assert html =~ "data-essence-password-toggle-root"
+    assert html =~ "data-radix-password-toggle-root"
     assert html =~ ~s[data-visible="true"]
     assert html =~ ~s[data-on-visibility-change="changed"]
-    assert html =~ "data-essence-password-toggle-input"
+    assert html =~ "data-radix-password-toggle-input"
     assert html =~ ~s[type="password"]
     assert html =~ ~s[name="password"]
-    assert html =~ "data-essence-password-toggle-toggle"
+    assert html =~ "data-radix-password-toggle-toggle"
     assert html =~ ~s[aria-pressed="false"]
-    assert html =~ "data-essence-password-toggle-icon"
+    assert html =~ "data-radix-password-toggle-icon"
     assert html =~ "data-visible"
     assert html =~ "data-hidden"
   end

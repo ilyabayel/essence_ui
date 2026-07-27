@@ -72,7 +72,7 @@ defmodule EssenceUI.Components.Box do
       display: %{
         type: :enum,
         values: @display_values,
-        class: "est-r-display",
+        class: "rt-r-display",
         responsive: true,
         default: "block"
       }
@@ -85,7 +85,7 @@ defmodule EssenceUI.Components.Box do
 
     extracted_props = ExtractProps.call(assigns, props_defs)
 
-    class = Enum.join(["est-Box", extracted_props[:class]], " ")
+    class = Enum.join(["rt-Box", extracted_props[:class]], " ")
     assigns = assign(assigns, class: class, style: extracted_props[:style] || false)
 
     ~H"""

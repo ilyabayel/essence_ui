@@ -71,8 +71,8 @@ defmodule EssenceUI.Components.CheckboxGroup do
   def checkbox_group_root(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, class: "est-r-size", values: @sizes, default: "2", responsive: true},
-        variant: %{type: :enum, class: "est-variant", values: @variants, default: "surface"}
+        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
+        variant: %{type: :enum, class: "rt-variant", values: @variants, default: "surface"}
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(HighContrastProps.prop_defs())
@@ -89,7 +89,7 @@ defmodule EssenceUI.Components.CheckboxGroup do
     assigns =
       assign(assigns,
         id: id,
-        class: ["est-CheckboxGroupRoot", extracted.class] |> Enum.filter(& &1) |> Enum.join(" "),
+        class: ["rt-CheckboxGroupRoot", extracted.class] |> Enum.filter(& &1) |> Enum.join(" "),
         style: extracted.style,
         color: assigns[:color],
         selected_values: selected_values
@@ -135,14 +135,14 @@ defmodule EssenceUI.Components.CheckboxGroup do
   def checkbox_group_item(assigns) do
     size = assigns[:size] || "2"
     variant = assigns[:variant] || "surface"
-    size_class = "est-r-size-#{size}"
-    variant_class = "est-variant-#{variant}"
-    high_contrast_class = if assigns[:high_contrast], do: "est-high-contrast"
+    size_class = "rt-r-size-#{size}"
+    variant_class = "rt-variant-#{variant}"
+    high_contrast_class = if assigns[:high_contrast], do: "rt-high-contrast"
 
     prop_defs =
       %{
-        size: %{type: :enum, class: "est-r-size", values: @sizes, responsive: true},
-        variant: %{type: :enum, class: "est-variant", values: @variants}
+        size: %{type: :enum, class: "rt-r-size", values: @sizes, responsive: true},
+        variant: %{type: :enum, class: "rt-variant", values: @variants}
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(HighContrastProps.prop_defs())
@@ -154,12 +154,12 @@ defmodule EssenceUI.Components.CheckboxGroup do
     assigns =
       assign(assigns,
         label_class:
-          ["est-CheckboxGroupItem", "est-Text", size_class, assigns.class] |> Enum.filter(& &1) |> Enum.join(" "),
+          ["rt-CheckboxGroupItem", "rt-Text", size_class, assigns.class] |> Enum.filter(& &1) |> Enum.join(" "),
         button_class:
           [
-            "est-reset",
-            "est-BaseCheckboxRoot",
-            "est-CheckboxGroupItemCheckbox",
+            "rt-reset",
+            "rt-BaseCheckboxRoot",
+            "rt-CheckboxGroupItemCheckbox",
             size_class,
             variant_class,
             high_contrast_class
@@ -188,7 +188,7 @@ defmodule EssenceUI.Components.CheckboxGroup do
           data-accent-color={@color}
           {@rest}
         >
-          <CheckboxGroupPrimitive.indicator checked={@checked} class="est-BaseCheckboxIndicator">
+          <CheckboxGroupPrimitive.indicator checked={@checked} class="rt-BaseCheckboxIndicator">
             <svg
               width="9"
               height="9"
@@ -201,7 +201,7 @@ defmodule EssenceUI.Components.CheckboxGroup do
             </svg>
           </CheckboxGroupPrimitive.indicator>
         </CheckboxGroupPrimitive.item>
-        <span class="est-CheckboxGroupItemInner">
+        <span class="rt-CheckboxGroupItemInner">
           {render_slot(@inner_block)}
         </span>
       </.text>
@@ -212,13 +212,13 @@ defmodule EssenceUI.Components.CheckboxGroup do
         disabled={@disabled}
         checked={@checked}
         class={
-          ["est-CheckboxGroupItem", @button_class, @class] |> Enum.filter(& &1) |> Enum.join(" ")
+          ["rt-CheckboxGroupItem", @button_class, @class] |> Enum.filter(& &1) |> Enum.join(" ")
         }
         style={@style}
         data-accent-color={@color}
         {@rest}
       >
-        <CheckboxGroupPrimitive.indicator checked={@checked} class="est-BaseCheckboxIndicator">
+        <CheckboxGroupPrimitive.indicator checked={@checked} class="rt-BaseCheckboxIndicator">
           <svg
             width="9"
             height="9"

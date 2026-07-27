@@ -9,7 +9,7 @@ defmodule EssenceUI.Primitives.Avatar do
 
   def root(assigns) do
     ~H"""
-    <span id={@id} phx-hook="AvatarRoot" data-essence-avatar-root data-status="idle" {@rest}>
+    <span id={@id} phx-hook="AvatarRoot" data-radix-avatar-root data-status="idle" {@rest}>
       {render_slot(@inner_block)}
     </span>
     """
@@ -25,7 +25,7 @@ defmodule EssenceUI.Primitives.Avatar do
     <img
       src={@src}
       alt={@alt}
-      data-essence-avatar-image
+      data-radix-avatar-image
       data-on-loading-status-change={@on_loading_status_change}
       {@rest}
     />
@@ -38,7 +38,7 @@ defmodule EssenceUI.Primitives.Avatar do
 
   def fallback(assigns) do
     ~H"""
-    <span data-essence-avatar-fallback data-delay-ms={@delay_ms} {@rest}>
+    <span data-radix-avatar-fallback data-delay-ms={@delay_ms} {@rest}>
       {render_slot(@inner_block)}
     </span>
     """

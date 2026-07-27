@@ -80,7 +80,7 @@ defmodule EssenceUI.Primitives.Switch do
       data-form={@form}
       data-default-checked={to_string(@default_checked)}
       data-on-checked-change={@on_checked_change}
-      data-essence-switch-trigger
+      data-radix-switch-trigger
       disabled={@disabled}
       {@rest}
     >
@@ -98,7 +98,7 @@ defmodule EssenceUI.Primitives.Switch do
   def thumb(assigns) do
     ~H"""
     <span
-      data-essence-switch-thumb
+      data-radix-switch-thumb
       style="pointer-events: none; display: block;"
       {@rest}
     >
@@ -132,7 +132,7 @@ defmodule EssenceUI.Primitives.Switch do
       name={@name}
       value={@value}
       form={@form}
-      data-essence-switch-input
+      data-radix-switch-input
       style="position: absolute; pointer-events: none; opacity: 0; margin: 0; transform: translateX(-100%);"
       tabindex="-1"
       aria-hidden="true"

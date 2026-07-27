@@ -34,9 +34,9 @@ export const OneTimePasswordFieldRoot = {
   _bind() {
     this._unbind();
     this.inputs = Array.from(
-      this.el.querySelectorAll("[data-essence-otp-input]"),
+      this.el.querySelectorAll("[data-radix-otp-input]"),
     ).sort((a, b) => Number(a.dataset.index) - Number(b.dataset.index));
-    this.hidden = this.el.querySelector("[data-essence-otp-hidden]");
+    this.hidden = this.el.querySelector("[data-radix-otp-hidden]");
 
     this._onInput = (event) => this._handleInput(event);
     this._onKeyDown = (event) => this._handleKeyDown(event);

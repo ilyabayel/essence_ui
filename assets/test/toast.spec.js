@@ -18,8 +18,8 @@ test.describe("Toast Primitive", () => {
 
   test("opens from button with title and description", async ({ page }) => {
     const root = await openToast(page);
-    const title = root.locator("[data-essence-toast-title]");
-    const description = root.locator("[data-essence-toast-description]");
+    const title = root.locator("[data-radix-toast-title]");
+    const description = root.locator("[data-radix-toast-description]");
 
     await expect(title).toContainText("Scheduled: Catch up");
     await expect(description).toContainText("Friday at 5:30 PM");
@@ -31,7 +31,7 @@ test.describe("Toast Primitive", () => {
 
   test("closes when close button is clicked", async ({ page }) => {
     const root = await openToast(page);
-    const close = root.locator("[data-essence-toast-close]");
+    const close = root.locator("[data-radix-toast-close]");
 
     await close.click();
     await expect(root).toHaveAttribute("data-state", "closed");
@@ -55,7 +55,7 @@ test.describe("Toast Primitive", () => {
 
   test("focuses viewport on F8 hotkey", async ({ page }) => {
     await expect(page.locator("#toast-primitive[data-hydrated]")).toBeAttached();
-    const viewport = page.locator("[data-essence-toast-viewport]");
+    const viewport = page.locator("[data-radix-toast-viewport]");
     await page.keyboard.press("F8");
     await expect(viewport).toBeFocused();
   });

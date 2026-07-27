@@ -14,7 +14,7 @@ defmodule EssenceUI.Primitives.Form do
 
   def root(assigns) do
     ~H"""
-    <form id={@id} phx-hook="FormRoot" data-essence-form-root novalidate {@rest}>
+    <form id={@id} phx-hook="FormRoot" data-radix-form-root novalidate {@rest}>
       {render_slot(@inner_block)}
     </form>
     """
@@ -30,7 +30,7 @@ defmodule EssenceUI.Primitives.Form do
     ~H"""
     <div
       id={@id}
-      data-essence-form-field
+      data-radix-form-field
       data-name={@name}
       data-invalid={if @server_invalid, do: ""}
       data-server-invalid={if @server_invalid, do: ""}
@@ -48,7 +48,7 @@ defmodule EssenceUI.Primitives.Form do
 
   def label(assigns) do
     ~H"""
-    <label id={@id} for={@for} data-essence-form-label {@rest}>
+    <label id={@id} for={@for} data-radix-form-label {@rest}>
       {render_slot(@inner_block)}
     </label>
     """
@@ -60,7 +60,7 @@ defmodule EssenceUI.Primitives.Form do
 
   def control(assigns) do
     ~H"""
-    <div id={@id} data-essence-form-control {@rest}>
+    <div id={@id} data-radix-form-control {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -77,7 +77,7 @@ defmodule EssenceUI.Primitives.Form do
     ~H"""
     <span
       id={@id}
-      data-essence-form-message
+      data-radix-form-message
       data-match={@match}
       data-name={@name}
       data-force-match={if @force_match, do: ""}
@@ -98,7 +98,7 @@ defmodule EssenceUI.Primitives.Form do
     ~H"""
     <div
       id={@id}
-      data-essence-form-validity-state
+      data-radix-form-validity-state
       data-name={@name}
       data-valid=""
       {@rest}
@@ -114,7 +114,7 @@ defmodule EssenceUI.Primitives.Form do
 
   def submit(assigns) do
     ~H"""
-    <button id={@id} type="submit" data-essence-form-submit {@rest}>
+    <button id={@id} type="submit" data-radix-form-submit {@rest}>
       {render_slot(@inner_block)}
     </button>
     """

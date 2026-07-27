@@ -302,11 +302,11 @@ The component that pops out when a menu is open.
 
 | CSS variable | Description |
 | --- | --- |
-| `--essence-menubar-content-transform-origin` | The `transform-origin` computed from content and arrow positions/offsets |
-| `--essence-menubar-content-available-width` | Remaining width between the trigger and the boundary edge |
-| `--essence-menubar-content-available-height` | Remaining height between the trigger and the boundary edge |
-| `--essence-menubar-trigger-width` | The width of the trigger |
-| `--essence-menubar-trigger-height` | The height of the trigger |
+| `--radix-menubar-content-transform-origin` | The `transform-origin` computed from content and arrow positions/offsets |
+| `--radix-menubar-content-available-width` | Remaining width between the trigger and the boundary edge |
+| `--radix-menubar-content-available-height` | Remaining height between the trigger and the boundary edge |
+| `--radix-menubar-trigger-width` | The width of the trigger |
+| `--radix-menubar-trigger-height` | The height of the trigger |
 
 ### Item
 
@@ -566,7 +566,7 @@ You can add extra decorative elements in the `item` parts, such as images.
 
 You may want to constrain the width of the content (or sub-content) so that it matches the trigger width, or constrain its height to not exceed the viewport.
 
-We expose several CSS custom properties such as `--essence-menubar-trigger-width` and `--essence-menubar-content-available-height` to support this. Use them to constrain the content dimensions.
+We expose several CSS custom properties such as `--radix-menubar-trigger-width` and `--radix-menubar-content-available-height` to support this. Use them to constrain the content dimensions.
 
 ```heex
 <Menubar.root id="menubar-constrain">
@@ -581,14 +581,14 @@ We expose several CSS custom properties such as `--essence-menubar-trigger-width
 
 ```css
 .MenubarContent {
-  width: var(--essence-menubar-trigger-width);
-  max-height: var(--essence-menubar-content-available-height);
+  width: var(--radix-menubar-trigger-width);
+  max-height: var(--radix-menubar-content-available-height);
 }
 ```
 
 ### Origin-aware animations
 
-We expose a CSS custom property `--essence-menubar-content-transform-origin`. Use it to animate the content from its computed origin based on `side`, `side_offset`, `align`, and any collisions.
+We expose a CSS custom property `--radix-menubar-content-transform-origin`. Use it to animate the content from its computed origin based on `side`, `side_offset`, `align`, and any collisions.
 
 ```heex
 <Menubar.root id="menubar-origin">
@@ -601,7 +601,7 @@ We expose a CSS custom property `--essence-menubar-content-transform-origin`. Us
 
 ```css
 .MenubarContent {
-  transform-origin: var(--essence-menubar-content-transform-origin);
+  transform-origin: var(--radix-menubar-content-transform-origin);
   animation: scaleIn 0.5s ease-out;
 }
 

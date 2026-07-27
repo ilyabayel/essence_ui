@@ -52,7 +52,7 @@ defmodule EssenceUI.Components.Popover do
       default_open={@default_open}
       on_open_change={@on_open_change}
       modal={@modal}
-      class={["est-PopoverRoot", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["rt-PopoverRoot", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={["display: contents;", @style] |> Enum.filter(&(&1 != "")) |> Enum.join("; ")}
       {@rest}
     >
@@ -78,7 +78,7 @@ defmodule EssenceUI.Components.Popover do
       id={@id}
       content_id={@content_id}
       as="div"
-      class={["est-PopoverTrigger", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["rt-PopoverTrigger", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={["display: inline-flex;", @style] |> Enum.filter(&(&1 != "")) |> Enum.join("; ")}
       {Map.delete(@rest, :class)}
     >
@@ -114,7 +114,7 @@ defmodule EssenceUI.Components.Popover do
   def popover_content(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, class: "est-r-size", values: @sizes, default: "2", responsive: true}
+        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true}
       }
       |> Map.merge(WidthProps.prop_defs())
       |> Map.merge(HeightProps.prop_defs())
@@ -129,9 +129,9 @@ defmodule EssenceUI.Components.Popover do
         portal_id: "#{id}-portal",
         class:
           [
-            "essence-ui",
-            "est-PopperContent",
-            "est-PopoverContent",
+            "radix-themes",
+            "rt-PopperContent",
+            "rt-PopoverContent",
             extracted.class,
             assigns.class
           ]
@@ -170,7 +170,7 @@ defmodule EssenceUI.Components.Popover do
     <PopoverPrimitive.close
       id={@id}
       as="div"
-      class={["est-PopoverClose", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["rt-PopoverClose", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
       style="display: inline-flex;"
       {Map.delete(@rest, :class)}
     >

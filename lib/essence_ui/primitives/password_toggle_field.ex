@@ -18,7 +18,7 @@ defmodule EssenceUI.Primitives.PasswordToggleField do
     <div
       id={@id}
       phx-hook="PasswordToggleFieldRoot"
-      data-essence-password-toggle-root
+      data-radix-password-toggle-root
       data-visible={to_string(@visible_state)}
       data-default-visible={to_string(@default_visible)}
       data-on-visibility-change={@on_visibility_change}
@@ -49,7 +49,7 @@ defmodule EssenceUI.Primitives.PasswordToggleField do
       disabled={@disabled}
       required={@required}
       autocomplete={@autocomplete}
-      data-essence-password-toggle-input
+      data-radix-password-toggle-input
       {@rest}
     />
     """
@@ -65,7 +65,7 @@ defmodule EssenceUI.Primitives.PasswordToggleField do
     <button
       id={@id}
       type="button"
-      data-essence-password-toggle-toggle
+      data-radix-password-toggle-toggle
       aria-pressed="false"
       aria-label="Show password"
       disabled={@disabled}
@@ -86,7 +86,7 @@ defmodule EssenceUI.Primitives.PasswordToggleField do
     ~H"""
     <span
       id={@id}
-      data-essence-password-toggle-icon
+      data-radix-password-toggle-icon
       data-visible={if @visible && !@hidden, do: ""}
       data-hidden={if @hidden, do: ""}
       {@rest}

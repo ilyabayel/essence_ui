@@ -57,12 +57,12 @@ export const DropdownMenuRoot = {
 
   resolveParts() {
     this.trigger = this.el.querySelector(
-      "[data-essence-dropdown-menu-trigger]"
+      "[data-radix-dropdown-menu-trigger]"
     );
     const contentId = this.trigger?.getAttribute("aria-controls");
     this.content = findMenuPart(
       this.el,
-      "[data-essence-dropdown-menu-content]",
+      "[data-radix-dropdown-menu-content]",
       contentId
     );
   },
@@ -108,7 +108,7 @@ export const DropdownMenuRoot = {
     if (!item || !this.content?.contains(item)) return;
     if (item.hasAttribute("data-disabled")) return;
 
-    if (item.hasAttribute("data-essence-dropdown-menu-sub-trigger")) {
+    if (item.hasAttribute("data-radix-dropdown-menu-sub-trigger")) {
       this.openSub(item);
       return;
     }
@@ -139,12 +139,12 @@ export const DropdownMenuRoot = {
 
     if (e.key === "ArrowRight") {
       const active = document.activeElement;
-      if (active?.hasAttribute("data-essence-dropdown-menu-sub-trigger")) {
+      if (active?.hasAttribute("data-radix-dropdown-menu-sub-trigger")) {
         e.preventDefault();
         this.openSub(active);
         const sub = active
-          .closest("[data-essence-dropdown-menu-sub]")
-          ?.querySelector("[data-essence-dropdown-menu-sub-content]");
+          .closest("[data-radix-dropdown-menu-sub]")
+          ?.querySelector("[data-radix-dropdown-menu-sub-content]");
         const subItems = getMenuItems(sub);
         if (subItems[0]) focusItem(subItems[0], subItems);
       }
@@ -154,13 +154,13 @@ export const DropdownMenuRoot = {
     if (e.key === "ArrowLeft") {
       const active = document.activeElement;
       const subContent = active?.closest(
-        "[data-essence-dropdown-menu-sub-content]"
+        "[data-radix-dropdown-menu-sub-content]"
       );
       if (subContent) {
         e.preventDefault();
-        const sub = subContent.closest("[data-essence-dropdown-menu-sub]");
+        const sub = subContent.closest("[data-radix-dropdown-menu-sub]");
         const trigger = sub?.querySelector(
-          "[data-essence-dropdown-menu-sub-trigger]"
+          "[data-radix-dropdown-menu-sub-trigger]"
         );
         this.closeSub(sub);
         if (trigger) focusItem(trigger, items);
@@ -170,12 +170,12 @@ export const DropdownMenuRoot = {
 
     if (e.key === "Enter" || e.key === " ") {
       const active = document.activeElement;
-      if (active?.hasAttribute("data-essence-dropdown-menu-sub-trigger")) {
+      if (active?.hasAttribute("data-radix-dropdown-menu-sub-trigger")) {
         e.preventDefault();
         this.openSub(active);
         const sub = active
-          .closest("[data-essence-dropdown-menu-sub]")
-          ?.querySelector("[data-essence-dropdown-menu-sub-content]");
+          .closest("[data-radix-dropdown-menu-sub]")
+          ?.querySelector("[data-radix-dropdown-menu-sub-content]");
         const subItems = getMenuItems(sub);
         if (subItems[0]) focusItem(subItems[0], subItems);
         return;
@@ -285,16 +285,16 @@ export const DropdownMenuRoot = {
     if (!this.content) return;
 
     this.content
-      .querySelectorAll("[data-essence-dropdown-menu-sub]")
+      .querySelectorAll("[data-radix-dropdown-menu-sub]")
       .forEach((sub) => {
         if (sub.hasAttribute("data-sub-bound")) return;
         sub.setAttribute("data-sub-bound", "true");
 
         const trigger = sub.querySelector(
-          "[data-essence-dropdown-menu-sub-trigger]"
+          "[data-radix-dropdown-menu-sub-trigger]"
         );
         const content = sub.querySelector(
-          "[data-essence-dropdown-menu-sub-content]"
+          "[data-radix-dropdown-menu-sub-content]"
         );
         if (!trigger || !content) return;
 
@@ -321,18 +321,18 @@ export const DropdownMenuRoot = {
   },
 
   openSub(trigger) {
-    const sub = trigger.closest("[data-essence-dropdown-menu-sub]");
+    const sub = trigger.closest("[data-radix-dropdown-menu-sub]");
     const content = sub?.querySelector(
-      "[data-essence-dropdown-menu-sub-content]"
+      "[data-radix-dropdown-menu-sub-content]"
     );
     if (!sub || !content) return;
 
     // Close sibling subs
     const parent =
-      sub.parentElement?.closest("[data-essence-dropdown-menu-sub]") ||
+      sub.parentElement?.closest("[data-radix-dropdown-menu-sub]") ||
       this.content;
     parent
-      ?.querySelectorAll(":scope > [data-essence-dropdown-menu-sub], [data-essence-dropdown-menu-content] > [data-essence-dropdown-menu-sub]")
+      ?.querySelectorAll(":scope > [data-radix-dropdown-menu-sub], [data-radix-dropdown-menu-content] > [data-radix-dropdown-menu-sub]")
       .forEach((sibling) => {
         if (sibling !== sub) this.closeSub(sibling);
       });
@@ -362,15 +362,15 @@ export const DropdownMenuRoot = {
   closeSub(sub) {
     if (!sub) return;
     const trigger = sub.querySelector(
-      "[data-essence-dropdown-menu-sub-trigger]"
+      "[data-radix-dropdown-menu-sub-trigger]"
     );
     const content = sub.querySelector(
-      "[data-essence-dropdown-menu-sub-content]"
+      "[data-radix-dropdown-menu-sub-content]"
     );
 
     // Close nested first
     sub
-      .querySelectorAll("[data-essence-dropdown-menu-sub]")
+      .querySelectorAll("[data-radix-dropdown-menu-sub]")
       .forEach((nested) => {
         if (nested !== sub) this.closeSub(nested);
       });
@@ -388,7 +388,7 @@ export const DropdownMenuRoot = {
 
   closeAllSubs() {
     this.content
-      ?.querySelectorAll("[data-essence-dropdown-menu-sub]")
+      ?.querySelectorAll("[data-radix-dropdown-menu-sub]")
       .forEach((sub) => this.closeSub(sub));
     this.openSubs.clear();
   },
@@ -425,7 +425,7 @@ export const DropdownMenuRoot = {
     // Full-viewport layer so scroll targets always hit a node we control when
     // the pointer is outside the menu (pointer-events none would let scroll through).
     const overlay = document.createElement("div");
-    overlay.setAttribute("data-essence-dropdown-menu-scroll-lock", "");
+    overlay.setAttribute("data-radix-dropdown-menu-scroll-lock", "");
     Object.assign(overlay.style, {
       position: "fixed",
       inset: "0",

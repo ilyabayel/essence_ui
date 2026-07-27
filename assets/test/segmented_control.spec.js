@@ -20,12 +20,12 @@ test.describe("Segmented Control Themes", () => {
     page,
   }) => {
     await gotoThemesSegmentedControl(page);
-    const root = page.locator("#sc-default[data-essence-toggle-group-root]");
+    const root = page.locator("#sc-default[data-radix-toggle-group-root]");
     const option1 = root.locator(
-      '[data-essence-toggle-group-item][data-value="option1"]',
+      '[data-radix-toggle-group-item][data-value="option1"]',
     );
     const option2 = root.locator(
-      '[data-essence-toggle-group-item][data-value="option2"]',
+      '[data-radix-toggle-group-item][data-value="option2"]',
     );
 
     await expect(root).toHaveAttribute("data-deselectable", "false");
@@ -44,12 +44,12 @@ test.describe("Segmented Control Themes", () => {
 
   test("disabled root blocks interaction", async ({ page }) => {
     await gotoThemesSegmentedControl(page, "disabled");
-    const root = page.locator("#sc-disabled[data-essence-toggle-group-root]");
+    const root = page.locator("#sc-disabled[data-radix-toggle-group-root]");
     const enabled = root.locator(
-      '[data-essence-toggle-group-item][data-value="enabled"]',
+      '[data-radix-toggle-group-item][data-value="enabled"]',
     );
     const disabled = root.locator(
-      '[data-essence-toggle-group-item][data-value="disabled"]',
+      '[data-radix-toggle-group-item][data-value="disabled"]',
     );
 
     await expect(root).toBeVisible();
@@ -65,7 +65,7 @@ test.describe("Segmented Control Themes", () => {
 
   test("has no accessibility violations", async ({ page }) => {
     await gotoThemesSegmentedControl(page);
-    const root = page.locator("#sc-default[data-essence-toggle-group-root]");
+    const root = page.locator("#sc-default[data-radix-toggle-group-root]");
     await expect(root).toBeVisible();
     await expectNoA11yViolations(page, {
       include: "#sc-default",

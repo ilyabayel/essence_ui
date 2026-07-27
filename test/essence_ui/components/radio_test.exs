@@ -16,10 +16,10 @@ defmodule EssenceUI.Components.RadioTest do
       })
 
     assert html =~ ~s[type="radio"]
-    assert html =~ "est-RadioRoot"
-    assert html =~ "est-BaseRadioRoot"
-    assert html =~ "est-r-size-3"
-    assert html =~ "est-variant-soft"
+    assert html =~ "rt-RadioRoot"
+    assert html =~ "rt-BaseRadioRoot"
+    assert html =~ "rt-r-size-3"
+    assert html =~ "rt-variant-soft"
     assert html =~ ~s(data-accent-color="blue")
     assert html =~ ~s[name="size"]
     assert html =~ ~s[value="small"]

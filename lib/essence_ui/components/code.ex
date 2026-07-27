@@ -71,13 +71,13 @@ defmodule EssenceUI.Components.Code do
       %{
         size: %{
           type: :enum,
-          class: "est-r-size",
+          class: "rt-r-size",
           values: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
           responsive: true
         },
         variant: %{
           type: :enum,
-          class: "est-variant",
+          class: "rt-variant",
           values: ["solid", "soft", "outline", "ghost"],
           default: "soft"
         }
@@ -98,7 +98,7 @@ defmodule EssenceUI.Components.Code do
         assigns[:color]
       end
 
-    class = ["est-Code", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["rt-Code", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
 
     assigns = assign(assigns, class: class, color: color || false)
 

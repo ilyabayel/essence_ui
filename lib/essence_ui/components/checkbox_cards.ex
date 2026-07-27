@@ -108,21 +108,21 @@ defmodule EssenceUI.Components.CheckboxCards do
       %{
         size: %{
           type: :enum,
-          class: "est-r-size",
+          class: "rt-r-size",
           values: @sizes,
           default: "2",
           responsive: true
         },
         variant: %{
           type: :enum,
-          class: "est-variant",
+          class: "rt-variant",
           values: @variants,
           default: "surface"
         },
         columns: %{
           type: [:enum, :string],
           values: @columns_values,
-          class: "est-r-gtc",
+          class: "rt-r-gtc",
           custom_properties: ["--grid-template-columns"],
           responsive: true
         }
@@ -136,8 +136,8 @@ defmodule EssenceUI.Components.CheckboxCards do
 
     class =
       [
-        "est-Grid",
-        "est-CheckboxCardsRoot",
+        "rt-Grid",
+        "rt-CheckboxCardsRoot",
         extracted.class
       ]
       |> Enum.filter(& &1)
@@ -200,8 +200,8 @@ defmodule EssenceUI.Components.CheckboxCards do
   """
   def checkbox_cards_item(assigns) do
     size = assigns[:size] || "2"
-    size_class = "est-r-size-#{size}"
-    high_contrast_class = if assigns[:high_contrast], do: "est-high-contrast"
+    size_class = "rt-r-size-#{size}"
+    high_contrast_class = if assigns[:high_contrast], do: "rt-high-contrast"
 
     assigns = assign_new(assigns, :id, fn -> "checkbox-cards-item-#{System.unique_integer([:positive])}" end)
 
@@ -209,16 +209,16 @@ defmodule EssenceUI.Components.CheckboxCards do
       assign(assigns,
         checkbox_class:
           [
-            "est-reset",
-            "est-BaseCheckboxRoot",
-            "est-CheckboxCardCheckbox",
+            "rt-reset",
+            "rt-BaseCheckboxRoot",
+            "rt-CheckboxCardCheckbox",
             size_class,
-            "est-variant-surface",
+            "rt-variant-surface",
             high_contrast_class
           ]
           |> Enum.filter(& &1)
           |> Enum.join(" "),
-        label_class: ["est-BaseCard", "est-CheckboxCardsItem", assigns.class] |> Enum.filter(& &1) |> Enum.join(" "),
+        label_class: ["rt-BaseCard", "rt-CheckboxCardsItem", assigns.class] |> Enum.filter(& &1) |> Enum.join(" "),
         check_path: @check_path
       )
 
@@ -234,7 +234,7 @@ defmodule EssenceUI.Components.CheckboxCards do
         tabindex="-1"
         {@rest}
       >
-        <CheckboxGroupPrimitive.indicator checked={@checked} class="est-BaseCheckboxIndicator">
+        <CheckboxGroupPrimitive.indicator checked={@checked} class="rt-BaseCheckboxIndicator">
           <svg
             width="9"
             height="9"

@@ -24,7 +24,7 @@ defmodule EssenceUI.Primitives.ToggleGroup do
       id={@id}
       phx-hook="ToggleGroupRoot"
       role={if @type == "single", do: "radiogroup", else: "toolbar"}
-      data-essence-toggle-group-root
+      data-radix-toggle-group-root
       data-type={@type}
       data-value={@value_attr}
       data-disabled={if @disabled, do: ""}
@@ -54,7 +54,7 @@ defmodule EssenceUI.Primitives.ToggleGroup do
     <button
       id={@id}
       type="button"
-      data-essence-toggle-group-item
+      data-radix-toggle-group-item
       data-value={@value}
       data-disabled={if @disabled, do: ""}
       data-state="off"

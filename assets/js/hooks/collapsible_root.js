@@ -1,7 +1,7 @@
 export const CollapsibleRoot = {
   mounted() {
-    this.trigger = this.el.querySelector('[data-essence-collapsible-trigger]');
-    this.content = this.el.querySelector('[data-essence-collapsible-content]');
+    this.trigger = this.el.querySelector('[data-radix-collapsible-trigger]');
+    this.content = this.el.querySelector('[data-radix-collapsible-content]');
     this.disabled = this.el.hasAttribute('data-disabled');
     this.isMountAnimationPrevented = true;
 
@@ -91,8 +91,8 @@ export const CollapsibleRoot = {
     const width = node.getBoundingClientRect().width;
 
     // Set all possible variable names for compatibility
-    node.style.setProperty('--essence-collapsible-content-height', `${height}px`);
-    node.style.setProperty('--essence-collapsible-content-width', `${width}px`);
+    node.style.setProperty('--radix-collapsible-content-height', `${height}px`);
+    node.style.setProperty('--radix-collapsible-content-width', `${width}px`);
     node.style.setProperty('--radix-collapsible-content-height', `${height}px`);
     node.style.setProperty('--radix-collapsible-content-width', `${width}px`);
 

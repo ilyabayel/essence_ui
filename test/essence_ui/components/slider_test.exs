@@ -10,12 +10,12 @@ defmodule EssenceUI.Components.SliderTest do
 
     assert html =~ ~s[id="sl1"]
     assert html =~ ~s[phx-hook="SliderRoot"]
-    assert html =~ ~s[data-essence-slider-root]
-    assert html =~ "est-SliderRoot"
-    assert html =~ "est-SliderTrack"
-    assert html =~ "est-SliderRange"
-    assert html =~ "est-SliderThumb"
-    assert html =~ ~s[data-essence-slider-thumb]
+    assert html =~ ~s[data-radix-slider-root]
+    assert html =~ "rt-SliderRoot"
+    assert html =~ "rt-SliderTrack"
+    assert html =~ "rt-SliderRange"
+    assert html =~ "rt-SliderThumb"
+    assert html =~ ~s[data-radix-slider-thumb]
   end
 
   test "renders range slider with themes props" do
@@ -28,8 +28,8 @@ defmodule EssenceUI.Components.SliderTest do
         color: "blue"
       })
 
-    assert html =~ "est-r-size-3"
-    assert html =~ "est-variant-soft"
+    assert html =~ "rt-r-size-3"
+    assert html =~ "rt-variant-soft"
     assert html =~ ~s(data-accent-color="blue")
     assert html =~ ~s[data-index="0"]
     assert html =~ ~s[data-index="1"]

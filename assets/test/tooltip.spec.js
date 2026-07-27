@@ -10,7 +10,7 @@ test.describe("Tooltip Primitive", () => {
 
   test("opens on hover after delay and closes on leave", async ({ page }) => {
     const root = page.locator("#tooltip-primitive");
-    const trigger = root.locator("[data-essence-tooltip-trigger]");
+    const trigger = root.locator("[data-radix-tooltip-trigger]");
     const content = page.locator("#tooltip-content");
 
     await expect(content).toBeHidden();
@@ -31,7 +31,7 @@ test.describe("Tooltip Primitive", () => {
 
   test("opens on focus and closes on escape", async ({ page }) => {
     const root = page.locator("#tooltip-primitive");
-    const trigger = root.locator("[data-essence-tooltip-trigger]");
+    const trigger = root.locator("[data-radix-tooltip-trigger]");
     const content = page.locator("#tooltip-content");
 
     await trigger.focus();
@@ -43,7 +43,7 @@ test.describe("Tooltip Primitive", () => {
 
   test("has no accessibility violations", async ({ page }) => {
     const root = page.locator("#tooltip-primitive");
-    const trigger = root.locator("[data-essence-tooltip-trigger]");
+    const trigger = root.locator("[data-radix-tooltip-trigger]");
     await trigger.hover();
     await expect(page.locator("#tooltip-content")).toBeVisible();
     await expectNoA11yViolations(page, {
@@ -64,13 +64,13 @@ test.describe("Tooltip Themes", () => {
       return hooks.every((el) => el.hasAttribute("data-phx-id"));
     });
     await expect(
-      page.locator(".est-TooltipRoot[data-hydrated]").first(),
+      page.locator(".rt-TooltipRoot[data-hydrated]").first(),
     ).toBeVisible();
   });
 
   test("opens when hovering nested button trigger", async ({ page }) => {
-    const root = page.locator(".est-TooltipRoot").first();
-    const trigger = root.locator("[data-essence-tooltip-trigger]");
+    const root = page.locator(".rt-TooltipRoot").first();
+    const trigger = root.locator("[data-radix-tooltip-trigger]");
     const button = trigger.locator("button");
     const contentId = await trigger.getAttribute("aria-describedby");
     const content = page.locator(`#${contentId}`);
@@ -103,7 +103,7 @@ test.describe("Tooltip Primitive (touch)", () => {
 
   test("opens on tap and closes on second tap", async ({ page }) => {
     const root = page.locator("#tooltip-primitive");
-    const trigger = root.locator("[data-essence-tooltip-trigger]");
+    const trigger = root.locator("[data-radix-tooltip-trigger]");
     const content = page.locator("#tooltip-content");
 
     await expect(content).toBeHidden();
@@ -118,7 +118,7 @@ test.describe("Tooltip Primitive (touch)", () => {
 
   test("closes when tapping outside", async ({ page }) => {
     const root = page.locator("#tooltip-primitive");
-    const trigger = root.locator("[data-essence-tooltip-trigger]");
+    const trigger = root.locator("[data-radix-tooltip-trigger]");
     const content = page.locator("#tooltip-content");
 
     await trigger.click();

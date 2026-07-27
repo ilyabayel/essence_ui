@@ -38,7 +38,7 @@ defmodule EssenceUI.Components.Link do
   def es_link(assigns) do
     prop_defs =
       %{
-        underline: %{type: :enum, values: @underline_values, class: "est-underline", default: "auto"}
+        underline: %{type: :enum, values: @underline_values, class: "rt-underline", default: "auto"}
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(HighContrastProps.prop_defs())
@@ -48,7 +48,7 @@ defmodule EssenceUI.Components.Link do
 
     class =
       [
-        "est-Link est-reset est-Text",
+        "rt-Link rt-reset rt-Text",
         extracted.class
       ]
       |> Enum.filter(& &1)

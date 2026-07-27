@@ -41,10 +41,10 @@ defmodule EssenceUI.Primitives.CheckboxGroupTest do
     assert html =~ ~s(role="checkbox")
     assert html =~ ~s(value="a")
     assert html =~ ~s(aria-checked="true")
-    assert html =~ "data-essence-checkbox-group-indicator"
+    assert html =~ "data-radix-checkbox-group-indicator"
     assert html =~ ~s(class="CheckboxGroupIndicator")
     assert html =~ ~s(type="checkbox")
-    assert html =~ "data-essence-checkbox-group-input"
+    assert html =~ "data-radix-checkbox-group-input"
     assert html =~ ~s(name="traits")
   end
 
@@ -62,7 +62,7 @@ defmodule EssenceUI.Primitives.CheckboxGroupTest do
         %{}
       )
 
-    assert html =~ "data-essence-checkbox-group-root"
+    assert html =~ "data-radix-checkbox-group-root"
     assert html =~ ~s(data-value="[&quot;x&quot;,&quot;y&quot;]")
   end
 end

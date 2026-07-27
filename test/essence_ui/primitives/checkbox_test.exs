@@ -14,7 +14,7 @@ defmodule EssenceUI.Primitives.CheckboxTest do
     assert html =~ ~s[data-state="unchecked"]
 
     assert html =~ ~s[input type="checkbox"]
-    assert html =~ ~s[data-essence-checkbox-input]
+    assert html =~ ~s[data-radix-checkbox-input]
   end
 
   test "renders with states" do

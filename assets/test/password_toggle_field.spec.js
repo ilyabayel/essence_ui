@@ -9,8 +9,8 @@ test.describe("Password Toggle Field Primitive", () => {
 
   test("toggles input type and aria-pressed", async ({ page }) => {
     const root = page.locator("#password-toggle-primitive");
-    const input = root.locator("[data-essence-password-toggle-input]");
-    const toggle = root.locator("[data-essence-password-toggle-toggle]");
+    const input = root.locator("[data-radix-password-toggle-input]");
+    const toggle = root.locator("[data-radix-password-toggle-toggle]");
 
     await expect(input).toHaveAttribute("type", "password");
     await expect(toggle).toHaveAttribute("aria-pressed", "false");
@@ -31,12 +31,12 @@ test.describe("Password Toggle Field Primitive", () => {
 
   test("shows and hides icon slots", async ({ page }) => {
     const root = page.locator("#password-toggle-primitive");
-    const toggle = root.locator("[data-essence-password-toggle-toggle]");
+    const toggle = root.locator("[data-radix-password-toggle-toggle]");
     const visibleIcon = root.locator(
-      "[data-essence-password-toggle-icon][data-visible]",
+      "[data-radix-password-toggle-icon][data-visible]",
     );
     const hiddenIcon = root.locator(
-      "[data-essence-password-toggle-icon][data-hidden]",
+      "[data-radix-password-toggle-icon][data-hidden]",
     );
 
     await expect(visibleIcon).toBeHidden();
@@ -50,7 +50,7 @@ test.describe("Password Toggle Field Primitive", () => {
 
   test("accepts typed password and stays laid out", async ({ page }) => {
     const root = page.locator("#password-toggle-primitive");
-    const input = root.locator("[data-essence-password-toggle-input]");
+    const input = root.locator("[data-radix-password-toggle-input]");
 
     await input.fill("s3cret");
     await expect(input).toHaveValue("s3cret");
@@ -64,7 +64,7 @@ test.describe("Password Toggle Field Primitive", () => {
   test("has no accessibility violations", async ({ page }) => {
     const root = page.locator("#password-toggle-primitive");
     await expect(
-      root.locator("[data-essence-password-toggle-input]"),
+      root.locator("[data-radix-password-toggle-input]"),
     ).toBeVisible();
     await expectNoA11yViolations(page, {
       include: "#password-toggle-primitive",

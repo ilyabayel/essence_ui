@@ -10,7 +10,7 @@ Essence Colors ship as 12-step color scales (inspired by [Radix Colors](https://
 Color tokens ship with Essence UI styles:
 
 ```css
-@import "essence-ui/styles.css";
+@import "essence-ui.css";
 ```
 
 ## Use with Theme

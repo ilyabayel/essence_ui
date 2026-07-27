@@ -151,7 +151,7 @@ An item in the group.
 
 ### Use with other primitives
 
-Primitives that expose a trigger part—such as `Dialog`, `AlertDialog`, `Popover`, and `DropdownMenu`—can be composed within a toolbar. Essence does not support `asChild`; instead, add `data-essence-toolbar-item` and toolbar styling classes to the trigger so it participates in roving tabindex.
+Primitives that expose a trigger part—such as `Dialog`, `AlertDialog`, `Popover`, and `DropdownMenu`—can be composed within a toolbar. Essence does not support `asChild`; instead, add `data-radix-toolbar-item` and toolbar styling classes to the trigger so it participates in roving tabindex.
 
 Here is an example using `DropdownMenu`:
 
@@ -164,8 +164,8 @@ Here is an example using `DropdownMenu`:
       id="toolbar-dropdown-trigger"
       content_id="toolbar-dropdown-content"
       class="DemoToolbarButton"
-      data-essence-toolbar-item
-      data-essence-toolbar-button
+      data-radix-toolbar-item
+      data-radix-toolbar-button
     >
       Trigger
     </DropdownMenu.trigger>

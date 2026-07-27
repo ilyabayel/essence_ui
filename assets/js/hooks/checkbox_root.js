@@ -1,14 +1,14 @@
 export const CheckboxRoot = {
   mounted() {
     this.trigger = this.el; // Now the hook is on the button itself
-    this.indicator = this.el.querySelector("[data-essence-checkbox-indicator]");
+    this.indicator = this.el.querySelector("[data-radix-checkbox-indicator]");
 
     // Find input as sibling or via parent
     this.input = this.el.nextElementSibling?.hasAttribute(
-      "data-essence-checkbox-input",
+      "data-radix-checkbox-input",
     )
       ? this.el.nextElementSibling
-      : this.el.parentElement?.querySelector("[data-essence-checkbox-input]");
+      : this.el.parentElement?.querySelector("[data-radix-checkbox-input]");
 
     this._initialState = this.el.dataset.state;
     this._updateState();

@@ -11,10 +11,10 @@ defmodule EssenceUI.Components.SwitchTest do
     assert html =~ ~s[button id="s1"]
     assert html =~ ~s[phx-hook="SwitchRoot"]
     assert html =~ ~s[role="switch"]
-    assert html =~ "est-SwitchRoot"
-    assert html =~ "est-SwitchThumb"
+    assert html =~ "rt-SwitchRoot"
+    assert html =~ "rt-SwitchThumb"
     assert html =~ ~s[input type="checkbox"]
-    assert html =~ ~s[data-essence-switch-input]
+    assert html =~ ~s[data-radix-switch-input]
   end
 
   test "renders with custom props" do
@@ -28,11 +28,11 @@ defmodule EssenceUI.Components.SwitchTest do
         m: "2"
       })
 
-    assert html =~ "est-r-size-3"
-    assert html =~ "est-variant-soft"
+    assert html =~ "rt-r-size-3"
+    assert html =~ "rt-variant-soft"
     assert html =~ ~s(data-accent-color="blue")
-    assert html =~ "est-high-contrast"
-    assert html =~ "est-r-m-2"
+    assert html =~ "rt-high-contrast"
+    assert html =~ "rt-r-m-2"
   end
 
   test "renders checked state" do

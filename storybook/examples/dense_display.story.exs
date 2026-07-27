@@ -13,7 +13,7 @@ defmodule Storybook.Examples.DenseDisplayStory do
       style="display: block; min-height: 100vh; padding: 20px;"
       data-gray-color="slate"
       data-accent-color="indigo"
-      class="essence-ui"
+      class="radix-themes"
     >
       <.grid
         columns={%{initial: "1", md: "2"}}

@@ -24,29 +24,29 @@ defmodule EssenceUI.Components.PopoverTest do
       )
 
     assert html =~ ~s[phx-hook="PopoverRoot"]
-    assert html =~ "data-essence-popover-trigger"
-    assert html =~ "data-essence-popover-content"
-    assert html =~ "data-essence-popover-close"
+    assert html =~ "data-radix-popover-trigger"
+    assert html =~ "data-radix-popover-content"
+    assert html =~ "data-radix-popover-close"
     assert html =~ ~s[data-phx-portal="body"]
     assert html =~ ~s[id="pop-content-portal"]
     assert html =~ ~s[role="dialog"]
     assert html =~ ~s[data-side="top"]
     assert html =~ ~s[data-align="center"]
 
-    assert html =~ "est-PopoverRoot"
-    assert html =~ "est-PopoverTrigger"
-    assert html =~ "est-PopoverContent"
-    assert html =~ "est-PopperContent"
-    assert html =~ "essence-ui"
-    assert html =~ "est-r-size-1"
-    assert html =~ "est-PopoverClose"
+    assert html =~ "rt-PopoverRoot"
+    assert html =~ "rt-PopoverTrigger"
+    assert html =~ "rt-PopoverContent"
+    assert html =~ "rt-PopperContent"
+    assert html =~ "radix-themes"
+    assert html =~ "rt-r-size-1"
+    assert html =~ "rt-PopoverClose"
     assert html =~ "Body"
     refute html =~ ~s[phx-hook="Popover"]
 
     # Themes wraps <.button>; trigger/close must be non-button wrappers (Radix asChild).
-    assert html =~ ~r/<div[^>]*data-essence-popover-trigger/
-    assert html =~ ~r/<div[^>]*data-essence-popover-close/
-    refute html =~ ~r/<button[^>]*data-essence-popover-trigger/
+    assert html =~ ~r/<div[^>]*data-radix-popover-trigger/
+    assert html =~ ~r/<div[^>]*data-radix-popover-close/
+    refute html =~ ~r/<button[^>]*data-radix-popover-trigger/
   end
 
   test "nested button stays inside trigger wrapper" do
@@ -56,7 +56,7 @@ defmodule EssenceUI.Components.PopoverTest do
           ~H"""
           <Popover.popover_root id="nested">
             <Popover.popover_trigger>
-              <button type="button" class="est-Button">Comment</button>
+              <button type="button" class="rt-Button">Comment</button>
             </Popover.popover_trigger>
             <Popover.popover_content id="nested-content">Body</Popover.popover_content>
           </Popover.popover_root>
@@ -65,7 +65,7 @@ defmodule EssenceUI.Components.PopoverTest do
         %{}
       )
 
-    assert html =~ ~r/data-essence-popover-trigger[^>]*>[\s\S]*<button[^>]*class="est-Button"/
+    assert html =~ ~r/data-radix-popover-trigger[^>]*>[\s\S]*<button[^>]*class="rt-Button"/
     assert html =~ "Comment"
   end
 end

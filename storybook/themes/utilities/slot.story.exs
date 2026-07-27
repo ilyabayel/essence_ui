@@ -25,7 +25,7 @@ defmodule Storybook.Themes.Utilities.Slot do
         template: """
         <.slot
           as="button"
-          class="est-Button est-variant-solid est-r-size-2"
+          class="rt-Button rt-variant-solid rt-r-size-2"
         >
           Composed Button
         </.slot>

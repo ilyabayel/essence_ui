@@ -18,7 +18,7 @@ Add `:essence_ui` to your `mix.exs` dependencies, then run `mix deps.get`.
 Import Essence UI styles in your app CSS entrypoint:
 
 ```css
-@import "essence-ui/styles.css";
+@import "essence-ui.css";
 ```
 
 ## 3. Theme root

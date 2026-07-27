@@ -25,19 +25,19 @@ defmodule EssenceUI.Components.AlertDialogTest do
     assert html =~ ~s[id="ad"]
     assert html =~ ~s[data-phx-portal="body"]
     assert html =~ ~s[id="ad-portal"]
-    assert html =~ "data-essence-alert-dialog-overlay"
-    assert html =~ "data-essence-alert-dialog-content"
-    assert html =~ "data-essence-alert-dialog-title"
-    assert html =~ "data-essence-alert-dialog-description"
+    assert html =~ "data-radix-alert-dialog-overlay"
+    assert html =~ "data-radix-alert-dialog-content"
+    assert html =~ "data-radix-alert-dialog-title"
+    assert html =~ "data-radix-alert-dialog-description"
     assert html =~ ~s[role="alertdialog"]
     refute html =~ ~s[phx-hook="Dialog"]
     refute html =~ ~s[phx-hook="DialogRoot"]
 
-    assert html =~ "es-DialogRoot"
-    assert html =~ "est-BaseDialogOverlay"
-    assert html =~ "est-AlertDialogOverlay"
-    assert html =~ "est-BaseDialogContent"
-    assert html =~ "est-AlertDialogContent"
+    assert html =~ ""
+    assert html =~ "rt-BaseDialogOverlay"
+    assert html =~ "rt-AlertDialogOverlay"
+    assert html =~ "rt-BaseDialogContent"
+    assert html =~ "rt-AlertDialogContent"
     assert html =~ "Revoke access"
     assert html =~ "Are you sure?"
     assert html =~ "Confirm"

@@ -51,15 +51,15 @@ defmodule Storybook.Primitives.CollapsibleStory do
           </div>
 
           <div class="Repository">
-            <span class="Text">@essence-ui/primitives</span>
+            <span class="Text">@radix-themes/primitives</span>
           </div>
 
           <Collapsible.content id="collapsible-content">
             <div class="Repository">
-              <span class="Text">@essence-ui/colors</span>
+              <span class="Text">@radix-themes/colors</span>
             </div>
             <div class="Repository">
-              <span class="Text">@essence-ui/themes</span>
+              <span class="Text">@radix-themes/themes</span>
             </div>
           </Collapsible.content>
         </Collapsible.root>

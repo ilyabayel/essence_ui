@@ -8,17 +8,17 @@ test.describe("Avatar Primitive", () => {
   });
 
   test("shows fallback when there is no image", async ({ page }) => {
-    const root = page.locator("#avatar-3[data-essence-avatar-root]");
-    const fallback = root.locator("[data-essence-avatar-fallback]");
+    const root = page.locator("#avatar-3[data-radix-avatar-root]");
+    const fallback = root.locator("[data-radix-avatar-fallback]");
     await expect(fallback).toBeVisible();
     await expect(fallback).toHaveText("PD");
     await expect(root).toHaveAttribute("data-status", "error");
   });
 
   test("loads image and hides fallback", async ({ page }) => {
-    const root = page.locator("#avatar-1[data-essence-avatar-root]");
-    const image = root.locator("[data-essence-avatar-image]");
-    const fallback = root.locator("[data-essence-avatar-fallback]");
+    const root = page.locator("#avatar-1[data-radix-avatar-root]");
+    const image = root.locator("[data-radix-avatar-image]");
+    const fallback = root.locator("[data-radix-avatar-fallback]");
 
     await expect(image).toBeVisible({ timeout: 15_000 });
     await expect(root).toHaveAttribute("data-status", "loaded", {

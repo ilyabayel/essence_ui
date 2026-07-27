@@ -67,26 +67,25 @@ defmodule EssenceUI.Components.Theme do
   def theme(assigns) do
     appearance_class =
       case assigns.appearance do
-        "light" -> "light light-theme"
-        "dark" -> "dark dark-theme"
+        "light" -> "light"
+        "dark" -> "dark"
         _ -> nil
       end
 
-    assigns =
-      assigns
-      |> assign(:appearance_class, appearance_class)
-      |> assign(:panel_bg, panel_background_style(assigns.panel_background, assigns.has_background))
+    assigns = assign(assigns, :appearance_class, appearance_class)
 
     ~H"""
     <.dynamic_tag
       tag_name={@as}
-      class={["essence-ui", @appearance_class, @class]}
+      class={["radix-themes", @appearance_class, @class]}
       data-accent-color={@accent_color}
       data-gray-color={@gray_color}
       data-radius={@radius}
       data-scaling={@scaling}
-      data-is-root-theme={if(@is_root, do: "true")}
-      style={merge_style(@panel_bg, @style)}
+      data-is-root-theme={if(@is_root, do: "true", else: "false")}
+      data-has-background={if(@has_background, do: "true", else: "false")}
+      data-panel-background={@panel_background}
+      style={@style}
       {@rest}
     >
       {render_slot(@inner_block)}
@@ -98,16 +97,4 @@ defmodule EssenceUI.Components.Theme do
   def gray_colors, do: @gray_colors
   def radii, do: @radii
   def scalings, do: @scalings
-
-  defp panel_background_style("translucent", true),
-    do: "background-color: var(--color-background); --color-panel: var(--color-panel-translucent);"
-
-  defp panel_background_style(_, true),
-    do: "background-color: var(--color-background); --color-panel: var(--color-panel-solid);"
-
-  defp panel_background_style(_, false), do: "--color-panel: var(--color-panel-solid);"
-
-  defp merge_style(a, nil), do: a
-  defp merge_style(a, ""), do: a
-  defp merge_style(a, b), do: a <> " " <> b
 end

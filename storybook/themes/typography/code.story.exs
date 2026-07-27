@@ -29,7 +29,7 @@ defmodule Storybook.Themes.Typography.Code do
         id: :sizes_group,
         description: "Size",
         template: """
-        <div class="est-Flex est-r-fd-column est-r-gap-3 est-r-ai-start">
+        <div class="rt-Flex rt-r-fd-column rt-r-gap-3 rt-r-ai-start">
           <.code size="1">Repo.all()</.code>
           <.code size="2">Repo.all()</.code>
           <.code size="3">Repo.all()</.code>
@@ -46,7 +46,7 @@ defmodule Storybook.Themes.Typography.Code do
         id: :variant_group,
         description: "Variant",
         template: """
-        <div class="est-Flex est-r-fd-column est-r-ai-start est-r-gap-2">
+        <div class="rt-Flex rt-r-fd-column rt-r-ai-start rt-r-gap-2">
           <.code variant="solid">Repo.all()</.code>
           <.code variant="soft">Repo.all()</.code>
           <.code variant="outline">Repo.all()</.code>
@@ -58,7 +58,7 @@ defmodule Storybook.Themes.Typography.Code do
         id: :colors_group,
         description: "Color",
         template: """
-        <div class="est-Flex est-r-fd-column est-r-ai-start est-r-gap-2">
+        <div class="rt-Flex rt-r-fd-column rt-r-ai-start rt-r-gap-2">
           <.code color="indigo">Repo.all()</.code>
           <.code color="crimson">Repo.all()</.code>
           <.code color="cyan">Repo.all()</.code>
@@ -70,8 +70,8 @@ defmodule Storybook.Themes.Typography.Code do
         id: :high_contrast_group,
         description: "High-contrast",
         template: """
-        <div class="est-Flex est-r-gap-3">
-          <div class="est-Flex est-r-fd-column est-r-ai-start est-r-gap-2">
+        <div class="rt-Flex rt-r-gap-3">
+          <div class="rt-Flex rt-r-fd-column rt-r-ai-start rt-r-gap-2">
             <.code
               color="gray"
               variant="solid"
@@ -98,7 +98,7 @@ defmodule Storybook.Themes.Typography.Code do
             </.code>
           </div>
 
-          <div class="est-Flex est-r-fd-column est-r-ai-start est-r-gap-2">
+          <div class="rt-Flex rt-r-fd-column rt-r-ai-start rt-r-gap-2">
             <.code
               color="gray"
               variant="solid"
@@ -135,7 +135,7 @@ defmodule Storybook.Themes.Typography.Code do
         id: :weight_group,
         description: "Weight",
         template: """
-        <div class="est-Flex est-r-fd-column est-r-gap-2 est-r-ai-start">
+        <div class="rt-Flex rt-r-fd-column rt-r-gap-2 rt-r-ai-start">
           <.code weight="regular">Repo.all()</.code>
           <.code weight="bold">Repo.all()</.code>
         </div>
@@ -146,7 +146,7 @@ defmodule Storybook.Themes.Typography.Code do
         description: "Truncate",
         template: """
         <div
-          class="est-Flex est-r-max-w"
+          class="rt-Flex rt-r-max-w"
           style="--max-width: 200px;"
         >
           <.code truncate={true}>linear-gradient(red, orange, yellow, green, blue);</.code>

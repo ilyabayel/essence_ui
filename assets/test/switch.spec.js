@@ -8,8 +8,8 @@ test.describe("Switch Primitive", () => {
   });
 
   test("toggles checked state on click and Space", async ({ page }) => {
-    const trigger = page.locator("#airplane-mode[data-essence-switch-trigger]");
-    const thumb = page.locator("[data-essence-switch-thumb]");
+    const trigger = page.locator("#airplane-mode[data-radix-switch-trigger]");
+    const thumb = page.locator("[data-radix-switch-thumb]");
 
     await expect(trigger).toHaveAttribute("role", "switch");
     await expect(trigger).toHaveAttribute("aria-checked", "false");

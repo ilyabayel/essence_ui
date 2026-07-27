@@ -10,7 +10,7 @@ test.describe("Popover Primitive", () => {
 
   test("opens and closes on trigger click", async ({ page }) => {
     const root = page.locator("#popover-primitive");
-    const trigger = root.locator("[data-essence-popover-trigger]");
+    const trigger = root.locator("[data-radix-popover-trigger]");
     const content = page.locator("#popover-content");
 
     await expect(content).toBeHidden();
@@ -34,9 +34,9 @@ test.describe("Popover Primitive", () => {
 
   test("closes on escape and close button", async ({ page }) => {
     const root = page.locator("#popover-primitive");
-    const trigger = root.locator("[data-essence-popover-trigger]");
+    const trigger = root.locator("[data-radix-popover-trigger]");
     const content = page.locator("#popover-content");
-    const close = content.locator("[data-essence-popover-close]");
+    const close = content.locator("[data-radix-popover-close]");
 
     await trigger.click();
     await expect(content).toBeVisible();
@@ -52,7 +52,7 @@ test.describe("Popover Primitive", () => {
 
   test("closes on outside click", async ({ page }) => {
     const root = page.locator("#popover-primitive");
-    const trigger = root.locator("[data-essence-popover-trigger]");
+    const trigger = root.locator("[data-radix-popover-trigger]");
     const content = page.locator("#popover-content");
 
     await trigger.click();
@@ -65,7 +65,7 @@ test.describe("Popover Primitive", () => {
 
   test("has no accessibility violations when open", async ({ page }) => {
     const root = page.locator("#popover-primitive");
-    const trigger = root.locator("[data-essence-popover-trigger]");
+    const trigger = root.locator("[data-radix-popover-trigger]");
     await trigger.click();
     await expect(page.locator("#popover-content")).toBeVisible();
     await expectNoA11yViolations(page, {

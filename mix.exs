@@ -79,6 +79,7 @@ defmodule EssenceUI.MixProject do
       "assets.build": ["esbuild essence_ui"],
       "assets.deploy": [
         "esbuild essence_ui --minify",
+        "cmd --cd assets npm run build:css",
         "phx.digest"
       ]
     ]

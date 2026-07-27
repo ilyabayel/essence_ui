@@ -40,7 +40,7 @@ defmodule EssenceUI.Primitives.Collapsible do
     <button
       id={@id}
       type="button"
-      data-essence-collapsible-trigger
+      data-radix-collapsible-trigger
       aria-controls={@content_id}
       aria-expanded="false"
       data-state="closed"
@@ -62,7 +62,7 @@ defmodule EssenceUI.Primitives.Collapsible do
     ~H"""
     <div
       id={@id}
-      data-essence-collapsible-content
+      data-radix-collapsible-content
       data-state="closed"
       data-force-mount={if @force_mount, do: ""}
       hidden

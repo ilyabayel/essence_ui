@@ -19,15 +19,15 @@ export const TabsRoot = {
   },
 
   list() {
-    return this.el.querySelector("[data-essence-tabs-list]");
+    return this.el.querySelector("[data-radix-tabs-list]");
   },
 
   triggers() {
-    return Array.from(this.el.querySelectorAll("[data-essence-tabs-trigger]"));
+    return Array.from(this.el.querySelectorAll("[data-radix-tabs-trigger]"));
   },
 
   contents() {
-    return Array.from(this.el.querySelectorAll("[data-essence-tabs-content]"));
+    return Array.from(this.el.querySelectorAll("[data-radix-tabs-content]"));
   },
 
   enabledTriggers() {
@@ -51,8 +51,8 @@ export const TabsRoot = {
       if (!trigger.id && rootId) trigger.id = `${rootId}-trigger-${value}`;
       if (rootId) trigger.setAttribute("aria-controls", `${rootId}-content-${value}`);
       trigger.dataset.orientation = orientation;
-      if (!trigger.hasAttribute("data-essence-collection-item")) {
-        trigger.setAttribute("data-essence-collection-item", "");
+      if (!trigger.hasAttribute("data-radix-collection-item")) {
+        trigger.setAttribute("data-radix-collection-item", "");
       }
     });
 
@@ -66,7 +66,7 @@ export const TabsRoot = {
   },
 
   onClick(event) {
-    const trigger = event.target.closest("[data-essence-tabs-trigger]");
+    const trigger = event.target.closest("[data-radix-tabs-trigger]");
     if (!trigger || !this.el.contains(trigger)) return;
     if (trigger.disabled || trigger.hasAttribute("data-disabled")) return;
     this.activate(trigger.dataset.value, true);

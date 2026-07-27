@@ -32,19 +32,19 @@ defmodule EssenceUI.Primitives.FormTest do
 
     assert html =~ ~s[id="signup"]
     assert html =~ ~s[phx-hook="FormRoot"]
-    assert html =~ "data-essence-form-root"
-    assert html =~ "data-essence-form-field"
+    assert html =~ "data-radix-form-root"
+    assert html =~ "data-radix-form-field"
     assert html =~ ~s[data-name="email"]
     assert html =~ "data-server-invalid"
     assert html =~ "data-invalid"
-    assert html =~ "data-essence-form-label"
-    assert html =~ "data-essence-form-control"
-    assert html =~ "data-essence-form-message"
+    assert html =~ "data-radix-form-label"
+    assert html =~ "data-radix-form-control"
+    assert html =~ "data-radix-form-message"
     assert html =~ ~s[data-match="valueMissing"]
     assert html =~ ~s[data-match="typeMismatch"]
-    assert html =~ "data-essence-form-validity-state"
+    assert html =~ "data-radix-form-validity-state"
     assert html =~ ~s[type="submit"]
-    assert html =~ "data-essence-form-submit"
+    assert html =~ "data-radix-form-submit"
     assert html =~ "novalidate"
   end
 

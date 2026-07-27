@@ -8,7 +8,7 @@ defmodule EssenceUI.SharedProps.RadiusProps do
 
   def prop_defs do
     %{
-      radius: %{type: :enum, values: @radii, class: "est-r-rd", responsive: true, default: nil}
+      radius: %{type: :enum, values: @radii, class: "rt-r-rd", responsive: true, default: nil}
     }
   end
 

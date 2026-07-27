@@ -83,25 +83,25 @@ defmodule EssenceUI.Components.Grid do
   """
   def grid(assigns) do
     grid_prop_defs = %{
-      display: %{type: :enum, values: @display_values, class: "est-r-display", responsive: true},
-      areas: %{type: :string, class: "est-r-gta", custom_properties: ["--grid-template-areas"], responsive: true},
+      display: %{type: :enum, values: @display_values, class: "rt-r-display", responsive: true},
+      areas: %{type: :string, class: "rt-r-gta", custom_properties: ["--grid-template-areas"], responsive: true},
       columns: %{
         type: [:enum, :string],
         values: @columns_values,
-        class: "est-r-gtc",
+        class: "rt-r-gtc",
         custom_properties: ["--grid-template-columns"],
         responsive: true
       },
       rows: %{
         type: [:enum, :string],
         values: @rows_values,
-        class: "est-r-gtr",
+        class: "rt-r-gtr",
         custom_properties: ["--grid-template-rows"],
         responsive: true
       },
-      flow: %{type: :enum, values: @flow_values, class: "est-r-gaf", responsive: true},
-      align: %{type: :enum, values: @align_values, class: "est-r-ai", responsive: true},
-      justify: %{type: :enum, values: @justify_values, class: "est-r-jc", responsive: true}
+      flow: %{type: :enum, values: @flow_values, class: "rt-r-gaf", responsive: true},
+      align: %{type: :enum, values: @align_values, class: "rt-r-ai", responsive: true},
+      justify: %{type: :enum, values: @justify_values, class: "rt-r-jc", responsive: true}
     }
 
     prop_defs =
@@ -113,7 +113,7 @@ defmodule EssenceUI.Components.Grid do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    class = ["est-Grid", extracted[:class]] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["rt-Grid", extracted[:class]] |> Enum.filter(& &1) |> Enum.join(" ")
     assigns = assign(assigns, class: class, style: extracted[:style])
 
     ~H"""

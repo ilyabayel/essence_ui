@@ -23,15 +23,15 @@ defmodule EssenceUI.Primitives.SliderTest do
       )
 
     assert html =~ ~s(phx-hook="SliderRoot")
-    assert html =~ ~s(data-essence-slider-root)
+    assert html =~ ~s(data-radix-slider-root)
     assert html =~ ~s(data-value="[50]")
     assert html =~ ~s(data-min="0")
     assert html =~ ~s(data-max="100")
     assert html =~ ~s(data-step="1")
     assert html =~ ~s(data-name="volume")
-    assert html =~ "data-essence-slider-track"
-    assert html =~ "data-essence-slider-range"
-    assert html =~ "data-essence-slider-thumb"
+    assert html =~ "data-radix-slider-track"
+    assert html =~ "data-radix-slider-range"
+    assert html =~ "data-radix-slider-thumb"
     assert html =~ ~s(role="slider")
     assert html =~ ~s(data-index="0")
   end

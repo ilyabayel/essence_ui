@@ -33,7 +33,7 @@ export const CheckboxGroupRoot = {
   syncValue() {
     const currentValues = this.parseValue();
     const items = Array.from(
-      this.el.querySelectorAll("[data-essence-checkbox-group-item]"),
+      this.el.querySelectorAll("[data-radix-checkbox-group-item]"),
     );
     const isRootDisabled = this.el.hasAttribute("data-disabled");
     const name = this.el.getAttribute("data-name");
@@ -70,7 +70,7 @@ export const CheckboxGroupRoot = {
       }
 
       const indicator = item.querySelector(
-        "[data-essence-checkbox-group-indicator]",
+        "[data-radix-checkbox-group-indicator]",
       );
       if (indicator) {
         const forceMount = indicator.hasAttribute("data-force-mount");
@@ -84,11 +84,11 @@ export const CheckboxGroupRoot = {
 
       const input =
         item.nextElementSibling?.matches?.(
-          "input[data-essence-checkbox-group-input]",
+          "input[data-radix-checkbox-group-input]",
         )
           ? item.nextElementSibling
           : this.el.querySelector(
-              `input[data-essence-checkbox-group-input][value="${CSS.escape(itemValue)}"]`,
+              `input[data-radix-checkbox-group-input][value="${CSS.escape(itemValue)}"]`,
             );
 
       if (input) {
@@ -137,7 +137,7 @@ export const CheckboxGroupRoot = {
     if (this.el.hasAttribute("data-disabled")) return;
 
     const items = Array.from(
-      this.el.querySelectorAll("[data-essence-checkbox-group-item]"),
+      this.el.querySelectorAll("[data-radix-checkbox-group-item]"),
     );
     const enabledItems = items.filter((item) => {
       const isDisabled =

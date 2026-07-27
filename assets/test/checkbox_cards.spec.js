@@ -17,23 +17,23 @@ async function gotoThemesCheckboxCards(page, variation = "default") {
 
 async function waitForCheckboxGroupHook(root) {
   await expect(
-    root.locator("[data-essence-checkbox-group-item][data-has-click]").first(),
+    root.locator("[data-radix-checkbox-group-item][data-has-click]").first(),
   ).toBeVisible();
 }
 
 test.describe("Checkbox Cards Themes", () => {
   test("toggles card selection on click", async ({ page }) => {
     await gotoThemesCheckboxCards(page);
-    const root = page.locator("[data-essence-checkbox-group-root]").first();
+    const root = page.locator("[data-radix-checkbox-group-root]").first();
     await waitForCheckboxGroupHook(root);
 
     const item1 = root.locator(
-      '[data-essence-checkbox-group-item][data-value="1"]',
+      '[data-radix-checkbox-group-item][data-value="1"]',
     );
     const item2 = root.locator(
-      '[data-essence-checkbox-group-item][data-value="2"]',
+      '[data-radix-checkbox-group-item][data-value="2"]',
     );
-    const card2 = root.locator(".est-CheckboxCardsItem").nth(1);
+    const card2 = root.locator(".rt-CheckboxCardsItem").nth(1);
 
     await expect(item1).toHaveAttribute("aria-checked", "true");
 

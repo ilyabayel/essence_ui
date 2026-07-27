@@ -68,14 +68,14 @@ defmodule EssenceUI.Components.Card do
       %{
         size: %{
           type: :enum,
-          class: "est-r-size",
+          class: "rt-r-size",
           values: @sizes,
           default: "1",
           responsive: true
         },
         variant: %{
           type: :enum,
-          class: "est-variant",
+          class: "rt-variant",
           values: @variants,
           default: "surface"
         }
@@ -85,7 +85,7 @@ defmodule EssenceUI.Components.Card do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    class = ["est-reset", "est-BaseCard", "est-Card", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["rt-reset", "rt-BaseCard", "rt-Card", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
 
     assigns = assign(assigns, class: class, style: extracted.style)
 

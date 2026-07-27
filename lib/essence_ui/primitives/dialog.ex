@@ -38,7 +38,7 @@ defmodule EssenceUI.Primitives.Dialog do
     <button
       id={@id}
       type="button"
-      data-essence-dialog-trigger
+      data-radix-dialog-trigger
       data-state="closed"
       aria-haspopup="dialog"
       aria-expanded="false"
@@ -69,7 +69,7 @@ defmodule EssenceUI.Primitives.Dialog do
     ~H"""
     <div
       id={@id}
-      data-essence-dialog-overlay
+      data-radix-dialog-overlay
       data-state="closed"
       hidden
       {@rest}
@@ -89,7 +89,7 @@ defmodule EssenceUI.Primitives.Dialog do
       id={@id}
       role="dialog"
       aria-modal="true"
-      data-essence-dialog-content
+      data-radix-dialog-content
       data-state="closed"
       tabindex="-1"
       hidden
@@ -106,7 +106,7 @@ defmodule EssenceUI.Primitives.Dialog do
 
   def title(assigns) do
     ~H"""
-    <h2 id={@id} data-essence-dialog-title {@rest}>
+    <h2 id={@id} data-radix-dialog-title {@rest}>
       {render_slot(@inner_block)}
     </h2>
     """
@@ -118,7 +118,7 @@ defmodule EssenceUI.Primitives.Dialog do
 
   def description(assigns) do
     ~H"""
-    <p id={@id} data-essence-dialog-description {@rest}>
+    <p id={@id} data-radix-dialog-description {@rest}>
       {render_slot(@inner_block)}
     </p>
     """
@@ -130,7 +130,7 @@ defmodule EssenceUI.Primitives.Dialog do
 
   def close(assigns) do
     ~H"""
-    <button id={@id} type="button" data-essence-dialog-close {@rest}>
+    <button id={@id} type="button" data-radix-dialog-close {@rest}>
       {render_slot(@inner_block)}
     </button>
     """

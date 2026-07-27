@@ -16,7 +16,7 @@ defmodule EssenceUIWeb.DecorationBox do
 
     ~H"""
     <div style={@style}>
-      <div class="est-Box est-r-py-9"></div>
+      <div class="rt-Box rt-r-py-9"></div>
     </div>
     """
   end

@@ -12,7 +12,7 @@ defmodule EssenceUI.Primitives.Tooltip do
   def provider(assigns) do
     ~H"""
     <div
-      data-essence-tooltip-provider
+      data-radix-tooltip-provider
       data-delay-duration={@delay_duration}
       data-skip-delay-duration={@skip_delay_duration}
       data-disable-hoverable-content={if @disable_hoverable_content, do: ""}
@@ -73,7 +73,7 @@ defmodule EssenceUI.Primitives.Tooltip do
     <.dynamic_tag
       tag_name={@as}
       id={@id}
-      data-essence-tooltip-trigger
+      data-radix-tooltip-trigger
       aria-describedby={@content_id}
       data-state="closed"
       {@rest}
@@ -120,7 +120,7 @@ defmodule EssenceUI.Primitives.Tooltip do
     <div
       id={@id}
       role="tooltip"
-      data-essence-tooltip-content
+      data-radix-tooltip-content
       data-state="closed"
       data-side={@side}
       data-align={@align}
@@ -147,7 +147,7 @@ defmodule EssenceUI.Primitives.Tooltip do
       height={@height}
       viewBox="0 0 30 10"
       preserveAspectRatio="none"
-      data-essence-tooltip-arrow
+      data-radix-tooltip-arrow
       aria-hidden="true"
       {@rest}
     >

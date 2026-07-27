@@ -34,7 +34,7 @@ defmodule EssenceUI.Primitives.Slider do
       id={@id}
       phx-hook="SliderRoot"
       role={@role}
-      data-essence-slider-root
+      data-radix-slider-root
       data-value={@value_attr}
       data-min={@min}
       data-max={@max}
@@ -59,7 +59,7 @@ defmodule EssenceUI.Primitives.Slider do
 
   def track(assigns) do
     ~H"""
-    <span data-essence-slider-track {@rest}>
+    <span data-radix-slider-track {@rest}>
       {render_slot(@inner_block)}
     </span>
     """
@@ -70,7 +70,7 @@ defmodule EssenceUI.Primitives.Slider do
 
   def range(assigns) do
     ~H"""
-    <span data-essence-slider-range {@rest}>
+    <span data-radix-slider-range {@rest}>
       {render_slot(@inner_block)}
     </span>
     """
@@ -83,7 +83,7 @@ defmodule EssenceUI.Primitives.Slider do
   def thumb(assigns) do
     ~H"""
     <span
-      data-essence-slider-thumb
+      data-radix-slider-thumb
       data-index={@index}
       role="slider"
       tabindex="0"

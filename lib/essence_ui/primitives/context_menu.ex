@@ -20,7 +20,7 @@ defmodule EssenceUI.Primitives.ContextMenu do
     <div
       id={@id}
       phx-hook="ContextMenuRoot"
-      data-essence-context-menu-root
+      data-radix-context-menu-root
       data-state={@state}
       data-on-open-change={@on_open_change}
       data-modal={if @modal, do: ""}
@@ -42,7 +42,7 @@ defmodule EssenceUI.Primitives.ContextMenu do
     ~H"""
     <div
       id={@id}
-      data-essence-context-menu-trigger
+      data-radix-context-menu-trigger
       aria-haspopup="menu"
       aria-controls={@content_id}
       data-state="closed"
@@ -77,7 +77,8 @@ defmodule EssenceUI.Primitives.ContextMenu do
     ~H"""
     <div
       id={@id}
-      data-essence-context-menu-content
+      data-radix-context-menu-content
+      data-radix-menu-content
       data-state="closed"
       data-loop={to_string(@loop)}
       role="menu"
@@ -96,7 +97,7 @@ defmodule EssenceUI.Primitives.ContextMenu do
 
   def label(assigns) do
     ~H"""
-    <div id={@id} data-essence-context-menu-label {@rest}>
+    <div id={@id} data-radix-context-menu-label {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -114,7 +115,7 @@ defmodule EssenceUI.Primitives.ContextMenu do
       id={@id}
       role="menuitem"
       tabindex={if @disabled, do: "-1", else: "0"}
-      data-essence-context-menu-item
+      data-radix-context-menu-item
       data-disabled={if @disabled, do: ""}
       data-text-value={@text_value}
       aria-disabled={if @disabled, do: "true"}
@@ -131,7 +132,7 @@ defmodule EssenceUI.Primitives.ContextMenu do
 
   def group(assigns) do
     ~H"""
-    <div id={@id} role="group" data-essence-context-menu-group {@rest}>
+    <div id={@id} role="group" data-radix-context-menu-group {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -153,7 +154,7 @@ defmodule EssenceUI.Primitives.ContextMenu do
       id={@id}
       role="menuitemcheckbox"
       tabindex={if @disabled, do: "-1", else: "0"}
-      data-essence-context-menu-checkbox-item
+      data-radix-context-menu-checkbox-item
       data-state={@state}
       data-disabled={if @disabled, do: ""}
       data-text-value={@text_value}
@@ -176,7 +177,7 @@ defmodule EssenceUI.Primitives.ContextMenu do
     <div
       id={@id}
       role="group"
-      data-essence-context-menu-radio-group
+      data-radix-context-menu-radio-group
       data-value={@value}
       {@rest}
     >
@@ -202,7 +203,7 @@ defmodule EssenceUI.Primitives.ContextMenu do
       id={@id}
       role="menuitemradio"
       tabindex={if @disabled, do: "-1", else: "0"}
-      data-essence-context-menu-radio-item
+      data-radix-context-menu-radio-item
       data-state={@state}
       data-value={@value}
       data-disabled={if @disabled, do: ""}
@@ -225,7 +226,7 @@ defmodule EssenceUI.Primitives.ContextMenu do
     ~H"""
     <span
       id={@id}
-      data-essence-context-menu-item-indicator
+      data-radix-context-menu-item-indicator
       data-force-mount={if @force_mount, do: ""}
       style={unless @force_mount, do: "display: none;"}
       {@rest}
@@ -244,7 +245,7 @@ defmodule EssenceUI.Primitives.ContextMenu do
       id={@id}
       role="separator"
       aria-orientation="horizontal"
-      data-essence-context-menu-separator
+      data-radix-context-menu-separator
       {@rest}
     >
     </div>
@@ -257,7 +258,7 @@ defmodule EssenceUI.Primitives.ContextMenu do
 
   def arrow(assigns) do
     ~H"""
-    <span id={@id} data-essence-context-menu-arrow aria-hidden="true" {@rest}>
+    <span id={@id} data-radix-context-menu-arrow aria-hidden="true" {@rest}>
       {render_slot(@inner_block)}
     </span>
     """
@@ -273,7 +274,7 @@ defmodule EssenceUI.Primitives.ContextMenu do
     assigns = assign(assigns, :state, state)
 
     ~H"""
-    <div id={@id} data-essence-context-menu-sub data-state={@state} {@rest}>
+    <div id={@id} data-radix-context-menu-sub data-state={@state} {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -293,7 +294,7 @@ defmodule EssenceUI.Primitives.ContextMenu do
       tabindex={if @disabled, do: "-1", else: "0"}
       aria-haspopup="menu"
       aria-expanded="false"
-      data-essence-context-menu-sub-trigger
+      data-radix-context-menu-sub-trigger
       data-state="closed"
       data-disabled={if @disabled, do: ""}
       data-text-value={@text_value}
@@ -316,7 +317,7 @@ defmodule EssenceUI.Primitives.ContextMenu do
     ~H"""
     <div
       id={@id}
-      data-essence-context-menu-sub-content
+      data-radix-context-menu-sub-content
       data-state="closed"
       data-side={@side}
       data-align={@align}

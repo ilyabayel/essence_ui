@@ -55,12 +55,12 @@ export const ContextMenuRoot = {
 
   resolveParts() {
     this.trigger = this.el.querySelector(
-      "[data-essence-context-menu-trigger]"
+      "[data-radix-context-menu-trigger]"
     );
     const contentId = this.trigger?.getAttribute("aria-controls");
     this.content = findMenuPart(
       this.el,
-      "[data-essence-context-menu-content]",
+      "[data-radix-context-menu-content]",
       contentId
     );
   },
@@ -93,7 +93,7 @@ export const ContextMenuRoot = {
     if (!item || !this.content?.contains(item)) return;
     if (item.hasAttribute("data-disabled")) return;
 
-    if (item.hasAttribute("data-essence-context-menu-sub-trigger")) {
+    if (item.hasAttribute("data-radix-context-menu-sub-trigger")) {
       this.openSub(item);
       return;
     }
@@ -124,12 +124,12 @@ export const ContextMenuRoot = {
 
     if (e.key === "ArrowRight") {
       const active = document.activeElement;
-      if (active?.hasAttribute("data-essence-context-menu-sub-trigger")) {
+      if (active?.hasAttribute("data-radix-context-menu-sub-trigger")) {
         e.preventDefault();
         this.openSub(active);
         const sub = active
-          .closest("[data-essence-context-menu-sub]")
-          ?.querySelector("[data-essence-context-menu-sub-content]");
+          .closest("[data-radix-context-menu-sub]")
+          ?.querySelector("[data-radix-context-menu-sub-content]");
         const subItems = getMenuItems(sub);
         if (subItems[0]) focusItem(subItems[0], subItems);
       }
@@ -139,13 +139,13 @@ export const ContextMenuRoot = {
     if (e.key === "ArrowLeft") {
       const active = document.activeElement;
       const subContent = active?.closest(
-        "[data-essence-context-menu-sub-content]"
+        "[data-radix-context-menu-sub-content]"
       );
       if (subContent) {
         e.preventDefault();
-        const sub = subContent.closest("[data-essence-context-menu-sub]");
+        const sub = subContent.closest("[data-radix-context-menu-sub]");
         const trigger = sub?.querySelector(
-          "[data-essence-context-menu-sub-trigger]"
+          "[data-radix-context-menu-sub-trigger]"
         );
         this.closeSub(sub);
         if (trigger) focusItem(trigger, items);
@@ -155,12 +155,12 @@ export const ContextMenuRoot = {
 
     if (e.key === "Enter" || e.key === " ") {
       const active = document.activeElement;
-      if (active?.hasAttribute("data-essence-context-menu-sub-trigger")) {
+      if (active?.hasAttribute("data-radix-context-menu-sub-trigger")) {
         e.preventDefault();
         this.openSub(active);
         const sub = active
-          .closest("[data-essence-context-menu-sub]")
-          ?.querySelector("[data-essence-context-menu-sub-content]");
+          .closest("[data-radix-context-menu-sub]")
+          ?.querySelector("[data-radix-context-menu-sub-content]");
         const subItems = getMenuItems(sub);
         if (subItems[0]) focusItem(subItems[0], subItems);
         return;
@@ -285,16 +285,16 @@ export const ContextMenuRoot = {
     if (!this.content) return;
 
     this.content
-      .querySelectorAll("[data-essence-context-menu-sub]")
+      .querySelectorAll("[data-radix-context-menu-sub]")
       .forEach((sub) => {
         if (sub.hasAttribute("data-sub-bound")) return;
         sub.setAttribute("data-sub-bound", "true");
 
         const trigger = sub.querySelector(
-          "[data-essence-context-menu-sub-trigger]"
+          "[data-radix-context-menu-sub-trigger]"
         );
         const content = sub.querySelector(
-          "[data-essence-context-menu-sub-content]"
+          "[data-radix-context-menu-sub-content]"
         );
         if (!trigger || !content) return;
 
@@ -322,9 +322,9 @@ export const ContextMenuRoot = {
   },
 
   openSub(trigger) {
-    const sub = trigger.closest("[data-essence-context-menu-sub]");
+    const sub = trigger.closest("[data-radix-context-menu-sub]");
     const content = sub?.querySelector(
-      "[data-essence-context-menu-sub-content]"
+      "[data-radix-context-menu-sub-content]"
     );
     if (!sub || !content) return;
 
@@ -351,14 +351,14 @@ export const ContextMenuRoot = {
   closeSub(sub) {
     if (!sub) return;
     const trigger = sub.querySelector(
-      "[data-essence-context-menu-sub-trigger]"
+      "[data-radix-context-menu-sub-trigger]"
     );
     const content = sub.querySelector(
-      "[data-essence-context-menu-sub-content]"
+      "[data-radix-context-menu-sub-content]"
     );
 
     sub
-      .querySelectorAll("[data-essence-context-menu-sub]")
+      .querySelectorAll("[data-radix-context-menu-sub]")
       .forEach((nested) => {
         if (nested !== sub) this.closeSub(nested);
       });
@@ -374,7 +374,7 @@ export const ContextMenuRoot = {
 
   closeAllSubs() {
     this.content
-      ?.querySelectorAll("[data-essence-context-menu-sub]")
+      ?.querySelectorAll("[data-radix-context-menu-sub]")
       .forEach((sub) => this.closeSub(sub));
   },
 

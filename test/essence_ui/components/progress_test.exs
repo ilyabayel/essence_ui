@@ -8,8 +8,8 @@ defmodule EssenceUI.Components.ProgressTest do
   test "renders progress wrapping primitive a11y attrs" do
     html = render_component(&Progress.progress/1, %{value: 50})
 
-    assert html =~ "est-ProgressRoot"
-    assert html =~ "est-ProgressIndicator"
+    assert html =~ "rt-ProgressRoot"
+    assert html =~ "rt-ProgressIndicator"
     assert html =~ ~s[role="progressbar"]
     assert html =~ ~s[aria-valuenow="50"]
     assert html =~ ~s[aria-valuemax="100"]
@@ -27,8 +27,8 @@ defmodule EssenceUI.Components.ProgressTest do
         radius: "full"
       })
 
-    assert html =~ "est-r-size-3"
-    assert html =~ "est-variant-soft"
+    assert html =~ "rt-r-size-3"
+    assert html =~ "rt-variant-soft"
     assert html =~ ~s(data-accent-color="green")
     assert html =~ ~s(data-radius="full")
     assert html =~ ~s[data-state="complete"]

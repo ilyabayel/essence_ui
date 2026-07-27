@@ -39,28 +39,28 @@ export const MenubarRoot = {
   destroyed() {
     this.closeActive();
     this.el.removeEventListener("keydown", this.onRootKeyDown);
-    this.el.querySelectorAll("[data-essence-menubar-trigger]").forEach((t) => {
+    this.el.querySelectorAll("[data-radix-menubar-trigger]").forEach((t) => {
       t.removeEventListener("click", this.onTriggerClick);
       t.removeEventListener("pointerenter", this.onTriggerMouseEnter);
     });
   },
 
   getMenus() {
-    return Array.from(this.el.querySelectorAll("[data-essence-menubar-menu]"));
+    return Array.from(this.el.querySelectorAll("[data-radix-menubar-menu]"));
   },
 
   getTriggers() {
     return this.getMenus()
-      .map((menu) => menu.querySelector("[data-essence-menubar-trigger]"))
+      .map((menu) => menu.querySelector("[data-radix-menubar-trigger]"))
       .filter(Boolean);
   },
 
   resolveContent(menu) {
-    const trigger = menu.querySelector("[data-essence-menubar-trigger]");
+    const trigger = menu.querySelector("[data-radix-menubar-trigger]");
     const contentId = trigger?.getAttribute("aria-controls");
     return (
-      findMenuPart(menu, "[data-essence-menubar-content]", contentId) ||
-      findMenuPart(this.el, `[data-essence-menubar-content]#${contentId}`, contentId)
+      findMenuPart(menu, "[data-radix-menubar-content]", contentId) ||
+      findMenuPart(this.el, `[data-radix-menubar-content]#${contentId}`, contentId)
     );
   },
 
@@ -78,7 +78,7 @@ export const MenubarRoot = {
     e.stopPropagation();
     const trigger = e.currentTarget;
     if (trigger.hasAttribute("data-disabled")) return;
-    const menu = trigger.closest("[data-essence-menubar-menu]");
+    const menu = trigger.closest("[data-radix-menubar-menu]");
     if (this.activeMenu === menu) {
       this.closeActive();
     } else {
@@ -90,7 +90,7 @@ export const MenubarRoot = {
     if (!this.activeMenu) return;
     const trigger = e.currentTarget;
     if (trigger.hasAttribute("data-disabled")) return;
-    const menu = trigger.closest("[data-essence-menubar-menu]");
+    const menu = trigger.closest("[data-radix-menubar-menu]");
     if (menu !== this.activeMenu) {
       this.openMenu(menu);
     }
@@ -109,9 +109,9 @@ export const MenubarRoot = {
       : null;
     if (!item || !content?.contains(item)) return;
     if (item.hasAttribute("data-disabled")) return;
-    if (item.hasAttribute("data-essence-menubar-trigger")) return;
+    if (item.hasAttribute("data-radix-menubar-trigger")) return;
 
-    if (item.hasAttribute("data-essence-menubar-sub-trigger")) {
+    if (item.hasAttribute("data-radix-menubar-subtrigger")) {
       this.openSub(item);
       return;
     }
@@ -153,7 +153,7 @@ export const MenubarRoot = {
         e.key === "ArrowDown"
       ) {
         e.preventDefault();
-        this.openMenu(focused.closest("[data-essence-menubar-menu]"));
+        this.openMenu(focused.closest("[data-radix-menubar-menu]"));
       }
       return;
     }
@@ -163,8 +163,8 @@ export const MenubarRoot = {
       // Submenu owns ArrowRight on its trigger and ArrowLeft inside its content.
       if (
         (e.key === nextKey &&
-          active?.hasAttribute("data-essence-menubar-sub-trigger")) ||
-        active?.closest("[data-essence-menubar-sub-content]")
+          active?.hasAttribute("data-radix-menubar-subtrigger")) ||
+        active?.closest("[data-radix-menubar-sub-content]")
       ) {
         return;
       }
@@ -184,7 +184,7 @@ export const MenubarRoot = {
     if (e.key === "Escape") {
       e.preventDefault();
       const trigger = this.activeMenu.querySelector(
-        "[data-essence-menubar-trigger]"
+        "[data-radix-menubar-trigger]"
       );
       this.closeActive();
       trigger?.focus();
@@ -195,13 +195,13 @@ export const MenubarRoot = {
 
     if (e.key === "ArrowRight") {
       const active = document.activeElement;
-      if (active?.hasAttribute("data-essence-menubar-sub-trigger")) {
+      if (active?.hasAttribute("data-radix-menubar-subtrigger")) {
         e.preventDefault();
         e.stopPropagation();
         this.openSub(active);
         const sub = active
-          .closest("[data-essence-menubar-sub]")
-          ?.querySelector("[data-essence-menubar-sub-content]");
+          .closest("[data-radix-menubar-sub]")
+          ?.querySelector("[data-radix-menubar-sub-content]");
         const subItems = getMenuItems(sub);
         if (subItems[0]) focusItem(subItems[0], subItems);
         return;
@@ -217,14 +217,14 @@ export const MenubarRoot = {
     if (e.key === "ArrowLeft") {
       const active = document.activeElement;
       const subContent = active?.closest(
-        "[data-essence-menubar-sub-content]"
+        "[data-radix-menubar-sub-content]"
       );
       if (subContent) {
         e.preventDefault();
         e.stopPropagation();
-        const sub = subContent.closest("[data-essence-menubar-sub]");
+        const sub = subContent.closest("[data-radix-menubar-sub]");
         const trigger = sub?.querySelector(
-          "[data-essence-menubar-sub-trigger]"
+          "[data-radix-menubar-subtrigger]"
         );
         this.closeSub(sub);
         if (trigger) focusItem(trigger, items);
@@ -234,12 +234,12 @@ export const MenubarRoot = {
 
     if (e.key === "Enter" || e.key === " ") {
       const active = document.activeElement;
-      if (active?.hasAttribute("data-essence-menubar-sub-trigger")) {
+      if (active?.hasAttribute("data-radix-menubar-subtrigger")) {
         e.preventDefault();
         this.openSub(active);
         const sub = active
-          .closest("[data-essence-menubar-sub]")
-          ?.querySelector("[data-essence-menubar-sub-content]");
+          .closest("[data-radix-menubar-sub]")
+          ?.querySelector("[data-radix-menubar-sub-content]");
         const subItems = getMenuItems(sub);
         if (subItems[0]) focusItem(subItems[0], subItems);
         return;
@@ -269,7 +269,7 @@ export const MenubarRoot = {
     if (!menu) return;
     this.closeActive(false);
 
-    const trigger = menu.querySelector("[data-essence-menubar-trigger]");
+    const trigger = menu.querySelector("[data-radix-menubar-trigger]");
     const content = this.resolveContent(menu);
     if (!trigger || !content) return;
 
@@ -317,14 +317,14 @@ export const MenubarRoot = {
     if (!this.activeMenu) return;
 
     const menu = this.activeMenu;
-    const trigger = menu.querySelector("[data-essence-menubar-trigger]");
+    const trigger = menu.querySelector("[data-radix-menubar-trigger]");
     const content = this.resolveContent(menu);
 
     this.activeMenu = null;
     this.typeahead.reset();
 
     content
-      ?.querySelectorAll("[data-essence-menubar-sub]")
+      ?.querySelectorAll("[data-radix-menubar-sub]")
       .forEach((sub) => this.closeSub(sub));
 
     if (trigger) {
@@ -345,13 +345,13 @@ export const MenubarRoot = {
   },
 
   bindSubmenus(content) {
-    content.querySelectorAll("[data-essence-menubar-sub]").forEach((sub) => {
+    content.querySelectorAll("[data-radix-menubar-sub]").forEach((sub) => {
       if (sub.hasAttribute("data-sub-bound")) return;
       sub.setAttribute("data-sub-bound", "true");
 
-      const trigger = sub.querySelector("[data-essence-menubar-sub-trigger]");
+      const trigger = sub.querySelector("[data-radix-menubar-subtrigger]");
       const subContent = sub.querySelector(
-        "[data-essence-menubar-sub-content]"
+        "[data-radix-menubar-sub-content]"
       );
       if (!trigger || !subContent) return;
 
@@ -384,8 +384,8 @@ export const MenubarRoot = {
   },
 
   openSub(trigger) {
-    const sub = trigger.closest("[data-essence-menubar-sub]");
-    const content = sub?.querySelector("[data-essence-menubar-sub-content]");
+    const sub = trigger.closest("[data-radix-menubar-sub]");
+    const content = sub?.querySelector("[data-radix-menubar-sub-content]");
     if (!sub || !content) return;
 
     trigger.setAttribute("data-state", "open");
@@ -406,8 +406,8 @@ export const MenubarRoot = {
 
   closeSub(sub) {
     if (!sub) return;
-    const trigger = sub.querySelector("[data-essence-menubar-sub-trigger]");
-    const content = sub.querySelector("[data-essence-menubar-sub-content]");
+    const trigger = sub.querySelector("[data-radix-menubar-subtrigger]");
+    const content = sub.querySelector("[data-radix-menubar-sub-content]");
     if (trigger) {
       trigger.setAttribute("data-state", "closed");
       trigger.setAttribute("aria-expanded", "false");

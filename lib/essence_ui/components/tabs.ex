@@ -76,7 +76,7 @@ defmodule EssenceUI.Components.Tabs do
         tabs_id: tabs_id,
         color: assigns[:color] || false,
         high_contrast: assigns[:high_contrast] || false,
-        class: ["est-TabsRoot", extracted.class, assigns[:class]] |> Enum.filter(& &1) |> Enum.join(" "),
+        class: ["rt-TabsRoot", extracted.class, assigns[:class]] |> Enum.filter(& &1) |> Enum.join(" "),
         style: extracted.style
       )
 
@@ -95,7 +95,7 @@ defmodule EssenceUI.Components.Tabs do
         high_contrast: @high_contrast
       })}
 
-      <.content :for={panel <- @content} value={panel.value} class="est-TabsContent">
+      <.content :for={panel <- @content} value={panel.value} class="rt-TabsContent">
         {render_slot(panel)}
       </.content>
     </.root>
@@ -132,10 +132,10 @@ defmodule EssenceUI.Components.Tabs do
 
     list_class =
       [
-        "est-BaseTabList",
-        "est-TabsList",
-        "est-r-size-#{assigns.size}",
-        high_contrast && "est-high-contrast",
+        "rt-BaseTabList",
+        "rt-TabsList",
+        "rt-r-size-#{assigns.size}",
+        high_contrast && "rt-high-contrast",
         assigns[:class]
       ]
       |> Enum.filter(& &1)
@@ -149,12 +149,12 @@ defmodule EssenceUI.Components.Tabs do
         :for={trig <- @trigger}
         value={trig.value}
         disabled={trig[:disabled] || false}
-        class="est-reset est-BaseTabListTrigger est-TabsTrigger"
+        class="rt-reset rt-BaseTabListTrigger rt-TabsTrigger"
       >
-        <span class="est-BaseTabListTriggerInner est-TabsTriggerInner">
+        <span class="rt-BaseTabListTriggerInner rt-TabsTriggerInner">
           {render_slot(trig)}
         </span>
-        <span class="est-BaseTabListTriggerInnerHidden est-TabsTriggerInnerHidden" aria-hidden="true">
+        <span class="rt-BaseTabListTriggerInnerHidden rt-TabsTriggerInnerHidden" aria-hidden="true">
           {render_slot(trig)}
         </span>
       </.trigger>

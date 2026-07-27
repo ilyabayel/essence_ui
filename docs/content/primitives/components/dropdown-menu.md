@@ -251,11 +251,11 @@ The component that pops out when the dropdown menu is open.
 
 | CSS variable | Description |
 | --- | --- |
-| `--essence-dropdown-menu-content-transform-origin` | The `transform-origin` computed from content and arrow positions/offsets |
-| `--essence-dropdown-menu-content-available-width` | Remaining width between the trigger and the boundary edge |
-| `--essence-dropdown-menu-content-available-height` | Remaining height between the trigger and the boundary edge |
-| `--essence-dropdown-menu-trigger-width` | The width of the trigger |
-| `--essence-dropdown-menu-trigger-height` | The height of the trigger |
+| `--radix-dropdown-menu-content-transform-origin` | The `transform-origin` computed from content and arrow positions/offsets |
+| `--radix-dropdown-menu-content-available-width` | Remaining width between the trigger and the boundary edge |
+| `--radix-dropdown-menu-content-available-height` | Remaining height between the trigger and the boundary edge |
+| `--radix-dropdown-menu-trigger-width` | The width of the trigger |
+| `--radix-dropdown-menu-trigger-height` | The height of the trigger |
 
 ### Item
 
@@ -513,7 +513,7 @@ You can add extra decorative elements in the `item` parts, such as images.
 
 You may want to constrain the width of the content (or sub-content) so that it matches the trigger width, or constrain its height to not exceed the viewport.
 
-We expose several CSS custom properties such as `--essence-dropdown-menu-trigger-width` and `--essence-dropdown-menu-content-available-height` to support this. Use them to constrain the content dimensions.
+We expose several CSS custom properties such as `--radix-dropdown-menu-trigger-width` and `--radix-dropdown-menu-content-available-height` to support this. Use them to constrain the content dimensions.
 
 ```heex
 <DropdownMenu.root id="dropdown-constrain">
@@ -526,14 +526,14 @@ We expose several CSS custom properties such as `--essence-dropdown-menu-trigger
 
 ```css
 .DropdownMenuContent {
-  width: var(--essence-dropdown-menu-trigger-width);
-  max-height: var(--essence-dropdown-menu-content-available-height);
+  width: var(--radix-dropdown-menu-trigger-width);
+  max-height: var(--radix-dropdown-menu-content-available-height);
 }
 ```
 
 ### Origin-aware animations
 
-We expose a CSS custom property `--essence-dropdown-menu-content-transform-origin`. Use it to animate the content from its computed origin based on `side`, `side_offset`, `align`, and any collisions.
+We expose a CSS custom property `--radix-dropdown-menu-content-transform-origin`. Use it to animate the content from its computed origin based on `side`, `side_offset`, `align`, and any collisions.
 
 ```heex
 <DropdownMenu.root id="dropdown-origin">
@@ -546,7 +546,7 @@ We expose a CSS custom property `--essence-dropdown-menu-content-transform-origi
 
 ```css
 .DropdownMenuContent {
-  transform-origin: var(--essence-dropdown-menu-content-transform-origin);
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
   animation: scaleIn 0.5s ease-out;
 }
 

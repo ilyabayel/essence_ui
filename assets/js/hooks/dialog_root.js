@@ -1,17 +1,17 @@
 import { trapFocus, focusFirst } from "../lib/focus_scope.js";
 
 const DIALOG_SELECTORS = {
-  trigger: "[data-essence-dialog-trigger]",
-  overlay: "[data-essence-dialog-overlay]",
-  content: "[data-essence-dialog-content]",
-  close: "[data-essence-dialog-close]",
+  trigger: "[data-radix-dialog-trigger]",
+  overlay: "[data-radix-dialog-overlay]",
+  content: "[data-radix-dialog-content]",
+  close: "[data-radix-dialog-close]",
 };
 
 const ALERT_DIALOG_SELECTORS = {
-  trigger: "[data-essence-alert-dialog-trigger]",
-  overlay: "[data-essence-alert-dialog-overlay]",
-  content: "[data-essence-alert-dialog-content]",
-  close: "[data-essence-alert-dialog-cancel], [data-essence-alert-dialog-action]",
+  trigger: "[data-radix-alert-dialog-trigger]",
+  overlay: "[data-radix-alert-dialog-overlay]",
+  content: "[data-radix-alert-dialog-content]",
+  close: "[data-radix-alert-dialog-cancel], [data-radix-alert-dialog-action]",
 };
 
 function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {

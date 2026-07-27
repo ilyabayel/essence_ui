@@ -477,7 +477,7 @@ Use `NavigationMenu.link` with the `active` prop to mark the current page:
 
 ### Advanced animation
 
-Essence exposes `--essence-navigation-menu-viewport-width`, `--essence-navigation-menu-viewport-height`, and `data-motion` on content to animate viewport size and content position based on enter/exit direction:
+Essence exposes `--radix-navigation-menu-viewport-width`, `--radix-navigation-menu-viewport-height`, and `data-motion` on content to animate viewport size and content position based on enter/exit direction:
 
 ```heex
 <NavigationMenu.content id="nav-anim-content" class="NavigationMenuContent">
@@ -510,8 +510,8 @@ Essence exposes `--essence-navigation-menu-viewport-width`, `--essence-navigatio
 
 .NavigationMenuViewport {
   position: relative;
-  width: var(--essence-navigation-menu-viewport-width);
-  height: var(--essence-navigation-menu-viewport-height);
+  width: var(--radix-navigation-menu-viewport-width);
+  height: var(--radix-navigation-menu-viewport-height);
   transition: width, height, 250ms ease;
 }
 

@@ -81,13 +81,13 @@ defmodule EssenceUI.Components.Avatar do
           type: :enum,
           values: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
           default: "3",
-          class: "est-r-size"
+          class: "rt-r-size"
         },
         variant: %{
           type: :enum,
           values: ["solid", "soft"],
           default: "soft",
-          class: "est-variant"
+          class: "rt-variant"
         }
       }
       |> Map.merge(AsChildProps.prop_defs())
@@ -97,7 +97,7 @@ defmodule EssenceUI.Components.Avatar do
 
     extracted = EssenceUI.Helpers.ExtractProps.call(assigns, prop_defs)
 
-    class = ["est-reset", "est-AvatarRoot", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["rt-reset", "rt-AvatarRoot", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
 
     id = assigns[:id] || "avatar-#{System.unique_integer([:positive])}"
 
@@ -121,7 +121,7 @@ defmodule EssenceUI.Components.Avatar do
       data-radius={@radius}
       {@rest}
     >
-      <.image :if={@has_image} src={@src} alt={@alt} class="est-AvatarImage" />
+      <.image :if={@has_image} src={@src} alt={@alt} class="rt-AvatarImage" />
       <.fallback :if={@has_image or @fallback || @fallback_slot != []} class={@fallback_classes} delay_ms={0}>
         <%= if @fallback do %>
           {render_fallback(@fallback)}
@@ -135,7 +135,7 @@ defmodule EssenceUI.Components.Avatar do
 
   defp fallback_classes(fallback) do
     [
-      "est-AvatarFallback",
+      "rt-AvatarFallback",
       fallback_size_class(fallback)
     ]
     |> Enum.filter(& &1)
@@ -144,8 +144,8 @@ defmodule EssenceUI.Components.Avatar do
 
   defp fallback_size_class(fallback) when is_binary(fallback) do
     case String.length(fallback) do
-      1 -> "est-one-letter"
-      2 -> "est-two-letters"
+      1 -> "rt-one-letter"
+      2 -> "rt-two-letters"
       _ -> nil
     end
   end

@@ -36,7 +36,7 @@ defmodule EssenceUI.Components.ThemePanel do
 
   def theme_panel(assigns) do
     class =
-      ["est-ThemePanel", "theme-panel", assigns.class]
+      ["rt-ThemePanel", "theme-panel", assigns.class]
       |> Enum.reject(&(is_nil(&1) or &1 == ""))
       |> Enum.join(" ")
 
@@ -54,7 +54,7 @@ defmodule EssenceUI.Components.ThemePanel do
               <.flex gap="2" wrap="wrap" class="theme-panel__swatches">
                 <label
                   :for={color <- Theme.accent_colors()}
-                  class="est-ThemePanelSwatch"
+                  class="rt-ThemePanelSwatch"
                   style={"background-color: var(--#{color}-9)"}
                   title={color}
                 >
@@ -63,7 +63,7 @@ defmodule EssenceUI.Components.ThemePanel do
                     name="accent_color"
                     value={color}
                     checked={color == @accent_color}
-                    class="est-ThemePanelSwatchInput"
+                    class="rt-ThemePanelSwatchInput"
                     aria-label={color}
                   />
                 </label>
@@ -75,7 +75,7 @@ defmodule EssenceUI.Components.ThemePanel do
               <.flex gap="2" wrap="wrap" class="theme-panel__swatches">
                 <label
                   :for={color <- Enum.reject(Theme.gray_colors(), &(&1 == "auto"))}
-                  class="est-ThemePanelSwatch"
+                  class="rt-ThemePanelSwatch"
                   style={"background-color: var(--#{color}-9)"}
                   title={color}
                 >
@@ -84,7 +84,7 @@ defmodule EssenceUI.Components.ThemePanel do
                     name="gray_color"
                     value={color}
                     checked={color == @gray_color}
-                    class="est-ThemePanelSwatchInput"
+                    class="rt-ThemePanelSwatchInput"
                     aria-label={color}
                   />
                 </label>
@@ -96,7 +96,7 @@ defmodule EssenceUI.Components.ThemePanel do
               <.flex gap="2" wrap="wrap">
                 <label
                   :for={value <- ["inherit", "light", "dark"]}
-                  class="est-ThemePanelRadioCard"
+                  class="rt-ThemePanelRadioCard"
                   style="padding: 0.35rem 0.65rem;"
                 >
                   <input
@@ -104,7 +104,7 @@ defmodule EssenceUI.Components.ThemePanel do
                     name="appearance"
                     value={value}
                     checked={value == @appearance}
-                    class="est-ThemePanelRadioCardInput"
+                    class="rt-ThemePanelRadioCardInput"
                   />
                   <.text size="1">{String.capitalize(value)}</.text>
                 </label>
@@ -116,7 +116,7 @@ defmodule EssenceUI.Components.ThemePanel do
               <.flex gap="2" wrap="wrap">
                 <label
                   :for={value <- Theme.radii()}
-                  class="est-ThemePanelRadioCard"
+                  class="rt-ThemePanelRadioCard"
                   style="padding: 0.35rem 0.65rem;"
                 >
                   <input
@@ -124,7 +124,7 @@ defmodule EssenceUI.Components.ThemePanel do
                     name="radius"
                     value={value}
                     checked={value == @radius}
-                    class="est-ThemePanelRadioCardInput"
+                    class="rt-ThemePanelRadioCardInput"
                   />
                   <.text size="1">{String.capitalize(value)}</.text>
                 </label>
@@ -136,7 +136,7 @@ defmodule EssenceUI.Components.ThemePanel do
               <.flex gap="2" wrap="wrap">
                 <label
                   :for={value <- Theme.scalings()}
-                  class="est-ThemePanelRadioCard"
+                  class="rt-ThemePanelRadioCard"
                   style="padding: 0.35rem 0.65rem;"
                 >
                   <input
@@ -144,7 +144,7 @@ defmodule EssenceUI.Components.ThemePanel do
                     name="scaling"
                     value={value}
                     checked={value == @scaling}
-                    class="est-ThemePanelRadioCardInput"
+                    class="rt-ThemePanelRadioCardInput"
                   />
                   <.text size="1">{value}</.text>
                 </label>
@@ -156,7 +156,7 @@ defmodule EssenceUI.Components.ThemePanel do
               <.flex gap="2" wrap="wrap">
                 <label
                   :for={value <- ["solid", "translucent"]}
-                  class="est-ThemePanelRadioCard"
+                  class="rt-ThemePanelRadioCard"
                   style="padding: 0.35rem 0.65rem;"
                 >
                   <input
@@ -164,7 +164,7 @@ defmodule EssenceUI.Components.ThemePanel do
                     name="panel_background"
                     value={value}
                     checked={value == @panel_background}
-                    class="est-ThemePanelRadioCardInput"
+                    class="rt-ThemePanelRadioCardInput"
                   />
                   <.text size="1">{String.capitalize(value)}</.text>
                 </label>

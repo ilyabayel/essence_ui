@@ -162,9 +162,9 @@ export function typeahead(key, items, state = { query: "", timeout: null }) {
 export function shouldCloseOnItemClick(item) {
   if (!item) return false;
   if (
-    item.hasAttribute("data-essence-dropdown-menu-sub-trigger") ||
-    item.hasAttribute("data-essence-context-menu-sub-trigger") ||
-    item.hasAttribute("data-essence-menubar-sub-trigger")
+    item.hasAttribute("data-radix-dropdown-menu-sub-trigger") ||
+    item.hasAttribute("data-radix-context-menu-sub-trigger") ||
+    item.hasAttribute("data-radix-menubar-subtrigger")
   ) {
     return false;
   }
@@ -272,9 +272,9 @@ export function toggleCheckboxItem(item) {
 export function selectRadioItem(item) {
   const group =
     item.closest('[role="group"]') ||
-    item.closest("[data-essence-dropdown-menu-radio-group]") ||
-    item.closest("[data-essence-context-menu-radio-group]") ||
-    item.closest("[data-essence-menubar-radio-group]") ||
+    item.closest("[data-radix-dropdown-menu-radio-group]") ||
+    item.closest("[data-radix-context-menu-radio-group]") ||
+    item.closest("[data-radix-menubar-radio-group]") ||
     item.parentElement;
 
   if (group) {
@@ -292,7 +292,7 @@ export function selectRadioItem(item) {
 
 function syncItemIndicator(item, checked) {
   const indicator = item.querySelector(
-    "[data-essence-dropdown-menu-item-indicator], [data-essence-context-menu-item-indicator], [data-essence-menubar-item-indicator]"
+    "[data-radix-dropdown-menu-item-indicator], [data-radix-context-menu-item-indicator], [data-radix-menubar-item-indicator]"
   );
   if (!indicator) return;
   indicator.style.display = checked ? "" : "none";

@@ -8,8 +8,8 @@ defmodule EssenceUI.Components.SeparatorTest do
   test "renders separator wrapping primitive a11y attrs" do
     html = render_component(&Separator.separator/1, %{})
 
-    assert html =~ "est-Separator"
-    assert html =~ "est-reset"
+    assert html =~ "rt-Separator"
+    assert html =~ "rt-reset"
     assert html =~ ~s[role="separator"]
     assert html =~ ~s[data-orientation="horizontal"]
   end
@@ -23,11 +23,11 @@ defmodule EssenceUI.Components.SeparatorTest do
         m: "4"
       })
 
-    assert html =~ "est-r-size-2"
-    assert html =~ "est-r-orientation-vertical"
+    assert html =~ "rt-r-size-2"
+    assert html =~ "rt-r-orientation-vertical"
     assert html =~ ~s(data-accent-color="red")
     assert html =~ ~s[data-orientation="vertical"]
-    assert html =~ "est-r-m-4"
+    assert html =~ "rt-r-m-4"
   end
 
   test "decorative omits separator role" do

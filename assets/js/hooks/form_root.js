@@ -14,7 +14,7 @@ const VALIDITY_KEYS = [
 
 function findControl(field) {
   const name = field.dataset.name;
-  const scoped = field.querySelector("[data-essence-form-control]");
+  const scoped = field.querySelector("[data-radix-form-control]");
   const root = scoped || field;
 
   if (name) {
@@ -28,24 +28,24 @@ function findControl(field) {
 }
 
 function findFields(form) {
-  return Array.from(form.querySelectorAll("[data-essence-form-field]"));
+  return Array.from(form.querySelectorAll("[data-radix-form-field]"));
 }
 
 function findMessages(form, field) {
   const name = field.dataset.name;
-  const inField = Array.from(field.querySelectorAll("[data-essence-form-message]"));
+  const inField = Array.from(field.querySelectorAll("[data-radix-form-message]"));
   const outside = Array.from(
-    form.querySelectorAll(`[data-essence-form-message][data-name="${CSS.escape(name)}"]`),
+    form.querySelectorAll(`[data-radix-form-message][data-name="${CSS.escape(name)}"]`),
   ).filter((el) => !field.contains(el));
   return [...inField, ...outside];
 }
 
 function findValidityStates(form, field) {
   const name = field.dataset.name;
-  const inField = Array.from(field.querySelectorAll("[data-essence-form-validity-state]"));
+  const inField = Array.from(field.querySelectorAll("[data-radix-form-validity-state]"));
   const outside = Array.from(
     form.querySelectorAll(
-      `[data-essence-form-validity-state][data-name="${CSS.escape(name)}"]`,
+      `[data-radix-form-validity-state][data-name="${CSS.escape(name)}"]`,
     ),
   ).filter((el) => !field.contains(el));
   return [...inField, ...outside];
@@ -117,7 +117,7 @@ function associateLabel(field, control) {
     control.id = `essence-form-${name}-${Math.random().toString(36).slice(2, 9)}`;
   }
 
-  const labels = Array.from(field.querySelectorAll("[data-essence-form-label]"));
+  const labels = Array.from(field.querySelectorAll("[data-radix-form-label]"));
   for (const label of labels) {
     if (!label.getAttribute("for")) {
       label.setAttribute("for", control.id);
@@ -156,13 +156,13 @@ export const FormRoot = {
 
     this._onInvalid = (event) => {
       event.preventDefault();
-      const field = event.target.closest?.("[data-essence-form-field]");
+      const field = event.target.closest?.("[data-radix-form-field]");
       if (field) syncField(this.el, field);
       else syncForm(this.el);
     };
 
     this._onInput = (event) => {
-      const field = event.target.closest?.("[data-essence-form-field]");
+      const field = event.target.closest?.("[data-radix-form-field]");
       if (field) {
         // Clear server invalid once the user edits
         field.removeAttribute("data-server-invalid");
@@ -171,7 +171,7 @@ export const FormRoot = {
     };
 
     this._onBlur = (event) => {
-      const field = event.target.closest?.("[data-essence-form-field]");
+      const field = event.target.closest?.("[data-radix-form-field]");
       if (field) syncField(this.el, field);
     };
 

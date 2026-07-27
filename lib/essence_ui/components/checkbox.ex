@@ -92,14 +92,14 @@ defmodule EssenceUI.Components.Checkbox do
       %{
         size: %{
           type: :enum,
-          class: "est-r-size",
+          class: "rt-r-size",
           values: @sizes,
           default: "2",
           responsive: true
         },
         variant: %{
           type: :enum,
-          class: "est-variant",
+          class: "rt-variant",
           values: @variants,
           default: "surface"
         }
@@ -116,9 +116,9 @@ defmodule EssenceUI.Components.Checkbox do
     # Build CSS classes
     class =
       [
-        "est-reset",
-        "est-BaseCheckboxRoot",
-        "est-CheckboxRoot",
+        "rt-reset",
+        "rt-BaseCheckboxRoot",
+        "rt-CheckboxRoot",
         extracted.class
       ]
       |> Enum.filter(& &1)
@@ -148,7 +148,7 @@ defmodule EssenceUI.Components.Checkbox do
       data-accent-color={@color}
       {@rest}
     >
-      <.indicator class="est-BaseCheckboxIndicator est-CheckboxIndicator">
+      <.indicator class="rt-BaseCheckboxIndicator rt-CheckboxIndicator">
         <svg
           width="9"
           height="9"

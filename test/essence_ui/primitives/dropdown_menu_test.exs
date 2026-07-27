@@ -41,23 +41,23 @@ defmodule EssenceUI.Primitives.DropdownMenuTest do
     assert html =~ ~s[phx-hook="DropdownMenuRoot"]
     assert html =~ ~s[data-state="open"]
     assert html =~ ~s[data-on-open-change="changed"]
-    assert html =~ "data-essence-dropdown-menu-trigger"
+    assert html =~ "data-radix-dropdown-menu-trigger"
     assert html =~ ~s[aria-controls="dm-content"]
-    assert html =~ "data-essence-dropdown-menu-content"
-    assert html =~ "data-essence-dropdown-menu-label"
-    assert html =~ "data-essence-dropdown-menu-item"
+    assert html =~ "data-radix-dropdown-menu-content"
+    assert html =~ "data-radix-dropdown-menu-label"
+    assert html =~ "data-radix-dropdown-menu-item"
     assert html =~ ~s[data-text-value="new"]
     assert html =~ "data-disabled"
-    assert html =~ "data-essence-dropdown-menu-checkbox-item"
+    assert html =~ "data-radix-dropdown-menu-checkbox-item"
     assert html =~ ~s[data-state="checked"]
-    assert html =~ "data-essence-dropdown-menu-radio-group"
-    assert html =~ "data-essence-dropdown-menu-radio-item"
-    assert html =~ "data-essence-dropdown-menu-item-indicator"
-    assert html =~ "data-essence-dropdown-menu-separator"
-    assert html =~ "data-essence-dropdown-menu-sub"
-    assert html =~ "data-essence-dropdown-menu-sub-trigger"
-    assert html =~ "data-essence-dropdown-menu-sub-content"
-    assert html =~ "data-essence-dropdown-menu-arrow"
+    assert html =~ "data-radix-dropdown-menu-radio-group"
+    assert html =~ "data-radix-dropdown-menu-radio-item"
+    assert html =~ "data-radix-dropdown-menu-item-indicator"
+    assert html =~ "data-radix-dropdown-menu-separator"
+    assert html =~ "data-radix-dropdown-menu-sub"
+    assert html =~ "data-radix-dropdown-menu-sub-trigger"
+    assert html =~ "data-radix-dropdown-menu-sub-content"
+    assert html =~ "data-radix-dropdown-menu-arrow"
     assert html =~ "display: none"
   end
 
@@ -79,7 +79,7 @@ defmodule EssenceUI.Primitives.DropdownMenuTest do
 
     assert html =~ ~s[data-phx-portal="body"]
     assert html =~ ~s[id="dm-portal"]
-    assert html =~ "data-essence-dropdown-menu-content"
+    assert html =~ "data-radix-dropdown-menu-content"
     assert html =~ "Ported"
   end
 end

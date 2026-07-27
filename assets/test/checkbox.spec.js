@@ -9,8 +9,8 @@ test.describe("Checkbox Primitive", () => {
 
   test("starts checked and toggles on click and Space", async ({ page }) => {
     const demo = page.locator('.essence-demo[data-component="checkbox"]');
-    const trigger = demo.locator("#c1[data-essence-checkbox-trigger]");
-    const indicator = demo.locator("[data-essence-checkbox-indicator]");
+    const trigger = demo.locator("#c1[data-radix-checkbox-trigger]");
+    const indicator = demo.locator("[data-radix-checkbox-indicator]");
 
     await expect(trigger).toHaveAttribute("role", "checkbox");
     await expect(trigger).toHaveAttribute("aria-checked", "true");
@@ -28,7 +28,7 @@ test.describe("Checkbox Primitive", () => {
   });
 
   test("Enter does not toggle (WAI-ARIA checkbox)", async ({ page }) => {
-    const trigger = page.locator("#c1[data-essence-checkbox-trigger]");
+    const trigger = page.locator("#c1[data-radix-checkbox-trigger]");
     await expect(trigger).toHaveAttribute("aria-checked", "true");
     await trigger.focus();
     await page.keyboard.press("Enter");

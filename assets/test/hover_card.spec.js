@@ -12,7 +12,7 @@ test.describe("Hover Card Primitive", () => {
 
   test("opens on hover after delay and closes on leave", async ({ page }) => {
     const root = page.locator("#hover-card-primitive");
-    const trigger = root.locator("[data-essence-hover-card-trigger]");
+    const trigger = root.locator("[data-radix-hover-card-trigger]");
     const content = page.locator("#hover-card-content");
 
     await expect(content).toBeHidden();
@@ -34,7 +34,7 @@ test.describe("Hover Card Primitive", () => {
 
   test("stays open when moving from trigger to content", async ({ page }) => {
     const root = page.locator("#hover-card-primitive");
-    const trigger = root.locator("[data-essence-hover-card-trigger]");
+    const trigger = root.locator("[data-radix-hover-card-trigger]");
     const content = page.locator("#hover-card-content");
 
     await trigger.hover();
@@ -46,7 +46,7 @@ test.describe("Hover Card Primitive", () => {
 
   test("has no accessibility violations", async ({ page }) => {
     const root = page.locator("#hover-card-primitive");
-    const trigger = root.locator("[data-essence-hover-card-trigger]");
+    const trigger = root.locator("[data-radix-hover-card-trigger]");
     await trigger.hover();
     await expect(page.locator("#hover-card-content")).toBeVisible();
     await expectNoA11yViolations(page, {
@@ -71,7 +71,7 @@ test.describe("Hover Card Primitive (touch)", () => {
 
   test("opens on tap and closes on second tap", async ({ page }) => {
     const root = page.locator("#hover-card-primitive");
-    const trigger = root.locator("[data-essence-hover-card-trigger]");
+    const trigger = root.locator("[data-radix-hover-card-trigger]");
     const content = page.locator("#hover-card-content");
 
     await expect(content).toBeHidden();
@@ -87,7 +87,7 @@ test.describe("Hover Card Primitive (touch)", () => {
 
   test("closes when tapping outside", async ({ page }) => {
     const root = page.locator("#hover-card-primitive");
-    const trigger = root.locator("[data-essence-hover-card-trigger]");
+    const trigger = root.locator("[data-radix-hover-card-trigger]");
     const content = page.locator("#hover-card-content");
 
     await trigger.click();

@@ -9,14 +9,14 @@ test.describe("Scroll Area Primitive", () => {
 
   test("renders viewport, scrollbars, and corner", async ({ page }) => {
     const root = page.locator("#scroll-area-primitive");
-    const viewport = root.locator("[data-essence-scroll-area-viewport]");
+    const viewport = root.locator("[data-radix-scroll-area-viewport]");
     const vertical = root.locator(
-      '[data-essence-scroll-area-scrollbar][data-orientation="vertical"]',
+      '[data-radix-scroll-area-scrollbar][data-orientation="vertical"]',
     );
     const horizontal = root.locator(
-      '[data-essence-scroll-area-scrollbar][data-orientation="horizontal"]',
+      '[data-radix-scroll-area-scrollbar][data-orientation="horizontal"]',
     );
-    const corner = root.locator("[data-essence-scroll-area-corner]");
+    const corner = root.locator("[data-radix-scroll-area-corner]");
 
     await expect(viewport).toBeVisible();
     await expect(viewport).toHaveAttribute("tabindex", "0");
@@ -34,11 +34,11 @@ test.describe("Scroll Area Primitive", () => {
 
   test("updates vertical thumb on scroll", async ({ page }) => {
     const root = page.locator("#scroll-area-primitive");
-    const viewport = root.locator("[data-essence-scroll-area-viewport]");
+    const viewport = root.locator("[data-radix-scroll-area-viewport]");
     const scrollbar = root.locator(
-      '[data-essence-scroll-area-scrollbar][data-orientation="vertical"]',
+      '[data-radix-scroll-area-scrollbar][data-orientation="vertical"]',
     );
-    const thumb = scrollbar.locator("[data-essence-scroll-area-thumb]");
+    const thumb = scrollbar.locator("[data-radix-scroll-area-thumb]");
 
     await expect(scrollbar).toHaveAttribute("data-state", "visible");
 
@@ -57,7 +57,7 @@ test.describe("Scroll Area Primitive", () => {
   test("has no accessibility violations", async ({ page }) => {
     const root = page.locator("#scroll-area-primitive");
     await expect(
-      root.locator("[data-essence-scroll-area-viewport]"),
+      root.locator("[data-radix-scroll-area-viewport]"),
     ).toBeVisible();
     await expectNoA11yViolations(page, {
       include: "#scroll-area-primitive",

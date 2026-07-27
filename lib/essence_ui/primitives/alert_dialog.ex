@@ -38,7 +38,7 @@ defmodule EssenceUI.Primitives.AlertDialog do
     <button
       id={@id}
       type="button"
-      data-essence-alert-dialog-trigger
+      data-radix-alert-dialog-trigger
       data-state="closed"
       aria-haspopup="dialog"
       aria-expanded="false"
@@ -69,7 +69,7 @@ defmodule EssenceUI.Primitives.AlertDialog do
     ~H"""
     <div
       id={@id}
-      data-essence-alert-dialog-overlay
+      data-radix-alert-dialog-overlay
       data-state="closed"
       hidden
       {@rest}
@@ -89,7 +89,7 @@ defmodule EssenceUI.Primitives.AlertDialog do
       id={@id}
       role="alertdialog"
       aria-modal="true"
-      data-essence-alert-dialog-content
+      data-radix-alert-dialog-content
       data-state="closed"
       tabindex="-1"
       hidden
@@ -106,7 +106,7 @@ defmodule EssenceUI.Primitives.AlertDialog do
 
   def title(assigns) do
     ~H"""
-    <h2 id={@id} data-essence-alert-dialog-title {@rest}>
+    <h2 id={@id} data-radix-alert-dialog-title {@rest}>
       {render_slot(@inner_block)}
     </h2>
     """
@@ -118,7 +118,7 @@ defmodule EssenceUI.Primitives.AlertDialog do
 
   def description(assigns) do
     ~H"""
-    <p id={@id} data-essence-alert-dialog-description {@rest}>
+    <p id={@id} data-radix-alert-dialog-description {@rest}>
       {render_slot(@inner_block)}
     </p>
     """
@@ -130,7 +130,7 @@ defmodule EssenceUI.Primitives.AlertDialog do
 
   def cancel(assigns) do
     ~H"""
-    <button id={@id} type="button" data-essence-alert-dialog-cancel {@rest}>
+    <button id={@id} type="button" data-radix-alert-dialog-cancel {@rest}>
       {render_slot(@inner_block)}
     </button>
     """
@@ -142,7 +142,7 @@ defmodule EssenceUI.Primitives.AlertDialog do
 
   def action(assigns) do
     ~H"""
-    <button id={@id} type="button" data-essence-alert-dialog-action {@rest}>
+    <button id={@id} type="button" data-radix-alert-dialog-action {@rest}>
       {render_slot(@inner_block)}
     </button>
     """

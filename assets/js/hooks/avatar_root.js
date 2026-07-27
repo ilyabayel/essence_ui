@@ -3,8 +3,8 @@ export const AvatarRoot = {
     this.timer = null;
     this.status = "idle";
     this.sync = this.sync.bind(this);
-    this.image = this.el.querySelector("[data-essence-avatar-image]");
-    this.fallback = this.el.querySelector("[data-essence-avatar-fallback]");
+    this.image = this.el.querySelector("[data-radix-avatar-image]");
+    this.fallback = this.el.querySelector("[data-radix-avatar-fallback]");
 
     if (this.image) {
       this.image.addEventListener("load", this.sync);

@@ -76,8 +76,8 @@ defmodule EssenceUI.Components.TextField do
   def text_field(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, class: "est-r-size", values: @sizes, default: "2", responsive: true},
-        variant: %{type: :enum, class: "est-variant", values: @variants, default: "surface"}
+        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
+        variant: %{type: :enum, class: "rt-variant", values: @variants, default: "surface"}
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(HighContrastProps.prop_defs())
@@ -87,8 +87,8 @@ defmodule EssenceUI.Components.TextField do
 
     class =
       [
-        "est-reset",
-        "est-TextFieldRoot",
+        "rt-reset",
+        "rt-TextFieldRoot",
         extracted.class
       ]
       |> Enum.filter(& &1)
@@ -108,7 +108,7 @@ defmodule EssenceUI.Components.TextField do
         name={@name}
         value={@value}
         placeholder={@placeholder}
-        class="est-TextFieldInput est-reset"
+        class="rt-TextFieldInput rt-reset"
         disabled={@disabled}
         readonly={@readonly}
         autocomplete={@autocomplete}
@@ -116,7 +116,7 @@ defmodule EssenceUI.Components.TextField do
         inputmode={@inputmode}
       />
       <%= for slot <- @slot do %>
-        <span class="est-TextFieldSlot" data-side={if slot[:side] == "right", do: "right", else: nil}>
+        <span class="rt-TextFieldSlot" data-side={if slot[:side] == "right", do: "right", else: nil}>
           {render_slot(slot)}
         </span>
       <% end %>

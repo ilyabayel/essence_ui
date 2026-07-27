@@ -6,25 +6,25 @@ test.describe("Form Primitive", () => {
   test.beforeEach(async ({ page }) => {
     await gotoPrimitive(page, "form");
     await expect(
-      page.locator("#form-primitive [data-essence-form-label][for]").first(),
+      page.locator("#form-primitive [data-radix-form-label][for]").first(),
     ).toBeVisible();
   });
 
   test("renders fields, labels, and submit control", async ({ page }) => {
     const root = page.locator("#form-primitive");
     const emailField = root.locator(
-      '[data-essence-form-field][data-name="email"]',
+      '[data-radix-form-field][data-name="email"]',
     );
     const questionField = root.locator(
-      '[data-essence-form-field][data-name="question"]',
+      '[data-radix-form-field][data-name="question"]',
     );
-    const submit = root.locator("[data-essence-form-submit]");
+    const submit = root.locator("[data-radix-form-submit]");
 
-    await expect(root).toHaveAttribute("data-essence-form-root", "");
-    await expect(emailField.locator("[data-essence-form-label]")).toHaveText(
+    await expect(root).toHaveAttribute("data-radix-form-root", "");
+    await expect(emailField.locator("[data-radix-form-label]")).toHaveText(
       "Email",
     );
-    await expect(questionField.locator("[data-essence-form-label]")).toHaveText(
+    await expect(questionField.locator("[data-radix-form-label]")).toHaveText(
       "Question",
     );
     await expect(emailField.locator('input[name="email"]')).toBeVisible();
@@ -39,12 +39,12 @@ test.describe("Form Primitive", () => {
   test("shows validation messages on invalid submit", async ({ page }) => {
     const root = page.locator("#form-primitive");
     const emailField = root.locator(
-      '[data-essence-form-field][data-name="email"]',
+      '[data-radix-form-field][data-name="email"]',
     );
     const valueMissing = emailField.locator(
-      '[data-essence-form-message][data-match="valueMissing"]',
+      '[data-radix-form-message][data-match="valueMissing"]',
     );
-    const submit = root.locator("[data-essence-form-submit]");
+    const submit = root.locator("[data-radix-form-submit]");
 
     await submit.click();
 
@@ -57,13 +57,13 @@ test.describe("Form Primitive", () => {
   test("shows typeMismatch for invalid email", async ({ page }) => {
     const root = page.locator("#form-primitive");
     const emailField = root.locator(
-      '[data-essence-form-field][data-name="email"]',
+      '[data-radix-form-field][data-name="email"]',
     );
     const emailInput = emailField.locator('input[name="email"]');
     const typeMismatch = emailField.locator(
-      '[data-essence-form-message][data-match="typeMismatch"]',
+      '[data-radix-form-message][data-match="typeMismatch"]',
     );
-    const submit = root.locator("[data-essence-form-submit]");
+    const submit = root.locator("[data-radix-form-submit]");
 
     await emailInput.fill("not-an-email");
     await root.locator('textarea[name="question"]').fill("Hello?");
@@ -77,12 +77,12 @@ test.describe("Form Primitive", () => {
   test("clears invalid state when fields become valid", async ({ page }) => {
     const root = page.locator("#form-primitive");
     const emailField = root.locator(
-      '[data-essence-form-field][data-name="email"]',
+      '[data-radix-form-field][data-name="email"]',
     );
     const questionField = root.locator(
-      '[data-essence-form-field][data-name="question"]',
+      '[data-radix-form-field][data-name="question"]',
     );
-    const submit = root.locator("[data-essence-form-submit]");
+    const submit = root.locator("[data-radix-form-submit]");
 
     await submit.click();
     await expect(emailField).toHaveAttribute("data-invalid", "");
@@ -98,7 +98,7 @@ test.describe("Form Primitive", () => {
     const root = page.locator("#form-primitive");
     await expect(root.locator('input[name="email"]')).toBeVisible();
     await expect(
-      root.locator('[data-essence-form-label][for]').first(),
+      root.locator('[data-radix-form-label][for]').first(),
     ).toBeVisible();
     await expectNoA11yViolations(page, {
       include: "#form-primitive",

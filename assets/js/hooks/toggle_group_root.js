@@ -17,7 +17,7 @@ export const ToggleGroupRoot = {
   },
 
   items() {
-    return Array.from(this.el.querySelectorAll("[data-essence-toggle-group-item]"));
+    return Array.from(this.el.querySelectorAll("[data-radix-toggle-group-item]"));
   },
 
   values() {
@@ -47,7 +47,7 @@ export const ToggleGroupRoot = {
   },
 
   onClick(event) {
-    const item = event.target.closest("[data-essence-toggle-group-item]");
+    const item = event.target.closest("[data-radix-toggle-group-item]");
     if (!item || item.disabled || this.el.hasAttribute("data-disabled")) return;
 
     const type = this.el.dataset.type;

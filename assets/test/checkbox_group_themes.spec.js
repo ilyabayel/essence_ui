@@ -17,21 +17,21 @@ async function gotoThemesCheckboxGroup(page, variation = "default") {
 
 async function waitForCheckboxGroupHook(root) {
   await expect(
-    root.locator("[data-essence-checkbox-group-item][data-has-click]").first(),
+    root.locator("[data-radix-checkbox-group-item][data-has-click]").first(),
   ).toBeVisible();
 }
 
 test.describe("Checkbox Group Themes", () => {
   test("toggles items and supports multi-select", async ({ page }) => {
     await gotoThemesCheckboxGroup(page);
-    const root = page.locator("[data-essence-checkbox-group-root]").first();
+    const root = page.locator("[data-radix-checkbox-group-root]").first();
     await waitForCheckboxGroupHook(root);
 
     const option1 = root.locator(
-      '[data-essence-checkbox-group-item][data-value="option1"]',
+      '[data-radix-checkbox-group-item][data-value="option1"]',
     );
     const option2 = root.locator(
-      '[data-essence-checkbox-group-item][data-value="option2"]',
+      '[data-radix-checkbox-group-item][data-value="option2"]',
     );
 
     await expect(option2).toHaveAttribute("aria-checked", "true");

@@ -20,7 +20,7 @@ defmodule EssenceUI.Primitives.DropdownMenu do
     <div
       id={@id}
       phx-hook="DropdownMenuRoot"
-      data-essence-dropdown-menu-root
+      data-radix-dropdown-menu-root
       data-state={@state}
       data-on-open-change={@on_open_change}
       data-modal={if @modal, do: ""}
@@ -57,7 +57,7 @@ defmodule EssenceUI.Primitives.DropdownMenu do
       id={@id}
       role={if(@as == "div", do: "button")}
       tabindex={if(@as == "div" and not @disabled, do: "0")}
-      data-essence-dropdown-menu-trigger
+      data-radix-dropdown-menu-trigger
       aria-haspopup="menu"
       aria-expanded="false"
       aria-controls={@content_id}
@@ -96,7 +96,8 @@ defmodule EssenceUI.Primitives.DropdownMenu do
     ~H"""
     <div
       id={@id}
-      data-essence-dropdown-menu-content
+      data-radix-dropdown-menu-content
+      data-radix-menu-content
       data-state="closed"
       data-side={@side}
       data-align={@align}
@@ -118,7 +119,7 @@ defmodule EssenceUI.Primitives.DropdownMenu do
 
   def label(assigns) do
     ~H"""
-    <div id={@id} data-essence-dropdown-menu-label {@rest}>
+    <div id={@id} data-radix-dropdown-menu-label {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -136,7 +137,7 @@ defmodule EssenceUI.Primitives.DropdownMenu do
       id={@id}
       role="menuitem"
       tabindex={if @disabled, do: "-1", else: "0"}
-      data-essence-dropdown-menu-item
+      data-radix-dropdown-menu-item
       data-disabled={if @disabled, do: ""}
       data-text-value={@text_value}
       aria-disabled={if @disabled, do: "true"}
@@ -153,7 +154,7 @@ defmodule EssenceUI.Primitives.DropdownMenu do
 
   def group(assigns) do
     ~H"""
-    <div id={@id} role="group" data-essence-dropdown-menu-group {@rest}>
+    <div id={@id} role="group" data-radix-dropdown-menu-group {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -175,7 +176,7 @@ defmodule EssenceUI.Primitives.DropdownMenu do
       id={@id}
       role="menuitemcheckbox"
       tabindex={if @disabled, do: "-1", else: "0"}
-      data-essence-dropdown-menu-checkbox-item
+      data-radix-dropdown-menu-checkbox-item
       data-state={@state}
       data-disabled={if @disabled, do: ""}
       data-text-value={@text_value}
@@ -198,7 +199,7 @@ defmodule EssenceUI.Primitives.DropdownMenu do
     <div
       id={@id}
       role="group"
-      data-essence-dropdown-menu-radio-group
+      data-radix-dropdown-menu-radio-group
       data-value={@value}
       {@rest}
     >
@@ -224,7 +225,7 @@ defmodule EssenceUI.Primitives.DropdownMenu do
       id={@id}
       role="menuitemradio"
       tabindex={if @disabled, do: "-1", else: "0"}
-      data-essence-dropdown-menu-radio-item
+      data-radix-dropdown-menu-radio-item
       data-state={@state}
       data-value={@value}
       data-disabled={if @disabled, do: ""}
@@ -247,7 +248,7 @@ defmodule EssenceUI.Primitives.DropdownMenu do
     ~H"""
     <span
       id={@id}
-      data-essence-dropdown-menu-item-indicator
+      data-radix-dropdown-menu-item-indicator
       data-force-mount={if @force_mount, do: ""}
       style={unless @force_mount, do: "display: none;"}
       {@rest}
@@ -267,7 +268,7 @@ defmodule EssenceUI.Primitives.DropdownMenu do
       id={@id}
       role="separator"
       aria-orientation="horizontal"
-      data-essence-dropdown-menu-separator
+      data-radix-dropdown-menu-separator
       {@rest}
     >
     </div>
@@ -280,7 +281,7 @@ defmodule EssenceUI.Primitives.DropdownMenu do
 
   def arrow(assigns) do
     ~H"""
-    <span id={@id} data-essence-dropdown-menu-arrow aria-hidden="true" {@rest}>
+    <span id={@id} data-radix-dropdown-menu-arrow aria-hidden="true" {@rest}>
       {render_slot(@inner_block)}
     </span>
     """
@@ -296,7 +297,7 @@ defmodule EssenceUI.Primitives.DropdownMenu do
     assigns = assign(assigns, :state, state)
 
     ~H"""
-    <div id={@id} data-essence-dropdown-menu-sub data-state={@state} {@rest}>
+    <div id={@id} data-radix-dropdown-menu-sub data-state={@state} {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -316,7 +317,7 @@ defmodule EssenceUI.Primitives.DropdownMenu do
       tabindex={if @disabled, do: "-1", else: "0"}
       aria-haspopup="menu"
       aria-expanded="false"
-      data-essence-dropdown-menu-sub-trigger
+      data-radix-dropdown-menu-sub-trigger
       data-state="closed"
       data-disabled={if @disabled, do: ""}
       data-text-value={@text_value}
@@ -339,7 +340,7 @@ defmodule EssenceUI.Primitives.DropdownMenu do
     ~H"""
     <div
       id={@id}
-      data-essence-dropdown-menu-sub-content
+      data-radix-dropdown-menu-sub-content
       data-state="closed"
       data-side={@side}
       data-align={@align}

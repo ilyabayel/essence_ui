@@ -29,6 +29,6 @@ defmodule EssenceUI.Primitives.CollapsibleTest do
     assert html =~ ~s[id="details-trigger"]
     assert html =~ ~s[aria-controls="details-content"]
     assert html =~ ~s[aria-expanded="false"]
-    assert html =~ "data-essence-collapsible-content"
+    assert html =~ "data-radix-collapsible-content"
   end
 end

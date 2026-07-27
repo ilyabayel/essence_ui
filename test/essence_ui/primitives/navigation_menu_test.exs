@@ -40,14 +40,14 @@ defmodule EssenceUI.Primitives.NavigationMenuTest do
     assert html =~ ~s[phx-hook="NavigationMenuRoot"]
     assert html =~ ~s[data-orientation="horizontal"]
     assert html =~ ~s[data-delay-duration="100"]
-    assert html =~ "data-essence-navigation-menu-list"
-    assert html =~ "data-essence-navigation-menu-item"
-    assert html =~ "data-essence-navigation-menu-trigger"
-    assert html =~ "data-essence-navigation-menu-content"
-    assert html =~ "data-essence-navigation-menu-link"
+    assert html =~ "data-radix-navigation-menu-list"
+    assert html =~ "data-radix-navigation-menu-item"
+    assert html =~ "data-radix-navigation-menu-trigger"
+    assert html =~ "data-radix-navigation-menu-content"
+    assert html =~ "data-radix-navigation-menu-link"
     assert html =~ ~s[data-active]
-    assert html =~ "data-essence-navigation-menu-viewport"
-    assert html =~ "data-essence-navigation-menu-indicator"
-    assert html =~ "data-essence-navigation-menu-sub"
+    assert html =~ "data-radix-navigation-menu-viewport"
+    assert html =~ "data-radix-navigation-menu-indicator"
+    assert html =~ "data-radix-navigation-menu-sub"
   end
 end

@@ -64,15 +64,15 @@ export const SliderRoot = {
   },
 
   thumbs() {
-    return Array.from(this.el.querySelectorAll("[data-essence-slider-thumb]"));
+    return Array.from(this.el.querySelectorAll("[data-radix-slider-thumb]"));
   },
 
   track() {
-    return this.el.querySelector("[data-essence-slider-track]");
+    return this.el.querySelector("[data-radix-slider-track]");
   },
 
   range() {
-    return this.el.querySelector("[data-essence-slider-range]");
+    return this.el.querySelector("[data-radix-slider-range]");
   },
 
   percent(value) {
@@ -146,8 +146,8 @@ export const SliderRoot = {
         end = pcts[0] ?? 0;
       }
 
-      this.el.style.setProperty("--essence-slider-range-start", `${start}%`);
-      this.el.style.setProperty("--essence-slider-range-end", `${end}%`);
+      this.el.style.setProperty("--radix-slider-range-start", `${start}%`);
+      this.el.style.setProperty("--radix-slider-range-end", `${end}%`);
       this.el.style.setProperty("--radix-slider-range-start", `${start}%`);
       this.el.style.setProperty("--radix-slider-range-end", `${end}%`);
 
@@ -173,10 +173,10 @@ export const SliderRoot = {
     const name = this.el.dataset.name;
     if (!name) return;
 
-    let container = this.el.querySelector("[data-essence-slider-inputs]");
+    let container = this.el.querySelector("[data-radix-slider-inputs]");
     if (!container) {
       container = document.createElement("span");
-      container.setAttribute("data-essence-slider-inputs", "");
+      container.setAttribute("data-radix-slider-inputs", "");
       container.style.display = "contents";
       this.el.appendChild(container);
     }
@@ -252,7 +252,7 @@ export const SliderRoot = {
     if (this.disabled()) return;
     if (event.button !== 0) return;
 
-    const thumb = event.target.closest("[data-essence-slider-thumb]");
+    const thumb = event.target.closest("[data-radix-slider-thumb]");
     const value = this.valueFromPointer(event);
     this.activeIndex = thumb
       ? Number(thumb.dataset.index ?? this.thumbs().indexOf(thumb))
@@ -280,7 +280,7 @@ export const SliderRoot = {
   onKeyDown(event) {
     if (this.disabled()) return;
 
-    const thumb = event.target.closest("[data-essence-slider-thumb]");
+    const thumb = event.target.closest("[data-radix-slider-thumb]");
     if (!thumb || !this.el.contains(thumb)) return;
 
     const index = Number(thumb.dataset.index ?? this.thumbs().indexOf(thumb));

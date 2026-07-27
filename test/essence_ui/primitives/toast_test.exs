@@ -19,7 +19,7 @@ defmodule EssenceUI.Primitives.ToastTest do
         %{}
       )
 
-    assert html =~ ~s[data-essence-toast-provider]
+    assert html =~ ~s[data-radix-toast-provider]
     assert html =~ ~s[data-duration="4000"]
     assert html =~ ~s[data-swipe-direction="left"]
     assert html =~ ~s[data-label="Alert"]
@@ -41,14 +41,14 @@ defmodule EssenceUI.Primitives.ToastTest do
 
     assert html =~ ~s[id="toast-1"]
     assert html =~ ~s[phx-hook="ToastRoot"]
-    assert html =~ ~s[data-essence-toast-root]
+    assert html =~ ~s[data-radix-toast-root]
     assert html =~ ~s[data-state="open"]
     assert html =~ ~s[data-type="foreground"]
     assert html =~ ~s[data-duration="2000"]
     assert html =~ ~s[data-on-open-change="changed"]
     assert html =~ ~s[aria-live="assertive"]
-    assert html =~ ~s[data-essence-toast-title]
-    assert html =~ ~s[data-essence-toast-description]
+    assert html =~ ~s[data-radix-toast-title]
+    assert html =~ ~s[data-radix-toast-description]
     refute html =~ " hidden"
   end
 
@@ -100,9 +100,9 @@ defmodule EssenceUI.Primitives.ToastTest do
         %{}
       )
 
-    assert html =~ ~s[data-essence-toast-action]
+    assert html =~ ~s[data-radix-toast-action]
     assert html =~ ~s[data-alt-text="Goto schedule to undo"]
-    assert html =~ ~s[data-essence-toast-close]
+    assert html =~ ~s[data-radix-toast-close]
   end
 
   test "renders viewport with hotkey, label, and hook" do
@@ -122,7 +122,7 @@ defmodule EssenceUI.Primitives.ToastTest do
 
     assert html =~ ~s[id="vp"]
     assert html =~ ~s[phx-hook="ToastViewport"]
-    assert html =~ ~s[data-essence-toast-viewport]
+    assert html =~ ~s[data-radix-toast-viewport]
     assert html =~ ~s[data-hotkey="F8"]
     assert html =~ ~s[aria-label="Notifications (F8)"]
   end

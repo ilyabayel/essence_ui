@@ -10,7 +10,7 @@ test.describe("Select Primitive", () => {
 
   test("opens and closes on trigger click", async ({ page }) => {
     const root = page.locator("#select-primitive");
-    const trigger = root.locator("[data-essence-select-trigger]");
+    const trigger = root.locator("[data-radix-select-trigger]");
     const content = page.locator("#select-primitive-content");
 
     await expect(content).toBeHidden();
@@ -32,11 +32,11 @@ test.describe("Select Primitive", () => {
 
   test("selects item on click", async ({ page }) => {
     const root = page.locator("#select-primitive");
-    const trigger = root.locator("[data-essence-select-trigger]");
-    const value = root.locator("[data-essence-select-value]");
+    const trigger = root.locator("[data-radix-select-trigger]");
+    const value = root.locator("[data-radix-select-value]");
     const content = page.locator("#select-primitive-content");
     const orangeItem = content.locator(
-      '[data-essence-select-item][data-value="orange"]',
+      '[data-radix-select-item][data-value="orange"]',
     );
 
     await trigger.click();
@@ -49,7 +49,7 @@ test.describe("Select Primitive", () => {
 
   test("closes on escape key", async ({ page }) => {
     const root = page.locator("#select-primitive");
-    const trigger = root.locator("[data-essence-select-trigger]");
+    const trigger = root.locator("[data-radix-select-trigger]");
     const content = page.locator("#select-primitive-content");
 
     await trigger.click();
@@ -62,13 +62,13 @@ test.describe("Select Primitive", () => {
 
   test("navigates with keyboard", async ({ page }) => {
     const root = page.locator("#select-primitive");
-    const trigger = root.locator("[data-essence-select-trigger]");
+    const trigger = root.locator("[data-radix-select-trigger]");
     const content = page.locator("#select-primitive-content");
     const appleItem = content.locator(
-      '[data-essence-select-item][data-value="apple"]',
+      '[data-radix-select-item][data-value="apple"]',
     );
     const bananaItem = content.locator(
-      '[data-essence-select-item][data-value="banana"]',
+      '[data-radix-select-item][data-value="banana"]',
     );
 
     await trigger.focus();
@@ -90,10 +90,10 @@ test.describe("Select Primitive", () => {
 
   test("supports typeahead to enabled items", async ({ page }) => {
     const root = page.locator("#select-primitive");
-    const trigger = root.locator("[data-essence-select-trigger]");
+    const trigger = root.locator("[data-radix-select-trigger]");
     const content = page.locator("#select-primitive-content");
     const broccoliItem = content.locator(
-      '[data-essence-select-item][data-value="broccoli"]',
+      '[data-radix-select-item][data-value="broccoli"]',
     );
 
     await trigger.click();
@@ -105,7 +105,7 @@ test.describe("Select Primitive", () => {
 
   test("has no accessibility violations when closed", async ({ page }) => {
     const root = page.locator("#select-primitive");
-    await expect(root.locator("[data-essence-select-trigger]")).toBeVisible();
+    await expect(root.locator("[data-radix-select-trigger]")).toBeVisible();
     await expectNoA11yViolations(page, {
       include: "#select-primitive",
     });
@@ -113,7 +113,7 @@ test.describe("Select Primitive", () => {
 
   test("has no accessibility violations when open", async ({ page }) => {
     const root = page.locator("#select-primitive");
-    const trigger = root.locator("[data-essence-select-trigger]");
+    const trigger = root.locator("[data-radix-select-trigger]");
     const content = page.locator("#select-primitive-content");
 
     await trigger.click();

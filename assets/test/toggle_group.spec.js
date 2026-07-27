@@ -10,12 +10,12 @@ test.describe("Toggle Group Primitive", () => {
   test("single type selects exclusively and allows deselect", async ({
     page,
   }) => {
-    const root = page.locator("#alignment[data-essence-toggle-group-root]");
+    const root = page.locator("#alignment[data-radix-toggle-group-root]");
     const left = root.locator(
-      '[data-essence-toggle-group-item][data-value="left"]',
+      '[data-radix-toggle-group-item][data-value="left"]',
     );
     const center = root.locator(
-      '[data-essence-toggle-group-item][data-value="center"]',
+      '[data-radix-toggle-group-item][data-value="center"]',
     );
 
     await expect(root).toHaveAttribute("role", "radiogroup");
@@ -32,15 +32,15 @@ test.describe("Toggle Group Primitive", () => {
   });
 
   test("arrow keys move focus between items", async ({ page }) => {
-    const root = page.locator("#alignment[data-essence-toggle-group-root]");
+    const root = page.locator("#alignment[data-radix-toggle-group-root]");
     const left = root.locator(
-      '[data-essence-toggle-group-item][data-value="left"]',
+      '[data-radix-toggle-group-item][data-value="left"]',
     );
     const center = root.locator(
-      '[data-essence-toggle-group-item][data-value="center"]',
+      '[data-radix-toggle-group-item][data-value="center"]',
     );
     const right = root.locator(
-      '[data-essence-toggle-group-item][data-value="right"]',
+      '[data-radix-toggle-group-item][data-value="right"]',
     );
 
     await center.focus();

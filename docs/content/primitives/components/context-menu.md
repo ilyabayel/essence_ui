@@ -235,11 +235,11 @@ The component that pops out in an open context menu.
 
 | CSS variable | Description |
 | --- | --- |
-| `--essence-context-menu-content-transform-origin` | The `transform-origin` computed from content and arrow positions/offsets |
-| `--essence-context-menu-content-available-width` | Remaining width between the trigger and the boundary edge |
-| `--essence-context-menu-content-available-height` | Remaining height between the trigger and the boundary edge |
-| `--essence-context-menu-trigger-width` | The width of the trigger |
-| `--essence-context-menu-trigger-height` | The height of the trigger |
+| `--radix-context-menu-content-transform-origin` | The `transform-origin` computed from content and arrow positions/offsets |
+| `--radix-context-menu-content-available-width` | Remaining width between the trigger and the boundary edge |
+| `--radix-context-menu-content-available-height` | Remaining height between the trigger and the boundary edge |
+| `--radix-context-menu-trigger-width` | The width of the trigger |
+| `--radix-context-menu-trigger-height` | The height of the trigger |
 
 ### Item
 
@@ -495,7 +495,7 @@ You can add extra decorative elements in the `item` parts, such as images.
 
 You may want to constrain the width of the content (or sub-content) so that it matches the trigger width, or constrain its height to not exceed the viewport.
 
-We expose several CSS custom properties such as `--essence-context-menu-trigger-width` and `--essence-context-menu-content-available-height` to support this. Use them to constrain the content dimensions.
+We expose several CSS custom properties such as `--radix-context-menu-trigger-width` and `--radix-context-menu-content-available-height` to support this. Use them to constrain the content dimensions.
 
 ```heex
 <ContextMenu.root id="context-constrain">
@@ -508,14 +508,14 @@ We expose several CSS custom properties such as `--essence-context-menu-trigger-
 
 ```css
 .ContextMenuContent {
-  width: var(--essence-context-menu-trigger-width);
-  max-height: var(--essence-context-menu-content-available-height);
+  width: var(--radix-context-menu-trigger-width);
+  max-height: var(--radix-context-menu-content-available-height);
 }
 ```
 
 ### Origin-aware animations
 
-We expose a CSS custom property `--essence-context-menu-content-transform-origin`. Use it to animate the content from its computed origin based on positioning and any collisions.
+We expose a CSS custom property `--radix-context-menu-content-transform-origin`. Use it to animate the content from its computed origin based on positioning and any collisions.
 
 ```heex
 <ContextMenu.root id="context-origin">
@@ -528,7 +528,7 @@ We expose a CSS custom property `--essence-context-menu-content-transform-origin
 
 ```css
 .ContextMenuContent {
-  transform-origin: var(--essence-context-menu-content-transform-origin);
+  transform-origin: var(--radix-context-menu-content-transform-origin);
   animation: scaleIn 0.5s ease-out;
 }
 

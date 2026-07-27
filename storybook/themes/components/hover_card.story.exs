@@ -36,7 +36,7 @@ defmodule Storybook.Themes.Components.HoverCard do
           <.hover_card_trigger>
             <a
               href="#"
-              class="est-Link est-reset est-Text"
+              class="rt-Link rt-reset rt-Text"
             >
               @essence_ui
             </a>
@@ -84,7 +84,7 @@ defmodule Storybook.Themes.Components.HoverCard do
           <.hover_card_trigger>
             <a
               href="#"
-              class="est-Link est-reset est-Text"
+              class="rt-Link rt-reset rt-Text"
             >
               Size 1
             </a>
@@ -112,7 +112,7 @@ defmodule Storybook.Themes.Components.HoverCard do
           <.hover_card_trigger>
             <a
               href="#"
-              class="est-Link est-reset est-Text"
+              class="rt-Link rt-reset rt-Text"
             >
               Size 2
             </a>
@@ -140,7 +140,7 @@ defmodule Storybook.Themes.Components.HoverCard do
           <.hover_card_trigger>
             <a
               href="#"
-              class="est-Link est-reset est-Text"
+              class="rt-Link rt-reset rt-Text"
             >
               Size 3
             </a>
@@ -171,7 +171,7 @@ defmodule Storybook.Themes.Components.HoverCard do
           <.hover_card_trigger>
             <a
               href="#"
-              class="est-Link est-reset est-Text"
+              class="rt-Link rt-reset rt-Text"
             >
               Slow open (500ms)
             </a>
@@ -195,7 +195,7 @@ defmodule Storybook.Themes.Components.HoverCard do
           <.hover_card_trigger>
             <a
               href="#"
-              class="est-Link est-reset est-Text"
+              class="rt-Link rt-reset rt-Text"
             >
               Open above
             </a>
@@ -222,7 +222,7 @@ defmodule Storybook.Themes.Components.HoverCard do
           <.hover_card_trigger>
             <a
               href="#"
-              class="est-Link est-reset est-Text"
+              class="rt-Link rt-reset rt-Text"
             >
               Center aligned
             </a>

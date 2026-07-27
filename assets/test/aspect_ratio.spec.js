@@ -8,7 +8,7 @@ test.describe("Aspect Ratio Primitive", () => {
     const demo = page.locator(
       '#primitive-component .essence-demo[data-component="aspect-ratio"]',
     );
-    const wrapper = demo.locator("[data-essence-aspect-ratio-wrapper]");
+    const wrapper = demo.locator("[data-radix-aspect-ratio-wrapper]");
     await expect(wrapper).toBeVisible();
     await expect(demo.locator("img.Image")).toBeVisible();
 
@@ -24,7 +24,7 @@ test.describe("Aspect Ratio Primitive", () => {
     );
     await expect(demo.getByText("1:1")).toBeVisible();
 
-    const wrapper = demo.locator("[data-essence-aspect-ratio-wrapper]");
+    const wrapper = demo.locator("[data-radix-aspect-ratio-wrapper]");
     const box = await wrapper.boundingBox();
     expect(box).not.toBeNull();
     expect(box.width / box.height).toBeCloseTo(1, 1);

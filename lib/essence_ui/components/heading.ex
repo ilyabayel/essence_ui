@@ -47,7 +47,7 @@ defmodule EssenceUI.Components.Heading do
   def heading(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, values: @size_values, class: "est-r-size", responsive: true}
+        size: %{type: :enum, values: @size_values, class: "rt-r-size", responsive: true}
       }
       |> Map.merge(WeightProps.prop_defs())
       |> Map.merge(TextAlignProps.prop_defs())
@@ -61,7 +61,7 @@ defmodule EssenceUI.Components.Heading do
     extracted = ExtractProps.call(assigns, prop_defs)
 
     class =
-      ["est-Heading", extracted.class, assigns[:class], assigns[:high_contrast] && "est-HighContrast"]
+      ["rt-Heading", extracted.class, assigns[:class], assigns[:high_contrast] && "rt-HighContrast"]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 

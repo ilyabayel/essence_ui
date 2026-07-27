@@ -25,13 +25,13 @@ export const ToolbarRoot = {
   },
 
   items() {
-    return Array.from(this.el.querySelectorAll("[data-essence-toolbar-item]")).filter(
+    return Array.from(this.el.querySelectorAll("[data-radix-toolbar-item]")).filter(
       (el) => !el.disabled && !el.hasAttribute("data-disabled")
     );
   },
 
   allItems() {
-    return Array.from(this.el.querySelectorAll("[data-essence-toolbar-item]"));
+    return Array.from(this.el.querySelectorAll("[data-radix-toolbar-item]"));
   },
 
   syncTabIndexes(focused = null) {
@@ -45,7 +45,7 @@ export const ToolbarRoot = {
   },
 
   onFocusIn(event) {
-    const item = event.target.closest("[data-essence-toolbar-item]");
+    const item = event.target.closest("[data-radix-toolbar-item]");
     if (item && this.el.contains(item)) {
       this.syncTabIndexes(item);
     }
@@ -85,11 +85,11 @@ export const ToolbarRoot = {
   },
 
   onClick(event) {
-    const item = event.target.closest("[data-essence-toolbar-toggle-item]");
+    const item = event.target.closest("[data-radix-toolbar-toggle-item]");
     if (!item || !this.el.contains(item)) return;
     if (item.disabled || item.hasAttribute("data-disabled")) return;
 
-    const group = item.closest("[data-essence-toolbar-toggle-group]");
+    const group = item.closest("[data-radix-toolbar-toggle-group]");
     if (!group || group.hasAttribute("data-disabled")) return;
 
     const type = group.dataset.type || "single";
@@ -117,7 +117,7 @@ export const ToolbarRoot = {
 
   syncToggleGroups() {
     this.el
-      .querySelectorAll("[data-essence-toolbar-toggle-group]")
+      .querySelectorAll("[data-radix-toolbar-toggle-group]")
       .forEach((group) => this.syncToggleGroup(group));
   },
 
@@ -125,7 +125,7 @@ export const ToolbarRoot = {
     const values = (group.dataset.value || "").split(",").filter(Boolean);
     const disabled = group.hasAttribute("data-disabled");
 
-    group.querySelectorAll("[data-essence-toolbar-toggle-item]").forEach((item) => {
+    group.querySelectorAll("[data-radix-toolbar-toggle-item]").forEach((item) => {
       const pressed = values.includes(item.dataset.value);
       item.dataset.state = pressed ? "on" : "off";
       item.setAttribute("aria-pressed", String(pressed));

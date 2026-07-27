@@ -17,7 +17,7 @@ defmodule EssenceUI.Primitives.AspectRatioTest do
         %{}
       )
 
-    assert html =~ "data-essence-aspect-ratio-wrapper"
+    assert html =~ "data-radix-aspect-ratio-wrapper"
     assert html =~ "padding-bottom: 56.25%"
     assert html =~ ~s[id="media"]
     assert html =~ ~s[class="root"]

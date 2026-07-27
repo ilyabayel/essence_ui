@@ -20,7 +20,7 @@ defmodule Storybook.GettingStarted do
       data-gray-color="slate"
       data-scaling="100%"
       style="display: block; margin-top: -2rem;"
-      class="essence-ui"
+      class="radix-themes"
       data-radius="medium"
     >
       <.text as="p" mb="4">
@@ -55,7 +55,7 @@ defmodule Storybook.GettingStarted do
         (or equivalent):
       </.text>
       <.code color="indigo" style="display: block; padding: 0.5rem 0.75rem; margin: 0.5rem 0;">
-        @import "essence-ui/styles.css";
+        @import "essence-ui.css";
       </.code>
       <.text as="p" mb="4">
         Make sure your build tool (esbuild, tailwind, etc.) is configured to include the EssenceUI CSS.
@@ -150,7 +150,7 @@ defmodule Storybook.GettingStarted do
         console.log("EssenceUI is installed and ready to use!");
         const htmlElement = document.documentElement;
         const isDark = htmlElement.classList.contains("psb-dark");
-        const sandboxElement = document.querySelector(".essence-ui")
+        const sandboxElement = document.querySelector(".radix-themes")
 
         const mutationObserver = new MutationObserver((mutations) => {
           mutations.forEach((mutation) => {

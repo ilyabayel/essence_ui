@@ -75,7 +75,7 @@ defmodule EssenceUI.Primitives.Checkbox do
       data-form={@form}
       data-default-checked={to_string(@default_checked)}
       data-on-checked-change={@on_checked_change}
-      data-essence-checkbox-trigger
+      data-radix-checkbox-trigger
       disabled={@disabled}
       value={@value}
       {@rest}
@@ -92,7 +92,7 @@ defmodule EssenceUI.Primitives.Checkbox do
   def indicator(assigns) do
     ~H"""
     <span
-      data-essence-checkbox-indicator
+      data-radix-checkbox-indicator
       data-state="unchecked"
       data-force-mount={if @force_mount, do: ""}
       style="pointer-events: none; display: flex; align-items: center; justify-content: center;"
@@ -125,7 +125,7 @@ defmodule EssenceUI.Primitives.Checkbox do
       name={@name}
       value={@value}
       form={@form}
-      data-essence-checkbox-input
+      data-radix-checkbox-input
       style="position: absolute; pointer-events: none; opacity: 0; margin: 0; transform: translateX(-100%);"
       tabindex="-1"
       aria-hidden="true"

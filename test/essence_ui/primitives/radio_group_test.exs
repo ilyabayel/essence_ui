@@ -32,13 +32,13 @@ defmodule EssenceUI.Primitives.RadioGroupTest do
     assert html =~ ~s[role="radio"]
     assert html =~ ~s[value="a"]
     assert html =~ ~s[aria-checked="true"]
-    assert html =~ "data-essence-radio-group-indicator"
+    assert html =~ "data-radix-radio-group-indicator"
     assert html =~ ~s[class="RadioGroupIndicator"]
     assert html =~ ~s[type="radio"]
-    assert html =~ "data-essence-radio-group-input"
+    assert html =~ "data-radix-radio-group-input"
     assert html =~ ~s[name="choice"]
 
     # Empty indicator (no nested content) for checked item
-    assert html =~ ~r/data-essence-radio-group-indicator[^>]*>\s*</
+    assert html =~ ~r/data-radix-radio-group-indicator[^>]*>\s*</
   end
 end

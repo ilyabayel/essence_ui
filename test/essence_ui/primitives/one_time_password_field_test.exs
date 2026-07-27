@@ -18,16 +18,16 @@ defmodule EssenceUI.Primitives.OneTimePasswordFieldTest do
       })
 
     assert html =~ ~s[phx-hook="OneTimePasswordFieldRoot"]
-    assert html =~ "data-essence-otp-root"
+    assert html =~ "data-radix-otp-root"
     assert html =~ ~s[data-length="6"]
     assert html =~ ~s[data-name="code"]
     assert html =~ ~s[data-auto-submit="true"]
     assert html =~ ~s[data-on-complete="done"]
-    assert html =~ "data-essence-otp-hidden"
+    assert html =~ "data-radix-otp-hidden"
     assert html =~ ~s[name="code"]
     assert html =~ ~s[value="12"]
 
-    assert length(Regex.scan(~r/data-essence-otp-input/, html)) == 6
+    assert length(Regex.scan(~r/data-radix-otp-input/, html)) == 6
     assert html =~ ~s[data-index="0"]
     assert html =~ ~s[data-index="5"]
     assert html =~ ~s[value="1"]
@@ -50,8 +50,8 @@ defmodule EssenceUI.Primitives.OneTimePasswordFieldTest do
         %{}
       )
 
-    assert html =~ "data-essence-otp-hidden"
-    assert length(Regex.scan(~r/data-essence-otp-input/, html)) == 4
+    assert html =~ "data-radix-otp-hidden"
+    assert length(Regex.scan(~r/data-radix-otp-input/, html)) == 4
   end
 
   test "supports max_length alias and validation attrs" do

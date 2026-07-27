@@ -73,7 +73,7 @@ defmodule EssenceUI.Components.Tooltip do
         portal_id: "#{id}-portal",
         color: assigns[:color] || false,
         content_class:
-          ["essence-ui", "est-TooltipContent", "est-reset", extracted.class, assigns.class]
+          ["radix-themes", "rt-TooltipContent", "rt-reset", extracted.class, assigns.class]
           |> Enum.filter(& &1)
           |> Enum.join(" "),
         content_style: [extracted.style, assigns.style] |> Enum.filter(& &1) |> Enum.join("; ")
@@ -84,13 +84,13 @@ defmodule EssenceUI.Components.Tooltip do
       id={@id}
       open_delay={@open_delay}
       close_delay={@close_delay}
-      class="est-TooltipRoot"
+      class="rt-TooltipRoot"
     >
       <TooltipPrimitive.trigger
         id={"#{@id}-trigger"}
         content_id={@content_id}
         as="div"
-        class="est-TooltipTrigger"
+        class="rt-TooltipTrigger"
         style="display: inline-flex;"
       >
         {render_slot(@inner_block)}
@@ -106,12 +106,12 @@ defmodule EssenceUI.Components.Tooltip do
           {@rest}
         >
           <span
-            class="est-Text est-TooltipText est-r-size-1"
+            class="rt-Text rt-TooltipText rt-r-size-1"
             style="display: block; font-size: var(--font-size-1); line-height: var(--line-height-1);"
           >
             {@content}
           </span>
-          <TooltipPrimitive.arrow class="est-TooltipArrow" />
+          <TooltipPrimitive.arrow class="rt-TooltipArrow" />
         </TooltipPrimitive.content>
       </TooltipPrimitive.portal>
     </TooltipPrimitive.root>

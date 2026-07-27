@@ -41,7 +41,7 @@ defmodule EssenceUI.Primitives.ToggleTest do
     assert html =~ ~s[data-type="single"]
     assert html =~ ~s[data-value="left"]
     assert html =~ ~s[data-deselectable="true"]
-    assert html =~ "data-essence-toggle-group-item"
+    assert html =~ "data-radix-toggle-group-item"
   end
 
   test "toggle group can disable deselect for single type" do

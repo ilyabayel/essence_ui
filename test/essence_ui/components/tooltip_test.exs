@@ -22,22 +22,22 @@ defmodule EssenceUI.Components.TooltipTest do
     assert html =~ ~s[phx-hook="TooltipRoot"]
     assert html =~ ~s[data-open-delay="500"]
     assert html =~ ~s[data-close-delay="200"]
-    assert html =~ "data-essence-tooltip-trigger"
-    assert html =~ "data-essence-tooltip-content"
-    assert html =~ "data-essence-tooltip-arrow"
+    assert html =~ "data-radix-tooltip-trigger"
+    assert html =~ "data-radix-tooltip-content"
+    assert html =~ "data-radix-tooltip-arrow"
     assert html =~ ~s[data-phx-portal="body"]
     assert html =~ ~s[role="tooltip"]
     assert html =~ ~s[data-side="right"]
     assert html =~ ~s[data-align="start"]
 
-    assert html =~ "est-TooltipRoot"
-    assert html =~ "est-TooltipTrigger"
+    assert html =~ "rt-TooltipRoot"
+    assert html =~ "rt-TooltipTrigger"
     assert html =~ ~s[id="tip-trigger"]
     assert html =~ ~r/<div[^>]*id="tip-trigger"/
-    assert html =~ "est-TooltipContent"
-    assert html =~ "essence-ui"
-    assert html =~ "est-TooltipText"
-    assert html =~ "est-TooltipArrow"
+    assert html =~ "rt-TooltipContent"
+    assert html =~ "radix-themes"
+    assert html =~ "rt-TooltipText"
+    assert html =~ "rt-TooltipArrow"
     assert html =~ ~s[data-accent-color="blue"]
     assert html =~ "Hello tip"
     refute html =~ ~s[phx-hook="Tooltip"]

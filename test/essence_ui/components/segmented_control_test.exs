@@ -17,16 +17,16 @@ defmodule EssenceUI.Components.SegmentedControlTest do
         inner_block: [%{inner_block: fn _, _ -> "" end}]
       })
 
-    assert html =~ "est-SegmentedControlRoot"
-    assert html =~ "est-SegmentedControlIndicator"
-    assert html =~ "est-r-size-3"
-    assert html =~ "est-variant-classic"
+    assert html =~ "rt-SegmentedControlRoot"
+    assert html =~ "rt-SegmentedControlIndicator"
+    assert html =~ "rt-r-size-3"
+    assert html =~ "rt-variant-classic"
     assert html =~ ~s(phx-hook="ToggleGroupRoot")
-    assert html =~ "data-essence-toggle-group-root"
+    assert html =~ "data-radix-toggle-group-root"
     assert html =~ ~s(data-type="single")
     assert html =~ ~s(data-deselectable="false")
     assert html =~ ~s(data-accent-color="blue")
-    assert html =~ "est-high-contrast"
+    assert html =~ "rt-high-contrast"
     assert html =~ ~s(data-value="inbox")
   end
 
@@ -37,12 +37,12 @@ defmodule EssenceUI.Components.SegmentedControlTest do
         inner_block: [%{inner_block: fn _, _ -> "Inbox" end}]
       })
 
-    assert html =~ "est-SegmentedControlItem"
-    assert html =~ "est-SegmentedControlItemSeparator"
-    assert html =~ "est-SegmentedControlItemLabel"
-    assert html =~ "est-SegmentedControlItemLabelActive"
-    assert html =~ "est-SegmentedControlItemLabelInactive"
-    assert html =~ "data-essence-toggle-group-item"
+    assert html =~ "rt-SegmentedControlItem"
+    assert html =~ "rt-SegmentedControlItemSeparator"
+    assert html =~ "rt-SegmentedControlItemLabel"
+    assert html =~ "rt-SegmentedControlItemLabelActive"
+    assert html =~ "rt-SegmentedControlItemLabelInactive"
+    assert html =~ "data-radix-toggle-group-item"
     assert html =~ ~s(data-value="inbox")
     assert html =~ "Inbox"
   end
@@ -60,9 +60,9 @@ defmodule EssenceUI.Components.SegmentedControlTest do
         ]
       })
 
-    assert html =~ "est-SegmentedControlRoot"
+    assert html =~ "rt-SegmentedControlRoot"
     assert html =~ ~s(phx-hook="ToggleGroupRoot")
-    assert html =~ "est-r-size-1"
+    assert html =~ "rt-r-size-1"
     assert html =~ ~s(data-accent-color="indigo")
     assert html =~ ~s(data-deselectable="false")
     assert html =~ "Inbox"

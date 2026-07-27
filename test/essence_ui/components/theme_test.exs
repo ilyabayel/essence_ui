@@ -5,7 +5,7 @@ defmodule EssenceUI.Components.ThemeTest do
   import Phoenix.Component
   import Phoenix.LiveViewTest
 
-  test "theme renders data attributes and essence-ui class" do
+  test "theme renders data attributes and radix-themes class" do
     html =
       render_component(fn assigns ->
         ~H"""
@@ -15,7 +15,7 @@ defmodule EssenceUI.Components.ThemeTest do
         """
       end)
 
-    assert html =~ "essence-ui"
+    assert html =~ "radix-themes"
     assert html =~ ~s(data-accent-color="crimson")
     assert html =~ ~s(data-gray-color="mauve")
     assert html =~ ~s(data-radius="full")
@@ -34,6 +34,10 @@ defmodule EssenceUI.Components.ThemeTest do
         """
       end)
 
-    assert html =~ "dark-theme"
+    assert html =~ ~r/class="[^"]*\bdark\b/
+    refute html =~ "dark-theme"
+    assert html =~ ~s(data-has-background="true")
+    assert html =~ ~s(data-panel-background="solid")
+    assert html =~ ~s(data-is-root-theme="false")
   end
 end

@@ -16,7 +16,7 @@ defmodule EssenceUI.Primitives.Toast do
   def provider(assigns) do
     ~H"""
     <div
-      data-essence-toast-provider
+      data-radix-toast-provider
       data-duration={@duration}
       data-swipe-direction={@swipe_direction}
       data-label={@label}
@@ -61,7 +61,7 @@ defmodule EssenceUI.Primitives.Toast do
       aria-live={if @type == "foreground", do: "assertive", else: "polite"}
       aria-atomic="true"
       tabindex="0"
-      data-essence-toast-root
+      data-radix-toast-root
       data-state={@state}
       data-type={@type}
       data-duration={@duration}
@@ -83,7 +83,7 @@ defmodule EssenceUI.Primitives.Toast do
 
   def title(assigns) do
     ~H"""
-    <div data-essence-toast-title {@rest}>
+    <div data-radix-toast-title {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -97,7 +97,7 @@ defmodule EssenceUI.Primitives.Toast do
 
   def description(assigns) do
     ~H"""
-    <div data-essence-toast-description {@rest}>
+    <div data-radix-toast-description {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -113,7 +113,7 @@ defmodule EssenceUI.Primitives.Toast do
 
   def action(assigns) do
     ~H"""
-    <button type="button" data-essence-toast-action data-alt-text={@alt_text} {@rest}>
+    <button type="button" data-radix-toast-action data-alt-text={@alt_text} {@rest}>
       {render_slot(@inner_block)}
     </button>
     """
@@ -127,7 +127,7 @@ defmodule EssenceUI.Primitives.Toast do
 
   def close(assigns) do
     ~H"""
-    <button type="button" data-essence-toast-close {@rest}>
+    <button type="button" data-radix-toast-close {@rest}>
       {render_slot(@inner_block)}
     </button>
     """
@@ -152,7 +152,7 @@ defmodule EssenceUI.Primitives.Toast do
       phx-hook="ToastViewport"
       tabindex="-1"
       role="region"
-      data-essence-toast-viewport
+      data-radix-toast-viewport
       data-hotkey={@hotkey}
       data-label={@resolved_label}
       aria-label={@resolved_label}

@@ -17,11 +17,11 @@ defmodule EssenceUI.Components.CheckboxGroupTest do
         inner_block: [%{inner_block: fn _, _ -> "" end}]
       })
 
-    assert html =~ "est-CheckboxGroupRoot"
-    assert html =~ "est-r-size-3"
+    assert html =~ "rt-CheckboxGroupRoot"
+    assert html =~ "rt-r-size-3"
     assert html =~ ~s(phx-hook="CheckboxGroupRoot")
     assert html =~ ~s(data-accent-color="blue")
-    assert html =~ "est-high-contrast"
+    assert html =~ "rt-high-contrast"
     assert html =~ ~s(data-name="traits")
   end
 
@@ -37,13 +37,13 @@ defmodule EssenceUI.Components.CheckboxGroupTest do
         inner_block: [%{inner_block: fn _, _ -> "Fun" end}]
       })
 
-    assert html =~ "est-CheckboxGroupItem"
-    assert html =~ "est-CheckboxGroupItemCheckbox"
-    assert html =~ "est-BaseCheckboxRoot"
-    assert html =~ "est-BaseCheckboxIndicator"
+    assert html =~ "rt-CheckboxGroupItem"
+    assert html =~ "rt-CheckboxGroupItemCheckbox"
+    assert html =~ "rt-BaseCheckboxRoot"
+    assert html =~ "rt-BaseCheckboxIndicator"
     assert html =~ ~s(role="checkbox")
     assert html =~ ~s(data-accent-color="crimson")
-    assert html =~ "est-variant-soft"
+    assert html =~ "rt-variant-soft"
     assert html =~ "Fun"
   end
 
@@ -61,9 +61,9 @@ defmodule EssenceUI.Components.CheckboxGroupTest do
         ]
       })
 
-    assert html =~ "est-CheckboxGroupRoot"
+    assert html =~ "rt-CheckboxGroupRoot"
     assert html =~ ~s(phx-hook="CheckboxGroupRoot")
-    assert html =~ "est-r-size-1"
+    assert html =~ "rt-r-size-1"
     assert html =~ ~s(data-accent-color="indigo")
     assert html =~ "One"
     assert html =~ "Two"

@@ -84,7 +84,7 @@ defmodule EssenceUI.Components.Skeleton do
     ~H"""
     <%= if @loading do %>
       <span
-        class={["est-Skeleton", @extracted_class, @class]}
+        class={["rt-Skeleton", @extracted_class, @class]}
         style={@extracted_style <> @inline_styles}
         {@rest}
       >

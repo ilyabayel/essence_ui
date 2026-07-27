@@ -102,14 +102,14 @@ defmodule EssenceUI.Components.Slider do
       %{
         size: %{
           type: :enum,
-          class: "est-r-size",
+          class: "rt-r-size",
           values: @sizes,
           default: "2",
           responsive: true
         },
         variant: %{
           type: :enum,
-          class: "est-variant",
+          class: "rt-variant",
           values: @variants,
           default: "surface"
         }
@@ -125,12 +125,12 @@ defmodule EssenceUI.Components.Slider do
     id = assigns[:id] || "slider-#{System.unique_integer([:positive])}"
 
     class =
-      ["est-reset", "est-SliderRoot", extracted.class]
+      ["rt-reset", "rt-SliderRoot", extracted.class]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 
     style =
-      [extracted.style, assigns[:style], "--essence-slider-thumb-transform: translateX(-50%);"]
+      [extracted.style, assigns[:style], "--radix-slider-thumb-transform: translateX(-50%);"]
       |> Enum.reject(&(is_nil(&1) or &1 == ""))
       |> Enum.join(" ")
 
@@ -163,13 +163,13 @@ defmodule EssenceUI.Components.Slider do
       data-accent-color={@color}
       {@rest}
     >
-      <.track class="est-SliderTrack" data-orientation={@orientation}>
-        <.range class="est-SliderRange" data-orientation={@orientation} />
+      <.track class="rt-SliderTrack" data-orientation={@orientation}>
+        <.range class="rt-SliderRange" data-orientation={@orientation} />
       </.track>
       <.thumb
         :for={index <- @thumb_indexes}
         index={index}
-        class="est-SliderThumb"
+        class="rt-SliderThumb"
         data-orientation={@orientation}
       />
     </.root>

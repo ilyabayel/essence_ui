@@ -138,7 +138,7 @@ defmodule EssenceUIWeb.CRM.DashboardLive do
       data-gray-color="slate"
       data-accent-color="blue"
       data-is-root-theme="true"
-      class="essence-ui"
+      class="radix-themes"
       style="display: flex; height: 100vh; width: 100vw; overflow: hidden; background-color: var(--gray-1);"
     >
       <%!-- Left Sidebar --%>

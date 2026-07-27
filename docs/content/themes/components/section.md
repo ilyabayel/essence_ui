@@ -21,4 +21,4 @@ This component is based on the `section` element and supports common margin prop
 
 Layout sizing, padding, position, overflow, and related props are shared with [Box](/themes/docs/components/box), [Flex](/themes/docs/components/flex), [Grid](/themes/docs/components/grid), and [Container](/themes/docs/components/container).
 
-Themes CSS also defines `est-r-size-*` vertical padding for Section; the Elixir `size` attr is not wired yet—use padding props (`py`, `pt`, `pb`) until it lands.
+Themes CSS also defines `rt-r-size-*` vertical padding for Section; the Elixir `size` attr is not wired yet—use padding props (`py`, `pt`, `pb`) until it lands.

@@ -336,7 +336,7 @@ defmodule EssenceUIWeb.Docs.Components do
   end
 
   defp preview_class("primitive"), do: "docs-demo__preview essence-demo"
-  defp preview_class(_), do: "docs-demo__preview essence-ui"
+  defp preview_class(_), do: "docs-demo__preview radix-themes"
 
   defp theme_attr("theme", value), do: value
   defp theme_attr(_, _), do: nil

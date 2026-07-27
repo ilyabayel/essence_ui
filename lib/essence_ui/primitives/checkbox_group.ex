@@ -30,7 +30,7 @@ defmodule EssenceUI.Primitives.CheckboxGroup do
       phx-hook="CheckboxGroupRoot"
       role="group"
       aria-required={to_string(@required)}
-      data-essence-checkbox-group-root
+      data-radix-checkbox-group-root
       data-value={@value_attr}
       data-name={@name}
       data-disabled={if @disabled, do: ""}
@@ -65,7 +65,7 @@ defmodule EssenceUI.Primitives.CheckboxGroup do
       role="checkbox"
       id={@id}
       value={@value}
-      data-essence-checkbox-group-item
+      data-radix-checkbox-group-item
       data-value={@value}
       data-disabled={if @disabled, do: ""}
       data-state={if @checked, do: "checked", else: "unchecked"}
@@ -97,7 +97,7 @@ defmodule EssenceUI.Primitives.CheckboxGroup do
 
     ~H"""
     <span
-      data-essence-checkbox-group-indicator
+      data-radix-checkbox-group-indicator
       data-force-mount={if @force_mount, do: ""}
       style={if @present?, do: "display: flex;", else: "display: none;"}
       data-state={if @checked, do: "checked", else: "unchecked"}
@@ -126,7 +126,7 @@ defmodule EssenceUI.Primitives.CheckboxGroup do
       name={@name}
       value={@value}
       form={@form}
-      data-essence-checkbox-group-input
+      data-radix-checkbox-group-input
       style="position: absolute; pointer-events: none; opacity: 0; margin: 0; transform: translateX(-100%); width: 25px; height: 25px;"
       tabindex="-1"
       aria-hidden="true"

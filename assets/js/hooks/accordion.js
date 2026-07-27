@@ -41,7 +41,6 @@ export const Accordion = {
     // Temporarily remove animation to measure height accurately if needed
     // but usually scrollHeight works even if collapsed
     const height = content.scrollHeight;
-    content.style.setProperty('--essence-accordion-content-height', `${height}px`);
     content.style.setProperty('--radix-accordion-content-height', `${height}px`);
   },
 

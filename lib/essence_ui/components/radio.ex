@@ -81,14 +81,14 @@ defmodule EssenceUI.Components.Radio do
       %{
         size: %{
           type: :enum,
-          class: "est-r-size",
+          class: "rt-r-size",
           values: @sizes,
           default: "2",
           responsive: true
         },
         variant: %{
           type: :enum,
-          class: "est-variant",
+          class: "rt-variant",
           values: @variants,
           default: "surface"
         }
@@ -103,9 +103,9 @@ defmodule EssenceUI.Components.Radio do
     # Build CSS classes
     class =
       [
-        "est-reset",
-        "est-BaseRadioRoot",
-        "est-RadioRoot",
+        "rt-reset",
+        "rt-BaseRadioRoot",
+        "rt-RadioRoot",
         extracted.class,
         assigns.class
       ]

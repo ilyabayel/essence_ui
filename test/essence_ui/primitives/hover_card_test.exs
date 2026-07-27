@@ -28,11 +28,11 @@ defmodule EssenceUI.Primitives.HoverCardTest do
     assert html =~ ~s[data-state="open"]
     assert html =~ ~s[data-open-delay="100"]
     assert html =~ ~s[data-close-delay="50"]
-    assert html =~ "data-essence-hover-card-trigger"
+    assert html =~ "data-radix-hover-card-trigger"
     assert html =~ ~s[aria-describedby="preview-content"]
-    assert html =~ "data-essence-hover-card-content"
+    assert html =~ "data-radix-hover-card-content"
     assert html =~ ~s[data-side="right"]
-    assert html =~ "data-essence-hover-card-arrow"
+    assert html =~ "data-radix-hover-card-arrow"
     assert html =~ "display: none"
   end
 
@@ -54,6 +54,6 @@ defmodule EssenceUI.Primitives.HoverCardTest do
 
     assert html =~ ~s[data-phx-portal="body"]
     assert html =~ ~s[id="hover-portal"]
-    assert html =~ "data-essence-hover-card-content"
+    assert html =~ "data-radix-hover-card-content"
   end
 end

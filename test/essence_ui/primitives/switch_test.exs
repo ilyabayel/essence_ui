@@ -14,7 +14,7 @@ defmodule EssenceUI.Primitives.SwitchTest do
     assert html =~ ~s[data-state="unchecked"]
 
     assert html =~ ~s[input type="checkbox"]
-    assert html =~ ~s[data-essence-switch-input]
+    assert html =~ ~s[data-radix-switch-input]
   end
 
   test "renders with checked state" do
@@ -55,7 +55,7 @@ defmodule EssenceUI.Primitives.SwitchTest do
         %{}
       )
 
-    assert html =~ ~s[data-essence-switch-thumb]
+    assert html =~ ~s[data-radix-switch-thumb]
     assert html =~ ~s[id="thumb"]
   end
 end

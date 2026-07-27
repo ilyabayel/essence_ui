@@ -19,8 +19,8 @@ defmodule EssenceUI.Components.AspectRatioTest do
         %{}
       )
 
-    assert html =~ "est-AspectRatio"
-    assert html =~ ~s[data-essence-aspect-ratio-wrapper]
+    assert html =~ "rt-AspectRatio"
+    assert html =~ ~s[data-radix-aspect-ratio-wrapper]
     assert html =~ "padding-bottom:"
     assert html =~ ~s[src="/x.jpg"]
   end

@@ -84,11 +84,11 @@ defmodule EssenceUI.Components.ScrollArea do
       |> Enum.join("; ")
 
     class =
-      ["est-ScrollAreaRoot", extracted.class, assigns[:class]]
+      ["rt-ScrollAreaRoot", extracted.class, assigns[:class]]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 
-    scrollbar_class = "est-ScrollAreaScrollbar est-r-size-#{assigns.size}"
+    scrollbar_class = "rt-ScrollAreaScrollbar rt-r-size-#{assigns.size}"
 
     assigns =
       assign(assigns,
@@ -109,10 +109,10 @@ defmodule EssenceUI.Components.ScrollArea do
       style={@style}
       {@rest}
     >
-      <.viewport class="est-ScrollAreaViewport">
+      <.viewport class="rt-ScrollAreaViewport">
         {render_slot(@inner_block)}
       </.viewport>
-      <div class="est-ScrollAreaViewportFocusRing"></div>
+      <div class="rt-ScrollAreaViewportFocusRing"></div>
 
       <.scrollbar
         :if={@scrollbars != "vertical"}
@@ -120,7 +120,7 @@ defmodule EssenceUI.Components.ScrollArea do
         class={@scrollbar_class}
         data-radius={@radius}
       >
-        <.thumb class="est-ScrollAreaThumb" />
+        <.thumb class="rt-ScrollAreaThumb" />
       </.scrollbar>
       <.scrollbar
         :if={@scrollbars != "horizontal"}
@@ -128,9 +128,9 @@ defmodule EssenceUI.Components.ScrollArea do
         class={@scrollbar_class}
         data-radius={@radius}
       >
-        <.thumb class="est-ScrollAreaThumb" />
+        <.thumb class="rt-ScrollAreaThumb" />
       </.scrollbar>
-      <.corner :if={@scrollbars == "both"} class="est-ScrollAreaCorner" />
+      <.corner :if={@scrollbars == "both"} class="rt-ScrollAreaCorner" />
     </.root>
     """
   end

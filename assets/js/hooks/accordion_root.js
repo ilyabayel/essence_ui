@@ -17,7 +17,7 @@ export const AccordionRoot = {
   },
 
   items() {
-    return Array.from(this.el.querySelectorAll("[data-essence-accordion-item]"));
+    return Array.from(this.el.querySelectorAll("[data-radix-accordion-item]"));
   },
 
   values() {
@@ -38,7 +38,7 @@ export const AccordionRoot = {
       if (disabled) item.dataset.disabled = "true";
       this.setItemOpen(item, open);
 
-      item.querySelectorAll("[data-essence-accordion-header], [data-essence-accordion-trigger], [data-essence-accordion-content]").forEach((node) => {
+      item.querySelectorAll("[data-radix-accordion-header], [data-radix-accordion-trigger], [data-radix-accordion-content]").forEach((node) => {
         node.dataset.orientation = orientation;
         node.dataset.state = open ? "open" : "closed";
         if (itemDisabled) node.dataset.disabled = "";
@@ -55,10 +55,10 @@ export const AccordionRoot = {
       return;
     }
 
-    const trigger = event.target.closest("[data-essence-accordion-trigger]");
+    const trigger = event.target.closest("[data-radix-accordion-trigger]");
     if (!trigger || !this.el.contains(trigger)) return;
 
-    const item = trigger.closest("[data-essence-accordion-item]");
+    const item = trigger.closest("[data-radix-accordion-item]");
     if (!item || item.dataset.disabled === "true") return;
 
     // Accordion owns open state; prevent CollapsibleRoot from also toggling.
@@ -89,12 +89,12 @@ export const AccordionRoot = {
   },
 
   onKeyDown(event) {
-    const trigger = event.target.closest("[data-essence-accordion-trigger]");
+    const trigger = event.target.closest("[data-radix-accordion-trigger]");
     if (!trigger || !this.el.contains(trigger)) return;
 
     const triggers = this.items()
       .filter((item) => item.dataset.disabled !== "true")
-      .map((item) => item.querySelector("[data-essence-accordion-trigger]"))
+      .map((item) => item.querySelector("[data-radix-accordion-trigger]"))
       .filter(Boolean);
 
     const current = triggers.indexOf(trigger);
@@ -151,7 +151,7 @@ export const AccordionRoot = {
     const collapsible = this.el.dataset.collapsible === "true";
 
     this.items().forEach((item) => {
-      const trigger = item.querySelector("[data-essence-accordion-trigger]");
+      const trigger = item.querySelector("[data-radix-accordion-trigger]");
       if (!trigger) return;
 
       if (single && !collapsible && item.dataset.state === "open") {

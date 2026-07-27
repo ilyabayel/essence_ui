@@ -4,7 +4,7 @@ import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 async function waitForCheckboxGroupHook(root) {
   await expect(
-    root.locator("[data-essence-checkbox-group-item][data-has-click]").first(),
+    root.locator("[data-radix-checkbox-group-item][data-has-click]").first(),
   ).toBeVisible();
 }
 
@@ -18,10 +18,10 @@ test.describe("Checkbox Group Primitive", () => {
     await waitForCheckboxGroupHook(root);
 
     const fun = root.locator(
-      '[data-essence-checkbox-group-item][data-value="fun"]',
+      '[data-radix-checkbox-group-item][data-value="fun"]',
     );
     const serious = root.locator(
-      '[data-essence-checkbox-group-item][data-value="serious"]',
+      '[data-radix-checkbox-group-item][data-value="serious"]',
     );
 
     await expect(root).toHaveAttribute("role", "group");
@@ -37,10 +37,10 @@ test.describe("Checkbox Group Primitive", () => {
     await waitForCheckboxGroupHook(root);
 
     const fun = root.locator(
-      '[data-essence-checkbox-group-item][data-value="fun"]',
+      '[data-radix-checkbox-group-item][data-value="fun"]',
     );
     const serious = root.locator(
-      '[data-essence-checkbox-group-item][data-value="serious"]',
+      '[data-radix-checkbox-group-item][data-value="serious"]',
     );
 
     await page.locator('label[for="cg2"]').click();
@@ -59,10 +59,10 @@ test.describe("Checkbox Group Primitive", () => {
     await waitForCheckboxGroupHook(root);
 
     const fun = root.locator(
-      '[data-essence-checkbox-group-item][data-value="fun"]',
+      '[data-radix-checkbox-group-item][data-value="fun"]',
     );
     const serious = root.locator(
-      '[data-essence-checkbox-group-item][data-value="serious"]',
+      '[data-radix-checkbox-group-item][data-value="serious"]',
     );
 
     await fun.focus();

@@ -40,7 +40,7 @@ defmodule EssenceUI.Primitives.HoverCard do
     ~H"""
     <div
       id={@id}
-      data-essence-hover-card-trigger
+      data-radix-hover-card-trigger
       aria-describedby={@content_id}
       data-state="closed"
       {@rest}
@@ -75,7 +75,7 @@ defmodule EssenceUI.Primitives.HoverCard do
     ~H"""
     <div
       id={@id}
-      data-essence-hover-card-content
+      data-radix-hover-card-content
       data-state="closed"
       data-side={@side}
       data-align={@align}
@@ -94,7 +94,7 @@ defmodule EssenceUI.Primitives.HoverCard do
 
   def arrow(assigns) do
     ~H"""
-    <span id={@id} data-essence-hover-card-arrow aria-hidden="true" {@rest}>
+    <span id={@id} data-radix-hover-card-arrow aria-hidden="true" {@rest}>
       {render_slot(@inner_block)}
     </span>
     """

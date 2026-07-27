@@ -211,10 +211,10 @@ The hook sets `data-invalid` on the field and native control. Use it to style pa
 .DemoFormLabel {
   color: white;
 }
-[data-essence-form-field][data-invalid] .DemoFormLabel {
+[data-radix-form-field][data-invalid] .DemoFormLabel {
   color: red;
 }
-[data-essence-form-field]:not([data-invalid]) .DemoFormLabel {
+[data-radix-form-field]:not([data-invalid]) .DemoFormLabel {
   color: green;
 }
 ```
@@ -236,10 +236,10 @@ Wrap markup in `Form.validity_state` and read mirrored `data-*` attributes on th
 ```
 
 ```css
-[data-essence-form-validity-state][data-valid="false"] .ValidityIcon {
+[data-radix-form-validity-state][data-valid="false"] .ValidityIcon {
   color: red;
 }
-[data-essence-form-validity-state][data-valid="true"] .ValidityIcon {
+[data-radix-form-validity-state][data-valid="true"] .ValidityIcon {
   color: green;
 }
 ```

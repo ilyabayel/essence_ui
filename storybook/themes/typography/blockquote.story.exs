@@ -31,7 +31,7 @@ defmodule Storybook.Themes.Typography.Blockquote do
         id: :sizes,
         description: "Size",
         template: """
-        <div class="est-Flex est-r-fd-column est-r-gap-5">
+        <div class="rt-Flex rt-r-fd-column rt-r-gap-5">
           <div style="max-width: 300px;">
             <.blockquote size="1">
               Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy.
@@ -85,7 +85,7 @@ defmodule Storybook.Themes.Typography.Blockquote do
         description: "Weight",
         template: """
         <div
-          class="est-Flex est-r-fd-column est-r-gap-3"
+          class="rt-Flex rt-r-fd-column rt-r-gap-3"
           style="max-width: 500px;"
         >
           <.blockquote weight="regular">
@@ -105,7 +105,7 @@ defmodule Storybook.Themes.Typography.Blockquote do
         description: "Color",
         template: """
         <div
-          class="est-Flex est-r-fd-column est-r-gap-3"
+          class="rt-Flex rt-r-fd-column rt-r-gap-3"
           style="max-width: 500px;"
         >
           <.blockquote color="indigo">
@@ -128,7 +128,7 @@ defmodule Storybook.Themes.Typography.Blockquote do
         description: "High-contrast",
         template: """
         <div
-          class="est-Flex est-r-fd-column est-r-gap-3"
+          class="rt-Flex rt-r-fd-column rt-r-gap-3"
           style="max-width: 500px;"
         >
           <.blockquote color="gray">
@@ -148,7 +148,7 @@ defmodule Storybook.Themes.Typography.Blockquote do
         description: "Truncate",
         template: """
         <div
-          class="est-Flex"
+          class="rt-Flex"
           style="max-width: 500px;"
         >
           <.blockquote truncate>

@@ -45,19 +45,19 @@ function scrollFromPointer(
 
 export const ScrollAreaRoot = {
   mounted() {
-    this.viewport = this.el.querySelector("[data-essence-scroll-area-viewport]");
-    this.content = this.el.querySelector("[data-essence-scroll-area-content]");
+    this.viewport = this.el.querySelector("[data-radix-scroll-area-viewport]");
+    this.content = this.el.querySelector("[data-radix-scroll-area-content]");
     this.verticalScrollbar = this.el.querySelector(
-      '[data-essence-scroll-area-scrollbar][data-orientation="vertical"]',
+      '[data-radix-scroll-area-scrollbar][data-orientation="vertical"]',
     );
     this.horizontalScrollbar = this.el.querySelector(
-      '[data-essence-scroll-area-scrollbar][data-orientation="horizontal"]',
+      '[data-radix-scroll-area-scrollbar][data-orientation="horizontal"]',
     );
-    this.verticalThumb = this.verticalScrollbar?.querySelector("[data-essence-scroll-area-thumb]");
+    this.verticalThumb = this.verticalScrollbar?.querySelector("[data-radix-scroll-area-thumb]");
     this.horizontalThumb = this.horizontalScrollbar?.querySelector(
-      "[data-essence-scroll-area-thumb]",
+      "[data-radix-scroll-area-thumb]",
     );
-    this.corner = this.el.querySelector("[data-essence-scroll-area-corner]");
+    this.corner = this.el.querySelector("[data-radix-scroll-area-corner]");
     this.type = this.el.dataset.type || "hover";
     if (this.type === "hover" && !hasFinePointerHover()) {
       this.type = "scroll";
@@ -153,7 +153,7 @@ export const ScrollAreaRoot = {
       Object.assign(this.verticalScrollbar.style, {
         position: "absolute",
         top: "0",
-        bottom: "var(--essence-scroll-area-corner-height, 0px)",
+        bottom: "var(--radix-scroll-area-corner-height, 0px)",
         ...(this.dir === "rtl" ? { left: "0", right: "auto" } : { right: "0", left: "auto" }),
       });
     }
@@ -161,8 +161,8 @@ export const ScrollAreaRoot = {
       Object.assign(this.horizontalScrollbar.style, {
         position: "absolute",
         bottom: "0",
-        left: this.dir === "rtl" ? "var(--essence-scroll-area-corner-width, 0px)" : "0",
-        right: this.dir === "ltr" ? "var(--essence-scroll-area-corner-width, 0px)" : "0",
+        left: this.dir === "rtl" ? "var(--radix-scroll-area-corner-width, 0px)" : "0",
+        right: this.dir === "ltr" ? "var(--radix-scroll-area-corner-width, 0px)" : "0",
       });
     }
     if (this.corner) {
@@ -224,8 +224,8 @@ export const ScrollAreaRoot = {
     const cornerHeight =
       hasHorizontalScroll && this.horizontalScrollbar ? this.horizontalScrollbar.offsetHeight : 0;
 
-    this.el.style.setProperty("--essence-scroll-area-corner-width", `${cornerWidth}px`);
-    this.el.style.setProperty("--essence-scroll-area-corner-height", `${cornerHeight}px`);
+    this.el.style.setProperty("--radix-scroll-area-corner-width", `${cornerWidth}px`);
+    this.el.style.setProperty("--radix-scroll-area-corner-height", `${cornerHeight}px`);
 
     if (this.corner) {
       const showCorner = this.type !== "scroll" && hasVerticalScroll && hasHorizontalScroll;
