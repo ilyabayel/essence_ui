@@ -1,4 +1,3 @@
-/* Official Radix Primitives docs demo styles (scoped under .radix-demo) */
 @import "./demo-canvas.css";
 @import "./accordion.css";
 @import "./alert-dialog.css";
@@ -21,6 +20,7 @@
 @import "./radio-group.css";
 @import "./scroll-area.css";
 @import "./select.css";
+@import "./separator.css";
 @import "./slider.css";
 @import "./switch.css";
 @import "./tabs.css";

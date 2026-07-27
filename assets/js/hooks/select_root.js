@@ -4,6 +4,8 @@
  * Handles click events to toggle the select menu, item selection, 
  * keyboard navigation, and positions it relative to the trigger.
  */
+import { getFixedContainingBlockOffset } from "../lib/position";
+
 export const SelectRoot = {
   mounted() {
     this.init();
@@ -26,7 +28,7 @@ export const SelectRoot = {
     this.searchTimeout = null;
     
     this.el.addEventListener('click', e => {
-      const trigger = e.target.closest('[data-essence-select-trigger]');
+      const trigger = e.target.closest('[data-radix-select-trigger]');
       if (trigger && this.el.contains(trigger)) {
         this.onToggle(e);
       }
@@ -51,9 +53,9 @@ export const SelectRoot = {
 
   init() {
     this.root = this.el;
-    this.trigger = this.el.querySelector('[data-essence-select-trigger]');
-    this.content = this.el.querySelector('[data-essence-select-content]');
-    this.valueDisplay = this.el.querySelector('[data-essence-select-value]');
+    this.trigger = this.el.querySelector('[data-radix-select-trigger]');
+    this.content = this.el.querySelector('[data-radix-select-content]');
+    this.valueDisplay = this.el.querySelector('[data-radix-select-value]');
   },
 
   onToggle(e) {
@@ -71,7 +73,7 @@ export const SelectRoot = {
     if (this.root.hasAttribute('data-disabled')) return;
 
     // Close other menus if any
-    document.querySelectorAll('[data-essence-select-content]').forEach(el => {
+    document.querySelectorAll('[data-radix-select-content]').forEach(el => {
       if (el !== this.content) el.style.display = 'none';
     });
 
@@ -90,7 +92,7 @@ export const SelectRoot = {
     if (selectedItem) {
       selectedItem.focus();
     } else {
-      const firstItem = this.content.querySelector('[data-essence-select-item]:not([data-disabled])');
+      const firstItem = this.content.querySelector('[data-radix-select-item]:not([data-disabled])');
       if (firstItem) firstItem.focus();
     }
   },
@@ -135,6 +137,12 @@ export const SelectRoot = {
     if (left < 4) left = 4;
     if (top < 4) top = 4;
 
+    // Convert viewport coords → containing-block coords (transform ancestors).
+    const cb = getFixedContainingBlockOffset(this.content);
+    top -= cb.top;
+    left -= cb.left;
+
+    this.content.style.position = "fixed";
     this.content.style.top = `${top}px`;
     this.content.style.left = `${left}px`;
     this.content.style.minWidth = `${tRect.width}px`;
@@ -143,7 +151,7 @@ export const SelectRoot = {
   positionItemAligned() {
     const tRect = this.trigger.getBoundingClientRect();
     const selectedItem = this.content.querySelector('[aria-selected="true"]') || 
-                         this.content.querySelector('[data-essence-select-item]:not([data-disabled])');
+                         this.content.querySelector('[data-radix-select-item]:not([data-disabled])');
     
     if (!selectedItem) {
       this.positionPopper();
@@ -167,6 +175,11 @@ export const SelectRoot = {
       top = viewportHeight - cRect.height - 4;
     }
 
+    const cb = getFixedContainingBlockOffset(this.content);
+    top -= cb.top;
+    left -= cb.left;
+
+    this.content.style.position = "fixed";
     this.content.style.top = `${top}px`;
     this.content.style.left = `${left}px`;
     this.content.style.minWidth = `${tRect.width}px`;
@@ -208,7 +221,7 @@ export const SelectRoot = {
 
   syncValue() {
     const currentValue = this.root.getAttribute('data-value');
-    const items = this.content.querySelectorAll('[data-essence-select-item]');
+    const items = this.content.querySelectorAll('[data-radix-select-item]');
     
     let selectedText = null;
 
@@ -219,13 +232,13 @@ export const SelectRoot = {
       item.setAttribute('aria-selected', isSelected.toString());
       if (isSelected) {
         item.setAttribute('data-state', 'checked');
-        const textPart = item.querySelector('[data-essence-select-item-text]');
+        const textPart = item.querySelector('[data-radix-select-item-text]');
         selectedText = item.getAttribute('data-text-value') || (textPart ? textPart.innerText : item.innerText).trim();
       } else {
         item.removeAttribute('data-state');
       }
 
-      const indicator = item.querySelector('[data-essence-select-item-indicator]');
+      const indicator = item.querySelector('[data-radix-select-item-indicator]');
       if (indicator) {
         indicator.style.display = isSelected ? 'inline-flex' : 'none';
       }
@@ -251,7 +264,7 @@ export const SelectRoot = {
         return;
       }
 
-      const items = Array.from(this.content.querySelectorAll('[data-essence-select-item]:not([data-disabled])'));
+      const items = Array.from(this.content.querySelectorAll('[data-radix-select-item]:not([data-disabled])'));
       const currentIndex = items.indexOf(document.activeElement);
 
       if (e.key === 'ArrowDown') {
@@ -294,7 +307,7 @@ export const SelectRoot = {
   },
 
   bindHoverEvents() {
-    const items = this.content.querySelectorAll('[data-essence-select-item]:not([data-disabled])');
+    const items = this.content.querySelectorAll('[data-radix-select-item]:not([data-disabled])');
     items.forEach(item => {
       if (item.hasAttribute('data-has-hover')) return;
       item.setAttribute('data-has-hover', 'true');

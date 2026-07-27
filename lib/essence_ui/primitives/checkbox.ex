@@ -75,7 +75,7 @@ defmodule EssenceUI.Primitives.Checkbox do
       data-form={@form}
       data-default-checked={to_string(@default_checked)}
       data-on-checked-change={@on_checked_change}
-      data-essence-checkbox-trigger
+      data-radix-checkbox-trigger
       disabled={@disabled}
       value={@value}
       {@rest}
@@ -86,16 +86,24 @@ defmodule EssenceUI.Primitives.Checkbox do
   end
 
   attr :force_mount, :boolean, default: false
+  attr :state, :string, default: "unchecked"
   attr :rest, :global
   slot :inner_block, required: true
 
   def indicator(assigns) do
+    display =
+      if assigns.state in ["checked", "indeterminate"] or assigns.force_mount,
+        do: "flex",
+        else: "none"
+
+    assigns = assign(assigns, :display, display)
+
     ~H"""
     <span
-      data-essence-checkbox-indicator
-      data-state="unchecked"
+      data-radix-checkbox-indicator
+      data-state={@state}
       data-force-mount={if @force_mount, do: ""}
-      style="pointer-events: none; display: flex; align-items: center; justify-content: center;"
+      style={"pointer-events: none; display: #{@display}; align-items: center; justify-content: center;"}
       {@rest}
     >
       {render_slot(@inner_block)}
@@ -125,7 +133,7 @@ defmodule EssenceUI.Primitives.Checkbox do
       name={@name}
       value={@value}
       form={@form}
-      data-essence-checkbox-input
+      data-radix-checkbox-input
       style="position: absolute; pointer-events: none; opacity: 0; margin: 0; transform: translateX(-100%);"
       tabindex="-1"
       aria-hidden="true"

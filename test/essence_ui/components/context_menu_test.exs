@@ -48,41 +48,41 @@ defmodule EssenceUI.Components.ContextMenuTest do
       )
 
     assert html =~ ~s[phx-hook="ContextMenuRoot"]
-    assert html =~ "data-essence-context-menu-root"
-    assert html =~ "data-essence-context-menu-trigger"
-    assert html =~ "data-essence-context-menu-content"
+    assert html =~ "data-radix-context-menu-root"
+    assert html =~ "data-radix-context-menu-trigger"
+    assert html =~ "data-radix-context-menu-content"
     assert html =~ ~s[data-phx-portal="body"]
     assert html =~ ~s[id="cm-content-portal"]
 
-    assert html =~ "est-ContextMenuRoot"
-    assert html =~ "est-ContextMenuTrigger"
-    assert html =~ "est-ContextMenuContent"
-    assert html =~ "est-BaseMenuContent"
-    assert html =~ "est-PopperContent"
-    assert html =~ "est-r-size-1"
-    assert html =~ "est-variant-soft"
-    assert html =~ "est-high-contrast"
+    assert html =~ "rt-ContextMenuRoot"
+    assert html =~ "rt-ContextMenuTrigger"
+    assert html =~ "rt-ContextMenuContent"
+    assert html =~ "rt-BaseMenuContent"
+    assert html =~ "rt-PopperContent"
+    assert html =~ "rt-r-size-1"
+    assert html =~ "rt-variant-soft"
+    assert html =~ "rt-high-contrast"
     assert html =~ ~s[data-accent-color="indigo"]
 
-    assert html =~ "est-ContextMenuItem"
-    assert html =~ "est-BaseMenuShortcut"
+    assert html =~ "rt-ContextMenuItem"
+    assert html =~ "rt-BaseMenuShortcut"
     assert html =~ "⌘ E"
     assert html =~ ~s[data-accent-color="red"]
 
-    assert html =~ "est-ContextMenuLabel"
-    assert html =~ "est-ContextMenuGroup"
-    assert html =~ "est-ContextMenuSeparator"
-    assert html =~ "est-ContextMenuCheckboxItem"
-    assert html =~ "est-BaseMenuItemIndicator"
-    assert html =~ "data-essence-context-menu-checkbox-item"
-    assert html =~ "data-essence-context-menu-item-indicator"
-    assert html =~ "data-essence-context-menu-radio-group"
-    assert html =~ "data-essence-context-menu-radio-item"
-    assert html =~ "est-ContextMenuRadioItem"
-    assert html =~ "est-ContextMenuSub"
-    assert html =~ "est-ContextMenuSubTrigger"
-    assert html =~ "est-ContextMenuSubContent"
-    assert html =~ "est-BaseMenuViewport"
+    assert html =~ "rt-ContextMenuLabel"
+    assert html =~ "rt-ContextMenuGroup"
+    assert html =~ "rt-ContextMenuSeparator"
+    assert html =~ "rt-ContextMenuCheckboxItem"
+    assert html =~ "rt-BaseMenuItemIndicator"
+    assert html =~ "data-radix-menu-checkbox-item"
+    assert html =~ "data-radix-menu-item-indicator"
+    assert html =~ "data-radix-menu-radio-group"
+    assert html =~ "data-radix-menu-radio-item"
+    assert html =~ "rt-ContextMenuRadioItem"
+    assert html =~ "rt-ContextMenuSub"
+    assert html =~ "rt-ContextMenuSubTrigger"
+    assert html =~ "rt-ContextMenuSubContent"
+    assert html =~ "rt-BaseMenuViewport"
   end
 
   test "content portals and keeps themes viewport wrapper" do
@@ -103,7 +103,7 @@ defmodule EssenceUI.Components.ContextMenuTest do
 
     assert html =~ ~s[data-phx-portal="body"]
     assert html =~ ~s[id="ported-content"]
-    assert html =~ "est-BaseMenuViewport"
+    assert html =~ "rt-BaseMenuViewport"
     assert html =~ "One"
     refute html =~ ~s[phx-hook="ContextMenu"]
   end

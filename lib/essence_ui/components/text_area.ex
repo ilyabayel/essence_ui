@@ -1,6 +1,6 @@
 defmodule EssenceUI.Components.TextArea do
   @moduledoc """
-  TextArea component compatible with Radix UI Themes Text Area API.
+  Themed text area with sizes, variants, and accent colors.
   """
 
   use Phoenix.Component
@@ -45,8 +45,8 @@ defmodule EssenceUI.Components.TextArea do
   def text_area(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, class: "est-r-size", values: @sizes, default: "2", responsive: true},
-        variant: %{type: :enum, class: "est-variant", values: @variants, default: "surface"}
+        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
+        variant: %{type: :enum, class: "rt-variant", values: @variants, default: "surface"}
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(HighContrastProps.prop_defs())
@@ -56,8 +56,8 @@ defmodule EssenceUI.Components.TextArea do
 
     class =
       [
-        "est-reset",
-        "est-TextAreaRoot",
+        "rt-reset",
+        "rt-TextAreaRoot",
         extracted.class
       ]
       |> Enum.filter(& &1)
@@ -77,7 +77,7 @@ defmodule EssenceUI.Components.TextArea do
       <textarea
         name={@name}
         placeholder={@placeholder}
-        class="est-TextAreaInput est-reset"
+        class="rt-TextAreaInput rt-reset"
         disabled={@disabled}
         readonly={@readonly}
         rows={@rows}

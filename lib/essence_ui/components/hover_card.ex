@@ -2,8 +2,7 @@ defmodule EssenceUI.Components.HoverCard do
   @moduledoc """
   A HoverCard component for sighted users to preview content available behind a link.
 
-  Wraps `EssenceUI.Primitives.HoverCard` with Themes visual props.
-  Based on Radix UI Themes HoverCard.
+  Wraps `EssenceUI.Primitives.HoverCard` with themed visual props.
   """
   use Phoenix.Component
 
@@ -52,7 +51,7 @@ defmodule EssenceUI.Components.HoverCard do
       open_delay={@open_delay}
       close_delay={@close_delay}
       on_open_change={@on_open_change}
-      class={["est-HoverCardRoot", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["rt-HoverCardRoot", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={["display: contents;", @style] |> Enum.filter(&(&1 != "")) |> Enum.join("; ")}
       {@rest}
     >
@@ -77,7 +76,7 @@ defmodule EssenceUI.Components.HoverCard do
     <HoverCardPrimitive.trigger
       id={@id}
       content_id={@content_id}
-      class={["est-HoverCardTrigger", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["rt-HoverCardTrigger", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={
         [
           # Root uses display:contents; without this, grid/flex parents stretch the
@@ -123,7 +122,7 @@ defmodule EssenceUI.Components.HoverCard do
   def hover_card_content(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, class: "est-r-size", values: @sizes, default: "2", responsive: true}
+        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true}
       }
       |> Map.merge(WidthProps.prop_defs())
       |> Map.merge(HeightProps.prop_defs())
@@ -137,7 +136,7 @@ defmodule EssenceUI.Components.HoverCard do
         id: id,
         portal_id: "#{id}-portal",
         class:
-          ["est-PopperContent", "est-HoverCardContent", extracted.class, assigns.class]
+          ["rt-PopperContent", "rt-HoverCardContent", extracted.class, assigns.class]
           |> Enum.filter(& &1)
           |> Enum.join(" "),
         style: [extracted.style, assigns.style] |> Enum.filter(&(&1 != "")) |> Enum.join("; ")

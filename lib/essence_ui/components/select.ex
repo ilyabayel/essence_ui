@@ -1,6 +1,6 @@
 defmodule EssenceUI.Components.Select do
   @moduledoc """
-  Select component styled per Radix Themes Select.
+  Themed select with trigger, content, and item subcomponents.
   """
   use Phoenix.Component
 
@@ -61,8 +61,8 @@ defmodule EssenceUI.Components.Select do
     prop_defs =
       Map.merge(
         %{
-          size: %{type: :enum, class: "est-r-size", values: @sizes, default: "2", responsive: true},
-          variant: %{type: :enum, class: "est-variant", values: @trigger_variants, default: "surface"}
+          size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
+          variant: %{type: :enum, class: "rt-variant", values: @trigger_variants, default: "surface"}
         },
         ColorProps.color_prop_def()
       )
@@ -71,7 +71,7 @@ defmodule EssenceUI.Components.Select do
 
     assigns =
       assign(assigns,
-        class: ["est-reset", "est-SelectTrigger", extracted.class, assigns.class] |> Enum.filter(& &1) |> Enum.join(" "),
+        class: ["rt-reset", "rt-SelectTrigger", extracted.class, assigns.class] |> Enum.filter(& &1) |> Enum.join(" "),
         color: assigns[:color] || false
       )
 
@@ -82,10 +82,10 @@ defmodule EssenceUI.Components.Select do
       data-accent-color={@color}
       {Map.delete(@rest, :class)}
     >
-      <span class="est-SelectTriggerInner">
+      <span class="rt-SelectTriggerInner">
         <SelectPrimitive.value placeholder={@placeholder} />
       </span>
-      <SelectPrimitive.icon class="est-SelectIcon">
+      <SelectPrimitive.icon class="rt-SelectIcon">
         <svg
           width="12"
           height="12"
@@ -123,8 +123,8 @@ defmodule EssenceUI.Components.Select do
   def select_content(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, class: "est-r-size", values: @sizes, default: "2", responsive: true},
-        variant: %{type: :enum, class: "est-variant", values: @content_variants, default: "solid"}
+        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
+        variant: %{type: :enum, class: "rt-variant", values: @content_variants, default: "solid"}
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(HighContrastProps.prop_defs())
@@ -134,7 +134,7 @@ defmodule EssenceUI.Components.Select do
     assigns =
       assign(assigns,
         class:
-          ["est-SelectContent", extracted.class, assigns.class]
+          ["rt-SelectContent", extracted.class, assigns.class]
           |> Enum.filter(& &1)
           |> Enum.join(" ")
       )
@@ -147,7 +147,7 @@ defmodule EssenceUI.Components.Select do
       data-position={@position}
       {Map.delete(@rest, :class)}
     >
-      <SelectPrimitive.viewport class="est-SelectViewport">
+      <SelectPrimitive.viewport class="rt-SelectViewport">
         {render_slot(@inner_block)}
       </SelectPrimitive.viewport>
     </SelectPrimitive.content>
@@ -169,18 +169,18 @@ defmodule EssenceUI.Components.Select do
       value={@value}
       disabled={@disabled}
       class={
-        ["est-reset", "est-SelectItem", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")
+        ["rt-reset", "rt-SelectItem", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")
       }
       {Map.delete(@rest, :class)}
     >
-      <SelectPrimitive.item_indicator class="est-SelectItemIndicator">
+      <SelectPrimitive.item_indicator class="rt-SelectItemIndicator">
         <svg
           width="12"
           height="12"
           viewBox="0 0 12 12"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          class="est-SelectItemIndicatorIcon"
+          class="rt-SelectItemIndicatorIcon"
         >
           <path
             d="M10 3L4.5 8.5L2 6"
@@ -208,7 +208,7 @@ defmodule EssenceUI.Components.Select do
   def select_group(assigns) do
     ~H"""
     <SelectPrimitive.group
-      class={["est-SelectGroup", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["rt-SelectGroup", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
       {@rest}
     >
       {render_slot(@inner_block)}
@@ -226,7 +226,7 @@ defmodule EssenceUI.Components.Select do
   def select_label(assigns) do
     ~H"""
     <SelectPrimitive.label
-      class={["est-SelectLabel", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["rt-SelectLabel", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
       {@rest}
     >
       {render_slot(@inner_block)}
@@ -243,7 +243,7 @@ defmodule EssenceUI.Components.Select do
   def select_separator(assigns) do
     ~H"""
     <SelectPrimitive.separator
-      class={["est-SelectSeparator", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["rt-SelectSeparator", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
       {@rest}
     />
     """

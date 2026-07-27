@@ -4,28 +4,50 @@ defmodule EssenceUIWeb.Docs.Components do
 
   import EssenceUI.Components
 
+  alias Makeup.Formatters.HTML.HTMLFormatter
+  alias Makeup.Lexers.HEExLexer
+  alias Makeup.Lexers.HTMLLexer
+  alias Makeup.Registry
+  alias MakeupSyntect.Lexer, as: SyntectLexer
+
   @doc """
-  Live preview with optional HEEx / CSS source tabs.
+  Live preview with HEEx / CSS source tabs.
+
+  Use `<:heex>` for the live markup. Pass CSS as an argument, typically via
+  `css={primitive_css("accordion")}` available in Markdown through PageLive imports.
   """
-  attr :heex, :string, default: nil
-  attr :css, :string, default: nil
   attr :variant, :string, default: "theme", values: ["theme", "primitive"]
   attr :component, :string, default: nil
   attr :class, :string, default: nil
-  slot :inner_block, required: true
+  attr :css, :string, default: nil
+  attr :theme, :string, default: "system", values: ["system", "light", "dark"]
+
+  slot :heex, required: true do
+    attr :code, :string
+  end
 
   def demo(assigns) do
+    heex_code = slot_code(assigns.heex)
+    css_code = assigns.css
+    primitive? = assigns.variant == "primitive"
+    canvas_css = if primitive?, do: demo_canvas_css()
+
     assigns =
       assigns
       |> assign_new(:tab_id, fn -> "demo-#{System.unique_integer([:positive])}" end)
-      |> assign(:has_css, is_binary(assigns.css) and assigns.css != "")
-      |> assign(:has_heex, is_binary(assigns.heex) and assigns.heex != "")
-      |> assign(:default_tab, default_tab(assigns))
+      |> assign(:heex_code, heex_code)
+      |> assign(:css_code, css_code)
+      |> assign(:canvas_css, canvas_css)
+      |> assign(:has_canvas_css, is_binary(canvas_css) and canvas_css != "")
+      |> assign(:has_heex_code, is_binary(heex_code) and heex_code != "")
+      |> assign(:has_css_code, is_binary(css_code) and css_code != "")
+      |> assign(:default_tab, if(is_binary(heex_code) and heex_code != "", do: "heex", else: "css"))
+      |> assign(:box_class, [get_component_frame_class(assigns.theme), preview_class(assigns.variant)])
 
     ~H"""
     <.card variant="surface" class={["docs-demo", @class]}>
       <.box
-        class={preview_class(@variant)}
+        class={@box_class}
         p="5"
         data-component={@component}
         data-accent-color={theme_attr(@variant, "indigo")}
@@ -33,22 +55,28 @@ defmodule EssenceUIWeb.Docs.Components do
         data-radius={theme_attr(@variant, "medium")}
         data-scaling={theme_attr(@variant, "100%")}
       >
-        {render_slot(@inner_block)}
+        <style :if={@has_canvas_css}>
+          <%= Phoenix.HTML.raw(@canvas_css) %>
+        </style>
+        <style :if={@has_css_code}>
+          <%= Phoenix.HTML.raw(@css_code) %>
+        </style>
+        {render_slot(@heex)}
       </.box>
 
-      <.box :if={@has_heex or @has_css} class="docs-demo__source">
+      <.box :if={@has_heex_code or @has_css_code} class="docs-demo__source">
         <.tabs id={@tab_id} default_value={@default_tab}>
           <:list>
             <.tabs_list size="1">
-              <:trigger :if={@has_heex} value="heex">HEEx</:trigger>
-              <:trigger :if={@has_css} value="css">CSS</:trigger>
+              <:trigger :if={@has_heex_code} value="heex">HEEx</:trigger>
+              <:trigger :if={@has_css_code} value="css">CSS</:trigger>
             </.tabs_list>
           </:list>
-          <:content :if={@has_heex} value="heex">
-            <.code_block language="heex" code={@heex} />
+          <:content :if={@has_heex_code} value="heex">
+            <.code_block language="heex" code={@heex_code} />
           </:content>
-          <:content :if={@has_css} value="css">
-            <.code_block language="css" code={@css} />
+          <:content :if={@has_css_code} value="css">
+            <.code_block language="css" code={@css_code} />
           </:content>
         </.tabs>
       </.box>
@@ -56,14 +84,36 @@ defmodule EssenceUIWeb.Docs.Components do
     """
   end
 
-  @doc "Standalone fenced-style code block."
+  defp get_component_frame_class(theme) do
+    case theme do
+      "light" -> "light theme-light"
+      "dark" -> "dark theme-dark"
+      _ -> ""
+    end
+  end
+
+  @doc """
+  Load primitives demo CSS for Markdown: `css={primitive_css("dialog")}`.
+
+  Returns the component stylesheet only (no demo canvas). Strips `@import`
+  lines and `.essence-demo[data-component]` selector prefixes so the CSS tab
+  shows copy-pasteable `Demo*` rules.
+  """
+  def primitive_css(component) when is_binary(component) do
+    case read_primitive_css("#{component}.css") do
+      nil -> ""
+      css -> css |> strip_css_imports() |> unwrap_essence_demo_selectors()
+    end
+  end
+
+  @doc "Standalone fenced-style code block with Makeup highlighting for HEEx/HTML/CSS."
   attr :code, :string, required: true
   attr :language, :string, default: "text"
 
   def code_block(assigns) do
     assigns =
       assigns
-      |> assign(:formatted, format_source(assigns.code, assigns.language))
+      |> assign(:highlighted, highlight_source(assigns.code, assigns.language))
       |> assign_new(:copy_id, fn -> "copy-#{System.unique_integer([:positive])}" end)
 
     ~H"""
@@ -71,7 +121,7 @@ defmodule EssenceUIWeb.Docs.Components do
       <button type="button" class="docs-code-block__copy" data-copy aria-label="Copy code">
         Copy
       </button>
-      <pre><code>{@formatted}</code></pre>
+      <pre><code class={"language-#{@language}"}>{Phoenix.HTML.raw(@highlighted)}</code></pre>
     </.box>
     """
   end
@@ -168,6 +218,58 @@ defmodule EssenceUIWeb.Docs.Components do
     """
   end
 
+  @doc "Feature bullet list (highlights)."
+  slot :item, required: true
+
+  def highlights(assigns) do
+    ~H"""
+    <.box class="docs-highlights" mb="5">
+      <.flex direction="column" gap="2" class="docs-highlights__list">
+        <.flex :for={item <- @item} gap="2" align="start" class="docs-highlights__item">
+          <.text size="2" color="gray" high_contrast>•</.text>
+          <.text size="2">{render_slot(item)}</.text>
+        </.flex>
+      </.flex>
+    </.box>
+    """
+  end
+
+  @doc "Data attribute reference table for stateful parts."
+  slot :row, required: true do
+    attr :name, :string, required: true
+    attr :values, :string, required: true
+  end
+
+  def data_attributes_table(assigns) do
+    ~H"""
+    <.box class="docs-data-attrs" mb="4">
+      <.heading as="h4" size="2" mb="2">Data attributes</.heading>
+      <.table variant="surface" size="1">
+        <.table_header>
+          <.table_row>
+            <.table_column_header_cell>Attribute</.table_column_header_cell>
+            <.table_column_header_cell>Values</.table_column_header_cell>
+            <.table_column_header_cell>Description</.table_column_header_cell>
+          </.table_row>
+        </.table_header>
+        <.table_body>
+          <.table_row :for={row <- @row}>
+            <.table_row_header_cell>
+              <.code size="1">{row.name}</.code>
+            </.table_row_header_cell>
+            <.table_cell>
+              <.code size="1" variant="ghost" color="gray">{row.values}</.code>
+            </.table_cell>
+            <.table_cell>
+              <.text size="2">{render_slot(row)}</.text>
+            </.table_cell>
+          </.table_row>
+        </.table_body>
+      </.table>
+    </.box>
+    """
+  end
+
   @doc "Anatomy list for compound components."
   slot :part, required: true do
     attr :name, :string, required: true
@@ -191,13 +293,45 @@ defmodule EssenceUIWeb.Docs.Components do
     """
   end
 
-  defp default_tab(assigns) do
-    heex? = is_binary(assigns[:heex]) and assigns[:heex] != ""
-    if heex?, do: "heex", else: "css"
+  defp slot_code([]), do: nil
+
+  defp slot_code([%{code: code} | _]) when is_binary(code) and code != "", do: code
+
+  defp slot_code(_), do: nil
+
+  defp read_primitive_css(filename) do
+    path = Path.expand("../../../assets/css/primitives/#{filename}", __DIR__)
+
+    if File.exists?(path) do
+      File.read!(path)
+    end
   end
 
-  defp preview_class("primitive"), do: "docs-demo__preview radix-demo"
-  defp preview_class(_), do: "docs-demo__preview essence-ui"
+  # Canvas layout for the preview only (not shown in the CSS tab).
+  defp demo_canvas_css do
+    case read_primitive_css("demo-canvas.css") do
+      nil -> ""
+      css -> strip_css_imports(css)
+    end
+  end
+
+  # @import to node_modules colors does not resolve inside <style>; tokens already
+  # ship via the main Essence UI stylesheet.
+  defp strip_css_imports(css) when is_binary(css) do
+    css
+    |> String.replace(~r/^@import\s+[^;]+;\s*/m, "")
+    |> String.trim()
+  end
+
+  # Drop `.essence-demo[data-component="…"]` so the CSS tab shows component-local rules.
+  defp unwrap_essence_demo_selectors(css) when is_binary(css) do
+    css
+    |> String.replace(~r/\.essence-demo\[data-component="[^"]+"\]\s*/m, "")
+    |> String.trim()
+  end
+
+  defp preview_class("primitive"), do: "docs-demo__preview essence-demo"
+  defp preview_class(_), do: "docs-demo__preview radix-themes"
 
   defp theme_attr("theme", value), do: value
   defp theme_attr(_, _), do: nil
@@ -225,17 +359,64 @@ defmodule EssenceUIWeb.Docs.Components do
 
   defp format_default(_), do: "—"
 
+  defp highlight_source(code, language) when is_binary(code) do
+    code
+    |> format_source(language)
+    |> highlight_formatted(language)
+  end
+
   defp format_source(code, language) when language in ["heex", "html"] do
     code
+    |> Phoenix.LiveView.HTMLFormatter.format([])
     |> String.trim()
-    |> String.replace(~r/\s+/, " ")
-    |> String.replace(~r"/>\s*</", "/>\n<")
-    |> String.replace(~r"/>(?=<)/", "/>\n")
-    |> String.replace(~r">(?=<\.)", ">\n")
-    |> String.replace(~r"></", ">\n</")
-    |> String.split("\n")
-    |> Enum.map_join("\n", &String.trim/1)
   end
 
   defp format_source(code, _), do: String.trim(code)
+
+  defp highlight_formatted(code, "heex") do
+    ensure_html_lexer_registered()
+    code |> HEExLexer.lex() |> HTMLFormatter.format_inner_as_binary([])
+  rescue
+    _ -> escape_code(code)
+  end
+
+  defp highlight_formatted(code, "html") do
+    ensure_html_lexer_registered()
+    code |> HTMLLexer.lex() |> HTMLFormatter.format_inner_as_binary([])
+  rescue
+    _ -> escape_code(code)
+  end
+
+  defp highlight_formatted(code, "css") do
+    ensure_syntect_css_lexer()
+    {lexer, opts} = Registry.fetch_lexer_by_name!("css")
+    code |> lexer.lex(opts) |> HTMLFormatter.format_inner_as_binary([])
+  rescue
+    _ -> escape_code(code)
+  end
+
+  defp highlight_formatted(code, _), do: escape_code(code)
+
+  defp escape_code(code) do
+    code |> Phoenix.HTML.html_escape() |> Phoenix.HTML.safe_to_string()
+  end
+
+  defp ensure_html_lexer_registered do
+    if is_nil(Registry.get_lexer_by_name("html")) and
+         is_nil(Registry.get_lexer_by_extension("html")) do
+      Registry.register_lexer(HTMLLexer, options: [], names: ["html"], extensions: ["html"])
+    end
+  end
+
+  defp ensure_syntect_css_lexer do
+    {:ok, _} = Application.ensure_all_started(:makeup_syntect)
+
+    if is_nil(Registry.get_lexer_by_name("css")) do
+      Registry.register_lexer(SyntectLexer,
+        options: [language: "CSS"],
+        names: ["css", "CSS"],
+        extensions: ["css"]
+      )
+    end
+  end
 end

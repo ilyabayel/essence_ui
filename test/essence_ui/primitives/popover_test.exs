@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.PopoverTest do
 
   alias EssenceUI.Primitives.Popover
 
-  test "renders radix-like popover parts" do
+  test "renders popover parts" do
     html =
       render_component(
         fn assigns ->
@@ -29,14 +29,14 @@ defmodule EssenceUI.Primitives.PopoverTest do
     assert html =~ ~s[data-state="open"]
     assert html =~ ~s[data-modal]
     assert html =~ ~s[data-on-open-change="changed"]
-    assert html =~ "data-essence-popover-trigger"
+    assert html =~ "data-radix-popover-trigger"
     assert html =~ ~s[aria-controls="share-content"]
-    assert html =~ "data-essence-popover-anchor"
-    assert html =~ "data-essence-popover-content"
+    assert html =~ "data-radix-popover-anchor"
+    assert html =~ "data-radix-popover-content"
     assert html =~ ~s[data-side="top"]
     assert html =~ ~s[data-align="start"]
-    assert html =~ "data-essence-popover-close"
-    assert html =~ "data-essence-popover-arrow"
+    assert html =~ "data-radix-popover-close"
+    assert html =~ "data-radix-popover-arrow"
     assert html =~ "polygon"
     assert html =~ "display: none"
   end
@@ -59,9 +59,9 @@ defmodule EssenceUI.Primitives.PopoverTest do
         %{}
       )
 
-    assert html =~ ~r/<div[^>]*data-essence-popover-trigger/
-    assert html =~ ~r/<div[^>]*data-essence-popover-close/
-    assert html =~ ~r/data-essence-popover-trigger[^>]*>[\s\S]*<button[^>]*>Open/
+    assert html =~ ~r/<div[^>]*data-radix-popover-trigger/
+    assert html =~ ~r/<div[^>]*data-radix-popover-close/
+    assert html =~ ~r/data-radix-popover-trigger[^>]*>[\s\S]*<button[^>]*>Open/
   end
 
   test "portal thin-wraps Phoenix portal" do
@@ -82,7 +82,7 @@ defmodule EssenceUI.Primitives.PopoverTest do
 
     assert html =~ ~s[data-phx-portal="body"]
     assert html =~ ~s[id="ported-portal"]
-    assert html =~ "data-essence-popover-content"
+    assert html =~ "data-radix-popover-content"
     assert html =~ "Ported"
   end
 end

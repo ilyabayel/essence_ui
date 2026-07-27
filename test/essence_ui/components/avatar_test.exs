@@ -10,9 +10,9 @@ defmodule EssenceUI.Components.AvatarTest do
 
     assert html =~ ~s[id="av1"]
     assert html =~ ~s[phx-hook="AvatarRoot"]
-    assert html =~ ~s[data-essence-avatar-root]
-    assert html =~ "est-AvatarRoot"
-    assert html =~ "est-AvatarFallback"
+    assert html =~ ~s[data-radix-avatar-root]
+    assert html =~ "rt-AvatarRoot"
+    assert html =~ "rt-AvatarFallback"
     assert html =~ "JD"
   end
 
@@ -28,11 +28,11 @@ defmodule EssenceUI.Components.AvatarTest do
         color: "indigo"
       })
 
-    assert html =~ "est-r-size-5"
-    assert html =~ "est-variant-solid"
+    assert html =~ "rt-r-size-5"
+    assert html =~ "rt-variant-solid"
     assert html =~ ~s(data-accent-color="indigo")
-    assert html =~ ~s[data-essence-avatar-image]
+    assert html =~ ~s[data-radix-avatar-image]
     assert html =~ ~s[src="/avatar.jpg"]
-    assert html =~ "est-AvatarImage"
+    assert html =~ "rt-AvatarImage"
   end
 end

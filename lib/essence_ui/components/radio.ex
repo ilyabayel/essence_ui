@@ -1,9 +1,7 @@
 defmodule EssenceUI.Components.Radio do
   @moduledoc """
-  A simple, accessible Radio component for single selection within a group.
-
-  Based on Radix UI Themes Radio component with support for various sizes, variants,
-  and colors. Like Radix Themes, this is a styled native `<input type="radio">`
+  A simple, accessible Radio component for single selection within a group with support for various sizes, variants,
+  and colors. This is a styled native `<input type="radio">`
   (not a wrap of `Primitives.RadioGroup` — use `radio_group` for the compound API).
 
   ## Examples
@@ -83,14 +81,14 @@ defmodule EssenceUI.Components.Radio do
       %{
         size: %{
           type: :enum,
-          class: "est-r-size",
+          class: "rt-r-size",
           values: @sizes,
           default: "2",
           responsive: true
         },
         variant: %{
           type: :enum,
-          class: "est-variant",
+          class: "rt-variant",
           values: @variants,
           default: "surface"
         }
@@ -105,9 +103,9 @@ defmodule EssenceUI.Components.Radio do
     # Build CSS classes
     class =
       [
-        "est-reset",
-        "est-BaseRadioRoot",
-        "est-RadioRoot",
+        "rt-reset",
+        "rt-BaseRadioRoot",
+        "rt-RadioRoot",
         extracted.class,
         assigns.class
       ]

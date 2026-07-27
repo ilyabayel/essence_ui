@@ -14,6 +14,8 @@ defmodule EssenceUI.Components do
     * `checkbox_cards_root/1` - See `EssenceUI.Components.CheckboxCards`
     * `checkbox_cards_item/1` - See `EssenceUI.Components.CheckboxCards`
     * `checkbox_group/1` - See `EssenceUI.Components.CheckboxGroup`
+    * `checkbox_group_root/1` - See `EssenceUI.Components.CheckboxGroup`
+    * `checkbox_group_item/1` - See `EssenceUI.Components.CheckboxGroup`
     * `dialog/1` - See `EssenceUI.Components.Dialog`
     * `alert_dialog/1` - See `EssenceUI.Components.AlertDialog`
     * `icon_button/1` - See `EssenceUI.Components.IconButton`
@@ -24,6 +26,8 @@ defmodule EssenceUI.Components do
     * `radio_cards_root/1` - See `EssenceUI.Components.RadioCards`
     * `radio_group/1` - See `EssenceUI.Components.RadioGroup`
     * `segmented_control/1` - See `EssenceUI.Components.SegmentedControl`
+    * `segmented_control_root/1` - See `EssenceUI.Components.SegmentedControl`
+    * `segmented_control_item/1` - See `EssenceUI.Components.SegmentedControl`
     * `select_root/1` - See `EssenceUI.Components.Select`
     * `select_trigger/1` - See `EssenceUI.Components.Select`
     * `select_content/1` - See `EssenceUI.Components.Select`
@@ -88,7 +92,6 @@ defmodule EssenceUI.Components do
     * `reset/1` - See `EssenceUI.Utilities.Reset`
     * `visually_hidden/1` - See `EssenceUI.Utilities.VisuallyHidden`
   """
-  alias EssenceUI.Components.Accordion
   alias EssenceUI.Components.CheckboxCards
   alias EssenceUI.Components.ContextMenu
   alias EssenceUI.Components.DataList
@@ -110,10 +113,6 @@ defmodule EssenceUI.Components do
   alias EssenceUI.Utilities.VisuallyHidden
 
   # Components
-  defdelegate accordion(assigns), to: Accordion
-  defdelegate accordion_header(assigns), to: Accordion
-  defdelegate accordion_trigger(assigns), to: Accordion
-  defdelegate accordion_content(assigns), to: Accordion
   defdelegate avatar(assigns), to: EssenceUI.Components.Avatar
   defdelegate badge(assigns), to: EssenceUI.Components.Badge
   defdelegate button(assigns), to: EssenceUI.Components.Button
@@ -123,6 +122,8 @@ defmodule EssenceUI.Components do
   defdelegate checkbox_cards_root(assigns), to: CheckboxCards
   defdelegate checkbox_cards_item(assigns), to: CheckboxCards
   defdelegate checkbox_group(assigns), to: EssenceUI.Components.CheckboxGroup
+  defdelegate checkbox_group_root(assigns), to: EssenceUI.Components.CheckboxGroup
+  defdelegate checkbox_group_item(assigns), to: EssenceUI.Components.CheckboxGroup
   defdelegate context_menu_root(assigns), to: ContextMenu
   defdelegate context_menu_trigger(assigns), to: ContextMenu
   defdelegate context_menu_content(assigns), to: ContextMenu
@@ -158,6 +159,8 @@ defmodule EssenceUI.Components do
   defdelegate radio_group_root(assigns), to: RadioGroup
   defdelegate radio_group_item(assigns), to: RadioGroup
   defdelegate segmented_control(assigns), to: EssenceUI.Components.SegmentedControl
+  defdelegate segmented_control_root(assigns), to: EssenceUI.Components.SegmentedControl
+  defdelegate segmented_control_item(assigns), to: EssenceUI.Components.SegmentedControl
   defdelegate select_root(assigns), to: Select
   defdelegate select_trigger(assigns), to: Select
   defdelegate select_content(assigns), to: Select

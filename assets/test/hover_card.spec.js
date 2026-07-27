@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("Hover Card Primitive", () => {
@@ -12,7 +12,7 @@ test.describe("Hover Card Primitive", () => {
 
   test("opens on hover after delay and closes on leave", async ({ page }) => {
     const root = page.locator("#hover-card-primitive");
-    const trigger = root.locator("[data-essence-hover-card-trigger]");
+    const trigger = root.locator("[data-radix-hover-card-trigger]");
     const content = page.locator("#hover-card-content");
 
     await expect(content).toBeHidden();
@@ -21,7 +21,7 @@ test.describe("Hover Card Primitive", () => {
     await expect(content).toBeVisible();
     await expect(trigger).toHaveAttribute("data-state", "open");
     await expect(content).toHaveAttribute("data-state", "open");
-    await expect(content).toContainText("@radix_ui");
+    await expect(content).toContainText("@essence_ui");
 
     const box = await content.boundingBox();
     expect(box).not.toBeNull();
@@ -34,7 +34,7 @@ test.describe("Hover Card Primitive", () => {
 
   test("stays open when moving from trigger to content", async ({ page }) => {
     const root = page.locator("#hover-card-primitive");
-    const trigger = root.locator("[data-essence-hover-card-trigger]");
+    const trigger = root.locator("[data-radix-hover-card-trigger]");
     const content = page.locator("#hover-card-content");
 
     await trigger.hover();
@@ -46,11 +46,11 @@ test.describe("Hover Card Primitive", () => {
 
   test("has no accessibility violations", async ({ page }) => {
     const root = page.locator("#hover-card-primitive");
-    const trigger = root.locator("[data-essence-hover-card-trigger]");
+    const trigger = root.locator("[data-radix-hover-card-trigger]");
     await trigger.hover();
     await expect(page.locator("#hover-card-content")).toBeVisible();
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="hover-card"]',
+      include: '.essence-demo[data-component="hover-card"]',
     });
   });
 });
@@ -71,7 +71,7 @@ test.describe("Hover Card Primitive (touch)", () => {
 
   test("opens on tap and closes on second tap", async ({ page }) => {
     const root = page.locator("#hover-card-primitive");
-    const trigger = root.locator("[data-essence-hover-card-trigger]");
+    const trigger = root.locator("[data-radix-hover-card-trigger]");
     const content = page.locator("#hover-card-content");
 
     await expect(content).toBeHidden();
@@ -87,14 +87,14 @@ test.describe("Hover Card Primitive (touch)", () => {
 
   test("closes when tapping outside", async ({ page }) => {
     const root = page.locator("#hover-card-primitive");
-    const trigger = root.locator("[data-essence-hover-card-trigger]");
+    const trigger = root.locator("[data-radix-hover-card-trigger]");
     const content = page.locator("#hover-card-content");
 
     await trigger.click();
     await expect(content).toBeVisible();
 
     await page
-      .locator('.radix-demo[data-component="hover-card"]')
+      .locator('.essence-demo[data-component="hover-card"]')
       .click({ position: { x: 8, y: 8 }, force: true });
     await expect(content).toBeHidden();
   });

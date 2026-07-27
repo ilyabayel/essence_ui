@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.CollapsibleTest do
 
   alias EssenceUI.Primitives.Collapsible
 
-  test "renders radix-like root, trigger, and content" do
+  test "renders root, trigger, and content" do
     html =
       render_component(
         fn assigns ->
@@ -29,6 +29,6 @@ defmodule EssenceUI.Primitives.CollapsibleTest do
     assert html =~ ~s[id="details-trigger"]
     assert html =~ ~s[aria-controls="details-content"]
     assert html =~ ~s[aria-expanded="false"]
-    assert html =~ "data-essence-collapsible-content"
+    assert html =~ "data-radix-collapsible-content"
   end
 end

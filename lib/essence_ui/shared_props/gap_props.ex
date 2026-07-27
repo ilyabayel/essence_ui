@@ -1,7 +1,7 @@
 defmodule EssenceUI.SharedProps.GapProps do
   @moduledoc """
   Prop definitions for gap, column_gap, and row_gap utilities (for flex/grid layouts).
-  Inspired by Radix UI Themes gap.props.ts.
+  Theme gap props for flex and grid layouts.
   """
 
   @gap_values [
@@ -42,7 +42,7 @@ defmodule EssenceUI.SharedProps.GapProps do
         type: [:enum, :string],
         values: @gap_values,
         responsive: true,
-        class: "est-r-gap",
+        class: "rt-r-gap",
         custom_properties: ["--gap"]
       },
       # Sets the CSS **row-gap** property.
@@ -59,7 +59,7 @@ defmodule EssenceUI.SharedProps.GapProps do
         type: [:enum, :string],
         values: @gap_values,
         responsive: true,
-        class: "est-r-cg",
+        class: "rt-r-cg",
         custom_properties: ["--column-gap"]
       },
       # Sets the CSS **column-gap** property.
@@ -76,7 +76,7 @@ defmodule EssenceUI.SharedProps.GapProps do
         type: [:enum, :string],
         values: @gap_values,
         responsive: true,
-        class: "est-r-rg",
+        class: "rt-r-rg",
         custom_properties: ["--row-gap"]
       }
     }

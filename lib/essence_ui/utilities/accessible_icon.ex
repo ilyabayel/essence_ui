@@ -2,7 +2,7 @@ defmodule EssenceUI.Utilities.AccessibleIcon do
   @moduledoc """
   A wrapper for icons that provides a label for screen readers.
 
-  Based on Radix UI AccessibleIcon primitive.
+  Accessible icon wrapper that provides a screen-reader label.
   """
   use Phoenix.Component
 

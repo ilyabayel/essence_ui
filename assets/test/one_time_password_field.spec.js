@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("One-Time Password Field Primitive", () => {
@@ -10,8 +10,8 @@ test.describe("One-Time Password Field Primitive", () => {
 
   test("renders six inputs and hidden value field", async ({ page }) => {
     const root = page.locator("#otp-primitive");
-    const inputs = root.locator("[data-essence-otp-input]");
-    const hidden = root.locator("[data-essence-otp-hidden]");
+    const inputs = root.locator("[data-radix-otp-input]");
+    const hidden = root.locator("[data-radix-otp-hidden]");
 
     await expect(root).toHaveAttribute("role", "group");
     await expect(inputs).toHaveCount(6);
@@ -26,8 +26,8 @@ test.describe("One-Time Password Field Primitive", () => {
     page,
   }) => {
     const root = page.locator("#otp-primitive");
-    const inputs = root.locator("[data-essence-otp-input]");
-    const hidden = root.locator("[data-essence-otp-hidden]");
+    const inputs = root.locator("[data-radix-otp-input]");
+    const hidden = root.locator("[data-radix-otp-hidden]");
 
     await inputs.nth(0).focus();
     await page.keyboard.type("123456");
@@ -39,13 +39,13 @@ test.describe("One-Time Password Field Primitive", () => {
 
   test("supports paste to fill all inputs", async ({ page }) => {
     const root = page.locator("#otp-primitive");
-    const inputs = root.locator("[data-essence-otp-input]");
-    const hidden = root.locator("[data-essence-otp-hidden]");
+    const inputs = root.locator("[data-radix-otp-input]");
+    const hidden = root.locator("[data-radix-otp-hidden]");
 
     await inputs.nth(0).focus();
     await page.evaluate(() => {
       const input = document.querySelector(
-        "#otp-primitive [data-essence-otp-input]",
+        "#otp-primitive [data-radix-otp-input]",
       );
       const event = new ClipboardEvent("paste", {
         bubbles: true,
@@ -64,7 +64,7 @@ test.describe("One-Time Password Field Primitive", () => {
 
   test("arrow keys and backspace navigate between inputs", async ({ page }) => {
     const root = page.locator("#otp-primitive");
-    const inputs = root.locator("[data-essence-otp-input]");
+    const inputs = root.locator("[data-radix-otp-input]");
 
     await inputs.nth(0).focus();
     await page.keyboard.type("12");
@@ -75,7 +75,7 @@ test.describe("One-Time Password Field Primitive", () => {
 
     await page.keyboard.press("Backspace");
     await expect(inputs.nth(1)).toHaveValue("");
-    await expect(root.locator("[data-essence-otp-hidden]")).toHaveValue("1");
+    await expect(root.locator("[data-radix-otp-hidden]")).toHaveValue("1");
 
     await page.keyboard.press("Backspace");
     await expect(inputs.nth(0)).toBeFocused();
@@ -83,7 +83,7 @@ test.describe("One-Time Password Field Primitive", () => {
 
   test("has no accessibility violations", async ({ page }) => {
     const root = page.locator("#otp-primitive");
-    await expect(root.locator("[data-essence-otp-input]").first()).toBeVisible();
+    await expect(root.locator("[data-radix-otp-input]").first()).toBeVisible();
     await expectNoA11yViolations(page, {
       include: "#otp-primitive",
     });

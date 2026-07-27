@@ -1,6 +1,6 @@
 defmodule EssenceUI.Primitives.Select do
   @moduledoc """
-  Select primitive based on Radix UI Select.
+  Select primitive for choosing a value from a list of options.
   """
   use EssenceUI.Primitives
 
@@ -22,7 +22,7 @@ defmodule EssenceUI.Primitives.Select do
     <div
       id={@id}
       phx-hook="SelectRoot"
-      data-essence-select-root
+      data-radix-select-root
       data-value={@value}
       data-disabled={if @disabled, do: "", else: nil}
       dir={@dir}
@@ -51,7 +51,7 @@ defmodule EssenceUI.Primitives.Select do
     <button
       type="button"
       id={@id}
-      data-essence-select-trigger
+      data-radix-select-trigger
       role="combobox"
       aria-haspopup="listbox"
       aria-expanded="false"
@@ -72,7 +72,7 @@ defmodule EssenceUI.Primitives.Select do
 
   def value(assigns) do
     ~H"""
-    <span data-essence-select-value {@rest}>
+    <span data-radix-select-value {@rest}>
       {render_slot(@inner_block) || @placeholder}
     </span>
     """
@@ -86,7 +86,7 @@ defmodule EssenceUI.Primitives.Select do
 
   def icon(assigns) do
     ~H"""
-    <span data-essence-select-icon aria-hidden="true" {@rest}>
+    <span data-radix-select-icon aria-hidden="true" {@rest}>
       {render_slot(@inner_block)}
     </span>
     """
@@ -102,7 +102,7 @@ defmodule EssenceUI.Primitives.Select do
   def portal(assigns) do
     ~H"""
     <Phoenix.Component.portal id={@id} target={@target}>
-      <div data-essence-select-portal>
+      <div data-radix-select-portal>
         {render_slot(@inner_block)}
       </div>
     </Phoenix.Component.portal>
@@ -122,7 +122,7 @@ defmodule EssenceUI.Primitives.Select do
     ~H"""
     <div
       id={@id}
-      data-essence-select-content
+      data-radix-select-content
       role="listbox"
       tabindex="-1"
       style="display: none; position: fixed; z-index: 50;"
@@ -141,7 +141,7 @@ defmodule EssenceUI.Primitives.Select do
 
   def scroll_up_button(assigns) do
     ~H"""
-    <div data-essence-select-scroll-up-button aria-hidden="true" {@rest}>
+    <div data-radix-select-scroll-up-button aria-hidden="true" {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -155,7 +155,7 @@ defmodule EssenceUI.Primitives.Select do
 
   def scroll_down_button(assigns) do
     ~H"""
-    <div data-essence-select-scroll-down-button aria-hidden="true" {@rest}>
+    <div data-radix-select-scroll-down-button aria-hidden="true" {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -169,7 +169,7 @@ defmodule EssenceUI.Primitives.Select do
 
   def viewport(assigns) do
     ~H"""
-    <div data-essence-select-viewport {@rest} style="overflow-y: auto; flex: 1;">
+    <div data-radix-select-viewport {@rest} style="overflow-y: auto; flex: 1;">
       {render_slot(@inner_block)}
     </div>
     """
@@ -182,7 +182,7 @@ defmodule EssenceUI.Primitives.Select do
 
   def arrow(assigns) do
     ~H"""
-    <div data-essence-select-arrow aria-hidden="true" {@rest}></div>
+    <div data-radix-select-arrow aria-hidden="true" {@rest}></div>
     """
   end
 
@@ -199,7 +199,7 @@ defmodule EssenceUI.Primitives.Select do
     ~H"""
     <div
       role="option"
-      data-essence-select-item
+      data-radix-select-item
       data-value={@value}
       data-disabled={if @disabled, do: "", else: nil}
       data-text-value={@text_value}
@@ -220,7 +220,7 @@ defmodule EssenceUI.Primitives.Select do
 
   def item_text(assigns) do
     ~H"""
-    <span data-essence-select-item-text {@rest}>
+    <span data-radix-select-item-text {@rest}>
       {render_slot(@inner_block)}
     </span>
     """
@@ -234,7 +234,7 @@ defmodule EssenceUI.Primitives.Select do
 
   def item_indicator(assigns) do
     ~H"""
-    <span data-essence-select-item-indicator aria-hidden="true" style="display: none;" {@rest}>
+    <span data-radix-select-item-indicator aria-hidden="true" style="display: none;" {@rest}>
       {render_slot(@inner_block)}
     </span>
     """
@@ -248,7 +248,7 @@ defmodule EssenceUI.Primitives.Select do
 
   def group(assigns) do
     ~H"""
-    <div role="group" data-essence-select-group {@rest}>
+    <div role="group" data-radix-select-group {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -262,7 +262,7 @@ defmodule EssenceUI.Primitives.Select do
 
   def label(assigns) do
     ~H"""
-    <div data-essence-select-label {@rest}>
+    <div data-radix-select-label {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -275,7 +275,7 @@ defmodule EssenceUI.Primitives.Select do
 
   def separator(assigns) do
     ~H"""
-    <div role="separator" data-essence-select-separator aria-hidden="true" {@rest}></div>
+    <div role="separator" data-radix-select-separator aria-hidden="true" {@rest}></div>
     """
   end
 end

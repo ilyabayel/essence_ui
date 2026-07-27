@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("Collapsible Primitive", () => {
@@ -10,8 +10,8 @@ test.describe("Collapsible Primitive", () => {
   test("should toggle content on click and set CSS variables", async ({
     page,
   }) => {
-    const trigger = page.locator("[data-essence-collapsible-trigger]");
-    const content = page.locator("[data-essence-collapsible-content]");
+    const trigger = page.locator("[data-radix-collapsible-trigger]");
+    const content = page.locator("[data-radix-collapsible-content]");
 
     await expect(content).toBeHidden();
     await expect(trigger).toHaveAttribute("aria-expanded", "false");
@@ -22,7 +22,7 @@ test.describe("Collapsible Primitive", () => {
     await expect(trigger).toHaveAttribute("data-state", "open");
 
     const height = await content.evaluate((el) =>
-      el.style.getPropertyValue("--essence-collapsible-content-height"),
+      el.style.getPropertyValue("--radix-collapsible-content-height"),
     );
     expect(height).toMatch(/^\d+(\.\d+)?px$/);
     expect(parseFloat(height)).toBeGreaterThan(0);
@@ -40,8 +40,8 @@ test.describe("Collapsible Primitive", () => {
   test("should support delayed hiding for exit animations", async ({
     page,
   }) => {
-    const trigger = page.locator("[data-essence-collapsible-trigger]");
-    const content = page.locator("[data-essence-collapsible-content]");
+    const trigger = page.locator("[data-radix-collapsible-trigger]");
+    const content = page.locator("[data-radix-collapsible-content]");
 
     await trigger.click();
     await expect(content).toBeVisible();
@@ -65,7 +65,7 @@ test.describe("Collapsible Primitive", () => {
 
   test("has no accessibility violations", async ({ page }) => {
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="collapsible"]',
+      include: '.essence-demo[data-component="collapsible"]',
     });
   });
 });

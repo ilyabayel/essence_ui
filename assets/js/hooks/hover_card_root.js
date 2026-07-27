@@ -63,11 +63,11 @@ export const HoverCardRoot = {
   },
 
   resolveParts() {
-    this.trigger = this.el.querySelector("[data-essence-hover-card-trigger]");
+    this.trigger = this.el.querySelector("[data-radix-hover-card-trigger]");
     const contentId = this.trigger?.getAttribute("aria-describedby");
     this.content = findPart(
       this.el,
-      "[data-essence-hover-card-content]",
+      "[data-radix-hover-card-content]",
       contentId
     );
   },

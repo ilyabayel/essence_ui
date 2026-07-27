@@ -25,18 +25,18 @@ defmodule EssenceUI.Components.HoverCardTest do
     assert html =~ ~s[phx-hook="HoverCardRoot"]
     assert html =~ ~s[data-open-delay="100"]
     assert html =~ ~s[data-close-delay="50"]
-    assert html =~ "data-essence-hover-card-trigger"
-    assert html =~ "data-essence-hover-card-content"
+    assert html =~ "data-radix-hover-card-trigger"
+    assert html =~ "data-radix-hover-card-content"
     assert html =~ ~s[data-phx-portal="body"]
     assert html =~ ~s[id="hc-content-portal"]
     assert html =~ ~s[data-side="top"]
 
-    assert html =~ "est-HoverCardRoot"
-    assert html =~ "est-HoverCardTrigger"
+    assert html =~ "rt-HoverCardRoot"
+    assert html =~ "rt-HoverCardTrigger"
     assert html =~ "width: max-content"
-    assert html =~ "est-HoverCardContent"
-    assert html =~ "est-PopperContent"
-    assert html =~ "est-r-size-1"
+    assert html =~ "rt-HoverCardContent"
+    assert html =~ "rt-PopperContent"
+    assert html =~ "rt-r-size-1"
     assert html =~ "Preview"
     refute html =~ ~s[phx-hook="HoverCard"]
   end

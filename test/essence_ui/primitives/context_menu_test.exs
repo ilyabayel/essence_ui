@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.ContextMenuTest do
 
   alias EssenceUI.Primitives.ContextMenu
 
-  test "renders radix-like context menu parts" do
+  test "renders context menu parts" do
     html =
       render_component(
         fn assigns ->
@@ -43,21 +43,22 @@ defmodule EssenceUI.Primitives.ContextMenuTest do
     assert html =~ ~s[phx-hook="ContextMenuRoot"]
     assert html =~ ~s[data-state="closed"]
     assert html =~ ~s[data-on-open-change="changed"]
-    assert html =~ "data-essence-context-menu-trigger"
+    assert html =~ "data-radix-context-menu-trigger"
     assert html =~ ~s[aria-controls="cm-content"]
-    assert html =~ "data-essence-context-menu-content"
-    assert html =~ "data-essence-context-menu-label"
-    assert html =~ "data-essence-context-menu-item"
+    assert html =~ "data-radix-context-menu-content"
+    assert html =~ ~s[aria-expanded="false"]
+    assert html =~ "data-radix-menu-label"
+    assert html =~ "data-radix-menu-item"
     assert html =~ ~s[data-text-value="copy"]
-    assert html =~ "data-essence-context-menu-checkbox-item"
-    assert html =~ "data-essence-context-menu-radio-group"
-    assert html =~ "data-essence-context-menu-radio-item"
-    assert html =~ "data-essence-context-menu-item-indicator"
-    assert html =~ "data-essence-context-menu-separator"
-    assert html =~ "data-essence-context-menu-sub"
-    assert html =~ "data-essence-context-menu-sub-trigger"
-    assert html =~ "data-essence-context-menu-sub-content"
-    assert html =~ "data-essence-context-menu-arrow"
+    assert html =~ "data-radix-menu-checkbox-item"
+    assert html =~ "data-radix-menu-radio-group"
+    assert html =~ "data-radix-menu-radio-item"
+    assert html =~ "data-radix-menu-item-indicator"
+    assert html =~ "data-radix-menu-separator"
+    assert html =~ "data-radix-menu-sub"
+    assert html =~ "data-radix-menu-sub-trigger"
+    assert html =~ "data-radix-menu-sub-content"
+    assert html =~ "data-radix-menu-arrow"
   end
 
   test "portal thin-wraps Phoenix portal" do
@@ -78,7 +79,7 @@ defmodule EssenceUI.Primitives.ContextMenuTest do
 
     assert html =~ ~s[data-phx-portal="body"]
     assert html =~ ~s[id="cm-portal"]
-    assert html =~ "data-essence-context-menu-content"
+    assert html =~ "data-radix-context-menu-content"
     assert html =~ "Ported"
   end
 end

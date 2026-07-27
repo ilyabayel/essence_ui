@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("Label Primitive", () => {
@@ -8,7 +8,7 @@ test.describe("Label Primitive", () => {
   });
 
   test("associates with control and focuses on click", async ({ page }) => {
-    const demo = page.locator('.radix-demo[data-component="label"]');
+    const demo = page.locator('.essence-demo[data-component="label"]');
     const label = demo.locator("label.LabelRoot");
     const input = demo.locator("#firstName");
 
@@ -23,7 +23,7 @@ test.describe("Label Primitive", () => {
   test("prevents text selection on double-click (Radix LabelRoot)", async ({
     page,
   }) => {
-    const demo = page.locator('.radix-demo[data-component="label"]');
+    const demo = page.locator('.essence-demo[data-component="label"]');
     const label = demo.locator("label.LabelRoot");
 
     await label.dblclick();
@@ -35,7 +35,7 @@ test.describe("Label Primitive", () => {
 
   test("has no accessibility violations", async ({ page }) => {
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="label"]',
+      include: '.essence-demo[data-component="label"]',
     });
   });
 });

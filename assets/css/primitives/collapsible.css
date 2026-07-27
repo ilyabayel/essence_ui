@@ -2,15 +2,15 @@
 @import "@radix-ui/colors/violet.css";
 
 /* reset */
-.radix-demo[data-component="collapsible"] button {
+button {
 	all: unset;
 }
 
-.radix-demo[data-component="collapsible"] .CollapsibleRoot {
+.DemoCollapsibleRoot {
 	width: 300px;
 }
 
-.radix-demo[data-component="collapsible"] .IconButton {
+.DemoIconButton {
 	font-family: inherit;
 	border-radius: 100%;
 	height: 25px;
@@ -21,29 +21,57 @@
 	color: var(--violet-11);
 	box-shadow: 0 2px 10px var(--black-a7);
 }
-.radix-demo[data-component="collapsible"] .IconButton[data-state="closed"] {
+.DemoIconButton[data-state="closed"] {
 	background-color: white;
 }
-.radix-demo[data-component="collapsible"] .IconButton[data-state="open"] {
+.DemoIconButton[data-state="open"] {
 	background-color: var(--violet-3);
 }
-.radix-demo[data-component="collapsible"] .IconButton:hover {
+.DemoIconButton:hover {
 	background-color: var(--violet-3);
 }
-.radix-demo[data-component="collapsible"] .IconButton:focus {
+.DemoIconButton:focus {
 	box-shadow: 0 0 0 2px black;
 }
 
-.radix-demo[data-component="collapsible"] .Text {
+.DemoText {
 	color: var(--violet-11);
 	font-size: 15px;
 	line-height: 25px;
 }
 
-.radix-demo[data-component="collapsible"] .Repository {
+.DemoRepository {
 	background-color: white;
 	border-radius: 4px;
 	margin: 10px 0;
 	padding: 10px;
 	box-shadow: 0 2px 10px var(--black-a7);
+}
+
+.DemoCollapsibleContent {
+	overflow: hidden;
+}
+.DemoCollapsibleContent[data-state="open"] {
+	animation: demoCollapsibleSlideDown 300ms ease-out;
+}
+.DemoCollapsibleContent[data-state="closed"] {
+	animation: demoCollapsibleSlideUp 300ms ease-out;
+}
+
+@keyframes demoCollapsibleSlideDown {
+	from {
+		height: 0;
+	}
+	to {
+		height: var(--radix-collapsible-content-height);
+	}
+}
+
+@keyframes demoCollapsibleSlideUp {
+	from {
+		height: var(--radix-collapsible-content-height);
+	}
+	to {
+		height: 0;
+	}
 }

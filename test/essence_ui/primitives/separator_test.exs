@@ -5,7 +5,7 @@ defmodule EssenceUI.Primitives.SeparatorTest do
 
   alias EssenceUI.Primitives.Separator
 
-  test "renders radix-like horizontal separator" do
+  test "renders horizontal separator" do
     html = render_component(&Separator.separator/1, %{})
 
     assert html =~ ~s(role="separator")

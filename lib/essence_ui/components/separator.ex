@@ -2,8 +2,8 @@ defmodule EssenceUI.Components.Separator do
   @moduledoc """
   A Separator component that renders a visual divider between content sections.
 
-  Based on Radix UI Themes Separator component with support for various orientations,
-  colors, and styling options. Wraps `EssenceUI.Primitives.Separator`.
+  Supports various orientations, colors, and styling options.
+  Wraps `EssenceUI.Primitives.Separator`.
   """
   use Phoenix.Component
 
@@ -48,15 +48,15 @@ defmodule EssenceUI.Components.Separator do
   def separator(assigns) do
     prop_defs =
       %{
-        orientation: %{type: :enum, values: @orientations, class: "est-r-orientation", default: "horizontal"},
-        size: %{type: :enum, values: @sizes, class: "est-r-size", default: "1"}
+        orientation: %{type: :enum, values: @orientations, class: "rt-r-orientation", default: "horizontal"},
+        size: %{type: :enum, values: @sizes, class: "rt-r-size", default: "1"}
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(MarginProps.prop_defs())
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    class = ["est-reset", "est-Separator", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["rt-reset", "rt-Separator", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
 
     assigns =
       assigns

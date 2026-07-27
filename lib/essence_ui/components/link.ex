@@ -1,7 +1,6 @@
 defmodule EssenceUI.Components.Link do
   @moduledoc """
-  Link component 100% compatible with Radix UI Themes Link API.
-  See: https://www.radix-ui.com/themes/docs/components/link
+  Themed link with size, weight, and underline options.
   """
   use Phoenix.Component
 
@@ -17,7 +16,7 @@ defmodule EssenceUI.Components.Link do
   @underline_values ["auto", "always", "hover", "none"]
 
   @doc """
-  Renders a link. All props match Radix UI Link.
+  Renders a link.
 
   Phoenix LiveView navigation is supported via `navigate` / `patch`
   (implemented with `Phoenix.Component.link/1`).
@@ -39,7 +38,7 @@ defmodule EssenceUI.Components.Link do
   def es_link(assigns) do
     prop_defs =
       %{
-        underline: %{type: :enum, values: @underline_values, class: "est-underline", default: "auto"}
+        underline: %{type: :enum, values: @underline_values, class: "rt-underline", default: "auto"}
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(HighContrastProps.prop_defs())
@@ -49,7 +48,7 @@ defmodule EssenceUI.Components.Link do
 
     class =
       [
-        "est-Link est-reset est-Text",
+        "rt-Link rt-reset rt-Text",
         extracted.class
       ]
       |> Enum.filter(& &1)

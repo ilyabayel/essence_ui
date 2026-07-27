@@ -8,11 +8,11 @@ export const ToastRoot = {
     this._remaining = null;
     this._startedAt = null;
 
-    this.provider = this.el.closest("[data-essence-toast-provider]");
+    this.provider = this.el.closest("[data-radix-toast-provider]");
     this._syncSwipeDirection();
 
     this._onCloseClick = (event) => {
-      if (event.target.closest("[data-essence-toast-close]")) {
+      if (event.target.closest("[data-radix-toast-close]")) {
         event.preventDefault();
         this.close();
       }

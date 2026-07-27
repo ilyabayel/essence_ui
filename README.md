@@ -1,6 +1,6 @@
 # EssenceUI
 
-EssenceUI is a set of Phoenix components compatible with Radix UI Themes API.
+EssenceUI is a Phoenix LiveView component library inspired by Radix UI Themes.
 
 ## Usage
 
@@ -14,7 +14,7 @@ import EssenceUI.Components
 
 ### Em
 
-Emphasizes text, matching the Radix UI Themes Em API.
+Emphasizes text with optional truncation and wrapping controls.
 
 #### Example
 
@@ -50,7 +50,7 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 ## Implementation plan and TODO
 
-This library aims for API and UX parity with Radix Themes. See the Radix Themes overview for reference: [Getting started with Radix Themes](https://www.radix-ui.com/themes/docs/overview/getting-started).
+Essence UI provides accessible, themeable Phoenix LiveView components inspired by Radix Themes. The checklist below tracks component coverage; Radix Themes docs are an optional reference for familiar APIs and patterns: [Getting started with Radix Themes](https://www.radix-ui.com/themes/docs/overview/getting-started).
 
 ### ✅ Completed Components (25/52)
 
@@ -146,12 +146,12 @@ This library aims for API and UX parity with Radix Themes. See the Radix Themes 
 - [ ] `ThemePanel` dev-only component
 - [ ] Normalize props across all components using `shared_props`
 - [ ] Dark mode documentation and examples
-- [ ] Add prop tables in storybook
+- [ ] Add prop tables in docs
 - [ ] Establish a11y checks in CI
 
 ### Docs and examples
 
-- [ ] Storybook category parity with Radix Themes
+- [ ] Themes docs category parity
 - [ ] Usage patterns guide (controlled vs uncontrolled, `as_child`, composition)
 - [ ] Migration guide from plain HTML to components
 
@@ -170,7 +170,7 @@ npx --prefix assets playwright install chromium
 npm --prefix assets run test:e2e
 ```
 
-Playwright starts `mix phx.server` automatically. Shared helpers: `assets/test/helpers/story.js` (`gotoPrimitive`) and `assets/test/helpers/a11y.js` (`expectNoA11yViolations` via axe).
+Playwright starts `mix phx.server` automatically. Shared helpers: `assets/test/helpers/docs.js` (`gotoPrimitive`, `gotoTheme`) and `assets/test/helpers/a11y.js` (`expectNoA11yViolations` via axe).
 
 ## Learn more
 

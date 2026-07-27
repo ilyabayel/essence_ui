@@ -1,11 +1,11 @@
 @import "@radix-ui/colors/mauve.css";
 
 /* reset */
-.radix-demo[data-component="hover-card"] a {
+a {
 	all: unset;
 }
 
-.radix-demo[data-component="hover-card"] .HoverCardContent {
+.DemoHoverCardContent {
 	border-radius: 6px;
 	padding: 20px;
 	width: 300px;
@@ -17,55 +17,55 @@
 	animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 	will-change: transform, opacity;
 }
-.radix-demo[data-component="hover-card"] .HoverCardContent[data-side="top"] {
+.DemoHoverCardContent[data-side="top"] {
 	animation-name: slideDownAndFade;
 }
-.radix-demo[data-component="hover-card"] .HoverCardContent[data-side="right"] {
+.DemoHoverCardContent[data-side="right"] {
 	animation-name: slideLeftAndFade;
 }
-.radix-demo[data-component="hover-card"] .HoverCardContent[data-side="bottom"] {
+.DemoHoverCardContent[data-side="bottom"] {
 	animation-name: slideUpAndFade;
 }
-.radix-demo[data-component="hover-card"] .HoverCardContent[data-side="left"] {
+.DemoHoverCardContent[data-side="left"] {
 	animation-name: slideRightAndFade;
 }
 
-.radix-demo[data-component="hover-card"] .HoverCardArrow {
+.DemoHoverCardArrow {
 	fill: white;
 }
 
-.radix-demo[data-component="hover-card"] .ImageTrigger {
+.DemoImageTrigger {
 	cursor: pointer;
 	border-radius: 100%;
 	display: inline-block;
 }
-.radix-demo[data-component="hover-card"] .ImageTrigger:focus {
+.DemoImageTrigger:focus {
 	box-shadow: 0 0 0 2px white;
 }
 
-.radix-demo[data-component="hover-card"] .Image {
+.DemoImage {
 	display: block;
 	border-radius: 100%;
 }
-.radix-demo[data-component="hover-card"] .Image.normal {
+.DemoImage.normal {
 	width: 45px;
 	height: 45px;
 }
-.radix-demo[data-component="hover-card"] .Image.large {
+.DemoImage.large {
 	width: 60px;
 	height: 60px;
 }
 
-.radix-demo[data-component="hover-card"] .Text {
+.DemoText {
 	margin: 0;
 	color: var(--mauve-12);
 	font-size: 15px;
 	line-height: 1.5;
 }
-.radix-demo[data-component="hover-card"] .Text.faded {
+.DemoText.faded {
 	color: var(--mauve-10);
 }
-.radix-demo[data-component="hover-card"] .Text.bold {
+.DemoText.bold {
 	font-weight: 500;
 }
 

@@ -23,7 +23,7 @@ defmodule EssenceUI.Primitives.ScrollArea do
     <div
       id={@id}
       phx-hook="ScrollAreaRoot"
-      data-essence-scroll-area-root
+      data-radix-scroll-area-root
       data-type={@type}
       data-scroll-hide-delay={@scroll_hide_delay}
       dir={@dir}
@@ -40,8 +40,8 @@ defmodule EssenceUI.Primitives.ScrollArea do
 
   def viewport(assigns) do
     ~H"""
-    <div data-essence-scroll-area-viewport tabindex="0" {@rest}>
-      <div data-essence-scroll-area-content style="min-width: 100%; display: table;">
+    <div data-radix-scroll-area-viewport tabindex="0" {@rest}>
+      <div data-radix-scroll-area-content style="min-width: 100%; display: table;">
         {render_slot(@inner_block)}
       </div>
     </div>
@@ -56,7 +56,7 @@ defmodule EssenceUI.Primitives.ScrollArea do
   def scrollbar(assigns) do
     ~H"""
     <div
-      data-essence-scroll-area-scrollbar
+      data-radix-scroll-area-scrollbar
       data-orientation={@orientation}
       data-state="hidden"
       data-force-mount={if @force_mount, do: ""}
@@ -72,7 +72,7 @@ defmodule EssenceUI.Primitives.ScrollArea do
 
   def thumb(assigns) do
     ~H"""
-    <div data-essence-scroll-area-thumb {@rest}>
+    <div data-radix-scroll-area-thumb {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -83,7 +83,7 @@ defmodule EssenceUI.Primitives.ScrollArea do
 
   def corner(assigns) do
     ~H"""
-    <div data-essence-scroll-area-corner {@rest}>
+    <div data-radix-scroll-area-corner {@rest}>
       {render_slot(@inner_block)}
     </div>
     """

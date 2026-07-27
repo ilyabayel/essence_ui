@@ -7,9 +7,43 @@ defmodule EssenceUIWeb.Docs.PageLive do
   import EssenceUIWeb.Docs.Components, warn: false
   import EssenceUIWeb.Components.SiteHeader
   import EssenceUIWeb.Components.SiteFooter
+  import EssenceUIWeb.DecorationBox, warn: false
 
+  alias EssenceUI.Primitives.AccessibleIcon, warn: false
+  alias EssenceUI.Primitives.Accordion, warn: false
+  alias EssenceUI.Primitives.AlertDialog, warn: false
+  alias EssenceUI.Primitives.AspectRatio, warn: false
+  alias EssenceUI.Primitives.Avatar, warn: false
+  alias EssenceUI.Primitives.Checkbox, warn: false
+  alias EssenceUI.Primitives.CheckboxGroup, warn: false
+  alias EssenceUI.Primitives.Collapsible, warn: false
+  alias EssenceUI.Primitives.ContextMenu, warn: false
   alias EssenceUI.Primitives.Dialog, warn: false
+  alias EssenceUI.Primitives.DirectionProvider, warn: false
+  alias EssenceUI.Primitives.DropdownMenu, warn: false
+  alias EssenceUI.Primitives.Form, warn: false
+  alias EssenceUI.Primitives.HoverCard, warn: false
+  alias EssenceUI.Primitives.Label, warn: false
+  alias EssenceUI.Primitives.Menubar, warn: false
+  alias EssenceUI.Primitives.NavigationMenu, warn: false
+  alias EssenceUI.Primitives.OneTimePasswordField, warn: false
+  alias EssenceUI.Primitives.PasswordToggleField, warn: false
+  alias EssenceUI.Primitives.Popover, warn: false
+  alias EssenceUI.Primitives.Progress, warn: false
+  alias EssenceUI.Primitives.RadioGroup, warn: false
+  alias EssenceUI.Primitives.ScrollArea, warn: false
+  alias EssenceUI.Primitives.Select, warn: false
+  alias EssenceUI.Primitives.Separator, warn: false
+  alias EssenceUI.Primitives.Slider, warn: false
+  alias EssenceUI.Primitives.Slot, warn: false
+  alias EssenceUI.Primitives.Switch, warn: false
+  alias EssenceUI.Primitives.Tabs, warn: false
+  alias EssenceUI.Primitives.Toast, warn: false
+  alias EssenceUI.Primitives.Toggle, warn: false
+  alias EssenceUI.Primitives.ToggleGroup, warn: false
+  alias EssenceUI.Primitives.Toolbar, warn: false
   alias EssenceUI.Primitives.Tooltip, warn: false
+  alias EssenceUI.Primitives.VisuallyHidden, warn: false
   alias EssenceUIWeb.Docs.Catalog
 
   @impl true
@@ -151,7 +185,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
           </.button>
         </.flex>
 
-        <.scroll_area type="hover" class="docs-sidebar__scroll">
+        <.scroll_area id="docs-sidebar-scroll" type="hover" class="docs-sidebar__scroll">
           <.flex direction="column" gap="5" class="docs-sidebar__inner">
             <.box as="nav" aria-label="Documentation pages">
               <.flex :for={section <- @nav} direction="column" gap="1" mb="4">
@@ -160,7 +194,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
                 </.text>
                 <.es_link
                   :for={item <- section.items}
-                  navigate={docs_path(@section, item.path)}
+                  patch={docs_path(@section, item.path)}
                   underline="none"
                   color={nav_color(@page, item.path)}
                   high_contrast={nav_active?(@page, item.path)}
@@ -179,7 +213,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
         <.flex :if={@not_found} direction="column" align="center" gap="3" py="9" px="4">
           <.heading as="h1" size="6">Page not found</.heading>
           <.text color="gray">No documentation exists at this path.</.text>
-          <.es_link navigate={docs_path(@section, Catalog.home_path(@section))}>Back to docs</.es_link>
+          <.es_link patch={docs_path(@section, Catalog.home_path(@section))}>Back to docs</.es_link>
         </.flex>
 
         <.flex :if={@page} class="docs-article-wrap" gap="6">
@@ -204,7 +238,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
             >
               <.es_link
                 :if={@prev_page}
-                navigate={docs_path(@section, @prev_page.path)}
+                patch={docs_path(@section, @prev_page.path)}
                 underline="hover"
               >
                 <.text size="2">← {@prev_page.title}</.text>
@@ -212,7 +246,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
               <.box :if={!@prev_page}></.box>
               <.es_link
                 :if={@next_page}
-                navigate={docs_path(@section, @next_page.path)}
+                patch={docs_path(@section, @next_page.path)}
                 underline="hover"
               >
                 <.text size="2">{@next_page.title} →</.text>
@@ -243,7 +277,11 @@ defmodule EssenceUIWeb.Docs.PageLive do
   end
 
   defp render_markdown(assigns) do
-    MDEx.to_heex!(assigns.page.body, assigns: assigns)
+    # Empty prefix → id="slug" matching TOC href="#slug" (MDEx default is no heading ids).
+    MDEx.to_heex!(assigns.page.body,
+      assigns: assigns,
+      extension: [header_id_prefix: ""]
+    )
   end
 
   defp section_from_uri(uri) do

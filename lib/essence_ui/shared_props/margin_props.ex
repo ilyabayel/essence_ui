@@ -1,7 +1,7 @@
 defmodule EssenceUI.SharedProps.MarginProps do
   @moduledoc """
   Margin prop definitions for Box and other components.
-  Inspired by Radix UI Themes.
+  Theme spacing props for Essence UI.
   """
 
   def prop_defs do
@@ -10,49 +10,49 @@ defmodule EssenceUI.SharedProps.MarginProps do
         type: [:enum, :string],
         values: margin_values(),
         responsive: true,
-        class: "est-r-m",
+        class: "rt-r-m",
         custom_properties: ["--m"]
       },
       mx: %{
         type: [:enum, :string],
         values: margin_values(),
         responsive: true,
-        class: "est-r-mx",
+        class: "rt-r-mx",
         custom_properties: ["--ml", "--mr"]
       },
       my: %{
         type: [:enum, :string],
         values: margin_values(),
         responsive: true,
-        class: "est-r-my",
+        class: "rt-r-my",
         custom_properties: ["--mt", "--mb"]
       },
       mt: %{
         type: [:enum, :string],
         values: margin_values(),
         responsive: true,
-        class: "est-r-mt",
+        class: "rt-r-mt",
         custom_properties: ["--mt"]
       },
       mr: %{
         type: [:enum, :string],
         values: margin_values(),
         responsive: true,
-        class: "est-r-mr",
+        class: "rt-r-mr",
         custom_properties: ["--mr"]
       },
       mb: %{
         type: [:enum, :string],
         values: margin_values(),
         responsive: true,
-        class: "est-r-mb",
+        class: "rt-r-mb",
         custom_properties: ["--mb"]
       },
       ml: %{
         type: [:enum, :string],
         values: margin_values(),
         responsive: true,
-        class: "est-r-ml",
+        class: "rt-r-ml",
         custom_properties: ["--ml"]
       }
     }

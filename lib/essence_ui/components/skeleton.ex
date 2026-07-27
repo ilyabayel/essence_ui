@@ -2,8 +2,7 @@ defmodule EssenceUI.Components.Skeleton do
   @moduledoc """
   A loading placeholder component that replaces content with a same-shape placeholder.
 
-  Based on Radix UI Themes Skeleton component for indicating loading states while
-  maintaining layout consistency. The skeleton preserves the dimensions and structure
+  Indicates loading states while maintaining layout consistency. The skeleton preserves the dimensions and structure
   of the content it replaces.
 
   ## Examples
@@ -85,7 +84,7 @@ defmodule EssenceUI.Components.Skeleton do
     ~H"""
     <%= if @loading do %>
       <span
-        class={["est-Skeleton", @extracted_class, @class]}
+        class={["rt-Skeleton", @extracted_class, @class]}
         style={@extracted_style <> @inline_styles}
         {@rest}
       >

@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.TooltipTest do
 
   alias EssenceUI.Primitives.Tooltip
 
-  test "renders provider and radix-like tooltip parts" do
+  test "renders provider and  tooltip parts" do
     html =
       render_component(
         fn assigns ->
@@ -24,17 +24,17 @@ defmodule EssenceUI.Primitives.TooltipTest do
         %{}
       )
 
-    assert html =~ "data-essence-tooltip-provider"
+    assert html =~ "data-radix-tooltip-provider"
     assert html =~ ~s[data-delay-duration="400"]
     assert html =~ ~s[phx-hook="TooltipRoot"]
     assert html =~ ~s[data-state="open"]
     assert html =~ ~s[data-open-delay="100"]
-    assert html =~ "data-essence-tooltip-trigger"
+    assert html =~ "data-radix-tooltip-trigger"
     assert html =~ ~s[aria-describedby="tip-content"]
-    assert html =~ "data-essence-tooltip-content"
+    assert html =~ "data-radix-tooltip-content"
     assert html =~ ~s[role="tooltip"]
     assert html =~ ~s[data-side="bottom"]
-    assert html =~ "data-essence-tooltip-arrow"
+    assert html =~ "data-radix-tooltip-arrow"
     assert html =~ "display: none"
   end
 
@@ -54,9 +54,9 @@ defmodule EssenceUI.Primitives.TooltipTest do
         %{}
       )
 
-    assert html =~ ~r/<div[^>]*data-essence-tooltip-trigger/
+    assert html =~ ~r/<div[^>]*data-radix-tooltip-trigger/
     assert html =~ ~s[<button type="button">Hover</button>]
-    refute html =~ ~r/<button[^>]*data-essence-tooltip-trigger/
+    refute html =~ ~r/<button[^>]*data-radix-tooltip-trigger/
   end
 
   test "portal thin-wraps Phoenix portal" do
@@ -77,6 +77,6 @@ defmodule EssenceUI.Primitives.TooltipTest do
 
     assert html =~ ~s[data-phx-portal="body"]
     assert html =~ ~s[id="tip-portal"]
-    assert html =~ "data-essence-tooltip-content"
+    assert html =~ "data-radix-tooltip-content"
   end
 end

@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("Visually Hidden Primitive", () => {
@@ -10,7 +10,7 @@ test.describe("Visually Hidden Primitive", () => {
   test("hides text visually while keeping it for assistive tech", async ({
     page,
   }) => {
-    const demo = page.locator('.radix-demo[data-component="visually-hidden"]');
+    const demo = page.locator('.essence-demo[data-component="visually-hidden"]');
     const btn = demo.locator("button");
     const hidden = btn.locator("span").filter({ hasText: "the document" });
 
@@ -23,7 +23,7 @@ test.describe("Visually Hidden Primitive", () => {
 
   test("has no accessibility violations", async ({ page }) => {
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="visually-hidden"]',
+      include: '.essence-demo[data-component="visually-hidden"]',
     });
   });
 });

@@ -7,11 +7,14 @@
     <.live_title>
       {assigns[:page_title] || "EssenceUI"}
     </.live_title>
-    <link phx-track-static rel="stylesheet" href="/assets/storybook.css" />
-    <script defer phx-track-static type="text/javascript" src="/assets/js/storybook.js">
+    <link phx-track-static rel="stylesheet" href="/assets/app.css" />
+    <script defer phx-track-static type="text/javascript" src="/assets/js/app.js">
     </script>
+    <%= if Mix.env() == :dev do %>
+      <%= Application.get_env(:live_debugger, :live_debugger_tags) %>
+    <% end %>
   </head>
   <body class="bg-white antialiased">
     {@inner_content}
-  </body>
+  </body>  
 </html>

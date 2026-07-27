@@ -2,7 +2,7 @@ defmodule EssenceUI.Components.ScrollArea do
   @moduledoc """
   A component for custom scrollbars.
 
-  Based on Radix UI Themes ScrollArea. Wraps `EssenceUI.Primitives.ScrollArea`.
+  Themed ScrollArea. Wraps `EssenceUI.Primitives.ScrollArea`.
 
   ## Examples
 
@@ -70,7 +70,7 @@ defmodule EssenceUI.Components.ScrollArea do
 
     id = assigns[:id] || "scroll-area-#{System.unique_integer([:positive])}"
 
-    # Align with Radix Themes: only `type="scroll"` uses a non-zero hide delay by default.
+    # Only `type="scroll"` uses a non-zero hide delay by default.
     scroll_hide_delay =
       cond do
         not is_nil(assigns[:scroll_hide_delay]) -> assigns.scroll_hide_delay
@@ -84,11 +84,11 @@ defmodule EssenceUI.Components.ScrollArea do
       |> Enum.join("; ")
 
     class =
-      ["est-ScrollAreaRoot", extracted.class, assigns[:class]]
+      ["rt-ScrollAreaRoot", extracted.class, assigns[:class]]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 
-    scrollbar_class = "est-ScrollAreaScrollbar est-r-size-#{assigns.size}"
+    scrollbar_class = "rt-ScrollAreaScrollbar rt-r-size-#{assigns.size}"
 
     assigns =
       assign(assigns,
@@ -109,10 +109,10 @@ defmodule EssenceUI.Components.ScrollArea do
       style={@style}
       {@rest}
     >
-      <.viewport class="est-ScrollAreaViewport">
+      <.viewport class="rt-ScrollAreaViewport">
         {render_slot(@inner_block)}
       </.viewport>
-      <div class="est-ScrollAreaViewportFocusRing"></div>
+      <div class="rt-ScrollAreaViewportFocusRing"></div>
 
       <.scrollbar
         :if={@scrollbars != "vertical"}
@@ -120,7 +120,7 @@ defmodule EssenceUI.Components.ScrollArea do
         class={@scrollbar_class}
         data-radius={@radius}
       >
-        <.thumb class="est-ScrollAreaThumb" />
+        <.thumb class="rt-ScrollAreaThumb" />
       </.scrollbar>
       <.scrollbar
         :if={@scrollbars != "horizontal"}
@@ -128,9 +128,9 @@ defmodule EssenceUI.Components.ScrollArea do
         class={@scrollbar_class}
         data-radius={@radius}
       >
-        <.thumb class="est-ScrollAreaThumb" />
+        <.thumb class="rt-ScrollAreaThumb" />
       </.scrollbar>
-      <.corner :if={@scrollbars == "both"} class="est-ScrollAreaCorner" />
+      <.corner :if={@scrollbars == "both"} class="rt-ScrollAreaCorner" />
     </.root>
     """
   end

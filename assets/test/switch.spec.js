@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("Switch Primitive", () => {
@@ -8,8 +8,8 @@ test.describe("Switch Primitive", () => {
   });
 
   test("toggles checked state on click and Space", async ({ page }) => {
-    const trigger = page.locator("#airplane-mode[data-essence-switch-trigger]");
-    const thumb = page.locator("[data-essence-switch-thumb]");
+    const trigger = page.locator("#airplane-mode[data-radix-switch-trigger]");
+    const thumb = page.locator("[data-radix-switch-thumb]");
 
     await expect(trigger).toHaveAttribute("role", "switch");
     await expect(trigger).toHaveAttribute("aria-checked", "false");
@@ -33,7 +33,7 @@ test.describe("Switch Primitive", () => {
 
   test("has no accessibility violations", async ({ page }) => {
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="switch"]',
+      include: '.essence-demo[data-component="switch"]',
     });
   });
 });

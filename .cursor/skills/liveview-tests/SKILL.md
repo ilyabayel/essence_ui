@@ -75,7 +75,7 @@ Prefer `async: true` unless the test needs shared global state.
 ## Function components (Essence UI default)
 
 ```elixir
-test "renders radix-like dialog parts" do
+test "renders dialog parts" do
   html =
     render_component(
       fn assigns ->

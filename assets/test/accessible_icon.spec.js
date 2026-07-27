@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("Accessible Icon Primitive", () => {
@@ -8,8 +8,8 @@ test.describe("Accessible Icon Primitive", () => {
   });
 
   test("hides decorative icon and exposes label", async ({ page }) => {
-    const demo = page.locator('.radix-demo[data-component="accessible-icon"]');
-    const btn = demo.locator("button.IconButton");
+    const demo = page.locator('.essence-demo[data-component="accessible-icon"]');
+    const btn = demo.locator("button.DemoIconButton");
     const iconWrap = btn.locator('span[aria-hidden="true"]');
     const sr = btn.locator("span").filter({ hasText: "Close" });
 
@@ -20,7 +20,7 @@ test.describe("Accessible Icon Primitive", () => {
 
   test("has no accessibility violations", async ({ page }) => {
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="accessible-icon"]',
+      include: '.essence-demo[data-component="accessible-icon"]',
     });
   });
 });

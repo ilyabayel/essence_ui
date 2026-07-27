@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.AccordionTest do
 
   alias EssenceUI.Primitives.Accordion
 
-  test "renders radix-like root and item attributes" do
+  test "renders root and item attributes" do
     html =
       render_component(
         fn assigns ->
@@ -32,8 +32,8 @@ defmodule EssenceUI.Primitives.AccordionTest do
     assert html =~ ~s[data-disabled]
     assert html =~ ~s[data-orientation="horizontal"]
     assert html =~ ~s[dir="rtl"]
-    assert html =~ ~s[data-essence-accordion-item]
-    assert html =~ ~s[data-essence-accordion-trigger]
+    assert html =~ ~s[data-radix-accordion-item]
+    assert html =~ ~s[data-radix-accordion-trigger]
     assert html =~ ~s[aria-controls="item-1-content"]
     assert html =~ ~s[id="item-1-trigger"]
     assert html =~ ~s[role="region"]

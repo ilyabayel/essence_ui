@@ -41,7 +41,7 @@ defmodule EssenceUI.Primitives.UtilityTest do
     assert html =~ "Content"
   end
 
-  test "progress renders radix-like states" do
+  test "progress renders states" do
     html =
       render_component(
         fn assigns ->

@@ -2,7 +2,7 @@ defmodule EssenceUI.Utilities.Reset do
   @moduledoc """
   A component that resets the styles of its children.
 
-  Based on Radix UI Themes Reset component.
+  CSS reset utility for themed components.
   """
   use Phoenix.Component
 
@@ -29,7 +29,7 @@ defmodule EssenceUI.Utilities.Reset do
   def reset(assigns) do
     ~H"""
     <div
-      class={["est-reset", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["rt-reset", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={@style}
       {@rest}
     >

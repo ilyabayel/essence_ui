@@ -26,7 +26,7 @@ function findPart(root, selector, contentId) {
 
 export const TooltipRoot = {
   mounted() {
-    const provider = this.el.closest("[data-essence-tooltip-provider]");
+    const provider = this.el.closest("[data-radix-tooltip-provider]");
     const providerDelay = provider
       ? parseInt(provider.dataset.delayDuration, 10)
       : null;
@@ -71,11 +71,11 @@ export const TooltipRoot = {
   },
 
   resolveParts() {
-    this.trigger = this.el.querySelector("[data-essence-tooltip-trigger]");
+    this.trigger = this.el.querySelector("[data-radix-tooltip-trigger]");
     const contentId = this.trigger?.getAttribute("aria-describedby");
     this.content = findPart(
       this.el,
-      "[data-essence-tooltip-content]",
+      "[data-radix-tooltip-content]",
       contentId
     );
   },
@@ -171,8 +171,8 @@ export const TooltipRoot = {
       const side = this.content.dataset.side || "top";
       const align = this.content.dataset.align || "center";
       const sideOffset = parseInt(this.content.dataset.sideOffset, 10) || 4;
-      // Radix Popper: offset mainAxis = sideOffset + arrowHeight
-      const arrow = this.content.querySelector("[data-essence-tooltip-arrow]");
+      // Popper: offset mainAxis = sideOffset + arrowHeight
+      const arrow = this.content.querySelector("[data-radix-tooltip-arrow]");
       const arrowHeight = arrow ? arrow.offsetHeight || 5 : 0;
 
       positionFloating({
@@ -185,7 +185,7 @@ export const TooltipRoot = {
 
       positionArrow({
         content: this.content,
-        arrowSelector: "[data-essence-tooltip-arrow]",
+        arrowSelector: "[data-radix-tooltip-arrow]",
         side,
         align,
       });

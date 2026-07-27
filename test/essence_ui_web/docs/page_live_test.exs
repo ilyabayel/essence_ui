@@ -49,6 +49,22 @@ defmodule EssenceUIWeb.Docs.PageLiveTest do
     assert html =~ "Anatomy"
     assert html =~ "Dialog.trigger"
     assert html =~ "docs-demo"
+    assert html =~ "Custom APIs"
+    assert html =~ "docs-highlights"
+  end
+
+  test "primitives docs index lands on introduction", %{conn: conn} do
+    {:ok, _view, html} = live(conn, ~p"/primitives/docs")
+
+    assert html =~ "Introduction"
+    assert html =~ "Essence UI Primitives"
+  end
+
+  test "primitives getting started guide renders", %{conn: conn} do
+    {:ok, _view, html} = live(conn, ~p"/primitives/docs/overview/getting-started")
+
+    assert html =~ "Popover"
+    assert html =~ "docs-demo"
   end
 
   test "playground renders theme panel", %{conn: conn} do

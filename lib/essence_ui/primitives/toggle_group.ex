@@ -7,6 +7,7 @@ defmodule EssenceUI.Primitives.ToggleGroup do
   attr :type, :string, values: ["single", "multiple"], required: true
   attr :value, :any, default: nil
   attr :disabled, :boolean, default: false
+  attr :deselectable, :boolean, default: true
   attr :roving_focus, :boolean, default: true
   attr :orientation, :string, values: ["horizontal", "vertical"], default: "horizontal"
   attr :dir, :string, values: ["ltr", "rtl"], default: "ltr"
@@ -23,10 +24,11 @@ defmodule EssenceUI.Primitives.ToggleGroup do
       id={@id}
       phx-hook="ToggleGroupRoot"
       role={if @type == "single", do: "radiogroup", else: "toolbar"}
-      data-essence-toggle-group-root
+      data-radix-toggle-group-root
       data-type={@type}
       data-value={@value_attr}
       data-disabled={if @disabled, do: ""}
+      data-deselectable={to_string(@deselectable)}
       data-roving-focus={to_string(@roving_focus)}
       data-orientation={@orientation}
       data-loop={to_string(@loop)}
@@ -52,7 +54,7 @@ defmodule EssenceUI.Primitives.ToggleGroup do
     <button
       id={@id}
       type="button"
-      data-essence-toggle-group-item
+      data-radix-toggle-group-item
       data-value={@value}
       data-disabled={if @disabled, do: ""}
       data-state="off"

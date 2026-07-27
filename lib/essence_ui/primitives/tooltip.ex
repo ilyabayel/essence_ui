@@ -3,16 +3,16 @@ defmodule EssenceUI.Primitives.Tooltip do
 
   use EssenceUI.Primitives
 
-  attr :delay_duration, :integer, default: 700
-  attr :skip_delay_duration, :integer, default: 300
-  attr :disable_hoverable_content, :boolean, default: false
+  attr :delay_duration, :integer, default: 700, doc: "Default open delay in ms for tooltips in this provider."
+  attr :skip_delay_duration, :integer, default: 300, doc: "Delay when moving between tooltips."
+  attr :disable_hoverable_content, :boolean, default: false, doc: "When true, tooltip content is not hoverable."
   attr :rest, :global
   slot :inner_block, required: true
 
   def provider(assigns) do
     ~H"""
     <div
-      data-essence-tooltip-provider
+      data-radix-tooltip-provider
       data-delay-duration={@delay_duration}
       data-skip-delay-duration={@skip_delay_duration}
       data-disable-hoverable-content={if @disable_hoverable_content, do: ""}
@@ -23,12 +23,12 @@ defmodule EssenceUI.Primitives.Tooltip do
     """
   end
 
-  attr :id, :string, required: true
-  attr :open, :boolean, default: false
-  attr :default_open, :boolean, default: false
-  attr :open_delay, :integer, default: nil
-  attr :close_delay, :integer, default: 0
-  attr :on_open_change, :string, default: nil
+  attr :id, :string, required: true, doc: "Unique id for the tooltip root."
+  attr :open, :boolean, default: false, doc: "Controlled open state."
+  attr :default_open, :boolean, default: false, doc: "Initial open state when uncontrolled."
+  attr :open_delay, :integer, default: nil, doc: "Override provider open delay (ms)."
+  attr :close_delay, :integer, default: 0, doc: "Delay before closing (ms)."
+  attr :on_open_change, :string, default: nil, doc: "LiveView event name pushed when open state changes."
   attr :rest, :global
   slot :inner_block, required: true
 
@@ -73,7 +73,7 @@ defmodule EssenceUI.Primitives.Tooltip do
     <.dynamic_tag
       tag_name={@as}
       id={@id}
-      data-essence-tooltip-trigger
+      data-radix-tooltip-trigger
       aria-describedby={@content_id}
       data-state="closed"
       {@rest}
@@ -120,7 +120,7 @@ defmodule EssenceUI.Primitives.Tooltip do
     <div
       id={@id}
       role="tooltip"
-      data-essence-tooltip-content
+      data-radix-tooltip-content
       data-state="closed"
       data-side={@side}
       data-align={@align}
@@ -147,7 +147,7 @@ defmodule EssenceUI.Primitives.Tooltip do
       height={@height}
       viewBox="0 0 30 10"
       preserveAspectRatio="none"
-      data-essence-tooltip-arrow
+      data-radix-tooltip-arrow
       aria-hidden="true"
       {@rest}
     >

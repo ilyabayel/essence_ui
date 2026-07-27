@@ -3,11 +3,11 @@
 @import "@radix-ui/colors/violet.css";
 
 /* reset */
-.radix-demo button {
+button {
 	all: unset;
 }
 
-.radix-demo .PopoverTrigger {
+.DemoPopoverTrigger {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -21,14 +21,14 @@
 	color: var(--violet-11);
 	box-shadow: 0 2px 10px var(--black-a7);
 }
-.radix-demo .PopoverTrigger:hover {
+.DemoPopoverTrigger:hover {
 	background-color: var(--mauve-3);
 }
-.radix-demo .PopoverTrigger:focus {
+.DemoPopoverTrigger:focus {
 	box-shadow: 0 0 0 2px black;
 }
 
-.radix-demo .PopoverContent {
+.DemoPopoverContent {
 	border-radius: 4px;
 	padding: 20px;
 	width: 260px;
@@ -40,7 +40,7 @@
 		hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
 		hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
 }
-.radix-demo .PopoverContent:focus {
+.DemoPopoverContent:focus {
 	outline: none;
 	box-shadow:
 		hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
@@ -48,6 +48,6 @@
 		0 0 0 2px var(--violet-7);
 }
 
-.radix-demo .PopoverArrow {
+.DemoPopoverArrow {
 	fill: white;
 }

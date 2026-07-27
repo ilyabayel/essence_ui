@@ -28,11 +28,11 @@ defmodule EssenceUI.Components.TabsTest do
 
     assert html =~ ~s[id="t1"]
     assert html =~ ~s[phx-hook="TabsRoot"]
-    assert html =~ ~s[data-essence-tabs-root]
-    assert html =~ "est-TabsRoot"
-    assert html =~ "est-TabsList"
-    assert html =~ ~s[data-essence-tabs-trigger]
-    assert html =~ ~s[data-essence-tabs-content]
+    assert html =~ ~s[data-radix-tabs-root]
+    assert html =~ "rt-TabsRoot"
+    assert html =~ "rt-TabsList"
+    assert html =~ ~s[data-radix-tabs-trigger]
+    assert html =~ ~s[data-radix-tabs-content]
     assert html =~ ~s(data-accent-color="blue")
     assert html =~ "Panel A"
   end

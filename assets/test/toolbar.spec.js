@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("Toolbar Primitive", () => {
@@ -11,13 +11,13 @@ test.describe("Toolbar Primitive", () => {
   test("navigates focusable items with arrow keys", async ({ page }) => {
     const root = page.locator("#toolbar-primitive");
     const bold = root.locator(
-      '[data-essence-toolbar-toggle-item][data-value="bold"]',
+      '[data-radix-toolbar-toggle-item][data-value="bold"]',
     );
     const italic = root.locator(
-      '[data-essence-toolbar-toggle-item][data-value="italic"]',
+      '[data-radix-toolbar-toggle-item][data-value="italic"]',
     );
     const strike = root.locator(
-      '[data-essence-toolbar-toggle-item][data-value="strikethrough"]',
+      '[data-radix-toolbar-toggle-item][data-value="strikethrough"]',
     );
 
     await bold.focus();
@@ -33,7 +33,7 @@ test.describe("Toolbar Primitive", () => {
     await expect(bold).toBeFocused();
 
     await page.keyboard.press("End");
-    const share = root.locator("[data-essence-toolbar-button]", {
+    const share = root.locator("[data-radix-toolbar-button]", {
       hasText: "Share",
     });
     await expect(share).toBeFocused();
@@ -46,10 +46,10 @@ test.describe("Toolbar Primitive", () => {
   test("toggles items in toggle group", async ({ page }) => {
     const root = page.locator("#toolbar-primitive");
     const left = root.locator(
-      '[data-essence-toolbar-toggle-item][data-value="left"]',
+      '[data-radix-toolbar-toggle-item][data-value="left"]',
     );
     const center = root.locator(
-      '[data-essence-toolbar-toggle-item][data-value="center"]',
+      '[data-radix-toolbar-toggle-item][data-value="center"]',
     );
 
     await expect(center).toHaveAttribute("data-state", "on");

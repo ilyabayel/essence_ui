@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.AspectRatioTest do
 
   alias EssenceUI.Primitives.AspectRatio
 
-  test "renders radix-like wrapper and inner root" do
+  test "renders wrapper and inner root" do
     html =
       render_component(
         fn assigns ->

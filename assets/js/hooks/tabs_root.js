@@ -19,22 +19,22 @@ export const TabsRoot = {
   },
 
   list() {
-    return this.el.querySelector("[data-essence-tabs-list]");
+    return this.el.querySelector("[data-radix-tabs-list]");
   },
 
   triggers() {
-    return Array.from(this.el.querySelectorAll("[data-essence-tabs-trigger]"));
+    return Array.from(this.el.querySelectorAll("[data-radix-tabs-trigger]"));
   },
 
   contents() {
-    return Array.from(this.el.querySelectorAll("[data-essence-tabs-content]"));
+    return Array.from(this.el.querySelectorAll("[data-radix-tabs-content]"));
   },
 
   enabledTriggers() {
     return this.triggers().filter((t) => !t.disabled && !t.hasAttribute("data-disabled"));
   },
 
-  /** Wire Radix-compatible ids / aria-controls / aria-labelledby / orientation. */
+  /** Wire ids / aria-controls / aria-labelledby / orientation. */
   wireAria() {
     const rootId = this.el.id;
     const orientation = this.el.dataset.orientation || "horizontal";
@@ -66,7 +66,7 @@ export const TabsRoot = {
   },
 
   onClick(event) {
-    const trigger = event.target.closest("[data-essence-tabs-trigger]");
+    const trigger = event.target.closest("[data-radix-tabs-trigger]");
     if (!trigger || !this.el.contains(trigger)) return;
     if (trigger.disabled || trigger.hasAttribute("data-disabled")) return;
     this.activate(trigger.dataset.value, true);

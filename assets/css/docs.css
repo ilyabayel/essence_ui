@@ -141,7 +141,7 @@ body:has(.docs-shell) {
 }
 
 .docs-sidebar__inner>nav,
-.docs-sidebar__inner>nav>.est-Flex {
+.docs-sidebar__inner>nav>.rt-Flex {
   width: 100%;
   align-self: stretch;
 }
@@ -226,12 +226,30 @@ body:has(.docs-shell) {
   font-size: var(--font-size-5, 1.25rem);
   font-weight: 650;
   letter-spacing: -0.02em;
+  scroll-margin-top: 4.5rem;
 }
 
 .docs-article__body>h3 {
   margin: 1.25rem 0 0.5rem;
   font-size: var(--font-size-4, 1.05rem);
   font-weight: 600;
+  scroll-margin-top: 4.5rem;
+}
+
+/* MDEx heading permalink anchors (from header_id_prefix) */
+.docs-article__body :is(h2, h3)>a.anchor {
+  margin-left: 0.35em;
+  text-decoration: none;
+  opacity: 0;
+}
+
+.docs-article__body :is(h2, h3):hover>a.anchor,
+.docs-article__body :is(h2, h3)>a.anchor:focus-visible {
+  opacity: 0.55;
+}
+
+.docs-article__body :is(h2, h3)>a.anchor::before {
+  content: "#";
 }
 
 .docs-article__body>p {
@@ -265,7 +283,7 @@ body:has(.docs-shell) {
 }
 
 .docs-article__body>.docs-code-block,
-.docs-article__body>.est-Card,
+.docs-article__body>.rt-Card,
 .docs-article__body>.docs-demo,
 .docs-article__body>.docs-props,
 .docs-article__body>.docs-anatomy {
@@ -279,7 +297,7 @@ body:has(.docs-shell) {
   overflow: visible;
 }
 
-.docs-demo.est-Card {
+.docs-demo.rt-Card {
   overflow: visible !important;
 }
 
@@ -290,14 +308,17 @@ body:has(.docs-shell) {
   justify-content: flex-start;
   flex-wrap: wrap;
   gap: 0.75rem;
-  background:
-    linear-gradient(90deg, var(--gray-a2) 1px, transparent 1px) 0 0 / 16px 16px,
-    linear-gradient(var(--gray-a2) 1px, transparent 1px) 0 0 / 16px 16px;
 }
 
-.docs-demo__preview.radix-demo {
-  display: block;
-  background: var(--color-background, #fff);
+/* Layout roots need full preview width; otherwise flex shrink-to-fit
+   collapses Box/Container/Section demos to a hairline. */
+.docs-demo__preview>.rt-Box,
+.docs-demo__preview>.rt-Flex,
+.docs-demo__preview>.rt-Grid,
+.docs-demo__preview>.rt-Container,
+.docs-demo__preview>.rt-Section {
+  width: 100%;
+  min-width: 0;
 }
 
 .docs-demo__source {
@@ -306,13 +327,13 @@ body:has(.docs-shell) {
   min-width: 0;
 }
 
-.docs-demo__source .est-TabsRoot,
-.docs-demo__source .est-TabsContent {
+.docs-demo__source .rt-TabsRoot,
+.docs-demo__source .rt-TabsContent {
   max-width: 100%;
   min-width: 0;
 }
 
-.docs-demo__source .est-TabsList {
+.docs-demo__source .rt-TabsList {
   padding-inline: 0.75rem;
 }
 
@@ -347,6 +368,97 @@ body:has(.docs-shell) {
   line-height: 1.55;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+  color: var(--gray-12);
+}
+
+/* Makeup token colors — theme-aware via Radix scales */
+.docs-code-block .c,
+.docs-code-block .c1,
+.docs-code-block .cm,
+.docs-code-block .cp,
+.docs-code-block .cs {
+  color: var(--gray-9);
+  font-style: italic;
+}
+
+.docs-code-block .k,
+.docs-code-block .kc,
+.docs-code-block .kd,
+.docs-code-block .kn,
+.docs-code-block .kp,
+.docs-code-block .kr,
+.docs-code-block .kt {
+  color: var(--crimson-11);
+}
+
+.docs-code-block .n,
+.docs-code-block .na,
+.docs-code-block .bp,
+.docs-code-block .nc,
+.docs-code-block .nd,
+.docs-code-block .ni,
+.docs-code-block .ne,
+.docs-code-block .nf,
+.docs-code-block .fm,
+.docs-code-block .nl,
+.docs-code-block .nn,
+.docs-code-block .nx,
+.docs-code-block .py,
+.docs-code-block .nt,
+.docs-code-block .nv,
+.docs-code-block .vc,
+.docs-code-block .vg,
+.docs-code-block .vi,
+.docs-code-block .vm {
+  color: var(--blue-11);
+}
+
+/* Syntect CSS: properties vs keyword values */
+.docs-code-block .nb {
+  color: var(--crimson-11);
+}
+
+.docs-code-block .no {
+  color: var(--orange-11);
+}
+
+.docs-code-block .o,
+.docs-code-block .ow,
+.docs-code-block .p {
+  color: var(--gray-11);
+}
+
+.docs-code-block .s,
+.docs-code-block .sa,
+.docs-code-block .sb,
+.docs-code-block .sc,
+.docs-code-block .dl,
+.docs-code-block .sd,
+.docs-code-block .s2,
+.docs-code-block .se,
+.docs-code-block .sh,
+.docs-code-block .si,
+.docs-code-block .sx,
+.docs-code-block .sr,
+.docs-code-block .s1,
+.docs-code-block .ss {
+  color: var(--teal-11);
+}
+
+.docs-code-block .m,
+.docs-code-block .mb,
+.docs-code-block .mf,
+.docs-code-block .mh,
+.docs-code-block .mi,
+.docs-code-block .il,
+.docs-code-block .mo,
+.docs-code-block .l,
+.docs-code-block .ld {
+  color: var(--orange-11);
+}
+
+.docs-code-block .err {
+  color: var(--red-11);
 }
 
 .docs-props {

@@ -48,7 +48,6 @@ config :essence_ui, EssenceUIWeb.Endpoint,
       ~r"priv/gettext/.*(po)$",
       ~r"lib/essence_ui_web/(?:controllers|live|components|docs|router)/?.*\.(ex|heex)$",
       ~r"lib/essence_ui/components/?.*\.(ex|heex)$",
-      ~r"storybook/.*(exs)$",
       ~r"docs/.*(md|exs)$"
     ]
   ]

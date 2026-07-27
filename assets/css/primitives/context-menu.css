@@ -2,7 +2,7 @@
 @import "@radix-ui/colors/mauve.css";
 @import "@radix-ui/colors/violet.css";
 
-.radix-demo[data-component="context-menu"] .ContextMenuTrigger {
+.DemoContextMenuTrigger {
 	display: block;
 	border: 2px white dashed;
 	color: white;
@@ -14,8 +14,8 @@
 	text-align: center;
 }
 
-.radix-demo[data-component="context-menu"] .ContextMenuContent,
-.radix-demo[data-component="context-menu"] .ContextMenuSubContent {
+.DemoContextMenuContent,
+.DemoContextMenuSubContent {
 	min-width: 220px;
 	background-color: white;
 	border-radius: 6px;
@@ -26,10 +26,10 @@
 		0px 10px 20px -15px rgba(22, 23, 24, 0.2);
 }
 
-.radix-demo[data-component="context-menu"] .ContextMenuItem,
-.radix-demo[data-component="context-menu"] .ContextMenuCheckboxItem,
-.radix-demo[data-component="context-menu"] .ContextMenuRadioItem,
-.radix-demo[data-component="context-menu"] .ContextMenuSubTrigger {
+.DemoContextMenuItem,
+.DemoContextMenuCheckboxItem,
+.DemoContextMenuRadioItem,
+.DemoContextMenuSubTrigger {
 	font-size: 13px;
 	line-height: 1;
 	color: var(--violet-11);
@@ -43,39 +43,39 @@
 	user-select: none;
 	outline: none;
 }
-.radix-demo[data-component="context-menu"] .ContextMenuSubTrigger[data-state="open"] {
+.DemoContextMenuSubTrigger[data-state="open"] {
 	background-color: var(--violet-4);
 	color: var(--violet-11);
 }
-.radix-demo[data-component="context-menu"] .ContextMenuItem[data-disabled],
-.radix-demo[data-component="context-menu"] .ContextMenuCheckboxItem[data-disabled],
-.radix-demo[data-component="context-menu"] .ContextMenuRadioItem[data-disabled],
-.radix-demo[data-component="context-menu"] .ContextMenuSubTrigger[data-disabled] {
+.DemoContextMenuItem[data-disabled],
+.DemoContextMenuCheckboxItem[data-disabled],
+.DemoContextMenuRadioItem[data-disabled],
+.DemoContextMenuSubTrigger[data-disabled] {
 	color: var(--mauve-8);
 	pointer-events: "none";
 }
-.radix-demo[data-component="context-menu"] .ContextMenuItem[data-highlighted],
-.radix-demo[data-component="context-menu"] .ContextMenuCheckboxItem[data-highlighted],
-.radix-demo[data-component="context-menu"] .ContextMenuRadioItem[data-highlighted],
-.radix-demo[data-component="context-menu"] .ContextMenuSubTrigger[data-highlighted] {
+.DemoContextMenuItem[data-highlighted],
+.DemoContextMenuCheckboxItem[data-highlighted],
+.DemoContextMenuRadioItem[data-highlighted],
+.DemoContextMenuSubTrigger[data-highlighted] {
 	background-color: var(--violet-9);
 	color: var(--violet-1);
 }
 
-.radix-demo[data-component="context-menu"] .ContextMenuLabel {
+.DemoContextMenuLabel {
 	padding-left: 25px;
 	font-size: 12px;
 	line-height: 25px;
 	color: var(--mauve-11);
 }
 
-.radix-demo[data-component="context-menu"] .ContextMenuSeparator {
+.DemoContextMenuSeparator {
 	height: 1px;
 	background-color: var(--violet-6);
 	margin: 5px;
 }
 
-.radix-demo[data-component="context-menu"] .ContextMenuItemIndicator {
+.DemoContextMenuItemIndicator {
 	position: absolute;
 	left: 0;
 	width: 25px;
@@ -84,14 +84,18 @@
 	justify-content: center;
 }
 
-.radix-demo[data-component="context-menu"] .RightSlot {
+.DemoRightSlot {
 	margin-left: auto;
 	padding-left: 20px;
 	color: var(--mauve-11);
 }
-.radix-demo[data-component="context-menu"] [data-highlighted] > .RightSlot {
+[data-highlighted] > .DemoRightSlot {
 	color: white;
 }
-.radix-demo[data-component="context-menu"] [data-disabled] .RightSlot {
+[data-disabled] .DemoRightSlot {
 	color: var(--mauve-8);
+}
+
+.DemoContextMenuArrow {
+	fill: white;
 }

@@ -1,7 +1,7 @@
 defmodule EssenceUI.SharedProps.LayoutProps do
   @moduledoc """
   Layout prop definitions for Box, Flex, Grid, and other layout components.
-  Inspired by Radix UI Themes layout.props.ts and the provided TypeScript definition.
+  Theme layout props for Essence UI.
   """
 
   alias EssenceUI.SharedProps.HeightProps
@@ -39,72 +39,72 @@ defmodule EssenceUI.SharedProps.LayoutProps do
     |> Map.merge(WidthProps.prop_defs())
     |> Map.merge(HeightProps.prop_defs())
     |> Map.merge(%{
-      position: %{type: :enum, values: @position_values, class: "est-r-position", responsive: true},
+      position: %{type: :enum, values: @position_values, class: "rt-r-position", responsive: true},
       inset: %{
         type: [:enum, :string],
         values: @edge_values,
-        class: "est-r-inset",
+        class: "rt-r-inset",
         custom_properties: ["--inset"],
         responsive: true
       },
       top: %{
         type: [:enum, :string],
         values: @edge_values,
-        class: "est-r-top",
+        class: "rt-r-top",
         custom_properties: ["--top"],
         responsive: true
       },
       right: %{
         type: [:enum, :string],
         values: @edge_values,
-        class: "est-r-right",
+        class: "rt-r-right",
         custom_properties: ["--right"],
         responsive: true
       },
       bottom: %{
         type: [:enum, :string],
         values: @edge_values,
-        class: "est-r-bottom",
+        class: "rt-r-bottom",
         custom_properties: ["--bottom"],
         responsive: true
       },
       left: %{
         type: [:enum, :string],
         values: @edge_values,
-        class: "est-r-left",
+        class: "rt-r-left",
         custom_properties: ["--left"],
         responsive: true
       },
-      overflow: %{type: :enum, values: @overflow_values, class: "est-r-overflow", responsive: true},
-      overflow_x: %{type: :enum, values: @overflow_values, class: "est-r-ox", responsive: true},
-      overflow_y: %{type: :enum, values: @overflow_values, class: "est-r-oy", responsive: true},
-      flex_basis: %{type: :string, class: "est-r-fb", custom_properties: ["--flex-basis"], responsive: true},
+      overflow: %{type: :enum, values: @overflow_values, class: "rt-r-overflow", responsive: true},
+      overflow_x: %{type: :enum, values: @overflow_values, class: "rt-r-ox", responsive: true},
+      overflow_y: %{type: :enum, values: @overflow_values, class: "rt-r-oy", responsive: true},
+      flex_basis: %{type: :string, class: "rt-r-fb", custom_properties: ["--flex-basis"], responsive: true},
       flex_shrink: %{
         type: [:enum, :string],
         values: @flex_shrink_values,
-        class: "est-r-fs",
+        class: "rt-r-fs",
         custom_properties: ["--flex-shrink"],
         responsive: true
       },
       flex_grow: %{
         type: [:enum, :string],
         values: @flex_grow_values,
-        class: "est-r-fg",
+        class: "rt-r-fg",
         custom_properties: ["--flex-grow"],
         responsive: true
       },
-      grid_area: %{type: :string, class: "est-r-ga", custom_properties: ["--grid-area"], responsive: true},
-      grid_column: %{type: :string, class: "est-r-gc", custom_properties: ["--grid-column"], responsive: true},
+      grid_area: %{type: :string, class: "rt-r-ga", custom_properties: ["--grid-area"], responsive: true},
+      grid_column: %{type: :string, class: "rt-r-gc", custom_properties: ["--grid-column"], responsive: true},
       grid_column_start: %{
         type: :string,
-        class: "est-r-gcs",
+        class: "rt-r-gcs",
         custom_properties: ["--grid-column-start"],
         responsive: true
       },
-      grid_column_end: %{type: :string, class: "est-r-gce", custom_properties: ["--grid-column-end"], responsive: true},
-      grid_row: %{type: :string, class: "est-r-gr", custom_properties: ["--grid-row"], responsive: true},
-      grid_row_start: %{type: :string, class: "est-r-grs", custom_properties: ["--grid-row-start"], responsive: true},
-      grid_row_end: %{type: :string, class: "est-r-gre", custom_properties: ["--grid-row-end"], responsive: true}
+      grid_column_end: %{type: :string, class: "rt-r-gce", custom_properties: ["--grid-column-end"], responsive: true},
+      grid_row: %{type: :string, class: "rt-r-gr", custom_properties: ["--grid-row"], responsive: true},
+      grid_row_start: %{type: :string, class: "rt-r-grs", custom_properties: ["--grid-row-start"], responsive: true},
+      grid_row_end: %{type: :string, class: "rt-r-gre", custom_properties: ["--grid-row-end"], responsive: true}
     })
   end
 

@@ -1,11 +1,11 @@
 @import "@radix-ui/colors/black-alpha.css";
 
 /* reset */
-.radix-demo[data-component="switch"] button {
+button {
 	all: unset;
 }
 
-.radix-demo[data-component="switch"] .SwitchRoot {
+.DemoSwitchRoot {
 	width: 42px;
 	height: 25px;
 	background-color: var(--black-a9);
@@ -21,7 +21,7 @@
 	}
 }
 
-.radix-demo[data-component="switch"] .SwitchThumb {
+.DemoSwitchThumb {
 	display: block;
 	width: 21px;
 	height: 21px;
@@ -36,7 +36,7 @@
 	}
 }
 
-.radix-demo[data-component="switch"] .Label {
+.DemoLabel {
 	color: white;
 	font-size: 15px;
 	line-height: 1;

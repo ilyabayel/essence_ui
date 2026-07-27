@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.MenubarTest do
 
   alias EssenceUI.Primitives.Menubar
 
-  test "renders radix-like menubar parts" do
+  test "renders menubar parts" do
     html =
       render_component(
         fn assigns ->
@@ -48,19 +48,20 @@ defmodule EssenceUI.Primitives.MenubarTest do
     assert html =~ ~s[phx-hook="MenubarRoot"]
     assert html =~ ~s[role="menubar"]
     assert html =~ ~s[data-orientation="horizontal"]
-    assert html =~ "data-essence-menubar-menu"
-    assert html =~ "data-essence-menubar-trigger"
-    assert html =~ "data-essence-menubar-content"
-    assert html =~ "data-essence-menubar-label"
-    assert html =~ "data-essence-menubar-item"
-    assert html =~ "data-essence-menubar-checkbox-item"
-    assert html =~ "data-essence-menubar-radio-group"
-    assert html =~ "data-essence-menubar-radio-item"
-    assert html =~ "data-essence-menubar-item-indicator"
-    assert html =~ "data-essence-menubar-separator"
-    assert html =~ "data-essence-menubar-sub"
-    assert html =~ "data-essence-menubar-sub-trigger"
-    assert html =~ "data-essence-menubar-sub-content"
+    assert html =~ "data-radix-menubar-menu"
+    assert html =~ "data-radix-menubar-trigger"
+    assert html =~ "data-radix-menubar-content"
+    assert html =~ "data-radix-menu-label"
+    assert html =~ "data-radix-menu-item"
+    assert html =~ "data-radix-menu-checkbox-item"
+    assert html =~ "data-radix-menu-radio-group"
+    assert html =~ "data-radix-menu-radio-item"
+    assert html =~ "data-radix-menu-item-indicator"
+    assert html =~ "data-radix-menu-separator"
+    assert html =~ "data-radix-menu-sub"
+    assert html =~ "data-radix-menu-sub-trigger"
+    assert html =~ "data-radix-menu-sub-content"
+    assert html =~ ~s[data-loop="true"]
   end
 
   test "portal thin-wraps Phoenix portal" do
@@ -83,7 +84,7 @@ defmodule EssenceUI.Primitives.MenubarTest do
 
     assert html =~ ~s[data-phx-portal="body"]
     assert html =~ ~s[id="mb-portal"]
-    assert html =~ "data-essence-menubar-content"
+    assert html =~ "data-radix-menubar-content"
     assert html =~ "Ported"
   end
 end

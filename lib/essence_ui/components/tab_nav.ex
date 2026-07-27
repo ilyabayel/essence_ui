@@ -2,7 +2,7 @@ defmodule EssenceUI.Components.TabNav do
   @moduledoc """
   A set of links for navigating between different views.
 
-  Based on Radix UI Themes TabNav component. Use `TabNav` for navigation links
+  Themed TabNav component. Use `TabNav` for navigation links
   that styled like tabs.
 
   ## Examples
@@ -46,16 +46,16 @@ defmodule EssenceUI.Components.TabNav do
   def tab_nav(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, class: "est-r-size", values: ["1", "2"], default: "2", responsive: true},
+        size: %{type: :enum, class: "rt-r-size", values: ["1", "2"], default: "2", responsive: true},
         wrap: %{
           type: :enum,
-          class: "est-r-fw",
+          class: "rt-r-fw",
           values: ["nowrap", "wrap", "wrap-reverse"],
           responsive: true
         },
         justify: %{
           type: :enum,
-          class: "est-r-jc",
+          class: "rt-r-jc",
           values: ["start", "center", "end"],
           responsive: true
         }
@@ -77,8 +77,8 @@ defmodule EssenceUI.Components.TabNav do
     <nav
       class={
         [
-          "est-BaseTabList",
-          "est-TabNavRoot",
+          "rt-BaseTabList",
+          "rt-TabNavRoot",
           @extracted_class,
           @class
         ]
@@ -110,7 +110,7 @@ defmodule EssenceUI.Components.TabNav do
     <.dynamic_tag
       tag_name={@as}
       class={
-        ["est-reset", "est-BaseTabListTrigger", "est-TabNavLink", @class]
+        ["rt-reset", "rt-BaseTabListTrigger", "rt-TabNavLink", @class]
         |> Enum.filter(& &1)
         |> Enum.join(" ")
       }
@@ -118,10 +118,10 @@ defmodule EssenceUI.Components.TabNav do
       data-active={@active}
       {Map.merge(%{href: @href}, @rest)}
     >
-      <span class="est-BaseTabListTriggerInner est-TabNavLinkInner">
+      <span class="rt-BaseTabListTriggerInner rt-TabNavLinkInner">
         {render_slot(@inner_block)}
       </span>
-      <span class="est-BaseTabListTriggerInnerHidden est-TabNavLinkInnerHidden" aria-hidden="true">
+      <span class="rt-BaseTabListTriggerInnerHidden rt-TabNavLinkInnerHidden" aria-hidden="true">
         {render_slot(@inner_block)}
       </span>
     </.dynamic_tag>

@@ -16,8 +16,9 @@
     "postcss-nesting": "^13.0.1"
   },
   "scripts": {
-    "build:css": "postcss css/storybook.css -o ../priv/static/assets/storybook.css",
-    "watch:css": "postcss css/storybook.css -o ../priv/static/assets/storybook.css --watch",
+    "build:css": "postcss css/app.css -o ../priv/static/assets/app.css && node ../scripts/build-css-release.mjs",
+    "build:css:release": "node ../scripts/build-css-release.mjs",
+    "watch:css": "postcss css/app.css -o ../priv/static/assets/app.css --watch",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui"
   },

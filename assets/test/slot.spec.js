@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("Slot Primitive", () => {
@@ -8,8 +8,8 @@ test.describe("Slot Primitive", () => {
   });
 
   test("renders composed button with slot props", async ({ page }) => {
-    const demo = page.locator('.radix-demo[data-component="slot"]');
-    const button = demo.locator("button.Button.violet");
+    const demo = page.locator('.essence-demo[data-component="slot"]');
+    const button = demo.locator("button.DemoButton.violet");
 
     await expect(button).toBeVisible();
     await expect(button).toHaveText("Composed Button");
@@ -24,7 +24,7 @@ test.describe("Slot Primitive", () => {
 
   test("is activatable with keyboard", async ({ page }) => {
     const button = page.locator(
-      '.radix-demo[data-component="slot"] button.Button',
+      '.essence-demo[data-component="slot"] button.DemoButton',
     );
 
     await button.focus();
@@ -35,10 +35,10 @@ test.describe("Slot Primitive", () => {
 
   test("has no accessibility violations", async ({ page }) => {
     await expect(
-      page.locator('.radix-demo[data-component="slot"] button'),
+      page.locator('.essence-demo[data-component="slot"] button'),
     ).toBeVisible();
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="slot"]',
+      include: '.essence-demo[data-component="slot"]',
     });
   });
 });

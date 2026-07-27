@@ -3,11 +3,11 @@
 @import "@radix-ui/colors/violet.css";
 
 /* reset */
-.radix-demo[data-component="select"] button {
+button {
 	all: unset;
 }
 
-.radix-demo[data-component="select"] .SelectTrigger {
+.DemoSelectTrigger {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -21,21 +21,21 @@
 	color: var(--violet-11);
 	box-shadow: 0 2px 10px var(--black-a7);
 }
-.radix-demo[data-component="select"] .SelectTrigger:hover {
+.DemoSelectTrigger:hover {
 	background-color: var(--mauve-3);
 }
-.radix-demo[data-component="select"] .SelectTrigger:focus {
+.DemoSelectTrigger:focus {
 	box-shadow: 0 0 0 2px black;
 }
-.radix-demo[data-component="select"] .SelectTrigger[data-placeholder] {
+.DemoSelectTrigger[data-placeholder] {
 	color: var(--violet-9);
 }
 
-.radix-demo[data-component="select"] .SelectIcon {
+.DemoSelectIcon {
 	color: Var(--violet-11);
 }
 
-.radix-demo[data-component="select"] .SelectContent {
+.DemoSelectContent {
 	overflow: hidden;
 	background-color: white;
 	border-radius: 6px;
@@ -44,11 +44,11 @@
 		0px 10px 20px -15px rgba(22, 23, 24, 0.2);
 }
 
-.radix-demo[data-component="select"] .SelectViewport {
+.DemoSelectViewport {
 	padding: 5px;
 }
 
-.radix-demo[data-component="select"] .SelectItem {
+.DemoSelectItem {
 	font-size: 13px;
 	line-height: 1;
 	color: var(--violet-11);
@@ -60,30 +60,30 @@
 	position: relative;
 	user-select: none;
 }
-.radix-demo[data-component="select"] .SelectItem[data-disabled] {
+.DemoSelectItem[data-disabled] {
 	color: var(--mauve-8);
 	pointer-events: none;
 }
-.radix-demo[data-component="select"] .SelectItem[data-highlighted] {
+.DemoSelectItem[data-highlighted] {
 	outline: none;
 	background-color: var(--violet-9);
 	color: var(--violet-1);
 }
 
-.radix-demo[data-component="select"] .SelectLabel {
+.DemoSelectLabel {
 	padding: 0 25px;
 	font-size: 12px;
 	line-height: 25px;
 	color: var(--mauve-11);
 }
 
-.radix-demo[data-component="select"] .SelectSeparator {
+.DemoSelectSeparator {
 	height: 1px;
 	background-color: var(--violet-6);
 	margin: 5px;
 }
 
-.radix-demo[data-component="select"] .SelectItemIndicator {
+.DemoSelectItemIndicator {
 	position: absolute;
 	left: 0;
 	width: 25px;
@@ -92,7 +92,7 @@
 	justify-content: center;
 }
 
-.radix-demo[data-component="select"] .SelectScrollButton {
+.DemoSelectScrollButton {
 	display: flex;
 	align-items: center;
 	justify-content: center;

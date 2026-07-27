@@ -1,8 +1,6 @@
 defmodule EssenceUI.Components.Switch do
   @moduledoc """
-  A Switch component for toggling between on/off states.
-
-  Based on Radix UI Themes Switch component with support for various sizes, variants,
+  A Switch component for toggling between on/off states with support for various sizes, variants,
   and colors. The switch provides visual feedback for boolean state changes
   and can be used in forms, settings panels, and interactive controls.
 
@@ -93,14 +91,14 @@ defmodule EssenceUI.Components.Switch do
       %{
         size: %{
           type: :enum,
-          class: "est-r-size",
+          class: "rt-r-size",
           values: @sizes,
           default: "2",
           responsive: true
         },
         variant: %{
           type: :enum,
-          class: "est-variant",
+          class: "rt-variant",
           values: @variants,
           default: "surface"
         }
@@ -117,8 +115,8 @@ defmodule EssenceUI.Components.Switch do
     # Build CSS classes
     class =
       [
-        "est-reset",
-        "est-SwitchRoot",
+        "rt-reset",
+        "rt-SwitchRoot",
         extracted.class
       ]
       |> Enum.filter(& &1)
@@ -148,7 +146,7 @@ defmodule EssenceUI.Components.Switch do
       data-accent-color={@color}
       {@rest}
     >
-      <.thumb class="est-SwitchThumb" />
+      <.thumb class="rt-SwitchThumb" />
     </.root>
     """
   end

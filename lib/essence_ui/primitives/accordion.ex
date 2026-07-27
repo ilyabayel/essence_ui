@@ -51,7 +51,7 @@ defmodule EssenceUI.Primitives.Accordion do
       id={@id}
       open={@open}
       disabled={@disabled}
-      data-essence-accordion-item
+      data-radix-accordion-item
       data-value={@value}
       {@rest}
     >
@@ -65,7 +65,7 @@ defmodule EssenceUI.Primitives.Accordion do
 
   def header(assigns) do
     ~H"""
-    <h3 data-essence-accordion-header {@rest}>
+    <h3 data-radix-accordion-header {@rest}>
       {render_slot(@inner_block)}
     </h3>
     """
@@ -81,7 +81,7 @@ defmodule EssenceUI.Primitives.Accordion do
     <Collapsible.trigger
       id={@trigger_id}
       content_id={@id}
-      data-essence-accordion-trigger
+      data-radix-accordion-trigger
       {@rest}
     >
       {render_slot(@inner_block)}
@@ -100,8 +100,8 @@ defmodule EssenceUI.Primitives.Accordion do
       id={@id}
       role="region"
       aria-labelledby={@trigger_id}
-      data-essence-accordion-content
-      style="--essence-accordion-content-height: var(--essence-collapsible-content-height); --essence-accordion-content-width: var(--essence-collapsible-content-width); --radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+      data-radix-accordion-content
+      style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
       {@rest}
     >
       {render_slot(@inner_block)}

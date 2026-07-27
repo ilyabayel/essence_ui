@@ -2,31 +2,31 @@
 @import "@radix-ui/colors/violet.css";
 
 /* reset */
-.radix-demo[data-component="radio-group"] button {
+button {
 	all: unset;
 }
 
-.radix-demo[data-component="radio-group"] .RadioGroupRoot {
+.DemoRadioGroupRoot {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 }
 
-.radix-demo[data-component="radio-group"] .RadioGroupItem {
+.DemoRadioGroupItem {
 	background-color: white;
 	width: 25px;
 	height: 25px;
 	border-radius: 100%;
 	box-shadow: 0 2px 10px var(--black-a7);
 }
-.radix-demo[data-component="radio-group"] .RadioGroupItem:hover {
+.DemoRadioGroupItem:hover {
 	background-color: var(--violet-3);
 }
-.radix-demo[data-component="radio-group"] .RadioGroupItem:focus {
+.DemoRadioGroupItem:focus {
 	box-shadow: 0 0 0 2px black;
 }
 
-.radix-demo[data-component="radio-group"] .RadioGroupIndicator {
+.DemoRadioGroupIndicator {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -34,7 +34,7 @@
 	height: 100%;
 	position: relative;
 }
-.radix-demo[data-component="radio-group"] .RadioGroupIndicator::after {
+.DemoRadioGroupIndicator::after {
 	content: "";
 	display: block;
 	width: 11px;
@@ -43,7 +43,7 @@
 	background-color: var(--violet-11);
 }
 
-.radix-demo[data-component="radio-group"] .Label {
+.DemoLabel {
 	color: white;
 	font-size: 15px;
 	line-height: 1;

@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("Progress Primitive", () => {
@@ -8,7 +8,7 @@ test.describe("Progress Primitive", () => {
   });
 
   test("exposes progressbar semantics and loading state", async ({ page }) => {
-    const demo = page.locator('.radix-demo[data-component="progress"]');
+    const demo = page.locator('.essence-demo[data-component="progress"]');
     const bar = demo.locator('[role="progressbar"]');
 
     await expect(bar).toHaveAttribute("aria-valuemin", "0");
@@ -25,7 +25,7 @@ test.describe("Progress Primitive", () => {
 
   test("has no accessibility violations", async ({ page }) => {
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="progress"]',
+      include: '.essence-demo[data-component="progress"]',
     });
   });
 });

@@ -1,8 +1,8 @@
 defmodule EssenceUI.Components.AlertDialog do
   @moduledoc """
-  Alert Dialog styled per Radix Themes Alert Dialog.
+  Themed alert dialog with overlay, content, and action subcomponents.
 
-  Themes façade keeps `alert_dialog/1` with `target`, `default_state`, and
+  Compound API keeps `alert_dialog/1` with `target`, `default_state`, and
   title/description slots. Internally wraps `EssenceUI.Primitives.AlertDialog`.
   """
   use Phoenix.Component
@@ -43,23 +43,24 @@ defmodule EssenceUI.Components.AlertDialog do
     <AlertDialogPrimitive.root id={@id} default_open={@default_open}>
       <AlertDialogPrimitive.portal id={"#{@id}-portal"} target={@target}>
         <div
-          class="essence-ui es-DialogRoot"
+          class="radix-themes"
+          data-is-dialog-theme
           data-scaling={@scaling}
           data-radius={@radius}
           data-gray-color={@gray_color}
           data-accent-color={@accent_color}
         >
-          <AlertDialogPrimitive.overlay class="est-BaseDialogOverlay est-AlertDialogOverlay">
-            <div class="est-BaseDialogScroll est-AlertDialogScroll">
-              <div class="est-BaseDialogScrollPadding est-AlertDialogScrollPadding est-r-align-center">
+          <AlertDialogPrimitive.overlay class="rt-BaseDialogOverlay rt-AlertDialogOverlay">
+            <div class="rt-BaseDialogScroll rt-AlertDialogScroll">
+              <div class="rt-BaseDialogScrollPadding rt-AlertDialogScrollPadding rt-r-align-center">
                 <AlertDialogPrimitive.content
                   id={"#{@id}-content"}
                   class={
                     [
-                      "est-BaseDialogContent",
-                      "est-AlertDialogContent",
-                      "est-r-size-3",
-                      "est-r-max-w",
+                      "rt-BaseDialogContent",
+                      "rt-AlertDialogContent",
+                      "rt-r-size-3",
+                      "rt-r-max-w",
                       @class
                     ]
                     |> Enum.filter(&(&1 != ""))
@@ -73,14 +74,14 @@ defmodule EssenceUI.Components.AlertDialog do
                 >
                   <AlertDialogPrimitive.title
                     :if={@title != []}
-                    class="est-Heading est-r-size-5"
+                    class="rt-Heading rt-r-size-5"
                     style="margin-bottom: var(--space-3)"
                   >
                     {render_slot(@title)}
                   </AlertDialogPrimitive.title>
                   <AlertDialogPrimitive.description
                     :if={@description != []}
-                    class="est-Text est-r-size-2"
+                    class="rt-Text rt-r-size-2"
                     style="margin-bottom: var(--space-4)"
                   >
                     {render_slot(@description)}

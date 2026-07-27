@@ -1,7 +1,6 @@
 defmodule EssenceUI.Components.Strong do
   @moduledoc """
-  Stong component 100% compatible with Radix UI Themes Stong API.
-  See: https://www.radix-ui.com/themes/docs/components/strong
+  Themed strong text.
   """
 
   use Phoenix.Component
@@ -40,7 +39,7 @@ defmodule EssenceUI.Components.Strong do
 
     extracted = EssenceUI.Helpers.ExtractProps.call(assigns, prop_defs)
 
-    class = ["est-Strong", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["rt-Strong", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
     style = [extracted.style, assigns[:style]] |> Enum.filter(& &1) |> Enum.join("; ")
     color = assigns[:color] || false
 

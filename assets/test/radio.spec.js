@@ -1,49 +1,51 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
+import { gotoTheme } from "./helpers/docs.js";
 
-test.describe('Radio', () => {
+test.describe("Radio", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/components/radio?variation_id=default');
-    await page.waitForTimeout(500);
+    await gotoTheme(page, "radio");
   });
 
-  test('should render as input type radio', async ({ page }) => {
-    const radio = page.locator('#radio-single-default');
+  test("should render as input type radio", async ({ page }) => {
+    const radio = page.locator('input[name="radio-hero"][value="1"]');
     await expect(radio).toBeVisible();
-    await expect(radio).toHaveAttribute('name', 'default_example');
-    await expect(radio).toHaveValue('option1');
-  });
-
-  test('should be checkable', async ({ page }) => {
-    const radio = page.locator('#radio-single-default');
-    await expect(radio).not.toBeChecked();
-    
-    await radio.click();
+    await expect(radio).toHaveAttribute("type", "radio");
     await expect(radio).toBeChecked();
   });
 
-  test('should support disabled state', async ({ page }) => {
-    const radio = page.locator('#radio-single-disabled');
+  test("should be checkable", async ({ page }) => {
+    const first = page.locator('input[name="radio-hero"][value="1"]');
+    const second = page.locator('input[name="radio-hero"][value="2"]');
+    await expect(first).toBeChecked();
+
+    await second.click();
+    await expect(second).toBeChecked();
+    await expect(first).not.toBeChecked();
+  });
+
+  test("should support disabled state", async ({ page }) => {
+    const radio = page.locator('input[name="radio-disabled"][value="1"]');
     await expect(radio).toBeDisabled();
   });
 
-  test('should support high contrast', async ({ page }) => {
-    await page.goto('/components/radio?variation_id=high_contrast');
-    const radio = page.locator('input[name="contrast_example"]');
-    await expect(radio).toHaveAttribute('data-accent-color', 'blue');
+  test("should support high contrast", async ({ page }) => {
+    const radio = page.locator('input[name="radio-hc-indigo-contrast"]');
+    await expect(radio).toHaveAttribute("data-accent-color", "indigo");
   });
 
-  test('should work within a manual label', async ({ page }) => {
-    await page.goto('/components/radio?variation_id=form_example');
-    const mediumLabel = page.locator('label:has-text("Medium")');
-    const mediumRadio = mediumLabel.locator('input[type="radio"]');
-    const largeLabel = page.locator('label:has-text("Large")');
-    const largeRadio = largeLabel.locator('input[type="radio"]');
+  test("should work within a manual label", async ({ page }) => {
+    const defaultLabel = page.locator('label:has-text("Default")').first();
+    const comfortableLabel = page
+      .locator('label:has-text("Comfortable")')
+      .first();
+    const defaultRadio = defaultLabel.locator('input[type="radio"]');
+    const comfortableRadio = comfortableLabel.locator('input[type="radio"]');
 
-    await expect(mediumRadio).toBeChecked();
-    await expect(largeRadio).not.toBeChecked();
+    await expect(defaultRadio).toBeChecked();
+    await expect(comfortableRadio).not.toBeChecked();
 
-    await largeLabel.click();
-    await expect(largeRadio).toBeChecked();
-    await expect(mediumRadio).not.toBeChecked();
+    await comfortableLabel.click();
+    await expect(comfortableRadio).toBeChecked();
+    await expect(defaultRadio).not.toBeChecked();
   });
 });

@@ -18,7 +18,7 @@
  * @param {Element} el
  * @returns {{ top: number, left: number }}
  */
-function getFixedContainingBlockOffset(el) {
+export function getFixedContainingBlockOffset(el) {
   let parent = el.parentElement;
   while (parent && parent !== document.documentElement) {
     const style = getComputedStyle(parent);
@@ -113,7 +113,7 @@ export function positionFloating({
 
 /**
  * Positions a floating arrow on the edge of content facing the trigger.
- * Matches Radix Popper arrow placement (SVG points down by default).
+ * Matches Popper arrow placement (SVG points down by default).
  *
  * @param {object} options
  * @param {Element} options.content
@@ -144,7 +144,7 @@ export function positionArrow({
   arrow.style.transform = "";
   arrow.style.transformOrigin = "";
 
-  // Radix PopperArrow: [oppositeSide]=0 + side-specific origin/transform.
+  // PopperArrow: [oppositeSide]=0 + side-specific origin/transform.
   // SVG points down by default (polygon tip at bottom).
   if (side === "bottom") {
     arrow.style.top = "0px";
@@ -170,7 +170,7 @@ export function positionArrow({
     else arrow.style.right = "16px";
   } else if (align === "center") {
     // Floating-UI centers via arrowY; approximate with mid-line.
-    // translateY(50%) is relative to origin at the top edge (Radix).
+    // translateY(50%) is relative to origin at the top edge (containing block).
     arrow.style.top = "50%";
   } else if (align === "start") {
     arrow.style.top = "8px";

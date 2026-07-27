@@ -44,6 +44,10 @@ defmodule EssenceUI.MixProject do
       {:igniter, "~> 0.6", only: [:dev, :test]},
       {:jason, "~> 1.4"},
       {:lazy_html, ">= 0.1.0", only: :test},
+      {:live_debugger, "~> 1.0.0", only: :dev},
+      {:makeup_eex, "~> 2.0"},
+      {:makeup_html, "~> 0.2"},
+      {:makeup_syntect, "~> 0.1.4"},
       {:mdex, "~> 0.13"},
       {:mix_test_watch, "~> 1.3", only: [:dev, :test], runtime: false},
       {:phoenix, "~> 1.8.1", override: true},
@@ -51,7 +55,8 @@ defmodule EssenceUI.MixProject do
       {:phoenix_live_dashboard, "~> 0.8.7"},
       {:phoenix_live_reload, "~> 1.6", only: :dev},
       {:phoenix_live_view, "~> 1.1.8"},
-      {:phoenix_storybook, "~> 1.3"},
+      # makeup_syntect 0.1.4 requires ~> 0.8.2; mdex_native allows ~> 0.8
+      {:rustler_precompiled, "~> 0.8.2", override: true},
       {:styler, "~> 1.7"},
       {:swoosh, "~> 1.19"},
       {:telemetry_metrics, "~> 1.1"},
@@ -73,6 +78,7 @@ defmodule EssenceUI.MixProject do
       "assets.build": ["esbuild essence_ui"],
       "assets.deploy": [
         "esbuild essence_ui --minify",
+        "cmd --cd assets npm run build:css",
         "phx.digest"
       ]
     ]

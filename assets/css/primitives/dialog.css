@@ -4,22 +4,20 @@
 @import "@radix-ui/colors/violet.css";
 
 /* reset */
-.radix-demo[data-component="dialog"] button,
-.radix-demo[data-component="dialog"] fieldset,
-.radix-demo[data-component="dialog"] input {
+button,
+fieldset,
+input {
 	all: unset;
 }
 
-.radix-demo[data-component="dialog"] .DialogOverlay,
-[data-essence-dialog-overlay].DialogOverlay {
+.DemoDialogOverlay {
 	background-color: var(--black-a9);
 	position: fixed;
 	inset: 0;
 	animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.radix-demo[data-component="dialog"] .DialogContent,
-[data-essence-dialog-content].DialogContent {
+.DemoDialogContent {
 	background-color: var(--gray-1);
 	border-radius: 6px;
 	box-shadow: var(--shadow-6);
@@ -33,26 +31,25 @@
 	padding: 25px;
 	animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-.radix-demo[data-component="dialog"] .DialogContent:focus,
-[data-essence-dialog-content].DialogContent:focus {
+.DemoDialogContent:focus {
 	outline: none;
 }
 
-.radix-demo[data-component="dialog"] .DialogTitle {
+.DemoDialogTitle {
 	margin: 0;
 	font-weight: 500;
 	color: var(--mauve-12);
 	font-size: 17px;
 }
 
-.radix-demo[data-component="dialog"] .DialogDescription {
+.DemoDialogDescription {
 	margin: 10px 0 20px;
 	color: var(--mauve-11);
 	font-size: 15px;
 	line-height: 1.5;
 }
 
-.radix-demo[data-component="dialog"] .Button {
+.DemoButton {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -64,31 +61,31 @@
 	height: 35px;
 	user-select: none;
 }
-.radix-demo[data-component="dialog"] .Button:focus:not(:focus-visible) {
+.DemoButton:focus:not(:focus-visible) {
 	outline: 0;
 }
-.radix-demo[data-component="dialog"] .Button:focus-visible {
+.DemoButton:focus-visible {
 	outline: 2px solid var(--violet-6);
 	outline-offset: 1px;
 }
-.radix-demo[data-component="dialog"] .Button.violet {
+.DemoButton.violet {
 	background-color: var(--violet-4);
 	color: var(--violet-12);
 	outline-color: var(--violet-6);
 }
-.radix-demo[data-component="dialog"] .Button.violet:hover {
+.DemoButton.violet:hover {
 	background-color: var(--mauve-3);
 }
-.radix-demo[data-component="dialog"] .Button.green {
+.DemoButton.green {
 	background-color: var(--green-4);
 	color: var(--green-11);
 	outline-color: var(--green-7);
 }
-.radix-demo[data-component="dialog"] .Button.green:hover {
+.DemoButton.green:hover {
 	background-color: var(--green-5);
 }
 
-.radix-demo[data-component="dialog"] .IconButton {
+.DemoIconButton {
 	all: unset;
 	font-family: inherit;
 	border-radius: 100%;
@@ -103,28 +100,28 @@
 	right: 10px;
 	background-color: var(--gray-3);
 }
-.radix-demo[data-component="dialog"] .IconButton:hover {
+.DemoIconButton:hover {
 	background-color: var(--violet-4);
 }
-.radix-demo[data-component="dialog"] .IconButton:focus {
+.DemoIconButton:focus {
 	box-shadow: 0 0 0 2px var(--violet-7);
 }
 
-.radix-demo[data-component="dialog"] .Fieldset {
+.DemoFieldset {
 	display: flex;
 	gap: 20px;
 	align-items: center;
 	margin-bottom: 15px;
 }
 
-.radix-demo[data-component="dialog"] .Label {
+.DemoLabel {
 	font-size: 15px;
 	color: var(--violet-11);
 	width: 90px;
 	text-align: right;
 }
 
-.radix-demo[data-component="dialog"] .Input {
+.DemoInput {
 	width: 100%;
 	flex: 1;
 	display: inline-flex;
@@ -138,7 +135,7 @@
 	box-shadow: 0 0 0 1px var(--violet-7);
 	height: 35px;
 }
-.radix-demo[data-component="dialog"] .Input:focus {
+.DemoInput:focus {
 	box-shadow: 0 0 0 2px var(--violet-8);
 }
 

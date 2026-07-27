@@ -1,9 +1,20 @@
 /**
- * Shared helpers for menu-like primitives (DropdownMenu, ContextMenu, Menubar).
+ * Shared helpers + MenuController for menu-like primitives
+ * (DropdownMenu, ContextMenu, Menubar).
  */
+
+import { positionFloating } from "./position";
+import { setOpen, setClosed } from "./presence";
+import { whenMouse } from "./pointer";
 
 const ITEM_SELECTOR =
   '[role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]';
+
+const SUB_SEL = "[data-radix-menu-sub]";
+const SUB_TRIGGER_SEL = "[data-radix-menu-sub-trigger]";
+const SUB_CONTENT_SEL = "[data-radix-menu-sub-content]";
+const RADIO_GROUP_SEL = "[data-radix-menu-radio-group]";
+const INDICATOR_SEL = "[data-radix-menu-item-indicator]";
 
 /**
  * Returns enabled menu items within a content container.
@@ -153,27 +164,18 @@ export function typeahead(key, items, state = { query: "", timeout: null }) {
 
 /**
  * Whether clicking an item should close the menu.
- * Matches Radix: all items close on select except sub-triggers.
- * Checkbox/radio stay open only when the consumer prevents the select
- * (e.g. `onSelect` + `preventDefault`); by default they close.
+ * Matches Themes: all items close on select except sub-triggers.
  * @param {Element} item
  * @returns {boolean}
  */
 export function shouldCloseOnItemClick(item) {
   if (!item) return false;
-  if (
-    item.hasAttribute("data-essence-dropdown-menu-sub-trigger") ||
-    item.hasAttribute("data-essence-context-menu-sub-trigger") ||
-    item.hasAttribute("data-essence-menubar-sub-trigger")
-  ) {
-    return false;
-  }
+  if (item.hasAttribute("data-radix-menu-sub-trigger")) return false;
   return true;
 }
 
 /**
- * Highlight menu items on mouse pointer move (Radix MenuItemImpl).
- * Focuses the item under the cursor so `[data-highlighted]` styles apply.
+ * Highlight menu items on mouse pointer move (MenuItemImpl).
  * @param {Element} content
  */
 export function bindMenuPointerHighlight(content) {
@@ -271,10 +273,8 @@ export function toggleCheckboxItem(item) {
  */
 export function selectRadioItem(item) {
   const group =
+    item.closest(RADIO_GROUP_SEL) ||
     item.closest('[role="group"]') ||
-    item.closest("[data-essence-dropdown-menu-radio-group]") ||
-    item.closest("[data-essence-context-menu-radio-group]") ||
-    item.closest("[data-essence-menubar-radio-group]") ||
     item.parentElement;
 
   if (group) {
@@ -291,11 +291,364 @@ export function selectRadioItem(item) {
 }
 
 function syncItemIndicator(item, checked) {
-  const indicator = item.querySelector(
-    "[data-essence-dropdown-menu-item-indicator], [data-essence-context-menu-item-indicator], [data-essence-menubar-item-indicator]"
-  );
+  const indicator = item.querySelector(INDICATOR_SEL);
   if (!indicator) return;
   indicator.style.display = checked ? "" : "none";
   indicator.hidden = !checked;
   indicator.dataset.state = checked ? "checked" : "unchecked";
+}
+
+/**
+ * Shared open-content behavior for DropdownMenu / ContextMenu / Menubar.
+ *
+ * Owns: item click (checkbox/radio/sub), keyboard nav + typeahead,
+ * submenu hover open/close, pointer highlight, close-on-item-click.
+ *
+ * @typedef {object} MenuControllerOptions
+ * @property {() => void} onClose
+ * @property {ReturnType<typeof createTypeahead>} [typeahead]
+ * @property {(e: KeyboardEvent) => boolean | void} [onArrowLeftOutside]
+ *   Called when ArrowLeft is pressed outside a submenu. Return true if handled.
+ * @property {(e: KeyboardEvent) => boolean | void} [onArrowRightOutside]
+ *   Called when ArrowRight is pressed and focus is not on a sub-trigger.
+ * @property {(e: KeyboardEvent) => boolean | void} [onEscape]
+ *   Override Escape handling. Return true if handled (skips default onClose).
+ * @property {(item: Element) => boolean} [isShellItem]
+ *   Ignore clicks on shell items (e.g. menubar triggers inside content tree).
+ * @property {boolean} [modal=true]
+ *   When true, show a fullscreen transparent backdrop that blocks page scroll
+ *   and closes the menu on pointerdown (does not toggle body overflow).
+ */
+export class MenuController {
+  /** @param {MenuControllerOptions} opts */
+  constructor(opts) {
+    this.onClose = opts.onClose;
+    this.typeahead = opts.typeahead || createTypeahead();
+    this.onArrowLeftOutside = opts.onArrowLeftOutside;
+    this.onArrowRightOutside = opts.onArrowRightOutside;
+    this.onEscape = opts.onEscape;
+    this.isShellItem = opts.isShellItem;
+    this.modal = opts.modal !== false;
+    this.openSubs = new Set();
+    this.content = null;
+    this._backdrop = null;
+
+    this._onItemClick = this._onItemClick.bind(this);
+    this._onKeyDown = this._onKeyDown.bind(this);
+    this._onBackdropScroll = this._onBackdropScroll.bind(this);
+    this._onBackdropPointer = this._onBackdropPointer.bind(this);
+  }
+
+  /**
+   * Attach interaction handlers to an open menu content root.
+   * @param {Element} content
+   * @param {{ modal?: boolean }} [options]
+   */
+  attach(content, options = {}) {
+    if (!content) return;
+    if (this.content && this.content !== content) {
+      this.detach();
+    }
+    this.content = content;
+    this.bindSubmenus(content);
+    closeOnItemClick(content, () => this.onClose());
+    bindMenuPointerHighlight(content);
+    content.removeEventListener("click", this._onItemClick);
+    content.addEventListener("click", this._onItemClick);
+    content.removeEventListener("keydown", this._onKeyDown);
+    content.addEventListener("keydown", this._onKeyDown);
+
+    const modal = options.modal !== undefined ? options.modal : this.modal;
+    if (modal) this.showBackdrop();
+  }
+
+  detach() {
+    this.hideBackdrop();
+    if (this.content) {
+      this.content.removeEventListener("click", this._onItemClick);
+      this.content.removeEventListener("keydown", this._onKeyDown);
+    }
+    this.content = null;
+  }
+
+  /**
+   * Fullscreen transparent backdrop under the menu: blocks page scroll without
+   * removing the scrollbar, closes on click.
+   *
+   * Must share the menu's stacking context. A body-level overlay loses when an
+   * ancestor has `contain: paint` / transform (content z-index stays trapped at
+   * auto=0 while body overlay at 49 paints on top). Insert as previous sibling.
+   */
+  showBackdrop() {
+    if (this._backdrop || !this.content) return;
+
+    const MENU_Z = 50;
+    const BACKDROP_Z = MENU_Z - 1;
+
+    this.content.style.zIndex = String(MENU_Z);
+
+    const overlay = document.createElement("div");
+    overlay.setAttribute("data-radix-menu-scroll-lock", "");
+    Object.assign(overlay.style, {
+      position: "fixed",
+      inset: "0",
+      zIndex: String(BACKDROP_Z),
+      background: "transparent",
+    });
+
+    overlay.addEventListener("wheel", this._onBackdropScroll, {
+      passive: false,
+    });
+    overlay.addEventListener("touchmove", this._onBackdropScroll, {
+      passive: false,
+    });
+    overlay.addEventListener("pointerdown", this._onBackdropPointer);
+
+    const parent = this.content.parentElement || document.body;
+    parent.insertBefore(overlay, this.content);
+    this._backdrop = overlay;
+
+    // Page scroll outside a contain:paint box still needs blocking.
+    this._onDocScroll = (event) => {
+      const target = event.target;
+      if (this.content?.contains(target)) return;
+      if ([...this.openSubs].some((sub) => sub.contains(target))) return;
+      event.preventDefault();
+    };
+    document.addEventListener("wheel", this._onDocScroll, {
+      passive: false,
+      capture: true,
+    });
+    document.addEventListener("touchmove", this._onDocScroll, {
+      passive: false,
+      capture: true,
+    });
+  }
+
+  hideBackdrop() {
+    if (this._onDocScroll) {
+      document.removeEventListener("wheel", this._onDocScroll, {
+        capture: true,
+      });
+      document.removeEventListener("touchmove", this._onDocScroll, {
+        capture: true,
+      });
+      this._onDocScroll = null;
+    }
+
+    if (this._backdrop) {
+      this._backdrop.removeEventListener("wheel", this._onBackdropScroll);
+      this._backdrop.removeEventListener("touchmove", this._onBackdropScroll);
+      this._backdrop.removeEventListener(
+        "pointerdown",
+        this._onBackdropPointer
+      );
+      this._backdrop.remove();
+      this._backdrop = null;
+    }
+  }
+
+  _onBackdropScroll(event) {
+    event.preventDefault();
+  }
+
+  _onBackdropPointer() {
+    this.onClose();
+  }
+
+  resetTypeahead() {
+    this.typeahead.reset();
+  }
+
+  /** @param {Element} [content] */
+  closeAllSubs(content = this.content) {
+    content?.querySelectorAll(SUB_SEL).forEach((sub) => this.closeSub(sub));
+    this.openSubs.clear();
+  }
+
+  /** @param {Element} content */
+  bindSubmenus(content) {
+    if (!content) return;
+
+    content.querySelectorAll(SUB_SEL).forEach((sub) => {
+      if (sub.hasAttribute("data-sub-bound")) return;
+      sub.setAttribute("data-sub-bound", "true");
+
+      const trigger = sub.querySelector(SUB_TRIGGER_SEL);
+      const subContent = sub.querySelector(SUB_CONTENT_SEL);
+      if (!trigger || !subContent) return;
+
+      let closeTimer;
+
+      const open = () => {
+        clearTimeout(closeTimer);
+        this.openSub(trigger);
+      };
+
+      const scheduleClose = () => {
+        closeTimer = setTimeout(() => this.closeSub(sub), 150);
+      };
+
+      // Hover open is mouse-only ; click/keyboard open via item click / arrows.
+      trigger.addEventListener("pointerenter", whenMouse(open));
+      trigger.addEventListener("pointerleave", whenMouse(scheduleClose));
+      subContent.addEventListener(
+        "pointerenter",
+        whenMouse(() => clearTimeout(closeTimer))
+      );
+      subContent.addEventListener("pointerleave", whenMouse(scheduleClose));
+    });
+  }
+
+  /** @param {Element} trigger */
+  openSub(trigger) {
+    const sub = trigger.closest(SUB_SEL);
+    const content = sub?.querySelector(SUB_CONTENT_SEL);
+    if (!sub || !content) return;
+
+    // Close sibling subs at the same level
+    const parent = sub.parentElement?.closest(SUB_SEL) || this.content;
+    parent?.querySelectorAll(`:scope > ${SUB_SEL}`).forEach((sibling) => {
+      if (sibling !== sub) this.closeSub(sibling);
+    });
+    // Also close direct children of the root content
+    if (this.content && parent === this.content) {
+      this.content.querySelectorAll(`:scope > ${SUB_SEL}`).forEach((sibling) => {
+        if (sibling !== sub) this.closeSub(sibling);
+      });
+    }
+
+    trigger.setAttribute("data-state", "open");
+    trigger.setAttribute("aria-expanded", "true");
+    sub.dataset.state = "open";
+    setOpen(content);
+
+    positionFloating({
+      trigger,
+      content,
+      side: content.dataset.side || "right",
+      align: content.dataset.align || "start",
+      sideOffset: parseInt(content.dataset.sideOffset, 10) || 0,
+    });
+
+    this.openSubs.add(sub);
+    closeOnItemClick(content, () => this.onClose());
+    bindMenuPointerHighlight(content);
+  }
+
+  /** @param {Element|null|undefined} sub */
+  closeSub(sub) {
+    if (!sub) return;
+    const trigger = sub.querySelector(SUB_TRIGGER_SEL);
+    const content = sub.querySelector(SUB_CONTENT_SEL);
+
+    sub.querySelectorAll(SUB_SEL).forEach((nested) => {
+      if (nested !== sub) this.closeSub(nested);
+    });
+
+    if (trigger) {
+      trigger.setAttribute("data-state", "closed");
+      trigger.setAttribute("aria-expanded", "false");
+    }
+    sub.dataset.state = "closed";
+    if (content) {
+      setClosed(content, { waitForAnimation: false });
+    }
+    this.openSubs.delete(sub);
+  }
+
+  /** @param {MouseEvent} e */
+  _onItemClick(e) {
+    const item = e.target.closest(ITEM_SELECTOR);
+    if (!item || !this.content?.contains(item)) return;
+    if (item.hasAttribute("data-disabled")) return;
+    if (this.isShellItem?.(item)) return;
+
+    if (item.hasAttribute("data-radix-menu-sub-trigger")) {
+      this.openSub(item);
+      return;
+    }
+
+    if (item.getAttribute("role") === "menuitemcheckbox") {
+      toggleCheckboxItem(item);
+      return;
+    }
+
+    if (item.getAttribute("role") === "menuitemradio") {
+      selectRadioItem(item);
+    }
+  }
+
+  /** @param {KeyboardEvent} e */
+  _onKeyDown(e) {
+    if (!this.content) return;
+
+    const items = getMenuItems(this.content);
+    const navItems = getFocusedMenuItems(this.content);
+
+    if (e.key === "Escape") {
+      if (this.onEscape?.(e)) return;
+      e.preventDefault();
+      this.onClose();
+      return;
+    }
+
+    if (handleArrowKeys(e, navItems)) return;
+
+    if (e.key === "ArrowRight") {
+      const active = document.activeElement;
+      if (active?.hasAttribute("data-radix-menu-sub-trigger")) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.openSub(active);
+        const sub = active
+          .closest(SUB_SEL)
+          ?.querySelector(SUB_CONTENT_SEL);
+        const subItems = getMenuItems(sub);
+        if (subItems[0]) focusItem(subItems[0], subItems);
+        return;
+      }
+      if (this.onArrowRightOutside?.(e)) return;
+      return;
+    }
+
+    if (e.key === "ArrowLeft") {
+      const active = document.activeElement;
+      const subContent = active?.closest(SUB_CONTENT_SEL);
+      if (subContent) {
+        e.preventDefault();
+        e.stopPropagation();
+        const sub = subContent.closest(SUB_SEL);
+        const trigger = sub?.querySelector(SUB_TRIGGER_SEL);
+        this.closeSub(sub);
+        if (trigger) focusItem(trigger, items);
+        return;
+      }
+      if (this.onArrowLeftOutside?.(e)) return;
+      return;
+    }
+
+    if (e.key === "Enter" || e.key === " ") {
+      const active = document.activeElement;
+      if (active?.hasAttribute("data-radix-menu-sub-trigger")) {
+        e.preventDefault();
+        this.openSub(active);
+        const sub = active
+          .closest(SUB_SEL)
+          ?.querySelector(SUB_CONTENT_SEL);
+        const subItems = getMenuItems(sub);
+        if (subItems[0]) focusItem(subItems[0], subItems);
+        return;
+      }
+      if (active && navItems.includes(active)) {
+        e.preventDefault();
+        active.click();
+      }
+      return;
+    }
+
+    if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      this.typeahead.handle(e.key, navItems);
+    }
+  }
 }

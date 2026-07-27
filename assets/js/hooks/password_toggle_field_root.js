@@ -1,7 +1,7 @@
 export const PasswordToggleFieldRoot = {
   mounted() {
-    this.input = this.el.querySelector("[data-essence-password-toggle-input]");
-    this.toggle = this.el.querySelector("[data-essence-password-toggle-toggle]");
+    this.input = this.el.querySelector("[data-radix-password-toggle-input]");
+    this.toggle = this.el.querySelector("[data-radix-password-toggle-toggle]");
     this._visible = this.el.dataset.visible === "true";
 
     this._onToggle = (event) => {
@@ -65,7 +65,7 @@ export const PasswordToggleFieldRoot = {
       );
     }
 
-    const icons = this.el.querySelectorAll("[data-essence-password-toggle-icon]");
+    const icons = this.el.querySelectorAll("[data-radix-password-toggle-icon]");
     for (const icon of icons) {
       const isVisibleIcon = icon.hasAttribute("data-visible");
       const isHiddenIcon = icon.hasAttribute("data-hidden");

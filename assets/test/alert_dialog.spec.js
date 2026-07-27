@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("Alert Dialog Primitive", () => {
@@ -14,9 +14,9 @@ test.describe("Alert Dialog Primitive", () => {
     page,
   }) => {
     const root = page.locator("#alert-dialog-primitive");
-    const trigger = root.locator("[data-essence-alert-dialog-trigger]");
+    const trigger = root.locator("[data-radix-alert-dialog-trigger]");
     const content = page.locator("#alert-dialog-content");
-    const overlay = page.locator("[data-essence-alert-dialog-overlay]");
+    const overlay = page.locator("[data-radix-alert-dialog-overlay]");
 
     await expect(content).toBeHidden();
     await trigger.click();
@@ -34,10 +34,10 @@ test.describe("Alert Dialog Primitive", () => {
 
   test("closes via cancel and action", async ({ page }) => {
     const root = page.locator("#alert-dialog-primitive");
-    const trigger = root.locator("[data-essence-alert-dialog-trigger]");
+    const trigger = root.locator("[data-radix-alert-dialog-trigger]");
     const content = page.locator("#alert-dialog-content");
-    const cancel = content.locator("[data-essence-alert-dialog-cancel]");
-    const action = content.locator("[data-essence-alert-dialog-action]");
+    const cancel = content.locator("[data-radix-alert-dialog-cancel]");
+    const action = content.locator("[data-radix-alert-dialog-action]");
 
     await trigger.click();
     await expect(content).toBeVisible();
@@ -52,9 +52,9 @@ test.describe("Alert Dialog Primitive", () => {
 
   test("closes on escape but not overlay click", async ({ page }) => {
     const root = page.locator("#alert-dialog-primitive");
-    const trigger = root.locator("[data-essence-alert-dialog-trigger]");
+    const trigger = root.locator("[data-radix-alert-dialog-trigger]");
     const content = page.locator("#alert-dialog-content");
-    const overlay = page.locator("[data-essence-alert-dialog-overlay]");
+    const overlay = page.locator("[data-radix-alert-dialog-overlay]");
 
     await trigger.click();
     await expect(content).toBeVisible();
@@ -73,13 +73,13 @@ test.describe("Alert Dialog Primitive", () => {
 
   test("has no accessibility violations when open", async ({ page }) => {
     const root = page.locator("#alert-dialog-primitive");
-    const trigger = root.locator("[data-essence-alert-dialog-trigger]");
+    const trigger = root.locator("[data-radix-alert-dialog-trigger]");
     await trigger.click();
     await expect(page.locator("#alert-dialog-content")).toBeVisible();
     await expectNoA11yViolations(page, {
       include: [
         "#alert-dialog-content",
-        "[data-essence-alert-dialog-overlay]",
+        "[data-radix-alert-dialog-overlay]",
       ],
     });
   });

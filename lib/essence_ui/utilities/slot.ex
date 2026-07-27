@@ -2,7 +2,7 @@ defmodule EssenceUI.Utilities.Slot do
   @moduledoc """
   A component for prop composition.
 
-  Based on Radix UI Slot primitive. In Elixir/Phoenix, this is implemented as a
+  Composable slot for merging props onto a child element. In Elixir/Phoenix, this is implemented as a
   wrapper around `dynamic_tag` to allow for tag-based composition.
 
   ## Examples

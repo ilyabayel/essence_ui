@@ -39,19 +39,19 @@ export const NavigationMenuRoot = {
 
   getItems() {
     return Array.from(
-      this.el.querySelectorAll("[data-essence-navigation-menu-item]")
+      this.el.querySelectorAll("[data-radix-navigation-menu-item]")
     );
   },
 
   /** Top-level triggers/links in visual list order (excludes in-content links). */
   getTabStops() {
-    const list = this.el.querySelector("[data-essence-navigation-menu-list]");
+    const list = this.el.querySelector("[data-radix-navigation-menu-list]");
     if (!list) return [];
     return Array.from(list.children).flatMap((item) => {
-      if (!item.hasAttribute("data-essence-navigation-menu-item")) return [];
+      if (!item.hasAttribute("data-radix-navigation-menu-item")) return [];
       const stop =
-        item.querySelector(":scope > [data-essence-navigation-menu-trigger]") ||
-        item.querySelector(":scope > [data-essence-navigation-menu-link]");
+        item.querySelector(":scope > [data-radix-navigation-menu-trigger]") ||
+        item.querySelector(":scope > [data-radix-navigation-menu-link]");
       return stop ? [stop] : [];
     });
   },
@@ -59,8 +59,8 @@ export const NavigationMenuRoot = {
   getNextTabStop(fromItem) {
     const stops = this.getTabStops();
     const current =
-      fromItem.querySelector(":scope > [data-essence-navigation-menu-trigger]") ||
-      fromItem.querySelector(":scope > [data-essence-navigation-menu-link]");
+      fromItem.querySelector(":scope > [data-radix-navigation-menu-trigger]") ||
+      fromItem.querySelector(":scope > [data-radix-navigation-menu-link]");
     const idx = stops.indexOf(current);
     return idx >= 0 ? stops[idx + 1] || null : null;
   },
@@ -68,7 +68,7 @@ export const NavigationMenuRoot = {
   bindItems() {
     this.getItems().forEach((item) => {
       const trigger = item.querySelector(
-        "[data-essence-navigation-menu-trigger]"
+        "[data-radix-navigation-menu-trigger]"
       );
       const content = this.resolveContent(item);
       if (!trigger) return;
@@ -76,7 +76,7 @@ export const NavigationMenuRoot = {
       if (!trigger.hasAttribute("data-nav-bound")) {
         trigger.setAttribute("data-nav-bound", "true");
         trigger.addEventListener("click", this.onTriggerClick);
-        // Radix whenMouse: hover intent is mouse-only; touch uses click.
+        // Hover intent is mouse-only; touch uses click.
         trigger.addEventListener("pointerenter", this.onTriggerEnter);
         trigger.addEventListener("pointerleave", this.onTriggerLeave);
       }
@@ -91,10 +91,10 @@ export const NavigationMenuRoot = {
 
   resolveContent(item) {
     const trigger = item.querySelector(
-      "[data-essence-navigation-menu-trigger]"
+      "[data-radix-navigation-menu-trigger]"
     );
     const contentId = trigger?.getAttribute("aria-controls");
-    const local = item.querySelector("[data-essence-navigation-menu-content]");
+    const local = item.querySelector("[data-radix-navigation-menu-content]");
     if (local) return local;
     if (contentId) return document.getElementById(contentId);
     return null;
@@ -134,6 +134,14 @@ export const NavigationMenuRoot = {
       "--radix-navigation-menu-viewport-height",
       `${height}px`
     );
+    this.el.style.setProperty(
+      "--radix-navigation-menu-viewport-width",
+      `${width}px`
+    );
+    this.el.style.setProperty(
+      "--radix-navigation-menu-viewport-height",
+      `${height}px`
+    );
   },
 
   onTriggerClick(e) {
@@ -141,7 +149,7 @@ export const NavigationMenuRoot = {
     if (trigger.hasAttribute("data-disabled")) return;
     clearTimeout(this.openTimer);
     clearTimeout(this.closeTimer);
-    const item = trigger.closest("[data-essence-navigation-menu-item]");
+    const item = trigger.closest("[data-radix-navigation-menu-item]");
     if (this.activeItem === item) {
       this.close();
     } else {
@@ -152,7 +160,7 @@ export const NavigationMenuRoot = {
   onTriggerEnter(e) {
     const trigger = e.currentTarget;
     if (trigger.hasAttribute("data-disabled")) return;
-    const item = trigger.closest("[data-essence-navigation-menu-item]");
+    const item = trigger.closest("[data-radix-navigation-menu-item]");
     clearTimeout(this.closeTimer);
     clearTimeout(this.openTimer);
     this.openTimer = setTimeout(() => this.open(item), this.delay());
@@ -186,7 +194,7 @@ export const NavigationMenuRoot = {
     if (e.key === "Escape" && this.activeItem) {
       e.preventDefault();
       const trigger = this.activeItem.querySelector(
-        "[data-essence-navigation-menu-trigger]"
+        "[data-radix-navigation-menu-trigger]"
       );
       this.close();
       trigger?.focus();
@@ -198,7 +206,7 @@ export const NavigationMenuRoot = {
       const focusables = getFocusableElements(content);
       const active = document.activeElement;
       const trigger = this.activeItem.querySelector(
-        "[data-essence-navigation-menu-trigger]"
+        "[data-radix-navigation-menu-trigger]"
       );
       const inContent = !!(content && active && content.contains(active));
 
@@ -226,11 +234,11 @@ export const NavigationMenuRoot = {
     }
 
     const trigger = e.target.closest?.(
-      "[data-essence-navigation-menu-trigger]"
+      "[data-radix-navigation-menu-trigger]"
     );
     if (!trigger || !this.el.contains(trigger)) return;
 
-    const item = trigger.closest("[data-essence-navigation-menu-item]");
+    const item = trigger.closest("[data-radix-navigation-menu-item]");
     const content = this.resolveContent(item);
     if (!content) return;
 
@@ -267,14 +275,14 @@ export const NavigationMenuRoot = {
 
     this.activeItem = item;
     const trigger = item.querySelector(
-      "[data-essence-navigation-menu-trigger]"
+      "[data-radix-navigation-menu-trigger]"
     );
     const content = this.resolveContent(item);
     const viewport = this.el.querySelector(
-      "[data-essence-navigation-menu-viewport]"
+      "[data-radix-navigation-menu-viewport]"
     );
     const indicator = this.el.querySelector(
-      "[data-essence-navigation-menu-indicator]"
+      "[data-radix-navigation-menu-indicator]"
     );
 
     if (trigger) {
@@ -314,16 +322,24 @@ export const NavigationMenuRoot = {
     this.activeItem = null;
 
     const viewport = this.el.querySelector(
-      "[data-essence-navigation-menu-viewport]"
+      "[data-radix-navigation-menu-viewport]"
     );
     const indicator = this.el.querySelector(
-      "[data-essence-navigation-menu-indicator]"
+      "[data-radix-navigation-menu-indicator]"
     );
     if (viewport) {
       viewport.dataset.state = "closed";
       // Collapse shell: content is already restored home; size vars alone still
       // leave a visible panel because width/height transition over 300ms and
       // scaleOut has no fill-mode: forwards.
+      this.el.style.setProperty(
+        "--radix-navigation-menu-viewport-width",
+        "0px"
+      );
+      this.el.style.setProperty(
+        "--radix-navigation-menu-viewport-height",
+        "0px"
+      );
       this.el.style.setProperty(
         "--radix-navigation-menu-viewport-width",
         "0px"
@@ -342,7 +358,7 @@ export const NavigationMenuRoot = {
 
   hideItem(item, { motion } = {}) {
     const trigger = item.querySelector(
-      "[data-essence-navigation-menu-trigger]"
+      "[data-radix-navigation-menu-trigger]"
     );
     const content = this.resolveContent(item);
 

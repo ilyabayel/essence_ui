@@ -40,7 +40,7 @@ defmodule EssenceUI.Primitives.OneTimePasswordField do
       id={@id}
       phx-hook="OneTimePasswordFieldRoot"
       role="group"
-      data-essence-otp-root
+      data-radix-otp-root
       data-length={@length_attr}
       data-value={@value_attr}
       data-name={@name}
@@ -115,7 +115,7 @@ defmodule EssenceUI.Primitives.OneTimePasswordField do
       readonly={@read_only}
       placeholder={@placeholder}
       autofocus={@autofocus}
-      data-essence-otp-input
+      data-radix-otp-input
       data-index={@index}
       aria-label={"Character #{@index + 1}"}
       {@rest}
@@ -137,7 +137,7 @@ defmodule EssenceUI.Primitives.OneTimePasswordField do
       value={@value}
       form={@form}
       disabled={@disabled}
-      data-essence-otp-hidden
+      data-radix-otp-hidden
       {@rest}
     />
     """

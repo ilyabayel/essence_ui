@@ -19,7 +19,7 @@ export const RadioGroupRoot = {
   syncValue() {
     const currentValue = this.el.getAttribute("data-value");
     const items = Array.from(
-      this.el.querySelectorAll("[data-essence-radio-group-item]"),
+      this.el.querySelectorAll("[data-radix-radio-group-item]"),
     );
     const isRootDisabled = this.el.hasAttribute("data-disabled");
     const name = this.el.getAttribute("data-name");
@@ -42,7 +42,7 @@ export const RadioGroupRoot = {
       }
 
       const indicator = item.querySelector(
-        "[data-essence-radio-group-indicator]",
+        "[data-radix-radio-group-indicator]",
       );
       if (indicator) {
         const forceMount = indicator.hasAttribute("data-force-mount");
@@ -56,11 +56,11 @@ export const RadioGroupRoot = {
 
       const input =
         item.nextElementSibling?.matches?.(
-          "input[data-essence-radio-group-input]",
+          "input[data-radix-radio-group-input]",
         )
           ? item.nextElementSibling
           : this.el.querySelector(
-              `input[data-essence-radio-group-input][value="${CSS.escape(itemValue)}"]`,
+              `input[data-radix-radio-group-input][value="${CSS.escape(itemValue)}"]`,
             );
 
       if (input) {
@@ -106,7 +106,7 @@ export const RadioGroupRoot = {
     if (this.el.hasAttribute("data-disabled")) return;
 
     const items = Array.from(
-      this.el.querySelectorAll("[data-essence-radio-group-item]"),
+      this.el.querySelectorAll("[data-radix-radio-group-item]"),
     );
     const enabledItems = items.filter((item) => {
       const isDisabled =

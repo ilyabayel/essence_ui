@@ -23,18 +23,18 @@ defmodule EssenceUI.Components.DialogTest do
     assert html =~ ~s[id="dlg"]
     assert html =~ ~s[data-phx-portal="body"]
     assert html =~ ~s[id="dlg-portal"]
-    assert html =~ "data-essence-dialog-overlay"
-    assert html =~ "data-essence-dialog-content"
+    assert html =~ "data-radix-dialog-overlay"
+    assert html =~ "data-radix-dialog-content"
     assert html =~ ~s[role="dialog"]
     refute html =~ ~s[role="alertdialog"]
     refute html =~ ~s[phx-hook="Dialog"]
 
-    assert html =~ "es-DialogRoot"
-    assert html =~ "est-BaseDialogOverlay"
-    assert html =~ "est-BaseDialogScroll"
-    assert html =~ "est-BaseDialogContent"
-    assert html =~ "est-DialogContent"
-    assert html =~ "est-r-size-3"
+    assert html =~ ""
+    assert html =~ "rt-BaseDialogOverlay"
+    assert html =~ "rt-BaseDialogScroll"
+    assert html =~ "rt-BaseDialogContent"
+    assert html =~ "rt-DialogContent"
+    assert html =~ "rt-r-size-3"
     assert html =~ "extra"
     assert html =~ "Dialog body"
   end

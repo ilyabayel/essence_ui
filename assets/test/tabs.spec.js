@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("Tabs Primitive", () => {
@@ -12,16 +12,16 @@ test.describe("Tabs Primitive", () => {
   }) => {
     const root = page.locator("#tabs-primitive");
     const account = root.locator(
-      '[data-essence-tabs-trigger][data-value="tab1"]',
+      '[data-radix-tabs-trigger][data-value="tab1"]',
     );
     const password = root.locator(
-      '[data-essence-tabs-trigger][data-value="tab2"]',
+      '[data-radix-tabs-trigger][data-value="tab2"]',
     );
     const accountContent = root.locator(
-      '[data-essence-tabs-content][data-value="tab1"]',
+      '[data-radix-tabs-content][data-value="tab1"]',
     );
     const passwordContent = root.locator(
-      '[data-essence-tabs-content][data-value="tab2"]',
+      '[data-radix-tabs-content][data-value="tab2"]',
     );
 
     await expect(account).toHaveAttribute("data-state", "active");
@@ -36,18 +36,18 @@ test.describe("Tabs Primitive", () => {
     await expect(root).toHaveAttribute("data-value", "tab2");
   });
 
-  test("should expose radix-like ids and aria wiring", async ({ page }) => {
+  test("should expose ids and aria wiring", async ({ page }) => {
     const root = page.locator("#tabs-primitive");
     const account = root.locator(
-      '[data-essence-tabs-trigger][data-value="tab1"]',
+      '[data-radix-tabs-trigger][data-value="tab1"]',
     );
     const password = root.locator(
-      '[data-essence-tabs-trigger][data-value="tab2"]',
+      '[data-radix-tabs-trigger][data-value="tab2"]',
     );
     const accountContent = root.locator(
-      '[data-essence-tabs-content][data-value="tab1"]',
+      '[data-radix-tabs-content][data-value="tab1"]',
     );
-    const list = root.locator("[data-essence-tabs-list]");
+    const list = root.locator("[data-radix-tabs-list]");
 
     await expect(list).toHaveAttribute("aria-orientation", "horizontal");
     await expect(list).toHaveAttribute("data-orientation", "horizontal");
@@ -79,10 +79,10 @@ test.describe("Tabs Primitive", () => {
   test("should navigate with arrow keys", async ({ page }) => {
     const root = page.locator("#tabs-primitive");
     const account = root.locator(
-      '[data-essence-tabs-trigger][data-value="tab1"]',
+      '[data-radix-tabs-trigger][data-value="tab1"]',
     );
     const password = root.locator(
-      '[data-essence-tabs-trigger][data-value="tab2"]',
+      '[data-radix-tabs-trigger][data-value="tab2"]',
     );
 
     await expect(account).toHaveAttribute("data-state", "active");

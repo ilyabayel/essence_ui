@@ -1,6 +1,6 @@
 defmodule EssenceUI.Components.RadioGroup do
   @moduledoc """
-  Radio Group component styled per Radix Themes Radio Group.
+  Themed radio group with sizes, variants, and accent colors.
   """
   use Phoenix.Component
 
@@ -43,8 +43,8 @@ defmodule EssenceUI.Components.RadioGroup do
   def radio_group_root(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, class: "est-r-size", values: @sizes, default: "2", responsive: true},
-        variant: %{type: :enum, class: "est-variant", values: @variants, default: "surface"}
+        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true},
+        variant: %{type: :enum, class: "rt-variant", values: @variants, default: "surface"}
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(HighContrastProps.prop_defs())
@@ -57,7 +57,7 @@ defmodule EssenceUI.Components.RadioGroup do
 
     assigns =
       assign(assigns,
-        class: ["est-RadioGroupRoot", extracted.class] |> Enum.filter(& &1) |> Enum.join(" "),
+        class: ["rt-RadioGroupRoot", extracted.class] |> Enum.filter(& &1) |> Enum.join(" "),
         style: extracted.style,
         color: assigns[:color],
         current_value: selected_value
@@ -102,14 +102,14 @@ defmodule EssenceUI.Components.RadioGroup do
     # Size and variant classes are handled differently for label vs button
     size = assigns[:size] || "2"
     variant = assigns[:variant] || "surface"
-    size_class = "est-r-size-#{size}"
-    variant_class = "est-variant-#{variant}"
-    high_contrast_class = if assigns[:high_contrast], do: "est-high-contrast"
+    size_class = "rt-r-size-#{size}"
+    variant_class = "rt-variant-#{variant}"
+    high_contrast_class = if assigns[:high_contrast], do: "rt-high-contrast"
 
     prop_defs =
       %{
-        size: %{type: :enum, class: "est-r-size", values: @sizes, responsive: true},
-        variant: %{type: :enum, class: "est-variant", values: @variants, responsive: true}
+        size: %{type: :enum, class: "rt-r-size", values: @sizes, responsive: true},
+        variant: %{type: :enum, class: "rt-variant", values: @variants, responsive: true}
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(HighContrastProps.prop_defs())
@@ -119,15 +119,15 @@ defmodule EssenceUI.Components.RadioGroup do
     extracted = ExtractProps.call(assigns, prop_defs)
     assigns = assign_new(assigns, :id, fn -> "radio-item-#{System.unique_integer([:positive])}" end)
 
-    # We manually build classes to match Radix Themes precisely
-    # Label gets: est-RadioGroupItem est-Text est-r-size-*
-    # Button gets: est-reset est-BaseRadioRoot est-r-size-* est-variant-* [est-high-contrast]
+    # Build classes for theme styling
+    # Label gets: rt-RadioGroupItem rt-Text rt-r-size-*
+    # Button gets: rt-reset rt-BaseRadioRoot rt-r-size-* rt-variant-* [rt-high-contrast]
 
     assigns =
       assign(assigns,
-        label_class: ["est-RadioGroupItem", "est-Text", size_class, assigns.class] |> Enum.filter(& &1) |> Enum.join(" "),
+        label_class: ["rt-RadioGroupItem", "rt-Text", size_class, assigns.class] |> Enum.filter(& &1) |> Enum.join(" "),
         button_class:
-          ["est-reset", "est-BaseRadioRoot", size_class, variant_class, high_contrast_class]
+          ["rt-reset", "rt-BaseRadioRoot", size_class, variant_class, high_contrast_class]
           |> Enum.filter(& &1)
           |> Enum.join(" "),
         style: extracted.style,
@@ -146,7 +146,7 @@ defmodule EssenceUI.Components.RadioGroup do
           data-accent-color={@color}
           {@rest}
         />
-        <span class="est-RadioGroupItemInner">
+        <span class="rt-RadioGroupItemInner">
           {render_slot(@inner_block)}
         </span>
       </label>
@@ -156,7 +156,7 @@ defmodule EssenceUI.Components.RadioGroup do
         value={@value}
         disabled={@disabled}
         checked={@checked}
-        class={["est-RadioGroupItem", @button_class, @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+        class={["rt-RadioGroupItem", @button_class, @class] |> Enum.filter(& &1) |> Enum.join(" ")}
         style={@style}
         data-accent-color={@color}
         {@rest}

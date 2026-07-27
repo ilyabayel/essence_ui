@@ -21,12 +21,12 @@ defmodule EssenceUI.Components.ScrollAreaTest do
 
     assert html =~ ~s[id="sa1"]
     assert html =~ ~s[phx-hook="ScrollAreaRoot"]
-    assert html =~ ~s[data-essence-scroll-area-root]
-    assert html =~ "est-ScrollAreaRoot"
-    assert html =~ "est-ScrollAreaViewport"
-    assert html =~ ~s[data-essence-scroll-area-viewport]
-    assert html =~ ~s[data-essence-scroll-area-content]
-    assert html =~ "est-r-size-2"
+    assert html =~ ~s[data-radix-scroll-area-root]
+    assert html =~ "rt-ScrollAreaRoot"
+    assert html =~ "rt-ScrollAreaViewport"
+    assert html =~ ~s[data-radix-scroll-area-viewport]
+    assert html =~ ~s[data-radix-scroll-area-content]
+    assert html =~ "rt-r-size-2"
     assert html =~ "content"
     assert html =~ ~s[data-orientation="vertical"]
     assert html =~ ~s[data-orientation="horizontal"]
@@ -47,7 +47,7 @@ defmodule EssenceUI.Components.ScrollAreaTest do
 
     refute vertical =~ ~s[data-orientation="horizontal"]
     assert vertical =~ ~s[data-orientation="vertical"]
-    refute vertical =~ "est-ScrollAreaCorner"
+    refute vertical =~ "rt-ScrollAreaCorner"
 
     horizontal =
       render_component(

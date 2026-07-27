@@ -2,8 +2,7 @@ defmodule EssenceUI.Components.Spinner do
   @moduledoc """
   A Spinner component that displays a loading animation.
 
-  Based on Radix UI Spinner component with support for various sizes
-  and styling options.
+  Supports various sizes and styling options.
   """
   use Phoenix.Component
 
@@ -39,11 +38,11 @@ defmodule EssenceUI.Components.Spinner do
 
   def spinner(assigns) do
     prop_defs =
-      Map.merge(%{size: %{type: :enum, values: @sizes, class: "est-r-size", default: "2"}}, MarginProps.prop_defs())
+      Map.merge(%{size: %{type: :enum, values: @sizes, class: "rt-r-size", default: "2"}}, MarginProps.prop_defs())
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    class = ["est-reset", "est-Spinner", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["rt-reset", "rt-Spinner", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
 
     assigns = assign(assigns, class: class, style: extracted.style)
 
@@ -54,14 +53,14 @@ defmodule EssenceUI.Components.Spinner do
       data-loading={@loading}
       {@rest}
     >
-      <span class="est-SpinnerLeaf"></span>
-      <span class="est-SpinnerLeaf"></span>
-      <span class="est-SpinnerLeaf"></span>
-      <span class="est-SpinnerLeaf"></span>
-      <span class="est-SpinnerLeaf"></span>
-      <span class="est-SpinnerLeaf"></span>
-      <span class="est-SpinnerLeaf"></span>
-      <span class="est-SpinnerLeaf"></span>
+      <span class="rt-SpinnerLeaf"></span>
+      <span class="rt-SpinnerLeaf"></span>
+      <span class="rt-SpinnerLeaf"></span>
+      <span class="rt-SpinnerLeaf"></span>
+      <span class="rt-SpinnerLeaf"></span>
+      <span class="rt-SpinnerLeaf"></span>
+      <span class="rt-SpinnerLeaf"></span>
+      <span class="rt-SpinnerLeaf"></span>
     </span>
     """
   end

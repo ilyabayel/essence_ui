@@ -2,11 +2,11 @@
 @import "@radix-ui/colors/violet.css";
 
 /* reset */
-.radix-demo[data-component="tooltip"] button {
+button {
 	all: unset;
 }
 
-.radix-demo[data-component="tooltip"] .TooltipContent {
+.DemoTooltipContent {
 	border-radius: 4px;
 	padding: 10px 15px;
 	font-size: 15px;
@@ -21,24 +21,24 @@
 	animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 	will-change: transform, opacity;
 }
-.radix-demo[data-component="tooltip"] .TooltipContent[data-state="delayed-open"][data-side="top"] {
+.DemoTooltipContent[data-state="delayed-open"][data-side="top"] {
 	animation-name: slideDownAndFade;
 }
-.radix-demo[data-component="tooltip"] .TooltipContent[data-state="delayed-open"][data-side="right"] {
+.DemoTooltipContent[data-state="delayed-open"][data-side="right"] {
 	animation-name: slideLeftAndFade;
 }
-.radix-demo[data-component="tooltip"] .TooltipContent[data-state="delayed-open"][data-side="bottom"] {
+.DemoTooltipContent[data-state="delayed-open"][data-side="bottom"] {
 	animation-name: slideUpAndFade;
 }
-.radix-demo[data-component="tooltip"] .TooltipContent[data-state="delayed-open"][data-side="left"] {
+.DemoTooltipContent[data-state="delayed-open"][data-side="left"] {
 	animation-name: slideRightAndFade;
 }
 
-.radix-demo[data-component="tooltip"] .TooltipArrow {
+.DemoTooltipArrow {
 	fill: white;
 }
 
-.radix-demo[data-component="tooltip"] .IconButton {
+.DemoIconButton {
 	font-family: inherit;
 	border-radius: 100%;
 	height: 35px;
@@ -51,10 +51,10 @@
 	box-shadow: 0 2px 10px var(--black-a7);
 	user-select: none;
 }
-.radix-demo[data-component="tooltip"] .IconButton:hover {
+.DemoIconButton:hover {
 	background-color: var(--violet-3);
 }
-.radix-demo[data-component="tooltip"] .IconButton:focus {
+.DemoIconButton:focus {
 	box-shadow: 0 0 0 2px black;
 }
 

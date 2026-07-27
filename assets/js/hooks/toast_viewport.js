@@ -1,5 +1,5 @@
 /**
- * ToastViewport — focus region / hotkey (F8 by default, matching Radix).
+ * ToastViewport — focus region / hotkey (F8 by default).
  */
 export const ToastViewport = {
   mounted() {

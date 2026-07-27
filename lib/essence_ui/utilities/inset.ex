@@ -2,7 +2,7 @@ defmodule EssenceUI.Utilities.Inset do
   @moduledoc """
   A utility for applying negative margins to elements so they "bleed" into their container.
 
-  Based on Radix UI Themes Inset component. Commonly used within `Card` or `Dialog` components.
+  Inset utility for nested padding within containers. Commonly used within `Card` or `Dialog` components.
 
   ## Examples
 
@@ -46,14 +46,14 @@ defmodule EssenceUI.Utilities.Inset do
         %{
           side: %{
             type: :enum,
-            class: "est-r-side",
+            class: "rt-r-side",
             values: @sides,
             default: "all",
             responsive: true
           },
           clip: %{
             type: :enum,
-            class: "est-r-clip",
+            class: "rt-r-clip",
             values: @clips,
             default: "border-box",
             responsive: true
@@ -72,7 +72,7 @@ defmodule EssenceUI.Utilities.Inset do
 
     ~H"""
     <div
-      class={["est-Inset", @extracted_class, @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["rt-Inset", @extracted_class, @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={[@extracted_style, @style] |> Enum.filter(& &1) |> Enum.join("; ")}
       {@rest}
     >

@@ -26,7 +26,7 @@ defmodule EssenceUI.Primitives.RadioGroup do
       role="radiogroup"
       aria-orientation={@orientation}
       aria-required={to_string(@required)}
-      data-essence-radio-group-root
+      data-radix-radio-group-root
       data-value={@value_attr}
       data-name={@name}
       data-disabled={if @disabled, do: ""}
@@ -61,7 +61,7 @@ defmodule EssenceUI.Primitives.RadioGroup do
       role="radio"
       id={@id}
       value={@value}
-      data-essence-radio-group-item
+      data-radix-radio-group-item
       data-value={@value}
       data-disabled={if @disabled, do: ""}
       data-state={if @checked, do: "checked", else: "unchecked"}
@@ -93,7 +93,7 @@ defmodule EssenceUI.Primitives.RadioGroup do
 
     ~H"""
     <span
-      data-essence-radio-group-indicator
+      data-radix-radio-group-indicator
       data-force-mount={if @force_mount, do: ""}
       style={if @present?, do: "display: flex;", else: "display: none;"}
       data-state={if @checked, do: "checked", else: "unchecked"}
@@ -122,7 +122,7 @@ defmodule EssenceUI.Primitives.RadioGroup do
       name={@name}
       value={@value}
       form={@form}
-      data-essence-radio-group-input
+      data-radix-radio-group-input
       style="position: absolute; pointer-events: none; opacity: 0; margin: 0; transform: translateX(-100%); width: 25px; height: 25px;"
       tabindex="-1"
       aria-hidden="true"

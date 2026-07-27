@@ -1,8 +1,8 @@
 defmodule EssenceUI.Components.Dialog do
   @moduledoc """
-  Dialog component compatible with Radix UI Themes Dialog visuals.
+  Themed dialog with overlay, content, and compound subcomponents.
 
-  Themes façade: `dialog/1` and `dialog_content/1` with `target` and `default_state`.
+  Compound API: `dialog/1` and `dialog_content/1` with `target` and `default_state`.
   Internally wraps `EssenceUI.Primitives.Dialog` (root / portal / overlay / content).
   """
 
@@ -38,15 +38,16 @@ defmodule EssenceUI.Components.Dialog do
     <DialogPrimitive.root id={@id} default_open={@default_open}>
       <DialogPrimitive.portal id={"#{@id}-portal"} target={@target}>
         <div
-          class="essence-ui es-DialogRoot"
+          class="radix-themes"
+          data-is-dialog-theme
           data-scaling={@scaling}
           data-radius={@radius}
           data-gray-color={@gray_color}
           data-accent-color={@accent_color}
         >
-          <DialogPrimitive.overlay class="est-BaseDialogOverlay est-DialogOverlay">
-            <div class="est-BaseDialogScroll est-DialogScroll">
-              <div class="est-BaseDialogScrollPadding est-DialogScrollPadding est-r-align-center">
+          <DialogPrimitive.overlay class="rt-BaseDialogOverlay rt-DialogOverlay">
+            <div class="rt-BaseDialogScroll rt-DialogScroll">
+              <div class="rt-BaseDialogScrollPadding rt-DialogScrollPadding rt-r-align-center">
                 <.dialog_content dialog_id={@id} style={@style} class={@class}>
                   {render_slot(@inner_block)}
                 </.dialog_content>
@@ -69,7 +70,7 @@ defmodule EssenceUI.Components.Dialog do
     <DialogPrimitive.content
       id={"#{@dialog_id}-content"}
       class={
-        ["est-BaseDialogContent", "est-DialogContent", "est-r-size-3", "est-r-max-w", @class]
+        ["rt-BaseDialogContent", "rt-DialogContent", "rt-r-size-3", "rt-r-max-w", @class]
         |> Enum.filter(&(&1 != ""))
         |> Enum.join(" ")
       }

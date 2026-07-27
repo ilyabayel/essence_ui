@@ -1,14 +1,14 @@
 defmodule EssenceUI.SharedProps.RadiusProps do
   @moduledoc """
   Radius prop definitions for Box, Flex, and other layout components.
-  Inspired by Radix UI Themes radius.props.ts and the provided TypeScript definition.
+  Theme radius props for Essence UI.
   """
 
   @radii ["none", "small", "medium", "large", "full"]
 
   def prop_defs do
     %{
-      radius: %{type: :enum, values: @radii, class: "est-r-rd", responsive: true, default: nil}
+      radius: %{type: :enum, values: @radii, class: "rt-r-rd", responsive: true, default: nil}
     }
   end
 

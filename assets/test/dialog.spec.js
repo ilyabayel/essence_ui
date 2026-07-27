@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("Dialog Primitive", () => {
@@ -12,11 +12,11 @@ test.describe("Dialog Primitive", () => {
     page,
   }) => {
     const root = page.locator("#dialog-primitive");
-    const trigger = root.locator("[data-essence-dialog-trigger]");
+    const trigger = root.locator("[data-radix-dialog-trigger]");
     const content = page.locator("#dialog-content");
-    const overlay = page.locator("[data-essence-dialog-overlay]");
+    const overlay = page.locator("[data-radix-dialog-overlay]");
     const close = content.locator(
-      '[data-essence-dialog-close][aria-label="Close"]',
+      '[data-radix-dialog-close][aria-label="Close"]',
     );
 
     await expect(content).toBeHidden();
@@ -46,9 +46,9 @@ test.describe("Dialog Primitive", () => {
 
   test("closes on overlay click", async ({ page }) => {
     const root = page.locator("#dialog-primitive");
-    const trigger = root.locator("[data-essence-dialog-trigger]");
+    const trigger = root.locator("[data-radix-dialog-trigger]");
     const content = page.locator("#dialog-content");
-    const overlay = page.locator("[data-essence-dialog-overlay]");
+    const overlay = page.locator("[data-radix-dialog-overlay]");
 
     await trigger.click();
     await expect(content).toBeVisible();
@@ -58,18 +58,18 @@ test.describe("Dialog Primitive", () => {
     expect(contentBox).not.toBeNull();
     expect(overlayBox).not.toBeNull();
 
-    // Click overlay corner away from dialog content and storybook header.
+    // Click overlay corner away from dialog content.
     await page.mouse.click(overlayBox.x + 12, overlayBox.y + overlayBox.height - 12);
     await expect(content).toBeHidden();
   });
 
   test("has no accessibility violations when open", async ({ page }) => {
     const root = page.locator("#dialog-primitive");
-    const trigger = root.locator("[data-essence-dialog-trigger]");
+    const trigger = root.locator("[data-radix-dialog-trigger]");
     await trigger.click();
     await expect(page.locator("#dialog-content")).toBeVisible();
     await expectNoA11yViolations(page, {
-      include: ["#dialog-content", "[data-essence-dialog-overlay]"],
+      include: ["#dialog-content", "[data-radix-dialog-overlay]"],
     });
   });
 });

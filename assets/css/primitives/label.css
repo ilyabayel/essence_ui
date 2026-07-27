@@ -1,18 +1,18 @@
 @import "@radix-ui/colors/black-alpha.css";
 
 /* reset */
-.radix-demo[data-component="label"] input {
+input {
 	all: unset;
 }
 
-.radix-demo[data-component="label"] .LabelRoot {
+.DemoLabelRoot {
 	font-size: 15px;
 	font-weight: 500;
 	line-height: 35px;
 	color: white;
 }
 
-.radix-demo[data-component="label"] .Input {
+.DemoInput {
 	width: 200px;
 	display: inline-flex;
 	align-items: center;
@@ -27,11 +27,11 @@
 	box-shadow: 0 0 0 1px var(--black-a6);
 }
 
-.radix-demo[data-component="label"] .Input:focus {
+.DemoInput:focus {
 	box-shadow: 0 0 0 2px black;
 }
 
-.radix-demo[data-component="label"] .Input::selection {
+.DemoInput::selection {
 	background-color: var(--black-a6);
 	color: white;
 }

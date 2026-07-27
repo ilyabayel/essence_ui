@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.AlertDialogTest do
 
   alias EssenceUI.Primitives.AlertDialog
 
-  test "renders radix-like alert dialog parts" do
+  test "renders alert dialog parts" do
     html =
       render_component(
         fn assigns ->
@@ -32,14 +32,14 @@ defmodule EssenceUI.Primitives.AlertDialogTest do
     assert html =~ ~s[data-state="open"]
     assert html =~ ~s[data-close-on-overlay="false"]
     assert html =~ ~s[data-on-open-change="changed"]
-    assert html =~ ~s[data-essence-alert-dialog-trigger]
+    assert html =~ ~s[data-radix-alert-dialog-trigger]
     assert html =~ ~s[data-phx-portal="body"]
     assert html =~ ~s[role="alertdialog"]
     assert html =~ ~s[aria-modal="true"]
-    assert html =~ ~s[data-essence-alert-dialog-content]
-    assert html =~ ~s[data-essence-alert-dialog-title]
-    assert html =~ ~s[data-essence-alert-dialog-description]
-    assert html =~ ~s[data-essence-alert-dialog-cancel]
-    assert html =~ ~s[data-essence-alert-dialog-action]
+    assert html =~ ~s[data-radix-alert-dialog-content]
+    assert html =~ ~s[data-radix-alert-dialog-title]
+    assert html =~ ~s[data-radix-alert-dialog-description]
+    assert html =~ ~s[data-radix-alert-dialog-cancel]
+    assert html =~ ~s[data-radix-alert-dialog-action]
   end
 end

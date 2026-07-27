@@ -35,7 +35,7 @@ defmodule EssenceUI.Primitives.Tabs do
         <div
           id={@id}
           phx-hook="TabsRoot"
-          data-essence-tabs-root
+          data-radix-tabs-root
           data-value={@value_attr}
           data-orientation={@orientation}
           data-activation-mode={@activation_mode}
@@ -73,7 +73,7 @@ defmodule EssenceUI.Primitives.Tabs do
     <div
       role="tablist"
       aria-orientation={@orientation}
-      data-essence-tabs-list
+      data-radix-tabs-list
       data-orientation={@orientation}
       data-loop={to_string(@loop)}
       {@rest}
@@ -108,7 +108,7 @@ defmodule EssenceUI.Primitives.Tabs do
       id={@id}
       type="button"
       role="tab"
-      data-essence-tabs-trigger
+      data-radix-tabs-trigger
       data-value={@value}
       data-state={if @active?, do: "active", else: "inactive"}
       data-orientation={@orientation}
@@ -149,7 +149,7 @@ defmodule EssenceUI.Primitives.Tabs do
     <div
       id={@id}
       role="tabpanel"
-      data-essence-tabs-content
+      data-radix-tabs-content
       data-value={@value}
       data-state={if @active?, do: "active", else: "inactive"}
       data-orientation={@orientation}

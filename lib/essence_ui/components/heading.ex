@@ -1,7 +1,6 @@
 defmodule EssenceUI.Components.Heading do
   @moduledoc """
-  Heading component 100% compatible with Radix UI Themes Heading API.
-  See: https://www.radix-ui.com/themes/docs/components/heading
+  Themed heading with size and weight options.
   """
   use Phoenix.Component
 
@@ -28,7 +27,7 @@ defmodule EssenceUI.Components.Heading do
   @size_values Enum.map(1..9, &Integer.to_string/1)
 
   @doc """
-  Renders a heading. All props match Radix UI Heading.
+  Renders a heading.
   """
   attr :as, :string, default: "h1", values: @heading_tags, doc: "The element to render. h1-h6."
   attr :size, :string, values: @size_values, doc: "Heading size (1-9). Responsive supported."
@@ -48,7 +47,7 @@ defmodule EssenceUI.Components.Heading do
   def heading(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, values: @size_values, class: "est-r-size", responsive: true}
+        size: %{type: :enum, values: @size_values, class: "rt-r-size", responsive: true}
       }
       |> Map.merge(WeightProps.prop_defs())
       |> Map.merge(TextAlignProps.prop_defs())
@@ -62,7 +61,7 @@ defmodule EssenceUI.Components.Heading do
     extracted = ExtractProps.call(assigns, prop_defs)
 
     class =
-      ["est-Heading", extracted.class, assigns[:class], assigns[:high_contrast] && "est-HighContrast"]
+      ["rt-Heading", extracted.class, assigns[:class], assigns[:high_contrast] && "rt-HighContrast"]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 

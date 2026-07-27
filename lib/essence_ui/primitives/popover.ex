@@ -51,7 +51,7 @@ defmodule EssenceUI.Primitives.Popover do
     <.dynamic_tag
       tag_name={@as}
       id={@id}
-      data-essence-popover-trigger
+      data-radix-popover-trigger
       aria-haspopup="dialog"
       aria-expanded="false"
       aria-controls={@content_id}
@@ -69,7 +69,7 @@ defmodule EssenceUI.Primitives.Popover do
 
   def anchor(assigns) do
     ~H"""
-    <div id={@id} data-essence-popover-anchor {@rest}>
+    <div id={@id} data-radix-popover-anchor {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -100,7 +100,7 @@ defmodule EssenceUI.Primitives.Popover do
     ~H"""
     <div
       id={@id}
-      data-essence-popover-content
+      data-radix-popover-content
       data-state="closed"
       data-side={@side}
       data-align={@align}
@@ -132,7 +132,7 @@ defmodule EssenceUI.Primitives.Popover do
     assigns = assign(assigns, :rest, rest)
 
     ~H"""
-    <.dynamic_tag tag_name={@as} id={@id} data-essence-popover-close {@rest}>
+    <.dynamic_tag tag_name={@as} id={@id} data-radix-popover-close {@rest}>
       {render_slot(@inner_block)}
     </.dynamic_tag>
     """
@@ -152,7 +152,7 @@ defmodule EssenceUI.Primitives.Popover do
       height={@height}
       viewBox="0 0 30 10"
       preserveAspectRatio="none"
-      data-essence-popover-arrow
+      data-radix-popover-arrow
       aria-hidden="true"
       {@rest}
     >

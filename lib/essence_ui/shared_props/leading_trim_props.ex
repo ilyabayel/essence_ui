@@ -7,7 +7,7 @@ defmodule EssenceUI.SharedProps.LeadingTrimProps do
 
   def prop_defs do
     %{
-      trim: %{type: [:enum, :string], values: @leading_trim_values, responsive: true, class: "est-r-lt"}
+      trim: %{type: [:enum, :string], values: @leading_trim_values, responsive: true, class: "rt-r-lt"}
     }
   end
 

@@ -45,7 +45,7 @@ defmodule EssenceUI.Components.Container do
   @doc """
   The Container component is a layout primitive for constraining content width and centering content.
 
-  Based on Radix UI Themes Container component.
+  Themed Container component.
 
   ## Examples
 
@@ -70,9 +70,9 @@ defmodule EssenceUI.Components.Container do
   """
   def container(assigns) do
     container_prop_defs = %{
-      size: %{type: :enum, values: @size_values, class: "est-r-size", responsive: true, default: "4"},
-      display: %{type: :enum, values: @display_values, class: "est-r-display", responsive: true},
-      align: %{type: :enum, values: @align_values, class: "est-r-ai", responsive: true}
+      size: %{type: :enum, values: @size_values, class: "rt-r-size", responsive: true, default: "4"},
+      display: %{type: :enum, values: @display_values, class: "rt-r-display", responsive: true},
+      align: %{type: :enum, values: @align_values, class: "rt-r-ai", responsive: true}
     }
 
     prop_defs =
@@ -84,12 +84,12 @@ defmodule EssenceUI.Components.Container do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    class = ["est-Container", extracted[:class]] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["rt-Container", extracted[:class]] |> Enum.filter(& &1) |> Enum.join(" ")
     assigns = assign(assigns, class: class, style: extracted[:style])
 
     ~H"""
     <.dynamic_tag tag_name={@as} class={@class} style={@style} {@rest}>
-      <div class="est-ContainerInner">
+      <div class="rt-ContainerInner">
         {render_slot(@inner_block)}
       </div>
     </.dynamic_tag>

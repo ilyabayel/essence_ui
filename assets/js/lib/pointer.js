@@ -1,5 +1,5 @@
 /**
- * Pointer helpers aligned with Radix UI primitives.
+ * Pointer helpers aligned with Essence UI primitives.
  * Hover intent is mouse-only; touch uses click / focus / long-press.
  */
 
@@ -12,7 +12,7 @@ export function isMousePointer(event) {
 }
 
 /**
- * Radix `whenMouse` — invoke handler only for mouse pointers.
+ * `whenMouse` — invoke handler only for mouse pointers.
  * @template {Event} E
  * @param {(event: E) => void} handler
  * @returns {(event: E) => void}

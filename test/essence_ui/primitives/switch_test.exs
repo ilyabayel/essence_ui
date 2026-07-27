@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.SwitchTest do
 
   alias EssenceUI.Primitives.Switch
 
-  test "renders radix-like structure" do
+  test "renders structure" do
     html = render_component(&Switch.root/1, %{id: "s1", inner_block: []})
     assert html =~ ~s[button id="s1"]
     assert html =~ ~s[phx-hook="SwitchRoot"]
@@ -14,7 +14,7 @@ defmodule EssenceUI.Primitives.SwitchTest do
     assert html =~ ~s[data-state="unchecked"]
 
     assert html =~ ~s[input type="checkbox"]
-    assert html =~ ~s[data-essence-switch-input]
+    assert html =~ ~s[data-radix-switch-input]
   end
 
   test "renders with checked state" do
@@ -55,7 +55,7 @@ defmodule EssenceUI.Primitives.SwitchTest do
         %{}
       )
 
-    assert html =~ ~s[data-essence-switch-thumb]
+    assert html =~ ~s[data-radix-switch-thumb]
     assert html =~ ~s[id="thumb"]
   end
 end

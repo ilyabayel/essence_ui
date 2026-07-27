@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.ToolbarTest do
 
   alias EssenceUI.Primitives.Toolbar
 
-  test "renders radix-like toolbar parts" do
+  test "renders toolbar parts" do
     html =
       render_component(
         fn assigns ->
@@ -29,15 +29,15 @@ defmodule EssenceUI.Primitives.ToolbarTest do
     assert html =~ ~s[role="toolbar"]
     assert html =~ ~s[data-orientation="horizontal"]
     assert html =~ ~s[data-loop="true"]
-    assert html =~ "data-essence-toolbar-button"
+    assert html =~ "data-radix-toolbar-button"
     assert html =~ ~s[type="button"]
-    assert html =~ "data-essence-toolbar-link"
+    assert html =~ "data-radix-toolbar-link"
     assert html =~ ~s[href="#docs"]
-    assert html =~ "data-essence-toolbar-separator"
-    assert html =~ "data-essence-toolbar-toggle-group"
+    assert html =~ "data-radix-toolbar-separator"
+    assert html =~ "data-radix-toolbar-toggle-group"
     assert html =~ ~s[data-type="single"]
     assert html =~ ~s[data-value="left"]
-    assert html =~ "data-essence-toolbar-toggle-item"
+    assert html =~ "data-radix-toolbar-toggle-item"
   end
 
   test "toggle group supports multiple values" do

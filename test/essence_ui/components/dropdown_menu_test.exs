@@ -13,7 +13,7 @@ defmodule EssenceUI.Components.DropdownMenuTest do
           ~H"""
           <DropdownMenu.dropdown_menu_root id="dm-btn">
             <DropdownMenu.dropdown_menu_trigger>
-              <button type="button" class="est-Button">Options</button>
+              <button type="button" class="rt-Button">Options</button>
             </DropdownMenu.dropdown_menu_trigger>
             <DropdownMenu.dropdown_menu_content id="dm-btn-content">
               <DropdownMenu.dropdown_menu_item>Edit</DropdownMenu.dropdown_menu_item>
@@ -24,10 +24,10 @@ defmodule EssenceUI.Components.DropdownMenuTest do
         %{}
       )
 
-    assert html =~ ~s[data-essence-dropdown-menu-trigger]
+    assert html =~ ~s[data-radix-dropdown-menu-trigger]
     assert html =~ ~s[role="button"]
-    refute html =~ ~r/<button[^>]*data-essence-dropdown-menu-trigger/
-    assert html =~ ~s[class="est-Button"]
+    refute html =~ ~r/<button[^>]*data-radix-dropdown-menu-trigger/
+    assert html =~ ~s[class="rt-Button"]
   end
 
   test "renders themes dropdown menu over dropdown menu primitive" do
@@ -68,38 +68,38 @@ defmodule EssenceUI.Components.DropdownMenuTest do
       )
 
     assert html =~ ~s[phx-hook="DropdownMenuRoot"]
-    assert html =~ "data-essence-dropdown-menu-root"
-    assert html =~ "data-essence-dropdown-menu-trigger"
-    assert html =~ "data-essence-dropdown-menu-content"
+    assert html =~ "data-radix-dropdown-menu-root"
+    assert html =~ "data-radix-dropdown-menu-trigger"
+    assert html =~ "data-radix-dropdown-menu-content"
     assert html =~ ~s[data-phx-portal="body"]
     assert html =~ ~s[id="dm-content-portal"]
 
-    assert html =~ "est-DropdownMenuRoot"
-    assert html =~ "est-DropdownMenuTrigger"
-    assert html =~ "est-DropdownMenuTriggerIcon"
-    assert html =~ "est-DropdownMenuContent"
-    assert html =~ "est-BaseMenuContent"
-    assert html =~ "est-PopperContent"
-    assert html =~ "est-r-size-1"
-    assert html =~ "est-variant-soft"
-    assert html =~ "est-high-contrast"
+    assert html =~ "rt-DropdownMenuRoot"
+    assert html =~ "rt-DropdownMenuTrigger"
+    assert html =~ "rt-DropdownMenuTriggerIcon"
+    assert html =~ "rt-DropdownMenuContent"
+    assert html =~ "rt-BaseMenuContent"
+    assert html =~ "rt-PopperContent"
+    assert html =~ "rt-r-size-1"
+    assert html =~ "rt-variant-soft"
+    assert html =~ "rt-high-contrast"
     assert html =~ ~s[data-accent-color="indigo"]
 
-    assert html =~ "est-DropdownMenuItem"
-    assert html =~ "est-BaseMenuShortcut"
+    assert html =~ "rt-DropdownMenuItem"
+    assert html =~ "rt-BaseMenuShortcut"
     assert html =~ "⌘ E"
     assert html =~ ~s[data-accent-color="red"]
-    assert html =~ "est-DropdownMenuLabel"
-    assert html =~ "est-DropdownMenuSeparator"
-    assert html =~ "est-DropdownMenuCheckboxItem"
-    assert html =~ "data-essence-dropdown-menu-checkbox-item"
-    assert html =~ "data-essence-dropdown-menu-item-indicator"
-    assert html =~ "data-essence-dropdown-menu-radio-item"
-    assert html =~ "est-DropdownMenuRadioItem"
-    assert html =~ "est-DropdownMenuSub"
-    assert html =~ "est-DropdownMenuSubTrigger"
-    assert html =~ "est-DropdownMenuSubContent"
-    assert html =~ "est-BaseMenuViewport"
+    assert html =~ "rt-DropdownMenuLabel"
+    assert html =~ "rt-DropdownMenuSeparator"
+    assert html =~ "rt-DropdownMenuCheckboxItem"
+    assert html =~ "data-radix-menu-checkbox-item"
+    assert html =~ "data-radix-menu-item-indicator"
+    assert html =~ "data-radix-menu-radio-item"
+    assert html =~ "rt-DropdownMenuRadioItem"
+    assert html =~ "rt-DropdownMenuSub"
+    assert html =~ "rt-DropdownMenuSubTrigger"
+    assert html =~ "rt-DropdownMenuSubContent"
+    assert html =~ "rt-BaseMenuViewport"
     refute html =~ ~s[phx-hook="DropdownMenu"]
   end
 end

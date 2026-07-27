@@ -1,7 +1,7 @@
 defmodule EssenceUI.SharedProps.ColorProps do
   @moduledoc """
   Color prop definitions for Box and other components.
-  Inspired by Radix UI Themes and Radix Colors.
+  Theme color props for Essence UI.
   """
 
   @accent_colors [
@@ -49,7 +49,7 @@ defmodule EssenceUI.SharedProps.ColorProps do
         type: [:enum, :string],
         values: @accent_colors,
         responsive: false,
-        class: "est-r-color"
+        class: "rt-r-color"
       }
     }
   end
@@ -60,7 +60,7 @@ defmodule EssenceUI.SharedProps.ColorProps do
         type: [:enum, :string],
         values: @accent_colors,
         responsive: false,
-        class: "est-r-accent-color"
+        class: "rt-r-accent-color"
       }
     }
   end

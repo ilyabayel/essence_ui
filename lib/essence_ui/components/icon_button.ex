@@ -1,7 +1,6 @@
 defmodule EssenceUI.Components.IconButton do
   @moduledoc """
-  Icon Button component 100% compatible with Radix UI Themes Icon Button API.
-  See: https://www.radix-ui.com/themes/docs/components/icon-button
+  Themed icon button with sizes, variants, and accent colors.
   """
 
   use Phoenix.Component
@@ -25,7 +24,7 @@ defmodule EssenceUI.Components.IconButton do
   @sizes ["1", "2", "3", "4"]
 
   @doc """
-  Renders an icon button. All props match Radix UI Icon Button.
+  Renders an icon button.
 
   ## Examples
       <.icon_button><Icons.plus /></.icon_button>
@@ -65,9 +64,9 @@ defmodule EssenceUI.Components.IconButton do
   def icon_button(assigns) do
     prop_defs =
       %{
-        variant: %{type: :enum, values: @variants, class: "est-variant", default: "soft"},
-        size: %{type: :enum, values: @sizes, class: "est-r-size"},
-        loading: %{type: :boolean, class: "est-loading"}
+        variant: %{type: :enum, values: @variants, class: "rt-variant", default: "soft"},
+        size: %{type: :enum, values: @sizes, class: "rt-r-size"},
+        loading: %{type: :boolean, class: "rt-loading"}
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(HighContrastProps.prop_defs())
@@ -82,9 +81,9 @@ defmodule EssenceUI.Components.IconButton do
 
     class =
       [
-        "est-IconButton",
-        "est-BaseButton",
-        "est-reset",
+        "rt-IconButton",
+        "rt-BaseButton",
+        "rt-reset",
         extracted.class
       ]
       |> Enum.filter(& &1)
@@ -121,19 +120,19 @@ defmodule EssenceUI.Components.IconButton do
           align="center"
           justify="center"
           gap="2"
-          class="est-ButtonLoading"
+          class="rt-ButtonLoading"
           position="absolute"
           width="100%"
         >
-          <span class="est-Spinner est-r-size-2">
-            <span class="est-SpinnerLeaf"></span>
-            <span class="est-SpinnerLeaf"></span>
-            <span class="est-SpinnerLeaf"></span>
-            <span class="est-SpinnerLeaf"></span>
-            <span class="est-SpinnerLeaf"></span>
-            <span class="est-SpinnerLeaf"></span>
-            <span class="est-SpinnerLeaf"></span>
-            <span class="est-SpinnerLeaf"></span>
+          <span class="rt-Spinner rt-r-size-2">
+            <span class="rt-SpinnerLeaf"></span>
+            <span class="rt-SpinnerLeaf"></span>
+            <span class="rt-SpinnerLeaf"></span>
+            <span class="rt-SpinnerLeaf"></span>
+            <span class="rt-SpinnerLeaf"></span>
+            <span class="rt-SpinnerLeaf"></span>
+            <span class="rt-SpinnerLeaf"></span>
+            <span class="rt-SpinnerLeaf"></span>
           </span>
         </.flex>
         <span style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; overflow-wrap: normal;">

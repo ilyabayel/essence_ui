@@ -1,15 +1,15 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 /** Wait until RadioGroupRoot hook has synced item tabindex / click handlers. */
 async function waitForRadioGroupHook(root) {
   await expect(
-    root.locator('[data-essence-radio-group-item][data-has-click]').first(),
+    root.locator('[data-radix-radio-group-item][data-has-click]').first(),
   ).toBeVisible();
   await expect(
     root.locator(
-      '[data-essence-radio-group-item][aria-checked="true"][tabindex="0"]',
+      '[data-radix-radio-group-item][aria-checked="true"][tabindex="0"]',
     ),
   ).toBeVisible();
 }
@@ -26,13 +26,13 @@ test.describe("Radio Group Primitive", () => {
     await waitForRadioGroupHook(root);
 
     const defaultItem = root.locator(
-      '[data-essence-radio-group-item][data-value="default"]',
+      '[data-radix-radio-group-item][data-value="default"]',
     );
     const comfortableItem = root.locator(
-      '[data-essence-radio-group-item][data-value="comfortable"]',
+      '[data-radix-radio-group-item][data-value="comfortable"]',
     );
     const compactItem = root.locator(
-      '[data-essence-radio-group-item][data-value="compact"]',
+      '[data-radix-radio-group-item][data-value="compact"]',
     );
 
     await expect(root).toHaveAttribute("role", "radiogroup");
@@ -54,10 +54,10 @@ test.describe("Radio Group Primitive", () => {
     await waitForRadioGroupHook(root);
 
     const defaultItem = root.locator(
-      '[data-essence-radio-group-item][data-value="default"]',
+      '[data-radix-radio-group-item][data-value="default"]',
     );
     const comfortableItem = root.locator(
-      '[data-essence-radio-group-item][data-value="comfortable"]',
+      '[data-radix-radio-group-item][data-value="comfortable"]',
     );
     const comfortableLabel = page.locator('label[for="r2"]');
 
@@ -73,13 +73,13 @@ test.describe("Radio Group Primitive", () => {
     await waitForRadioGroupHook(root);
 
     const defaultItem = root.locator(
-      '[data-essence-radio-group-item][data-value="default"]',
+      '[data-radix-radio-group-item][data-value="default"]',
     );
     const comfortableItem = root.locator(
-      '[data-essence-radio-group-item][data-value="comfortable"]',
+      '[data-radix-radio-group-item][data-value="comfortable"]',
     );
     const compactItem = root.locator(
-      '[data-essence-radio-group-item][data-value="compact"]',
+      '[data-radix-radio-group-item][data-value="compact"]',
     );
 
     await defaultItem.focus();
@@ -122,10 +122,10 @@ test.describe("Radio Group Component", () => {
     await waitForRadioGroupHook(root);
 
     const appleItem = root.locator(
-      '[data-essence-radio-group-item][data-value="apple"]',
+      '[data-radix-radio-group-item][data-value="apple"]',
     );
     const orangeItem = root.locator(
-      '[data-essence-radio-group-item][data-value="orange"]',
+      '[data-radix-radio-group-item][data-value="orange"]',
     );
     const orangeLabel = root.locator('label:has-text("Orange")');
     const hiddenInput = root.locator('input[type="hidden"][name="fruit"]');
@@ -147,13 +147,13 @@ test.describe("Radio Group Component", () => {
     await waitForRadioGroupHook(root);
 
     const appleItem = root.locator(
-      '[data-essence-radio-group-item][data-value="apple"]',
+      '[data-radix-radio-group-item][data-value="apple"]',
     );
     const orangeItem = root.locator(
-      '[data-essence-radio-group-item][data-value="orange"]',
+      '[data-radix-radio-group-item][data-value="orange"]',
     );
     const bananaItem = root.locator(
-      '[data-essence-radio-group-item][data-value="banana"]',
+      '[data-radix-radio-group-item][data-value="banana"]',
     );
 
     await appleItem.focus();

@@ -2,8 +2,7 @@ defmodule EssenceUI.Components.Popover do
   @moduledoc """
   A Popover component for displaying rich floating content, triggered by a button.
 
-  Wraps `EssenceUI.Primitives.Popover` with Themes visual props.
-  Based on Radix UI Themes Popover.
+  Wraps `EssenceUI.Primitives.Popover` with themed visual props.
   """
   use Phoenix.Component
 
@@ -53,7 +52,7 @@ defmodule EssenceUI.Components.Popover do
       default_open={@default_open}
       on_open_change={@on_open_change}
       modal={@modal}
-      class={["est-PopoverRoot", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["rt-PopoverRoot", @class] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={["display: contents;", @style] |> Enum.filter(&(&1 != "")) |> Enum.join("; ")}
       {@rest}
     >
@@ -79,7 +78,7 @@ defmodule EssenceUI.Components.Popover do
       id={@id}
       content_id={@content_id}
       as="div"
-      class={["est-PopoverTrigger", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["rt-PopoverTrigger", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
       style={["display: inline-flex;", @style] |> Enum.filter(&(&1 != "")) |> Enum.join("; ")}
       {Map.delete(@rest, :class)}
     >
@@ -98,7 +97,7 @@ defmodule EssenceUI.Components.Popover do
   - `size` - Size of the content: "1", "2", "3", "4" (default: "2")
   - `side` - Placement side: "top", "bottom", "left", "right" (default: "bottom")
   - `align` - Alignment: "start", "center", "end" (default: "start")
-  - Plus width/height props (max_width defaults to "480px" in Radix)
+  - Plus width/height props (max_width defaults to "480px")
   """
   attr :id, :string, default: nil
   attr :size, :string, values: @sizes, default: "2"
@@ -115,7 +114,7 @@ defmodule EssenceUI.Components.Popover do
   def popover_content(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, class: "est-r-size", values: @sizes, default: "2", responsive: true}
+        size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "2", responsive: true}
       }
       |> Map.merge(WidthProps.prop_defs())
       |> Map.merge(HeightProps.prop_defs())
@@ -130,9 +129,9 @@ defmodule EssenceUI.Components.Popover do
         portal_id: "#{id}-portal",
         class:
           [
-            "essence-ui",
-            "est-PopperContent",
-            "est-PopoverContent",
+            "radix-themes",
+            "rt-PopperContent",
+            "rt-PopoverContent",
             extracted.class,
             assigns.class
           ]
@@ -171,7 +170,7 @@ defmodule EssenceUI.Components.Popover do
     <PopoverPrimitive.close
       id={@id}
       as="div"
-      class={["est-PopoverClose", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
+      class={["rt-PopoverClose", @class, @rest[:class]] |> Enum.filter(& &1) |> Enum.join(" ")}
       style="display: inline-flex;"
       {Map.delete(@rest, :class)}
     >

@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("Checkbox Primitive", () => {
@@ -8,9 +8,9 @@ test.describe("Checkbox Primitive", () => {
   });
 
   test("starts checked and toggles on click and Space", async ({ page }) => {
-    const demo = page.locator('.radix-demo[data-component="checkbox"]');
-    const trigger = demo.locator("#c1[data-essence-checkbox-trigger]");
-    const indicator = demo.locator("[data-essence-checkbox-indicator]");
+    const demo = page.locator('.essence-demo[data-component="checkbox"]');
+    const trigger = demo.locator("#c1[data-radix-checkbox-trigger]");
+    const indicator = demo.locator("[data-radix-checkbox-indicator]");
 
     await expect(trigger).toHaveAttribute("role", "checkbox");
     await expect(trigger).toHaveAttribute("aria-checked", "true");
@@ -28,7 +28,7 @@ test.describe("Checkbox Primitive", () => {
   });
 
   test("Enter does not toggle (WAI-ARIA checkbox)", async ({ page }) => {
-    const trigger = page.locator("#c1[data-essence-checkbox-trigger]");
+    const trigger = page.locator("#c1[data-radix-checkbox-trigger]");
     await expect(trigger).toHaveAttribute("aria-checked", "true");
     await trigger.focus();
     await page.keyboard.press("Enter");
@@ -36,7 +36,7 @@ test.describe("Checkbox Primitive", () => {
   });
 
   test("label click toggles checkbox", async ({ page }) => {
-    const demo = page.locator('.radix-demo[data-component="checkbox"]');
+    const demo = page.locator('.essence-demo[data-component="checkbox"]');
     const trigger = demo.locator("#c1");
     const label = demo.locator('label[for="c1"]');
 
@@ -47,7 +47,7 @@ test.describe("Checkbox Primitive", () => {
 
   test("has no accessibility violations", async ({ page }) => {
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="checkbox"]',
+      include: '.essence-demo[data-component="checkbox"]',
     });
   });
 });

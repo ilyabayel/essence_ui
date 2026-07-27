@@ -10,11 +10,11 @@
 export function applyPortalTheme(el, source) {
   if (!el || !source) return;
 
-  const theme = source.closest(".essence-ui");
+  const theme = source.closest(".radix-themes");
   // Already under a theme ancestor in the live DOM (not portaled away).
   if (theme && theme.contains(el)) return;
 
-  el.classList.add("essence-ui");
+  el.classList.add("radix-themes");
 
   for (const attr of [
     "data-accent-color",

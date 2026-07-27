@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("Dropdown Menu Primitive", () => {
@@ -12,7 +12,7 @@ test.describe("Dropdown Menu Primitive", () => {
 
   test("opens and closes on trigger click", async ({ page }) => {
     const root = page.locator("#dropdown-primitive");
-    const trigger = root.locator("[data-essence-dropdown-menu-trigger]");
+    const trigger = root.locator("[data-radix-dropdown-menu-trigger]");
     const content = page.locator("#dropdown-content");
 
     await expect(content).toBeHidden();
@@ -35,10 +35,10 @@ test.describe("Dropdown Menu Primitive", () => {
 
   test("navigates with arrows and closes on escape", async ({ page }) => {
     const root = page.locator("#dropdown-primitive");
-    const trigger = root.locator("[data-essence-dropdown-menu-trigger]");
+    const trigger = root.locator("[data-radix-dropdown-menu-trigger]");
     const content = page.locator("#dropdown-content");
     const items = content.locator(
-      "[data-essence-dropdown-menu-item]:not([data-disabled]), [data-essence-dropdown-menu-checkbox-item]",
+      "[data-radix-menu-item]:not([data-disabled]), [data-radix-menu-checkbox-item]",
     );
 
     await trigger.click();
@@ -55,10 +55,10 @@ test.describe("Dropdown Menu Primitive", () => {
 
   test("closes on outside click and item select", async ({ page }) => {
     const root = page.locator("#dropdown-primitive");
-    const trigger = root.locator("[data-essence-dropdown-menu-trigger]");
+    const trigger = root.locator("[data-radix-dropdown-menu-trigger]");
     const content = page.locator("#dropdown-content");
     const item = content
-      .locator("[data-essence-dropdown-menu-item]")
+      .locator("[data-radix-menu-item]")
       .filter({ hasText: "Close" });
 
     await trigger.click();
@@ -75,13 +75,13 @@ test.describe("Dropdown Menu Primitive", () => {
 
   test("opens submenu on sub-trigger click (touch path)", async ({ page }) => {
     const root = page.locator("#dropdown-primitive");
-    const trigger = root.locator("[data-essence-dropdown-menu-trigger]");
+    const trigger = root.locator("[data-radix-dropdown-menu-trigger]");
     const content = page.locator("#dropdown-content");
     const subTrigger = content.locator(
-      "[data-essence-dropdown-menu-sub-trigger]",
+      "[data-radix-menu-sub-trigger]",
     );
     const subContent = page.locator(
-      "[data-essence-dropdown-menu-sub-content]",
+      "[data-radix-menu-sub-content]",
     );
 
     await trigger.click();
@@ -96,11 +96,11 @@ test.describe("Dropdown Menu Primitive", () => {
 
   test("has no accessibility violations when open", async ({ page }) => {
     const root = page.locator("#dropdown-primitive");
-    const trigger = root.locator("[data-essence-dropdown-menu-trigger]");
+    const trigger = root.locator("[data-radix-dropdown-menu-trigger]");
     await trigger.click();
     await expect(page.locator("#dropdown-content")).toBeVisible();
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="dropdown-menu"]',
+      include: '.essence-demo[data-component="dropdown-menu"]',
     });
   });
 });
@@ -164,8 +164,8 @@ test.describe("Dropdown Menu Themes nested subs (legacy hook)", () => {
     const root = page.locator("#dropdown-nested-subs");
     const trigger = root.locator("[data-dropdown-menu-trigger] button");
     const content = root.locator("[data-dropdown-menu-content]");
-    const moreSub = content.locator(":scope > .est-BaseMenuViewport > [data-dropdown-menu-sub]").nth(0);
-    const shareSub = content.locator(":scope > .est-BaseMenuViewport > [data-dropdown-menu-sub]").nth(1);
+    const moreSub = content.locator(":scope > .rt-BaseMenuViewport > [data-dropdown-menu-sub]").nth(0);
+    const shareSub = content.locator(":scope > .rt-BaseMenuViewport > [data-dropdown-menu-sub]").nth(1);
     const moreTrigger = moreSub.locator(":scope > [data-dropdown-menu-sub-trigger]");
     const moreContent = moreSub.locator(":scope > [data-dropdown-menu-sub-content]");
     const nestedSub = moreContent.locator("[data-dropdown-menu-sub]");

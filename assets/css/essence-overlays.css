@@ -1,0 +1,15 @@
+/* LiveView-only CSS that is not part of upstream Radix Themes.
+   Keep assets/radix/ free of local patches. */
+
+/*
+ * Themes Dialog / AlertDialog portal wrapper stays mounted when closed.
+ * Mirrors former . visibility hack.
+ * Child with data-state="open" can paint while the wrapper stays hidden.
+ */
+[data-is-dialog-theme] {
+  visibility: hidden;
+}
+
+[data-is-dialog-theme]>[data-state="open"] {
+  visibility: visible;
+}

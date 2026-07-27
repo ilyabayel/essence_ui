@@ -1,8 +1,6 @@
 defmodule EssenceUI.Components.Badge do
   @moduledoc """
-  A Badge component that displays a small piece of information or status.
-
-  Based on Radix UI Badge component with support for various sizes, variants,
+  A Badge component that displays a small piece of information or status with support for various sizes, variants,
   colors, and styling options.
   """
   use Phoenix.Component
@@ -58,8 +56,8 @@ defmodule EssenceUI.Components.Badge do
   def badge(assigns) do
     prop_defs =
       %{
-        size: %{type: :enum, values: @sizes, class: "est-r-size", default: "1"},
-        variant: %{type: :enum, values: @variants, class: "est-variant", default: "soft"}
+        size: %{type: :enum, values: @sizes, class: "rt-r-size", default: "1"},
+        variant: %{type: :enum, values: @variants, class: "rt-variant", default: "soft"}
       }
       |> Map.merge(ColorProps.color_prop_def())
       |> Map.merge(HighContrastProps.prop_defs())
@@ -69,7 +67,7 @@ defmodule EssenceUI.Components.Badge do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
-    class = ["est-reset", "est-Badge", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
+    class = ["rt-reset", "rt-Badge", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
 
     assigns =
       assigns

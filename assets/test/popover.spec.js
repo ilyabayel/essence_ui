@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("Popover Primitive", () => {
@@ -10,7 +10,7 @@ test.describe("Popover Primitive", () => {
 
   test("opens and closes on trigger click", async ({ page }) => {
     const root = page.locator("#popover-primitive");
-    const trigger = root.locator("[data-essence-popover-trigger]");
+    const trigger = root.locator("[data-radix-popover-trigger]");
     const content = page.locator("#popover-content");
 
     await expect(content).toBeHidden();
@@ -34,9 +34,9 @@ test.describe("Popover Primitive", () => {
 
   test("closes on escape and close button", async ({ page }) => {
     const root = page.locator("#popover-primitive");
-    const trigger = root.locator("[data-essence-popover-trigger]");
+    const trigger = root.locator("[data-radix-popover-trigger]");
     const content = page.locator("#popover-content");
-    const close = content.locator("[data-essence-popover-close]");
+    const close = content.locator("[data-radix-popover-close]");
 
     await trigger.click();
     await expect(content).toBeVisible();
@@ -52,24 +52,24 @@ test.describe("Popover Primitive", () => {
 
   test("closes on outside click", async ({ page }) => {
     const root = page.locator("#popover-primitive");
-    const trigger = root.locator("[data-essence-popover-trigger]");
+    const trigger = root.locator("[data-radix-popover-trigger]");
     const content = page.locator("#popover-content");
 
     await trigger.click();
     await expect(content).toBeVisible();
 
-    // Click a neutral page point away from trigger/content (avoid storybook chrome).
+    // Click a neutral page point away from trigger/content.
     await page.mouse.click(8, 120);
     await expect(content).toBeHidden();
   });
 
   test("has no accessibility violations when open", async ({ page }) => {
     const root = page.locator("#popover-primitive");
-    const trigger = root.locator("[data-essence-popover-trigger]");
+    const trigger = root.locator("[data-radix-popover-trigger]");
     await trigger.click();
     await expect(page.locator("#popover-content")).toBeVisible();
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="popover"]',
+      include: '.essence-demo[data-component="popover"]',
     });
   });
 });
