@@ -5,7 +5,7 @@ description: Renders an accessible label associated with controls.
 
 Renders an accessible label associated with controls.
 
-<.demo variant="primitive" component="label" css={primitive_css("label")}>
+<.demo theme="light" variant="primitive" component="label" css={primitive_css("label")}>
   <:heex>
     <div style="display: flex; padding: 0 20px; flex-wrap: wrap; gap: 15px; align-items: center;">
       <Label.label class="LabelRoot" for="firstName">

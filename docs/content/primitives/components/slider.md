@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/slider-multithumb
 
 An input where the user selects a value from within a given range.
 
-<.demo variant="primitive" component="slider" css={primitive_css("slider")}>
+<.demo theme="light" variant="primitive" component="slider" css={primitive_css("slider")}>
   <:heex>
     <form>
       <Slider.root

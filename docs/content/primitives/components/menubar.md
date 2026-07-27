@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/menu/
 
 A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.
 
-<.demo variant="primitive" component="menubar" css={primitive_css("menubar")}>
+<.demo theme="light" variant="primitive" component="menubar" css={primitive_css("menubar")}>
 
   <:heex>
     <Menubar.root

@@ -5,7 +5,7 @@ description: For sighted users to preview content available behind a link.
 
 For sighted users to preview content available behind a link.
 
-<.demo variant="primitive" component="hover-card" css={primitive_css("hover-card")}>
+<.demo theme="light" variant="primitive" component="hover-card" css={primitive_css("hover-card")}>
 
   <:heex>
     <HoverCard.root

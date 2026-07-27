@@ -20,6 +20,7 @@ defmodule EssenceUIWeb.Docs.Components do
   attr :component, :string, default: nil
   attr :class, :string, default: nil
   attr :css, :string, default: nil
+  attr :theme, :string, default: "system", values: ["system", "light", "dark"]
 
   slot :heex, required: true do
     attr :code, :string
@@ -29,7 +30,7 @@ defmodule EssenceUIWeb.Docs.Components do
     heex_code = slot_code(assigns.heex) || fallback_heex_code(assigns.variant, assigns.component)
     css_code = assigns.css
     primitive? = assigns.variant == "primitive"
-    canvas_css = if primitive?, do: demo_canvas_css(), else: nil
+    canvas_css = if primitive?, do: demo_canvas_css()
 
     assigns =
       assigns
@@ -41,11 +42,12 @@ defmodule EssenceUIWeb.Docs.Components do
       |> assign(:has_heex_code, is_binary(heex_code) and heex_code != "")
       |> assign(:has_css_code, is_binary(css_code) and css_code != "")
       |> assign(:default_tab, if(is_binary(heex_code) and heex_code != "", do: "heex", else: "css"))
+      |> assign(:box_class, [get_component_frame_class(assigns.theme), preview_class(assigns.variant)])
 
     ~H"""
     <.card variant="surface" class={["docs-demo", @class]}>
       <.box
-        class={preview_class(@variant)}
+        class={@box_class}
         p="5"
         data-component={@component}
         data-accent-color={theme_attr(@variant, "indigo")}
@@ -80,6 +82,14 @@ defmodule EssenceUIWeb.Docs.Components do
       </.box>
     </.card>
     """
+  end
+
+  defp get_component_frame_class(theme) do
+    case theme do
+      "light" -> "light theme-light"
+      "dark" -> "dark theme-dark"
+      _ -> ""
+    end
   end
 
   @doc """

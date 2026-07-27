@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/listbox
 
 Displays a list of options for the user to pick from—triggered by a button.
 
-<.demo variant="primitive" component="select" css={primitive_css("select")}>
+<.demo theme="light" variant="primitive" component="select" css={primitive_css("select")}>
 
   <:heex>
     <Select.root id="select-primitive">

@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/disclosure
 
 An interactive component which expands/collapses a panel.
 
-<.demo variant="primitive" component="collapsible" css={primitive_css("collapsible")}>
+<.demo theme="light" variant="primitive" component="collapsible" css={primitive_css("collapsible")}>
   <:heex>
     <Collapsible.root id="collapsible-primitive" class="DemoCollapsibleRoot">
       <div style="display: flex; align-items: center; justify-content: space-between;">

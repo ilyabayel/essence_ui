@@ -50,7 +50,7 @@ Contains all the parts.
 Hero demo shape:
 
 ```heex
-<.demo variant="primitive" component="kebab-name" css={primitive_css("kebab-name")}>
+<.demo theme="light" variant="primitive" component="kebab-name" css={primitive_css("kebab-name")}>
   <:heex>
     <Module.root id="…-primitive" class="DemoNameRoot">
       …
@@ -81,7 +81,7 @@ Gold pages: `docs/content/primitives/components/dialog.md`, `accordion.md`.
 
 | Component | Use |
 |-----------|-----|
-| `<.demo>` | Live preview + HEEx/CSS tabs; `variant="primitive"` + `component` + `css={primitive_css(…)}` |
+| `<.demo>` | Live preview + HEEx/CSS tabs; `theme="light"` + `variant="primitive"` + `component` + `css={primitive_css(…)}` |
 | `primitive_css/1` | Loads `assets/css/primitives/{name}.css` only (no canvas); strips `@import` and `.essence-demo[data-component]` prefixes |
 | `<.highlights>` | Feature bullets |
 | `<.anatomy>` | Named parts |

@@ -5,7 +5,7 @@ description: Wraps your app to provide global reading direction.
 
 Wraps your app to provide global reading direction.
 
-<.demo variant="primitive" component="direction-provider" css={primitive_css("direction-provider")}>
+<.demo theme="light" variant="primitive" component="direction-provider" css={primitive_css("direction-provider")}>
   <:heex>
     <DirectionProvider.direction_provider
       dir="rtl"

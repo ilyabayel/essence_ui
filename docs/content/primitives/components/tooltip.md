@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/tooltip
 
 A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.
 
-<.demo variant="primitive" component="tooltip" css={primitive_css("tooltip")}>
+<.demo theme="light" variant="primitive" component="tooltip" css={primitive_css("tooltip")}>
 
   <:heex>
     <Tooltip.provider delay_duration={100}>

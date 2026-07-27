@@ -5,7 +5,7 @@ description: Collect information from your users using validation rules.
 
 Collect information from your users using validation rules.
 
-<.demo variant="primitive" component="form" css={primitive_css("form")}>
+<.demo theme="light" variant="primitive" component="form" css={primitive_css("form")}>
 
   <:heex>
     <Form.root id="form-primitive" class="DemoFormRoot">

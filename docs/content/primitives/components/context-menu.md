@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/menu
 
 Displays a menu located at the pointer, triggered by a right click or a long press.
 
-<.demo variant="primitive" component="context-menu" css={primitive_css("context-menu")}>
+<.demo theme="light" variant="primitive" component="context-menu" css={primitive_css("context-menu")}>
 
   <:heex>
     <ContextMenu.root id="context-primitive">

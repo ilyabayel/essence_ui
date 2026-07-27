@@ -5,7 +5,7 @@ description: Merges its props onto its immediate child.
 
 Merges its props onto its immediate child.
 
-<.demo variant="primitive" component="slot" css={primitive_css("slot")}>
+<.demo theme="light" variant="primitive" component="slot" css={primitive_css("slot")}>
   <:heex>
     <Slot.slot as="button" class="Button violet" type="button">
       Composed Button

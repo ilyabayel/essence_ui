@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal
 
 A window overlaid on either the primary window or another dialog window, rendering the content underneath inert. Headless dialog primitive—pair with your own styles (or Themes Dialog) for the visual layer.
 
-<.demo variant="primitive" component="dialog" css={primitive_css("dialog")}>
+<.demo theme="light" variant="primitive" component="dialog" css={primitive_css("dialog")}>
 
   <:heex>
     <Dialog.root id="dialog-primitive">

@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog
 
 A modal dialog that interrupts the user with important content and expects a response.
 
-<.demo variant="primitive" component="alert-dialog" css={primitive_css("alert-dialog")}>
+<.demo theme="light" variant="primitive" component="alert-dialog" css={primitive_css("alert-dialog")}>
 
   <:heex>
     <AlertDialog.root id="alert-dialog-primitive">

@@ -5,7 +5,7 @@ description: Makes icons accessible by adding a label.
 
 Makes icons accessible by adding a label.
 
-<.demo variant="primitive" component="accessible-icon" css={primitive_css("accessible-icon")}>
+<.demo theme="light" variant="primitive" component="accessible-icon" css={primitive_css("accessible-icon")}>
   <:heex>
     <button class="IconButton" type="button">
       <AccessibleIcon.accessible_icon label="Close">

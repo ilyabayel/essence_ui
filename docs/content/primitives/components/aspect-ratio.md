@@ -5,7 +5,7 @@ description: Displays content within a desired ratio.
 
 Displays content within a desired ratio.
 
-<.demo variant="primitive" component="aspect-ratio" css={primitive_css("aspect-ratio")}>
+<.demo theme="light" variant="primitive" component="aspect-ratio" css={primitive_css("aspect-ratio")}>
   <:heex>
     <div class="DemoAspectRatioContainer">
       <AspectRatio.aspect_ratio ratio={16 / 9}>

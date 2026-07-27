@@ -37,7 +37,7 @@ Import and structure the parts. Each primitive is a module with named function c
 
 Primitives are unstyled. Pass `class` (and write CSS) for presentation. Demo styles live under `assets/css/primitives/`.
 
-<.demo variant="primitive" component="popover" css={primitive_css("popover")}>
+<.demo theme="light" variant="primitive" component="popover" css={primitive_css("popover")}>
 
   <:heex>
     <Popover.root id="docs-gs-popover">

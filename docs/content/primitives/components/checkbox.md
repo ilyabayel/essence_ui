@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/checkbox
 
 A control that allows the user to toggle between checked and not checked.
 
-<.demo variant="primitive" component="checkbox" css={primitive_css("checkbox")}>
+<.demo theme="light" variant="primitive" component="checkbox" css={primitive_css("checkbox")}>
   <:heex>
     <form>
       <div style="display: flex; align-items: center;">

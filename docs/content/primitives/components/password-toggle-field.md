@@ -5,7 +5,7 @@ description: A password input field with an integrated button to toggle the valu
 
 A password input field with an integrated button to toggle the value's visibility.
 
-<.demo variant="primitive" component="password-toggle-field" css={primitive_css("password-toggle-field")}>
+<.demo theme="light" variant="primitive" component="password-toggle-field" css={primitive_css("password-toggle-field")}>
 
   <:heex>
     <PasswordToggleField.root id="password-toggle-primitive">

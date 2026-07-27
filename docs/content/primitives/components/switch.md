@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/switch
 
 A control that allows the user to toggle between checked and not checked.
 
-<.demo variant="primitive" component="switch" css={primitive_css("switch")}>
+<.demo theme="light" variant="primitive" component="switch" css={primitive_css("switch")}>
   <:heex>
     <form>
       <div style="display: flex; align-items: center;">

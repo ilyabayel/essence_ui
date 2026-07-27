@@ -79,7 +79,7 @@ Gold refs: `docs/content/primitives/components/dialog.md`, `accordion.md`.
 3. **Hero demo**
 
 ```heex
-<.demo variant="primitive" component="{name}" css={primitive_css("{name}")}>
+<.demo theme="light" variant="primitive" component="{name}" css={primitive_css("{name}")}>
   <:heex>
     … Demo* classes …
   </:heex>

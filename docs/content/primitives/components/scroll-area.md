@@ -5,7 +5,7 @@ description: Augments native scroll functionality for custom, cross-browser styl
 
 Augments native scroll functionality for custom, cross-browser styling.
 
-<.demo variant="primitive" component="scroll-area" css={primitive_css("scroll-area")}>
+<.demo theme="light" variant="primitive" component="scroll-area" css={primitive_css("scroll-area")}>
   <:heex>
     <ScrollArea.root
       id="scroll-area-primitive"

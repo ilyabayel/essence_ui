@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/accordion
 
 A vertically stacked set of interactive headings that each reveal an associated section of content.
 
-<.demo variant="primitive" component="accordion" css={primitive_css("accordion")}>
+<.demo theme="light" variant="primitive" component="accordion" css={primitive_css("accordion")}>
   <:heex>
     <Accordion.root
       id="accordion-primitive"

@@ -5,7 +5,7 @@ description: Hides content from the screen in an accessible way.
 
 Hides content from the screen in an accessible way.
 
-<.demo variant="primitive" component="visually-hidden" css={primitive_css("visually-hidden")}>
+<.demo theme="light" variant="primitive" component="visually-hidden" css={primitive_css("visually-hidden")}>
   <:heex>
     <button class="Button violet" type="button">
       Save

@@ -79,7 +79,7 @@ Frontmatter is simple `key: value` lines (no nested YAML). Body is Markdown with
 | `<.keyboard_table>` | Accessibility keyboard interactions |
 | `<.code_block>` | Standalone highlighted snippet |
 
-Primitives demos set `variant="primitive"`, `component="…"`, and `css={primitive_css("…")}`. The CSS tab shows the component stylesheet only (no demo canvas). The preview injects canvas + component CSS via `<style>` tags; `Demo*` class names keep demo styles from clashing. Pass `code` on `<:heex>` to override the HEEx tab; otherwise HEEx falls back to the storybook template.
+Primitives demos set `theme="light"` (docs CSS has no dark theme), `variant="primitive"`, `component="…"`, and `css={primitive_css("…")}`. The CSS tab shows the component stylesheet only (no demo canvas). The preview injects canvas + component CSS via `<style>` tags; `Demo*` class names keep demo styles from clashing. Pass `code` on `<:heex>` to override the HEEx tab; otherwise HEEx falls back to the storybook template.
 
 ### Routing
 
@@ -161,7 +161,7 @@ Prefer Markdown fenced code for static snippets, single-line `heex={~s[...]}` fo
 
 1. One job per page; lead with a short description, then demos, then API
 2. Use `<.demo>` with `<:heex>` (live markup); pass `code` on the slot when the HEEx tab source should differ from the storybook fallback
-3. Primitives: `variant="primitive" component="…" css={primitive_css("…")}` — CSS is an argument (not a slot); component CSS only in the CSS tab; preview uses `Demo*` classes + injected `<style>`
+3. Primitives: `theme="light" variant="primitive" component="…" css={primitive_css("…")}` — lock light theme (docs CSS has no dark); CSS is an argument (not a slot); component CSS only in the CSS tab; preview uses `Demo*` classes + injected `<style>`
 4. Import nothing in Markdown — `PageLive` imports docs helpers + `EssenceUI.Components` + **all** `EssenceUI.Primitives.*` aliases
 5. Keep nav in `docs/nav/primitives.exs` (and siblings) in sync when adding pages
 6. Avoid `"""` sigils in Markdown HEEx attributes (use `~s[...]` / `~S|...|`)

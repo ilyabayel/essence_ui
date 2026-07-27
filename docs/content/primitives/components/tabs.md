@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/tabs
 
 A set of layered sections of content—known as tab panels—that are displayed one at a time.
 
-<.demo variant="primitive" component="tabs" css={primitive_css("tabs")}>
+<.demo theme="light" variant="primitive" component="tabs" css={primitive_css("tabs")}>
 
   <:heex>
     <Tabs.root

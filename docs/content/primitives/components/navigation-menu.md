@@ -6,7 +6,7 @@ aria: https://www.w3.org/TR/wai-aria/#navigation
 
 A collection of links for navigating websites.
 
-<.demo variant="primitive" component="navigation-menu" css={primitive_css("navigation-menu")}>
+<.demo theme="light" variant="primitive" component="navigation-menu" css={primitive_css("navigation-menu")}>
 
   <:heex>
     <NavigationMenu.root

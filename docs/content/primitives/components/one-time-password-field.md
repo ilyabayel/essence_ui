@@ -5,7 +5,7 @@ description: A group of single-character text inputs to handle one-time password
 
 A group of single-character text inputs to handle one-time password verification.
 
-<.demo variant="primitive" component="one-time-password-field" css={primitive_css("one-time-password-field")}>
+<.demo theme="light" variant="primitive" component="one-time-password-field" css={primitive_css("one-time-password-field")}>
   <:heex>
     <OneTimePasswordField.root id="otp-primitive" class="DemoOTPRoot" length={6} name="otp">
       <OneTimePasswordField.input class="DemoOTPInput" index={0} />

@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/
 
 Displays a menu to the user—such as a set of actions or functions—triggered by a button.
 
-<.demo variant="primitive" component="dropdown-menu" css={primitive_css("dropdown-menu")}>
+<.demo theme="light" variant="primitive" component="dropdown-menu" css={primitive_css("dropdown-menu")}>
 
   <:heex>
     <DropdownMenu.root id="dropdown-primitive">

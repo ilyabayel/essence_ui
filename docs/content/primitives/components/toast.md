@@ -6,7 +6,7 @@ aria: https://www.w3.org/TR/wai-aria/#aria-live
 
 A succinct message that is displayed temporarily.
 
-<.demo variant="primitive" component="toast" css={primitive_css("toast")}>
+<.demo theme="light" variant="primitive" component="toast" css={primitive_css("toast")}>
   <:heex>
     <Toast.provider duration={8000} swipe_direction="right" label="Notification">
       <button

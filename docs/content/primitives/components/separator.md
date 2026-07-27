@@ -6,7 +6,7 @@ aria: https://www.w3.org/TR/wai-aria-1.2/#separator
 
 Visually or semantically separates content.
 
-<.demo variant="primitive" component="separator" css={primitive_css("separator")}>
+<.demo theme="light" variant="primitive" component="separator" css={primitive_css("separator")}>
   <:heex>
     <div style="width: 100%; max-width: 300px; margin: 0 15px;">
       <div class="DemoSeparatorText" style="font-weight: 500;">Essence UI</div>

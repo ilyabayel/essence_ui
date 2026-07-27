@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/button
 
 A set of two-state buttons that can be toggled on or off.
 
-<.demo variant="primitive" component="toggle-group" css={primitive_css("toggle-group")}>
+<.demo theme="light" variant="primitive" component="toggle-group" css={primitive_css("toggle-group")}>
   <:heex>
     <ToggleGroup.root id="toggle-group-primitive" type="single" value="center" class="DemoToggleGroupRoot" aria-label="Text alignment">
       <ToggleGroup.item class="DemoToggleGroupItem" value="left" aria-label="Left aligned">

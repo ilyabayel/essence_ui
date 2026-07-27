@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal
 
 Displays rich content in a portal, triggered by a button.
 
-<.demo variant="primitive" component="popover" css={primitive_css("popover")}>
+<.demo theme="light" variant="primitive" component="popover" css={primitive_css("popover")}>
 
   <:heex>
     <Popover.root id="popover-primitive">

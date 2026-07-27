@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/toolbar
 
 A container for grouping a set of controls, such as buttons, toggle groups or dropdown menus.
 
-<.demo variant="primitive" component="toolbar" css={primitive_css("toolbar")}>
+<.demo theme="light" variant="primitive" component="toolbar" css={primitive_css("toolbar")}>
   <:heex>
     <Toolbar.root id="toolbar-primitive" class="DemoToolbarRoot" aria-label="Formatting options">
       <Toolbar.toggle_group type="multiple" aria-label="Text formatting">

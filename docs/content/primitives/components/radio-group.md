@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/radio
 
 A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.
 
-<.demo variant="primitive" component="radio-group" css={primitive_css("radio-group")}>
+<.demo theme="light" variant="primitive" component="radio-group" css={primitive_css("radio-group")}>
   <:heex>
     <form>
       <RadioGroup.root id="radio-group-primitive" class="DemoRadioGroupRoot" default_value="default" aria-label="View density">

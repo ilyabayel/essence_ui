@@ -5,7 +5,7 @@ description: An image element with a fallback for representing the user.
 
 An image element with a fallback for representing the user.
 
-<.demo variant="primitive" component="avatar" css={primitive_css("avatar")}>
+<.demo theme="light" variant="primitive" component="avatar" css={primitive_css("avatar")}>
   <:heex>
     <div style="display: flex; gap: 20px;">
       <Avatar.root

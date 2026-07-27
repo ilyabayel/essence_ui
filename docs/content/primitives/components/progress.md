@@ -6,7 +6,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/meter
 
 Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
 
-<.demo variant="primitive" component="progress" css={primitive_css("progress")}>
+<.demo theme="light" variant="primitive" component="progress" css={primitive_css("progress")}>
   <:heex>
     <Progress.root class="ProgressRoot" value={66} aria-label="Progress">
       <Progress.indicator
