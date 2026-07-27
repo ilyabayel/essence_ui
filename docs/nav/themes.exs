@@ -38,7 +38,6 @@
   %{
     title: "Components",
     items: [
-      %{title: "Accordion", path: "components/accordion"},
       %{title: "Alert Dialog", path: "components/alert-dialog"},
       %{title: "Aspect Ratio", path: "components/aspect-ratio"},
       %{title: "Avatar", path: "components/avatar"},

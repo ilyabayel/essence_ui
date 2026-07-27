@@ -92,7 +92,6 @@ defmodule EssenceUI.Components do
     * `reset/1` - See `EssenceUI.Utilities.Reset`
     * `visually_hidden/1` - See `EssenceUI.Utilities.VisuallyHidden`
   """
-  alias EssenceUI.Components.Accordion
   alias EssenceUI.Components.CheckboxCards
   alias EssenceUI.Components.ContextMenu
   alias EssenceUI.Components.DataList
@@ -114,10 +113,6 @@ defmodule EssenceUI.Components do
   alias EssenceUI.Utilities.VisuallyHidden
 
   # Components
-  defdelegate accordion(assigns), to: Accordion
-  defdelegate accordion_header(assigns), to: Accordion
-  defdelegate accordion_trigger(assigns), to: Accordion
-  defdelegate accordion_content(assigns), to: Accordion
   defdelegate avatar(assigns), to: EssenceUI.Components.Avatar
   defdelegate badge(assigns), to: EssenceUI.Components.Badge
   defdelegate button(assigns), to: EssenceUI.Components.Button
