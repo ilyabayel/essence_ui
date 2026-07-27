@@ -89,16 +89,11 @@ let hooks = {
   Clipboard,
 };
 
-// Storybook integration
-window.storybook = { Hooks: hooks };
-
-// App LiveViews (e.g. /crm) reuse this bundle; Storybook boots its own LiveSocket
-// via phoenix_storybook (html.psb) using window.storybook.Hooks.
 const csrfToken = document
   .querySelector("meta[name='csrf-token']")
   ?.getAttribute("content");
 
-if (csrfToken && !document.documentElement.classList.contains("psb")) {
+if (csrfToken) {
   const liveSocket = new LiveSocket("/live", Socket, {
     hooks,
     params: { _csrf_token: csrfToken },

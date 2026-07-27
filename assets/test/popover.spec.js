@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("Popover Primitive", () => {
@@ -58,7 +58,7 @@ test.describe("Popover Primitive", () => {
     await trigger.click();
     await expect(content).toBeVisible();
 
-    // Click a neutral page point away from trigger/content (avoid storybook chrome).
+    // Click a neutral page point away from trigger/content.
     await page.mouse.click(8, 120);
     await expect(content).toBeHidden();
   });

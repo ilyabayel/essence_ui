@@ -27,7 +27,7 @@ defmodule EssenceUIWeb.Docs.Components do
   end
 
   def demo(assigns) do
-    heex_code = slot_code(assigns.heex) || fallback_heex_code(assigns.variant, assigns.component)
+    heex_code = slot_code(assigns.heex)
     css_code = assigns.css
     primitive? = assigns.variant == "primitive"
     canvas_css = if primitive?, do: demo_canvas_css()
@@ -298,21 +298,6 @@ defmodule EssenceUIWeb.Docs.Components do
   defp slot_code([%{code: code} | _]) when is_binary(code) and code != "", do: code
 
   defp slot_code(_), do: nil
-
-  defp fallback_heex_code("primitive", component) when is_binary(component) do
-    snake = String.replace(component, "-", "_")
-    path = Path.expand("../../../storybook/primitives/#{snake}.story.exs", __DIR__)
-
-    with true <- File.exists?(path),
-         {:ok, contents} <- File.read(path),
-         [_, template] <- Regex.run(~r/template:\s*"""(.*?)"""/s, contents) do
-      String.trim(template)
-    else
-      _ -> nil
-    end
-  end
-
-  defp fallback_heex_code(_, _), do: nil
 
   defp read_primitive_css(filename) do
     path = Path.expand("../../../assets/css/primitives/#{filename}", __DIR__)

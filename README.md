@@ -146,12 +146,12 @@ Essence UI provides accessible, themeable Phoenix LiveView components inspired b
 - [ ] `ThemePanel` dev-only component
 - [ ] Normalize props across all components using `shared_props`
 - [ ] Dark mode documentation and examples
-- [ ] Add prop tables in storybook
+- [ ] Add prop tables in docs
 - [ ] Establish a11y checks in CI
 
 ### Docs and examples
 
-- [ ] Storybook Themes category parity
+- [ ] Themes docs category parity
 - [ ] Usage patterns guide (controlled vs uncontrolled, `as_child`, composition)
 - [ ] Migration guide from plain HTML to components
 
@@ -170,7 +170,7 @@ npx --prefix assets playwright install chromium
 npm --prefix assets run test:e2e
 ```
 
-Playwright starts `mix phx.server` automatically. Shared helpers: `assets/test/helpers/story.js` (`gotoPrimitive`) and `assets/test/helpers/a11y.js` (`expectNoA11yViolations` via axe).
+Playwright starts `mix phx.server` automatically. Shared helpers: `assets/test/helpers/docs.js` (`gotoPrimitive`, `gotoTheme`) and `assets/test/helpers/a11y.js` (`expectNoA11yViolations` via axe).
 
 ## Learn more
 

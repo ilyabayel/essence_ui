@@ -11,7 +11,6 @@
 | Docs utilities | `docs/content/primitives/utilities/{name}.md` |
 | Demo CSS | `assets/css/primitives/{name}.css` (kebab filename) |
 | Canvas (preview only) | `assets/css/primitives/demo-canvas.css` |
-| Storybook story | `storybook/primitives/{snake}.story.exs` |
 | Nav | `docs/nav/primitives.exs` |
 | Engine | `docs/ENGINE.md` |
 | API friction | `docs/API_FRICTION.md` |
@@ -117,14 +116,9 @@ Preview injects **canvas** + **component** `<style>` tags. CSS tab shows **compo
 - Keep multiline-hostile attrs single-line; use slots for structured lists (`:part`, `:item`, `:row`).
 - Frontmatter is flat `key: value` only (no nested YAML).
 
-## Storybook vs docs
+## HEEx tab source
 
-| Task | Touch |
-|------|--------|
-| Docs page / Demo* CSS / nav | Always for this skill |
-| `storybook/primitives/{snake}.story.exs` | Update when keeping Storybook demos in sync with Demo* class names; HEEx tab may fall back to the story template if `<:heex>` has no `code=` |
-
-Prefer explicit live markup in `<:heex>`; pass `code={~S|…|}` only when the tab source should differ from the live tree.
+Prefer explicit live markup in `<:heex>`; pass `code={~S|…|}` so the HEEx tab shows copy-pasteable source.
 
 ## Nav
 

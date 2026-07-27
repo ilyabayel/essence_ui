@@ -11,7 +11,7 @@
 | `classNames('rt-reset', 'rt-Foo', …)` | list → join / class list on part |
 | `asChild` / Slot | Elixir: compose parts explicitly; utilities in `lib/essence_ui/utilities/` |
 | `_internal/base-*.css` | Shared `rt-Base*` classes in `assets/css/components/` / styles |
-| Theme provider `data-*` | Storybook themes container / `EssenceUI.Components.Theme` |
+| Theme provider `data-*` | Docs theme chrome / `EssenceUI.Components.Theme` |
 
 ### Where to read upstream
 
@@ -51,17 +51,16 @@ Note: Themes Dialog API friction is logged as F5 in `docs/API_FRICTION.md` — a
 
 Utilities (`accessible_icon`, `slot`, `visually_hidden`) live under `lib/essence_ui/utilities/` and are re-exported on `EssenceUI.Components`.
 
-## Storybook / tests paths
+## Docs / tests paths
 
 | Artifact | Path |
 |----------|------|
-| Primitive story | `storybook/primitives/<name>.story.exs` — container `essence-demo` + `data-component` |
-| Themes story | `storybook/themes/components/<name>.story.exs` — theme `data-*` only |
-| Legacy story mirror | `storybook/components/` — prefer themes path for new work |
+| Primitive docs | `docs/content/primitives/components/<name>.md` — `essence-demo` + `data-component` |
+| Themes docs | `docs/content/themes/components/<name>.md` — theme `data-*` via demo chrome |
 | ExUnit themed | `test/essence_ui/components/<name>_test.exs` |
 | ExUnit primitive | `test/essence_ui/primitives/<name>_test.exs` |
 | Playwright | `assets/test/<name>.spec.js` |
-| Helpers | `assets/test/helpers/story.js`, `a11y.js` |
+| Helpers | `assets/test/helpers/docs.js`, `a11y.js` |
 
 ## Facade
 
@@ -69,7 +68,7 @@ Public Themes API is `EssenceUI.Components` via `defdelegate` in `lib/essence_ui
 
 ## Visual polish checklist
 
-- [ ] Default size/variant matches Radix Themes story
+- [ ] Default size/variant matches Radix Themes docs
 - [ ] Color prop remaps accent (inspect `data-accent-color` + computed `--accent-*`)
 - [ ] Disabled / high-contrast look correct
 - [ ] Focus ring uses theme focus tokens

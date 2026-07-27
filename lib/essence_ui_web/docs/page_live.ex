@@ -15,6 +15,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
   alias EssenceUI.Primitives.AspectRatio, warn: false
   alias EssenceUI.Primitives.Avatar, warn: false
   alias EssenceUI.Primitives.Checkbox, warn: false
+  alias EssenceUI.Primitives.CheckboxGroup, warn: false
   alias EssenceUI.Primitives.Collapsible, warn: false
   alias EssenceUI.Primitives.ContextMenu, warn: false
   alias EssenceUI.Primitives.Dialog, warn: false

@@ -49,7 +49,7 @@ _(none — all listed public primitives covered)_
 Each primitive needs:
 
 - `EssenceUI.Primitives.<Name>` API matching public compound parts where practical.
-- A primitive Storybook example.
+- A primitive docs demo.
 - ExUnit render coverage.
 - Browser coverage for hook-backed keyboard, focus, dismissal, typeahead, or form behavior.
 

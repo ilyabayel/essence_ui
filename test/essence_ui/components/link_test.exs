@@ -30,13 +30,13 @@ defmodule EssenceUI.Components.LinkTest do
           import EssenceUI.Components
 
           ~H"""
-          <.es_link href="/getting_started" color="gray">Storybook</.es_link>
+          <.es_link href="/primitives/docs/overview/getting-started" color="gray">Docs</.es_link>
           """
         end,
         %{}
       )
 
-    assert html =~ ~s(href="/getting_started")
-    assert html =~ "Storybook"
+    assert html =~ ~s(href="/primitives/docs/overview/getting-started")
+    assert html =~ "Docs"
   end
 end

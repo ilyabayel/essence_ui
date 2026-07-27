@@ -1,12 +1,9 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive } from "./helpers/docs.js";
 
 test.describe("Separator Primitive", () => {
-  /** Separator story uses Storybook iframe container. */
   function demo(page) {
-    return page
-      .frameLocator('iframe[id*="separator"]')
-      .locator('.essence-demo[data-component="separator"]');
+    return page.locator('.essence-demo[data-component="separator"]');
   }
 
   test.beforeEach(async ({ page }) => {

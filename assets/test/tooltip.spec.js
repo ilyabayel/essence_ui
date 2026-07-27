@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { gotoPrimitive } from "./helpers/story.js";
+import { gotoPrimitive, gotoTheme } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 test.describe("Tooltip Primitive", () => {
@@ -54,15 +54,7 @@ test.describe("Tooltip Primitive", () => {
 
 test.describe("Tooltip Themes", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/storybook/themes/components/tooltip?variation_id=default");
-    await page.waitForLoadState("domcontentloaded");
-    await page.waitForFunction(() => {
-      const hooks = Array.from(document.querySelectorAll("[phx-hook]")).filter(
-        (el) => !el.id?.startsWith("psb-"),
-      );
-      if (hooks.length === 0) return true;
-      return hooks.every((el) => el.hasAttribute("data-phx-id"));
-    });
+    await gotoTheme(page, "tooltip");
     await expect(
       page.locator(".rt-TooltipRoot[data-hydrated]").first(),
     ).toBeVisible();
@@ -82,7 +74,7 @@ test.describe("Tooltip Themes", () => {
     await button.hover();
     await expect(content).toBeVisible({ timeout: 2000 });
     await expect(content).toHaveAttribute("data-state", "delayed-open");
-    await expect(content).toContainText("This is a tooltip");
+    await expect(content).toContainText("Add to library");
 
     await page.mouse.move(0, 0);
     await expect(content).toBeHidden();

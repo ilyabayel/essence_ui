@@ -1,8 +1,6 @@
 defmodule EssenceUIWeb.Router do
   use EssenceUIWeb, :router
 
-  import PhoenixStorybook.Router
-
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -27,12 +25,7 @@ defmodule EssenceUIWeb.Router do
   end
 
   scope "/" do
-    storybook_assets()
-  end
-
-  scope "/" do
     pipe_through(:browser)
-    live_storybook("/storybook", backend_module: EssenceUIWeb.Storybook)
   end
 
   scope "/crm", EssenceUIWeb do

@@ -1,6 +1,6 @@
 # Essence UI Docs Engine
 
-Custom documentation site (Radix-inspired) that replaces Phoenix Storybook for developer docs.
+Custom documentation site (Radix-inspired) hosted as Phoenix LiveView + MDEx.
 
 ## Decisions
 
@@ -8,8 +8,7 @@ Custom documentation site (Radix-inspired) that replaces Phoenix Storybook for d
 |--------|--------|
 | Authoring | Markdown + embedded HEEx (`MDEx` phoenix_heex) |
 | Scope | Unified Themes + Primitives in one site |
-| Hosting | Phoenix LiveView at `/docs` |
-| Migration | Parallel with Storybook, then cut over |
+| Hosting | Phoenix LiveView at `/themes/docs`, `/primitives/docs`, `/colors/docs` |
 
 ## Goals
 
@@ -24,7 +23,7 @@ Custom documentation site (Radix-inspired) that replaces Phoenix Storybook for d
 ```
 docs/
   ENGINE.md                 # this file
-  nav.exs                   # sidebar IA
+  nav/*.exs                 # sidebar IA per section
   content/**/*.md           # pages (frontmatter + Markdown/HEEx)
 
 lib/essence_ui_web/docs/
@@ -36,7 +35,7 @@ lib/essence_ui_web/docs/
 ```mermaid
 flowchart LR
   MD["docs/content/*.md"] --> Catalog["Docs.Catalog"]
-  Nav["docs/nav.exs"] --> Catalog
+  Nav["docs/nav/*.exs"] --> Catalog
   Catalog --> Live["Docs.PageLive"]
   Live --> MDEx["MDEx.to_heex!"]
   MDEx --> Demo["Docs.Components"]
@@ -79,7 +78,7 @@ Frontmatter is simple `key: value` lines (no nested YAML). Body is Markdown with
 | `<.keyboard_table>` | Accessibility keyboard interactions |
 | `<.code_block>` | Standalone highlighted snippet |
 
-Primitives demos set `theme="light"` (docs CSS has no dark theme), `variant="primitive"`, `component="…"`, and `css={primitive_css("…")}`. The CSS tab shows the component stylesheet only (no demo canvas). The preview injects canvas + component CSS via `<style>` tags; `Demo*` class names keep demo styles from clashing. Pass `code` on `<:heex>` to override the HEEx tab; otherwise HEEx falls back to the storybook template.
+Primitives demos set `theme="light"` (docs CSS has no dark theme), `variant="primitive"`, `component="…"`, and `css={primitive_css("…")}`. The CSS tab shows the component stylesheet only (no demo canvas). The preview injects canvas + component CSS via `<style>` tags; `Demo*` class names keep demo styles from clashing. Pass `code` on `<:heex>` for the HEEx tab source.
 
 ### Routing
 
@@ -90,43 +89,9 @@ Primitives demos set `theme="light"` (docs CSS has no dark theme), `variant="pri
 | `/primitives` · `/primitives/docs/*` | Primitives marketing + docs |
 | `/colors` · `/colors/docs/*` | Colors explorer + docs |
 | `/themes/playground` | ThemePanel playground |
-| `/storybook` | Storybook (internal until catalog parity) |
 | `/crm` | Recruiting CRM example |
 
 Content lives under `docs/content/{themes,primitives,colors}/` with nav in `docs/nav/*.exs`.
-
-## Migration plan
-
-### Phase 0 — Engine (this PR)
-
-- Catalog + PageLive + docs chrome
-- Sample pages: Getting started, Button (themes), Dialog (primitives)
-- Storybook remains at `/`
-
-### Phase 1 — Overview & Theme guides
-
-Migrate Getting Started fully; add Styling, Layout, Theme overview (Radix Themes docs IA).
-
-### Phase 2 — Themes catalog
-
-For each `storybook/themes/**/*.story.exs` → `docs/content/{section}/{name}.md` with demos + props tables. Port Variation/VariationGroup examples as `<.demo>` blocks.
-
-### Phase 3 — Primitives catalog
-
-Same for `storybook/primitives/*.story.exs`, using `variant="primitive"` demos (`.essence-demo` canvas).
-
-**Done:** Overview (Introduction, Getting started, Accessibility), Guides (Styling, Animation, Composition, SSR), all component pages, Utilities (Accessible Icon, Direction Provider, Slot, Visually Hidden). Component pages follow Radix section order: hero demo → highlights → anatomy → API (all parts) → examples → accessibility → custom APIs where applicable, with full Radix example parity (Essence-supported examples translated to HEEx; React-only / unsupported APIs omitted). Skip Releases changelog and Portal utility (no standalone module).
-
-### Phase 4 — Examples
-
-Port `storybook/examples/*` and decide CRM: keep `/crm` LiveView, link from Examples; drop duplicate story if redundant.
-
-### Phase 5 — Cutover
-
-1. Move Storybook to `/storybook` (or remove)
-2. Point `/` → `/docs`
-3. Retarget Playwright helpers (`gotoPrimitive` → `/docs/primitives/...`)
-4. Remove `phoenix_storybook` dep + `storybook/` tree when parity is done
 
 ## Dogfooding
 
@@ -160,7 +125,7 @@ Prefer Markdown fenced code for static snippets, single-line `heex={~s[...]}` fo
 ## Authoring rules
 
 1. One job per page; lead with a short description, then demos, then API
-2. Use `<.demo>` with `<:heex>` (live markup); pass `code` on the slot when the HEEx tab source should differ from the storybook fallback
+2. Use `<.demo>` with `<:heex>` (live markup); pass `code` on the slot for the HEEx tab
 3. Primitives: `theme="light" variant="primitive" component="…" css={primitive_css("…")}` — lock light theme (docs CSS has no dark); CSS is an argument (not a slot); component CSS only in the CSS tab; preview uses `Demo*` classes + injected `<style>`
 4. Import nothing in Markdown — `PageLive` imports docs helpers + `EssenceUI.Components` + **all** `EssenceUI.Primitives.*` aliases
 5. Keep nav in `docs/nav/primitives.exs` (and siblings) in sync when adding pages
@@ -170,9 +135,9 @@ Prefer Markdown fenced code for static snippets, single-line `heex={~s[...]}` fo
 
 ## Success criteria
 
-- [x] `/docs` renders Markdown with live Essence UI components
-- [x] Demo shows HEEx (and optional CSS) beside preview
+- [x] Docs render Markdown with live Essence UI components
+- [x] Demo shows HEEx (and optional CSS) beside preview when `code=` / `css=` provided
 - [x] Props table generated from `attr`
 - [x] Mobile-first layout (topbar + drawer; desktop sidebar)
-- [x] All Storybook primitive stories have docs equivalents (Overview + Guides + Components + Utilities)
-- [ ] Storybook removed; E2E green against `/docs`
+- [x] Themes + Primitives catalogs hosted on MDEx/LiveView docs
+- [x] Playwright e2e targets `/primitives/docs` and `/themes/docs`

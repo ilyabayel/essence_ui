@@ -21,7 +21,7 @@ const SKIP_DIRS = new Set([
   "scripts", // this file mentions forbidden strings
 ]);
 
-const ROOTS = ["lib", "test", "storybook", "docs", "assets/js", "assets/css", "assets/test", ".cursor/skills"];
+const ROOTS = ["lib", "test", "docs", "assets/js", "assets/css", "assets/test", ".cursor/skills"];
 
 function shouldSkip(path) {
   const rel = relative(root, path);

@@ -403,7 +403,7 @@ export const DropdownMenuRoot = {
     document.body.style.overflow = "hidden";
     document.documentElement.style.overflow = "hidden";
 
-    // Storybook (and many apps) scroll an inner container, not body — so also
+    // Apps may scroll an inner container, not body — so also
     // block wheel/touch outside the open menu layers.
     this._onScrollBlock = (event) => {
       const target = event.target;

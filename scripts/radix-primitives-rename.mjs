@@ -27,7 +27,6 @@ const SKIP_DIRS = new Set([
 const ROOTS = [
   "lib",
   "test",
-  "storybook",
   "docs",
   "assets/js",
   "assets/css",

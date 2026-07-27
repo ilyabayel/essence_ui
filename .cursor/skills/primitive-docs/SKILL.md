@@ -36,8 +36,7 @@ Stop before writing if any gate fails.
    | 3 | `lib/essence_ui/primitives/{snake}.ex` (`alert-dialog` → `alert_dialog.ex`) |
    | 4 | `docs/content/primitives/components/{name}.md` if it exists |
    | 5 | `assets/css/primitives/{name}.css` |
-   | 6 | `storybook/primitives/{snake}.story.exs` (HEEx fallback / parity) |
-   | 7 | `docs/ENGINE.md` authoring section |
+   | 6 | `docs/ENGINE.md` authoring section |
 
 3. **Props truth.** Only document attrs that exist on `EssenceUI.Primitives.*`
    (module source or `<.props_table>`). Translate Radix *ideas*; never paste
@@ -91,7 +90,7 @@ Gold refs: `docs/content/primitives/components/dialog.md`, `accordion.md`.
 6. **`## API Reference`** — per part: short prose, `<.props_table>`, then
    `<.data_attributes_table>` / CSS variables when Radix documents them **and**
    Essence exposes them
-7. **`## Examples`** — real translated examples from Radix (not “see storybook”).
+7. **`## Examples`** — real translated examples from Radix.
    Prefer extra `<.demo>` when interactive; else fenced `heex` / `css`
 8. **`## Accessibility`** — ARIA link + `<.keyboard_table>` from Radix keyboard section
 

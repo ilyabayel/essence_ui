@@ -3,7 +3,7 @@ name: themed-from-primitives
 description: >-
   Build or refactor Essence UI themed components that wrap headless primitives
   (Radix Themes pattern): ExtractProps, SharedProps, rt-* classes,
-  data-accent-color, ExUnit regression + Playwright e2e, Storybook polish.
+  data-accent-color, ExUnit regression + Playwright e2e, docs polish.
   Use when wrapping a primitive in Components.*, converting a parallel themed
   implementation to reuse Primitives.*, or when the user mentions themed from
   primitives, Themes wrapper, or rt-* on a primitive root.
@@ -24,7 +24,7 @@ Canonical wrappers today: `switch`, `checkbox`, `select`, `accordion`, `context_
 
 Deeper maps / gaps / Radix paths: [reference.md](reference.md).
 
-Related: [phoenix-storybook](../phoenix-storybook/SKILL.md), [liveview-tests](../liveview-tests/SKILL.md).
+Related: [themes-docs](../themes-docs/SKILL.md), [primitive-docs](../primitive-docs/SKILL.md), [liveview-tests](../liveview-tests/SKILL.md).
 
 ## Workflow (TDD + polish)
 
@@ -33,10 +33,10 @@ Do in this order. Do not skip tests.
 ```
 1. Read Radix Themes wrapper for the same component in .radix-ui/
 2. Write ExUnit regression tests for the themed API (rt-*, props, primitive hooks)
-3. Write / extend Playwright e2e against themes storybook
+3. Write / extend Playwright e2e against themes docs pages
 4. Implement or refactor Components.* to wrap Primitives.*
 5. Run mix test + Playwright; fix until green
-6. Screenshot Storybook themes story; iterate CSS/markup until polished
+6. Screenshot themes docs page; iterate CSS/markup until polished
 ```
 
 ### 1. Study Radix Themes source
@@ -79,8 +79,8 @@ Use [liveview-tests](../liveview-tests/SKILL.md) for `render_component` details.
 
 ### 3. Playwright e2e (themes)
 
-- Primitive specs: `assets/test/<name>.spec.js` + `gotoPrimitive` → `/storybook/primitives/…`
-- Themed specs: prefer themes path `/storybook/themes/components/<name>` (or extend helpers; `gotoComponent` currently hits legacy `/storybook/components/`)
+- Primitive specs: `assets/test/<name>.spec.js` + `gotoPrimitive` → `/primitives/docs/…`
+- Themed specs: `gotoTheme` → `/themes/docs/components/<name>`
 
 Cover interaction + `expectNoA11yViolations`. Keep selectors stable (roles, `data-testid` only if already used).
 
@@ -131,7 +131,7 @@ Checklist:
 **Do not:**
 
 - Duplicate `phx-hook` / state logic already in the primitive
-- Mix `essence-demo` with theme `data-*` on the same story container
+- Mix `essence-demo` with theme `data-*` on the same docs demo container
 - Change the public Themes API unless aligning to Radix Themes (note friction in `docs/API_FRICTION.md`)
 
 ### 5. Run until green
@@ -142,11 +142,11 @@ mix test test/essence_ui/components/<name>_test.exs
 npm --prefix assets run test:e2e -- <name>.spec.js   # or full suite
 ```
 
-Fix failures at the layer they belong to (primitive vs themes styles vs story).
+Fix failures at the layer they belong to (primitive vs themes styles vs docs).
 
 ### 6. Screenshots + polish
 
-1. `mix phx.server` → `/storybook/themes/components/<name>`
+1. `mix phx.server` → `/themes/docs/components/<name>`
 2. Capture default + key variants (size, variant, color, disabled)
 3. Compare to Radix Themes docs / `.radix-ui/themes` visuals
 4. Iterate CSS or class stacking only — keep primitive markup intact

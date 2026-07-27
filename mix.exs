@@ -55,7 +55,6 @@ defmodule EssenceUI.MixProject do
       {:phoenix_live_dashboard, "~> 0.8.7"},
       {:phoenix_live_reload, "~> 1.6", only: :dev},
       {:phoenix_live_view, "~> 1.1.8"},
-      {:phoenix_storybook, "~> 1.3"},
       # makeup_syntect 0.1.4 requires ~> 0.8.2; mdex_native allows ~> 0.8
       {:rustler_precompiled, "~> 0.8.2", override: true},
       {:styler, "~> 1.7"},

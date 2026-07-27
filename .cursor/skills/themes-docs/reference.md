@@ -10,7 +10,6 @@
 | Essence module | `lib/essence_ui/components/{snake}.ex` |
 | Utilities (Inset, etc.) | `lib/essence_ui/utilities/{snake}.ex` (re-exported on `EssenceUI.Components`) |
 | Docs page | `docs/content/themes/components/{name}.md` |
-| Storybook story | `storybook/themes/components/{snake}.story.exs` |
 | Nav | `docs/nav/themes.exs` |
 | Engine | `docs/ENGINE.md` |
 | API friction | `docs/API_FRICTION.md` |

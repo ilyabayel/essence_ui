@@ -209,6 +209,6 @@ The hook is automatically integrated when you add the component to your applicat
 ## Notes
 
 - The component requires the CSS from `assets/css/components/checkbox-cards.css` which is already included
-- The JavaScript hook is in `assets/js/hooks/checkbox_cards.js` and registered in `storybook.js`
+- The JavaScript hook is in `assets/js/hooks/checkbox_cards.js` and registered in `app.js`
 - Checkbox state is managed client-side for immediate feedback
 - Default checked values are set via the `default_value` prop on the root component

@@ -24,6 +24,7 @@
       %{title: "Aspect Ratio", path: "components/aspect-ratio"},
       %{title: "Avatar", path: "components/avatar"},
       %{title: "Checkbox", path: "components/checkbox"},
+      %{title: "Checkbox Group", path: "components/checkbox-group"},
       %{title: "Collapsible", path: "components/collapsible"},
       %{title: "Context Menu", path: "components/context-menu"},
       %{title: "Dialog", path: "components/dialog"},

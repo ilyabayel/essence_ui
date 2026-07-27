@@ -37,8 +37,7 @@ Stop before writing if any gate fails.
    | 2 | `.radix-ui/themes/packages/radix-ui-themes/src/components/{snake}.*` (props/CSS if needed) |
    | 3 | `lib/essence_ui/components/{snake}.ex` (`text-field` → `text_field.ex`) |
    | 4 | `docs/content/themes/components/{name}.md` if it exists |
-   | 5 | `storybook/themes/components/{snake}.story.exs` (HEEx fallback / parity) |
-   | 6 | `docs/ENGINE.md` authoring section |
+   | 5 | `docs/ENGINE.md` authoring section |
 
 3. **Props truth.** Only document attrs that exist on `EssenceUI.Components.*`
    (module source or `<.props_table>`). Translate Radix *ideas*; never paste
@@ -57,7 +56,7 @@ Themes docs:
 - [ ] Essence Components.* attrs verified
 - [ ] Page sections complete (order below)
 - [ ] Hero + Examples are Essence HEEx (Radix-translated)
-- [ ] Unsupported Radix examples omitted (not stubbed with “see storybook”)
+- [ ] Unsupported Radix examples omitted (not stubbed)
 - [ ] Nav updated if new page
 - [ ] Browser check: page loads; hero demo works
 ```
@@ -102,7 +101,7 @@ Gold refs: `docs/content/themes/components/button.md`, `select.md`, `card.md`.
   + docs helpers.
 - MDEx: no `"""` in attrs; use `~s[...]` / `~S|...|`; keep complex attrs single-line.
 - Icons: inline Lucide-style SVG (no Radix Icons package). Prefer patterns from
-  `storybook/themes/components/*.story.exs`.
+  existing `docs/content/themes/components/*.md` demos.
 - **Text has no margin props** — use `Flex`/`Box` spacing (`gap`, `mt` on Box).
 - Unique `id`s for every Select/Dialog/interactive demo on the page.
 
