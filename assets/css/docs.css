@@ -317,6 +317,17 @@ body:has(.docs-shell) {
   gap: 0.75rem;
 }
 
+/* Layout roots need full preview width; otherwise flex shrink-to-fit
+   collapses Box/Container/Section demos to a hairline. */
+.docs-demo__preview > .est-Box,
+.docs-demo__preview > .est-Flex,
+.docs-demo__preview > .est-Grid,
+.docs-demo__preview > .est-Container,
+.docs-demo__preview > .est-Section {
+  width: 100%;
+  min-width: 0;
+}
+
 .docs-demo__source {
   border-top: 1px solid var(--gray-a5);
   max-width: 100%;

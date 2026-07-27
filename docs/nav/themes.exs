@@ -12,6 +12,16 @@
     ]
   },
   %{
+    title: "Layout",
+    items: [
+      %{title: "Box", path: "components/box"},
+      %{title: "Flex", path: "components/flex"},
+      %{title: "Grid", path: "components/grid"},
+      %{title: "Container", path: "components/container"},
+      %{title: "Section", path: "components/section"}
+    ]
+  },
+  %{
     title: "Components",
     items: [
       %{title: "Button", path: "components/button"},

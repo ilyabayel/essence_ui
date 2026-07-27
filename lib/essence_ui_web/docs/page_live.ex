@@ -7,6 +7,7 @@ defmodule EssenceUIWeb.Docs.PageLive do
   import EssenceUIWeb.Docs.Components, warn: false
   import EssenceUIWeb.Components.SiteHeader
   import EssenceUIWeb.Components.SiteFooter
+  import EssenceUIWeb.DecorationBox, warn: false
 
   alias EssenceUI.Primitives.AccessibleIcon, warn: false
   alias EssenceUI.Primitives.Accordion, warn: false

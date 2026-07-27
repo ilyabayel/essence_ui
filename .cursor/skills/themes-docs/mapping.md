@@ -46,6 +46,15 @@ not a guarantee every prop exists.
 | `Inset` | `<.inset>` (`EssenceUI.Utilities.Inset`) |
 | Icons (`BookmarkIcon`) | Inline SVG |
 
+## Layout demos
+
+| Radix | Essence |
+|-------|---------|
+| `<DecorativeBox />` | `<.decoration_box />` (`EssenceUIWeb.DecorationBox`, imported in `PageLive`) |
+| Responsive maps `{ initial, md }` | `%{initial: "1", md: "2"}` (atom keys) |
+| Section `size` | CSS exists; Elixir `size` attr not wired — use `py` / padding until fixed |
+| Full-bleed layout heroes | Outer root needs `width="100%"` (or rely on `.docs-demo__preview > .est-Box` etc. rule in `docs.css`) — preview is a flex row and otherwise shrink-to-fits to a hairline |
+
 ## Omit or adapt
 
 | Radix example | Action |

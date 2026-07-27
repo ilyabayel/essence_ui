@@ -62,7 +62,11 @@ Use the `size` prop to control the size.
 </.demo>
 ```
 
-Gold pages: `button.md`, `card.md`, `select.md`, `text-field.md`, `dialog.md`.
+Gold pages: `button.md`, `card.md`, `select.md`, `text-field.md`, `dialog.md`,
+plus Layout: `box.md`, `flex.md`, `grid.md`, `container.md`, `section.md`.
+
+Layout demos use `<.decoration_box>` from `EssenceUIWeb.DecorationBox`
+(imported in `PageLive`).
 
 ## Nav IA (Radix-aligned)
 
