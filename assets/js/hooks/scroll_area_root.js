@@ -146,6 +146,24 @@ export const ScrollAreaRoot = {
     // Match Themes: enable scroll only on axes that have a scrollbar part.
     this.viewport.style.overflowX = this.horizontalScrollbar ? "scroll" : "hidden";
     this.viewport.style.overflowY = this.verticalScrollbar ? "scroll" : "hidden";
+    // Match Radix Primitives ScrollAreaViewportStyle — hide native scrollbar so
+    // only the custom thumb is visible.
+    this.ensureNativeScrollbarHidden();
+  },
+
+  ensureNativeScrollbarHidden() {
+    if (!this.viewport) return;
+    this.viewport.style.scrollbarWidth = "none";
+    this.viewport.style.msOverflowStyle = "none";
+    this.viewport.style.webkitOverflowScrolling = "touch";
+
+    const styleId = "radix-scroll-area-viewport-hide";
+    if (document.getElementById(styleId)) return;
+    const style = document.createElement("style");
+    style.id = styleId;
+    style.textContent =
+      "[data-radix-scroll-area-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-scroll-area-viewport]::-webkit-scrollbar{display:none}";
+    document.head.appendChild(style);
   },
 
   positionScrollbars() {

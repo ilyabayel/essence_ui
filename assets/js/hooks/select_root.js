@@ -4,6 +4,8 @@
  * Handles click events to toggle the select menu, item selection, 
  * keyboard navigation, and positions it relative to the trigger.
  */
+import { getFixedContainingBlockOffset } from "../lib/position";
+
 export const SelectRoot = {
   mounted() {
     this.init();
@@ -135,6 +137,12 @@ export const SelectRoot = {
     if (left < 4) left = 4;
     if (top < 4) top = 4;
 
+    // Convert viewport coords → containing-block coords (transform ancestors).
+    const cb = getFixedContainingBlockOffset(this.content);
+    top -= cb.top;
+    left -= cb.left;
+
+    this.content.style.position = "fixed";
     this.content.style.top = `${top}px`;
     this.content.style.left = `${left}px`;
     this.content.style.minWidth = `${tRect.width}px`;
@@ -167,6 +175,11 @@ export const SelectRoot = {
       top = viewportHeight - cRect.height - 4;
     }
 
+    const cb = getFixedContainingBlockOffset(this.content);
+    top -= cb.top;
+    left -= cb.left;
+
+    this.content.style.position = "fixed";
     this.content.style.top = `${top}px`;
     this.content.style.left = `${left}px`;
     this.content.style.minWidth = `${tRect.width}px`;
