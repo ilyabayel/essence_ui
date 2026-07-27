@@ -1,7 +1,6 @@
 defmodule EssenceUI.Components.Quote do
   @moduledoc """
-  Quote component 100% compatible with Radix UI Themes Quote API.
-  See: https://www.radix-ui.com/themes/docs/components/quote
+  Themed inline quotation.
   """
 
   use Phoenix.Component
@@ -13,7 +12,7 @@ defmodule EssenceUI.Components.Quote do
   require TruncateProps
 
   @doc """
-  Renders a short inline quotation. All props match Radix UI Quote.
+  Renders a short inline quotation.
 
   ## Examples
 

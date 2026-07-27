@@ -220,12 +220,12 @@ Contains the collapsible content for an item.
   <:row name="[data-orientation]" values={"vertical | horizontal"}>The orientation of the accordion.</:row>
 </.data_attributes_table>
 
-Essence exposes Radix-compatible CSS variables on content for size animations:
+Essence exposes CSS variables on content for size animations:
 
 | CSS variable | Description |
 | --- | --- |
-| `--radix-accordion-content-width` | The width of the content when it opens/closes |
-| `--radix-accordion-content-height` | The height of the content when it opens/closes |
+| `--essence-accordion-content-width` | The width of the content when it opens/closes |
+| `--essence-accordion-content-height` | The height of the content when it opens/closes |
 
 ## Examples
 
@@ -297,7 +297,7 @@ Use the `orientation` prop to create a horizontal accordion.
 
 ### Animating content size
 
-Use the `--radix-accordion-content-width` and/or `--radix-accordion-content-height` CSS variables to animate the size of the content when it opens/closes:
+Use the `--essence-accordion-content-width` and/or `--essence-accordion-content-height` CSS variables to animate the size of the content when it opens/closes:
 
 ```heex
 <Accordion.content id="item-1-content" trigger_id="item-1-trigger" class="DemoAccordionContent">
@@ -318,11 +318,11 @@ Use the `--radix-accordion-content-width` and/or `--radix-accordion-content-heig
 
 @keyframes slideDown {
   from { height: 0; }
-  to { height: var(--radix-accordion-content-height); }
+  to { height: var(--essence-accordion-content-height); }
 }
 
 @keyframes slideUp {
-  from { height: var(--radix-accordion-content-height); }
+  from { height: var(--essence-accordion-content-height); }
   to { height: 0; }
 }
 ```

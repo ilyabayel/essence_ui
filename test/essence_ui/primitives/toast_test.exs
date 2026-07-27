@@ -25,7 +25,7 @@ defmodule EssenceUI.Primitives.ToastTest do
     assert html =~ ~s[data-label="Alert"]
   end
 
-  test "renders radix-like root with open state and hook" do
+  test "renders root with open state and hook" do
     html =
       render_component(
         fn assigns ->

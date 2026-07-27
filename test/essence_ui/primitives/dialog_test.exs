@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.DialogTest do
 
   alias EssenceUI.Primitives.Dialog
 
-  test "renders radix-like dialog parts" do
+  test "renders dialog parts" do
     html =
       render_component(
         fn assigns ->

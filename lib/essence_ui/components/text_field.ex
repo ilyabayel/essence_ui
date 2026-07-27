@@ -1,6 +1,6 @@
 defmodule EssenceUI.Components.TextField do
   @moduledoc """
-  TextField component compatible with Radix UI Themes Text Field API.
+  Themed text field with sizes, variants, and accent colors.
 
   Supports size, variant, accent color, disabled/read-only states, and optional left/right slots.
   """

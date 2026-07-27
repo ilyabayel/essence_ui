@@ -3,20 +3,20 @@
 @import "@radix-ui/colors/mauve.css";
 @import "@radix-ui/colors/violet.css";
 
-.radix-demo[data-component="tabs"] .TabsRoot {
+.essence-demo[data-component="tabs"] .TabsRoot {
 	display: flex;
 	flex-direction: column;
 	width: 300px;
 	box-shadow: 0 2px 10px var(--black-a4);
 }
 
-.radix-demo[data-component="tabs"] .TabsList {
+.essence-demo[data-component="tabs"] .TabsList {
 	flex-shrink: 0;
 	display: flex;
 	border-bottom: 1px solid var(--mauve-6);
 }
 
-.radix-demo[data-component="tabs"] .TabsTrigger {
+.essence-demo[data-component="tabs"] .TabsTrigger {
 	font-family: inherit;
 	background-color: white;
 	padding: 0 20px;
@@ -30,27 +30,27 @@
 	color: var(--mauve-11);
 	user-select: none;
 }
-.radix-demo[data-component="tabs"] .TabsTrigger:first-child {
+.essence-demo[data-component="tabs"] .TabsTrigger:first-child {
 	border-top-left-radius: 6px;
 }
-.radix-demo[data-component="tabs"] .TabsTrigger:last-child {
+.essence-demo[data-component="tabs"] .TabsTrigger:last-child {
 	border-top-right-radius: 6px;
 }
-.radix-demo[data-component="tabs"] .TabsTrigger:hover {
+.essence-demo[data-component="tabs"] .TabsTrigger:hover {
 	color: var(--violet-11);
 }
-.radix-demo[data-component="tabs"] .TabsTrigger[data-state="active"] {
+.essence-demo[data-component="tabs"] .TabsTrigger[data-state="active"] {
 	color: var(--violet-11);
 	box-shadow:
 		inset 0 -1px 0 0 currentColor,
 		0 1px 0 0 currentColor;
 }
-.radix-demo[data-component="tabs"] .TabsTrigger:focus {
+.essence-demo[data-component="tabs"] .TabsTrigger:focus {
 	position: relative;
 	box-shadow: 0 0 0 2px black;
 }
 
-.radix-demo[data-component="tabs"] .TabsContent {
+.essence-demo[data-component="tabs"] .TabsContent {
 	flex-grow: 1;
 	padding: 20px;
 	background-color: white;
@@ -58,11 +58,11 @@
 	border-bottom-right-radius: 6px;
 	outline: none;
 }
-.radix-demo[data-component="tabs"] .TabsContent:focus {
+.essence-demo[data-component="tabs"] .TabsContent:focus {
 	box-shadow: 0 0 0 2px black;
 }
 
-.radix-demo[data-component="tabs"] .Text {
+.essence-demo[data-component="tabs"] .Text {
 	margin-top: 0;
 	margin-bottom: 20px;
 	color: var(--mauve-11);
@@ -70,7 +70,7 @@
 	line-height: 1.5;
 }
 
-.radix-demo[data-component="tabs"] .Fieldset {
+.essence-demo[data-component="tabs"] .Fieldset {
 	margin-bottom: 15px;
 	width: 100%;
 	display: flex;
@@ -78,7 +78,7 @@
 	justify-content: flex-start;
 }
 
-.radix-demo[data-component="tabs"] .Label {
+.essence-demo[data-component="tabs"] .Label {
 	font-size: 13px;
 	line-height: 1;
 	margin-bottom: 10px;
@@ -87,7 +87,7 @@
 	user-select: none;
 }
 
-.radix-demo[data-component="tabs"] .Input {
+.essence-demo[data-component="tabs"] .Input {
 	flex: 1 0 auto;
 	border-radius: 4px;
 	padding: 0 10px;
@@ -97,11 +97,11 @@
 	box-shadow: 0 0 0 1px var(--violet-7);
 	height: 35px;
 }
-.radix-demo[data-component="tabs"] .Input:focus {
+.essence-demo[data-component="tabs"] .Input:focus {
 	box-shadow: 0 0 0 2px var(--violet-8);
 }
 
-.radix-demo[data-component="tabs"] .Button {
+.essence-demo[data-component="tabs"] .Button {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -112,13 +112,13 @@
 	font-weight: 500;
 	height: 35px;
 }
-.radix-demo[data-component="tabs"] .Button.green {
+.essence-demo[data-component="tabs"] .Button.green {
 	background-color: var(--green-4);
 	color: var(--green-11);
 }
-.radix-demo[data-component="tabs"] .Button.green:hover {
+.essence-demo[data-component="tabs"] .Button.green:hover {
 	background-color: var(--green-5);
 }
-.radix-demo[data-component="tabs"] .Button.green:focus {
+.essence-demo[data-component="tabs"] .Button.green:focus {
 	box-shadow: 0 0 0 2px var(--green-7);
 }

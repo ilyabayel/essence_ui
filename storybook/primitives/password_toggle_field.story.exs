@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.PasswordToggleFieldStory do
 
   def function, do: &PasswordToggleField.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "password-toggle-field"}
+  def container, do: {:div, class: "essence-demo", "data-component": "password-toggle-field"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.PasswordToggleFieldStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs password toggle field demo",
+        description: "Essence UI password toggle field demo",
         template: """
         <PasswordToggleField.root id="password-toggle-primitive">
           <div class="Root">

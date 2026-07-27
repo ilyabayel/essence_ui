@@ -1,6 +1,6 @@
 defmodule EssenceUI.Components.TextArea do
   @moduledoc """
-  TextArea component compatible with Radix UI Themes Text Area API.
+  Themed text area with sizes, variants, and accent colors.
   """
 
   use Phoenix.Component

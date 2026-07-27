@@ -1,8 +1,6 @@
 defmodule EssenceUI.Components.SegmentedControl do
   @moduledoc """
-  A SegmentedControl component for selecting one option from a group of related options.
-
-  Based on Radix UI Themes SegmentedControl component with support for various sizes, variants,
+  A SegmentedControl component for selecting one option from a group of related options with support for various sizes, variants,
   and colors. The segmented control provides a tab-like interface for switching between
   mutually exclusive options.
 

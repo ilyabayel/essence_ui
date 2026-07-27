@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.TooltipStory do
 
   def function, do: &Tooltip.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "tooltip"}
+  def container, do: {:div, class: "essence-demo", "data-component": "tooltip"}
 
   def layout, do: :one_column
 

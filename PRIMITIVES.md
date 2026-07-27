@@ -1,6 +1,6 @@
 # EssenceUI Primitives Parity
 
-Target: Radix public docs API, implemented for Phoenix LiveView with small client hooks where native HTML and LiveView are not enough.
+Target: public primitives API for Phoenix LiveView with small client hooks where native HTML and LiveView are not enough.
 
 ## Implemented
 
@@ -42,13 +42,13 @@ Target: Radix public docs API, implemented for Phoenix LiveView with small clien
 
 ## Missing
 
-_(none — all listed Radix public primitives covered)_
+_(none — all listed public primitives covered)_
 
 ## Implementation Rule
 
 Each primitive needs:
 
-- `EssenceUI.Primitives.<Name>` API matching Radix public parts where practical.
+- `EssenceUI.Primitives.<Name>` API matching public compound parts where practical.
 - A primitive Storybook example.
 - ExUnit render coverage.
 - Browser coverage for hook-backed keyboard, focus, dismissal, typeahead, or form behavior.

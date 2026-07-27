@@ -1,8 +1,8 @@
 defmodule EssenceUI.Components.ContextMenu do
   @moduledoc """
-  Context Menu styled per Radix Themes Context Menu.
+  Themed context menu with trigger, content, and item subcomponents.
 
-  Wraps `EssenceUI.Primitives.ContextMenu` with Themes visual props
+  Wraps `EssenceUI.Primitives.ContextMenu` with themed visual props
   (`size`, `variant`, `color`, `high_contrast`, `shortcut`).
   """
   use Phoenix.Component
@@ -79,7 +79,7 @@ defmodule EssenceUI.Components.ContextMenu do
   end
 
   @doc """
-  The menu content. Portals into `container` (default `"body"`) like Radix Themes.
+  The menu content. Portals into `container` (default `"body"`).
   """
   attr :id, :string, default: nil
   attr :size, :string, values: @sizes, default: "2"

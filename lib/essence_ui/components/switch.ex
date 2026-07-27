@@ -1,8 +1,6 @@
 defmodule EssenceUI.Components.Switch do
   @moduledoc """
-  A Switch component for toggling between on/off states.
-
-  Based on Radix UI Themes Switch component with support for various sizes, variants,
+  A Switch component for toggling between on/off states with support for various sizes, variants,
   and colors. The switch provides visual feedback for boolean state changes
   and can be used in forms, settings panels, and interactive controls.
 

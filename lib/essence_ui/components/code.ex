@@ -2,7 +2,7 @@ defmodule EssenceUI.Components.Code do
   @moduledoc """
   The Code component marks text to signify a short fragment of computer code.
 
-  Based on Radix UI Themes Code component.
+  Themed Code component.
   """
 
   use Phoenix.Component

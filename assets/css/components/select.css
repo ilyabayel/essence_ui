@@ -42,9 +42,9 @@
     background-color: var(--color-panel-solid);
 
     &:where([data-side]) {
-        min-width: var(--radix-select-trigger-width);
-        max-height: var(--radix-select-content-available-height);
-        transform-origin: var(--radix-select-content-transform-origin);
+        min-width: var(--essence-select-trigger-width);
+        max-height: var(--essence-select-content-available-height);
+        transform-origin: var(--essence-select-content-transform-origin);
     }
 }
 

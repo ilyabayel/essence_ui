@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.ScrollAreaTest do
 
   alias EssenceUI.Primitives.ScrollArea
 
-  test "renders radix-like root, viewport, content, scrollbar, thumb, and corner" do
+  test "renders root, viewport, content, scrollbar, thumb, and corner" do
     html =
       render_component(
         fn assigns ->

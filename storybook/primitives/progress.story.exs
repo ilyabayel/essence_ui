@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.ProgressStory do
 
   def function, do: &Progress.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "progress"}
+  def container, do: {:div, class: "essence-demo", "data-component": "progress"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.ProgressStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs progress demo",
+        description: "Essence UI progress demo",
         template: """
         <Progress.root
           class="ProgressRoot"

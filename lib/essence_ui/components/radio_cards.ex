@@ -1,9 +1,7 @@
 defmodule EssenceUI.Components.RadioCards do
   @moduledoc """
-  A radio group component that displays radios as interactive cards.
-
-  Based on Radix UI Themes RadioCards component. Provides a card-based layout
-  for radio selections, with support for various sizes, variants, and colors.
+  A radio group component that displays radios as interactive cards,
+  with support for various sizes, variants, and colors.
 
   ## Examples
 
@@ -191,7 +189,7 @@ defmodule EssenceUI.Components.RadioCards do
       style={@style}
       tabindex="-1"
       disabled={@disabled}
-      data-radix-collection-item
+      data-essence-collection-item
       {@rest}
     >
       {render_slot(@inner_block)}

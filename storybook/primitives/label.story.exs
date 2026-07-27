@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.LabelStory do
 
   def function, do: &Label.label/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "label"}
+  def container, do: {:div, class: "essence-demo", "data-component": "label"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.LabelStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs label demo",
+        description: "Essence UI label demo",
         template: """
         <div style="display: flex; padding: 0 20px; flex-wrap: wrap; gap: 15px; align-items: center;">
           <Label.label

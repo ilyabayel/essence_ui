@@ -171,7 +171,7 @@ export const TooltipRoot = {
       const side = this.content.dataset.side || "top";
       const align = this.content.dataset.align || "center";
       const sideOffset = parseInt(this.content.dataset.sideOffset, 10) || 4;
-      // Radix Popper: offset mainAxis = sideOffset + arrowHeight
+      // Popper: offset mainAxis = sideOffset + arrowHeight
       const arrow = this.content.querySelector("[data-essence-tooltip-arrow]");
       const arrowHeight = arrow ? arrow.offsetHeight || 5 : 0;
 

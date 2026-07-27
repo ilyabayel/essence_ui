@@ -34,7 +34,7 @@ export const TabsRoot = {
     return this.triggers().filter((t) => !t.disabled && !t.hasAttribute("data-disabled"));
   },
 
-  /** Wire Radix-compatible ids / aria-controls / aria-labelledby / orientation. */
+  /** Wire ids / aria-controls / aria-labelledby / orientation. */
   wireAria() {
     const rootId = this.el.id;
     const orientation = this.el.dataset.orientation || "horizontal";
@@ -51,8 +51,8 @@ export const TabsRoot = {
       if (!trigger.id && rootId) trigger.id = `${rootId}-trigger-${value}`;
       if (rootId) trigger.setAttribute("aria-controls", `${rootId}-content-${value}`);
       trigger.dataset.orientation = orientation;
-      if (!trigger.hasAttribute("data-radix-collection-item")) {
-        trigger.setAttribute("data-radix-collection-item", "");
+      if (!trigger.hasAttribute("data-essence-collection-item")) {
+        trigger.setAttribute("data-essence-collection-item", "");
       }
     });
 

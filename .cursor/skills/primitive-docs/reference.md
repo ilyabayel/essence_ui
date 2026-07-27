@@ -82,7 +82,7 @@ Gold pages: `docs/content/primitives/components/dialog.md`, `accordion.md`.
 | Component | Use |
 |-----------|-----|
 | `<.demo>` | Live preview + HEEx/CSS tabs; `variant="primitive"` + `component` + `css={primitive_css(…)}` |
-| `primitive_css/1` | Loads `assets/css/primitives/{name}.css` only (no canvas); strips `@import` and `.radix-demo[data-component]` prefixes |
+| `primitive_css/1` | Loads `assets/css/primitives/{name}.css` only (no canvas); strips `@import` and `.essence-demo[data-component]` prefixes |
 | `<.highlights>` | Feature bullets |
 | `<.anatomy>` | Named parts |
 | `<.props_table>` | Attr table from `module.__components__()` |

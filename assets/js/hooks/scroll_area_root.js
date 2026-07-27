@@ -143,7 +143,7 @@ export const ScrollAreaRoot = {
 
   applyViewportOverflow() {
     if (!this.viewport) return;
-    // Match Radix: enable scroll only on axes that have a scrollbar part.
+    // Match Themes: enable scroll only on axes that have a scrollbar part.
     this.viewport.style.overflowX = this.horizontalScrollbar ? "scroll" : "hidden";
     this.viewport.style.overflowY = this.verticalScrollbar ? "scroll" : "hidden";
   },

@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.OneTimePasswordFieldStory do
 
   def function, do: &OneTimePasswordField.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "one-time-password-field"}
+  def container, do: {:div, class: "essence-demo", "data-component": "one-time-password-field"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.OneTimePasswordFieldStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs one-time password field demo",
+        description: "Essence UI one-time password field demo",
         template: """
         <OneTimePasswordField.root
           id="otp-primitive"

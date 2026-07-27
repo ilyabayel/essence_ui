@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.CheckboxStory do
 
   def function, do: &Checkbox.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "checkbox"}
+  def container, do: {:div, class: "essence-demo", "data-component": "checkbox"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.CheckboxStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs checkbox demo",
+        description: "Essence UI checkbox demo",
         template: """
         <form>
           <div style="display: flex; align-items: center;">

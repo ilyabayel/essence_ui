@@ -49,7 +49,7 @@ export const CheckboxRoot = {
       form.addEventListener("reset", this._onFormReset);
     }
 
-    // Measure size and apply to input (Radix logic)
+    // Measure size and apply to input (size sync)
     if (this.input) {
       this._resizeObserver = new ResizeObserver(() => {
         const rect = this.trigger.getBoundingClientRect();

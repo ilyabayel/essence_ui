@@ -2,8 +2,8 @@ defmodule EssenceUI.Components.Slider do
   @moduledoc """
   A Slider component for selecting values from a range.
 
-  Based on Radix UI Themes Slider component with support for various sizes, variants,
-  colors, and both single and range sliders. Wraps `EssenceUI.Primitives.Slider`.
+  Supports various sizes, variants, colors, and both single and range sliders.
+  Wraps `EssenceUI.Primitives.Slider`.
 
   ## Examples
 
@@ -130,7 +130,7 @@ defmodule EssenceUI.Components.Slider do
       |> Enum.join(" ")
 
     style =
-      [extracted.style, assigns[:style], "--radix-slider-thumb-transform: translateX(-50%);"]
+      [extracted.style, assigns[:style], "--essence-slider-thumb-transform: translateX(-50%);"]
       |> Enum.reject(&(is_nil(&1) or &1 == ""))
       |> Enum.join(" ")
 

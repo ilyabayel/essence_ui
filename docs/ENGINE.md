@@ -113,7 +113,7 @@ For each `storybook/themes/**/*.story.exs` → `docs/content/{section}/{name}.md
 
 ### Phase 3 — Primitives catalog
 
-Same for `storybook/primitives/*.story.exs`, using `variant="primitive"` demos (`.radix-demo` canvas).
+Same for `storybook/primitives/*.story.exs`, using `variant="primitive"` demos (`.essence-demo` canvas).
 
 **Done:** Overview (Introduction, Getting started, Accessibility), Guides (Styling, Animation, Composition, SSR), all component pages, Utilities (Accessible Icon, Direction Provider, Slot, Visually Hidden). Component pages follow Radix section order: hero demo → highlights → anatomy → API (all parts) → examples → accessibility → custom APIs where applicable, with full Radix example parity (Essence-supported examples translated to HEEx; React-only / unsupported APIs omitted). Skip Releases changelog and Portal utility (no standalone module).
 

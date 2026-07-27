@@ -27,7 +27,7 @@ export const SwitchRoot = {
 
     this._onKeyDown = (event) => {
       // Switches often toggle on Space or Enter (standard button behavior)
-      // but we should ensure it matches Radix/WAI-ARIA if needed.
+      // but we should ensure it matches WAI-ARIA if needed.
     };
 
     this.trigger.addEventListener('click', this._onClick);
@@ -42,7 +42,7 @@ export const SwitchRoot = {
       form.addEventListener('reset', this._onFormReset);
     }
 
-    // Measure size and apply to input (Radix logic)
+    // Measure size and apply to input (size sync)
     if (this.input) {
       this._resizeObserver = new ResizeObserver(() => {
         const rect = this.trigger.getBoundingClientRect();

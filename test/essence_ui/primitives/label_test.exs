@@ -5,7 +5,7 @@ defmodule EssenceUI.Primitives.LabelTest do
 
   alias EssenceUI.Primitives.Label
 
-  test "renders radix-like label" do
+  test "renders label" do
     html = render_component(&Label.label/1, %{for: "name", inner_block: []})
 
     assert html =~ ~s[<label]

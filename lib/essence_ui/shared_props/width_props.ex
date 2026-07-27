@@ -1,7 +1,7 @@
 defmodule EssenceUI.SharedProps.WidthProps do
   @moduledoc """
   Width prop definitions for Box and other components.
-  Inspired by Radix UI Themes.
+  Theme spacing props for Essence UI.
   """
 
   def prop_defs do

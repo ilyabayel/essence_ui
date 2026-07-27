@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.TabsTest do
 
   alias EssenceUI.Primitives.Tabs
 
-  test "renders radix-like root, list, trigger, and content" do
+  test "renders root, list, trigger, and content" do
     html =
       render_component(
         fn assigns ->
@@ -32,7 +32,7 @@ defmodule EssenceUI.Primitives.TabsTest do
     assert html =~ ~s[aria-orientation="horizontal"]
     assert html =~ ~s[role="tab"]
     assert html =~ ~s[data-essence-tabs-trigger]
-    assert html =~ ~s[data-radix-collection-item]
+    assert html =~ ~s[data-essence-collection-item]
     assert html =~ ~s[data-value="a"]
     assert html =~ ~s[role="tabpanel"]
     assert html =~ "data-essence-tabs-content"

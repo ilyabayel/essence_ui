@@ -1,7 +1,7 @@
 defmodule EssenceUI.SharedProps.LayoutProps do
   @moduledoc """
   Layout prop definitions for Box, Flex, Grid, and other layout components.
-  Inspired by Radix UI Themes layout.props.ts and the provided TypeScript definition.
+  Theme layout props for Essence UI.
   """
 
   alias EssenceUI.SharedProps.HeightProps

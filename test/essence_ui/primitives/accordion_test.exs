@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.AccordionTest do
 
   alias EssenceUI.Primitives.Accordion
 
-  test "renders radix-like root and item attributes" do
+  test "renders root and item attributes" do
     html =
       render_component(
         fn assigns ->

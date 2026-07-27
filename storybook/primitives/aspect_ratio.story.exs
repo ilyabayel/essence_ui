@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.AspectRatioStory do
 
   def function, do: &AspectRatio.aspect_ratio/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "aspect-ratio"}
+  def container, do: {:div, class: "essence-demo", "data-component": "aspect-ratio"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.AspectRatioStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs aspect ratio demo",
+        description: "Essence UI aspect ratio demo",
         template: """
         <div class="DemoAspectRatioContainer">
           <AspectRatio.aspect_ratio ratio={16 / 9}>

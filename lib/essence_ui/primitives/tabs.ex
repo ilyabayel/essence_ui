@@ -113,7 +113,7 @@ defmodule EssenceUI.Primitives.Tabs do
       data-state={if @active?, do: "active", else: "inactive"}
       data-orientation={@orientation}
       data-disabled={if @disabled, do: ""}
-      data-radix-collection-item=""
+      data-essence-collection-item=""
       aria-selected={if @active?, do: "true", else: "false"}
       aria-controls={@aria_controls}
       tabindex={if @active?, do: "0", else: "-1"}

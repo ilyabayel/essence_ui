@@ -42,6 +42,6 @@ You can also use transitions:
 
 ## JavaScript animation libraries
 
-Radix React exposes `forceMount` so animation libraries can own unmount timing. Essence LiveView primitives keep parts in the DOM and toggle visibility/`data-state` via hooks. Animate with CSS against `data-state`, or drive controlled `open` from LiveView assign updates coordinated with your preferred JS.
+Essence LiveView primitives keep parts in the DOM and toggle visibility/`data-state` via hooks. Animate with CSS against `data-state`, or drive controlled `open` from LiveView assign updates coordinated with your preferred JS.
 
 When you need custom exit timing, keep the part mounted while `data-state="closed"` animations run, then sync `open={false}` from the client hook or LiveView after the animation ends.

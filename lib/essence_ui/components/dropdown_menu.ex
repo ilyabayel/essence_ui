@@ -1,8 +1,8 @@
 defmodule EssenceUI.Components.DropdownMenu do
   @moduledoc """
-  Dropdown Menu styled per Radix Themes Dropdown Menu.
+  Themed dropdown menu with trigger, content, and item subcomponents.
 
-  Wraps `EssenceUI.Primitives.DropdownMenu` with Themes visual props
+  Wraps `EssenceUI.Primitives.DropdownMenu` with themed visual props
   (`size`, `variant`, `color`, `high_contrast`, `shortcut`).
   """
   use Phoenix.Component
@@ -108,7 +108,7 @@ defmodule EssenceUI.Components.DropdownMenu do
   end
 
   @doc """
-  The menu content. Portals into `container` (default `"body"`) like Radix Themes.
+  The menu content. Portals into `container` (default `"body"`).
   """
   attr :id, :string, default: nil
   attr :size, :string, values: @sizes, default: "2"

@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.AlertDialogStory do
 
   def function, do: &AlertDialog.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "alert-dialog"}
+  def container, do: {:div, class: "essence-demo", "data-component": "alert-dialog"}
 
   def layout, do: :one_column
 

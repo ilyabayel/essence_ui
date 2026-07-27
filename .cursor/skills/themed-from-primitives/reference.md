@@ -56,7 +56,7 @@ Utilities (`accessible_icon`, `slot`, `visually_hidden`) live under `lib/essence
 
 | Artifact | Path |
 |----------|------|
-| Primitive story | `storybook/primitives/<name>.story.exs` — container `radix-demo` + `data-component` |
+| Primitive story | `storybook/primitives/<name>.story.exs` — container `essence-demo` + `data-component` |
 | Themes story | `storybook/themes/components/<name>.story.exs` — theme `data-*` only |
 | Legacy story mirror | `storybook/components/` — prefer themes path for new work |
 | ExUnit themed | `test/essence_ui/components/<name>_test.exs` |

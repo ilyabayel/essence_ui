@@ -113,7 +113,7 @@ export const DropdownMenu = {
 
   onMenuItemClick(e) {
     if (e.currentTarget.hasAttribute('data-dropdown-menu-sub-trigger')) {
-      // Touch / click path: open nested submenu (Radix SubTrigger parity).
+      // Touch / click path: open nested submenu (sub-trigger parity).
       const sub = e.currentTarget.closest('[data-dropdown-menu-sub]');
       if (sub?._openSub) sub._openSub();
       return;

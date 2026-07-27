@@ -2,8 +2,8 @@ defmodule EssenceUI.Components.Progress do
   @moduledoc """
   A Progress component that displays the completion progress of a task.
 
-  Based on Radix UI Themes Progress component with support for various sizes,
-  colors, and styling options. Wraps `EssenceUI.Primitives.Progress`.
+  Supports various sizes, colors, and styling options.
+  Wraps `EssenceUI.Primitives.Progress`.
   """
   use Phoenix.Component
 

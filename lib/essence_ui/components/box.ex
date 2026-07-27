@@ -2,7 +2,7 @@ defmodule EssenceUI.Components.Box do
   @moduledoc """
   The Box component is a low-level layout primitive for building UI structure.
 
-  Based on Radix UI Themes Box component.
+  Themed Box component.
   """
   use Phoenix.Component
 

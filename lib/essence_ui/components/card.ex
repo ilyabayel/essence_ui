@@ -1,8 +1,6 @@
 defmodule EssenceUI.Components.Card do
   @moduledoc """
-  A Card component that groups related content and actions.
-
-  Based on Radix UI Themes Card component with support for various sizes, variants,
+  A Card component that groups related content and actions with support for various sizes, variants,
   and styling options. Cards are container elements that provide visual separation
   and hierarchy for content sections.
 

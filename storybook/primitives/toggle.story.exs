@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.ToggleStory do
 
   def function, do: &Toggle.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "toggle"}
+  def container, do: {:div, class: "essence-demo", "data-component": "toggle"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.ToggleStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs toggle demo",
+        description: "Essence UI toggle demo",
         template: """
         <Toggle.root
           id="toggle-italic"

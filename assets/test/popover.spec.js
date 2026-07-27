@@ -69,7 +69,7 @@ test.describe("Popover Primitive", () => {
     await trigger.click();
     await expect(page.locator("#popover-content")).toBeVisible();
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="popover"]',
+      include: '.essence-demo[data-component="popover"]',
     });
   });
 });

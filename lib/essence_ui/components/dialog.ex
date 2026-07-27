@@ -1,8 +1,8 @@
 defmodule EssenceUI.Components.Dialog do
   @moduledoc """
-  Dialog component compatible with Radix UI Themes Dialog visuals.
+  Themed dialog with overlay, content, and compound subcomponents.
 
-  Themes façade: `dialog/1` and `dialog_content/1` with `target` and `default_state`.
+  Compound API: `dialog/1` and `dialog_content/1` with `target` and `default_state`.
   Internally wraps `EssenceUI.Primitives.Dialog` (root / portal / overlay / content).
   """
 

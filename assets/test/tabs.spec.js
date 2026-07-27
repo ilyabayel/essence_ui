@@ -36,7 +36,7 @@ test.describe("Tabs Primitive", () => {
     await expect(root).toHaveAttribute("data-value", "tab2");
   });
 
-  test("should expose radix-like ids and aria wiring", async ({ page }) => {
+  test("should expose ids and aria wiring", async ({ page }) => {
     const root = page.locator("#tabs-primitive");
     const account = root.locator(
       '[data-essence-tabs-trigger][data-value="tab1"]',

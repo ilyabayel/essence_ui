@@ -1,7 +1,6 @@
 defmodule EssenceUI.Components.Kbd do
   @moduledoc """
-  Kbd component 100% compatible with Radix UI Themes Kbd API.
-  See: https://www.radix-ui.com/themes/docs/components/kbd
+  Keyboard key label for shortcuts and key hints.
   """
 
   use Phoenix.Component
@@ -11,7 +10,7 @@ defmodule EssenceUI.Components.Kbd do
   @size_values Enum.map(1..9, &Integer.to_string/1)
 
   @doc """
-  Renders a keyboard key label. All props match Radix UI Kbd.
+  Renders a keyboard key label.
   """
   attr :size, :string, values: @size_values, doc: "Kbd size (1-9). Responsive supported."
   attr :rest, :any, default: %{}, doc: "Additional HTML attributes."

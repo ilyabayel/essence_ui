@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.AvatarStory do
 
   def function, do: &Avatar.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "avatar"}
+  def container, do: {:div, class: "essence-demo", "data-component": "avatar"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.AvatarStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs avatar demo",
+        description: "Essence UI avatar demo",
         template: """
         <div style="display: flex; gap: 20px;">
           <Avatar.root

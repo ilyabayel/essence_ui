@@ -2,7 +2,7 @@ defmodule EssenceUI.Components.TabNav do
   @moduledoc """
   A set of links for navigating between different views.
 
-  Based on Radix UI Themes TabNav component. Use `TabNav` for navigation links
+  Themed TabNav component. Use `TabNav` for navigation links
   that styled like tabs.
 
   ## Examples

@@ -1,6 +1,6 @@
 # EssenceUI
 
-EssenceUI is a set of Phoenix components compatible with Radix UI Themes API.
+EssenceUI is a Phoenix LiveView component library inspired by Radix UI Themes.
 
 ## Usage
 
@@ -14,7 +14,7 @@ import EssenceUI.Components
 
 ### Em
 
-Emphasizes text, matching the Radix UI Themes Em API.
+Emphasizes text with optional truncation and wrapping controls.
 
 #### Example
 
@@ -50,7 +50,7 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 ## Implementation plan and TODO
 
-This library aims for API and UX parity with Radix Themes. See the Radix Themes overview for reference: [Getting started with Radix Themes](https://www.radix-ui.com/themes/docs/overview/getting-started).
+Essence UI provides accessible, themeable Phoenix LiveView components inspired by Radix Themes. The checklist below tracks component coverage; Radix Themes docs are an optional reference for familiar APIs and patterns: [Getting started with Radix Themes](https://www.radix-ui.com/themes/docs/overview/getting-started).
 
 ### ✅ Completed Components (25/52)
 
@@ -151,7 +151,7 @@ This library aims for API and UX parity with Radix Themes. See the Radix Themes 
 
 ### Docs and examples
 
-- [ ] Storybook category parity with Radix Themes
+- [ ] Storybook Themes category parity
 - [ ] Usage patterns guide (controlled vs uncontrolled, `as_child`, composition)
 - [ ] Migration guide from plain HTML to components
 

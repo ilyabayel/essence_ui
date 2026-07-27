@@ -68,7 +68,7 @@ test.describe("Toast Primitive", () => {
   test("has no accessibility violations when open", async ({ page }) => {
     await openToast(page);
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="toast"]',
+      include: '.essence-demo[data-component="toast"]',
     });
   });
 });

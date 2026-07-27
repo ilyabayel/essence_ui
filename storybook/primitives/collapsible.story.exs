@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.CollapsibleStory do
 
   def function, do: &Collapsible.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "collapsible"}
+  def container, do: {:div, class: "essence-demo", "data-component": "collapsible"}
 
   def layout, do: :one_column
 
@@ -51,15 +51,15 @@ defmodule Storybook.Primitives.CollapsibleStory do
           </div>
 
           <div class="Repository">
-            <span class="Text">@radix-ui/primitives</span>
+            <span class="Text">@essence-ui/primitives</span>
           </div>
 
           <Collapsible.content id="collapsible-content">
             <div class="Repository">
-              <span class="Text">@radix-ui/colors</span>
+              <span class="Text">@essence-ui/colors</span>
             </div>
             <div class="Repository">
-              <span class="Text">@radix-ui/themes</span>
+              <span class="Text">@essence-ui/themes</span>
             </div>
           </Collapsible.content>
         </Collapsible.root>

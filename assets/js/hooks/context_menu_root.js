@@ -310,7 +310,7 @@ export const ContextMenuRoot = {
         };
 
         // Open on pointer hover only — not on focus (keyboard uses ArrowRight/Enter/Space).
-        // Hover open is mouse-only (Radix); click/keyboard open via onItemClick / arrows.
+        // Hover open is mouse-only ; click/keyboard open via onItemClick / arrows.
         trigger.addEventListener("pointerenter", whenMouse(open));
         trigger.addEventListener("pointerleave", whenMouse(scheduleClose));
         content.addEventListener(

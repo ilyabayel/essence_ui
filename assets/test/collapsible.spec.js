@@ -65,7 +65,7 @@ test.describe("Collapsible Primitive", () => {
 
   test("has no accessibility violations", async ({ page }) => {
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="collapsible"]',
+      include: '.essence-demo[data-component="collapsible"]',
     });
   });
 });

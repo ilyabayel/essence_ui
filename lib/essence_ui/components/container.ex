@@ -45,7 +45,7 @@ defmodule EssenceUI.Components.Container do
   @doc """
   The Container component is a layout primitive for constraining content width and centering content.
 
-  Based on Radix UI Themes Container component.
+  Themed Container component.
 
   ## Examples
 

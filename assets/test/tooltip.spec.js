@@ -47,7 +47,7 @@ test.describe("Tooltip Primitive", () => {
     await trigger.hover();
     await expect(page.locator("#tooltip-content")).toBeVisible();
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="tooltip"]',
+      include: '.essence-demo[data-component="tooltip"]',
     });
   });
 });
@@ -125,7 +125,7 @@ test.describe("Tooltip Primitive (touch)", () => {
     await expect(content).toBeVisible();
 
     await page
-      .locator('.radix-demo[data-component="tooltip"]')
+      .locator('.essence-demo[data-component="tooltip"]')
       .click({ position: { x: 8, y: 8 }, force: true });
     await expect(content).toBeHidden();
   });

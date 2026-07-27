@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.RadioGroupStory do
 
   def function, do: &RadioGroup.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "radio-group"}
+  def container, do: {:div, class: "essence-demo", "data-component": "radio-group"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.RadioGroupStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs radio group demo",
+        description: "Essence UI radio group demo",
         template: """
         <form>
           <RadioGroup.root

@@ -1,7 +1,6 @@
 defmodule EssenceUI.Components.IconButton do
   @moduledoc """
-  Icon Button component 100% compatible with Radix UI Themes Icon Button API.
-  See: https://www.radix-ui.com/themes/docs/components/icon-button
+  Themed icon button with sizes, variants, and accent colors.
   """
 
   use Phoenix.Component
@@ -25,7 +24,7 @@ defmodule EssenceUI.Components.IconButton do
   @sizes ["1", "2", "3", "4"]
 
   @doc """
-  Renders an icon button. All props match Radix UI Icon Button.
+  Renders an icon button.
 
   ## Examples
       <.icon_button><Icons.plus /></.icon_button>

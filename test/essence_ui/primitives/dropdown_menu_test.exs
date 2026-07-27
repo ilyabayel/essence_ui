@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.DropdownMenuTest do
 
   alias EssenceUI.Primitives.DropdownMenu
 
-  test "renders radix-like dropdown menu parts" do
+  test "renders dropdown menu parts" do
     html =
       render_component(
         fn assigns ->

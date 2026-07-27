@@ -116,7 +116,7 @@ defmodule Storybook.Examples.DenseDisplayStory do
               </.table_row>
             </.table_header>
             <.table_body>
-              <%= for project <- ["Essence UI", "Phoenix Components", "Radix Elixir", "LiveView Hooks"] do %>
+              <%= for project <- ["Essence UI", "Phoenix Components", "Essence Elixir", "LiveView Hooks"] do %>
                 <.table_row>
                   <.table_row_header_cell>{project}</.table_row_header_cell>
                   <.table_cell>

@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.Select do
 
   def function, do: &Select.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "select"}
+  def container, do: {:div, class: "essence-demo", "data-component": "select"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.Select do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs select demo",
+        description: "Essence UI select demo",
         template: """
         <Select.root id="select-primitive">
           <Select.trigger

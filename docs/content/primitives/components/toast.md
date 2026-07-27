@@ -118,10 +118,10 @@ CSS variables for swipe animations (set when swipe handling is active):
 
 | CSS variable | Description |
 | --- | --- |
-| `--radix-toast-swipe-move-x` | Horizontal offset while swiping |
-| `--radix-toast-swipe-move-y` | Vertical offset while swiping |
-| `--radix-toast-swipe-end-x` | Final horizontal offset after swipe |
-| `--radix-toast-swipe-end-y` | Final vertical offset after swipe |
+| `--essence-toast-swipe-move-x` | Horizontal offset while swiping |
+| `--essence-toast-swipe-move-y` | Vertical offset while swiping |
+| `--essence-toast-swipe-end-x` | Final horizontal offset after swipe |
+| `--essence-toast-swipe-end-y` | Final vertical offset after swipe |
 
 ### Title
 
@@ -202,7 +202,7 @@ end
 
 ### Animating swipe gesture
 
-Combine `--radix-toast-swipe-move-[x|y]` and `--radix-toast-swipe-end-[x|y]` CSS variables with `data-swipe="[start|move|cancel|end]"` attributes to animate a swipe-to-close gesture. The stylesheet below matches the demo CSS; the `ToastRoot` hook currently syncs `data-swipe-direction` from the provider—pointer swipe events that set `data-swipe` are not yet implemented.
+Combine `--essence-toast-swipe-move-[x|y]` and `--essence-toast-swipe-end-[x|y]` CSS variables with `data-swipe="[start|move|cancel|end]"` attributes to animate a swipe-to-close gesture. The stylesheet below matches the demo CSS; the `ToastRoot` hook currently syncs `data-swipe-direction` from the provider—pointer swipe events that set `data-swipe` are not yet implemented.
 
 ```heex
 <Toast.provider swipe_direction="right">
@@ -213,7 +213,7 @@ Combine `--radix-toast-swipe-move-[x|y]` and `--radix-toast-swipe-end-[x|y]` CSS
 
 ```css
 .DemoToastRoot[data-swipe="move"] {
-  transform: translateX(var(--radix-toast-swipe-move-x));
+  transform: translateX(var(--essence-toast-swipe-move-x));
 }
 .DemoToastRoot[data-swipe="cancel"] {
   transform: translateX(0);
@@ -225,7 +225,7 @@ Combine `--radix-toast-swipe-move-[x|y]` and `--radix-toast-swipe-end-[x|y]` CSS
 
 @keyframes slideRight {
   from {
-    transform: translateX(var(--radix-toast-swipe-end-x));
+    transform: translateX(var(--essence-toast-swipe-end-x));
   }
   to {
     transform: translateX(100%);

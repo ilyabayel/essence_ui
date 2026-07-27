@@ -76,7 +76,7 @@ export const NavigationMenuRoot = {
       if (!trigger.hasAttribute("data-nav-bound")) {
         trigger.setAttribute("data-nav-bound", "true");
         trigger.addEventListener("click", this.onTriggerClick);
-        // Radix whenMouse: hover intent is mouse-only; touch uses click.
+        // Hover intent is mouse-only; touch uses click.
         trigger.addEventListener("pointerenter", this.onTriggerEnter);
         trigger.addEventListener("pointerleave", this.onTriggerLeave);
       }
@@ -126,6 +126,14 @@ export const NavigationMenuRoot = {
     }
     const width = content.offsetWidth;
     const height = content.offsetHeight;
+    this.el.style.setProperty(
+      "--essence-navigation-menu-viewport-width",
+      `${width}px`
+    );
+    this.el.style.setProperty(
+      "--essence-navigation-menu-viewport-height",
+      `${height}px`
+    );
     this.el.style.setProperty(
       "--radix-navigation-menu-viewport-width",
       `${width}px`
@@ -324,6 +332,14 @@ export const NavigationMenuRoot = {
       // Collapse shell: content is already restored home; size vars alone still
       // leave a visible panel because width/height transition over 300ms and
       // scaleOut has no fill-mode: forwards.
+      this.el.style.setProperty(
+        "--essence-navigation-menu-viewport-width",
+        "0px"
+      );
+      this.el.style.setProperty(
+        "--essence-navigation-menu-viewport-height",
+        "0px"
+      );
       this.el.style.setProperty(
         "--radix-navigation-menu-viewport-width",
         "0px"

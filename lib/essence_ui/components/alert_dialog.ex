@@ -1,8 +1,8 @@
 defmodule EssenceUI.Components.AlertDialog do
   @moduledoc """
-  Alert Dialog styled per Radix Themes Alert Dialog.
+  Themed alert dialog with overlay, content, and action subcomponents.
 
-  Themes façade keeps `alert_dialog/1` with `target`, `default_state`, and
+  Compound API keeps `alert_dialog/1` with `target`, `default_state`, and
   title/description slots. Internally wraps `EssenceUI.Primitives.AlertDialog`.
   """
   use Phoenix.Component

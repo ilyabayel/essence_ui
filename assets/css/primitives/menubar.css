@@ -2,7 +2,7 @@
 @import "@radix-ui/colors/mauve.css";
 @import "@radix-ui/colors/violet.css";
 
-.radix-demo[data-component="menubar"] .MenubarRoot {
+.essence-demo[data-component="menubar"] .MenubarRoot {
 	display: flex;
 	background-color: white;
 	padding: 3px;
@@ -10,7 +10,7 @@
 	box-shadow: 0 2px 10px var(--black-a7);
 }
 
-.radix-demo[data-component="menubar"] .MenubarTrigger {
+.essence-demo[data-component="menubar"] .MenubarTrigger {
 	padding: 8px 12px;
 	outline: none;
 	user-select: none;
@@ -25,13 +25,13 @@
 	gap: 2px;
 }
 
-.radix-demo[data-component="menubar"] .MenubarTrigger[data-highlighted],
-.radix-demo[data-component="menubar"] .MenubarTrigger[data-state="open"] {
+.essence-demo[data-component="menubar"] .MenubarTrigger[data-highlighted],
+.essence-demo[data-component="menubar"] .MenubarTrigger[data-state="open"] {
 	background-color: var(--violet-4);
 }
 
-.radix-demo[data-component="menubar"] .MenubarContent,
-.radix-demo[data-component="menubar"] .MenubarSubContent {
+.essence-demo[data-component="menubar"] .MenubarContent,
+.essence-demo[data-component="menubar"] .MenubarSubContent {
 	min-width: 220px;
 	background-color: white;
 	border-radius: 6px;
@@ -44,10 +44,10 @@
 	will-change: transform, opacity;
 }
 
-.radix-demo[data-component="menubar"] .MenubarItem,
-.radix-demo[data-component="menubar"] .MenubarSubTrigger,
-.radix-demo[data-component="menubar"] .MenubarCheckboxItem,
-.radix-demo[data-component="menubar"] .MenubarRadioItem {
+.essence-demo[data-component="menubar"] .MenubarItem,
+.essence-demo[data-component="menubar"] .MenubarSubTrigger,
+.essence-demo[data-component="menubar"] .MenubarCheckboxItem,
+.essence-demo[data-component="menubar"] .MenubarRadioItem {
 	font-size: 13px;
 	line-height: 1;
 	color: var(--violet-11);
@@ -60,23 +60,23 @@
 	user-select: none;
 }
 
-.radix-demo[data-component="menubar"] .MenubarItem.inset,
-.radix-demo[data-component="menubar"] .MenubarSubTrigger.inset,
-.radix-demo[data-component="menubar"] .MenubarCheckboxItem.inset,
-.radix-demo[data-component="menubar"] .MenubarRadioItem.inset {
+.essence-demo[data-component="menubar"] .MenubarItem.inset,
+.essence-demo[data-component="menubar"] .MenubarSubTrigger.inset,
+.essence-demo[data-component="menubar"] .MenubarCheckboxItem.inset,
+.essence-demo[data-component="menubar"] .MenubarRadioItem.inset {
 	padding-left: 20px;
 }
 
-.radix-demo[data-component="menubar"] .MenubarItem[data-state="open"],
-.radix-demo[data-component="menubar"] .MenubarSubTrigger[data-state="open"] {
+.essence-demo[data-component="menubar"] .MenubarItem[data-state="open"],
+.essence-demo[data-component="menubar"] .MenubarSubTrigger[data-state="open"] {
 	background-color: var(--violet-4);
 	color: var(--violet-11);
 }
 
-.radix-demo[data-component="menubar"] .MenubarItem[data-highlighted],
-.radix-demo[data-component="menubar"] .MenubarSubTrigger[data-highlighted],
-.radix-demo[data-component="menubar"] .MenubarCheckboxItem[data-highlighted],
-.radix-demo[data-component="menubar"] .MenubarRadioItem[data-highlighted] {
+.essence-demo[data-component="menubar"] .MenubarItem[data-highlighted],
+.essence-demo[data-component="menubar"] .MenubarSubTrigger[data-highlighted],
+.essence-demo[data-component="menubar"] .MenubarCheckboxItem[data-highlighted],
+.essence-demo[data-component="menubar"] .MenubarRadioItem[data-highlighted] {
 	background-image: linear-gradient(
 		135deg,
 		var(--violet-9) 0%,
@@ -85,15 +85,15 @@
 	color: var(--violet-1);
 }
 
-.radix-demo[data-component="menubar"] .MenubarItem[data-disabled],
-.radix-demo[data-component="menubar"] .MenubarSubTrigger[data-disabled],
-.radix-demo[data-component="menubar"] .MenubarCheckboxItem[data-disabled],
-.radix-demo[data-component="menubar"] .MenubarRadioItem[data-disabled] {
+.essence-demo[data-component="menubar"] .MenubarItem[data-disabled],
+.essence-demo[data-component="menubar"] .MenubarSubTrigger[data-disabled],
+.essence-demo[data-component="menubar"] .MenubarCheckboxItem[data-disabled],
+.essence-demo[data-component="menubar"] .MenubarRadioItem[data-disabled] {
 	color: var(--mauve-8);
 	pointer-events: none;
 }
 
-.radix-demo[data-component="menubar"] .MenubarItemIndicator {
+.essence-demo[data-component="menubar"] .MenubarItemIndicator {
 	position: absolute;
 	left: 0;
 	width: 20px;
@@ -102,22 +102,22 @@
 	justify-content: center;
 }
 
-.radix-demo[data-component="menubar"] .MenubarSeparator {
+.essence-demo[data-component="menubar"] .MenubarSeparator {
 	height: 1px;
 	background-color: var(--violet-6);
 	margin: 5px;
 }
 
-.radix-demo[data-component="menubar"] .RightSlot {
+.essence-demo[data-component="menubar"] .RightSlot {
 	margin-left: auto;
 	padding-left: 20px;
 	color: var(--mauve-9);
 }
 
-.radix-demo[data-component="menubar"] [data-highlighted] > .RightSlot {
+.essence-demo[data-component="menubar"] [data-highlighted] > .RightSlot {
 	color: white;
 }
 
-.radix-demo[data-component="menubar"] [data-disabled] > .RightSlot {
+.essence-demo[data-component="menubar"] [data-disabled] > .RightSlot {
 	color: var(--mauve-8);
 }

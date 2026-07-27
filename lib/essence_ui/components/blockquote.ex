@@ -1,7 +1,6 @@
 defmodule EssenceUI.Components.Blockquote do
   @moduledoc """
-  Blockquote component 100% compatible with Radix UI Themes Blockquote API.
-  See: https://www.radix-ui.com/themes/docs/components/blockquote
+  Themed block quotation.
   """
 
   use Phoenix.Component
@@ -18,7 +17,7 @@ defmodule EssenceUI.Components.Blockquote do
   require WeightProps
 
   @doc """
-  Renders a blockquote. All props match Radix UI Blockquote.
+  Renders a blockquote.
 
   ## Examples
 

@@ -1,6 +1,6 @@
 @import "@radix-ui/colors/mauve.css";
 
-.radix-demo[data-component="hover-card"] .HoverCardContent {
+.essence-demo[data-component="hover-card"] .HoverCardContent {
 	border-radius: 6px;
 	padding: 20px;
 	width: 300px;
@@ -12,55 +12,55 @@
 	animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 	will-change: transform, opacity;
 }
-.radix-demo[data-component="hover-card"] .HoverCardContent[data-side="top"] {
+.essence-demo[data-component="hover-card"] .HoverCardContent[data-side="top"] {
 	animation-name: slideDownAndFade;
 }
-.radix-demo[data-component="hover-card"] .HoverCardContent[data-side="right"] {
+.essence-demo[data-component="hover-card"] .HoverCardContent[data-side="right"] {
 	animation-name: slideLeftAndFade;
 }
-.radix-demo[data-component="hover-card"] .HoverCardContent[data-side="bottom"] {
+.essence-demo[data-component="hover-card"] .HoverCardContent[data-side="bottom"] {
 	animation-name: slideUpAndFade;
 }
-.radix-demo[data-component="hover-card"] .HoverCardContent[data-side="left"] {
+.essence-demo[data-component="hover-card"] .HoverCardContent[data-side="left"] {
 	animation-name: slideRightAndFade;
 }
 
-.radix-demo[data-component="hover-card"] .HoverCardArrow {
+.essence-demo[data-component="hover-card"] .HoverCardArrow {
 	fill: white;
 }
 
-.radix-demo[data-component="hover-card"] .ImageTrigger {
+.essence-demo[data-component="hover-card"] .ImageTrigger {
 	cursor: pointer;
 	border-radius: 100%;
 	display: inline-block;
 }
-.radix-demo[data-component="hover-card"] .ImageTrigger:focus {
+.essence-demo[data-component="hover-card"] .ImageTrigger:focus {
 	box-shadow: 0 0 0 2px white;
 }
 
-.radix-demo[data-component="hover-card"] .Image {
+.essence-demo[data-component="hover-card"] .Image {
 	display: block;
 	border-radius: 100%;
 }
-.radix-demo[data-component="hover-card"] .Image.normal {
+.essence-demo[data-component="hover-card"] .Image.normal {
 	width: 45px;
 	height: 45px;
 }
-.radix-demo[data-component="hover-card"] .Image.large {
+.essence-demo[data-component="hover-card"] .Image.large {
 	width: 60px;
 	height: 60px;
 }
 
-.radix-demo[data-component="hover-card"] .Text {
+.essence-demo[data-component="hover-card"] .Text {
 	margin: 0;
 	color: var(--mauve-12);
 	font-size: 15px;
 	line-height: 1.5;
 }
-.radix-demo[data-component="hover-card"] .Text.faded {
+.essence-demo[data-component="hover-card"] .Text.faded {
 	color: var(--mauve-10);
 }
-.radix-demo[data-component="hover-card"] .Text.bold {
+.essence-demo[data-component="hover-card"] .Text.bold {
 	font-weight: 500;
 }
 

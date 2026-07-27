@@ -1,9 +1,7 @@
 defmodule EssenceUI.Components.AspectRatio do
   @moduledoc """
-  AspectRatio component compatible with Radix UI Themes AspectRatio API.
+  Themed aspect ratio wrapper that preserves layout proportions.
   Wraps `EssenceUI.Primitives.AspectRatio`.
-
-  See: https://www.radix-ui.com/primitives/docs/components/aspect-ratio
 
   ## Examples
 

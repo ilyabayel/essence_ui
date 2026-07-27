@@ -1,8 +1,6 @@
 defmodule EssenceUI.Components.Checkbox do
   @moduledoc """
-  A simple, accessible Checkbox component for toggling between checked, unchecked, and indeterminate states.
-
-  Based on Radix UI Themes Checkbox component with support for various sizes, variants,
+  A simple, accessible Checkbox component for toggling between checked, unchecked, and indeterminate states with support for various sizes, variants,
   and colors. The checkbox provides visual feedback for user selections
   and can be used in forms, settings panels, and interactive lists.
 

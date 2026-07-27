@@ -229,7 +229,7 @@ end
 
 ### Mouse events are not fired
 
-Because of [a limitation](https://github.com/radix-ui/primitives/blob/83a8c13bf66f3d9f17d77caeb187a69eb146930b/packages/react/slider/src/Slider.tsx#L383-L384) in the upstream Radix implementation, `onMouseDown` and `onMouseUp` on the root may not fire as expected:
+Because of a known limitation in pointer event handling, `onMouseDown` and `onMouseUp` on the root may not fire as expected:
 
 ```heex
 <Slider.root id="slider-mouse" phx-hook="MySliderHook">

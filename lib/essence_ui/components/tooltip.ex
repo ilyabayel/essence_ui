@@ -2,8 +2,8 @@ defmodule EssenceUI.Components.Tooltip do
   @moduledoc """
   A Tooltip component that displays contextual information when hovering or focusing on an element.
 
-  Wraps `EssenceUI.Primitives.Tooltip` with Themes visual props (`color`, margin).
-  Based on Radix UI Themes Tooltip — single `<.tooltip content={…}>` API.
+  Wraps `EssenceUI.Primitives.Tooltip` with themed visual props (`color`, margin).
+  Themed Tooltip — single `<.tooltip content={…}>` API.
   """
   use Phoenix.Component
 

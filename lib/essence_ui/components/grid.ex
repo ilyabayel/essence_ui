@@ -50,7 +50,7 @@ defmodule EssenceUI.Components.Grid do
   @doc """
   The Grid component is a low-level layout primitive for building grid layouts.
 
-  Based on Radix UI Themes Grid component.
+  Themed Grid component.
 
   ## Examples
 

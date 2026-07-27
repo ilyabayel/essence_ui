@@ -131,7 +131,7 @@ Checklist:
 **Do not:**
 
 - Duplicate `phx-hook` / state logic already in the primitive
-- Mix `radix-demo` with theme `data-*` on the same story container
+- Mix `essence-demo` with theme `data-*` on the same story container
 - Change the public Themes API unless aligning to Radix Themes (note friction in `docs/API_FRICTION.md`)
 
 ### 5. Run until green

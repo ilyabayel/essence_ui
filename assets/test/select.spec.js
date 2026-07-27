@@ -119,7 +119,7 @@ test.describe("Select Primitive", () => {
     await trigger.click();
     await expect(content).toBeVisible();
     await expectNoA11yViolations(page, {
-      include: [".radix-demo[data-component='select']", "#select-primitive-content"],
+      include: [".essence-demo[data-component='select']", "#select-primitive-content"],
     });
   });
 });

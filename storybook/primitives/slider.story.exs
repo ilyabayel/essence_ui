@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.SliderStory do
 
   def function, do: &Slider.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "slider"}
+  def container, do: {:div, class: "essence-demo", "data-component": "slider"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.SliderStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs slider demo",
+        description: "Essence UI slider demo",
         template: """
         <form>
           <Slider.root

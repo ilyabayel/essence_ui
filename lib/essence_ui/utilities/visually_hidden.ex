@@ -2,7 +2,7 @@ defmodule EssenceUI.Utilities.VisuallyHidden do
   @moduledoc """
   Hides content from the screen but keeps it accessible to screen readers.
 
-  Based on Radix UI VisuallyHidden primitive.
+  Visually hidden content for screen readers.
   """
   use Phoenix.Component
 

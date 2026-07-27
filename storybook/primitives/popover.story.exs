@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.PopoverStory do
 
   def function, do: &Popover.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "popover"}
+  def container, do: {:div, class: "essence-demo", "data-component": "popover"}
 
   def layout, do: :one_column
 

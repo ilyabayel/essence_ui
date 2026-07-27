@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.AvatarTest do
 
   alias EssenceUI.Primitives.Avatar
 
-  test "renders radix-like structure" do
+  test "renders structure" do
     html =
       render_component(
         fn assigns ->

@@ -1,6 +1,6 @@
 # CheckboxCards Component
 
-The `CheckboxCards` component provides a card-based layout for checkbox selections, matching the Radix UI Themes CheckboxCards API.
+The `CheckboxCards` component provides a card-based layout for checkbox selections.
 
 ## Basic Usage
 
@@ -174,7 +174,7 @@ Individual checkbox card items that go inside the root container.
 
 ## Generated HTML
 
-The component generates HTML similar to Radix UI Themes:
+The component generates HTML like:
 
 ```html
 <div role="group" dir="ltr" class="est-Grid est-CheckboxCardsRoot est-r-size-2 est-variant-surface est-r-gtc-3" tabindex="0" id="checkbox-cards-123" phx-hook="CheckboxCards">

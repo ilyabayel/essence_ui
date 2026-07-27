@@ -2,7 +2,7 @@ defmodule EssenceUI.Components.Text do
   @moduledoc """
   The Text component is a foundational text primitive.
 
-  Based on Radix UI Themes Text component.
+  Themed Text component.
   """
 
   use Phoenix.Component

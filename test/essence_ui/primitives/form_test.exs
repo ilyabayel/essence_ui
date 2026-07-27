@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.FormTest do
 
   alias EssenceUI.Primitives.Form
 
-  test "renders radix-like form parts" do
+  test "renders form parts" do
     html =
       render_component(
         fn assigns ->

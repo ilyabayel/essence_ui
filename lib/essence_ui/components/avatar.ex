@@ -2,7 +2,7 @@ defmodule EssenceUI.Components.Avatar do
   @moduledoc """
   The Avatar component displays a user profile picture, initials, or fallback icon.
 
-  Based on Radix UI Themes Avatar component. Wraps `EssenceUI.Primitives.Avatar`.
+  Themed Avatar component. Wraps `EssenceUI.Primitives.Avatar`.
   """
 
   use Phoenix.Component

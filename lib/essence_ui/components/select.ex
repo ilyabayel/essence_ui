@@ -1,6 +1,6 @@
 defmodule EssenceUI.Components.Select do
   @moduledoc """
-  Select component styled per Radix Themes Select.
+  Themed select with trigger, content, and item subcomponents.
   """
   use Phoenix.Component
 

@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.ContextMenuTest do
 
   alias EssenceUI.Primitives.ContextMenu
 
-  test "renders radix-like context menu parts" do
+  test "renders context menu parts" do
     html =
       render_component(
         fn assigns ->

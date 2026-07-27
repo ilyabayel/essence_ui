@@ -1,7 +1,6 @@
 defmodule EssenceUI.Components.Em do
   @moduledoc """
-  Em component 100% compatible with Radix UI Themes Em API.
-  See: https://www.radix-ui.com/themes/docs/components/em
+  Themed emphasis text.
 
   ## Examples
 

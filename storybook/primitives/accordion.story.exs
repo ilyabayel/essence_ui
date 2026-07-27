@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.AccordionStory do
 
   def function, do: &Accordion.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "accordion"}
+  def container, do: {:div, class: "essence-demo", "data-component": "accordion"}
 
   def layout, do: :one_column
 

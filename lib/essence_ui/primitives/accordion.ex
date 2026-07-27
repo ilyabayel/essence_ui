@@ -101,7 +101,7 @@ defmodule EssenceUI.Primitives.Accordion do
       role="region"
       aria-labelledby={@trigger_id}
       data-essence-accordion-content
-      style="--essence-accordion-content-height: var(--essence-collapsible-content-height); --essence-accordion-content-width: var(--essence-collapsible-content-width); --radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+      style="--essence-accordion-content-height: var(--essence-collapsible-content-height); --essence-accordion-content-width: var(--essence-collapsible-content-width);"
       {@rest}
     >
       {render_slot(@inner_block)}

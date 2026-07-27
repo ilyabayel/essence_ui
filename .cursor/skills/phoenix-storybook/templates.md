@@ -16,7 +16,7 @@ defmodule Storybook.Primitives.WidgetStory do
   def container,
     do:
       {:div,
-       class: "radix-demo",
+       class: "essence-demo",
        "data-component": "widget"}
 
   def layout, do: :one_column
@@ -45,7 +45,7 @@ defmodule Storybook.Primitives.WidgetStory do
 end
 ```
 
-Separator exception: `def container, do: :iframe` and keep the `radix-demo` wrapper **inside** the template.
+Separator exception: `def container, do: :iframe` and keep the `essence-demo` wrapper **inside** the template.
 
 ## 2. Themes component (`:component`)
 

@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.AlertDialogTest do
 
   alias EssenceUI.Primitives.AlertDialog
 
-  test "renders radix-like alert dialog parts" do
+  test "renders alert dialog parts" do
     html =
       render_component(
         fn assigns ->

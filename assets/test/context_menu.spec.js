@@ -93,7 +93,7 @@ test.describe("Context Menu Primitive", () => {
     await trigger.click({ button: "right" });
     await expect(page.locator("[data-essence-context-menu-content]")).toBeVisible();
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="context-menu"]',
+      include: '.essence-demo[data-component="context-menu"]',
     });
   });
 });

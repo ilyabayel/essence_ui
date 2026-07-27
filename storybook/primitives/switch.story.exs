@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.SwitchStory do
 
   def function, do: &Switch.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "switch"}
+  def container, do: {:div, class: "essence-demo", "data-component": "switch"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.SwitchStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs switch demo",
+        description: "Essence UI switch demo",
         template: """
         <form>
           <div style="display: flex; align-items: center;">

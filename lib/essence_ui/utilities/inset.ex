@@ -2,7 +2,7 @@ defmodule EssenceUI.Utilities.Inset do
   @moduledoc """
   A utility for applying negative margins to elements so they "bleed" into their container.
 
-  Based on Radix UI Themes Inset component. Commonly used within `Card` or `Dialog` components.
+  Inset utility for nested padding within containers. Commonly used within `Card` or `Dialog` components.
 
   ## Examples
 

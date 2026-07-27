@@ -1,9 +1,7 @@
 defmodule EssenceUI.Components.CheckboxCards do
   @moduledoc """
-  A checkbox group component that displays checkboxes as interactive cards.
-
-  Based on Radix UI Themes CheckboxCards component. Provides a card-based layout
-  for checkbox selections, with support for various sizes, variants, and colors.
+  A checkbox group component that displays checkboxes as interactive cards,
+  with support for various sizes, variants, and colors.
 
   ## Examples
 
@@ -205,7 +203,7 @@ defmodule EssenceUI.Components.CheckboxCards do
         class="est-reset est-BaseCheckboxRoot est-CheckboxCardCheckbox est-r-size-2 est-variant-surface"
         tabindex="-1"
         disabled={@disabled}
-        data-radix-collection-item
+        data-essence-collection-item
         {@rest}
       >
         <%= if @checked_state == "checked" do %>

@@ -6,7 +6,7 @@ test.describe("Separator Primitive", () => {
   function demo(page) {
     return page
       .frameLocator('iframe[id*="separator"]')
-      .locator('.radix-demo[data-component="separator"]');
+      .locator('.essence-demo[data-component="separator"]');
   }
 
   test.beforeEach(async ({ page }) => {

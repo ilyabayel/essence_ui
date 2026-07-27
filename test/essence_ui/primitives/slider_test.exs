@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.SliderTest do
 
   alias EssenceUI.Primitives.Slider
 
-  test "renders radix-like root, track, range, and thumb" do
+  test "renders root, track, range, and thumb" do
     html =
       render_component(
         fn assigns ->

@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.RadioGroupTest do
 
   alias EssenceUI.Primitives.RadioGroup
 
-  test "renders radix-like root, item, empty indicator, and bubble input" do
+  test "renders root, item, empty indicator, and bubble input" do
     html =
       render_component(
         fn assigns ->

@@ -36,15 +36,27 @@ A collection of links for navigating websites.
                             aria-hidden="true"
                             width="38"
                             height="38"
-                            viewBox="0 0 25 25"
-                            fill="white"
+                            viewBox="0 0 38 38"
+                            fill="none"
+                            stroke="white"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
                           >
-                            <path d="M12 25C7.58173 25 4 21.4183 4 17C4 12.5817 7.58173 9 12 9V25Z"></path>
-                            <path d="M12 0H4V8H12V0Z"></path>
-                            <path d="M17 8C19.2091 8 21 6.20914 21 4C21 1.79086 19.2091 0 17 0C14.7909 0 13 1.79086 13 4C13 6.20914 14.7909 8 17 8Z"></path>
+                            <!-- Flask body -->
+                            <path d="M14 5 v13 c0 1.5 -0.75 3 -2 4.5 l-4 6 c-2 3 0 7 4 7 h14 c4 0 6-4 4-7 l-4-6 c-1.25-1.5-2-3-2-4.5 V5"/>
+                            <!-- Flask liquid (optional, subtle fill) -->
+                            <path d="M14 27 q5 3 10 0" stroke="white" fill="none"/>
+                            <!-- Flask rim -->
+                            <ellipse cx="19" cy="5" rx="5" ry="2"/>
+                            <!-- Steam lines -->
+                            <path d="M16 2 q-1 1 0 2"/>
+                            <path d="M19 1 q1 1 0 2"/>
+                            <path d="M22 2 q1 1 0 2"/>
                           </svg>
-                          <div class="CalloutHeading">Radix Primitives</div>
-                          <p class="CalloutText">Unstyled, accessible components for React.</p>
+                     
+                          <div class="CalloutHeading">Essence UI</div>
+                          <p class="CalloutText">Unstyled, accessible components for Phoenix LiveView.</p>
                         </NavigationMenu.link>
                       </li>
                       <li>
@@ -67,7 +79,7 @@ A collection of links for navigating websites.
                       </li>
                       <li>
                         <NavigationMenu.link
-                          href="https://icons.radix-ui.com/"
+                          href="/primitives/docs/overview/introduction"
                           class="ListItemLink"
                         >
                           <div class="ListItemHeading">Icons</div>
@@ -106,7 +118,7 @@ A collection of links for navigating websites.
                           class="ListItemLink"
                         >
                           <div class="ListItemHeading">Getting started</div>
-                          <p class="ListItemText">A quick tutorial to get you up and running with Radix Primitives.</p>
+                          <p class="ListItemText">A quick tutorial to get you up and running with Essence UI Primitives.</p>
                         </NavigationMenu.link>
                       </li>
                       <li>
@@ -142,7 +154,7 @@ A collection of links for navigating websites.
                           class="ListItemLink"
                         >
                           <div class="ListItemHeading">Releases</div>
-                          <p class="ListItemText">Radix Primitives releases and their changelogs.</p>
+                          <p class="ListItemText">Essence UI Primitives releases and their changelogs.</p>
                         </NavigationMenu.link>
                       </li>
                     </ul>
@@ -152,7 +164,7 @@ A collection of links for navigating websites.
                 <NavigationMenu.item value="github">
                   <NavigationMenu.link
                     class="NavigationMenuLink"
-                    href="https://github.com/radix-ui"
+                    href="https://github.com/"
                   >
                     Github
                   </NavigationMenu.link>
@@ -465,7 +477,7 @@ Use `NavigationMenu.link` with the `active` prop to mark the current page:
 
 ### Advanced animation
 
-Essence exposes `--radix-navigation-menu-viewport-width`, `--radix-navigation-menu-viewport-height`, and `data-motion` on content to animate viewport size and content position based on enter/exit direction:
+Essence exposes `--essence-navigation-menu-viewport-width`, `--essence-navigation-menu-viewport-height`, and `data-motion` on content to animate viewport size and content position based on enter/exit direction:
 
 ```heex
 <NavigationMenu.content id="nav-anim-content" class="NavigationMenuContent">
@@ -498,8 +510,8 @@ Essence exposes `--radix-navigation-menu-viewport-width`, `--radix-navigation-me
 
 .NavigationMenuViewport {
   position: relative;
-  width: var(--radix-navigation-menu-viewport-width);
-  height: var(--radix-navigation-menu-viewport-height);
+  width: var(--essence-navigation-menu-viewport-width);
+  height: var(--essence-navigation-menu-viewport-height);
   transition: width, height, 250ms ease;
 }
 

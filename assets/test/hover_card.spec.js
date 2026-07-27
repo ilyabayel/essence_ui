@@ -21,7 +21,7 @@ test.describe("Hover Card Primitive", () => {
     await expect(content).toBeVisible();
     await expect(trigger).toHaveAttribute("data-state", "open");
     await expect(content).toHaveAttribute("data-state", "open");
-    await expect(content).toContainText("@radix_ui");
+    await expect(content).toContainText("@essence_ui");
 
     const box = await content.boundingBox();
     expect(box).not.toBeNull();
@@ -50,7 +50,7 @@ test.describe("Hover Card Primitive", () => {
     await trigger.hover();
     await expect(page.locator("#hover-card-content")).toBeVisible();
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="hover-card"]',
+      include: '.essence-demo[data-component="hover-card"]',
     });
   });
 });
@@ -94,7 +94,7 @@ test.describe("Hover Card Primitive (touch)", () => {
     await expect(content).toBeVisible();
 
     await page
-      .locator('.radix-demo[data-component="hover-card"]')
+      .locator('.essence-demo[data-component="hover-card"]')
       .click({ position: { x: 8, y: 8 }, force: true });
     await expect(content).toBeHidden();
   });

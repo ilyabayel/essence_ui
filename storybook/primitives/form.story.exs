@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.FormStory do
 
   def function, do: &Form.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "form"}
+  def container, do: {:div, class: "essence-demo", "data-component": "form"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.FormStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs form demo",
+        description: "Essence UI form demo",
         template: """
         <Form.root
           id="form-primitive"

@@ -24,11 +24,11 @@ defmodule Storybook.GettingStarted do
       data-radius="medium"
     >
       <.text as="p" mb="4">
-        EssenceUI is a pre-styled component library for Phoenix LiveView, 100% compatible with <a
+        EssenceUI is a pre-styled component library for Phoenix LiveView—accessible, themeable,
+        and composable. Its design and APIs are inspired by <a
           href="https://www.radix-ui.com/themes"
           target="_blank"
-        >Radix UI Themes</a>.
-        It provides a set of accessible, themeable, and composable UI primitives for Elixir/Phoenix projects.
+        >Radix UI Themes</a>, adapted for Elixir and LiveView.
       </.text>
 
       <.heading as="h2" size="5" mt="6" mb="2">1. Install EssenceUI</.heading>
@@ -106,47 +106,43 @@ defmodule Storybook.GettingStarted do
 
       <.heading as="h2" size="5" mt="6" mb="2">Customizing your theme</.heading>
       <.text as="p">
-        You can further customize your theme by adjusting the data attributes on your root element. See the
-        <Link.es_link href="https://www.radix-ui.com/themes/docs/components/theme" target="_blank">
-          Theme documentation
+        You can further customize your theme by adjusting the data attributes on your root element.
+        See the
+        <Link.es_link href="/themes/docs/theme/overview" target="_blank">
+          Essence UI Themes docs
         </Link.es_link>
-        for all available options.
+        for available options.
       </.text>
 
       <.heading as="h2" size="5" mt="6" mb="2">Take it further</.heading>
       <.text as="p">
-        Explore more concepts and features:
+        Explore Essence UI docs:
       </.text>
       <ul style="margin-bottom: 2rem;">
         <li>
-          <Link.es_link href="https://www.radix-ui.com/themes/docs/overview/styling" target="_blank">
-            Styling
-          </Link.es_link>: Learn how to approach styling and overrides.
+          <Link.es_link href="/themes/docs" target="_blank">
+            Themes docs
+          </Link.es_link>: Component APIs, examples, and usage patterns.
         </li>
         <li>
-          <Link.es_link href="https://www.radix-ui.com/themes/docs/overview/layout" target="_blank">
-            Layout
-          </Link.es_link>: Get to know the layout primitives and their properties.
+          <Link.es_link href="/primitives/docs/overview/introduction" target="_blank">
+            Primitives
+          </Link.es_link>: Unstyled accessible building blocks.
         </li>
         <li>
-          <Link.es_link href="https://www.radix-ui.com/themes/docs/theme/overview" target="_blank">
-            Theme overview
-          </Link.es_link>: Anatomy of a theme and how to create your style.
+          <Link.es_link href="/themes/docs/overview/getting-started" target="_blank">
+            Getting started
+          </Link.es_link>: Install, theme root, and first components.
         </li>
         <li>
-          <Link.es_link href="https://www.radix-ui.com/themes/docs/theme/color" target="_blank">
-            Color
-          </Link.es_link>: Understand the color system and its application.
+          <Link.es_link href="/colors" target="_blank">
+            Colors
+          </Link.es_link>: 12-step scales and how Themes consumes them.
         </li>
         <li>
-          <Link.es_link href="https://www.radix-ui.com/themes/docs/theme/dark-mode" target="_blank">
-            Dark mode
-          </Link.es_link>: Integrate a great looking dark mode.
-        </li>
-        <li>
-          <Link.es_link href="https://www.radix-ui.com/themes/docs/theme/typography" target="_blank">
-            Typography
-          </Link.es_link>: Add custom typefaces and fine tune typographic details.
+          <Link.es_link href="/themes/playground" target="_blank">
+            Playground
+          </Link.es_link>: Try accent, gray, radius, and scaling live.
         </li>
       </ul>
 

@@ -2,7 +2,7 @@ defmodule EssenceUI.Components.ScrollArea do
   @moduledoc """
   A component for custom scrollbars.
 
-  Based on Radix UI Themes ScrollArea. Wraps `EssenceUI.Primitives.ScrollArea`.
+  Themed ScrollArea. Wraps `EssenceUI.Primitives.ScrollArea`.
 
   ## Examples
 
@@ -70,7 +70,7 @@ defmodule EssenceUI.Components.ScrollArea do
 
     id = assigns[:id] || "scroll-area-#{System.unique_integer([:positive])}"
 
-    # Align with Radix Themes: only `type="scroll"` uses a non-zero hide delay by default.
+    # Only `type="scroll"` uses a non-zero hide delay by default.
     scroll_hide_delay =
       cond do
         not is_nil(assigns[:scroll_hide_delay]) -> assigns.scroll_hide_delay

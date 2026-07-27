@@ -19,7 +19,7 @@ defmodule EssenceUIWeb.Docs.PrimitivesSmokeTest do
     end
   end
 
-  test "dialog has full radix sections", %{conn: conn} do
+  test "dialog has full docs sections", %{conn: conn} do
     {:ok, _view, html} = live(conn, "/primitives/docs/components/dialog")
     assert html =~ "Anatomy"
     assert html =~ "API Reference"

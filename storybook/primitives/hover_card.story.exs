@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.HoverCardStory do
 
   def function, do: &HoverCard.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "hover-card"}
+  def container, do: {:div, class: "essence-demo", "data-component": "hover-card"}
 
   def layout, do: :one_column
 
@@ -27,14 +27,14 @@ defmodule Storybook.Primitives.HoverCardStory do
           >
             <a
               class="ImageTrigger"
-              href="https://twitter.com/radix_ui"
+              href="https://github.com/ilyabayel/essence_ui"
               target="_blank"
               rel="noreferrer noopener"
             >
               <img
                 class="Image normal"
-                src="https://pbs.twimg.com/profile_images/1337055608613253126/r_eiMp2H_400x400.png"
-                alt="Radix UI"
+                src="https://github.com/ilyabayel.png"
+                alt="Essence UI"
               />
             </a>
           </HoverCard.trigger>
@@ -46,16 +46,16 @@ defmodule Storybook.Primitives.HoverCardStory do
             <div style="display: flex; flex-direction: column; gap: 7px;">
               <img
                 class="Image large"
-                src="https://pbs.twimg.com/profile_images/1337055608613253126/r_eiMp2H_400x400.png"
-                alt="Radix UI"
+                src="https://github.com/ilyabayel.png"
+                alt="Essence UI"
               />
               <div style="display: flex; flex-direction: column; gap: 15px;">
                 <div>
-                  <div class="Text bold">Radix</div>
-                  <div class="Text faded">@radix_ui</div>
+                  <div class="Text bold">Essence UI</div>
+                  <div class="Text faded">@essence_ui</div>
                 </div>
                 <div class="Text">
-                  Components, icons, colors, and templates for building high-quality, accessible UI. Free and open-source.
+                  Accessible, themeable Phoenix LiveView components. Free and open-source.
                 </div>
                 <div style="display: flex; gap: 15px;">
                   <div style="display: flex; gap: 5px;">

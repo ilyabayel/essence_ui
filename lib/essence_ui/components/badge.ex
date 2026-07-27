@@ -1,8 +1,6 @@
 defmodule EssenceUI.Components.Badge do
   @moduledoc """
-  A Badge component that displays a small piece of information or status.
-
-  Based on Radix UI Badge component with support for various sizes, variants,
+  A Badge component that displays a small piece of information or status with support for various sizes, variants,
   colors, and styling options.
   """
   use Phoenix.Component

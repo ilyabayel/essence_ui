@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.DialogStory do
 
   def function, do: &Dialog.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "dialog"}
+  def container, do: {:div, class: "essence-demo", "data-component": "dialog"}
 
   def layout, do: :one_column
 

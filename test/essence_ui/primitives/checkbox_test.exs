@@ -5,7 +5,7 @@ defmodule EssenceUI.Primitives.CheckboxTest do
 
   alias EssenceUI.Primitives.Checkbox
 
-  test "renders radix-like structure" do
+  test "renders structure" do
     html = render_component(&Checkbox.root/1, %{id: "c1", inner_block: []})
     assert html =~ ~s[button id="c1"]
     assert html =~ ~s[phx-hook="CheckboxRoot"]

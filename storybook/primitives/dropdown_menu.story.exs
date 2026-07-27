@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.DropdownMenuStory do
 
   def function, do: &DropdownMenu.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "dropdown-menu"}
+  def container, do: {:div, class: "essence-demo", "data-component": "dropdown-menu"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.DropdownMenuStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs dropdown menu demo",
+        description: "Essence UI dropdown menu demo",
         template: """
         <DropdownMenu.root id="dropdown-primitive">
           <DropdownMenu.trigger

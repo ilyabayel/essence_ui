@@ -7,7 +7,7 @@ defmodule EssenceUI.Primitives.ToggleTest do
   alias EssenceUI.Primitives.Toggle
   alias EssenceUI.Primitives.ToggleGroup
 
-  test "toggle renders radix-like button state" do
+  test "toggle renders button state" do
     html =
       render_component(
         fn assigns ->

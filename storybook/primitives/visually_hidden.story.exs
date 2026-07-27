@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.VisuallyHiddenStory do
   alias EssenceUI.Primitives.VisuallyHidden
 
   def function, do: &VisuallyHidden.visually_hidden/1
-  def container, do: {:div, class: "radix-demo", "data-component": "visually-hidden"}
+  def container, do: {:div, class: "essence-demo", "data-component": "visually-hidden"}
 
   def layout, do: :one_column
 

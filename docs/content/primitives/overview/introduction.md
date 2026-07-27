@@ -3,7 +3,7 @@ title: Introduction
 description: Unstyled, accessible Phoenix LiveView primitives for building design systems and web apps.
 ---
 
-Essence UI Primitives is a low-level UI component library for Phoenix LiveView with a focus on accessibility, customization, and developer experience. Use these components as the base layer of your design system, or adopt them incrementally.
+Essence UI Primitives is a low-level UI component library for Phoenix LiveView with a focus on accessibility, customization, and developer experience. Use these components as the base layer of your design system, or adopt them incrementally. The API and patterns are inspired by [Radix Primitives](https://www.radix-ui.com/primitives).
 
 ## Vision
 

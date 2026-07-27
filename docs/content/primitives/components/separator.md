@@ -9,7 +9,7 @@ Visually or semantically separates content.
 <.demo variant="primitive" component="separator" css={primitive_css("separator")}>
   <:heex>
     <div style="width: 100%; max-width: 300px; margin: 0 15px;">
-      <div class="DemoSeparatorText" style="font-weight: 500;">Radix Primitives</div>
+      <div class="DemoSeparatorText" style="font-weight: 500;">Essence UI</div>
       <div class="DemoSeparatorText">An open-source UI component library.</div>
       <Separator.separator class="DemoSeparatorRoot" style="margin: 15px 0;" />
       <div style="display: flex; height: 20px; align-items: center;">

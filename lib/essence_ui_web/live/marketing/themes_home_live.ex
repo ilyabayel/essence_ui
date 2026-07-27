@@ -54,7 +54,7 @@ defmodule EssenceUIWeb.Marketing.ThemesHomeLive do
 
               <.text size="4" color="gray" class="themes-home__lede">
                 An open source component library for Phoenix LiveView—accessible, themeable,
-                and compatible with the Radix Themes API. Just import and go.
+                and inspired by Radix Themes. Just import and go.
               </.text>
 
               <.box class="themes-home__code" phx-hook="CopyCode" id="hero-install-code">

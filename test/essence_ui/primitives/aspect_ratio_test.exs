@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.AspectRatioTest do
 
   alias EssenceUI.Primitives.AspectRatio
 
-  test "renders radix-like wrapper and inner root" do
+  test "renders wrapper and inner root" do
     html =
       render_component(
         fn assigns ->
@@ -17,7 +17,7 @@ defmodule EssenceUI.Primitives.AspectRatioTest do
         %{}
       )
 
-    assert html =~ "data-radix-aspect-ratio-wrapper"
+    assert html =~ "data-essence-aspect-ratio-wrapper"
     assert html =~ "padding-bottom: 56.25%"
     assert html =~ ~s[id="media"]
     assert html =~ ~s[class="root"]

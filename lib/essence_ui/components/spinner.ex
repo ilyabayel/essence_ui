@@ -2,8 +2,7 @@ defmodule EssenceUI.Components.Spinner do
   @moduledoc """
   A Spinner component that displays a loading animation.
 
-  Based on Radix UI Spinner component with support for various sizes
-  and styling options.
+  Supports various sizes and styling options.
   """
   use Phoenix.Component
 

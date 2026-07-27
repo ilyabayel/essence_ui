@@ -100,7 +100,7 @@ test.describe("Dropdown Menu Primitive", () => {
     await trigger.click();
     await expect(page.locator("#dropdown-content")).toBeVisible();
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="dropdown-menu"]',
+      include: '.essence-demo[data-component="dropdown-menu"]',
     });
   });
 });

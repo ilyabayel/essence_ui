@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.ContextMenuStory do
 
   def function, do: &ContextMenu.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "context-menu"}
+  def container, do: {:div, class: "essence-demo", "data-component": "context-menu"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.ContextMenuStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs context menu demo",
+        description: "Essence UI context menu demo",
         template: """
         <ContextMenu.root id="context-primitive">
           <ContextMenu.trigger

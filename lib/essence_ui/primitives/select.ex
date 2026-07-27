@@ -1,6 +1,6 @@
 defmodule EssenceUI.Primitives.Select do
   @moduledoc """
-  Select primitive based on Radix UI Select.
+  Select primitive for choosing a value from a list of options.
   """
   use EssenceUI.Primitives
 

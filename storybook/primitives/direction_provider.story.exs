@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.DirectionProviderStory do
   alias EssenceUI.Primitives.DirectionProvider
 
   def function, do: &DirectionProvider.direction_provider/1
-  def container, do: {:div, class: "radix-demo", "data-component": "direction-provider"}
+  def container, do: {:div, class: "essence-demo", "data-component": "direction-provider"}
 
   def layout, do: :one_column
 

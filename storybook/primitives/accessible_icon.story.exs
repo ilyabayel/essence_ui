@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.AccessibleIconStory do
   alias EssenceUI.Primitives.AccessibleIcon
 
   def function, do: &AccessibleIcon.accessible_icon/1
-  def container, do: {:div, class: "radix-demo", "data-component": "accessible-icon"}
+  def container, do: {:div, class: "essence-demo", "data-component": "accessible-icon"}
 
   def layout, do: :one_column
 

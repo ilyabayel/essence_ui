@@ -21,15 +21,15 @@ An interactive component which expands/collapses a panel.
       </div>
 
       <div class="DemoCollapsibleRepository">
-        <span class="DemoCollapsibleText">@radix-ui/primitives</span>
+        <span class="DemoCollapsibleText">@essence-ui/primitives</span>
       </div>
 
       <Collapsible.content id="collapsible-content">
         <div class="DemoCollapsibleRepository">
-          <span class="DemoCollapsibleText">@radix-ui/colors</span>
+          <span class="DemoCollapsibleText">@essence-ui/colors</span>
         </div>
         <div class="DemoCollapsibleRepository">
-          <span class="DemoCollapsibleText">@radix-ui/themes</span>
+          <span class="DemoCollapsibleText">@essence-ui/themes</span>
         </div>
       </Collapsible.content>
     </Collapsible.root>
@@ -107,18 +107,18 @@ The component that contains the collapsible content.
   <:row name="[data-disabled]" values="Present when disabled">Present when the collapsible is disabled.</:row>
 </.data_attributes_table>
 
-Essence exposes Radix-compatible CSS variables on content for size animations:
+Essence exposes CSS variables on content for size animations:
 
 | CSS variable | Description |
 | --- | --- |
-| `--radix-collapsible-content-width` | The width of the content when it opens/closes |
-| `--radix-collapsible-content-height` | The height of the content when it opens/closes |
+| `--essence-collapsible-content-width` | The width of the content when it opens/closes |
+| `--essence-collapsible-content-height` | The height of the content when it opens/closes |
 
 ## Examples
 
 ### Animating content size
 
-Use the `--radix-collapsible-content-width` and/or `--radix-collapsible-content-height` CSS variables to animate the size of the content when it opens/closes:
+Use the `--essence-collapsible-content-width` and/or `--essence-collapsible-content-height` CSS variables to animate the size of the content when it opens/closes:
 
 ```heex
 <Collapsible.content id="collapsible-animated-content" class="DemoCollapsibleContent">
@@ -139,11 +139,11 @@ Use the `--radix-collapsible-content-width` and/or `--radix-collapsible-content-
 
 @keyframes demoCollapsibleSlideDown {
   from { height: 0; }
-  to { height: var(--radix-collapsible-content-height); }
+  to { height: var(--essence-collapsible-content-height); }
 }
 
 @keyframes demoCollapsibleSlideUp {
-  from { height: var(--radix-collapsible-content-height); }
+  from { height: var(--essence-collapsible-content-height); }
   to { height: 0; }
 }
 ```

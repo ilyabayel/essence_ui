@@ -5,7 +5,7 @@ defmodule Storybook.Primitives.ToastStory do
   alias EssenceUI.Primitives.Toast
 
   def function, do: &Toast.provider/1
-  def container, do: {:div, class: "radix-demo", "data-component": "toast"}
+  def container, do: {:div, class: "essence-demo", "data-component": "toast"}
 
   def layout, do: :one_column
 

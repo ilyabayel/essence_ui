@@ -55,7 +55,7 @@ test.describe("Toggle Group Primitive", () => {
 
   test("has no accessibility violations", async ({ page }) => {
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="toggle-group"]',
+      include: '.essence-demo[data-component="toggle-group"]',
     });
   });
 });

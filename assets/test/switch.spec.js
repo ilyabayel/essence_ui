@@ -33,7 +33,7 @@ test.describe("Switch Primitive", () => {
 
   test("has no accessibility violations", async ({ page }) => {
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="switch"]',
+      include: '.essence-demo[data-component="switch"]',
     });
   });
 });

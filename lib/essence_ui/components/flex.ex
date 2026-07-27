@@ -2,7 +2,7 @@ defmodule EssenceUI.Components.Flex do
   @moduledoc """
   The Flex component is a low-level layout primitive for flexbox layouts.
 
-  Based on Radix UI Themes Flex component.
+  Themed Flex component.
   """
   use Phoenix.Component
 

@@ -6,14 +6,14 @@ defmodule EssenceUI.Primitives.HoverCardTest do
 
   alias EssenceUI.Primitives.HoverCard
 
-  test "renders radix-like hover card parts" do
+  test "renders hover card parts" do
     html =
       render_component(
         fn assigns ->
           ~H"""
           <HoverCard.root id="preview" open_delay={100} close_delay={50} default_open>
             <HoverCard.trigger id="preview-trigger" content_id="preview-content">
-              @radix
+              @essence
             </HoverCard.trigger>
             <HoverCard.content id="preview-content" side="right" align="start">
               Preview <HoverCard.arrow />

@@ -5,9 +5,9 @@ body:has(.docs-shell) {
   margin: 0;
 }
 
-.radix-demo[data-component="form"] input,
-.radix-demo[data-component="form"] textarea,
-.radix-demo[data-component="form"] button {
+.essence-demo[data-component="form"] input,
+.essence-demo[data-component="form"] textarea,
+.essence-demo[data-component="form"] button {
   box-sizing: border-box;
   all: unset;
 }

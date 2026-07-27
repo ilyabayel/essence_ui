@@ -2,8 +2,7 @@ defmodule EssenceUI.Components.Popover do
   @moduledoc """
   A Popover component for displaying rich floating content, triggered by a button.
 
-  Wraps `EssenceUI.Primitives.Popover` with Themes visual props.
-  Based on Radix UI Themes Popover.
+  Wraps `EssenceUI.Primitives.Popover` with themed visual props.
   """
   use Phoenix.Component
 
@@ -98,7 +97,7 @@ defmodule EssenceUI.Components.Popover do
   - `size` - Size of the content: "1", "2", "3", "4" (default: "2")
   - `side` - Placement side: "top", "bottom", "left", "right" (default: "bottom")
   - `align` - Alignment: "start", "center", "end" (default: "start")
-  - Plus width/height props (max_width defaults to "480px" in Radix)
+  - Plus width/height props (max_width defaults to "480px")
   """
   attr :id, :string, default: nil
   attr :size, :string, values: @sizes, default: "2"

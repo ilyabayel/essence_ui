@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.ToolbarStory do
 
   def function, do: &Toolbar.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "toolbar"}
+  def container, do: {:div, class: "essence-demo", "data-component": "toolbar"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.ToolbarStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs toolbar demo",
+        description: "Essence UI toolbar demo",
         template: """
         <Toolbar.root
           id="toolbar-primitive"

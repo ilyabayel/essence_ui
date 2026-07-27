@@ -1,7 +1,6 @@
 defmodule EssenceUI.Components.Button do
   @moduledoc """
-  Button component 100% compatible with Radix UI Themes Button API.
-  See: https://www.radix-ui.com/themes/docs/components/button
+  Themed button component with sizes, variants, and accent colors.
   """
 
   use Phoenix.Component
@@ -27,7 +26,7 @@ defmodule EssenceUI.Components.Button do
   @sizes ["1", "2", "3", "4"]
 
   @doc """
-  Renders a button. All props match Radix UI Button.
+  Renders a button.
 
   ## Examples
       <.button>Button</.button>

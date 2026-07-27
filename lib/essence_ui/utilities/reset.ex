@@ -2,7 +2,7 @@ defmodule EssenceUI.Utilities.Reset do
   @moduledoc """
   A component that resets the styles of its children.
 
-  Based on Radix UI Themes Reset component.
+  CSS reset utility for themed components.
   """
   use Phoenix.Component
 

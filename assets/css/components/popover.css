@@ -1,7 +1,7 @@
 .est-PopoverContent {
   background-color: var(--color-panel-solid);
   box-shadow: var(--shadow-5);
-  min-width: var(--radix-popover-trigger-width);
+  min-width: var(--essence-popover-trigger-width);
   outline: 0;
   overflow: auto;
   position: relative;
@@ -14,7 +14,7 @@
   padding: var(--popover-content-padding);
   box-sizing: border-box;
 
-  transform-origin: var(--radix-popover-content-transform-origin);
+  transform-origin: var(--essence-popover-content-transform-origin);
   animation-duration: 250ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;

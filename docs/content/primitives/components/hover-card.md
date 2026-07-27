@@ -19,15 +19,11 @@ For sighted users to preview content available behind a link.
               >
                 <a
                   class="ImageTrigger"
-                  href="https://twitter.com/radix_ui"
+                  href="https://github.com/"
                   target="_blank"
                   rel="noreferrer noopener"
                 >
-                  <img
-                    class="Image normal"
-                    src="https://pbs.twimg.com/profile_images/1337055608613253126/r_eiMp2H_400x400.png"
-                    alt="Radix UI"
-                  />
+                  <div class="Image normal" style="display: flex; align-items: center; justify-content: center; background: var(--gray-3); color: var(--gray-11); font-weight: 600; font-size: 14px;" aria-hidden="true">E</div>
                 </a>
               </HoverCard.trigger>
               <HoverCard.portal id="hover-card-portal">
@@ -37,18 +33,14 @@ For sighted users to preview content available behind a link.
                   side_offset={5}
                 >
                   <div style="display: flex; flex-direction: column; gap: 7px;">
-                    <img
-                      class="Image large"
-                      src="https://pbs.twimg.com/profile_images/1337055608613253126/r_eiMp2H_400x400.png"
-                      alt="Radix UI"
-                    />
+                    <div class="Image large" style="display: flex; align-items: center; justify-content: center; background: var(--gray-3); color: var(--gray-11); font-weight: 600; font-size: 24px;" aria-hidden="true">E</div>
                     <div style="display: flex; flex-direction: column; gap: 15px;">
                       <div>
-                        <div class="Text bold">Radix</div>
-                        <div class="Text faded">@radix_ui</div>
+                        <div class="Text bold">Essence</div>
+                        <div class="Text faded">@essence_ui</div>
                       </div>
                       <div class="Text">
-                        Components, icons, colors, and templates for building high-quality, accessible UI. Free and open-source.
+                        Unstyled, accessible UI components for Phoenix LiveView. Primitives, colors, and themes for building high-quality interfaces.
                       </div>
                       <div style="display: flex; gap: 15px;">
                         <div style="display: flex; gap: 5px;">

@@ -153,7 +153,7 @@ export function typeahead(key, items, state = { query: "", timeout: null }) {
 
 /**
  * Whether clicking an item should close the menu.
- * Matches Radix: all items close on select except sub-triggers.
+ * Matches Themes: all items close on select except sub-triggers.
  * Checkbox/radio stay open only when the consumer prevents the select
  * (e.g. `onSelect` + `preventDefault`); by default they close.
  * @param {Element} item
@@ -172,7 +172,7 @@ export function shouldCloseOnItemClick(item) {
 }
 
 /**
- * Highlight menu items on mouse pointer move (Radix MenuItemImpl).
+ * Highlight menu items on mouse pointer move (MenuItemImpl).
  * Focuses the item under the cursor so `[data-highlighted]` styles apply.
  * @param {Element} content
  */

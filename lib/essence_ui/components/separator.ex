@@ -2,8 +2,8 @@ defmodule EssenceUI.Components.Separator do
   @moduledoc """
   A Separator component that renders a visual divider between content sections.
 
-  Based on Radix UI Themes Separator component with support for various orientations,
-  colors, and styling options. Wraps `EssenceUI.Primitives.Separator`.
+  Supports various orientations, colors, and styling options.
+  Wraps `EssenceUI.Primitives.Separator`.
   """
   use Phoenix.Component
 

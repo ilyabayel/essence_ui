@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.NavigationMenuTest do
 
   alias EssenceUI.Primitives.NavigationMenu
 
-  test "renders radix-like navigation menu parts" do
+  test "renders navigation menu parts" do
     html =
       render_component(
         fn assigns ->

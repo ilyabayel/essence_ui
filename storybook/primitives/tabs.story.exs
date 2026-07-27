@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.TabsStory do
 
   def function, do: &Tabs.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "tabs"}
+  def container, do: {:div, class: "essence-demo", "data-component": "tabs"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.TabsStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs tabs demo",
+        description: "Essence UI tabs demo",
         template: """
         <Tabs.root
           id="tabs-primitive"

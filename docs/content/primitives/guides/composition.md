@@ -1,9 +1,9 @@
 ---
 title: Composition
-description: Compose primitive behavior with your own markup and Themes as_child—without Radix asChild cloning.
+description: Compose primitive behavior with your own markup and Themes as_child.
 ---
 
-Radix React uses an `asChild` prop to clone props onto an alternate child element. Essence UI Primitives take a different approach that fits HEEx and LiveView.
+Essence UI Primitives compose through concrete HEEx parts rather than cloning props onto alternate child elements. This approach fits LiveView and keeps markup explicit.
 
 ## What Essence does instead
 
@@ -14,7 +14,7 @@ Primitive parts render a concrete element (`button`, `div`, …). You compose by
 3. Using **`Slot`** when you need a polymorphic tag helper
 4. Using Themes **`as_child`** on Themes components (not on Primitives parts)
 
-Do not expect a Radix-style `asChild` on primitive parts—it is not implemented.
+Essence does not support `asChild` on primitive parts; use wrapping or Themes `as_child` instead.
 
 ## Wrapping a part
 
@@ -40,7 +40,7 @@ end
 
 ## Changing the element type with Slot
 
-[`Slot`](/primitives/docs/utilities/slot) renders a chosen HTML tag with merged attributes. Use it for polymorphic leaves—not as a drop-in for Radix `asChild` on compound triggers.
+[`Slot`](/primitives/docs/utilities/slot) renders a chosen HTML tag with merged attributes. Use it for polymorphic leaves—not as a drop-in for `asChild` on compound triggers.
 
 ```heex
 <Slot.slot as="a" href="/docs" class="link">

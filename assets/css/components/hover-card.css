@@ -11,7 +11,7 @@
   padding: var(--hover-card-content-padding);
   box-sizing: border-box;
 
-  transform-origin: var(--radix-hover-card-content-transform-origin);
+  transform-origin: var(--essence-hover-card-content-transform-origin);
 }
 
 /***************************************************************************************************

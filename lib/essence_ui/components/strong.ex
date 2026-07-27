@@ -1,7 +1,6 @@
 defmodule EssenceUI.Components.Strong do
   @moduledoc """
-  Stong component 100% compatible with Radix UI Themes Stong API.
-  See: https://www.radix-ui.com/themes/docs/components/strong
+  Themed strong text.
   """
 
   use Phoenix.Component

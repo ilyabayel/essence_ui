@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.TooltipTest do
 
   alias EssenceUI.Primitives.Tooltip
 
-  test "renders provider and radix-like tooltip parts" do
+  test "renders provider and  tooltip parts" do
     html =
       render_component(
         fn assigns ->

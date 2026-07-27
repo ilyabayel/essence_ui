@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.ToolbarTest do
 
   alias EssenceUI.Primitives.Toolbar
 
-  test "renders radix-like toolbar parts" do
+  test "renders toolbar parts" do
     html =
       render_component(
         fn assigns ->

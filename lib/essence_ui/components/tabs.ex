@@ -2,7 +2,7 @@ defmodule EssenceUI.Components.Tabs do
   @moduledoc """
   A set of content sections to be displayed one at a time.
 
-  Based on Radix UI Themes Tabs component with support for various sizes and colors.
+  Themed Tabs component with support for various sizes and colors.
   Wraps `EssenceUI.Primitives.Tabs`.
 
   ## Examples

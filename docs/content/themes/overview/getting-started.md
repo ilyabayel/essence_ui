@@ -3,7 +3,7 @@ title: Getting started
 description: Install Essence UI and render your first themed components.
 ---
 
-Essence UI is a pre-styled component library for Phoenix LiveView, compatible with [Radix UI Themes](https://www.radix-ui.com/themes).
+Essence UI is a pre-styled component library for Phoenix LiveView, inspired by [Radix UI Themes](https://www.radix-ui.com/themes).
 
 ## 1. Install
 

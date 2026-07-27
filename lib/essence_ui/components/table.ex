@@ -2,8 +2,7 @@ defmodule EssenceUI.Components.Table do
   @moduledoc """
   A semantic table component for presenting tabular data.
 
-  Based on Radix UI Themes Table component with support for various sizes, variants,
-  and layouts. The table provides proper semantic structure with separate header
+  Supports various sizes, variants, and layouts. The table provides proper semantic structure with separate header
   and body sections, and supports different types of cells.
 
   ## Examples

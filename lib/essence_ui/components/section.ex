@@ -1,7 +1,6 @@
 defmodule EssenceUI.Components.Section do
   @moduledoc """
-  Section component matching Radix UI Themes Section API and behavior.
-  See: https://github.com/radix-ui/themes/blob/main/packages/radix-ui-themes/src/components/section.tsx
+  Themed section container with layout and spacing props.
   """
   use Phoenix.Component
 
@@ -21,7 +20,7 @@ defmodule EssenceUI.Components.Section do
   require WidthProps
 
   @doc """
-  Section component. All props match Radix UI Section.
+  Section component.
   """
   LayoutProps.attrs()
   MarginProps.attrs()

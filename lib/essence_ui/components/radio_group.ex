@@ -1,6 +1,6 @@
 defmodule EssenceUI.Components.RadioGroup do
   @moduledoc """
-  Radio Group component styled per Radix Themes Radio Group.
+  Themed radio group with sizes, variants, and accent colors.
   """
   use Phoenix.Component
 
@@ -119,7 +119,7 @@ defmodule EssenceUI.Components.RadioGroup do
     extracted = ExtractProps.call(assigns, prop_defs)
     assigns = assign_new(assigns, :id, fn -> "radio-item-#{System.unique_integer([:positive])}" end)
 
-    # We manually build classes to match Radix Themes precisely
+    # Build classes for theme styling
     # Label gets: est-RadioGroupItem est-Text est-r-size-*
     # Button gets: est-reset est-BaseRadioRoot est-r-size-* est-variant-* [est-high-contrast]
 

@@ -38,23 +38,23 @@ defmodule Storybook.Themes.Components.HoverCard do
               href="#"
               class="est-Link est-reset est-Text"
             >
-              @radix_ui
+              @essence_ui
             </a>
           </.hover_card_trigger>
           <.hover_card_content max_width="300px">
             <.flex gap="4">
               <.avatar
                 size="3"
-                fallback="R"
+                fallback="E"
                 radius="full"
-                src="https://pbs.twimg.com/profile_images/1337055608613253126/r_eiMp2H_400x400.png"
+                src="https://github.com/ilyabayel.png"
               />
               <.box>
                 <.heading
                   size="3"
                   as="h3"
                 >
-                  Radix
+                  Essence UI
                 </.heading>
                 <.text
                   as="div"
@@ -62,13 +62,13 @@ defmodule Storybook.Themes.Components.HoverCard do
                   color="gray"
                   mb="2"
                 >
-                  @radix_ui
+                  @essence_ui
                 </.text>
                 <.text
                   as="div"
                   size="2"
                 >
-                  React components, icons, and colors for building high-quality, accessible UI.
+                  Accessible, themeable Phoenix LiveView components for building high-quality UI.
                 </.text>
               </.box>
             </.flex>

@@ -1,7 +1,7 @@
 defmodule EssenceUI.SharedProps.ColorProps do
   @moduledoc """
   Color prop definitions for Box and other components.
-  Inspired by Radix UI Themes and Radix Colors.
+  Theme color props for Essence UI.
   """
 
   @accent_colors [

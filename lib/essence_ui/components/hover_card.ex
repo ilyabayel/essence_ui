@@ -2,8 +2,7 @@ defmodule EssenceUI.Components.HoverCard do
   @moduledoc """
   A HoverCard component for sighted users to preview content available behind a link.
 
-  Wraps `EssenceUI.Primitives.HoverCard` with Themes visual props.
-  Based on Radix UI Themes HoverCard.
+  Wraps `EssenceUI.Primitives.HoverCard` with themed visual props.
   """
   use Phoenix.Component
 

@@ -1,7 +1,6 @@
 defmodule EssenceUI.Components.Link do
   @moduledoc """
-  Link component 100% compatible with Radix UI Themes Link API.
-  See: https://www.radix-ui.com/themes/docs/components/link
+  Themed link with size, weight, and underline options.
   """
   use Phoenix.Component
 
@@ -17,7 +16,7 @@ defmodule EssenceUI.Components.Link do
   @underline_values ["auto", "always", "hover", "none"]
 
   @doc """
-  Renders a link. All props match Radix UI Link.
+  Renders a link.
 
   Phoenix LiveView navigation is supported via `navigate` / `patch`
   (implemented with `Phoenix.Component.link/1`).

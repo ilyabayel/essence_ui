@@ -89,13 +89,13 @@
 	}
 
 	to {
-		height: var(--radix-accordion-content-height);
+		height: var(--essence-accordion-content-height);
 	}
 }
 
 @keyframes slideUp {
 	from {
-		height: var(--radix-accordion-content-height);
+		height: var(--essence-accordion-content-height);
 	}
 
 	to {

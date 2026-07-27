@@ -70,7 +70,7 @@ export const CollapsibleRoot = {
       this.trigger.dataset.state = 'open';
     }
 
-    // Dimension retrieval (Radix pattern)
+    // Dimension retrieval (dimension pattern)
     const node = this.content;
     const originalStyles = {
       transitionDuration: node.style.transitionDuration,

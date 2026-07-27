@@ -1,9 +1,7 @@
 defmodule EssenceUI.Components.Radio do
   @moduledoc """
-  A simple, accessible Radio component for single selection within a group.
-
-  Based on Radix UI Themes Radio component with support for various sizes, variants,
-  and colors. Like Radix Themes, this is a styled native `<input type="radio">`
+  A simple, accessible Radio component for single selection within a group with support for various sizes, variants,
+  and colors. This is a styled native `<input type="radio">`
   (not a wrap of `Primitives.RadioGroup` — use `radio_group` for the compound API).
 
   ## Examples

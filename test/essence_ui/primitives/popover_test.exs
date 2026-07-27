@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.PopoverTest do
 
   alias EssenceUI.Primitives.Popover
 
-  test "renders radix-like popover parts" do
+  test "renders popover parts" do
     html =
       render_component(
         fn assigns ->

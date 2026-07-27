@@ -6,7 +6,7 @@ defmodule EssenceUI.Primitives.PasswordToggleFieldTest do
 
   alias EssenceUI.Primitives.PasswordToggleField
 
-  test "renders radix-like password toggle parts" do
+  test "renders password toggle parts" do
     html =
       render_component(
         fn assigns ->

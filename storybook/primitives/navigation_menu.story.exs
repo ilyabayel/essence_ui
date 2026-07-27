@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.NavigationMenuStory do
 
   def function, do: &NavigationMenu.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "navigation-menu"}
+  def container, do: {:div, class: "essence-demo", "data-component": "navigation-menu"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.NavigationMenuStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs navigation menu demo",
+        description: "Essence UI navigation menu demo",
         template: """
         <NavigationMenu.root
           id="nav-primitive"
@@ -50,8 +50,8 @@ defmodule Storybook.Primitives.NavigationMenuStory do
                         <path d="M12 0H4V8H12V0Z"></path>
                         <path d="M17 8C19.2091 8 21 6.20914 21 4C21 1.79086 19.2091 0 17 0C14.7909 0 13 1.79086 13 4C13 6.20914 14.7909 8 17 8Z"></path>
                       </svg>
-                      <div class="CalloutHeading">Radix Primitives</div>
-                      <p class="CalloutText">Unstyled, accessible components for React.</p>
+                      <div class="CalloutHeading">Essence UI</div>
+                      <p class="CalloutText">Accessible components for Phoenix LiveView.</p>
                     </NavigationMenu.link>
                   </li>
                   <li>
@@ -74,7 +74,7 @@ defmodule Storybook.Primitives.NavigationMenuStory do
                   </li>
                   <li>
                     <NavigationMenu.link
-                      href="https://icons.radix-ui.com/"
+                      href="/colors"
                       class="ListItemLink"
                     >
                       <div class="ListItemHeading">Icons</div>
@@ -113,7 +113,7 @@ defmodule Storybook.Primitives.NavigationMenuStory do
                       class="ListItemLink"
                     >
                       <div class="ListItemHeading">Getting started</div>
-                      <p class="ListItemText">A quick tutorial to get you up and running with Radix Primitives.</p>
+                      <p class="ListItemText">A quick tutorial to get you up and running with Essence UI.</p>
                     </NavigationMenu.link>
                   </li>
                   <li>
@@ -149,7 +149,7 @@ defmodule Storybook.Primitives.NavigationMenuStory do
                       class="ListItemLink"
                     >
                       <div class="ListItemHeading">Releases</div>
-                      <p class="ListItemText">Radix Primitives releases and their changelogs.</p>
+                      <p class="ListItemText">Essence UI releases and their changelogs.</p>
                     </NavigationMenu.link>
                   </li>
                 </ul>
@@ -159,7 +159,7 @@ defmodule Storybook.Primitives.NavigationMenuStory do
             <NavigationMenu.item value="github">
               <NavigationMenu.link
                 class="NavigationMenuLink"
-                href="https://github.com/radix-ui"
+                href="https://github.com/ilyabayel/essence_ui"
               >
                 Github
               </NavigationMenu.link>

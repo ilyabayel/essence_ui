@@ -37,7 +37,7 @@ Import the component.
 
 ### Label
 
-Contains the content for the label. Use `for` to associate with a control (Radix `htmlFor`).
+Contains the content for the label. Use `for` to associate with a control.
 
 <.props_table module={EssenceUI.Primitives.Label} function={:label} />
 

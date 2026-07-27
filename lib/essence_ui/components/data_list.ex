@@ -2,7 +2,7 @@ defmodule EssenceUI.Components.DataList do
   @moduledoc """
   A component for displaying a list of key-value pairs.
 
-  Based on Radix UI Themes DataList component.
+  Themed DataList component.
 
   ## Examples
 

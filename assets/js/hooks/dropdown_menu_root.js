@@ -309,7 +309,7 @@ export const DropdownMenuRoot = {
           closeTimer = setTimeout(() => this.closeSub(sub), 150);
         };
 
-        // Hover open is mouse-only (Radix); click/keyboard open via onItemClick / arrows.
+        // Hover open is mouse-only ; click/keyboard open via onItemClick / arrows.
         trigger.addEventListener("pointerenter", whenMouse(open));
         trigger.addEventListener("pointerleave", whenMouse(scheduleClose));
         content.addEventListener(

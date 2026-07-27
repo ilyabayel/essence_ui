@@ -363,7 +363,7 @@ export const MenubarRoot = {
           this.openSub(trigger);
         })
       );
-      // Hover open is mouse-only (Radix); click/keyboard open via onItemClick / arrows.
+      // Hover open is mouse-only ; click/keyboard open via onItemClick / arrows.
       trigger.addEventListener(
         "pointerleave",
         whenMouse(() => {

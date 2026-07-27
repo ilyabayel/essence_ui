@@ -16,7 +16,7 @@ defmodule EssenceUIWeb.Components.SiteFooter do
         <.flex direction="column" gap="2">
           <.text size="3" weight="bold" high_contrast>Essence UI</.text>
           <.text size="2" color="gray">
-            Phoenix LiveView components compatible with Radix Themes.
+            Essence UI for Phoenix LiveView, inspired by Radix Themes.
           </.text>
         </.flex>
 

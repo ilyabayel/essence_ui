@@ -13,10 +13,10 @@ defmodule Storybook.Primitives.SeparatorStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs separator demo",
+        description: "Essence UI separator demo",
         template: """
         <div
-          class="radix-demo"
+          class="essence-demo"
           data-component="separator"
         >
           <div style="width: 100%; max-width: 300px; margin: 0 15px;">
@@ -24,7 +24,7 @@ defmodule Storybook.Primitives.SeparatorStory do
               class="Text"
               style="font-weight: 500;"
             >
-              Radix Primitives
+              Essence UI
             </div>
             <div class="Text">An open-source UI component library.</div>
             <Separator.separator

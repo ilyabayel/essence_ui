@@ -1,8 +1,6 @@
 defmodule EssenceUI.Components.CheckboxGroup do
   @moduledoc """
-  A group of checkboxes.
-
-  Based on Radix UI Themes Checkbox Group component with support for various sizes, variants,
+  A group of checkboxes with support for various sizes, variants,
   and colors. Checkbox Group provides layout and state management for a collection of
   checkboxes, allowing multiple selections.
 

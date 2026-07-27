@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.ScrollAreaStory do
 
   def function, do: &ScrollArea.root/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "scroll-area"}
+  def container, do: {:div, class: "essence-demo", "data-component": "scroll-area"}
 
   def layout, do: :one_column
 
@@ -14,7 +14,7 @@ defmodule Storybook.Primitives.ScrollAreaStory do
     [
       %Variation{
         id: :primitive,
-        description: "Radix docs scroll area demo",
+        description: "Essence UI scroll area demo",
         template: """
         <ScrollArea.root
           id="scroll-area-primitive"

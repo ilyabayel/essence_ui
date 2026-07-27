@@ -6,7 +6,7 @@ defmodule Storybook.Primitives.SlotStory do
 
   def function, do: &Slot.slot/1
 
-  def container, do: {:div, class: "radix-demo", "data-component": "slot"}
+  def container, do: {:div, class: "essence-demo", "data-component": "slot"}
 
   def layout, do: :one_column
 

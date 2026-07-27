@@ -2,7 +2,7 @@ defmodule EssenceUI.Components.Theme do
   @moduledoc """
   Theme root for Essence UI — applies accent, gray, radius, scaling, and appearance.
 
-  Compatible with Radix UI Themes `Theme` API. Prefer this over raw `data-*` attributes.
+  Applies accent, gray, radius, scaling, and appearance via `data-*` attributes on a root wrapper.
   """
   use Phoenix.Component
 

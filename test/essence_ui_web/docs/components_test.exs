@@ -95,12 +95,12 @@ defmodule EssenceUIWeb.Docs.ComponentsTest do
 
   test "primitive_css loads component styles without canvas" do
     css = Components.primitive_css("dialog")
-    refute css =~ "radix-demo"
+    refute css =~ "essence-demo"
     assert css =~ "DialogContent"
     refute css =~ "@import"
 
     alert = Components.primitive_css("alert-dialog")
-    refute alert =~ "radix-demo"
+    refute alert =~ "essence-demo"
     assert alert =~ "DemoAlertDialogContent"
     assert alert =~ "DemoButton"
     refute alert =~ "@import"

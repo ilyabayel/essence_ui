@@ -8,7 +8,7 @@ test.describe("Slot Primitive", () => {
   });
 
   test("renders composed button with slot props", async ({ page }) => {
-    const demo = page.locator('.radix-demo[data-component="slot"]');
+    const demo = page.locator('.essence-demo[data-component="slot"]');
     const button = demo.locator("button.Button.violet");
 
     await expect(button).toBeVisible();
@@ -24,7 +24,7 @@ test.describe("Slot Primitive", () => {
 
   test("is activatable with keyboard", async ({ page }) => {
     const button = page.locator(
-      '.radix-demo[data-component="slot"] button.Button',
+      '.essence-demo[data-component="slot"] button.Button',
     );
 
     await button.focus();
@@ -35,10 +35,10 @@ test.describe("Slot Primitive", () => {
 
   test("has no accessibility violations", async ({ page }) => {
     await expect(
-      page.locator('.radix-demo[data-component="slot"] button'),
+      page.locator('.essence-demo[data-component="slot"] button'),
     ).toBeVisible();
     await expectNoA11yViolations(page, {
-      include: '.radix-demo[data-component="slot"]',
+      include: '.essence-demo[data-component="slot"]',
     });
   });
 });

@@ -86,13 +86,13 @@ defmodule EssenceUIWeb.Docs.Components do
   Load primitives demo CSS for Markdown: `css={primitive_css("dialog")}`.
 
   Returns the component stylesheet only (no demo canvas). Strips `@import`
-  lines and `.radix-demo[data-component]` selector prefixes so the CSS tab
+  lines and `.essence-demo[data-component]` selector prefixes so the CSS tab
   shows copy-pasteable `Demo*` rules.
   """
   def primitive_css(component) when is_binary(component) do
     case read_primitive_css("#{component}.css") do
       nil -> ""
-      css -> css |> strip_css_imports() |> unwrap_radix_demo_selectors()
+      css -> css |> strip_css_imports() |> unwrap_essence_demo_selectors()
     end
   end
 
@@ -208,7 +208,7 @@ defmodule EssenceUIWeb.Docs.Components do
     """
   end
 
-  @doc "Feature bullet list (Radix Highlights equivalent)."
+  @doc "Feature bullet list (highlights)."
   slot :item, required: true
 
   def highlights(assigns) do
@@ -328,14 +328,14 @@ defmodule EssenceUIWeb.Docs.Components do
     |> String.trim()
   end
 
-  # Drop `.radix-demo[data-component="…"]` so the CSS tab shows component-local rules.
-  defp unwrap_radix_demo_selectors(css) when is_binary(css) do
+  # Drop `.essence-demo[data-component="…"]` so the CSS tab shows component-local rules.
+  defp unwrap_essence_demo_selectors(css) when is_binary(css) do
     css
-    |> String.replace(~r/\.radix-demo\[data-component="[^"]+"\]\s*/m, "")
+    |> String.replace(~r/\.essence-demo\[data-component="[^"]+"\]\s*/m, "")
     |> String.trim()
   end
 
-  defp preview_class("primitive"), do: "docs-demo__preview radix-demo"
+  defp preview_class("primitive"), do: "docs-demo__preview essence-demo"
   defp preview_class(_), do: "docs-demo__preview essence-ui"
 
   defp theme_attr("theme", value), do: value
