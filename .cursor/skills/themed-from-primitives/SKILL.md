@@ -103,7 +103,7 @@ import EssenceUI.Primitives.Switch, only: [root: 1, thumb: 1]
 """
 ```
 
-**Compound** (Select / Accordion / ContextMenu) — alias primitive, one themed fn per part:
+**Compound** (Select / ContextMenu) — alias primitive, one themed fn per part:
 
 ```elixir
 alias EssenceUI.Primitives.Select, as: SelectPrimitive

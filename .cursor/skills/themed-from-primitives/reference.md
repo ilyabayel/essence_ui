@@ -32,7 +32,6 @@ Themes depends on the unified `radix-ui` package, not `@radix-ui/react-*` per im
 | Switch | `lib/essence_ui/components/switch.ex` | `import …, only: [root, thumb]` |
 | Checkbox | `lib/essence_ui/components/checkbox.ex` | `import` + Base+Root class stack + indicator icons |
 | Select | `lib/essence_ui/components/select.ex` | `alias … as: SelectPrimitive`; `select_*` parts |
-| Accordion | `lib/essence_ui/components/accordion.ex` | `alias … as: Primitive`; slots + part fns |
 | ContextMenu | `lib/essence_ui/components/context_menu.ex` | heavy compound; moduledoc says wraps primitive |
 | RadioGroup | `lib/essence_ui/components/radio_group.ex` | `alias … as: RadioGroupPrimitive` |
 

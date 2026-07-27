@@ -75,7 +75,7 @@ def container,
 - Use `imports` for compound parts; templates use `<.component>` / slot APIs.
 - Prefer `%VariationGroup{}` for prop matrices (variants, sizes, colors); `%Variation{}` + `template:` for composed demos.
 
-Reference: `storybook/themes/components/button.story.exs`, `accordion.story.exs`.
+Reference: `storybook/themes/components/button.story.exs`, `storybook/primitives/accordion.story.exs`.
 
 ## Examples
 
