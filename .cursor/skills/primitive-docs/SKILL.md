@@ -102,7 +102,7 @@ Full skeleton: [reference.md](reference.md).
 - CSS tab = component file only (`primitive_css/1`); canvas is preview-only.
 - Class names: `Demo{Component}{Part}` (e.g. `DemoAccordionTrigger`).
 - Portaled overlays: dual selectors when needed, e.g.
-  `.DemoAlertDialogContent, [data-essence-alert-dialog-content].DemoAlertDialogContent`.
+  `.DemoAlertDialogContent, [data-radix-alert-dialog-content].DemoAlertDialogContent`.
 - Port Radix demo CSS from `components/demos/{name}/css/` →
   `assets/css/primitives/{name}.css`; `primitive_css` strips `@import`.
 - Import nothing in Markdown — `PageLive` already aliases all primitives + docs helpers.

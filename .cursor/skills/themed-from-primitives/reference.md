@@ -8,9 +8,9 @@
 | `extractProps(props, propDefs)` | `EssenceUI.Helpers.ExtractProps.call/2` |
 | `colorProp`, `marginProp`, … | `EssenceUI.SharedProps.*` macros + `prop_defs` |
 | `data-accent-color={color}` | same attr on primitive root |
-| `classNames('est-reset', 'est-Foo', …)` | list → join / class list on part |
+| `classNames('rt-reset', 'rt-Foo', …)` | list → join / class list on part |
 | `asChild` / Slot | Elixir: compose parts explicitly; utilities in `lib/essence_ui/utilities/` |
-| `_internal/base-*.css` | Shared `est-Base*` classes in `assets/css/components/` / styles |
+| `_internal/base-*.css` | Shared `rt-Base*` classes in `assets/css/components/` / styles |
 | Theme provider `data-*` | Storybook themes container / `EssenceUI.Components.Theme` |
 
 ### Where to read upstream

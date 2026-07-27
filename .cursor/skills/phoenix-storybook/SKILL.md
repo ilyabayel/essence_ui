@@ -23,7 +23,7 @@ Stories live under `storybook/`. Dev server: `mix phx.server` → Storybook at `
 |-------|------|------|---------|
 | Primitives | `storybook/primitives/` | `:component` | `def container` → `essence-demo` + `data-component` |
 | Themes | `storybook/themes/{components,layout,typography,utilities}/` | `:component` | theme data attrs only (no `essence-demo`) |
-| Examples | `storybook/examples/` | `:example` | root `div` with theme attrs + `class="essence-ui"` |
+| Examples | `storybook/examples/` | `:example` | root `div` with theme attrs + `class="radix-themes"` |
 
 **Hard rules**
 
@@ -83,7 +83,7 @@ Full-page compositions.
 
 - `use PhoenixStorybook.Story, :example`
 - `import EssenceUI.Components, except: [quote: 1]` (when using Components)
-- Single `render/1` with `~H`; root wrapper carries theme attrs + `essence-ui` (no `essence-demo`)
+- Single `render/1` with `~H`; root wrapper carries theme attrs + `radix-themes` (no `essence-demo`)
 
 Reference: `storybook/examples/dense_display.story.exs`.
 

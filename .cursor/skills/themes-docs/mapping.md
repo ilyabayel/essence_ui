@@ -53,7 +53,7 @@ not a guarantee every prop exists.
 | `<DecorativeBox />` | `<.decoration_box />` (`EssenceUIWeb.DecorationBox`, imported in `PageLive`) |
 | Responsive maps `{ initial, md }` | `%{initial: "1", md: "2"}` (atom keys) |
 | Section `size` | CSS exists; Elixir `size` attr not wired — use `py` / padding until fixed |
-| Full-bleed layout heroes | Outer root needs `width="100%"` (or rely on `.docs-demo__preview > .est-Box` etc. rule in `docs.css`) — preview is a flex row and otherwise shrink-to-fits to a hairline |
+| Full-bleed layout heroes | Outer root needs `width="100%"` (or rely on `.docs-demo__preview > .rt-Box` etc. rule in `docs.css`) — preview is a flex row and otherwise shrink-to-fits to a hairline |
 
 ## Omit or adapt
 

@@ -57,7 +57,7 @@ Radix talks about `className` and `data-state`. In Essence docs:
 
 - Say **`class`** (HEEx).
 - Keep **`data-state`**, **`data-disabled`**, orientation/dir attrs when the hook sets them.
-- CSS variables like `--essence-accordion-content-height`: document only if the Essence hook sets them (many do for animation parity).
+- CSS variables like `--radix-accordion-content-height`: document only if the Essence hook sets them (many do for animation parity).
 
 ## Examples translation checklist
 

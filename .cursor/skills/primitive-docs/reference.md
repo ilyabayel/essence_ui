@@ -101,7 +101,7 @@ Preview injects **canvas** + **component** `<style>` tags. CSS tab shows **compo
 
 ```css
 .DemoDialogOverlay,
-[data-essence-dialog-overlay].DemoDialogOverlay { … }
+[data-radix-dialog-overlay].DemoDialogOverlay { … }
 ```
 
 5. Do **not** add `all: unset` in this file unless the user asks.

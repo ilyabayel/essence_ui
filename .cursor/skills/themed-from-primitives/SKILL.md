@@ -2,11 +2,11 @@
 name: themed-from-primitives
 description: >-
   Build or refactor Essence UI themed components that wrap headless primitives
-  (Radix Themes pattern): ExtractProps, SharedProps, est-* classes,
+  (Radix Themes pattern): ExtractProps, SharedProps, rt-* classes,
   data-accent-color, ExUnit regression + Playwright e2e, Storybook polish.
   Use when wrapping a primitive in Components.*, converting a parallel themed
   implementation to reuse Primitives.*, or when the user mentions themed from
-  primitives, Themes wrapper, or est-* on a primitive root.
+  primitives, Themes wrapper, or rt-* on a primitive root.
 ---
 
 # Themed Components from Primitives
@@ -15,8 +15,8 @@ Essence UI has two layers:
 
 | Layer | Path | Role |
 |-------|------|------|
-| Primitives | `lib/essence_ui/primitives/` | Headless behavior, hooks, a11y (`data-essence-*`, `phx-hook`) |
-| Themes | `lib/essence_ui/components/` | Styled API (`est-*`, SharedProps, `data-accent-color`) |
+| Primitives | `lib/essence_ui/primitives/` | Headless behavior, hooks, a11y (`data-radix-*`, `phx-hook`) |
+| Themes | `lib/essence_ui/components/` | Styled API (`rt-*`, SharedProps, `data-accent-color`) |
 
 **Rule:** Primitive owns behavior. Themed component owns look + Themes prop surface. Do not reimplement hooks/state in Components when a matching Primitive exists.
 
@@ -32,7 +32,7 @@ Do in this order. Do not skip tests.
 
 ```
 1. Read Radix Themes wrapper for the same component in .radix-ui/
-2. Write ExUnit regression tests for the themed API (est-*, props, primitive hooks)
+2. Write ExUnit regression tests for the themed API (rt-*, props, primitive hooks)
 3. Write / extend Playwright e2e against themes storybook
 4. Implement or refactor Components.* to wrap Primitives.*
 5. Run mix test + Playwright; fix until green
@@ -51,11 +51,11 @@ Look for:
 - `import { X as XPrimitive } from 'radix-ui'`
 - `extractProps` → size/variant/color → classes
 - `data-accent-color` / `data-radius` on the interactive root
-- Class stack: `est-reset` + `est-Base*` + `est-*` (e.g. `est-CheckboxRoot`)
+- Class stack: `rt-reset` + `rt-Base*` + `rt-*` (e.g. `rt-CheckboxRoot`)
 - Compound parts vs single function
 - Shared `_internal/base-*.css` for related components
 
-Essence equivalents: `ExtractProps`, `SharedProps.*`, same `est-*` class names from `assets/css/components/`.
+Essence equivalents: `ExtractProps`, `SharedProps.*`, same `rt-*` class names from `assets/css/components/`.
 
 ### 2. ExUnit regression (themed)
 
@@ -63,14 +63,14 @@ Add `test/essence_ui/components/<name>_test.exs`.
 
 Assert **both** Themes surface and Primitive wiring:
 
-- `est-*` classes, `est-r-size-*`, `est-variant-*`, `data-accent-color`
-- Primitive markers: `phx-hook`, `role`, `data-essence-*`, part markup
+- `rt-*` classes, `rt-r-size-*`, `rt-variant-*`, `data-accent-color`
+- Primitive markers: `phx-hook`, `role`, `data-radix-*`, part markup
 
 Pattern: `test/essence_ui/components/switch_test.exs`.
 
 ```elixir
 html = render_component(&Switch.switch/1, %{id: "s1", size: "3", color: "blue"})
-assert html =~ "est-SwitchRoot"
+assert html =~ "rt-SwitchRoot"
 assert html =~ ~s[phx-hook="SwitchRoot"]
 assert html =~ ~s(data-accent-color="blue")
 ```
@@ -93,12 +93,12 @@ use Phoenix.Component
 
 import EssenceUI.Primitives.Switch, only: [root: 1, thumb: 1]
 
-# SharedProps attrs + ExtractProps → est-r-size / est-variant / color / margin
+# SharedProps attrs + ExtractProps → rt-r-size / rt-variant / color / margin
 # Ensure id for hooks
 
 ~H"""
 <.root id={@id} … class={@class} data-accent-color={@color} {@rest}>
-  <.thumb class="est-SwitchThumb" />
+  <.thumb class="rt-SwitchThumb" />
 </.root>
 """
 ```
@@ -122,7 +122,7 @@ Checklist:
 
 - [ ] Behavior attrs forwarded to primitive (`checked`, `disabled`, `on_*`, …)
 - [ ] Themes props via SharedProps + ExtractProps (do not hand-roll class maps)
-- [ ] `est-reset` on interactive roots when Radix does
+- [ ] `rt-reset` on interactive roots when Radix does
 - [ ] `data-accent-color={@color}` when color prop exists
 - [ ] Stable `id` generated if missing (hooks need it)
 - [ ] Facade: `defdelegate` in `lib/essence_ui/components.ex` for public fns
@@ -164,6 +164,6 @@ Fix failures at the layer they belong to (primitive vs themes styles vs story).
 ## Anti-patterns
 
 - Parallel themed markup that copies primitive DOM without calling it
-- Asserting only `est-*` in ExUnit and missing hook/a11y attrs (regressions slip through)
+- Asserting only `rt-*` in ExUnit and missing hook/a11y attrs (regressions slip through)
 - E2E only against primitives when shipping a Themes API change
-- Inventing new class names instead of Radix Themes `est-*`
+- Inventing new class names instead of Radix Themes `rt-*`
