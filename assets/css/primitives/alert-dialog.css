@@ -3,16 +3,19 @@
 @import "@radix-ui/colors/red.css";
 @import "@radix-ui/colors/violet.css";
 
-.DemoAlertDialogOverlay,
-[data-essence-alert-dialog-overlay].DemoAlertDialogOverlay {
+/* reset */
+button {
+	all: unset;
+}
+
+.DemoAlertDialogOverlay {
 	background-color: var(--black-a9);
 	position: fixed;
 	inset: 0;
 	animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.DemoAlertDialogContent,
-[data-essence-alert-dialog-content].DemoAlertDialogContent {
+.DemoAlertDialogContent {
 	background-color: var(--gray-1);
 	border-radius: 6px;
 	box-shadow: var(--shadow-6);
@@ -27,8 +30,7 @@
 	animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.DemoAlertDialogContent:focus,
-[data-essence-alert-dialog-content].DemoAlertDialogContent:focus {
+.DemoAlertDialogContent:focus {
 	outline: none;
 }
 
@@ -102,6 +104,7 @@
 	from {
 		opacity: 0;
 	}
+
 	to {
 		opacity: 1;
 	}
@@ -112,6 +115,7 @@
 		opacity: 0;
 		transform: translate(-50%, -48%) scale(0.96);
 	}
+
 	to {
 		opacity: 1;
 		transform: translate(-50%, -50%) scale(1);

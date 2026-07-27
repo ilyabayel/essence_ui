@@ -1,6 +1,0 @@
-@import './_internal/base-menu.css';
-
-.est-DropdownMenuContent {
-  max-height: var(--essence-dropdown-menu-content-available-height);
-  transform-origin: var(--essence-dropdown-menu-content-transform-origin);
-}

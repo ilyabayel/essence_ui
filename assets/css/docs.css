@@ -148,7 +148,7 @@ body:has(.docs-shell) {
 }
 
 .docs-sidebar__inner>nav,
-.docs-sidebar__inner>nav>.est-Flex {
+.docs-sidebar__inner>nav>.rt-Flex {
   width: 100%;
   align-self: stretch;
 }
@@ -290,7 +290,7 @@ body:has(.docs-shell) {
 }
 
 .docs-article__body>.docs-code-block,
-.docs-article__body>.est-Card,
+.docs-article__body>.rt-Card,
 .docs-article__body>.docs-demo,
 .docs-article__body>.docs-props,
 .docs-article__body>.docs-anatomy {
@@ -304,7 +304,7 @@ body:has(.docs-shell) {
   overflow: visible;
 }
 
-.docs-demo.est-Card {
+.docs-demo.rt-Card {
   overflow: visible !important;
 }
 
@@ -319,11 +319,11 @@ body:has(.docs-shell) {
 
 /* Layout roots need full preview width; otherwise flex shrink-to-fit
    collapses Box/Container/Section demos to a hairline. */
-.docs-demo__preview > .est-Box,
-.docs-demo__preview > .est-Flex,
-.docs-demo__preview > .est-Grid,
-.docs-demo__preview > .est-Container,
-.docs-demo__preview > .est-Section {
+.docs-demo__preview > .rt-Box,
+.docs-demo__preview > .rt-Flex,
+.docs-demo__preview > .rt-Grid,
+.docs-demo__preview > .rt-Container,
+.docs-demo__preview > .rt-Section {
   width: 100%;
   min-width: 0;
 }
@@ -334,13 +334,13 @@ body:has(.docs-shell) {
   min-width: 0;
 }
 
-.docs-demo__source .est-TabsRoot,
-.docs-demo__source .est-TabsContent {
+.docs-demo__source .rt-TabsRoot,
+.docs-demo__source .rt-TabsContent {
   max-width: 100%;
   min-width: 0;
 }
 
-.docs-demo__source .est-TabsList {
+.docs-demo__source .rt-TabsList {
   padding-inline: 0.75rem;
 }
 

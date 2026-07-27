@@ -58,13 +58,13 @@
 		height: 0;
 	}
 	to {
-		height: var(--essence-collapsible-content-height);
+		height: var(--radix-collapsible-content-height);
 	}
 }
 
 @keyframes demoCollapsibleSlideUp {
 	from {
-		height: var(--essence-collapsible-content-height);
+		height: var(--radix-collapsible-content-height);
 	}
 	to {
 		height: 0;

@@ -113,7 +113,7 @@
 	box-shadow:
 		hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
 		hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
-	height: var(--essence-navigation-menu-viewport-height);
+	height: var(--radix-navigation-menu-viewport-height);
 	transition:
 		width,
 		height,
@@ -127,7 +127,7 @@
 }
 @media only screen and (min-width: 600px) {
 	.essence-demo[data-component="navigation-menu"] .NavigationMenuViewport {
-		width: var(--essence-navigation-menu-viewport-width);
+		width: var(--radix-navigation-menu-viewport-width);
 	}
 }
 

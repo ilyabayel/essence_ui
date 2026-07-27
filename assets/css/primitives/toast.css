@@ -48,7 +48,7 @@
 }
 
 .DemoToastRoot[data-swipe="move"] {
-	transform: translateX(var(--essence-toast-swipe-move-x));
+	transform: translateX(var(--radix-toast-swipe-move-x));
 }
 
 .DemoToastRoot[data-swipe="cancel"] {
@@ -80,7 +80,7 @@
 
 @keyframes demoToastSwipeOut {
 	from {
-		transform: translateX(var(--essence-toast-swipe-end-x));
+		transform: translateX(var(--radix-toast-swipe-end-x));
 	}
 	to {
 		transform: translateX(calc(100% + var(--viewport-padding)));

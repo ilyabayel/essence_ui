@@ -26,12 +26,12 @@
 }
 
 /* Also hide for headless primitive usage outside the essence-demo story. */
-[data-essence-scroll-area-viewport] {
+[data-radix-scroll-area-viewport] {
 	scrollbar-width: none;
 	-ms-overflow-style: none;
 	-webkit-overflow-scrolling: touch;
 }
-[data-essence-scroll-area-viewport]::-webkit-scrollbar {
+[data-radix-scroll-area-viewport]::-webkit-scrollbar {
 	display: none;
 }
 
