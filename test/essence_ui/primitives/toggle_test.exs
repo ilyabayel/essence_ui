@@ -40,7 +40,24 @@ defmodule EssenceUI.Primitives.ToggleTest do
     assert html =~ ~s[role="radiogroup"]
     assert html =~ ~s[data-type="single"]
     assert html =~ ~s[data-value="left"]
+    assert html =~ ~s[data-deselectable="true"]
     assert html =~ "data-essence-toggle-group-item"
+  end
+
+  test "toggle group can disable deselect for single type" do
+    html =
+      render_component(
+        fn assigns ->
+          ~H"""
+          <ToggleGroup.root id="alignment" type="single" value="left" deselectable={false}>
+            <ToggleGroup.item value="left">Left</ToggleGroup.item>
+          </ToggleGroup.root>
+          """
+        end,
+        %{}
+      )
+
+    assert html =~ ~s[data-deselectable="false"]
   end
 
   test "toggle group renders multiple selection value list" do

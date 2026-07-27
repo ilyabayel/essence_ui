@@ -55,7 +55,12 @@ export const ToggleGroupRoot = {
     let values = this.values();
 
     if (type === "single") {
-      values = values[0] === value ? [] : [value];
+      if (values[0] === value) {
+        if (this.el.dataset.deselectable === "false") return;
+        values = [];
+      } else {
+        values = [value];
+      }
     } else if (values.includes(value)) {
       values = values.filter((current) => current !== value);
     } else {

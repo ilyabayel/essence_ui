@@ -23,7 +23,7 @@ defmodule Storybook.Themes.Components.SegmentedControlStory do
         id: :default,
         description: "Default segmented control with three options",
         template: """
-        <.segmented_control value="option1">
+        <.segmented_control id="sc-default" value="option1">
           <:option value="option1">Option 1</:option>
           <:option value="option2">Option 2</:option>
           <:option value="option3">Option 3</:option>
@@ -136,8 +136,9 @@ defmodule Storybook.Themes.Components.SegmentedControlStory do
         description: "Disabled segmented control",
         template: """
         <.segmented_control
+          id="sc-disabled"
           value="enabled"
-          disabled
+          disabled={true}
         >
           <:option value="enabled">Enabled</:option>
           <:option value="disabled">Disabled</:option>

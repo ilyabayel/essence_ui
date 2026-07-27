@@ -3,6 +3,8 @@ title: Segmented Control
 description: Toggle buttons for switching between different values or views.
 ---
 
+Wraps the ToggleGroup primitive (`type="single"`, non-deselectable) with Themes styling — the same pattern as Radix Themes.
+
 <.demo>
   <:heex code={~S|<.segmented_control id="segmented-control-hero" default_value="inbox"><:option value="inbox">Inbox</:option><:option value="drafts">Drafts</:option><:option value="sent">Sent</:option></.segmented_control>|}>
       <.segmented_control id="segmented-control-hero" default_value="inbox">
@@ -19,13 +21,13 @@ This component supports common margin props.
 
 ### Root
 
-Contains the items of the control.
+Contains the items of the control. Prefer the convenience `segmented_control` with `<:option>` slots, or compose `segmented_control_root` / `segmented_control_item` directly.
 
-<.props_table module={EssenceUI.Components.SegmentedControl} function={:segmented_control} />
+<.props_table module={EssenceUI.Components.SegmentedControl} function={:segmented_control_root} />
 
 ### Item
 
-Represents individual values of the control. Pass one or more `<:option value="…">` slots.
+Represents individual values of the control.
 
 <.props_table module={EssenceUI.Components.SegmentedControl} function={:segmented_control_item} />
 

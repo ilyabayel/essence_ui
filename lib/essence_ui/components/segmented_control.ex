@@ -1,45 +1,40 @@
 defmodule EssenceUI.Components.SegmentedControl do
   @moduledoc """
-  A SegmentedControl component for selecting one option from a group of related options with support for various sizes, variants,
-  and colors. The segmented control provides a tab-like interface for switching between
-  mutually exclusive options.
+  A SegmentedControl for selecting one option from a group of related options.
+  Wraps `EssenceUI.Primitives.ToggleGroup` (single, non-deselectable), matching
+  Radix Themes.
 
   ## Examples
 
-      <.segmented_control value="option1" on_change={fn val -> IO.puts("Selected: " <> val) end}>
-        <.segmented_control_item value="option1">Option 1</.segmented_control_item>
-        <.segmented_control_item value="option2">Option 2</.segmented_control_item>
-        <.segmented_control_item value="option3">Option 3</.segmented_control_item>
+      <.segmented_control id="mail" value="inbox" on_change="mail_changed">
+        <:option value="inbox">Inbox</:option>
+        <:option value="drafts">Drafts</:option>
+        <:option value="sent">Sent</:option>
       </.segmented_control>
 
-      <.segmented_control size="3" variant="classic" color="blue" value="tab1">
+      <.segmented_control_root id="tabs" size="3" variant="classic" color="blue" value="tab1">
         <.segmented_control_item value="tab1">Tab 1</.segmented_control_item>
         <.segmented_control_item value="tab2">Tab 2</.segmented_control_item>
-      </.segmented_control>
-
-      <.segmented_control radius="large" variant="surface" value="rounded">
-        <.segmented_control_item value="rounded">Rounded</.segmented_control_item>
-        <.segmented_control_item value="sharp">Sharp</.segmented_control_item>
-      </.segmented_control>
+      </.segmented_control_root>
 
   ## Props
 
   - `size` - Control size: "1", "2", "3" (default: "2")
   - `variant` - Visual variant: "surface", "classic" (default: "surface")
-  - `radius` - Border radius: "none", "small", "medium", "large", "full" (default: none)
-  - `color` - Color theme from accent color palette (default: none)
+  - `radius` - Border radius: "none", "small", "medium", "large", "full"
+  - `color` - Color theme from accent color palette
   - `high_contrast` - Increase color contrast (default: false)
   - `value` - Controlled selected value
   - `default_value` - Initial selected value
-  - `on_change` - Callback function when selection changes
+  - `on_change` - LiveView event name when selection changes
   - `disabled` - Whether the control is disabled
-  - `name` - Form name attribute
-  - Plus layout props (position, inset, overflow, etc.) for positioning control
+  - Plus layout props for positioning
   """
 
   use Phoenix.Component
 
   alias EssenceUI.Helpers.ExtractProps
+  alias EssenceUI.Primitives.ToggleGroup, as: ToggleGroupPrimitive
   alias EssenceUI.SharedProps.ColorProps
   alias EssenceUI.SharedProps.HeightProps
   alias EssenceUI.SharedProps.HighContrastProps
@@ -59,36 +54,30 @@ defmodule EssenceUI.Components.SegmentedControl do
   @sizes ["1", "2", "3"]
   @variants ["surface", "classic"]
 
+  @doc """
+  The root container for the segmented control.
+  """
+  attr :id, :string, default: nil
+  attr :size, :string, values: @sizes, default: "2"
+  attr :variant, :string, values: @variants, default: "surface"
+  attr :value, :string, default: nil
+  attr :default_value, :string, default: nil
+  attr :on_change, :string, default: nil
+  attr :disabled, :boolean, default: false
   ColorProps.attrs()
   HighContrastProps.attrs()
   LayoutProps.attrs()
   RadiusProps.attrs()
-
-  attr :size, :string,
-    values: @sizes,
-    default: "2",
-    doc: "Control size from 1 to 3. Controls overall dimensions and spacing."
-
-  attr :variant, :string,
-    values: @variants,
-    default: "surface",
-    doc: "Visual style variant. One of 'surface' or 'classic'."
-
-  attr :value, :string, default: nil, doc: "Controlled selected value."
-  attr :default_value, :string, default: nil, doc: "Initial selected value."
-  attr :on_change, :any, default: nil, doc: "Callback function when selection changes."
-  attr :disabled, :boolean, default: false, doc: "Whether the control is disabled."
-  attr :name, :string, default: nil, doc: "Form name attribute."
-  attr :class, :string, default: nil, doc: "Additional CSS classes to add to the element."
+  attr :class, :string, default: nil
   attr :style, :string, default: ""
 
   attr :rest, :global,
-    include: ~w(id form required aria-label aria-labelledby aria-describedby),
+    include: ~w(form required aria-label aria-labelledby aria-describedby),
     doc: "Global attributes and event handlers."
 
-  slot :option, required: true, doc: "SegmentedControlItem components."
+  slot :inner_block, required: true
 
-  def segmented_control(assigns) do
+  def segmented_control_root(assigns) do
     prop_defs =
       %{
         size: %{
@@ -112,118 +101,132 @@ defmodule EssenceUI.Components.SegmentedControl do
 
     extracted = ExtractProps.call(assigns, prop_defs)
 
+    id = assigns[:id] || "segmented-control-#{System.unique_integer([:positive])}"
     value = assigns[:value] || assigns[:default_value]
-
-    # Build CSS classes
-    class =
-      [
-        "est-reset",
-        "est-SegmentedControlRoot",
-        extracted.class
-      ]
-      |> Enum.filter(& &1)
-      |> Enum.join(" ")
 
     assigns =
       assign(assigns,
-        class: class,
+        id: id,
+        class:
+          ["est-reset", "est-SegmentedControlRoot", extracted.class]
+          |> Enum.filter(& &1)
+          |> Enum.join(" "),
         style: extracted.style,
-        value: value,
         color: assigns[:color] || false,
-        radius: assigns[:radius] || "medium"
+        radius: assigns[:radius] || "medium",
+        current_value: value
       )
 
     ~H"""
-    <div
-      role="tablist"
-      data-accent-color={@color}
-      data-disabled={@disabled}
-      data-radius={@radius}
+    <ToggleGroupPrimitive.root
+      id={@id}
+      type="single"
+      value={@current_value}
+      disabled={@disabled}
+      deselectable={false}
+      on_value_change={@on_change}
       class={@class}
       style={@style}
+      data-accent-color={@color}
+      data-radius={@radius}
       {@rest}
     >
-      <%= for entry <- @option do %>
-        <.segmented_control_item
-          value={entry.value}
-          disabled={entry[:disabled] || @disabled}
-          selected={entry.value == @value}
-        >
-          {render_slot(entry)}
-        </.segmented_control_item>
-      <% end %>
+      {render_slot(@inner_block)}
       <div class="est-SegmentedControlIndicator"></div>
-    </div>
+    </ToggleGroupPrimitive.root>
     """
   end
 
   @doc """
   A single item within a SegmentedControl.
-
-  ## Props
-
-  - `value` - The value this item represents
-  - `disabled` - Whether this item is disabled
-  - `class` - Additional CSS classes
-  - `style` - Additional inline styles
-  - `rest` - Additional HTML attributes
   """
-
+  attr :id, :string, default: nil
   attr :value, :string, required: true, doc: "The value this item represents."
-  attr :disabled, :boolean, default: false, doc: "Whether this item is disabled."
   attr :class, :string, default: nil, doc: "Additional CSS classes to add to the element."
   attr :style, :string, default: ""
-  attr :selected, :boolean, default: false, doc: "Whether this item is selected."
-
-  attr :parent_on_change, :any, default: nil, doc: "Parent control's change callback."
 
   attr :rest, :global,
-    include: ~w(id aria-label aria-labelledby aria-describedby),
+    include: ~w(aria-label aria-labelledby aria-describedby),
     doc: "Global attributes and event handlers."
 
   slot :inner_block, required: true, doc: "The content to display for this item."
 
   def segmented_control_item(assigns) do
-    data_state = if assigns.selected, do: "on", else: "off"
-
-    # Build CSS classes
     class =
-      [
-        "est-reset",
-        "est-SegmentedControlItem",
-        assigns.class
-      ]
+      ["est-reset", "est-SegmentedControlItem", assigns.class]
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 
-    assigns =
-      assign(assigns,
-        class: class,
-        data_state: data_state
-      )
+    assigns = assign(assigns, class: class)
 
     ~H"""
-    <button
-      type="button"
-      role="tab"
-      aria-selected={@selected}
-      data-state={@data_state}
-      disabled={@disabled}
+    <ToggleGroupPrimitive.item
+      id={@id}
+      value={@value}
+      disabled={false}
       class={@class}
       style={@style}
-      phx-click={if @parent_on_change && !@disabled, do: @parent_on_change.(@value)}
       {@rest}
     >
-      <div class="est-SegmentedControlItemSeparator"></div>
-      <div class="est-SegmentedControlItemLabel">
-        <span class="est-SegmentedControlItemLabelInactive" aria-hidden={"#{@selected}"}>
+      <span class="est-SegmentedControlItemSeparator"></span>
+      <span class="est-SegmentedControlItemLabel">
+        <span class="est-SegmentedControlItemLabelActive">{render_slot(@inner_block)}</span>
+        <span class="est-SegmentedControlItemLabelInactive" aria-hidden>
           {render_slot(@inner_block)}
         </span>
-        <span class="est-SegmentedControlItemLabelActive" aria-hidden={"#{!@selected}"}>
-          {render_slot(@inner_block)}
-        </span>
-      </div>
-    </button>
+      </span>
+    </ToggleGroupPrimitive.item>
+    """
+  end
+
+  ColorProps.attrs()
+  HighContrastProps.attrs()
+  RadiusProps.attrs()
+
+  attr :id, :string, default: nil
+  attr :size, :string, values: @sizes, default: "2"
+  attr :variant, :string, values: @variants, default: "surface"
+  attr :value, :string, default: nil
+  attr :default_value, :string, default: nil
+  attr :on_change, :string, default: nil
+  attr :disabled, :boolean, default: false
+  attr :class, :string, default: nil
+  attr :style, :string, default: ""
+
+  attr :rest, :global,
+    include: ~w(form required aria-label aria-labelledby aria-describedby),
+    doc: "Global attributes and event handlers."
+
+  slot :option, required: true, doc: "Segmented control options." do
+    attr :value, :string, required: true
+  end
+
+  @doc """
+  Convenience slot-based segmented control. Maps `<:option>` slots into root + items.
+  """
+  def segmented_control(assigns) do
+    ~H"""
+    <.segmented_control_root
+      id={@id}
+      size={@size}
+      variant={@variant}
+      color={assigns[:color]}
+      high_contrast={assigns[:high_contrast]}
+      radius={assigns[:radius]}
+      value={@value}
+      default_value={@default_value}
+      disabled={@disabled}
+      on_change={@on_change}
+      class={@class}
+      style={@style}
+      {@rest}
+    >
+      <%= for entry <- @option do %>
+        <.segmented_control_item value={entry.value}>
+          {render_slot(entry)}
+        </.segmented_control_item>
+      <% end %>
+    </.segmented_control_root>
     """
   end
 end
