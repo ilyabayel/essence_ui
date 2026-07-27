@@ -53,6 +53,10 @@ RUN mix assets.setup
 
 COPY priv priv
 COPY lib lib
+# build:css runs node ../scripts/build-css-release.mjs
+COPY scripts scripts
+# Catalog embeds docs/content + docs/nav at compile time
+COPY docs docs
 
 # compile assets
 RUN cd assets \
