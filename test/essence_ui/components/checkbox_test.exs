@@ -40,11 +40,19 @@ defmodule EssenceUI.Components.CheckboxTest do
     assert html =~ "rt-r-m-4"
   end
 
-  test "renders both icons in indicator" do
-    html = render_component(&Checkbox.checkbox/1, %{id: "c1"})
+  test "renders single check icon in indicator (Radix Themes pattern)" do
+    html = render_component(&Checkbox.checkbox/1, %{id: "c1", default_checked: true})
 
-    assert html =~ ~s(data-state="checked")
-    assert html =~ ~s(data-state="indeterminate")
     assert html =~ "rt-CheckboxIndicator"
+    assert html =~ ~s(data-state="checked")
+    assert html =~ "<svg"
+    refute html =~ ~s(data-state="indeterminate")
+  end
+
+  test "renders indeterminate icon when indeterminate" do
+    html = render_component(&Checkbox.checkbox/1, %{id: "c1", checked: "indeterminate"})
+
+    assert html =~ ~s(data-state="indeterminate")
+    assert html =~ "M0.75 4.5"
   end
 end

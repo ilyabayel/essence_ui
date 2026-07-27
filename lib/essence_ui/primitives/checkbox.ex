@@ -86,16 +86,24 @@ defmodule EssenceUI.Primitives.Checkbox do
   end
 
   attr :force_mount, :boolean, default: false
+  attr :state, :string, default: "unchecked"
   attr :rest, :global
   slot :inner_block, required: true
 
   def indicator(assigns) do
+    display =
+      if assigns.state in ["checked", "indeterminate"] or assigns.force_mount,
+        do: "flex",
+        else: "none"
+
+    assigns = assign(assigns, :display, display)
+
     ~H"""
     <span
       data-radix-checkbox-indicator
-      data-state="unchecked"
+      data-state={@state}
       data-force-mount={if @force_mount, do: ""}
-      style="pointer-events: none; display: flex; align-items: center; justify-content: center;"
+      style={"pointer-events: none; display: #{@display}; align-items: center; justify-content: center;"}
       {@rest}
     >
       {render_slot(@inner_block)}
