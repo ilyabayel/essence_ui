@@ -45,6 +45,21 @@
 .est-CheckboxCardCheckbox {
   position: absolute;
   right: var(--checkbox-cards-item-padding-left);
+  /* Sync checkbox box size with root card size CSS vars */
+  --checkbox-size: var(--checkbox-cards-item-checkbox-size);
+}
+
+/* Propagate root high-contrast to card checkboxes (no React context) */
+.est-CheckboxCardsRoot:where(.est-high-contrast) .est-CheckboxCardCheckbox:where(.est-variant-surface) {
+  &:where([data-state='checked'], [data-state='indeterminate']) {
+    &::before {
+      background-color: var(--accent-12);
+    }
+
+    & :where(.est-BaseCheckboxIndicator) {
+      color: var(--accent-1);
+    }
+  }
 }
 
 /* * * * * * * * * * * * * * * * * * * */

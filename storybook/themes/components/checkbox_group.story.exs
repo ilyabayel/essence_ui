@@ -24,6 +24,7 @@ defmodule Storybook.Themes.Components.CheckboxGroup do
         description: "Default checkbox group",
         template: """
         <.checkbox_group
+          id="checkbox-group-themes-default"
           default_value={["option2", "option3"]}
           name="example"
         >

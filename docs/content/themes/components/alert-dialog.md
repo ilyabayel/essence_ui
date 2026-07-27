@@ -33,7 +33,7 @@ description: Modal confirmation dialog that interrupts the user and expects a re
 
 This component inherits behavior from the [Alert Dialog primitive](/primitives/docs/components/alert-dialog). Open and close via `JS.dispatch("open" | "close", to: "#id")` on the dialog root id. A portal `target` selector is required (commonly `"body"`).
 
-Themes Alert Dialog exposes `alert_dialog/1` only — there are no separate Trigger, Action, or Cancel parts. Use `:title` and `:description` slots for accessible labelling, then compose action buttons in the default slot. Size and inset examples from Radix Themes are omitted until those props land on the Themes wrapper.
+Themes Alert Dialog exposes `alert_dialog/1` only — there are no separate Trigger, Action, or Cancel parts. Use `:title` and `:description` slots for accessible labelling, then compose action buttons in the default slot. Size and inset examples are omitted until those props land on the Themes wrapper.
 
 ### Root
 

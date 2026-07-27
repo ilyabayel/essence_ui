@@ -10,8 +10,8 @@ import { SwitchRoot } from "./hooks/switch_root";
 import { CollapsibleRoot } from "./hooks/collapsible_root";
 import { Tabs } from "./hooks/tabs";
 import { TabsRoot } from "./hooks/tabs_root";
-import { CheckboxCards } from "./hooks/checkbox_cards";
 import { RadioCards } from "./hooks/radio_cards";
+import { CheckboxGroupRoot } from "./hooks/checkbox_group_root";
 import { ContextMenuRoot } from "./hooks/context_menu_root";
 import { DropdownMenu } from "./hooks/dropdown_menu";
 import { DropdownMenuRoot } from "./hooks/dropdown_menu_root";
@@ -57,8 +57,8 @@ let hooks = {
   CollapsibleRoot,
   Tabs,
   TabsRoot,
-  CheckboxCards,
   RadioCards,
+  CheckboxGroupRoot,
   ContextMenuRoot,
   DropdownMenu,
   DropdownMenuRoot,

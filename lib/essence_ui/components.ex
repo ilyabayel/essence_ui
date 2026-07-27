@@ -14,6 +14,8 @@ defmodule EssenceUI.Components do
     * `checkbox_cards_root/1` - See `EssenceUI.Components.CheckboxCards`
     * `checkbox_cards_item/1` - See `EssenceUI.Components.CheckboxCards`
     * `checkbox_group/1` - See `EssenceUI.Components.CheckboxGroup`
+    * `checkbox_group_root/1` - See `EssenceUI.Components.CheckboxGroup`
+    * `checkbox_group_item/1` - See `EssenceUI.Components.CheckboxGroup`
     * `dialog/1` - See `EssenceUI.Components.Dialog`
     * `alert_dialog/1` - See `EssenceUI.Components.AlertDialog`
     * `icon_button/1` - See `EssenceUI.Components.IconButton`
@@ -123,6 +125,8 @@ defmodule EssenceUI.Components do
   defdelegate checkbox_cards_root(assigns), to: CheckboxCards
   defdelegate checkbox_cards_item(assigns), to: CheckboxCards
   defdelegate checkbox_group(assigns), to: EssenceUI.Components.CheckboxGroup
+  defdelegate checkbox_group_root(assigns), to: EssenceUI.Components.CheckboxGroup
+  defdelegate checkbox_group_item(assigns), to: EssenceUI.Components.CheckboxGroup
   defdelegate context_menu_root(assigns), to: ContextMenu
   defdelegate context_menu_trigger(assigns), to: ContextMenu
   defdelegate context_menu_content(assigns), to: ContextMenu

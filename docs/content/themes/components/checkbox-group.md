@@ -21,11 +21,26 @@ This component is based on the `div` element and supports common margin props.
 
 Contains all the parts of a checkbox group.
 
+<.props_table module={EssenceUI.Components.CheckboxGroup} function={:checkbox_group_root} />
+
+Slot convenience (same props, maps `<:item>` into root + items):
+
 <.props_table module={EssenceUI.Components.CheckboxGroup} function={:checkbox_group} />
 
 ### Item
 
-An item in the group that can be checked. Pass one or more `<:item value="…">` slots; optional `disabled` per item.
+An item in the group that can be checked.
+
+<.props_table module={EssenceUI.Components.CheckboxGroup} function={:checkbox_group_item} />
+
+```heex
+<.checkbox_group_root id="traits" name="traits" default_value={["1"]}>
+  <.checkbox_group_item value="1" checked>Fun</.checkbox_group_item>
+  <.checkbox_group_item value="2" disabled>Serious</.checkbox_group_item>
+</.checkbox_group_root>
+```
+
+Or with slots:
 
 ```heex
 <.checkbox_group name="traits" default_value={["1"]}>
