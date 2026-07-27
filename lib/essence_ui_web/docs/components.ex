@@ -314,35 +314,7 @@ defmodule EssenceUIWeb.Docs.Components do
                        )
 
   defp read_primitive_css(filename) do
-    css = Map.get(@primitive_css_files, filename)
-
-    # #region agent log
-    try do
-      File.write!(
-        "/tmp/debug-ff6686.log",
-        Jason.encode!(%{
-          sessionId: "ff6686",
-          runId: "css-post-fix",
-          hypothesisId: "H1",
-          location: "components.ex:read_primitive_css",
-          message: "primitive css lookup",
-          data: %{
-            filename: filename,
-            found: is_binary(css),
-            bytes: if(is_binary(css), do: byte_size(css), else: 0),
-            embedded_count: map_size(@primitive_css_files)
-          },
-          timestamp: System.system_time(:millisecond)
-        }) <> "\n",
-        [:append]
-      )
-    rescue
-      _ -> :ok
-    end
-
-    # #endregion
-
-    css
+    Map.get(@primitive_css_files, filename)
   end
 
   # Canvas layout for the preview only (not shown in the CSS tab).
