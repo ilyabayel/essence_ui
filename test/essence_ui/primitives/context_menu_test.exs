@@ -46,18 +46,19 @@ defmodule EssenceUI.Primitives.ContextMenuTest do
     assert html =~ "data-radix-context-menu-trigger"
     assert html =~ ~s[aria-controls="cm-content"]
     assert html =~ "data-radix-context-menu-content"
-    assert html =~ "data-radix-context-menu-label"
-    assert html =~ "data-radix-context-menu-item"
+    assert html =~ ~s[aria-expanded="false"]
+    assert html =~ "data-radix-menu-label"
+    assert html =~ "data-radix-menu-item"
     assert html =~ ~s[data-text-value="copy"]
-    assert html =~ "data-radix-context-menu-checkbox-item"
-    assert html =~ "data-radix-context-menu-radio-group"
-    assert html =~ "data-radix-context-menu-radio-item"
-    assert html =~ "data-radix-context-menu-item-indicator"
-    assert html =~ "data-radix-context-menu-separator"
-    assert html =~ "data-radix-context-menu-sub"
-    assert html =~ "data-radix-context-menu-sub-trigger"
-    assert html =~ "data-radix-context-menu-sub-content"
-    assert html =~ "data-radix-context-menu-arrow"
+    assert html =~ "data-radix-menu-checkbox-item"
+    assert html =~ "data-radix-menu-radio-group"
+    assert html =~ "data-radix-menu-radio-item"
+    assert html =~ "data-radix-menu-item-indicator"
+    assert html =~ "data-radix-menu-separator"
+    assert html =~ "data-radix-menu-sub"
+    assert html =~ "data-radix-menu-sub-trigger"
+    assert html =~ "data-radix-menu-sub-content"
+    assert html =~ "data-radix-menu-arrow"
   end
 
   test "portal thin-wraps Phoenix portal" do

@@ -38,7 +38,7 @@ test.describe("Dropdown Menu Primitive", () => {
     const trigger = root.locator("[data-radix-dropdown-menu-trigger]");
     const content = page.locator("#dropdown-content");
     const items = content.locator(
-      "[data-radix-dropdown-menu-item]:not([data-disabled]), [data-radix-dropdown-menu-checkbox-item]",
+      "[data-radix-menu-item]:not([data-disabled]), [data-radix-menu-checkbox-item]",
     );
 
     await trigger.click();
@@ -58,7 +58,7 @@ test.describe("Dropdown Menu Primitive", () => {
     const trigger = root.locator("[data-radix-dropdown-menu-trigger]");
     const content = page.locator("#dropdown-content");
     const item = content
-      .locator("[data-radix-dropdown-menu-item]")
+      .locator("[data-radix-menu-item]")
       .filter({ hasText: "Close" });
 
     await trigger.click();
@@ -78,10 +78,10 @@ test.describe("Dropdown Menu Primitive", () => {
     const trigger = root.locator("[data-radix-dropdown-menu-trigger]");
     const content = page.locator("#dropdown-content");
     const subTrigger = content.locator(
-      "[data-radix-dropdown-menu-sub-trigger]",
+      "[data-radix-menu-sub-trigger]",
     );
     const subContent = page.locator(
-      "[data-radix-dropdown-menu-sub-content]",
+      "[data-radix-menu-sub-content]",
     );
 
     await trigger.click();

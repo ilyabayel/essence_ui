@@ -44,20 +44,20 @@ defmodule EssenceUI.Primitives.DropdownMenuTest do
     assert html =~ "data-radix-dropdown-menu-trigger"
     assert html =~ ~s[aria-controls="dm-content"]
     assert html =~ "data-radix-dropdown-menu-content"
-    assert html =~ "data-radix-dropdown-menu-label"
-    assert html =~ "data-radix-dropdown-menu-item"
+    assert html =~ "data-radix-menu-label"
+    assert html =~ "data-radix-menu-item"
     assert html =~ ~s[data-text-value="new"]
     assert html =~ "data-disabled"
-    assert html =~ "data-radix-dropdown-menu-checkbox-item"
+    assert html =~ "data-radix-menu-checkbox-item"
     assert html =~ ~s[data-state="checked"]
-    assert html =~ "data-radix-dropdown-menu-radio-group"
-    assert html =~ "data-radix-dropdown-menu-radio-item"
-    assert html =~ "data-radix-dropdown-menu-item-indicator"
-    assert html =~ "data-radix-dropdown-menu-separator"
-    assert html =~ "data-radix-dropdown-menu-sub"
-    assert html =~ "data-radix-dropdown-menu-sub-trigger"
-    assert html =~ "data-radix-dropdown-menu-sub-content"
-    assert html =~ "data-radix-dropdown-menu-arrow"
+    assert html =~ "data-radix-menu-radio-group"
+    assert html =~ "data-radix-menu-radio-item"
+    assert html =~ "data-radix-menu-item-indicator"
+    assert html =~ "data-radix-menu-separator"
+    assert html =~ "data-radix-menu-sub"
+    assert html =~ "data-radix-menu-sub-trigger"
+    assert html =~ "data-radix-menu-sub-content"
+    assert html =~ "data-radix-menu-arrow"
     assert html =~ "display: none"
   end
 

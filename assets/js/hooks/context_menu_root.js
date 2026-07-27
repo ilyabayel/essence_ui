@@ -1,32 +1,25 @@
-import { positionFloating, getFixedContainingBlockOffset } from "../lib/position";
+import { getFixedContainingBlockOffset } from "../lib/position";
 import { setOpen, setClosed } from "../lib/presence";
 import { bindDismissableLayer } from "../lib/dismissable_layer";
 import { applyPortalTheme } from "../lib/theme";
 import {
   getMenuItems,
-  getFocusedMenuItems,
   focusItem,
-  handleArrowKeys,
-  createTypeahead,
-  closeOnItemClick,
-  bindMenuPointerHighlight,
   findMenuPart,
-  toggleCheckboxItem,
-  selectRadioItem,
+  MenuController,
 } from "../lib/menu";
-import { whenMouse } from "../lib/pointer";
 
 export const ContextMenuRoot = {
   mounted() {
     this.isOpen = false;
     this.dismissable = null;
-    this.typeahead = createTypeahead();
     this.pointer = { x: 0, y: 0 };
+    this.menu = new MenuController({
+      onClose: () => this.close(),
+    });
 
     this.onContextMenu = this.onContextMenu.bind(this);
-    this.onKeyDown = this.onKeyDown.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
-    this.onItemClick = this.onItemClick.bind(this);
 
     this.resolveParts();
     this.bindTrigger();
@@ -44,12 +37,9 @@ export const ContextMenuRoot = {
 
   destroyed() {
     this.unbindDismissable();
+    this.menu?.detach();
     if (this.trigger) {
       this.trigger.removeEventListener("contextmenu", this.onContextMenu);
-    }
-    if (this.content) {
-      this.content.removeEventListener("keydown", this.onKeyDown);
-      this.content.removeEventListener("click", this.onItemClick);
     }
   },
 
@@ -86,97 +76,6 @@ export const ContextMenuRoot = {
     this.close();
   },
 
-  onItemClick(e) {
-    const item = e.target.closest(
-      '[role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]'
-    );
-    if (!item || !this.content?.contains(item)) return;
-    if (item.hasAttribute("data-disabled")) return;
-
-    if (item.hasAttribute("data-radix-context-menu-sub-trigger")) {
-      this.openSub(item);
-      return;
-    }
-
-    if (item.getAttribute("role") === "menuitemcheckbox") {
-      toggleCheckboxItem(item);
-      return;
-    }
-
-    if (item.getAttribute("role") === "menuitemradio") {
-      selectRadioItem(item);
-    }
-  },
-
-  onKeyDown(e) {
-    if (!this.isOpen || !this.content) return;
-
-    const items = getMenuItems(this.content);
-    const navItems = getFocusedMenuItems(this.content);
-
-    if (e.key === "Escape") {
-      e.preventDefault();
-      this.close();
-      return;
-    }
-
-    if (handleArrowKeys(e, navItems)) return;
-
-    if (e.key === "ArrowRight") {
-      const active = document.activeElement;
-      if (active?.hasAttribute("data-radix-context-menu-sub-trigger")) {
-        e.preventDefault();
-        this.openSub(active);
-        const sub = active
-          .closest("[data-radix-context-menu-sub]")
-          ?.querySelector("[data-radix-context-menu-sub-content]");
-        const subItems = getMenuItems(sub);
-        if (subItems[0]) focusItem(subItems[0], subItems);
-      }
-      return;
-    }
-
-    if (e.key === "ArrowLeft") {
-      const active = document.activeElement;
-      const subContent = active?.closest(
-        "[data-radix-context-menu-sub-content]"
-      );
-      if (subContent) {
-        e.preventDefault();
-        const sub = subContent.closest("[data-radix-context-menu-sub]");
-        const trigger = sub?.querySelector(
-          "[data-radix-context-menu-sub-trigger]"
-        );
-        this.closeSub(sub);
-        if (trigger) focusItem(trigger, items);
-      }
-      return;
-    }
-
-    if (e.key === "Enter" || e.key === " ") {
-      const active = document.activeElement;
-      if (active?.hasAttribute("data-radix-context-menu-sub-trigger")) {
-        e.preventDefault();
-        this.openSub(active);
-        const sub = active
-          .closest("[data-radix-context-menu-sub]")
-          ?.querySelector("[data-radix-context-menu-sub-content]");
-        const subItems = getMenuItems(sub);
-        if (subItems[0]) focusItem(subItems[0], subItems);
-        return;
-      }
-      if (active && navItems.includes(active)) {
-        e.preventDefault();
-        active.click();
-      }
-      return;
-    }
-
-    if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
-      this.typeahead.handle(e.key, navItems);
-    }
-  },
-
   open(isInitial = false) {
     this.resolveParts();
     if (!this.trigger || !this.content) return;
@@ -184,17 +83,13 @@ export const ContextMenuRoot = {
     this.isOpen = true;
     applyPortalTheme(this.content, this.trigger || this.el);
     setOpen(this.content, [this.trigger, this.el]);
+    this.trigger.setAttribute("aria-expanded", "true");
 
     this.positionAtPointer();
 
-    this.bindSubmenus();
-    closeOnItemClick(this.content, () => this.close());
-    bindMenuPointerHighlight(this.content);
-
-    this.content.removeEventListener("click", this.onItemClick);
-    this.content.addEventListener("click", this.onItemClick);
-    this.content.removeEventListener("keydown", this.onKeyDown);
-    this.content.addEventListener("keydown", this.onKeyDown);
+    this.menu.attach(this.content, {
+      modal: this.el.hasAttribute("data-modal"),
+    });
 
     this.unbindDismissable();
     this.dismissable = bindDismissableLayer({
@@ -236,8 +131,6 @@ export const ContextMenuRoot = {
     if (x < padding) x = padding;
     if (y < padding) y = padding;
 
-    // Convert viewport coords → containing-block coords when needed
-    // (e.g. ancestor with contain:paint / transform).
     const cb = getFixedContainingBlockOffset(this.content);
     x -= cb.left;
     y -= cb.top;
@@ -249,11 +142,12 @@ export const ContextMenuRoot = {
   close() {
     if (!this.isOpen) return;
     this.isOpen = false;
-    this.typeahead.reset();
-    this.closeAllSubs();
+    this.menu.resetTypeahead();
+    this.menu.closeAllSubs();
 
     if (this.trigger) {
-          }
+      this.trigger.setAttribute("aria-expanded", "false");
+    }
 
     setClosed(this.content, {
       extras: [this.trigger, this.el],
@@ -274,108 +168,9 @@ export const ContextMenuRoot = {
     }, 50);
 
     this.unbindDismissable();
-    if (this.content) {
-      this.content.removeEventListener("keydown", this.onKeyDown);
-    }
+    this.menu.detach();
 
     this.pushOpenChange(false);
-  },
-
-  bindSubmenus() {
-    if (!this.content) return;
-
-    this.content
-      .querySelectorAll("[data-radix-context-menu-sub]")
-      .forEach((sub) => {
-        if (sub.hasAttribute("data-sub-bound")) return;
-        sub.setAttribute("data-sub-bound", "true");
-
-        const trigger = sub.querySelector(
-          "[data-radix-context-menu-sub-trigger]"
-        );
-        const content = sub.querySelector(
-          "[data-radix-context-menu-sub-content]"
-        );
-        if (!trigger || !content) return;
-
-        let closeTimer;
-
-        const open = () => {
-          clearTimeout(closeTimer);
-          this.openSub(trigger);
-        };
-
-        const scheduleClose = () => {
-          closeTimer = setTimeout(() => this.closeSub(sub), 150);
-        };
-
-        // Open on pointer hover only — not on focus (keyboard uses ArrowRight/Enter/Space).
-        // Hover open is mouse-only ; click/keyboard open via onItemClick / arrows.
-        trigger.addEventListener("pointerenter", whenMouse(open));
-        trigger.addEventListener("pointerleave", whenMouse(scheduleClose));
-        content.addEventListener(
-          "pointerenter",
-          whenMouse(() => clearTimeout(closeTimer))
-        );
-        content.addEventListener("pointerleave", whenMouse(scheduleClose));
-      });
-  },
-
-  openSub(trigger) {
-    const sub = trigger.closest("[data-radix-context-menu-sub]");
-    const content = sub?.querySelector(
-      "[data-radix-context-menu-sub-content]"
-    );
-    if (!sub || !content) return;
-
-    trigger.setAttribute("data-state", "open");
-        sub.dataset.state = "open";
-    setOpen(content);
-
-    const side = content.dataset.side || "right";
-    const align = content.dataset.align || "start";
-    const sideOffset = parseInt(content.dataset.sideOffset, 10) || 0;
-
-    positionFloating({
-      trigger,
-      content,
-      side,
-      align,
-      sideOffset,
-    });
-
-    closeOnItemClick(content, () => this.close());
-    bindMenuPointerHighlight(content);
-  },
-
-  closeSub(sub) {
-    if (!sub) return;
-    const trigger = sub.querySelector(
-      "[data-radix-context-menu-sub-trigger]"
-    );
-    const content = sub.querySelector(
-      "[data-radix-context-menu-sub-content]"
-    );
-
-    sub
-      .querySelectorAll("[data-radix-context-menu-sub]")
-      .forEach((nested) => {
-        if (nested !== sub) this.closeSub(nested);
-      });
-
-    if (trigger) {
-      trigger.setAttribute("data-state", "closed");
-          }
-    sub.dataset.state = "closed";
-    if (content) {
-      setClosed(content, { waitForAnimation: false });
-    }
-  },
-
-  closeAllSubs() {
-    this.content
-      ?.querySelectorAll("[data-radix-context-menu-sub]")
-      .forEach((sub) => this.closeSub(sub));
   },
 
   unbindDismissable() {

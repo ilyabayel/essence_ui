@@ -51,16 +51,17 @@ defmodule EssenceUI.Primitives.MenubarTest do
     assert html =~ "data-radix-menubar-menu"
     assert html =~ "data-radix-menubar-trigger"
     assert html =~ "data-radix-menubar-content"
-    assert html =~ "data-radix-menubar-label"
-    assert html =~ "data-radix-menubar-item"
-    assert html =~ "data-radix-menubar-checkbox-item"
-    assert html =~ "data-radix-menubar-radio-group"
-    assert html =~ "data-radix-menubar-radio-item"
-    assert html =~ "data-radix-menubar-item-indicator"
-    assert html =~ "data-radix-menubar-separator"
-    assert html =~ "data-radix-menubar-sub"
-    assert html =~ "data-radix-menubar-subtrigger"
-    assert html =~ "data-radix-menubar-sub-content"
+    assert html =~ "data-radix-menu-label"
+    assert html =~ "data-radix-menu-item"
+    assert html =~ "data-radix-menu-checkbox-item"
+    assert html =~ "data-radix-menu-radio-group"
+    assert html =~ "data-radix-menu-radio-item"
+    assert html =~ "data-radix-menu-item-indicator"
+    assert html =~ "data-radix-menu-separator"
+    assert html =~ "data-radix-menu-sub"
+    assert html =~ "data-radix-menu-sub-trigger"
+    assert html =~ "data-radix-menu-sub-content"
+    assert html =~ ~s[data-loop="true"]
   end
 
   test "portal thin-wraps Phoenix portal" do

@@ -57,3 +57,8 @@ Each primitive needs:
 
 Do not add `EssenceUI.Primitives.Portal`. Overlay and menu `portal/1` parts thin-wrap
 `Phoenix.Component.portal/1` (typically `target="body"`).
+
+## Internal Menu
+
+`EssenceUI.Primitives.Menu` is an internal building block (Radix `@radix-ui/react-menu`),
+reused by DropdownMenu, ContextMenu, and Menubar. It is not a public docs primitive.

@@ -122,6 +122,12 @@ MDEx `phoenix_heex` can swallow the rest of a page when:
 
 Prefer Markdown fenced code for static snippets, single-line `heex={~s[...]}` for demo source, and slots for structured data.
 
+## Primitives internals
+
+`EssenceUI.Primitives.Menu` is internal (like Radix `@radix-ui/react-menu`). DropdownMenu,
+ContextMenu, and Menubar thin-wrap it for shared item/submenu markup and JS behavior.
+Do not add a Menu docs page or nav entry.
+
 ## Authoring rules
 
 1. One job per page; lead with a short description, then demos, then API
