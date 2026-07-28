@@ -10,18 +10,31 @@ Essence UI is a pre-styled component library for Phoenix LiveView, inspired by [
 Add `:essence_ui` to your `mix.exs` dependencies, then run `mix deps.get`.
 
 ```elixir
-{:essence_ui, "~> 0.1.0"}
+{:essence_ui, "~> 0.2.0"}
 ```
 
 ## 2. Import CSS
 
-Import Essence UI styles in your app CSS entrypoint:
+Import Essence UI styles in your app CSS entrypoint (path relative to that file):
 
 ```css
-@import "essence-ui.css";
+@import "../deps/essence_ui/priv/static/essence-ui.css";
 ```
 
-## 3. Theme root
+## 3. JavaScript hooks
+
+Interactive components need LiveView hooks. In your `app.js`:
+
+```javascript
+import { hooks as essenceHooks } from "../deps/essence_ui/assets/js/essence_ui"
+
+const liveSocket = new LiveSocket("/live", Socket, {
+  hooks: { ...essenceHooks },
+  params: { _csrf_token: csrfToken },
+})
+```
+
+## 4. Theme root
 
 Wrap your layout with the Theme component:
 
@@ -31,7 +44,7 @@ Wrap your layout with the Theme component:
 </.theme>
 ```
 
-## 4. Start building
+## 5. Start building
 
 Import components and compose:
 

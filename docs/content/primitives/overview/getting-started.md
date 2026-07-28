@@ -11,7 +11,13 @@ In this tutorial we will structure and style the [Popover](/primitives/docs/comp
 
 ### 1. Use the library
 
-Add Essence UI to your Phoenix project (Hex package / path dep as you prefer), then alias the primitive in your LiveView or function component module:
+Add Essence UI to your Phoenix project:
+
+```elixir
+{:essence_ui, "~> 0.2.0"}
+```
+
+Register LiveView hooks from `deps/essence_ui/assets/js/essence_ui.js`, then alias the primitive in your LiveView or function component module:
 
 ```elixir
 alias EssenceUI.Primitives.Popover

@@ -1,52 +1,73 @@
-# EssenceUI
+# Essence UI
 
-EssenceUI is a Phoenix LiveView component library inspired by Radix UI Themes.
+Accessible, themeable [Phoenix LiveView](https://hexdocs.pm/phoenix_live_view) components inspired by [Radix UI](https://www.radix-ui.com).
 
-## Usage
+## Installation
 
-Add to your Phoenix templates or LiveView:
+Add to your `mix.exs` dependencies and run `mix deps.get`:
+
+```elixir
+{:essence_ui, "~> 0.2.0"}
+```
+
+### CSS (Themes)
+
+Import the prebuilt stylesheet from your app CSS entrypoint (path relative to that file):
+
+```css
+@import "../deps/essence_ui/priv/static/essence-ui.css";
+```
+
+### JavaScript hooks
+
+Interactive primitives and themed overlays need LiveView hooks. Import them into your `app.js`:
+
+```javascript
+import { hooks as essenceHooks } from "../deps/essence_ui/assets/js/essence_ui"
+
+const liveSocket = new LiveSocket("/live", Socket, {
+  hooks: { ...essenceHooks },
+  params: { _csrf_token: csrfToken },
+})
+```
+
+### Usage
 
 ```elixir
 import EssenceUI.Components
 ```
 
-## Components
-
-### Em
-
-Emphasizes text with optional truncation and wrapping controls.
-
-#### Example
-
-```elixir
-<.em>
-  Emphasized text
-</.em>
-
-<.em truncate>
-  This is a long emphasized text that will be truncated.
-</.em>
+```heex
+<.theme accent_color="indigo" gray_color="slate" radius="medium">
+  <.flex gap="3" align="center">
+    <.text size="3">Hello from Essence UI</.text>
+    <.button>Get started</.button>
+  </.flex>
+</.theme>
 ```
 
-#### Props
+Headless primitives live under `EssenceUI.Primitives.*`.
 
-- `as_child` - If true, renders the component as its child element.
-- `truncate` - If true, truncates text with ellipsis when it overflows.
-- `wrap` - Controls text wrapping. One of: `"wrap"`, `"nowrap"`, `"pretty"`, `"balance"`. Responsive supported.
-- `class` - Additional CSS classes.
-- `style` - Additional inline styles.
-- `rest` - Additional HTML attributes.
+## Docs site (this repo)
 
----
+This repository also contains the documentation site and CRM demo.
 
-To start your Phoenix server:
+```bash
+mix setup
+mix phx.server
+```
 
-* Run `mix setup` to install and setup dependencies
-* Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+Visit [localhost:4000](http://localhost:4000).
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+## Publishing to Hex
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+Package metadata lives in `mix.exs` (`package/0`, `description/0`, `docs/0`). Before publishing:
+
+```bash
+mix hex.build          # preview tarball contents
+mix docs               # build ExDoc locally
+mix hex.publish        # requires a Hex user (`mix hex.user register`)
+```
 
 ## Implementation plan and TODO
 
@@ -174,8 +195,7 @@ Playwright starts `mix phx.server` automatically. Shared helpers: `assets/test/h
 
 ## Learn more
 
-* Official website: https://www.phoenixframework.org/
-* Guides: https://hexdocs.pm/phoenix/overview.html
-* Docs: https://hexdocs.pm/phoenix
-* Forum: https://elixirforum.com/c/phoenix-forum
-* Source: https://github.com/phoenixframework/phoenix
+* Source: https://github.com/ilyabayel/essence_ui
+* Changelog: [CHANGELOG.md](CHANGELOG.md)
+* Hex: https://hex.pm/packages/essence_ui (after first publish)
+* HexDocs: https://hexdocs.pm/essence_ui (after first publish)
