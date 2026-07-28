@@ -50,14 +50,29 @@ Headless primitives live under `EssenceUI.Primitives.*`.
 
 ## Docs site (this repo)
 
-This repository also contains the documentation site and CRM demo.
+The documentation site and CRM demo live in [`website/`](website/) as a separate Mix app (`:essence_ui_web`) that depends on this library via `{:essence_ui, path: ".."}`.
 
 ```bash
+# library (root)
+mix setup
+mix test
+
+# docs site
+cd website
 mix setup
 mix phx.server
 ```
 
 Visit [localhost:4000](http://localhost:4000).
+
+E2E (Playwright) from `website/assets/`:
+
+```bash
+cd website
+npm --prefix assets ci
+npx --prefix assets playwright install chromium
+npm --prefix assets run test:e2e
+```
 
 ## Publishing to Hex
 
@@ -180,18 +195,6 @@ Essence UI provides accessible, themeable Phoenix LiveView components inspired b
 
 - [ ] Composables for state machines
 - [ ] Visual regression tests
-
-## E2E (Playwright)
-
-Primitive and component browser tests live under `assets/test/`.
-
-```bash
-npm --prefix assets ci
-npx --prefix assets playwright install chromium
-npm --prefix assets run test:e2e
-```
-
-Playwright starts `mix phx.server` automatically. Shared helpers: `assets/test/helpers/docs.js` (`gotoPrimitive`, `gotoTheme`) and `assets/test/helpers/a11y.js` (`expectNoA11yViolations` via axe).
 
 ## Learn more
 

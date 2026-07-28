@@ -2,7 +2,7 @@ import Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :essence_ui, EssenceUIWeb.Endpoint,
+config :essence_ui_web, EssenceUIWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "t3Msr0KrCuZ70t5K0yOTL6GgveR3PBDqRfyy6kwnGtmBlsTG/jRxoQaX3Qja/K11",
   server: false

@@ -1,5 +1,5 @@
 defmodule EssenceUI.Components.ProgressTest do
-  use EssenceUIWeb.ConnCase, async: true
+  use EssenceUI.ComponentCase, async: true
 
   import Phoenix.LiveViewTest
 

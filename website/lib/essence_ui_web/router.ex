@@ -14,7 +14,7 @@ defmodule EssenceUIWeb.Router do
     plug :accepts, ["json"]
   end
 
-  if Application.compile_env(:essence_ui, :dev_routes) do
+  if Application.compile_env(:essence_ui_web, :dev_routes) do
     import Phoenix.LiveDashboard.Router
 
     scope "/dev" do

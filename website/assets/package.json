@@ -1,0 +1,20 @@
+{
+  "name": "essence_ui_web",
+  "version": "0.0.1",
+  "type": "module",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.59.1",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.1",
+    "postcss-import": "^16.1.0",
+    "postcss-nesting": "^13.0.1"
+  },
+  "scripts": {
+    "build:css": "postcss css/app.css -o ../priv/static/assets/app.css",
+    "watch:css": "postcss css/app.css -o ../priv/static/assets/app.css --watch",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
+  }
+}

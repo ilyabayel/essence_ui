@@ -21,5 +21,5 @@ defmodule EssenceUIWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext.Backend, otp_app: :essence_ui
+  use Gettext.Backend, otp_app: :essence_ui_web
 end

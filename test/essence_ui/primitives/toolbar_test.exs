@@ -1,5 +1,5 @@
 defmodule EssenceUI.Primitives.ToolbarTest do
-  use EssenceUIWeb.ConnCase, async: true
+  use EssenceUI.ComponentCase, async: true
 
   import Phoenix.Component
   import Phoenix.LiveViewTest

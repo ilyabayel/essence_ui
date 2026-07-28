@@ -106,11 +106,13 @@ rtk pip list            rtk pnpm install        rtk npm run <script>
 
 ## Cursor Cloud specific instructions
 
-Single Phoenix (Elixir) app: a UI component library with an MDEx/LiveView documentation site, plus a CRM demo. No database or external services. Erlang/OTP + Elixir and `inotify-tools` are baked into the VM image; the startup update script only refreshes deps (`npm --prefix assets ci` then `mix setup`).
+Two Mix projects in one repo: Hex library at repo root (`:essence_ui`) and docs/CRM Phoenix app in `website/` (`:essence_ui_web`, path-depends on the library). No database or external services. Erlang/OTP + Elixir and `inotify-tools` are baked into the VM image.
 
-- Dev server: `mix phx.server` (Bandit on `127.0.0.1:4000`). Docs at `/` (themes home), `/themes/docs`, `/primitives/docs`, `/colors/docs`; CRM demo at `/crm`; LiveDashboard at `/dev/dashboard`.
-- Standard commands are in `README.md` and the `mix.exs` `setup` alias. Note `mix setup` does NOT run `npm install`; the `assets/` npm deps (postcss) must be installed first (`npm --prefix assets ci`), otherwise `build:css` fails with `postcss: not found`.
-- CSS is not wired into Phoenix watchers. After editing `assets/css/*`, rebuild with `npm --prefix assets run build:css` (or run `npm --prefix assets run watch:css` in a second terminal). JS is auto-bundled by the esbuild watcher.
-- Tests: `mix test` (no server needed). A pre-existing failure `EssenceUI.Primitives.Slot.slot/1 is undefined` exists on a clean checkout (the module lives at `lib/essence_ui/utilities/slot.ex`, not under `Primitives`); unrelated to environment setup.
-- Browser E2E (Playwright): from repo root run `npm --prefix assets ci && npx --prefix assets playwright install chromium`, then `npm --prefix assets run test:e2e`. Specs live in `assets/test/`; shared helpers in `assets/test/helpers/` (`gotoPrimitive`, `gotoTheme`, `expectNoA11yViolations`). Playwright auto-starts `mix phx.server` on `127.0.0.1:4000`.
-- Lint: `mix credo` and `mix format --check-formatted` both run (they report pre-existing findings).
+- Library setup (root): `npm --prefix assets ci && mix setup` (builds `priv/static/essence-ui.css`).
+- Website setup: `cd website && npm --prefix assets ci && mix setup`.
+- Dev server: `cd website && mix phx.server` (Bandit on `127.0.0.1:4000`). Docs at `/` (themes home), `/themes/docs`, `/primitives/docs`, `/colors/docs`; CRM demo at `/crm`; LiveDashboard at `/dev/dashboard`.
+- Library CSS release: after editing root `assets/essence.css` / `assets/radix` / overlays, run `mix css.release` (or `npm --prefix assets run build:css:release`). Website CSS: `npm --prefix website/assets run build:css` (or `watch:css`). Website JS is auto-bundled by the esbuild watcher.
+- Tests: root `mix test` (library components/primitives). Website: `cd website && mix test`. A pre-existing failure `EssenceUI.Primitives.Slot.slot/1 is undefined` may exist on a clean checkout (the module lives at `lib/essence_ui/utilities/slot.ex`, not under `Primitives`); unrelated to environment setup.
+- Browser E2E (Playwright): from `website/` run `npm --prefix assets ci && npx --prefix assets playwright install chromium`, then `npm --prefix assets run test:e2e`. Specs live in `website/assets/test/`; shared helpers in `website/assets/test/helpers/`. Playwright auto-starts `mix phx.server` in `website/` on `127.0.0.1:4000`.
+- Hex: root `mix hex.build` / `mix hex.publish`. Docker/Fly build from repo root (`Dockerfile` + `website/fly.toml`).
+- Lint: `mix credo` / `mix format --check-formatted` at root; same under `website/` for the docs app.

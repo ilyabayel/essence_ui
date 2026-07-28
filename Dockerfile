@@ -4,12 +4,8 @@
 # https://hub.docker.com/r/hexpm/elixir/tags?name=ubuntu
 # https://hub.docker.com/_/ubuntu/tags
 #
-# This file is based on these images:
-#
-#   - https://hub.docker.com/r/hexpm/elixir/tags - for the build image
-#   - https://hub.docker.com/_/debian/tags?name=bookworm-20240904-slim - for the release image
-#   - https://pkgs.org/ - resource for finding needed packages
-#   - Ex: docker.io/hexpm/elixir:1.16.3-erlang-26.2.5.2-debian-bookworm-20240904-slim
+# Build from the repository root so the website path dep (`{:essence_ui, path: ".."}`)
+# resolves correctly.
 #
 ARG ELIXIR_VERSION=1.16.3
 ARG OTP_VERSION=26.2.5.2
@@ -35,50 +31,58 @@ RUN mix local.hex --force \
 # set build ENV
 ENV MIX_ENV="prod"
 
-# install mix dependencies
+# --- Library (path dep parent) ---
 COPY mix.exs mix.lock ./
-RUN mix deps.get --only $MIX_ENV
-RUN mkdir config
-
-# copy compile-time config files before we compile dependencies
-# to ensure any relevant config change will trigger the dependencies
-# to be re-compiled.
-COPY config/config.exs config/${MIX_ENV}.exs config/
-
-COPY assets assets
-
-RUN mix deps.compile
-
-RUN mix assets.setup
-
-COPY priv priv
 COPY lib lib
-# build:css runs node ../scripts/build-css-release.mjs
+COPY priv priv
+COPY assets/package.json assets/package-lock.json assets/
+COPY assets/essence.css assets/postcss.config.js assets/postcss-breakpoints.js assets/postcss-whitespace.js assets/
+COPY assets/css assets/css
+COPY assets/radix assets/radix
+COPY assets/js assets/js
 COPY scripts scripts
-# Catalog embeds docs/content + docs/nav at compile time
-COPY docs docs
 
-# compile assets
+RUN mix deps.get --only $MIX_ENV \
+  && mix deps.compile
+
+# Build consumer stylesheet into priv/static/essence-ui.css
+RUN cd assets \
+  && npm ci --no-audit --no-fund \
+  && npm run build:css:release
+
+# --- Website ---
+WORKDIR /app/website
+
+COPY website/mix.exs website/mix.lock ./
+COPY website/config/config.exs website/config/${MIX_ENV}.exs config/
+COPY website/assets/package.json website/assets/package-lock.json assets/
+
+RUN mix deps.get --only $MIX_ENV \
+  && mix deps.compile \
+  && mix assets.setup
+
+COPY website/priv priv
+COPY website/lib lib
+COPY website/docs docs
+COPY website/assets assets
+COPY website/rel rel
+
+# Compile website CSS (imports deps/essence_ui stylesheet) and JS
 RUN cd assets \
   && npm ci --no-audit --no-fund \
   && npm run build:css
 
 RUN mix assets.deploy
-
-# Compile the release
 RUN mix compile
 
-# Changes to config/runtime.exs don't require recompiling the code
-COPY config/runtime.exs config/
-
-COPY rel rel
+COPY website/config/runtime.exs config/
 RUN mix release
 
 # start a new build stage so that the final image will only contain
 # the compiled release and other runtime necessities
 FROM ${RUNNER_IMAGE} AS final
 
-RUN apt-get update \ 
+RUN apt-get update \
   && apt-get install -y --no-install-recommends libstdc++6 openssl libncurses5 locales ca-certificates \
   && rm -rf /var/lib/apt/lists/*
 
@@ -97,7 +101,7 @@ RUN chown nobody /app
 ENV MIX_ENV="prod"
 
 # Only copy the final release from the build stage
-COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/essence_ui ./
+COPY --from=builder --chown=nobody:root /app/website/_build/${MIX_ENV}/rel/essence_ui_web ./
 
 USER nobody
 

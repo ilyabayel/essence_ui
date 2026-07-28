@@ -1,5 +1,5 @@
 defmodule EssenceUI.Primitives.ToggleTest do
-  use EssenceUIWeb.ConnCase, async: true
+  use EssenceUI.ComponentCase, async: true
 
   import Phoenix.Component
   import Phoenix.LiveViewTest

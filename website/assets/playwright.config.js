@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const repoRoot = path.resolve(__dirname, "..");
+const websiteRoot = path.resolve(__dirname, "..");
 
 export default defineConfig({
   testDir: "./test",
@@ -28,10 +28,9 @@ export default defineConfig({
   ],
   webServer: {
     command: "mix phx.server",
-    cwd: repoRoot,
+    cwd: websiteRoot,
     url: "http://127.0.0.1:4000",
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },
 });
-

@@ -13,6 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Consumer JS hooks entrypoint at `assets/js/essence_ui.js`
 - Prebuilt Themes stylesheet at `priv/static/essence-ui.css`
 
-### Notes
+### Changed
 
-- First Hex-oriented release. The docs/demo Phoenix app remains in this repository but is not included in the published package.
+- Split docs/CRM Phoenix app into `website/` (`:essence_ui_web`) so the Hex package only depends on Phoenix/LiveView
