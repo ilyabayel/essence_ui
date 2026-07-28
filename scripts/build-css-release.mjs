@@ -5,8 +5,9 @@
  * Usage:
  *   node scripts/build-css-release.mjs
  *
- * Output: priv/static/essence-ui.css
+ * Output: priv/static/essence-ui.css and essence-ui.css.gz
  */
+import { gzipSync } from "node:zlib";
 import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { dirname, resolve, join } from "node:path";
@@ -16,14 +17,16 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, "..");
 const assets = resolve(root, "assets");
 const outFile = resolve(root, "priv/static/essence-ui.css");
+const outGzFile = `${outFile}.gz`;
 const legacyOutDir = resolve(root, "priv/static/essence_ui");
+
+// postcss-breakpoints.js resolves ./radix relative to cwd at import time
+process.chdir(assets);
 
 const require = createRequire(join(assets, "package.json"));
 const postcss = require("postcss");
 const postcssConfig = (await import(pathToFileURL(join(assets, "postcss.config.js")).href)).default;
 const processor = postcss(postcssConfig.plugins);
-
-process.chdir(assets);
 
 const input = "essence.css";
 const inputPath = resolve(assets, input);
@@ -32,8 +35,11 @@ const result = await processor.process(css, { from: inputPath, to: outFile });
 
 await mkdir(dirname(outFile), { recursive: true });
 await writeFile(outFile, result.css);
+const gz = gzipSync(Buffer.from(result.css));
+await writeFile(outGzFile, gz);
 
 // Remove previous multi-file release layout if present
 await rm(legacyOutDir, { recursive: true, force: true });
 
 console.log(`Built ${input} → priv/static/essence-ui.css (${result.css.length} bytes)`);
+console.log(`Built ${input} → priv/static/essence-ui.css.gz (${gz.length} bytes)`);

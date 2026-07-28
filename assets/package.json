@@ -4,7 +4,6 @@
   "type": "module",
   "devDependencies": {
     "autoprefixer": "^10.4.21",
-    "classnames": "^2.5.1",
     "postcss": "^8.5.3",
     "postcss-cli": "^11.0.1",
     "postcss-combine-duplicated-selectors": "^10.0.3",
