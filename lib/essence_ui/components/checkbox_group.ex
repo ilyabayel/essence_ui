@@ -211,9 +211,7 @@ defmodule EssenceUI.Components.CheckboxGroup do
         value={@value}
         disabled={@disabled}
         checked={@checked}
-        class={
-          ["rt-CheckboxGroupItem", @button_class, @class] |> Enum.filter(& &1) |> Enum.join(" ")
-        }
+        class={["rt-CheckboxGroupItem", @button_class, @class] |> Enum.filter(& &1) |> Enum.join(" ")}
         style={@style}
         data-accent-color={@color}
         {@rest}

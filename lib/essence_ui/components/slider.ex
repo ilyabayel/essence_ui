@@ -134,7 +134,7 @@ defmodule EssenceUI.Components.Slider do
       |> Enum.reject(&(is_nil(&1) or &1 == ""))
       |> Enum.join(" ")
 
-    thumb_indexes = 0..(length(current_values) - 1) |> Enum.to_list()
+    thumb_indexes = Enum.to_list(0..(length(current_values) - 1))
 
     assigns =
       assign(assigns,

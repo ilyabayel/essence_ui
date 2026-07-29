@@ -94,24 +94,26 @@ defmodule EssenceUI.Components.Button do
       |> Enum.filter(& &1)
       |> Enum.join(" ")
 
+    # Pass `type` via props — not a global attr on dynamic_tag (LV 1.2+)
+    props =
+      then(%{disabled: assigns[:disabled] or assigns[:loading]}, fn props ->
+        if type, do: Map.put(props, :type, type), else: props
+      end)
+
     assigns =
       assign(assigns,
         tag: tag,
-        type: type,
         class: class,
         style: extracted.style,
         color: assigns[:color] || false,
         radius: assigns[:radius] || false,
         rest: assigns[:rest],
-        props: %{
-          disabled: assigns[:disabled] or assigns[:loading]
-        }
+        props: props
       )
 
     ~H"""
     <.dynamic_tag
       tag_name={@tag}
-      type={@type}
       class={@class}
       style={@style}
       data-disabled={@disabled or @loading}

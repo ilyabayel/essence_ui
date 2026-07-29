@@ -34,7 +34,12 @@ defmodule EssenceUI.Components.AspectRatio do
     assigns = assign(assigns, ratio: ratio)
 
     ~H"""
-    <AspectRatioPrimitive.aspect_ratio ratio={@ratio} class={["rt-AspectRatio", @class]} style={@style} {@rest}>
+    <AspectRatioPrimitive.aspect_ratio
+      ratio={@ratio}
+      class={["rt-AspectRatio", @class]}
+      style={@style}
+      {@rest}
+    >
       {render_slot(@inner_block)}
     </AspectRatioPrimitive.aspect_ratio>
     """

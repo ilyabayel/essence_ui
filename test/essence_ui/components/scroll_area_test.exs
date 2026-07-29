@@ -70,7 +70,9 @@ defmodule EssenceUI.Components.ScrollAreaTest do
       render_component(
         fn assigns ->
           ~H"""
-          <ScrollArea.scroll_area id="sa-hover" type="hover"><p>x</p></ScrollArea.scroll_area>
+          <ScrollArea.scroll_area id="sa-hover" type="hover">
+            <p>x</p>
+          </ScrollArea.scroll_area>
           """
         end,
         %{}
@@ -82,7 +84,9 @@ defmodule EssenceUI.Components.ScrollAreaTest do
       render_component(
         fn assigns ->
           ~H"""
-          <ScrollArea.scroll_area id="sa-scroll" type="scroll"><p>x</p></ScrollArea.scroll_area>
+          <ScrollArea.scroll_area id="sa-scroll" type="scroll">
+            <p>x</p>
+          </ScrollArea.scroll_area>
           """
         end,
         %{}

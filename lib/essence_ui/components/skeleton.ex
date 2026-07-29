@@ -102,8 +102,7 @@ defmodule EssenceUI.Components.Skeleton do
           class={[@extracted_class, @class]}
           style={@extracted_style <> @inline_styles}
           {@rest}
-        >
-        </span>
+        ></span>
       <% end %>
     <% end %>
     """

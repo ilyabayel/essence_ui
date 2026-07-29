@@ -11,7 +11,15 @@ defmodule EssenceUI.Components.TooltipTest do
       render_component(
         fn assigns ->
           ~H"""
-          <Tooltip.tooltip id="tip" content="Hello tip" side="right" align="start" color="blue" open_delay={500} close_delay={200}>
+          <Tooltip.tooltip
+            id="tip"
+            content="Hello tip"
+            side="right"
+            align="start"
+            color="blue"
+            open_delay={500}
+            close_delay={200}
+          >
             <button type="button">Hover</button>
           </Tooltip.tooltip>
           """

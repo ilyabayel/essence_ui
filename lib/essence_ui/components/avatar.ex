@@ -122,7 +122,11 @@ defmodule EssenceUI.Components.Avatar do
       {@rest}
     >
       <.image :if={@has_image} src={@src} alt={@alt} class="rt-AvatarImage" />
-      <.fallback :if={@has_image or @fallback || @fallback_slot != []} class={@fallback_classes} delay_ms={0}>
+      <.fallback
+        :if={(@has_image or @fallback) || @fallback_slot != []}
+        class={@fallback_classes}
+        delay_ms={0}
+      >
         <%= if @fallback do %>
           {render_fallback(@fallback)}
         <% else %>

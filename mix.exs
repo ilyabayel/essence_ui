@@ -1,7 +1,7 @@
 defmodule EssenceUI.MixProject do
   use Mix.Project
 
-  @version "0.2.0"
+  @version "0.2.1"
   @source_url "https://github.com/ilyabayel/essence_ui"
 
   def project do
@@ -39,9 +39,8 @@ defmodule EssenceUI.MixProject do
       {:floki, ">= 0.38.0", only: :test},
       {:jason, "~> 1.4"},
       {:lazy_html, ">= 0.1.0", only: :test},
-      {:phoenix, "~> 1.8.1"},
-      {:phoenix_html, "~> 4.2.1"},
-      {:phoenix_live_view, "~> 1.1.8"},
+      {:phoenix_html, "~> 4.1"},
+      {:phoenix_live_view, ">= 1.1.8 and < 2.0.0"},
       {:styler, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end

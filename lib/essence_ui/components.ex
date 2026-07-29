@@ -93,6 +93,7 @@ defmodule EssenceUI.Components do
     * `visually_hidden/1` - See `EssenceUI.Utilities.VisuallyHidden`
   """
   alias EssenceUI.Components.CheckboxCards
+  alias EssenceUI.Components.CheckboxGroup
   alias EssenceUI.Components.ContextMenu
   alias EssenceUI.Components.DataList
   alias EssenceUI.Components.DropdownMenu
@@ -101,6 +102,7 @@ defmodule EssenceUI.Components do
   alias EssenceUI.Components.RadioCards
   alias EssenceUI.Components.RadioGroup
   alias EssenceUI.Components.ScrollArea
+  alias EssenceUI.Components.SegmentedControl
   alias EssenceUI.Components.Select
   alias EssenceUI.Components.Table
   alias EssenceUI.Components.TabNav
@@ -121,9 +123,9 @@ defmodule EssenceUI.Components do
   defdelegate checkbox(assigns), to: EssenceUI.Components.Checkbox
   defdelegate checkbox_cards_root(assigns), to: CheckboxCards
   defdelegate checkbox_cards_item(assigns), to: CheckboxCards
-  defdelegate checkbox_group(assigns), to: EssenceUI.Components.CheckboxGroup
-  defdelegate checkbox_group_root(assigns), to: EssenceUI.Components.CheckboxGroup
-  defdelegate checkbox_group_item(assigns), to: EssenceUI.Components.CheckboxGroup
+  defdelegate checkbox_group(assigns), to: CheckboxGroup
+  defdelegate checkbox_group_root(assigns), to: CheckboxGroup
+  defdelegate checkbox_group_item(assigns), to: CheckboxGroup
   defdelegate context_menu_root(assigns), to: ContextMenu
   defdelegate context_menu_trigger(assigns), to: ContextMenu
   defdelegate context_menu_content(assigns), to: ContextMenu
@@ -158,9 +160,9 @@ defmodule EssenceUI.Components do
   defdelegate radio_cards_item(assigns), to: RadioCards
   defdelegate radio_group_root(assigns), to: RadioGroup
   defdelegate radio_group_item(assigns), to: RadioGroup
-  defdelegate segmented_control(assigns), to: EssenceUI.Components.SegmentedControl
-  defdelegate segmented_control_root(assigns), to: EssenceUI.Components.SegmentedControl
-  defdelegate segmented_control_item(assigns), to: EssenceUI.Components.SegmentedControl
+  defdelegate segmented_control(assigns), to: SegmentedControl
+  defdelegate segmented_control_root(assigns), to: SegmentedControl
+  defdelegate segmented_control_item(assigns), to: SegmentedControl
   defdelegate select_root(assigns), to: Select
   defdelegate select_trigger(assigns), to: Select
   defdelegate select_content(assigns), to: Select

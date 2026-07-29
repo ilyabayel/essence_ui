@@ -37,8 +37,7 @@ defmodule EssenceUI.Components.DropdownMenuTest do
           ~H"""
           <DropdownMenu.dropdown_menu_root id="dm">
             <DropdownMenu.dropdown_menu_trigger>
-              Options
-              <DropdownMenu.dropdown_menu_trigger_icon />
+              Options <DropdownMenu.dropdown_menu_trigger_icon />
             </DropdownMenu.dropdown_menu_trigger>
             <DropdownMenu.dropdown_menu_content
               id="dm-content"
@@ -55,7 +54,9 @@ defmodule EssenceUI.Components.DropdownMenuTest do
               <DropdownMenu.dropdown_menu_checkbox_item checked shortcut="⌘ B">
                 Bookmarks
               </DropdownMenu.dropdown_menu_checkbox_item>
-              <DropdownMenu.dropdown_menu_radio_item value="a" checked>A</DropdownMenu.dropdown_menu_radio_item>
+              <DropdownMenu.dropdown_menu_radio_item value="a" checked>
+                A
+              </DropdownMenu.dropdown_menu_radio_item>
               <DropdownMenu.dropdown_menu_sub>
                 <DropdownMenu.dropdown_menu_sub_trigger>More</DropdownMenu.dropdown_menu_sub_trigger>
                 <DropdownMenu.dropdown_menu_sub_content>Sub</DropdownMenu.dropdown_menu_sub_content>

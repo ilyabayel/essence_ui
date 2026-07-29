@@ -45,10 +45,10 @@ defmodule EssenceUIWeb.MixProject do
       {:mdex, "~> 0.13"},
       {:mix_test_watch, "~> 1.3", only: [:dev, :test], runtime: false},
       {:phoenix, "~> 1.8.1"},
-      {:phoenix_html, "~> 4.2.1"},
+      {:phoenix_html, "~> 4.2"},
       {:phoenix_live_dashboard, "~> 0.8.7"},
       {:phoenix_live_reload, "~> 1.6", only: :dev},
-      {:phoenix_live_view, "~> 1.1.8"},
+      {:phoenix_live_view, "~> 1.1"},
       # makeup_syntect 0.1.4 requires ~> 0.8.2; mdex_native allows ~> 0.8
       {:rustler_precompiled, "~> 0.8.2", override: true},
       {:styler, "~> 1.7", only: [:dev, :test], runtime: false},
