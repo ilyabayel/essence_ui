@@ -106,8 +106,10 @@ defmodule EssenceUIWeb.Docs.Catalog do
   attr; `<.demo>` only shows the HEEx tab when `code` is present. Themes pages
   that already pass `code=` are left unchanged.
 
-  Uses `inspect/1` so the attribute stays a single-line Elixir string literal
-  (MDEx swallows multiline HEEx attrs).
+  Uses `inspect/2` with `printable_limit: :infinity` so the attribute stays a
+  single-line Elixir string literal (MDEx swallows multiline HEEx attrs). Default
+  `inspect/1` truncates long strings as `"…" <> ...`, which MDEx evaluates as
+  a call to `.../0` and crashes docs pages with large demos.
   """
   def inject_heex_slot_code(body) when is_binary(body) do
     Regex.replace(~r/<:heex((?:\s[^>]*)?)>(.*?)<\/:heex>/s, body, fn full, attrs, inner ->
@@ -119,7 +121,7 @@ defmodule EssenceUIWeb.Docs.Catalog do
             full
 
           code ->
-            "<:heex#{attrs} code={#{inspect(code)}}>#{inner}</:heex>"
+            "<:heex#{attrs} code={#{inspect(code, printable_limit: :infinity)}}>#{inner}</:heex>"
         end
       end
     end)

@@ -61,4 +61,13 @@ defmodule EssenceUIWeb.Docs.CatalogTest do
 
     assert Catalog.inject_heex_slot_code(body) == body
   end
+
+  test "inject_heex_slot_code does not truncate long slot bodies" do
+    # Default inspect/1 appends `<> ...` past printable_limit; that becomes .../0 in MDEx.
+    long = String.duplicate("x", 5000)
+    body = "<:heex>\n#{long}\n</:heex>"
+    injected = Catalog.inject_heex_slot_code(body)
+    refute injected =~ "<> ..."
+    assert injected =~ long
+  end
 end
