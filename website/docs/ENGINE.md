@@ -78,7 +78,7 @@ Frontmatter is simple `key: value` lines (no nested YAML). Body is Markdown with
 | `<.keyboard_table>` | Accessibility keyboard interactions |
 | `<.code_block>` | Standalone highlighted snippet |
 
-Primitives demos set `theme="light"` (docs CSS has no dark theme), `variant="primitive"`, `component="…"`, and `css={primitive_css("…")}`. The CSS tab shows the component stylesheet only (no demo canvas). The preview injects canvas + component CSS via `<style>` tags; `Demo*` class names keep demo styles from clashing. Pass `code` on `<:heex>` for the HEEx tab source.
+Primitives demos set `theme="light"` (docs CSS has no dark theme), `variant="primitive"`, `component="…"`, and `css={primitive_css("…")}`. The CSS tab shows the component stylesheet only (no demo canvas). The preview injects canvas + component CSS via `<style>` tags; `Demo*` class names keep demo styles from clashing. HEEx tab source comes from `code` on `<:heex>` when present; otherwise `Catalog.inject_heex_slot_code/1` fills it from the slot body before MDEx render.
 
 ### Routing
 
@@ -131,7 +131,7 @@ Do not add a Menu docs page or nav entry.
 ## Authoring rules
 
 1. One job per page; lead with a short description, then demos, then API
-2. Use `<.demo>` with `<:heex>` (live markup); pass `code` on the slot for the HEEx tab
+2. Use `<.demo>` with `<:heex>` (live markup); optional `code` on the slot (auto-filled from body when omitted)
 3. Primitives: `theme="light" variant="primitive" component="…" css={primitive_css("…")}` — lock light theme (docs CSS has no dark); CSS is an argument (not a slot); component CSS only in the CSS tab; preview uses `Demo*` classes + injected `<style>`
 4. Import nothing in Markdown — `PageLive` imports docs helpers + `EssenceUI.Components` + **all** `EssenceUI.Primitives.*` aliases
 5. Keep nav in `docs/nav/primitives.exs` (and siblings) in sync when adding pages
@@ -142,7 +142,7 @@ Do not add a Menu docs page or nav entry.
 ## Success criteria
 
 - [x] Docs render Markdown with live Essence UI components
-- [x] Demo shows HEEx (and optional CSS) beside preview when `code=` / `css=` provided
+- [x] Demo shows HEEx (and optional CSS) beside preview when `code=` / `css=` provided (or HEEx body auto-injected)
 - [x] Props table generated from `attr`
 - [x] Mobile-first layout (topbar + drawer; desktop sidebar)
 - [x] Themes + Primitives catalogs hosted on MDEx/LiveView docs

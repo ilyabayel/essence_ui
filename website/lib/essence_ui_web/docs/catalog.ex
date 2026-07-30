@@ -99,6 +99,32 @@ defmodule EssenceUIWeb.Docs.Catalog do
   @doc "All pages keyed by full content path (e.g. \"themes/components/button\")."
   def pages, do: @pages
 
+  @doc """
+  Inject `code={...}` on `<:heex>` slots that omit it, using the slot body.
+
+  Primitive docs author live markup inside `<:heex>` without a duplicate `code`
+  attr; `<.demo>` only shows the HEEx tab when `code` is present. Themes pages
+  that already pass `code=` are left unchanged.
+
+  Uses `inspect/1` so the attribute stays a single-line Elixir string literal
+  (MDEx swallows multiline HEEx attrs).
+  """
+  def inject_heex_slot_code(body) when is_binary(body) do
+    Regex.replace(~r/<:heex((?:\s[^>]*)?)>(.*?)<\/:heex>/s, body, fn full, attrs, inner ->
+      if Regex.match?(~r/\bcode\s*=/, attrs) do
+        full
+      else
+        case String.trim(inner) do
+          "" ->
+            full
+
+          code ->
+            "<:heex#{attrs} code={#{inspect(code)}}>#{inner}</:heex>"
+        end
+      end
+    end)
+  end
+
   @doc "Sidebar navigation for a section."
   def nav(section) when section in @sections, do: Map.fetch!(@navs, section)
 

@@ -37,4 +37,28 @@ defmodule EssenceUIWeb.Docs.CatalogTest do
       end
     end
   end
+
+  test "inject_heex_slot_code adds code attr from slot body" do
+    body = """
+    <.demo>
+      <:heex>
+        <Dialog.root id="x">Hi</Dialog.root>
+      </:heex>
+    </.demo>
+    """
+
+    injected = Catalog.inject_heex_slot_code(body)
+    assert injected =~ ~s[code={"<Dialog.root id=\\"x\\">Hi</Dialog.root>"}]
+    assert injected =~ "<Dialog.root id=\"x\">Hi</Dialog.root>"
+  end
+
+  test "inject_heex_slot_code leaves existing code attr alone" do
+    body = """
+    <:heex code={~s[<.button>Hi</.button>]}>
+      <.button>Hi</.button>
+    </:heex>
+    """
+
+    assert Catalog.inject_heex_slot_code(body) == body
+  end
 end

@@ -278,7 +278,10 @@ defmodule EssenceUIWeb.Docs.PageLive do
 
   defp render_markdown(assigns) do
     # Empty prefix → id="slug" matching TOC href="#slug" (MDEx default is no heading ids).
-    MDEx.to_heex!(assigns.page.body,
+    # Inject code= on <:heex> slots so primitive demos get an HEEx source tab.
+    body = Catalog.inject_heex_slot_code(assigns.page.body)
+
+    MDEx.to_heex!(body,
       assigns: assigns,
       extension: [header_id_prefix: ""]
     )
