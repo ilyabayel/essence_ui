@@ -38,8 +38,26 @@ defmodule EssenceUI.Components.AlertDialogTest do
     assert html =~ "rt-AlertDialogOverlay"
     assert html =~ "rt-BaseDialogContent"
     assert html =~ "rt-AlertDialogContent"
+    assert html =~ "rt-r-size-3"
     assert html =~ "Revoke access"
     assert html =~ "Are you sure?"
     assert html =~ "Confirm"
+  end
+
+  test "size sets the alert dialog content class" do
+    html =
+      render_component(
+        fn assigns ->
+          ~H"""
+          <AlertDialog.alert_dialog id="ad-size" target="body" size="4">
+            <:title>Large</:title>
+          </AlertDialog.alert_dialog>
+          """
+        end,
+        %{}
+      )
+
+    assert html =~ "rt-r-size-4"
+    refute html =~ "rt-r-size-3"
   end
 end

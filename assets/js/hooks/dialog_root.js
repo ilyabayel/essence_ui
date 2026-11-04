@@ -14,6 +14,25 @@ const ALERT_DIALOG_SELECTORS = {
   close: "[data-radix-alert-dialog-cancel], [data-radix-alert-dialog-action]",
 };
 
+let bodyScrollLocks = 0;
+let bodyOverflowBeforeLock = "";
+
+function lockBodyScroll() {
+  if (bodyScrollLocks === 0) {
+    bodyOverflowBeforeLock = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+  }
+  bodyScrollLocks += 1;
+}
+
+function unlockBodyScroll() {
+  if (bodyScrollLocks === 0) return;
+  bodyScrollLocks -= 1;
+  if (bodyScrollLocks === 0) {
+    document.body.style.overflow = bodyOverflowBeforeLock;
+  }
+}
+
 function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {
   return {
     mounted() {
@@ -23,6 +42,7 @@ function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {
           ? this.el.dataset.closeOnOverlay !== "false"
           : closeOnOverlayDefault;
       this.modal = this.el.dataset.modal !== "false";
+      this.scrollLocked = false;
       this.previousFocus = null;
 
       this.onTriggerClick = this.onTriggerClick.bind(this);
@@ -48,9 +68,15 @@ function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {
     updated() {
       this.resolveParts();
       this.bindStaticListeners();
+      if (this.el.dataset.state === "open") {
+        this.lockScroll();
+      } else {
+        this.unlockScroll();
+      }
     },
 
     destroyed() {
+      this.unlockScroll();
       this.unbindOpenListeners();
       this.el.removeEventListener("open", this.onOpenEvent);
       this.el.removeEventListener("close", this.onCloseEvent);
@@ -152,6 +178,7 @@ function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {
       }
 
       this.bindOpenListeners();
+      this.lockScroll();
 
       if (!isInitial) this.pushOpenChange(true);
 
@@ -163,6 +190,7 @@ function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {
     close() {
       if (this.el.dataset.state === "closed") return;
 
+      this.unlockScroll();
       this.el.dataset.state = "closed";
       this.pushOpenChange(false);
       this.applyClosedUI();
@@ -205,6 +233,18 @@ function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {
         // may not fire again on close when no close animation is defined.
         setTimeout(settle, 200);
       });
+    },
+
+    lockScroll() {
+      if (!this.modal || this.scrollLocked) return;
+      lockBodyScroll();
+      this.scrollLocked = true;
+    },
+
+    unlockScroll() {
+      if (!this.scrollLocked) return;
+      this.scrollLocked = false;
+      unlockBodyScroll();
     },
 
     bindOpenListeners() {

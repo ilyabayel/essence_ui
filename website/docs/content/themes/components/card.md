@@ -34,7 +34,7 @@ This component is based on the `div` element and supports common margin props.
 
 ### As another element
 
-Nest a link (or button) inside the card for interactive surfaces. Prefer this pattern until `as_child` composition merges props into the child element.
+Nest a link (or button) inside the card. The card always renders its own element.
 
 <.demo>
   <:heex code={~S|<.box max_width="350px"><.card><a href="#" style="text-decoration: none; color: inherit; display: block;"><.text as="div" size="2" weight="bold">Quick start</.text><.text as="div" color="gray" size="2">Start building your next project in minutes</.text></a></.card></.box>|}>

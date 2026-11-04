@@ -19,9 +19,9 @@ defmodule EssenceUI.Components.Card do
         <p>Ghost card with margin</p>
       </.card>
 
-      <.card as_child>
+      <.card>
         <a href="/profile">
-          <p>Interactive card as link</p>
+          <p>Link nested inside the card</p>
         </a>
       </.card>
 
@@ -29,24 +29,22 @@ defmodule EssenceUI.Components.Card do
 
   - `size` - Card size: "1", "2", "3", "4", "5" (default: "1")
   - `variant` - Card variant: "surface", "classic", "ghost" (default: "surface")
-  - `as_child` - When true, merges props into immediate child element (default: false)
   - Plus margin props (m, mx, my, mt, mr, mb, ml) for spacing control
+
+  The card always renders its own `div`. Nest a link or button inside it.
   """
 
   use Phoenix.Component
 
   alias EssenceUI.Helpers.ExtractProps
-  alias EssenceUI.SharedProps.AsChildProps
   alias EssenceUI.SharedProps.MarginProps
 
-  require AsChildProps
   require MarginProps
 
   @sizes ["1", "2", "3", "4", "5"]
   @variants ["surface", "classic", "ghost"]
 
   MarginProps.attrs()
-  AsChildProps.attrs()
 
   attr :size, :string,
     values: @sizes,
@@ -65,23 +63,13 @@ defmodule EssenceUI.Components.Card do
 
   def card(assigns) do
     prop_defs =
-      %{
-        size: %{
-          type: :enum,
-          class: "rt-r-size",
-          values: @sizes,
-          default: "1",
-          responsive: true
+      Map.merge(
+        %{
+          size: %{type: :enum, class: "rt-r-size", values: @sizes, default: "1", responsive: true},
+          variant: %{type: :enum, class: "rt-variant", values: @variants, default: "surface"}
         },
-        variant: %{
-          type: :enum,
-          class: "rt-variant",
-          values: @variants,
-          default: "surface"
-        }
-      }
-      |> Map.merge(AsChildProps.prop_defs())
-      |> Map.merge(MarginProps.prop_defs())
+        MarginProps.prop_defs()
+      )
 
     extracted = ExtractProps.call(assigns, prop_defs)
 

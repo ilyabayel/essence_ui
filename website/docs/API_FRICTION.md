@@ -10,14 +10,14 @@ Findings while dogfooding Essence UI to build the marketing + docs site. Severit
 | F2 | P0 | ThemePanel CSS only, no Elixir module | Added `ThemePanel` + playground wiring |
 | F3 | P1 | Utilities not on `EssenceUI.Components` facade | Re-exported `inset`, `reset`, `visually_hidden`, `accessible_icon` |
 | F4 | P1 | Site needed appearance toggle | `AppearanceToggle` + `Clipboard` hooks; ThemePanel pushes appearance |
+| F7 | P2 | `Text` lacks margin props | `Text` now uses the same `MarginProps` scale as `Heading` |
 
 ## Open / documented
 
 | ID | Severity | Issue | Notes |
 |----|----------|-------|-------|
-| F5 | P1 | Themes `Dialog` requires portal `target` and differs from Primitives part tree | Docs send users to Primitives Dialog / CRM AlertDialog; align APIs later |
+| F5 | P1 | Themes `Dialog` requires portal `target` and differs from Primitives part tree | Content `size` (`1`–`4`, default `3`) is exposed. Portal `target` and the flattened part tree remain |
 | F6 | P2 | `es_link` / `es_quote` naming | Phoenix/`quote` collisions — keep aliases, document in getting started |
-| F7 | P2 | `Text` lacks margin props | Prefer `Flex`/`Box` spacing (ENGINE already noted) |
 | F8 | P2 | Compound APIs mix slots (`tabs`) and nested fns (`select_*`) | Document both; no mass rename in v1 |
 | F9 | P2 | Select has `value` but no `default_value` | LiveView controlled pattern; document in Select docs |
 | F10 | P2 | IconButton needs raw SVG children | No Icons product — recommend inline SVG pattern |

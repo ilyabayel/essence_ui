@@ -5,26 +5,30 @@ defmodule EssenceUI.Components.Section do
   use Phoenix.Component
 
   alias EssenceUI.Helpers.ExtractProps
-  alias EssenceUI.SharedProps.AsChildProps
   alias EssenceUI.SharedProps.HeightProps
   alias EssenceUI.SharedProps.LayoutProps
   alias EssenceUI.SharedProps.MarginProps
   alias EssenceUI.SharedProps.PaddingProps
   alias EssenceUI.SharedProps.WidthProps
 
-  require AsChildProps
   require HeightProps
   require LayoutProps
   require MarginProps
   require PaddingProps
   require WidthProps
 
+  @sizes ["1", "2", "3", "4"]
+
   @doc """
   Section component.
   """
   LayoutProps.attrs()
   MarginProps.attrs()
-  AsChildProps.attrs()
+
+  attr :size, :string,
+    values: @sizes,
+    doc: "Vertical padding size from 1 to 4. Maps to rt-r-size-*."
+
   attr :class, :string, default: nil, doc: "Additional CSS classes"
   attr :style, :string, default: nil, doc: "Additional inline styles"
   attr :rest, :any, default: %{}, doc: "Additional HTML attributes"
@@ -32,25 +36,20 @@ defmodule EssenceUI.Components.Section do
 
   def section(assigns) do
     prop_defs =
-      LayoutProps.prop_defs()
+      %{size: %{type: :enum, values: @sizes, class: "rt-r-size"}}
+      |> Map.merge(LayoutProps.prop_defs())
       |> Map.merge(MarginProps.prop_defs())
-      |> Map.merge(AsChildProps.prop_defs())
 
     extracted = ExtractProps.call(assigns, prop_defs)
     class = ["rt-Section", extracted.class, assigns[:class]] |> Enum.filter(& &1) |> Enum.join(" ")
     style = [extracted.style, assigns[:style]] |> Enum.filter(& &1) |> Enum.join("; ")
 
-    assigns = assign(assigns, class: class, style: style, as_child: Map.get(assigns, :as_child, false))
+    assigns = assign(assigns, class: class, style: style)
 
     ~H"""
-    <.dynamic_tag
-      tag_name={if @as_child, do: "div", else: "section"}
-      class={@class}
-      style={@style}
-      {@rest}
-    >
+    <section class={@class} style={@style} {@rest}>
       {render_slot(@inner_block)}
-    </.dynamic_tag>
+    </section>
     """
   end
 end

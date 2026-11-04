@@ -67,6 +67,12 @@ The component that contains the dropdown menu items.
 
 <.props_table module={EssenceUI.Components.DropdownMenu} function={:dropdown_menu_item} />
 
+### Group
+
+Used to group multiple items.
+
+<.props_table module={EssenceUI.Components.DropdownMenu} function={:dropdown_menu_group} />
+
 ### Separator
 
 Visual separator between items.
@@ -78,6 +84,12 @@ Visual separator between items.
 An item that can be controlled and rendered like a checkbox.
 
 <.props_table module={EssenceUI.Components.DropdownMenu} function={:dropdown_menu_checkbox_item} />
+
+### RadioGroup
+
+Used to group multiple radio items.
+
+<.props_table module={EssenceUI.Components.DropdownMenu} function={:dropdown_menu_radio_group} />
 
 ### RadioItem
 

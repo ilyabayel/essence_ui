@@ -11,6 +11,7 @@ defmodule EssenceUI.Components.Text do
   alias EssenceUI.SharedProps.ColorProps
   alias EssenceUI.SharedProps.HighContrastProps
   alias EssenceUI.SharedProps.LeadingTrimProps
+  alias EssenceUI.SharedProps.MarginProps
   alias EssenceUI.SharedProps.TextAlignProps
   alias EssenceUI.SharedProps.TextWrapProps
   alias EssenceUI.SharedProps.TruncateProps
@@ -20,6 +21,7 @@ defmodule EssenceUI.Components.Text do
   require ColorProps
   require HighContrastProps
   require LeadingTrimProps
+  require MarginProps
   require TextAlignProps
   require TextWrapProps
   require TruncateProps
@@ -45,7 +47,8 @@ defmodule EssenceUI.Components.Text do
     * `wrap` - Text wrapping: one of `"wrap"`, `"nowrap"`, `"pretty"`, or `"balance"`.
     * `color` - The text color. One of: `gray`, `gold`, `bronze`, `brown`, `yellow`, `amber`, `orange`, `tomato`, `red`, `ruby`, `crimson`, `pink`, `plum`, `purple`, `violet`, `iris`, `indigo`, `blue`, `cyan`, `teal`, `jade`, `green`, `grass`, `lime`, `mint`, `sky`.
     * `high_contrast` - Whether to increase color contrast with the background.
-    * `as_child` - Composes the component into its immediate child instead of rendering its own HTML element.
+    * `m`, `mx`, `my`, `mt`, `mr`, `mb`, `ml` - Margin utilities on the theme scale.
+    * `as_child` - Accepted for API compatibility. Text always renders its own element.
     * `class` - Additional CSS classes to add to the element.
     * `style` - Additional inline styles.
     * `rest` - Additional HTML attributes to add to the element.
@@ -57,6 +60,7 @@ defmodule EssenceUI.Components.Text do
   TruncateProps.attrs()
   WeightProps.attrs()
   AsChildProps.attrs()
+  MarginProps.attrs()
   HighContrastProps.attrs()
 
   attr :size, :any,
@@ -84,13 +88,15 @@ defmodule EssenceUI.Components.Text do
       |> Map.merge(LeadingTrimProps.prop_defs())
       |> Map.merge(TruncateProps.prop_defs())
       |> Map.merge(TextWrapProps.prop_defs())
+      |> Map.merge(MarginProps.prop_defs())
       |> Map.merge(HighContrastProps.prop_defs())
 
     extracted = EssenceUI.Helpers.ExtractProps.call(assigns, prop_defs)
 
     class = ["rt-Text", extracted.class] |> Enum.filter(& &1) |> Enum.join(" ")
 
-    assigns = assign(assigns, class: class, color: assigns[:color] || false)
+    assigns =
+      assign(assigns, class: class, style: extracted.style, color: assigns[:color] || false)
 
     ~H"""
     <.dynamic_tag tag_name={@as} class={@class} style={@style} data-accent-color={@color} {@rest}>

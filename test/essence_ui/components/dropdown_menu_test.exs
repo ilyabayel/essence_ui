@@ -103,4 +103,35 @@ defmodule EssenceUI.Components.DropdownMenuTest do
     assert html =~ "rt-BaseMenuViewport"
     refute html =~ ~s[phx-hook="DropdownMenu"]
   end
+
+  test "renders group and radio group parts" do
+    html =
+      render_component(
+        fn assigns ->
+          ~H"""
+          <DropdownMenu.dropdown_menu_root id="dm-group">
+            <DropdownMenu.dropdown_menu_trigger>Options</DropdownMenu.dropdown_menu_trigger>
+            <DropdownMenu.dropdown_menu_content id="dm-group-content">
+              <DropdownMenu.dropdown_menu_group>
+                <DropdownMenu.dropdown_menu_item>Edit</DropdownMenu.dropdown_menu_item>
+              </DropdownMenu.dropdown_menu_group>
+              <DropdownMenu.dropdown_menu_radio_group value="a">
+                <DropdownMenu.dropdown_menu_radio_item value="a" checked>
+                  A
+                </DropdownMenu.dropdown_menu_radio_item>
+              </DropdownMenu.dropdown_menu_radio_group>
+            </DropdownMenu.dropdown_menu_content>
+          </DropdownMenu.dropdown_menu_root>
+          """
+        end,
+        %{}
+      )
+
+    assert html =~ "rt-DropdownMenuGroup"
+    assert html =~ "data-radix-menu-group"
+    assert html =~ "rt-DropdownMenuRadioGroup"
+    assert html =~ "data-radix-menu-radio-group"
+    assert html =~ ~s[data-value="a"]
+    assert html =~ "Edit"
+  end
 end

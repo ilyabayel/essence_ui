@@ -28,6 +28,9 @@ test.describe("Dialog Primitive", () => {
     await expect(trigger).toHaveAttribute("data-state", "open");
     await expect(content).toHaveAttribute("data-state", "open");
     await expect(content).toContainText("Edit profile");
+    await expect
+      .poll(() => page.evaluate(() => document.body.style.overflow))
+      .toBe("hidden");
 
     const box = await content.boundingBox();
     expect(box).not.toBeNull();
@@ -36,6 +39,9 @@ test.describe("Dialog Primitive", () => {
     await page.keyboard.press("Escape");
     await expect(content).toBeHidden();
     await expect(trigger).toHaveAttribute("data-state", "closed");
+    await expect
+      .poll(() => page.evaluate(() => document.body.style.overflow))
+      .toBe("");
 
     await trigger.click();
     await expect(content).toBeVisible();
