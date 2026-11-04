@@ -23,6 +23,9 @@ test.describe("Alert Dialog Primitive", () => {
 
     await expect(content).toBeVisible();
     await expect(overlay).toBeVisible();
+    await expect
+      .poll(() => page.evaluate(() => document.body.style.overflow))
+      .toBe("hidden");
     await expect(content).toHaveAttribute("role", "alertdialog");
     await expect(content).toContainText("Are you absolutely sure?");
     await expect(content).toContainText("This action cannot be undone");
@@ -41,8 +44,14 @@ test.describe("Alert Dialog Primitive", () => {
 
     await trigger.click();
     await expect(content).toBeVisible();
+    await expect
+      .poll(() => page.evaluate(() => document.body.style.overflow))
+      .toBe("hidden");
     await cancel.click();
     await expect(content).toBeHidden();
+    await expect
+      .poll(() => page.evaluate(() => document.body.style.overflow))
+      .toBe("");
 
     await trigger.click();
     await expect(content).toBeVisible();

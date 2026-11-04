@@ -55,4 +55,32 @@ defmodule EssenceUI.Components.DialogTest do
     assert html =~ ~s[data-state="open"]
     assert html =~ "Opened"
   end
+
+  test "size sets the dialog content class and defaults to 3" do
+    default_html =
+      render_component(
+        fn assigns ->
+          ~H"""
+          <Dialog.dialog id="size-default" target="body">Default</Dialog.dialog>
+          """
+        end,
+        %{}
+      )
+
+    assert default_html =~ "rt-r-size-3"
+
+    html =
+      render_component(
+        fn assigns ->
+          ~H"""
+          <Dialog.dialog id="size-1" target="body" size="1">Compact</Dialog.dialog>
+          """
+        end,
+        %{}
+      )
+
+    assert html =~ "rt-r-size-1"
+    refute html =~ "rt-r-size-3"
+    assert html =~ "Compact"
+  end
 end

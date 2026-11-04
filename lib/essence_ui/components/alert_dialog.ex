@@ -12,8 +12,11 @@ defmodule EssenceUI.Components.AlertDialog do
 
   require RadiusProps
 
+  @sizes ["1", "2", "3", "4"]
+
   attr :id, :string, required: true, doc: "Unique identifier for the alert dialog"
   attr :target, :string, required: true, doc: "The target element to attach the dialog to"
+  attr :size, :string, values: @sizes, default: "3", doc: "Content padding and radius, from 1 to 4."
 
   attr :default_state, :string,
     default: "closed",
@@ -59,7 +62,7 @@ defmodule EssenceUI.Components.AlertDialog do
                     [
                       "rt-BaseDialogContent",
                       "rt-AlertDialogContent",
-                      "rt-r-size-3",
+                      "rt-r-size-#{@size}",
                       "rt-r-max-w",
                       @class
                     ]

@@ -13,9 +13,12 @@ defmodule EssenceUI.Components.Dialog do
 
   require RadiusProps
 
+  @sizes ["1", "2", "3", "4"]
+
   attr :target, :string, required: true, doc: "CSS selector for portal target"
   attr :default_state, :string, default: "closed", doc: "open closed"
   attr :id, :string, default: nil, doc: "Unique identifier for the dialog"
+  attr :size, :string, values: @sizes, default: "3", doc: "Content padding and radius, from 1 to 4."
   attr :style, :string, default: ""
   attr :class, :string, default: ""
   attr :scaling, :string, default: "100%"
@@ -48,7 +51,7 @@ defmodule EssenceUI.Components.Dialog do
           <DialogPrimitive.overlay class="rt-BaseDialogOverlay rt-DialogOverlay">
             <div class="rt-BaseDialogScroll rt-DialogScroll">
               <div class="rt-BaseDialogScrollPadding rt-DialogScrollPadding rt-r-align-center">
-                <.dialog_content dialog_id={@id} style={@style} class={@class}>
+                <.dialog_content dialog_id={@id} size={@size} style={@style} class={@class}>
                   {render_slot(@inner_block)}
                 </.dialog_content>
               </div>
@@ -61,6 +64,7 @@ defmodule EssenceUI.Components.Dialog do
   end
 
   attr :dialog_id, :string, required: true, doc: "Unique identifier for the dialog"
+  attr :size, :string, values: @sizes, default: "3", doc: "Content padding and radius, from 1 to 4."
   attr :style, :string, default: ""
   attr :class, :string, default: ""
   slot :inner_block, required: true
@@ -70,7 +74,7 @@ defmodule EssenceUI.Components.Dialog do
     <DialogPrimitive.content
       id={"#{@dialog_id}-content"}
       class={
-        ["rt-BaseDialogContent", "rt-DialogContent", "rt-r-size-3", "rt-r-max-w", @class]
+        ["rt-BaseDialogContent", "rt-DialogContent", "rt-r-size-#{@size}", "rt-r-max-w", @class]
         |> Enum.filter(&(&1 != ""))
         |> Enum.join(" ")
       }

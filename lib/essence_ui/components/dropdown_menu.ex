@@ -196,6 +196,28 @@ defmodule EssenceUI.Components.DropdownMenu do
   end
 
   @doc """
+  Groups multiple items.
+  """
+  attr :class, :string, default: nil
+  attr :rest, :global
+  slot :inner_block, required: true
+
+  def dropdown_menu_group(assigns) do
+    ~H"""
+    <DropdownMenuPrimitive.group
+      class={
+        ["rt-BaseMenuGroup", "rt-DropdownMenuGroup", @class, @rest[:class]]
+        |> Enum.filter(& &1)
+        |> Enum.join(" ")
+      }
+      {Map.delete(@rest, :class)}
+    >
+      {render_slot(@inner_block)}
+    </DropdownMenuPrimitive.group>
+    """
+  end
+
+  @doc """
   Visual separator between items.
   """
   attr :class, :string, default: nil
@@ -294,6 +316,30 @@ defmodule EssenceUI.Components.DropdownMenu do
       </DropdownMenuPrimitive.item_indicator>
       <div :if={@shortcut} class="rt-BaseMenuShortcut">{@shortcut}</div>
     </DropdownMenuPrimitive.checkbox_item>
+    """
+  end
+
+  @doc """
+  Groups radio items.
+  """
+  attr :value, :string, default: nil
+  attr :class, :string, default: nil
+  attr :rest, :global
+  slot :inner_block, required: true
+
+  def dropdown_menu_radio_group(assigns) do
+    ~H"""
+    <DropdownMenuPrimitive.radio_group
+      value={@value}
+      class={
+        ["rt-BaseMenuRadioGroup", "rt-DropdownMenuRadioGroup", @class, @rest[:class]]
+        |> Enum.filter(& &1)
+        |> Enum.join(" ")
+      }
+      {Map.delete(@rest, :class)}
+    >
+      {render_slot(@inner_block)}
+    </DropdownMenuPrimitive.radio_group>
     """
   end
 

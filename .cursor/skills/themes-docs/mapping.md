@@ -52,7 +52,7 @@ not a guarantee every prop exists.
 |-------|---------|
 | `<DecorativeBox />` | `<.decoration_box />` (`EssenceUIWeb.DecorationBox`, imported in `PageLive`) |
 | Responsive maps `{ initial, md }` | `%{initial: "1", md: "2"}` (atom keys) |
-| Section `size` | CSS exists; Elixir `size` attr not wired — use `py` / padding until fixed |
+| Section `size` | `"1"` through `"4"` (`rt-r-size-*` vertical padding). Omit `size` for no extra padding |
 | Full-bleed layout heroes | Outer root needs `width="100%"` (or rely on `.docs-demo__preview > .rt-Box` etc. rule in `docs.css`) — preview is a flex row and otherwise shrink-to-fits to a hairline |
 
 ## Omit or adapt
@@ -68,8 +68,7 @@ not a guarantee every prop exists.
 
 ## Layout helpers
 
-- **`Text` has no margin props** — wrap with `Box`/`Flex` (`gap`, `mt` on Box).
-- `Heading` **does** support margin props.
+- `Text` and `Heading` both support margin props (`mt`, `mx`, and the rest of the scale).
 - Prefer `max_width` / `width` on `Box`/`Flex` over inline styles when WidthProps exist.
 
 ## Examples translation checklist

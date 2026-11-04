@@ -7,7 +7,6 @@ defmodule EssenceUI.Components.Flex do
   use Phoenix.Component
 
   alias EssenceUI.Helpers.ExtractProps
-  alias EssenceUI.SharedProps.AsChildProps
   alias EssenceUI.SharedProps.GapProps
   alias EssenceUI.SharedProps.HeightProps
   alias EssenceUI.SharedProps.LayoutProps
@@ -15,7 +14,6 @@ defmodule EssenceUI.Components.Flex do
   alias EssenceUI.SharedProps.PaddingProps
   alias EssenceUI.SharedProps.WidthProps
 
-  require AsChildProps
   require GapProps
   require HeightProps
   require LayoutProps
@@ -32,7 +30,6 @@ defmodule EssenceUI.Components.Flex do
 
   LayoutProps.attrs()
   MarginProps.attrs()
-  AsChildProps.attrs()
   GapProps.attrs()
 
   attr :as, :string, default: "div", values: @as_values
@@ -71,8 +68,9 @@ defmodule EssenceUI.Components.Flex do
     * `class` - Additional CSS classes to add to the element.
     * `style` - Additional inline styles.
     * `rest` - Additional HTML attributes.
-    * `as_child` - Composes the component into its immediate child instead of rendering its own HTML element.
     * `inner_block` - Slot for flex children.
+
+  Flex always renders its own element. Use `as` to choose that element.
 
   """
   def flex(assigns) do
@@ -88,7 +86,6 @@ defmodule EssenceUI.Components.Flex do
       flex_prop_defs
       |> Map.merge(LayoutProps.prop_defs())
       |> Map.merge(MarginProps.prop_defs())
-      |> Map.merge(AsChildProps.prop_defs())
       |> Map.merge(GapProps.prop_defs())
 
     extracted = ExtractProps.call(assigns, prop_defs)

@@ -1,6 +1,6 @@
 ---
 title: Composition
-description: Compose primitive behavior with your own markup and Themes as_child.
+description: Compose primitive behavior with your own markup.
 ---
 
 Essence UI Primitives compose through concrete HEEx parts rather than cloning props onto alternate child elements. This approach fits LiveView and keeps markup explicit.
@@ -12,9 +12,9 @@ Primitive parts render a concrete element (`button`, `div`, …). You compose by
 1. **Wrapping parts** in your own function components (most common)
 2. **Passing attributes** (`class`, `aria-*`, `phx-*`) through `rest` / explicit attrs
 3. Using **`Slot`** when you need a polymorphic tag helper
-4. Using Themes **`as_child`** on Themes components (not on Primitives parts)
+4. Using a Themes `as` prop where that component offers one (`Button`, `Text`, `Flex`)
 
-Essence does not support `asChild` on primitive parts; use wrapping or Themes `as_child` instead.
+Essence does not merge props onto a child element. Nest the link or button inside the component, or pick the rendered tag with `as`.
 
 ## Wrapping a part
 
@@ -50,6 +50,6 @@ end
 
 If you change the underlying element of a trigger-like control, you are responsible for keeping it focusable and operable with pointer and keyboard.
 
-## Themes `as_child`
+## Themes elements
 
-Themes components (for example Button, Card) support `as_child` to merge Themes styles onto a child element. That API lives in Themes, not Primitives. Prefer Themes when you want that composition model with styled defaults.
+Themes components render their own element. Card is a `div`. Section is a `section`. Flex, Box, Button, and Text expose `as` when the tag can change. Nest a link or button inside when the surface should be interactive.

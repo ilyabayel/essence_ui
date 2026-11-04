@@ -41,7 +41,7 @@ defmodule EssenceUI.Components.Button do
     * `weight` - Font weight: light, regular, medium, bold.
     * `high_contrast` - Increase color contrast.
     * `disabled` - Disabled state.
-    * `loading` - Show loading spinner (not implemented, for API compatibility).
+    * `loading` - Show a loading spinner and disable the button.
     * `as` - Render as: button, a, or any tag. Default: button.
     * `type` - Button type: button, submit, reset. Default: button.
     * `class` - Additional CSS classes.
@@ -59,7 +59,7 @@ defmodule EssenceUI.Components.Button do
   attr :size, :string, values: @sizes, default: "2", doc: "Button size."
   attr :type, :string, values: ["button", "submit", "reset"], default: "button", doc: "Button type."
   attr :disabled, :boolean, default: false, doc: "Disabled state."
-  attr :loading, :boolean, default: false, doc: "Show loading spinner (API only)."
+  attr :loading, :boolean, default: false, doc: "Show a loading spinner and disable the button."
   attr :class, :string, default: nil, doc: "Additional CSS classes."
   attr :style, :string, default: nil, doc: "Additional inline styles."
   attr :rest, :global
