@@ -116,3 +116,17 @@ Two Mix projects in one repo: Hex library at repo root (`:essence_ui`) and docs/
 - Browser E2E (Playwright): from `website/` run `npm --prefix assets ci && npx --prefix assets playwright install chromium`, then `npm --prefix assets run test:e2e`. Specs live in `website/assets/test/`; shared helpers in `website/assets/test/helpers/`. Playwright auto-starts `mix phx.server` in `website/` on `127.0.0.1:4000`.
 - Hex: root `mix hex.build` / `mix hex.publish`. Docker/Fly build from repo root (`Dockerfile` + `website/fly.toml`).
 - Lint: `mix credo` / `mix format --check-formatted` at root; same under `website/` for the docs app.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and specs live as GitHub issues on `ilyabayel/essence_ui`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Five canonical roles, each label string equal to its name: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: one `GLOSSARY.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.
