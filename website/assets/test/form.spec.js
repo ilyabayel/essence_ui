@@ -52,6 +52,14 @@ test.describe("Form Primitive", () => {
     await expect(valueMissing).toBeVisible();
     await expect(valueMissing).toHaveText("Please enter your email");
     await expect(emailField.locator('input[name="email"]')).toBeFocused();
+
+    const describedBy = await emailField
+      .locator('input[name="email"]')
+      .getAttribute("aria-describedby");
+    expect(describedBy).toBeTruthy();
+    const described = emailField.locator(`#${describedBy.split(/\s+/)[0]}`);
+    await expect(described).toHaveText("Please enter your email");
+    await expect(described).toBeVisible();
   });
 
   test("shows typeMismatch for invalid email", async ({ page }) => {
