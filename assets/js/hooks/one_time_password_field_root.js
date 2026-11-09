@@ -1,6 +1,7 @@
 function isAllowedChar(char, validationType) {
   if (!char) return false;
   if (validationType === "none") return char.length === 1;
+  if (validationType === "alpha") return /^[a-zA-Z]$/.test(char);
   if (validationType === "alphanumeric") return /^[a-zA-Z0-9]$/.test(char);
   return /^[0-9]$/.test(char);
 }
@@ -17,6 +18,7 @@ export const OneTimePasswordFieldRoot = {
     this._completed = false;
     this._bind();
     this._syncFromInputs();
+    this._syncAutofill();
     this.el.setAttribute("data-hydrated", "");
   },
 
@@ -89,6 +91,7 @@ export const OneTimePasswordFieldRoot = {
 
     if (this.hidden) this.hidden.value = next;
     this.el.dataset.value = next;
+    this._syncAutofill();
 
     if (!silent) {
       const onChange = this.el.dataset.onValueChange;
@@ -102,6 +105,7 @@ export const OneTimePasswordFieldRoot = {
     const value = this._readValue();
     if (this.hidden) this.hidden.value = value;
     this.el.dataset.value = value;
+    this._syncAutofill();
   },
 
   _maybeComplete(value) {
@@ -120,6 +124,41 @@ export const OneTimePasswordFieldRoot = {
     } else {
       this._completed = false;
     }
+  },
+
+  /**
+   * Only the next empty slot accepts a password-manager dump of the whole code.
+   * The other slots stay `autocomplete="off"` and `maxlength="1"` so managers
+   * do not write a second copy into every box.
+   */
+  _syncAutofill() {
+    if (!this.inputs?.length) return;
+
+    const length = this._length();
+    const firstEmpty = this.inputs.findIndex((input) => !input.value);
+    const activeIndex = firstEmpty === -1 ? this.inputs.length - 1 : firstEmpty;
+    const type = this.el.dataset.type === "password" ? "password" : "text";
+    const autoComplete = this.el.dataset.autoComplete || "one-time-code";
+
+    this.inputs.forEach((input, index) => {
+      const active = index === activeIndex;
+      const focusable = index <= activeIndex && !this._disabled();
+      input.type = type;
+      input.maxLength = active ? length : 1;
+      input.autocomplete = active ? autoComplete : "off";
+      input.tabIndex = focusable ? 0 : -1;
+      input.setAttribute("aria-label", `Character ${index + 1} of ${length}`);
+
+      for (const attr of [
+        "data-1p-ignore",
+        "data-lpignore",
+        "data-protonpass-ignore",
+        "data-bwignore",
+      ]) {
+        if (active) input.removeAttribute(attr);
+        else input.setAttribute(attr, "true");
+      }
+    });
   },
 
   _focusIndex(index) {

@@ -14,7 +14,9 @@ defmodule EssenceUI.Primitives.OneTimePasswordField do
   attr :auto_submit, :boolean, default: false
   attr :auto_focus, :boolean, default: false
   attr :orientation, :string, values: ["horizontal", "vertical"], default: "horizontal"
-  attr :validation_type, :string, values: ["numeric", "alphanumeric", "none"], default: "numeric"
+  attr :type, :string, values: ["text", "password"], default: "text"
+  attr :auto_complete, :string, values: ["one-time-code", "off"], default: "one-time-code"
+  attr :validation_type, :string, values: ["numeric", "alpha", "alphanumeric", "none"], default: "numeric"
   attr :placeholder, :string, default: nil
   attr :form, :string, default: nil
   attr :on_value_change, :string, default: nil
@@ -48,6 +50,8 @@ defmodule EssenceUI.Primitives.OneTimePasswordField do
       data-readonly={if @read_only, do: ""}
       data-auto-submit={if @auto_submit, do: "true"}
       data-orientation={@orientation}
+      data-type={@type}
+      data-auto-complete={@auto_complete}
       data-validation-type={@validation_type}
       data-on-value-change={@on_value_change}
       data-on-complete={@on_complete}
@@ -64,6 +68,9 @@ defmodule EssenceUI.Primitives.OneTimePasswordField do
             placeholder={@placeholder}
             autofocus={@auto_focus && index == 0}
             validation_type={@validation_type}
+            type={@type}
+            code_length={@length_attr}
+            autofill={index == 0}
           />
         <% end %>
       <% else %>
@@ -81,6 +88,9 @@ defmodule EssenceUI.Primitives.OneTimePasswordField do
   attr :placeholder, :string, default: nil
   attr :autofocus, :boolean, default: false
   attr :validation_type, :string, default: "numeric"
+  attr :type, :string, default: "text"
+  attr :code_length, :integer, default: 6
+  attr :autofill, :boolean, default: false
   attr :rest, :global
 
   def input(assigns) do
@@ -92,8 +102,9 @@ defmodule EssenceUI.Primitives.OneTimePasswordField do
 
     pattern =
       case assigns.validation_type do
-        "numeric" -> "[0-9]*"
-        "alphanumeric" -> "[a-zA-Z0-9]*"
+        "numeric" -> "\\d{1}"
+        "alpha" -> "[a-zA-Z]{1}"
+        "alphanumeric" -> "[a-zA-Z0-9]{1}"
         _ -> nil
       end
 
@@ -105,11 +116,15 @@ defmodule EssenceUI.Primitives.OneTimePasswordField do
     ~H"""
     <input
       id={@id}
-      type="text"
+      type={@type}
       inputmode={@input_mode}
       pattern={@pattern}
-      maxlength="1"
-      autocomplete="one-time-code"
+      maxlength={if @autofill, do: @code_length, else: 1}
+      autocomplete={if @autofill, do: "one-time-code", else: "off"}
+      data-1p-ignore={if @autofill, do: nil, else: "true"}
+      data-lpignore={if @autofill, do: nil, else: "true"}
+      data-protonpass-ignore={if @autofill, do: nil, else: "true"}
+      data-bwignore={if @autofill, do: nil, else: "true"}
       value={@value}
       disabled={@disabled}
       readonly={@read_only}
@@ -117,7 +132,7 @@ defmodule EssenceUI.Primitives.OneTimePasswordField do
       autofocus={@autofocus}
       data-radix-otp-input
       data-index={@index}
-      aria-label={"Character #{@index + 1}"}
+      aria-label={"Character #{@index + 1} of #{@code_length}"}
       {@rest}
     />
     """
