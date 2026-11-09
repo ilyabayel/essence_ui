@@ -59,6 +59,37 @@ test.describe("Alert Dialog Primitive", () => {
     await expect(content).toBeHidden();
   });
 
+  test("focuses cancel and hides the rest of the page", async ({ page }) => {
+    const root = page.locator("#alert-dialog-primitive");
+    const trigger = root.locator("[data-radix-alert-dialog-trigger]");
+    const content = page.locator("#alert-dialog-content");
+    const cancel = content.locator("[data-radix-alert-dialog-cancel]");
+
+    await trigger.click();
+    await expect(content).toBeVisible();
+    await expect(cancel).toBeFocused();
+    await expect(content).toHaveAttribute(
+      "aria-labelledby",
+      "alert-dialog-content-title",
+    );
+
+    const inert = await page.evaluate(() => {
+      const triggerEl = document.querySelector("#alert-dialog-trigger");
+      const contentEl = document.querySelector("#alert-dialog-content");
+      return {
+        triggerHidden: triggerEl.closest("[aria-hidden='true']") !== null,
+        contentExposed: contentEl.closest("[aria-hidden='true']") === null,
+        pointerEvents: document.body.style.pointerEvents,
+      };
+    });
+    expect(inert.triggerHidden).toBe(true);
+    expect(inert.contentExposed).toBe(true);
+    expect(inert.pointerEvents).toBe("none");
+
+    await page.keyboard.press("Shift+Tab");
+    await expect(content.locator("[data-radix-alert-dialog-action]")).toBeFocused();
+  });
+
   test("closes on escape but not overlay click", async ({ page }) => {
     const root = page.locator("#alert-dialog-primitive");
     const trigger = root.locator("[data-radix-alert-dialog-trigger]");
