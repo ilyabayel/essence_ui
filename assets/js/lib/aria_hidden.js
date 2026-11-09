@@ -16,10 +16,21 @@ const SKIPPED_ELEMENTS = new Set([
   "template",
 ]);
 
-let counterMap = new WeakMap();
-let uncontrolledNodes = new WeakMap();
-let lockCount = 0;
 const markerMap = new Map();
+const attributeStores = new Map();
+
+function storeFor(attribute) {
+  let store = attributeStores.get(attribute);
+  if (!store) {
+    store = {
+      counterMap: new WeakMap(),
+      uncontrolledNodes: new WeakMap(),
+      lockCount: 0,
+    };
+    attributeStores.set(attribute, store);
+  }
+  return store;
+}
 
 function unwrapHost(node) {
   if (!node) return null;
@@ -43,13 +54,17 @@ function correctTargets(parent, targets) {
 /**
  * @param {Set<Element>} originalTargets
  * @param {Element} parentNode
- * @param {string} [markerName]
+ * @param {string} markerName
+ * @param {string} controlAttribute
+ * @param {boolean} booleanAttribute `inert` is present-or-not; `aria-hidden="false"` is not hidden.
  * @returns {() => void}
  */
-export function hideOthers(
+function applyAttributeToOthers(
   originalTargets,
   parentNode,
-  markerName = "data-aria-hidden",
+  markerName,
+  controlAttribute,
+  booleanAttribute,
 ) {
   if (!parentNode) return () => {};
 
@@ -67,33 +82,35 @@ export function hideOthers(
   const hiddenNodes = new Set();
   const elementsToKeep = new Set();
   const elementsToStop = new Set(targets);
-  const controlAttribute = "aria-hidden";
+  const store = storeFor(controlAttribute);
 
   targets.forEach(keep);
   deep(parentNode);
   elementsToKeep.clear();
-  lockCount += 1;
+  store.lockCount += 1;
 
   return () => {
     for (const node of hiddenNodes) {
-      const counterValue = (counterMap.get(node) || 1) - 1;
+      const counterValue = (store.counterMap.get(node) || 1) - 1;
       const markerValue = (markerCounter.get(node) || 1) - 1;
-      counterMap.set(node, counterValue);
+      store.counterMap.set(node, counterValue);
       markerCounter.set(node, markerValue);
 
       if (!counterValue) {
-        if (!uncontrolledNodes.has(node)) node.removeAttribute(controlAttribute);
-        uncontrolledNodes.delete(node);
+        if (!store.uncontrolledNodes.has(node)) {
+          node.removeAttribute(controlAttribute);
+        }
+        store.uncontrolledNodes.delete(node);
       }
 
       if (!markerValue) node.removeAttribute(markerName);
     }
 
-    lockCount -= 1;
-    if (!lockCount) {
-      counterMap = new WeakMap();
-      uncontrolledNodes = new WeakMap();
-      markerMap.clear();
+    store.lockCount -= 1;
+    if (store.lockCount === 0) {
+      store.counterMap = new WeakMap();
+      store.uncontrolledNodes = new WeakMap();
+      markerMap.delete(markerName);
     }
   };
 
@@ -113,18 +130,64 @@ export function hideOthers(
         deep(node);
       } else {
         const attr = node.getAttribute(controlAttribute);
-        const alreadyHidden = attr !== null && attr !== "false";
-        const counterValue = (counterMap.get(node) || 0) + 1;
+        const alreadyHidden = booleanAttribute
+          ? attr !== null
+          : attr !== null && attr !== "false";
+        const counterValue = (store.counterMap.get(node) || 0) + 1;
         const markerValue = (markerCounter.get(node) || 0) + 1;
 
-        counterMap.set(node, counterValue);
+        store.counterMap.set(node, counterValue);
         markerCounter.set(node, markerValue);
         hiddenNodes.add(node);
 
-        if (counterValue === 1 && alreadyHidden) uncontrolledNodes.set(node, true);
+        if (counterValue === 1 && alreadyHidden) {
+          store.uncontrolledNodes.set(node, true);
+        }
         if (markerValue === 1) node.setAttribute(markerName, "true");
         if (!alreadyHidden) node.setAttribute(controlAttribute, "true");
       }
     }
   }
+}
+
+/**
+ * @param {Set<Element>} originalTargets
+ * @param {Element} parentNode
+ * @param {string} [markerName]
+ * @returns {() => void}
+ */
+export function hideOthers(
+  originalTargets,
+  parentNode,
+  markerName = "data-aria-hidden",
+) {
+  return applyAttributeToOthers(
+    originalTargets,
+    parentNode,
+    markerName,
+    "aria-hidden",
+    false,
+  );
+}
+
+/**
+ * Marks everything except `originalTargets` as `inert`, so hidden controls
+ * leave the tab order. Keep clickable layers (overlay, backdrop) in the set.
+ * @param {Set<Element>} originalTargets
+ * @param {Element} parentNode
+ * @param {string} [markerName]
+ * @returns {() => void}
+ */
+export function inertOthers(
+  originalTargets,
+  parentNode,
+  markerName = "data-inert-ed",
+) {
+  return applyAttributeToOthers(
+    originalTargets,
+    parentNode,
+    markerName,
+    "inert",
+    true,
+  );
 }

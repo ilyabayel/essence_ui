@@ -5,6 +5,7 @@
  * keyboard navigation, and positions it relative to the trigger.
  */
 import { getFixedContainingBlockOffset } from "../lib/position";
+import { activateModalLayer } from "../lib/modal_layer.js";
 
 export const SelectRoot = {
   mounted() {
@@ -86,6 +87,12 @@ export const SelectRoot = {
 
     this.positionMenu();
     this.syncValue(); // Ensure indicators are correct
+    this.releaseModal();
+    this.modalLayer = activateModalLayer({
+      content: this.content,
+      interactives: [this.content],
+      onEscape: () => this.closeMenu(),
+    });
 
     // Focus selected item or first item
     const selectedItem = this.content.querySelector('[aria-selected="true"]');
@@ -100,6 +107,7 @@ export const SelectRoot = {
   closeMenu() {
     if (!this.isOpen) return;
     this.isOpen = false;
+    this.releaseModal();
     this.content.style.display = 'none';
     this.trigger.setAttribute('aria-expanded', 'false');
     this.content.setAttribute('data-state', 'closed');
@@ -322,7 +330,13 @@ export const SelectRoot = {
     });
   },
 
+  releaseModal() {
+    this.modalLayer?.release();
+    this.modalLayer = null;
+  },
+
   destroyed() {
+    this.releaseModal();
     if (this.trigger) {
       this.trigger.removeEventListener('click', this.onToggle);
     }

@@ -5,7 +5,7 @@
  * - Escape dismisses only the top layer
  * - Focus cannot leave the top layer
  */
-import { hideOthers } from "./aria_hidden.js";
+import { hideOthers, inertOthers } from "./aria_hidden.js";
 import { bindModalFocus } from "./focus_scope.js";
 
 const NESTED_DISMISS_SELECTOR = [
@@ -80,9 +80,21 @@ export function activateModalLayer({ content, interactives = [], onEscape }) {
 function applyHide(layer) {
   layer.undoHide();
   const parent = layer.content?.ownerDocument?.body;
-  layer.undoHide = parent
-    ? hideOthers(new Set([layer.content]), parent)
-    : () => {};
+  if (!parent) {
+    layer.undoHide = () => {};
+    return;
+  }
+
+  const undoHidden = hideOthers(new Set([layer.content]), parent);
+  // Overlays and backdrops stay clickable. Everything else leaves the tab order.
+  const undoInert = inertOthers(
+    new Set([layer.content, ...layer.interactives].filter(Boolean)),
+    parent,
+  );
+  layer.undoHide = () => {
+    undoInert();
+    undoHidden();
+  };
 }
 
 function syncStack() {

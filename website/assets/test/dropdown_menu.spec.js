@@ -28,9 +28,32 @@ test.describe("Dropdown Menu Primitive", () => {
     expect(box).not.toBeNull();
     expect(box.height).toBeGreaterThan(0);
 
+    const inert = await page.evaluate(() => {
+      const triggerEl = document.querySelector(
+        "#dropdown-primitive [data-radix-dropdown-menu-trigger]",
+      );
+      const contentEl = document.querySelector("#dropdown-content");
+      return {
+        triggerHidden: triggerEl.closest("[aria-hidden='true']") !== null,
+        contentExposed: contentEl.closest("[aria-hidden='true']") === null,
+        pointerEvents: document.body.style.pointerEvents,
+      };
+    });
+    expect(inert.triggerHidden).toBe(true);
+    expect(inert.contentExposed).toBe(true);
+    expect(inert.pointerEvents).toBe("none");
+
     await page.keyboard.press("Escape");
     await expect(content).toBeHidden();
     await expect(trigger).toHaveAttribute("aria-expanded", "false");
+    await expect
+      .poll(() => page.evaluate(() => document.body.style.pointerEvents))
+      .toBe("");
+    await expect
+      .poll(() =>
+        page.evaluate(() => document.querySelector("[data-aria-hidden]") === null),
+      )
+      .toBe(true);
   });
 
   test("navigates with arrows and closes on escape", async ({ page }) => {

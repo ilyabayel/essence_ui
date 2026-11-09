@@ -202,7 +202,8 @@ export const MenubarRoot = {
       sideOffset,
     });
 
-    this.menu.attach(content, { modal: true });
+    // Radix Menubar menus are non-modal so sibling triggers stay hoverable.
+    this.menu.attach(content, { modal: false });
 
     this.unbindDismissable();
     this.dismissable = bindDismissableLayer({
