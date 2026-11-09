@@ -2,6 +2,26 @@
 
 What changed in [Radix Primitives](https://github.com/radix-ui/primitives) through the published `radix-ui` package **1.8.1**, plus changesets already on `main` that are not in that release.
 
+## Essence UI
+
+Checked the LiveView primitives and hooks against this changelog on 9 Nov 2026. React-only items (RSC, `use client`, tree-shaking, TypeScript callback types, Slot generics, unstable collection renames) do not apply.
+
+Already aligned: `on_visibility_change` on password toggle, toggle-group `radiogroup` / `toolbar` roles, `align` on menu subcontent, controlled context-menu `open`, toast Escape only while that toast is focused, slider `aria-disabled` only when disabled, checkbox and switch form `reset`, avatar `naturalWidth === 0` reported as error.
+
+Still different from current Radix:
+
+- **Navigation menu.** No `activation_mode` or `disable_toggle`. Hover opens a trigger; focus does not. Click always toggles the open item. `lib/essence_ui/primitives/navigation_menu.ex`, `assets/js/hooks/navigation_menu_root.js`.
+- **Popover.** No `Title` or `Description`. The trigger keeps `aria-controls` while closed. `lib/essence_ui/primitives/popover.ex`, `assets/js/hooks/popover_root.js`.
+- **Scroll area.** Viewport always renders the implicit `display: table` wrapper. No `Content` part and no `disable_implicit_content_element`. That wrapper has no `role="presentation"`. `lib/essence_ui/primitives/scroll_area.ex`.
+- **Slider.** Thumbs are clamped so they cannot cross (`min_steps_between_thumbs` only widens the gap). Radix still swaps thumbs unless `preserveThumbOrder` is set. There is no `on_value_commit`. Arrow keys add `step` and then round, so an off-grid value can skip the next step. `assets/js/hooks/slider_root.js`.
+- **Form reset.** Radio group, slider, and select do not listen for form `reset`. Checkbox and switch do.
+- **Select.** While open, Enter and Space always call `preventDefault`, including when focus is on a descendant inside an item. An item value of `""` stays selected; it does not clear back to the placeholder. `assets/js/hooks/select_root.js`.
+- **Dismissable layer.** Each open layer registers its own document `pointerdown` listener and dismisses itself when the event is outside that layer, so one outside click closes every open popover or menu. `assets/js/lib/dismissable_layer.js`. Escape handlers do not ignore IME composition.
+- **Context menu content.** No `side`, `side_offset`, or `align`. Positioning is the pointer point. `lib/essence_ui/primitives/context_menu.ex`.
+- **Dialog.** `Title` and `Description` are not copied onto content as `aria-labelledby` / `aria-describedby`, so the later “missing title” and “custom id” fixes have no reference to repair. `lib/essence_ui/primitives/dialog.ex`, `assets/js/hooks/dialog_root.js`.
+- **Toast.** A `duration` change while the timer is paused keeps the old remaining time. `assets/js/hooks/toast_root.js`.
+- **Radio group.** A disabled root sets `data-disabled` and does not set `aria-disabled`. `lib/essence_ui/primitives/radio_group.ex`.
+
 Dates are npm publish times converted to Asia/Almaty (UTC+5). Behavior notes come from the umbrella changelog, not from secondary write-ups.
 
 ## Sources
