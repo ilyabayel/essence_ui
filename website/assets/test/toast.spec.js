@@ -3,9 +3,9 @@ import { gotoPrimitive } from "./helpers/docs.js";
 import { expectNoA11yViolations } from "./helpers/a11y.js";
 
 async function openToast(page) {
-  await expect(page.locator("#toast-primitive[data-hydrated]")).toBeAttached();
-  await page.locator("#toast-show-btn").click();
-  const root = page.locator("#toast-primitive");
+  await expect(page.locator("#docs-toast-primitive[data-hydrated]")).toBeAttached();
+  await page.locator("#docs-toast-show-btn").click();
+  const root = page.locator("#docs-toast-primitive");
   await expect(root).toBeVisible();
   await expect(root).toHaveAttribute("data-state", "open");
   return root;
@@ -54,10 +54,36 @@ test.describe("Toast Primitive", () => {
   });
 
   test("focuses viewport on F8 hotkey", async ({ page }) => {
-    await expect(page.locator("#toast-primitive[data-hydrated]")).toBeAttached();
+    await expect(page.locator("#docs-toast-primitive[data-hydrated]")).toBeAttached();
     const viewport = page.locator("[data-radix-toast-viewport]");
     await page.keyboard.press("F8");
     await expect(viewport).toBeFocused();
+  });
+
+  test("closes when swiped past the threshold", async ({ page }) => {
+    const root = await openToast(page);
+    await root.scrollIntoViewIfNeeded();
+    const box = await root.boundingBox();
+    expect(box).not.toBeNull();
+
+    const startX = box.x + box.width / 2;
+    const startY = box.y + box.height / 2;
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(startX + 20, startY, { steps: 4 });
+    await page.mouse.up();
+    await expect(root).toHaveAttribute("data-state", "open");
+    await expect(root).toHaveAttribute("data-swipe", "cancel");
+
+    const again = await root.boundingBox();
+    const nextX = again.x + again.width / 2;
+    const nextY = again.y + again.height / 2;
+    await page.mouse.move(nextX, nextY);
+    await page.mouse.down();
+    await page.mouse.move(nextX + 80, nextY, { steps: 6 });
+    await page.mouse.up();
+    await expect(root).toHaveAttribute("data-state", "closed");
+    await expect(root).toBeHidden();
   });
 
   test("exposes swipe direction from provider on root", async ({ page }) => {

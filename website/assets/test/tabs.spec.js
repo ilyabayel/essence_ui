@@ -99,6 +99,32 @@ test.describe("Tabs Primitive", () => {
     await expect(password).toBeFocused();
   });
 
+  test("reverses horizontal arrows in rtl and selects on Enter when manual", async ({
+    page,
+  }) => {
+    const root = page.locator("#tabs-primitive");
+    const account = root.locator(
+      '[data-radix-tabs-trigger][data-value="tab1"]',
+    );
+    const password = root.locator(
+      '[data-radix-tabs-trigger][data-value="tab2"]',
+    );
+
+    await root.evaluate((el) => {
+      el.setAttribute("dir", "rtl");
+      el.dataset.activationMode = "manual";
+    });
+
+    await account.focus();
+    await page.keyboard.press("ArrowLeft");
+    await expect(password).toBeFocused();
+    await expect(account).toHaveAttribute("data-state", "active");
+
+    await page.keyboard.press("Enter");
+    await expect(password).toHaveAttribute("data-state", "active");
+    await expect(account).toHaveAttribute("data-state", "inactive");
+  });
+
   test("has no accessibility violations", async ({ page }) => {
     await expectNoA11yViolations(page, {
       include: "#tabs-primitive",

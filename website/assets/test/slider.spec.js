@@ -57,6 +57,30 @@ test.describe("Slider Primitive", () => {
     );
     expect(start).toBe("0%");
     expect(end).toBe("100%");
+
+    await page.keyboard.press("Home");
+    await page.keyboard.press("Shift+ArrowRight");
+    await expect(thumb).toHaveAttribute("aria-valuenow", "10");
+  });
+
+  test("reverses horizontal keys for rtl and inverted", async ({ page }) => {
+    const root = page.locator("#slider-primitive");
+    const thumb = root.locator("[data-radix-slider-thumb]");
+
+    await thumb.focus();
+    await root.evaluate((el) => el.setAttribute("dir", "rtl"));
+    await page.keyboard.press("ArrowLeft");
+    await expect(thumb).toHaveAttribute("aria-valuenow", "51");
+    await expect
+      .poll(() => thumb.evaluate((el) => el.style.right))
+      .not.toBe("");
+
+    await root.evaluate((el) => {
+      el.setAttribute("dir", "ltr");
+      el.setAttribute("data-inverted", "");
+    });
+    await page.keyboard.press("ArrowRight");
+    await expect(thumb).toHaveAttribute("aria-valuenow", "50");
   });
 
   test("supports range thumbs", async ({ page }) => {

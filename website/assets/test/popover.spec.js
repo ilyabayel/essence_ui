@@ -20,6 +20,9 @@ test.describe("Popover Primitive", () => {
     await trigger.click();
     await expect(content).toBeVisible();
     await expect(trigger).toHaveAttribute("aria-expanded", "true");
+    await expect
+      .poll(() => page.evaluate(() => document.body.style.pointerEvents))
+      .toBe("");
     await expect(trigger).toHaveAttribute("data-state", "open");
     await expect(content).toHaveAttribute("data-state", "open");
 

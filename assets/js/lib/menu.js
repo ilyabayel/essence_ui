@@ -6,6 +6,7 @@
 import { positionFloating } from "./position";
 import { setOpen, setClosed } from "./presence";
 import { whenMouse } from "./pointer";
+import { activateModalLayer } from "./modal_layer.js";
 
 const ITEM_SELECTOR =
   '[role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]';
@@ -332,6 +333,7 @@ export class MenuController {
     this.openSubs = new Set();
     this.content = null;
     this._backdrop = null;
+    this._modalLayer = null;
 
     this._onItemClick = this._onItemClick.bind(this);
     this._onKeyDown = this._onKeyDown.bind(this);
@@ -359,10 +361,28 @@ export class MenuController {
     content.addEventListener("keydown", this._onKeyDown);
 
     const modal = options.modal !== undefined ? options.modal : this.modal;
-    if (modal) this.showBackdrop();
+    if (modal) {
+      this.showBackdrop();
+      this.releaseModal();
+      this._modalLayer = activateModalLayer({
+        content,
+        interactives: [content, this._backdrop].filter(Boolean),
+        onEscape: () => this.onClose(),
+      });
+    }
+  }
+
+  syncModal() {
+    this._modalLayer?.sync();
+  }
+
+  releaseModal() {
+    this._modalLayer?.release();
+    this._modalLayer = null;
   }
 
   detach() {
+    this.releaseModal();
     this.hideBackdrop();
     if (this.content) {
       this.content.removeEventListener("click", this._onItemClick);

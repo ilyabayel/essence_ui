@@ -20,6 +20,21 @@ test.describe("Select Primitive", () => {
     await expect(content).toBeVisible();
     await expect(trigger).toHaveAttribute("aria-expanded", "true");
 
+    const inert = await page.evaluate(() => {
+      const triggerEl = document.querySelector(
+        "#select-primitive [data-radix-select-trigger]",
+      );
+      const contentEl = document.querySelector("#select-primitive-content");
+      return {
+        triggerHidden: triggerEl.closest("[aria-hidden='true']") !== null,
+        contentExposed: contentEl.closest("[aria-hidden='true']") === null,
+        pointerEvents: document.body.style.pointerEvents,
+      };
+    });
+    expect(inert.triggerHidden).toBe(true);
+    expect(inert.contentExposed).toBe(true);
+    expect(inert.pointerEvents).toBe("none");
+
     const box = await content.boundingBox();
     expect(box).not.toBeNull();
     expect(box.height).toBeGreaterThan(0);
@@ -28,6 +43,9 @@ test.describe("Select Primitive", () => {
     await page.keyboard.press("Escape");
     await expect(content).toBeHidden();
     await expect(trigger).toHaveAttribute("aria-expanded", "false");
+    await expect
+      .poll(() => page.evaluate(() => document.body.style.pointerEvents))
+      .toBe("");
   });
 
   test("selects item on click", async ({ page }) => {

@@ -97,6 +97,8 @@ function syncField(form, field) {
     message.hidden = !show;
   }
 
+  if (control) associateDescribedBy(field, control, findMessages(form, field));
+
   for (const stateEl of findValidityStates(form, field)) {
     stateEl.dataset.valid = validity ? String(validity.valid) : "true";
     for (const key of VALIDITY_KEYS) {
@@ -109,6 +111,33 @@ function syncField(form, field) {
       stateEl.removeAttribute("data-invalid");
     }
   }
+}
+
+function associateDescribedBy(field, control, messages) {
+  messages.forEach((message, index) => {
+    if (message.id) return;
+    const match = message.dataset.match || "invalid";
+    const name = field.dataset.name || "field";
+    message.id = `essence-form-${name}-${match}-${index}`;
+  });
+
+  const owned = new Set(messages.map((message) => message.id));
+  const previous = (control.dataset.essenceDescribedby || "")
+    .split(/\s+/)
+    .filter(Boolean);
+  const kept = (control.getAttribute("aria-describedby") || "")
+    .split(/\s+/)
+    .filter((id) => id && !previous.includes(id) && !owned.has(id));
+  const visible = messages.filter((message) => !message.hidden).map((message) => message.id);
+  const next = [...kept, ...visible];
+
+  if (next.length) control.setAttribute("aria-describedby", next.join(" "));
+  else control.removeAttribute("aria-describedby");
+
+  if (visible.length) control.dataset.essenceDescribedby = visible.join(" ");
+  else delete control.dataset.essenceDescribedby;
+
+  if (!control.hasAttribute("title")) control.title = "";
 }
 
 function associateLabel(field, control) {

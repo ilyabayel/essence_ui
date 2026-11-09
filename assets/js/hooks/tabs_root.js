@@ -69,23 +69,36 @@ export const TabsRoot = {
     const trigger = event.target.closest("[data-radix-tabs-trigger]");
     if (!trigger || !this.el.contains(trigger)) return;
     if (trigger.disabled || trigger.hasAttribute("data-disabled")) return;
+    // Focus the trigger before the active panel is hidden, or focus is lost.
+    trigger.focus();
     this.activate(trigger.dataset.value, true);
   },
 
   onKeyDown(event) {
+    const trigger = event.target?.closest?.("[data-radix-tabs-trigger]");
+    if (!trigger || event.target !== trigger || !this.el.contains(trigger)) return;
+    if (trigger.disabled || trigger.hasAttribute("data-disabled")) return;
+
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      this.activate(trigger.dataset.value, true);
+      return;
+    }
+
     const keys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"];
     if (!keys.includes(event.key)) return;
 
     const enabled = this.enabledTriggers();
     if (!enabled.length) return;
 
-    const current = enabled.indexOf(document.activeElement);
+    const current = enabled.indexOf(trigger);
     if (current === -1) return;
 
     const orientation = this.el.dataset.orientation || "horizontal";
     const vertical = orientation === "vertical";
-    const prevKey = vertical ? "ArrowUp" : "ArrowLeft";
-    const nextKey = vertical ? "ArrowDown" : "ArrowRight";
+    const rtl = !vertical && (this.el.getAttribute("dir") || "ltr") === "rtl";
+    const prevKey = vertical ? "ArrowUp" : rtl ? "ArrowRight" : "ArrowLeft";
+    const nextKey = vertical ? "ArrowDown" : rtl ? "ArrowLeft" : "ArrowRight";
 
     if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
       if (vertical) return;

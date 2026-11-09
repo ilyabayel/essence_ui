@@ -1,10 +1,13 @@
-import { trapFocus, focusFirst } from "../lib/focus_scope.js";
+import { focusFirst } from "../lib/focus_scope.js";
+import { activateModalLayer } from "../lib/modal_layer.js";
 
 const DIALOG_SELECTORS = {
   trigger: "[data-radix-dialog-trigger]",
   overlay: "[data-radix-dialog-overlay]",
   content: "[data-radix-dialog-content]",
   close: "[data-radix-dialog-close]",
+  title: "[data-radix-dialog-title]",
+  description: "[data-radix-dialog-description]",
 };
 
 const ALERT_DIALOG_SELECTORS = {
@@ -12,6 +15,9 @@ const ALERT_DIALOG_SELECTORS = {
   overlay: "[data-radix-alert-dialog-overlay]",
   content: "[data-radix-alert-dialog-content]",
   close: "[data-radix-alert-dialog-cancel], [data-radix-alert-dialog-action]",
+  cancel: "[data-radix-alert-dialog-cancel]",
+  title: "[data-radix-alert-dialog-title]",
+  description: "[data-radix-alert-dialog-description]",
 };
 
 let bodyScrollLocks = 0;
@@ -33,10 +39,15 @@ function unlockBodyScroll() {
   }
 }
 
-function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {
+function createDialogRoot({
+  selectors,
+  closeOnOverlayDefault = true,
+  focusCancel = false,
+} = {}) {
   return {
     mounted() {
       this.selectors = selectors;
+      this.focusCancel = focusCancel;
       this.closeOnOverlay =
         this.el.dataset.closeOnOverlay !== undefined
           ? this.el.dataset.closeOnOverlay !== "false"
@@ -44,6 +55,7 @@ function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {
       this.modal = this.el.dataset.modal !== "false";
       this.scrollLocked = false;
       this.previousFocus = null;
+      this.modalLayer = null;
 
       this.onTriggerClick = this.onTriggerClick.bind(this);
       this.onCloseClick = this.onCloseClick.bind(this);
@@ -68,15 +80,19 @@ function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {
     updated() {
       this.resolveParts();
       this.bindStaticListeners();
+      this.syncModalAttributes();
       if (this.el.dataset.state === "open") {
         this.lockScroll();
+        if (this.modal) this.modalLayer?.sync();
       } else {
         this.unlockScroll();
+        this.releaseModalLayer();
       }
     },
 
     destroyed() {
       this.unlockScroll();
+      this.releaseModalLayer();
       this.unbindOpenListeners();
       this.el.removeEventListener("open", this.onOpenEvent);
       this.el.removeEventListener("close", this.onCloseEvent);
@@ -148,15 +164,9 @@ function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {
     },
 
     onDocumentKeyDown(e) {
-      if (e.key === "Escape") {
-        e.preventDefault();
-        this.close();
-        return;
-      }
-
-      if (this.modal && this.content) {
-        trapFocus(e, this.content);
-      }
+      if (e.key !== "Escape" || e.isComposing || e.keyCode === 229) return;
+      e.preventDefault();
+      this.close();
     },
 
     open(isInitial = false) {
@@ -177,20 +187,20 @@ function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {
         this.content.dataset.state = "open";
       }
 
+      this.syncModalAttributes();
       this.bindOpenListeners();
       this.lockScroll();
 
       if (!isInitial) this.pushOpenChange(true);
 
-      requestAnimationFrame(() => {
-        if (this.content) focusFirst(this.content);
-      });
+      requestAnimationFrame(() => this.focusOnOpen());
     },
 
     close() {
       if (this.el.dataset.state === "closed") return;
 
       this.unlockScroll();
+      this.releaseModalLayer();
       this.el.dataset.state = "closed";
       this.pushOpenChange(false);
       this.applyClosedUI();
@@ -248,11 +258,79 @@ function createDialogRoot({ selectors, closeOnOverlayDefault = true } = {}) {
     },
 
     bindOpenListeners() {
+      if (this.modal) {
+        this.ensureModalLayer();
+        return;
+      }
       document.addEventListener("keydown", this.onDocumentKeyDown);
     },
 
     unbindOpenListeners() {
       document.removeEventListener("keydown", this.onDocumentKeyDown);
+    },
+
+    ensureModalLayer() {
+      if (!this.modal || !this.content) return;
+      if (this.modalLayer?.content === this.content) {
+        this.modalLayer.sync();
+        return;
+      }
+      this.releaseModalLayer();
+      const content = this.content;
+      this.modalLayer = {
+        content,
+        ...activateModalLayer({
+          content,
+          interactives: [content, this.overlay],
+          onEscape: () => this.close(),
+        }),
+      };
+    },
+
+    releaseModalLayer() {
+      this.modalLayer?.release();
+      this.modalLayer = null;
+    },
+
+    syncModalAttributes() {
+      const content = this.content;
+      if (!content) return;
+
+      if (this.modal) content.setAttribute("aria-modal", "true");
+      else content.removeAttribute("aria-modal");
+
+      const title = content.querySelector(
+        this.selectors.title || "[data-radix-dialog-title]",
+      );
+      const description = content.querySelector(
+        this.selectors.description || "[data-radix-dialog-description]",
+      );
+
+      if (title && !content.hasAttribute("aria-labelledby")) {
+        if (!title.id) title.id = `${content.id || this.el.id}-title`;
+        content.setAttribute("aria-labelledby", title.id);
+      }
+
+      if (description && !content.hasAttribute("aria-describedby")) {
+        if (!description.id) {
+          description.id = `${content.id || this.el.id}-description`;
+        }
+        content.setAttribute("aria-describedby", description.id);
+      }
+    },
+
+    focusOnOpen() {
+      if (!this.content || this.el.dataset.state !== "open") return;
+
+      if (this.focusCancel && this.selectors.cancel) {
+        const cancel = this.content.querySelector(this.selectors.cancel);
+        if (cancel) {
+          cancel.focus({ preventScroll: true });
+          return;
+        }
+      }
+
+      focusFirst(this.content, { select: true, skipLinks: true });
     },
 
     returnFocus() {
@@ -278,4 +356,5 @@ export const DialogRoot = createDialogRoot({
 export const AlertDialogRoot = createDialogRoot({
   selectors: ALERT_DIALOG_SELECTORS,
   closeOnOverlayDefault: false,
+  focusCancel: true,
 });

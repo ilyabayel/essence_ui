@@ -32,8 +32,9 @@ export async function gotoTheme(page, name) {
 }
 
 /**
- * Wait until LiveView hooks inside the main LiveView have mounted.
- * Layout chrome hooks (e.g. AppearanceToggle) sit outside LV and never get data-phx-id.
+ * Wait until the docs LiveView has connected and tagged the hooks it owns.
+ * Chrome controls and hooks rendered through raw HTML sit inside the same
+ * root but never receive `data-phx-id`.
  * @param {import('@playwright/test').Page} page
  */
 async function waitForDocsHooks(page) {
@@ -41,9 +42,9 @@ async function waitForDocsHooks(page) {
     const root =
       document.querySelector("[data-phx-main]") ||
       document.querySelector("[data-phx-session]");
-    if (!root) return false;
+    if (!root || !window.liveSocket?.isConnected?.()) return false;
     const hooks = Array.from(root.querySelectorAll("[phx-hook]"));
     if (hooks.length === 0) return true;
-    return hooks.every((el) => el.hasAttribute("data-phx-id"));
+    return hooks.some((el) => el.hasAttribute("data-phx-id"));
   });
 }

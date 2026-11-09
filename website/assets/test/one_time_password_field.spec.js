@@ -37,6 +37,32 @@ test.describe("One-Time Password Field Primitive", () => {
     await expect(inputs.nth(5)).toBeFocused();
   });
 
+  test("accepts a password-manager dump on the active slot only", async ({
+    page,
+  }) => {
+    const root = page.locator("#otp-primitive");
+    const inputs = root.locator("[data-radix-otp-input]");
+    const hidden = root.locator("[data-radix-otp-hidden]");
+
+    await expect(inputs.nth(0)).toHaveAttribute("maxlength", "6");
+    await expect(inputs.nth(0)).toHaveAttribute("autocomplete", "one-time-code");
+    await expect(inputs.nth(1)).toHaveAttribute("maxlength", "1");
+    await expect(inputs.nth(1)).toHaveAttribute("autocomplete", "off");
+    await expect(inputs.nth(1)).toHaveAttribute("data-1p-ignore", "true");
+    await expect(inputs.nth(2)).toHaveAttribute("tabindex", "-1");
+
+    await inputs.nth(0).focus();
+    await inputs.nth(0).evaluate((input) => {
+      input.value = "12a456";
+      input.dispatchEvent(new InputEvent("input", { bubbles: true }));
+    });
+
+    await expect(hidden).toHaveValue("12456");
+    await expect(inputs.nth(0)).toHaveAttribute("maxlength", "1");
+    await expect(inputs.nth(5)).toHaveAttribute("maxlength", "6");
+    await expect(inputs.nth(5)).toHaveAttribute("autocomplete", "one-time-code");
+  });
+
   test("supports paste to fill all inputs", async ({ page }) => {
     const root = page.locator("#otp-primitive");
     const inputs = root.locator("[data-radix-otp-input]");

@@ -1,7 +1,8 @@
 import { positionFloating, positionArrow } from "../lib/position";
 import { setOpen, setClosed } from "../lib/presence";
 import { bindDismissableLayer } from "../lib/dismissable_layer";
-import { focusFirst, trapFocus } from "../lib/focus_scope";
+import { focusFirst } from "../lib/focus_scope";
+import { activateModalLayer } from "../lib/modal_layer.js";
 
 function findPart(root, selector, contentId) {
   const local = root.querySelector(selector);
@@ -61,7 +62,6 @@ export const PopoverRoot = {
 
     this.onTriggerClick = this.onTriggerClick.bind(this);
     this.onCloseClick = this.onCloseClick.bind(this);
-    this.onKeyDown = this.onKeyDown.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
     this.scheduleUpdate = this.scheduleUpdate.bind(this);
 
@@ -80,13 +80,13 @@ export const PopoverRoot = {
   },
 
   destroyed() {
+    this.releaseModal();
     this.unbindDismissable();
     this.unbindPositionUpdates();
     if (this.trigger) {
       this.trigger.removeEventListener("click", this.onTriggerClick);
     }
     if (this.content) {
-      this.content.removeEventListener("keydown", this.onKeyDown);
       this.content
         .querySelectorAll("[data-radix-popover-close]")
         .forEach((btn) => btn.removeEventListener("click", this.onCloseClick));
@@ -129,10 +129,6 @@ export const PopoverRoot = {
 
   onDismiss() {
     this.close();
-  },
-
-  onKeyDown(e) {
-    trapFocus(e, this.content);
   },
 
   updatePosition() {
@@ -205,7 +201,14 @@ export const PopoverRoot = {
       layers: [this.trigger, this.content, this.anchor].filter(Boolean),
     });
 
-    this.content.addEventListener("keydown", this.onKeyDown);
+    if (this.el.hasAttribute("data-modal")) {
+      this.releaseModal();
+      this.modalLayer = activateModalLayer({
+        content: this.content,
+        interactives: [this.content],
+        onEscape: () => this.close(),
+      });
+    }
 
     if (!isInitial) {
       this.pushOpenChange(true);
@@ -241,10 +244,8 @@ export const PopoverRoot = {
     }, 50);
 
     this.unbindPositionUpdates();
+    this.releaseModal();
     this.unbindDismissable();
-    if (this.content) {
-      this.content.removeEventListener("keydown", this.onKeyDown);
-    }
 
     this.pushOpenChange(false);
     this.returnFocus();
@@ -258,6 +259,11 @@ export const PopoverRoot = {
         btn.removeEventListener("click", this.onCloseClick);
         btn.addEventListener("click", this.onCloseClick);
       });
+  },
+
+  releaseModal() {
+    this.modalLayer?.release();
+    this.modalLayer = null;
   },
 
   unbindDismissable() {
