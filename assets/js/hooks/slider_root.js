@@ -9,7 +9,13 @@ export const SliderRoot = {
     this.el.addEventListener("keydown", this.onKeyDown);
 
     this.values = this.parseValues(this.el.dataset.value);
+    this.initialValues = [...this.values];
     this.activeIndex = null;
+    this.onFormReset = () => {
+      this.values = [...this.initialValues];
+      this.sync();
+    };
+    this.bindFormReset();
     this.sync();
   },
 
@@ -23,6 +29,15 @@ export const SliderRoot = {
     this.el.removeEventListener("keydown", this.onKeyDown);
     window.removeEventListener("pointermove", this.onPointerMove);
     window.removeEventListener("pointerup", this.onPointerUp);
+    this._form?.removeEventListener("reset", this.onFormReset);
+  },
+
+  bindFormReset() {
+    const form = this.el.closest("form");
+    if (this._form === form) return;
+    this._form?.removeEventListener("reset", this.onFormReset);
+    this._form = form;
+    form?.addEventListener("reset", this.onFormReset);
   },
 
   parseValues(raw) {
@@ -120,15 +135,19 @@ export const SliderRoot = {
       else thumb.removeAttribute("data-disabled");
 
       thumb.style.position = "absolute";
-      if (orientation === "horizontal") {
-        thumb.style.left = `${pct}%`;
+      const horizontal = orientation === "horizontal";
+      const fromStart = horizontal ? this.slidingFromLeft() : !this.inverted();
+      if (horizontal) {
+        thumb.style.left = fromStart ? `${pct}%` : "";
+        thumb.style.right = fromStart ? "" : `${pct}%`;
         thumb.style.top = "";
         thumb.style.bottom = "";
         thumb.style.transform = "translateX(-50%)";
       } else {
-        thumb.style.bottom = `${pct}%`;
+        thumb.style.bottom = fromStart ? `${pct}%` : "";
+        thumb.style.top = fromStart ? "" : `${pct}%`;
         thumb.style.left = "";
-        thumb.style.top = "";
+        thumb.style.right = "";
         thumb.style.transform = "translateY(50%)";
       }
     });
@@ -151,14 +170,16 @@ export const SliderRoot = {
       this.el.style.setProperty("--radix-slider-range-start", `${start}%`);
       this.el.style.setProperty("--radix-slider-range-end", `${end}%`);
 
-      if (orientation === "horizontal") {
-        range.style.left = `${start}%`;
-        range.style.right = `${100 - end}%`;
+      const horizontal = orientation === "horizontal";
+      const fromStart = horizontal ? this.slidingFromLeft() : !this.inverted();
+      if (horizontal) {
+        range.style.left = fromStart ? `${start}%` : `${100 - end}%`;
+        range.style.right = fromStart ? `${100 - end}%` : `${start}%`;
         range.style.bottom = "";
         range.style.top = "";
       } else {
-        range.style.bottom = `${start}%`;
-        range.style.top = `${100 - end}%`;
+        range.style.bottom = fromStart ? `${start}%` : `${100 - end}%`;
+        range.style.top = fromStart ? `${100 - end}%` : `${start}%`;
         range.style.left = "";
         range.style.right = "";
       }
@@ -199,10 +220,12 @@ export const SliderRoot = {
     let ratio;
 
     if (orientation === "horizontal") {
-      ratio = (event.clientX - rect.left) / rect.width;
-      if (this.el.dir === "rtl") ratio = 1 - ratio;
+      ratio = (event.clientX - rect.left) / (rect.width || 1);
+      if (!this.slidingFromLeft()) ratio = 1 - ratio;
+    } else if (!this.inverted()) {
+      ratio = 1 - (event.clientY - rect.top) / (rect.height || 1);
     } else {
-      ratio = 1 - (event.clientY - rect.top) / rect.height;
+      ratio = (event.clientY - rect.top) / (rect.height || 1);
     }
 
     ratio = Math.min(1, Math.max(0, ratio));
@@ -277,6 +300,31 @@ export const SliderRoot = {
     window.removeEventListener("pointerup", this.onPointerUp);
   },
 
+  inverted() {
+    return this.el.hasAttribute("data-inverted");
+  },
+
+  /**
+   * Horizontal value grows from the left unless `dir="rtl"` or `inverted`
+   * flips it. Both together cancel out, matching Radix.
+   */
+  slidingFromLeft() {
+    const rtl = (this.el.getAttribute("dir") || "ltr") === "rtl";
+    const inverted = this.inverted();
+    return rtl ? inverted : !inverted;
+  },
+
+  backKeys() {
+    if (this.orientation() === "vertical") {
+      return this.inverted()
+        ? ["PageDown", "ArrowUp", "ArrowLeft"]
+        : ["PageDown", "ArrowDown", "ArrowLeft"];
+    }
+    return this.slidingFromLeft()
+      ? ["PageDown", "ArrowDown", "ArrowLeft"]
+      : ["PageDown", "ArrowDown", "ArrowRight"];
+  },
+
   onKeyDown(event) {
     if (this.disabled()) return;
 
@@ -284,36 +332,35 @@ export const SliderRoot = {
     if (!thumb || !this.el.contains(thumb)) return;
 
     const index = Number(thumb.dataset.index ?? this.thumbs().indexOf(thumb));
-    const step = this.step();
-    const bigStep = step * 10;
-    let next = this.values[index];
 
-    switch (event.key) {
-      case "ArrowRight":
-      case "ArrowUp":
-        next += step;
-        break;
-      case "ArrowLeft":
-      case "ArrowDown":
-        next -= step;
-        break;
-      case "PageUp":
-        next += bigStep;
-        break;
-      case "PageDown":
-        next -= bigStep;
-        break;
-      case "Home":
-        next = this.min();
-        break;
-      case "End":
-        next = this.max();
-        break;
-      default:
-        return;
+    if (event.key === "Home") {
+      event.preventDefault();
+      this.setValueAt(0, this.min(), true);
+      return;
     }
 
+    if (event.key === "End") {
+      event.preventDefault();
+      this.setValueAt(this.values.length - 1, this.max(), true);
+      return;
+    }
+
+    const keys = [
+      "ArrowRight",
+      "ArrowLeft",
+      "ArrowUp",
+      "ArrowDown",
+      "PageUp",
+      "PageDown",
+    ];
+    if (!keys.includes(event.key)) return;
+
     event.preventDefault();
-    this.setValueAt(index, next, true);
+    const direction = this.backKeys().includes(event.key) ? -1 : 1;
+    const multiplier =
+      event.shiftKey || event.key === "PageUp" || event.key === "PageDown"
+        ? 10
+        : 1;
+    this.setValueAt(index, this.values[index] + direction * this.step() * multiplier, true);
   },
 };
