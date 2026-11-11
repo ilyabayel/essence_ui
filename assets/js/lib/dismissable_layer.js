@@ -29,7 +29,9 @@ export function bindDismissableLayer({
   if (outside) {
     handlers.onPointerDown = (e) => {
       const target = e.target;
-      const inside = layerList.some((el) => el && el.contains(target));
+      const inside =
+        layerList.some((el) => el && el.contains(target)) ||
+        Boolean(target.closest?.("[data-radix-select-content]"));
       if (!inside) {
         onDismiss?.(e);
       }

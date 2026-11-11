@@ -75,8 +75,10 @@ export const PopoverRoot = {
   },
 
   updated() {
+    const wasOpen = this.isOpen;
     this.resolveParts();
     this.bindTrigger();
+    if (wasOpen) this.open(true);
   },
 
   destroyed() {
