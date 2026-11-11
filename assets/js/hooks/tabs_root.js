@@ -1,21 +1,36 @@
+const DEFAULT_INDICATOR_TRANSITION =
+  "transform 200ms cubic-bezier(0.45, 0.05, 0.2, 1)";
+
 export const TabsRoot = {
   mounted() {
     this.onClick = this.onClick.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.el.addEventListener("click", this.onClick);
     this.list()?.addEventListener("keydown", this.onKeyDown);
+    this.reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    this.indicatorValue = null;
     this.wireAria();
     this.sync(this.el.dataset.value);
+    this.placeIndicator(false);
   },
 
   updated() {
     this.wireAria();
-    this.sync(this.el.dataset.value);
+    const value = this.el.dataset.value;
+    const animate = this.indicatorValue != null && value !== this.indicatorValue;
+    this.sync(value);
+    const indicator = this.indicator();
+    const rebound = indicator ? this.bindIndicator(indicator) : false;
+    if (animate || rebound || this.indicatorValue == null) {
+      this.placeIndicator(animate && !rebound);
+    }
   },
 
   destroyed() {
     this.el.removeEventListener("click", this.onClick);
     this.list()?.removeEventListener("keydown", this.onKeyDown);
+    this.indicatorObserver?.disconnect();
+    if (this.indicatorFrame) cancelAnimationFrame(this.indicatorFrame);
   },
 
   list() {
@@ -130,8 +145,10 @@ export const TabsRoot = {
 
   activate(value, notify = false) {
     if (!value) return;
+    const animate = this.indicatorValue != null && value !== this.indicatorValue;
     this.el.dataset.value = value;
     this.sync(value);
+    if (animate || this.indicatorValue == null) this.placeIndicator(animate);
 
     if (notify) {
       const eventName = this.el.dataset.onValueChange;
@@ -164,6 +181,112 @@ export const TabsRoot = {
     } else if (!active) {
       const first = this.enabledTriggers()[0];
       if (first) first.tabIndex = 0;
+    }
+  },
+
+  indicator() {
+    return this.el.querySelector("[data-radix-tabs-indicator]");
+  },
+
+  activeTrigger() {
+    return this.triggers().find((trigger) => trigger.dataset.state === "active");
+  },
+
+  bindIndicator(indicator) {
+    const list = indicator.closest("[data-radix-tabs-list]");
+    if (!list) return false;
+    if (getComputedStyle(list).position === "static") {
+      list.style.position = "relative";
+    }
+    if (!this.indicatorObserver) {
+      this.indicatorObserver = new ResizeObserver(() => this.placeIndicator(false));
+    }
+    if (this.indicatorList === list) return false;
+    if (this.indicatorList) this.indicatorObserver.unobserve(this.indicatorList);
+    this.indicatorObserver.observe(list);
+    const rebound = this.indicatorList != null;
+    this.indicatorList = list;
+    return rebound;
+  },
+
+  indicatorGeometry(indicator, trigger) {
+    const list = indicator.closest("[data-radix-tabs-list]");
+    if (!list) {
+      return {
+        x: trigger.offsetLeft,
+        y: trigger.offsetTop,
+        width: trigger.offsetWidth,
+        height: trigger.offsetHeight,
+      };
+    }
+
+    const listRect = list.getBoundingClientRect();
+    const rect = trigger.getBoundingClientRect();
+    return {
+      x: rect.left - listRect.left + list.scrollLeft - list.clientLeft,
+      y: rect.top - listRect.top + list.scrollTop - list.clientTop,
+      width: rect.width,
+      height: rect.height,
+    };
+  },
+
+  placeIndicator(animate) {
+    if (this.placingIndicator) return;
+    const indicator = this.indicator();
+    if (!indicator) return;
+    const trigger = this.activeTrigger();
+    if (!trigger) return;
+
+    this.placingIndicator = true;
+    try {
+      this.bindIndicator(indicator);
+      this.indicatorValue = trigger.dataset.value;
+      this.indicatorGeneration = (this.indicatorGeneration || 0) + 1;
+      const generation = this.indicatorGeneration;
+      if (this.indicatorFrame) cancelAnimationFrame(this.indicatorFrame);
+
+      const configured = indicator.dataset.transition || DEFAULT_INDICATOR_TRANSITION;
+      const reduce = this.reduceMotion?.matches;
+      const motion = animate && !reduce && configured !== "none" ? configured : "none";
+
+      const apply = () => {
+        if (generation !== this.indicatorGeneration) return;
+        const current = this.triggers().find((item) => item.dataset.value === trigger.dataset.value);
+        if (!current) return;
+        const box = this.indicatorGeometry(indicator, current);
+        indicator.style.setProperty("--radix-tabs-indicator-x", `${box.x}px`);
+        indicator.style.setProperty("--radix-tabs-indicator-y", `${box.y}px`);
+        indicator.style.setProperty("--radix-tabs-indicator-width", `${box.width}px`);
+        indicator.style.setProperty("--radix-tabs-indicator-height", `${box.height}px`);
+        indicator.hidden = false;
+        indicator.dataset.state = "active";
+      };
+
+      indicator.style.setProperty("--radix-tabs-indicator-transition", motion);
+
+      if (motion === "none") {
+        apply();
+        this.indicatorFrame = requestAnimationFrame(() => {
+          if (generation !== this.indicatorGeneration) return;
+          this.indicatorFrame = null;
+          if (!reduce && configured !== "none") {
+            indicator.style.setProperty("--radix-tabs-indicator-transition", configured);
+          }
+        });
+        return;
+      }
+
+      // Commit the transition before moving, or the first change does not animate.
+      queueMicrotask(() => {
+        if (generation !== this.indicatorGeneration) return;
+        this.indicatorFrame = requestAnimationFrame(() => {
+          if (generation !== this.indicatorGeneration) return;
+          this.indicatorFrame = null;
+          apply();
+        });
+      });
+    } finally {
+      this.placingIndicator = false;
     }
   },
 };

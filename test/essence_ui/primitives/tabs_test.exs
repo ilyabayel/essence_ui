@@ -78,4 +78,57 @@ defmodule EssenceUI.Primitives.TabsTest do
     assert html =~ "Panel A"
     assert html =~ "Panel B"
   end
+
+  test "indicator carries a customizable transition and stable id" do
+    html =
+      render_component(
+        fn assigns ->
+          ~H"""
+          <Tabs.root id="tabs" default_value="a">
+            <Tabs.list>
+              <Tabs.indicator />
+              <Tabs.trigger value="a">A</Tabs.trigger>
+              <Tabs.trigger value="b">Longer</Tabs.trigger>
+            </Tabs.list>
+            <Tabs.content value="a">Panel A</Tabs.content>
+            <Tabs.content value="b">Panel B</Tabs.content>
+          </Tabs.root>
+          """
+        end,
+        %{}
+      )
+
+    assert html =~ ~s[id="tabs-indicator"]
+    assert html =~ ~s[data-radix-tabs-indicator]
+    assert html =~ ~s[data-state="inactive"]
+    assert html =~ ~s[phx-update="ignore"]
+    assert html =~ ~s[aria-hidden="true"]
+    assert html =~ "--radix-tabs-indicator-x"
+    assert html =~ "--radix-tabs-indicator-transition"
+
+    assert html =~
+             ~s[data-transition="transform 200ms cubic-bezier(0.45, 0.05, 0.2, 1)"]
+
+    custom =
+      render_component(
+        fn assigns ->
+          ~H"""
+          <Tabs.root id="tabs" default_value="a">
+            <Tabs.list>
+              <Tabs.indicator id="thumb" transition="none" class="pill" style="background:red" />
+              <Tabs.trigger value="a">A</Tabs.trigger>
+            </Tabs.list>
+            <Tabs.content value="a">Panel A</Tabs.content>
+          </Tabs.root>
+          """
+        end,
+        %{}
+      )
+
+    assert custom =~ ~s[id="thumb"]
+    assert custom =~ ~s[data-transition="none"]
+    assert custom =~ ~s[class="pill"]
+    assert custom =~ "background:red"
+    assert custom =~ "position:absolute"
+  end
 end

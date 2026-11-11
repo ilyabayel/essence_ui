@@ -127,6 +127,7 @@ A set of layered sections of content—known as tab panels—that are displayed 
   <:item>Supports horizontal/vertical orientation.</:item>
   <:item>Supports automatic/manual activation.</:item>
   <:item>Full keyboard navigation.</:item>
+  <:item>Optional indicator with a CSS transition you choose.</:item>
 </.highlights>
 
 ## Anatomy
@@ -136,6 +137,7 @@ Import all parts and piece them together.
 ```heex
 <Tabs.root>
   <Tabs.list>
+    <Tabs.indicator />
     <Tabs.trigger />
   </Tabs.list>
   <Tabs.content />
@@ -145,6 +147,7 @@ Import all parts and piece them together.
 <.anatomy>
   <:part name="Root">Contains all the tabs component parts.</:part>
   <:part name="List">Contains the triggers that are aligned along the edge of the active content.</:part>
+  <:part name="Indicator">Follows the active trigger. Its CSS transition is configurable.</:part>
   <:part name="Trigger">The button that activates its associated content.</:part>
   <:part name="Content">Contains the content associated with each trigger.</:part>
 </.anatomy>
@@ -185,6 +188,19 @@ Contains the triggers that are aligned along the edge of the active content.
   <:row name="[data-orientation]" values={"vertical | horizontal"}>The orientation of the component.</:row>
 </.data_attributes_table>
 
+### Indicator
+
+Follows the active trigger. Render it inside the list. The hook positions it and applies `transition` when the selection changes. `transform` slides it; add `width` and `height` to animate size. Motion is skipped on the first paint, on resize, for `transition="none"`, and when the user prefers reduced motion.
+
+The hook sets `--radix-tabs-indicator-x`, `--radix-tabs-indicator-y`, `--radix-tabs-indicator-width`, `--radix-tabs-indicator-height`, and `--radix-tabs-indicator-transition` on the indicator.
+
+<.props_table module={EssenceUI.Primitives.Tabs} function={:indicator} />
+
+<.data_attributes_table>
+  <:row name="[data-state]" values={"active | inactive"}>active after the indicator has been positioned.</:row>
+  <:row name="[data-transition]" values="CSS transition">The transition used for the next selection change.</:row>
+</.data_attributes_table>
+
 ### Trigger
 
 The button that activates its associated content.
@@ -209,6 +225,29 @@ Contains the content associated with each trigger.
 </.data_attributes_table>
 
 ## Examples
+
+### Sliding indicator
+
+`transition` is any CSS transition. This one slides and resizes over 320ms.
+
+<.demo theme="light" variant="primitive" component="tabs" css={primitive_css("tabs")}>
+  <:heex>
+    <Tabs.root id="tabs-indicator" default_value="daily">
+      <Tabs.list class="DemoPillList" aria-label="Range">
+        <Tabs.indicator
+          class="DemoPillIndicator"
+          transition="transform 320ms cubic-bezier(0.45, 0.05, 0.2, 1), width 320ms cubic-bezier(0.45, 0.05, 0.2, 1)"
+        />
+        <Tabs.trigger class="DemoPillTrigger" value="daily">Day</Tabs.trigger>
+        <Tabs.trigger class="DemoPillTrigger" value="weekly">Week</Tabs.trigger>
+        <Tabs.trigger class="DemoPillTrigger" value="monthly">Month</Tabs.trigger>
+      </Tabs.list>
+      <Tabs.content value="daily">Daily view</Tabs.content>
+      <Tabs.content value="weekly">Weekly view</Tabs.content>
+      <Tabs.content value="monthly">Monthly view</Tabs.content>
+    </Tabs.root>
+  </:heex>
+</.demo>
 
 ### Vertical
 

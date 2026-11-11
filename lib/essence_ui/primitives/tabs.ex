@@ -59,6 +59,86 @@ defmodule EssenceUI.Primitives.Tabs do
     end
   end
 
+  @default_indicator_transition "transform 200ms cubic-bezier(0.45, 0.05, 0.2, 1)"
+
+  @indicator_style Enum.join(
+                     [
+                       "position:absolute",
+                       "top:0",
+                       "left:0",
+                       "box-sizing:border-box",
+                       "pointer-events:none",
+                       "width:var(--radix-tabs-indicator-width)",
+                       "height:var(--radix-tabs-indicator-height)",
+                       "transform:translate3d(var(--radix-tabs-indicator-x, 0px), var(--radix-tabs-indicator-y, 0px), 0)",
+                       "transition:var(--radix-tabs-indicator-transition, none)"
+                     ],
+                     ";"
+                   )
+
+  @doc """
+  Follows the active trigger.
+
+  Render it inside `list/1`. The hook writes these custom properties:
+
+    * `--radix-tabs-indicator-x`
+    * `--radix-tabs-indicator-y`
+    * `--radix-tabs-indicator-width`
+    * `--radix-tabs-indicator-height`
+    * `--radix-tabs-indicator-transition`
+
+  `transition` is the CSS transition for a selection change. Include `transform`
+  to slide, and `width` or `height` to animate size. The first paint, resizing,
+  `"none"`, and `prefers-reduced-motion` skip the animation. If the list is
+  `position: static`, the hook sets it to `relative`.
+  """
+  attr :id, :string, default: nil
+
+  attr :transition, :string,
+    default: @default_indicator_transition,
+    doc:
+      "CSS transition for a selection change. Animates transform, width, and height when those names are included. \"none\" disables motion."
+
+  attr :rest, :global
+  slot :inner_block
+
+  def indicator(assigns) do
+    ctx = current_ctx()
+
+    id =
+      assigns.id ||
+        case ctx do
+          %{id: root_id} when is_binary(root_id) -> "#{root_id}-indicator"
+          _other -> "tabs-indicator-#{:erlang.unique_integer([:positive])}"
+        end
+
+    {user_style, rest} = Map.pop(assigns.rest, :style)
+
+    style =
+      case user_style do
+        extra when is_binary(extra) and extra != "" -> @indicator_style <> ";" <> extra
+        _other -> @indicator_style
+      end
+
+    assigns = assign(assigns, id: id, rest: rest, style: style)
+
+    ~H"""
+    <span
+      id={@id}
+      data-radix-tabs-indicator
+      data-state="inactive"
+      data-transition={@transition}
+      hidden
+      aria-hidden="true"
+      phx-update="ignore"
+      style={@style}
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </span>
+    """
+  end
+
   attr :loop, :boolean, default: true
   attr :orientation, :string, values: ["horizontal", "vertical"], default: "horizontal"
   attr :rest, :global
